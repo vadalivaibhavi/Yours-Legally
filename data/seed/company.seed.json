@@ -1,0 +1,50 @@
+{
+  "_source": "data/raw/Dataset/atliq_entities.md (finance fact sheet, Jan 2026) + insurance from the 27 Sep Harrington huddle. Hand-prepared (Phase 1 spec §3, 1a).",
+  "entities": [
+    {
+      "name": "AtliQ Technologies Pvt Ltd",
+      "short": "Pvt Ltd",
+      "country": "India",
+      "servesRegions": ["India", "Middle East", "Europe", "Rest of world (outside the US)"],
+      "invoices": ["INR", "USD", "EUR"],
+      "law": "Indian law",
+      "identifiers": ["U72900MH2019PTC321456", "27AAKCA4821F1Z3", "AtliQ Technologies Pvt Ltd", "AtliQ Technologies Private Limited", "ATLIQ TECHNOLOGIES PRIVATE LIMITED"]
+    },
+    {
+      "name": "AtliQ Inc",
+      "short": "Inc",
+      "country": "USA",
+      "servesRegions": ["USA"],
+      "invoices": ["USD"],
+      "law": "US (state) law",
+      "identifiers": ["88-4410273", "AtliQ Inc", "ATLIQ INC."]
+    }
+  ],
+  "insuranceHeld": [
+    { "type": "cyber", "amountUsd": 1000000, "note": "Karandeep, 27 Sep huddle: \"Our cyber policy is $1M\"" },
+    { "type": "professional_indemnity", "amountUsd": null, "note": "Unknown: not recorded anywhere (PRD §16 open question)" },
+    { "type": "errors_and_omissions", "amountUsd": null, "note": "Unknown: not recorded anywhere" },
+    { "type": "general_liability", "amountUsd": null, "note": "Unknown: not recorded anywhere" },
+    { "type": "umbrella", "amountUsd": null, "note": "Unknown: not recorded anywhere" }
+  ],
+  "deliveryModel": "Delivery teams for both entities sit in Pune. AtliQ Inc sub-contracts delivery to AtliQ Technologies Pvt Ltd under an intercompany agreement (not in the dataset).",
+  "clients": [
+    { "name": "Orbit Travels", "sectors": ["travel"], "regions": ["India"], "status": "ended 2024", "trackerId": "C-001" },
+    { "name": "Crestline Retail", "sectors": ["retail"], "regions": ["USA"], "status": "live client", "trackerId": "C-002" },
+    { "name": "PayTrack Technologies", "sectors": ["bfsi"], "regions": ["India"], "status": "live client (fintech)", "trackerId": "C-005" },
+    { "name": "Acme Retail Group", "sectors": ["retail"], "regions": ["India"], "status": "live client", "trackerId": "C-006" },
+    { "name": "Al Noor Hospitality Group", "sectors": ["hospitality"], "regions": ["UAE"], "status": "live client", "trackerId": "C-007" },
+    { "name": "Sunrise Foods", "sectors": ["food", "retail"], "regions": ["India"], "status": "live client", "trackerId": "C-008" },
+    { "name": "Northwind Logistics", "sectors": ["logistics"], "regions": ["UK"], "status": "live client", "trackerId": "C-009" },
+    { "name": "DataNest", "sectors": ["technology"], "regions": ["India"], "status": "staff-aug ended Aug 2026 (renewal?)", "trackerId": "C-012" },
+    { "name": "Brightwater Insurance", "sectors": ["bfsi"], "regions": ["USA"], "status": "live client", "trackerId": "C-014" },
+    { "name": "Seaside Hotels", "sectors": ["hospitality"], "regions": ["Oman"], "status": "SOW completed Aug 2026", "trackerId": "C-017" },
+    { "name": "ShopSwift", "sectors": ["retail"], "regions": ["USA"], "status": "live client", "trackerId": "C-019" },
+    { "name": "Meridian Healthcare", "sectors": ["healthcare"], "regions": ["India"], "status": "pipeline (NDA signed)", "trackerId": "C-020" },
+    { "name": "Trustline NBFC", "sectors": ["bfsi"], "regions": ["India"], "status": "live client (NBFC, signed Aug 2026)", "trackerId": "C-021" },
+    { "name": "FinEdge Bank", "sectors": ["bfsi"], "regions": ["India"], "status": "pipeline (MSA awaiting client)", "trackerId": "C-022" },
+    { "name": "NovaPharma", "sectors": ["healthcare"], "regions": ["Other"], "status": "DPA signed", "trackerId": "C-030" },
+    { "name": "GlobalMart", "sectors": ["retail"], "regions": ["India"], "status": "pipeline (NDA signed)", "trackerId": "C-034" },
+    { "name": "CareBridge Clinics", "sectors": ["healthcare"], "regions": ["USA"], "status": "live client (MSA to 5 Oct 2026)", "trackerId": "C-042" }
+  ]
+}

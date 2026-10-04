@@ -1,0 +1,27 @@
+{
+  "script": "buildRegister",
+  "at": "2026-10-04T18:30:56.399Z",
+  "models": [
+    "gemini-flash-latest",
+    "gemini-3.5-flash",
+    "gemini-3-flash-preview"
+  ],
+  "documents": 1,
+  "entries": 6,
+  "dropped": 0,
+  "calls": 1,
+  "cachedCalls": 0,
+  "inputTokens": 4896,
+  "outputTokens": 19536,
+  "seconds": 95,
+  "perDoc": [
+    {
+      "docId": "alnoor-msa",
+      "ms": 95318,
+      "model": "gemini-3.5-flash",
+      "cached": false,
+      "inputTokens": 4896,
+      "outputTokens": 19536
+    }
+  ]
+}

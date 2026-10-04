@@ -1,0 +1,12 @@
+{
+  "script": "buildClauseIndex",
+  "at": "2026-10-04T18:41:03.574Z",
+  "chunks": 231,
+  "embedProvider": "gemini",
+  "embedModel": "gemini-embedding-001",
+  "embedTokensApprox": 16613,
+  "llmCalls": 0,
+  "llmInputTokens": 0,
+  "llmOutputTokens": 0,
+  "seconds": 147
+}

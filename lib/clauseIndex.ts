@@ -12,9 +12,9 @@ import { cosine, embed } from "./embed";
 import type { ClauseChunk, ClauseChunkMeta, ClauseType } from "./types";
 
 /** Tuned on EV-P1–P7 (see eval/results.md). Below this: "No similar clause signed before." */
-export const SIMILARITY_THRESHOLD = Number(process.env.SIMILARITY_THRESHOLD || 0.6);
+export const SIMILARITY_THRESHOLD = Number(process.env.SIMILARITY_THRESHOLD || 0.75);
 
-export type SimilarHit = { chunk: ClauseChunkMeta; score: number };
+export type SimilarHit = { chunk: ClauseChunkMeta; score: number; alsoIn: string[] };
 
 let index: ClauseChunk[] | null = null;
 
@@ -34,13 +34,34 @@ function strip(c: ClauseChunk): ClauseChunkMeta {
   return meta;
 }
 
+/** Same-label clauses this close are one repeated position (e.g. Acme/Northwind/Trustline LDs: 0.94–0.975). */
+const DUPLICATE_COSINE = 0.94;
+
+/**
+ * Cosine-rank same-type signed clauses; one hit per contract; a repeated position (same intent label,
+ * near-identical text) is shown once, as its earliest instance (the origin precedent), with the later
+ * contracts listed in `alsoIn`. Top k above the threshold.
+ */
 export function searchByVector(vec: number[], clauseType: ClauseType, k = 3, threshold = SIMILARITY_THRESHOLD): SimilarHit[] {
-  return loadIndex()
+  const ranked = loadIndex()
     .filter((c) => c.clauseType === clauseType)
-    .map((c) => ({ chunk: strip(c), score: cosine(vec, c.embedding) }))
+    .map((c) => ({ c, score: cosine(vec, c.embedding) }))
     .filter((h) => h.score >= threshold)
-    .sort((a, b) => b.score - a.score)
-    .slice(0, k);
+    .sort((a, b) => b.score - a.score);
+  const picked: { c: ClauseChunk; score: number; alsoIn: string[] }[] = [];
+  for (const h of ranked) {
+    if (picked.some((p) => p.c.docId === h.c.docId)) continue;
+    const dup = picked.find((p) => p.c.label === h.c.label && cosine(p.c.embedding, h.c.embedding) >= DUPLICATE_COSINE);
+    if (dup) {
+      if (h.c.date < dup.c.date) {
+        dup.alsoIn.push(`${dup.c.counterparty} (${dup.c.date.slice(0, 7)})`);
+        dup.c = h.c; // keep the best score, show the origin
+      } else dup.alsoIn.push(`${h.c.counterparty} (${h.c.date.slice(0, 7)})`);
+      continue;
+    }
+    if (picked.length < k) picked.push({ c: h.c, score: h.score, alsoIn: [] });
+  }
+  return picked.map((p) => ({ chunk: strip(p.c), score: p.score, alsoIn: p.alsoIn }));
 }
 
 /** search(text, clauseType, k): embed the query, filter by clause type, cosine rank, top k above threshold. */

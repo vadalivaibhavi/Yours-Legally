@@ -1,0 +1,24 @@
+{
+  "_source": "Intent labels for past clauses, from docs/Obligations_Register.md §C, §E, §G and negotiation_notes.md. Stands in for Karandeep's ~30-minute tagging session (PRD §14 Stage 2; Phase 1 spec 1c). Clause numbers are section numbers; '*' = every chunk of the document.",
+  "labels": [
+    { "docId": "acme-msa", "clauses": ["7"], "label": "standard", "note": "Origin of the LD playbook: 0.5% of milestone/week, 5% cap, client delays excluded (Mar 2025)" },
+    { "docId": "acme-msa", "clauses": ["11"], "label": "standard", "note": "Mutual indemnity" },
+    { "docId": "paytrack-msa", "clauses": ["10"], "label": "standard", "note": "Origin of the mutual-indemnity position: no indemnity for the indemnified party's own negligence" },
+    { "docId": "trustline-msa", "clauses": ["4"], "label": "standard", "note": "45-day payment: the negotiated maximum (90 → 45)" },
+    { "docId": "trustline-msa", "clauses": ["7"], "label": "standard", "note": "Playbook LDs, negotiated down from 2%/week with a 10% cap" },
+    { "docId": "northwind-msa", "clauses": ["11"], "label": "standard", "note": "Playbook LDs, negotiated down from 10% of contract value" },
+    { "docId": "sunrise-msa", "clauses": ["8", "13"], "label": "standard", "note": "AtliQ-friendly master: capped liability, service credits capped at 5%" },
+    { "docId": "alnoor-nda", "clauseTypes": ["confidentiality"], "label": "standard", "note": "Genuinely mutual NDA: the template for what mutual looks like" },
+    { "docId": "harrington-nda", "clauseTypes": ["confidentiality"], "label": "standard", "note": "Genuinely mutual NDA" },
+    { "docId": "carebridge-baa", "clauses": ["*"], "label": "standard", "note": "Counsel-reviewed BAA (Calloway Stern, $3.8k): capped liability, 5-day reporting, de-identified offshore route" },
+    { "docId": "rohan-ica", "clauses": ["3", "8", "9"], "label": "standard", "note": "Fair freelancer terms: 30-day pay, mutual cap, mutual 15-day exit" },
+    { "docId": "rohan-ica", "clauses": ["5"], "label": "accident", "note": "Rohan kept the Work Product IP (\"ok\" from phone) while Acme was promised ownership" },
+    { "docId": "alnoor-msa", "clauses": ["10"], "label": "exception", "note": "One-off: \"strategic exception for Al Noor only, not our new standard\" (cap 10% of total fees)" },
+    { "docId": "alnoor-msa", "clauses": ["21"], "label": "concession", "note": "DIFC law accepted as the client's group standard" },
+    { "docId": "northwind-msa", "clauses": ["17"], "label": "concession", "note": "English law + LCIA: \"not worth losing the deal over\"" },
+    { "docId": "cloudspan-spa", "clauses": ["15"], "label": "concession", "note": "Singapore law / SIAC accepted" },
+    { "docId": "brightwater-msa", "clauses": ["7", "9", "20"], "label": "accident", "note": "Signed on a phone in 4 minutes: 1%/day uncapped LDs, no client-delay exclusion, group set-off, English law on a US entity. Cost $9k + $14.2k legal" },
+    { "docId": "meridian-nda", "clauses": ["*"], "label": "accident", "note": "One-way NDA signed within the hour; contradicts \"we only sign mutual\"" },
+    { "docId": "crestline-msa", "clauses": ["6"], "label": "accident", "note": "MFN accepted on a false premise (\"we never discount, so it's harmless\")" }
+  ]
+}

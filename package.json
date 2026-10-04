@@ -6,7 +6,16 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "ingest": "tsx scripts/ingest.ts",
+    "build:register": "tsx scripts/buildRegister.ts",
+    "check:register": "tsx scripts/checkRegister.ts",
+    "build:index": "tsx scripts/buildClauseIndex.ts",
+    "search": "tsx scripts/search.ts",
+    "build:eval": "tsx scripts/buildEvalCases.ts",
+    "review": "tsx scripts/review.ts",
+    "eval": "tsx scripts/eval.ts",
+    "data": "npm run ingest && npm run build:register && npm run build:index && npm run build:eval"
   },
   "dependencies": {
     "next": "^16.3.8",

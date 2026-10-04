@@ -92,12 +92,16 @@ async function embedBatch(texts: string[]): Promise<number[][]> {
 
 async function withRetry(f: () => Promise<Response>): Promise<Response> {
   let last = "";
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < 6; i++) {
     const r = await f();
     if (r.ok) return r;
-    last = `HTTP ${r.status}: ${(await r.text()).slice(0, 200)}`;
+    const body = await r.text();
+    last = `HTTP ${r.status}: ${body.slice(0, 200)}`;
     if (r.status !== 429 && r.status < 500) break;
-    await new Promise((res) => setTimeout(res, 5000 * (i + 1)));
+    // Free tiers limit embeddings per minute: wait out the window the API asks for.
+    const m = body.match(/retry in ([\d.]+)s|"retryDelay":\s*"(\d+)s"/i);
+    const wait = m ? Number(m[1] ?? m[2]) * 1000 + 1000 : r.status === 429 ? 61_000 : 5000 * (i + 1);
+    await new Promise((res) => setTimeout(res, wait));
   }
   throw new Error("embedding failed: " + last);
 }

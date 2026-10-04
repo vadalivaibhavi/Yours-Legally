@@ -1,0 +1,287 @@
+{
+  "_source": "Hand-built answer key from docs/Obligations_Register.md §A–D (and the signed contracts). Used by scripts/checkRegister.ts (EV-R1–R4). 'must' = exit-check item (all live restrictions + Orbit as expired). 'types' lists acceptable commitment types for the same clause. 'end' is compared within ±45 days.",
+  "entries": [
+    {
+      "key": "R1",
+      "title": "Al Noor GCC hospitality non-compete",
+      "sourceDocId": "alnoor-msa",
+      "types": [
+        "non_compete"
+      ],
+      "clause": "12",
+      "bindsEntities": [
+        "Pvt Ltd",
+        "Inc"
+      ],
+      "includesAffiliates": true,
+      "regions": [
+        "GCC"
+      ],
+      "sectors": [
+        "hospitality"
+      ],
+      "end": "2029-09-14",
+      "status": "live",
+      "waiverDocId": "alnoor-waiver",
+      "must": true
+    },
+    {
+      "key": "R2",
+      "title": "Crestline most-favoured pricing",
+      "sourceDocId": "crestline-msa",
+      "types": [
+        "mfn_pricing"
+      ],
+      "clause": "6",
+      "bindsEntities": [
+        "Pvt Ltd",
+        "Inc"
+      ],
+      "includesAffiliates": true,
+      "end": "2027-07-31",
+      "status": "live",
+      "rateFloorRoles": 3,
+      "must": true
+    },
+    {
+      "key": "R3",
+      "title": "CloudSpan platform exclusivity",
+      "sourceDocId": "cloudspan-spa",
+      "types": [
+        "exclusivity"
+      ],
+      "clause": "7",
+      "bindsEntities": [
+        "Pvt Ltd",
+        "Inc"
+      ],
+      "includesAffiliates": true,
+      "regions": [
+        "India",
+        "GCC"
+      ],
+      "end": "2028-08-31",
+      "status": "live",
+      "must": true
+    },
+    {
+      "key": "R4",
+      "title": "Meridian no-hire incl. consultants",
+      "sourceDocId": "meridian-nda",
+      "types": [
+        "non_solicit"
+      ],
+      "clause": "7",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "end": "2031-07-16",
+      "status": "live",
+      "must": true
+    },
+    {
+      "key": "R6",
+      "title": "Orbit OTA non-compete (expired)",
+      "sourceDocId": "orbit-msa",
+      "types": [
+        "non_compete"
+      ],
+      "clause": "6",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "regions": [
+        "India"
+      ],
+      "sectors": [
+        "travel"
+      ],
+      "end": "2025-06-30",
+      "status": "expired",
+      "must": true
+    },
+    {
+      "key": "I1",
+      "title": "Northwind owns incorporated tools (PipeKit)",
+      "sourceDocId": "northwind-msa",
+      "types": [
+        "ip_transfer"
+      ],
+      "clause": "9",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "assets": [
+        "pre-existing"
+      ],
+      "status": "live",
+      "must": true
+    },
+    {
+      "key": "I2",
+      "title": "Rohan Iyer kept Work Product IP",
+      "sourceDocId": "rohan-ica",
+      "types": [
+        "ip_retention"
+      ],
+      "clause": "5",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "status": "live",
+      "must": true
+    },
+    {
+      "key": "C1",
+      "title": "CareBridge BAA: PHI in US only, de-identified offshore",
+      "sourceDocId": "carebridge-baa",
+      "types": [
+        "data_location",
+        "compliance"
+      ],
+      "clause": "3",
+      "bindsEntities": [
+        "Inc"
+      ]
+    },
+    {
+      "key": "C2",
+      "title": "Intercompany BAA scoped to CareBridge only",
+      "sourceDocId": "ic-baa",
+      "types": [
+        "compliance",
+        "data_location",
+        "other"
+      ],
+      "counterparties": [
+        "CareBridge"
+      ]
+    },
+    {
+      "key": "C3",
+      "title": "Harrington NDA: PHI only after a BAA",
+      "sourceDocId": "harrington-nda",
+      "types": [
+        "compliance",
+        "data_location",
+        "other"
+      ],
+      "clause": "2",
+      "bindsEntities": [
+        "Inc"
+      ],
+      "status": "live"
+    },
+    {
+      "key": "C4",
+      "title": "PayTrack: data only in India",
+      "sourceDocId": "paytrack-msa",
+      "types": [
+        "data_location"
+      ],
+      "clause": "7",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "regions": [
+        "India"
+      ],
+      "status": "live"
+    },
+    {
+      "key": "C5",
+      "title": "Trustline: data only in India",
+      "sourceDocId": "trustline-msa",
+      "types": [
+        "data_location"
+      ],
+      "clause": "13",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "regions": [
+        "India"
+      ],
+      "status": "live"
+    },
+    {
+      "key": "C6a",
+      "title": "Brightwater: no data outside the US",
+      "sourceDocId": "brightwater-msa",
+      "types": [
+        "data_location"
+      ],
+      "clause": "13",
+      "bindsEntities": [
+        "Inc"
+      ],
+      "regions": [
+        "USA"
+      ],
+      "status": "live"
+    },
+    {
+      "key": "C6b",
+      "title": "Brightwater: PI ≥$2M, cyber ≥$1M",
+      "sourceDocId": "brightwater-msa",
+      "types": [
+        "insurance"
+      ],
+      "clause": "17",
+      "bindsEntities": [
+        "Inc"
+      ],
+      "status": "live"
+    },
+    {
+      "key": "C7a",
+      "title": "Al Noor: Guest Data stays in UAE",
+      "sourceDocId": "alnoor-msa",
+      "types": [
+        "data_location"
+      ],
+      "clause": "16",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "regions": [
+        "UAE"
+      ],
+      "status": "live"
+    },
+    {
+      "key": "C7b",
+      "title": "Al Noor: PI insurance ≥$500k",
+      "sourceDocId": "alnoor-msa",
+      "types": [
+        "insurance"
+      ],
+      "clause": "17",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "status": "live"
+    },
+    {
+      "key": "C8",
+      "title": "Crestline: CGL $1M, E&O $2M",
+      "sourceDocId": "crestline-msa",
+      "types": [
+        "insurance"
+      ],
+      "clause": "14",
+      "bindsEntities": [
+        "Inc"
+      ],
+      "status": "live"
+    }
+  ],
+  "illegible": [
+    {
+      "sourceDocId": "orbit-msa",
+      "clause": "9",
+      "note": "Orbit indemnity §9.1 is illegible in the scan: must be reported, never guessed (EV-R3)"
+    }
+  ]
+}

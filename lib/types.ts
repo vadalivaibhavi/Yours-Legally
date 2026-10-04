@@ -184,9 +184,12 @@ export const RegisterEntry = z.object({
   bindsEntities: z.array(AtliqEntity),
   includesAffiliates: z.boolean(),
   scope: RegisterScope,
+  /** Definitions and companion clauses the commitment depends on, e.g. §1.11 "Hospitality Business". */
+  relatedClauses: z.array(z.object({ clauseRef: z.string(), quote: z.string() })).default([]),
   start: z.string(),
   end: z.string().nullable(),
   endRule: z.string().nullable(),
+  perpetual: z.boolean().default(false),
   waivers: z.array(z.object({ docId: z.string(), clauseRef: z.string(), covers: z.string(), quote: z.string() })),
   /** Structured specifics used by deterministic checks, e.g. an MFN rate floor. */
   terms: z

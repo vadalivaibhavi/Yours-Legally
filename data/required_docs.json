@@ -1,0 +1,30 @@
+{
+  "_source": "Deal type → required documents per party (FR-9; Phase 1 spec 1d). Plain rules evaluated in code (lib/review/bundle.ts); the verdict cannot be SIGN until the bundle is complete.",
+  "version": "rd-v1-2026-10-04",
+  "rules": [
+    {
+      "id": "rd-us-phi", "title": "US healthcare / PHI",
+      "when": { "sector": "healthcare", "regions": ["USA"], "dataType": "phi" },
+      "perParty": ["NDA", "MSA", "BAA", "sub-BAA per subcontractor and affiliate that touches PHI", "client's prior written consent for each subcontractor"],
+      "why": "HIPAA: every business associate and subcontractor needs a written BAA before PHI access. AtliQ Inc delivers through Pvt Ltd (Pune), which is itself a subcontractor."
+    },
+    {
+      "id": "rd-eu-personal", "title": "EU personal data",
+      "when": { "regions": ["EU", "Germany", "Europe"], "dataType": "personal_data" },
+      "perParty": ["DPA (GDPR Art. 28)", "SCCs for transfers to India", "sub-processor terms for each subcontractor"],
+      "why": "GDPR: processor terms and a transfer mechanism are needed before personal data reaches India or a sub-processor."
+    },
+    {
+      "id": "rd-india-payment", "title": "India payment-system data",
+      "when": { "regions": ["India"], "dataType": "payment_data" },
+      "perParty": ["data localisation clause (RBI)"],
+      "why": "RBI data-localisation rules for payment-system data."
+    },
+    {
+      "id": "rd-subcontractor", "title": "Any subcontractor on a client deal",
+      "when": { "subcontractor": true },
+      "perParty": ["client's written consent to subcontract", "flow-down: IP assignment", "flow-down: confidentiality", "flow-down: data protection terms"],
+      "why": "AtliQ can only give the client what its subcontractors give AtliQ."
+    }
+  ]
+}

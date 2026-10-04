@@ -1,0 +1,376 @@
+[
+  {
+    "id": "harrington",
+    "name": "Harrington Health: MSA + BAA",
+    "counterparty": "Harrington Health Systems Inc",
+    "counterpartyAliases": [
+      "Harrington",
+      "Harrington Health"
+    ],
+    "owner": "Dhaval",
+    "deadline": "2026-10-01",
+    "deadlineNote": "Rebecca needs MSA + BAA by 1 Oct (tracker C-023, 22 Sep meeting)",
+    "valueUsd": 210000,
+    "status": "open",
+    "documentIds": [
+      "harrington-msa",
+      "harrington-baa"
+    ],
+    "contextDocumentIds": [
+      "harrington-nda"
+    ],
+    "noteIds": [
+      "note-2026-09-22",
+      "note-2026-09-27"
+    ],
+    "linkedDealIds": [
+      "ortiz"
+    ],
+    "trackerIds": [
+      "C-023",
+      "C-046",
+      "C-045"
+    ],
+    "trackerNotes": [
+      "C-023 (MSA): need by 1 Oct (Rebecca). their lawyers say template is non-negotiable. $210k",
+      "C-046 (BAA): Rebecca: must be signed together with the MSA. BAA wants $5M cyber insurance - ours is $1M (K)"
+    ],
+    "clientCountry": "USA"
+  },
+  {
+    "id": "ortiz",
+    "name": "Daniel Ortiz: contractor + NDA (for Harrington)",
+    "counterparty": "Daniel Ortiz",
+    "counterpartyAliases": [
+      "Ortiz"
+    ],
+    "owner": "Dhaval",
+    "deadlineNote": "No date; staffs the Harrington deal",
+    "status": "open",
+    "documentIds": [
+      "ortiz-ica",
+      "ortiz-nda"
+    ],
+    "contextDocumentIds": [],
+    "noteIds": [
+      "note-2026-09-27"
+    ],
+    "linkedDealIds": [
+      "harrington"
+    ],
+    "endClientDealId": "harrington",
+    "trackerIds": [
+      "C-047",
+      "C-048"
+    ],
+    "trackerNotes": [
+      "C-047 (Contractor Agreement): US freelancer for Harrington. Dhaval: 'US-based, so the offshore thing is solved'. US contractor template"
+    ],
+    "clientCountry": "USA"
+  },
+  {
+    "id": "lakeshore",
+    "name": "Lakeshore Grocers: MSA + SOW-1 + rate card",
+    "counterparty": "Lakeshore Grocers Inc",
+    "counterpartyAliases": [
+      "Lakeshore"
+    ],
+    "owner": "Jay",
+    "deadline": "2026-10-03",
+    "deadlineNote": "by 3 Oct (tracker C-026)",
+    "valueUsd": 64000,
+    "status": "open",
+    "documentIds": [
+      "lakeshore-msa"
+    ],
+    "contextDocumentIds": [],
+    "noteIds": [
+      "note-2026-09-22"
+    ],
+    "linkedDealIds": [
+      "marcus"
+    ],
+    "trackerIds": [
+      "C-026"
+    ],
+    "trackerNotes": [
+      "C-026 (SOW + rate card): by 3 Oct. Jay gave sharper rate to win it - $72/hr senior DE, Dhaval ok'd on a call"
+    ],
+    "clientCountry": "USA"
+  },
+  {
+    "id": "marcus",
+    "name": "Marcus Reed: contractor (for Lakeshore)",
+    "counterparty": "Marcus Reed",
+    "counterpartyAliases": [
+      "Marcus"
+    ],
+    "owner": "Jay",
+    "deadline": "2026-10-01",
+    "deadlineNote": "Jay wants to send by Thu 1 Oct (tracker C-040)",
+    "status": "open",
+    "documentIds": [
+      "marcus-ica"
+    ],
+    "contextDocumentIds": [],
+    "noteIds": [],
+    "linkedDealIds": [
+      "lakeshore"
+    ],
+    "endClientDealId": "lakeshore",
+    "trackerIds": [
+      "C-040"
+    ],
+    "trackerNotes": [
+      "C-040 (Contractor Agreement): Jay wants to send by Thu 1 Oct. India freelancer template - only name and rate changed"
+    ],
+    "clientCountry": "USA"
+  },
+  {
+    "id": "blueorchid",
+    "name": "BlueOrchid Hotels: pilot",
+    "counterparty": "BlueOrchid Hotels",
+    "counterpartyAliases": [
+      "BlueOrchid",
+      "Blue Orchid"
+    ],
+    "owner": "Jay",
+    "deadline": "2026-10-05",
+    "deadlineNote": "by 5 Oct, want to start before Diwali (tracker C-027)",
+    "valueUsd": 38000,
+    "status": "open",
+    "documentIds": [
+      "blueorchid-pilot"
+    ],
+    "contextDocumentIds": [],
+    "noteIds": [
+      "note-2026-09-22"
+    ],
+    "linkedDealIds": [],
+    "trackerIds": [
+      "C-027"
+    ],
+    "trackerNotes": [
+      "C-027 (Pilot agreement): by 5 Oct - want to start before Diwali. Jay: 'just India hotels I think'. TechSummit lead"
+    ],
+    "clientCountry": "India"
+  },
+  {
+    "id": "gulfcrown",
+    "name": "Gulf Crown Hotels & Resorts: MSA",
+    "counterparty": "Gulf Crown Hotels & Resorts Co.",
+    "counterpartyAliases": [
+      "Gulf Crown"
+    ],
+    "owner": "Bhavin",
+    "deadline": "2026-10-10",
+    "deadlineNote": "sign by 10 Oct; Faisal has a summit on the 14th (tracker C-025)",
+    "valueUsd": 140000,
+    "status": "open",
+    "documentIds": [
+      "gulfcrown-msa"
+    ],
+    "contextDocumentIds": [],
+    "noteIds": [
+      "note-2026-09-22",
+      "note-2026-09-25"
+    ],
+    "linkedDealIds": [],
+    "trackerIds": [
+      "C-025"
+    ],
+    "trackerNotes": [
+      "C-025 (MSA): sign by 10 Oct!! Faisal has a summit on the 14th. biggest deal of the year (Bhavin)"
+    ],
+    "clientCountry": "Saudi Arabia"
+  },
+  {
+    "id": "travelhub",
+    "name": "TravelHub: software development & services",
+    "counterparty": "TravelHub",
+    "counterpartyAliases": [
+      "TravelHub FZ-LLC",
+      "Travel Hub"
+    ],
+    "owner": "Karandeep",
+    "deadlineNote": "No date (Karandeep's own deal)",
+    "valueUsd": 52000,
+    "status": "open",
+    "documentIds": [
+      "travelhub-sa"
+    ],
+    "contextDocumentIds": [],
+    "noteIds": [
+      "note-2026-09-22"
+    ],
+    "linkedDealIds": [],
+    "trackerIds": [
+      "C-024"
+    ],
+    "trackerNotes": [
+      "C-024 (MSA): Nadia: 'we put your US company since you're US-listed on LinkedIn'. K to look this week"
+    ],
+    "clientCountry": "UAE"
+  },
+  {
+    "id": "rheinwerk",
+    "name": "Rheinwerk Analytics: pipeline modernisation",
+    "counterparty": "Rheinwerk Analytics GmbH",
+    "counterpartyAliases": [
+      "Rheinwerk"
+    ],
+    "owner": "Bhavin",
+    "deadline": "2026-10-15",
+    "deadlineNote": "by 15 Oct (tracker C-028)",
+    "valueUsd": 96000,
+    "status": "open",
+    "documentIds": [
+      "rheinwerk-sa"
+    ],
+    "contextDocumentIds": [],
+    "noteIds": [
+      "note-2026-09-22"
+    ],
+    "linkedDealIds": [
+      "kriti"
+    ],
+    "trackerIds": [
+      "C-028"
+    ],
+    "trackerNotes": [
+      "C-028 (MSA + SOW): EUR 88k. by 15 Oct. Pranav: PipeKit can be reused 'like we did for Northwind'"
+    ],
+    "clientCountry": "Germany"
+  },
+  {
+    "id": "kriti",
+    "name": "Kriti Data Labs: subcontract (for Rheinwerk)",
+    "counterparty": "Kriti Data Labs",
+    "counterpartyAliases": [
+      "Kriti"
+    ],
+    "owner": "Pranav",
+    "deadline": "2026-10-05",
+    "deadlineNote": "Kriti wants to start 5 Oct (tracker C-037)",
+    "valueUsd": 10100,
+    "status": "open",
+    "documentIds": [
+      "kriti-sub"
+    ],
+    "contextDocumentIds": [],
+    "noteIds": [],
+    "linkedDealIds": [
+      "rheinwerk"
+    ],
+    "endClientDealId": "rheinwerk",
+    "trackerIds": [
+      "C-037"
+    ],
+    "trackerNotes": [
+      "C-037 (Subcontractor Agreement): Kriti wants to start 5 Oct. built from our vendor template (Jay made it from the Harrington draft). Kriti pushing back on 120-day pay-when-paid - 'we're 12 people'"
+    ],
+    "clientCountry": "India"
+  },
+  {
+    "id": "sunrise-sow2",
+    "name": "Sunrise Foods: SOW-2 (portal + dashboard)",
+    "counterparty": "Sunrise Foods",
+    "counterpartyAliases": [
+      "Sunrise"
+    ],
+    "owner": "Dhaval",
+    "deadline": "2026-10-08",
+    "deadlineNote": "Meera wants it by 8 Oct (22 Sep meeting)",
+    "valueUsd": 45000,
+    "status": "open",
+    "documentIds": [
+      "sunrise-sow2"
+    ],
+    "contextDocumentIds": [
+      "sunrise-msa"
+    ],
+    "noteIds": [
+      "note-2026-09-22"
+    ],
+    "linkedDealIds": [],
+    "trackerIds": [
+      "C-029"
+    ],
+    "trackerNotes": [
+      "C-029 (SOW-2): by 8 Oct. v2 portal + dashboard. Dhaval: 'same as last time, should be quick'"
+    ],
+    "clientCountry": "India"
+  },
+  {
+    "id": "datavane",
+    "name": "Datavane: strategic partnership",
+    "counterparty": "Datavane Inc",
+    "counterpartyAliases": [
+      "Datavane"
+    ],
+    "owner": "Bhavin",
+    "deadline": "2026-10-15",
+    "deadlineNote": "by 15 Oct (tracker C-035)",
+    "status": "open",
+    "documentIds": [
+      "datavane-spa"
+    ],
+    "contextDocumentIds": [],
+    "noteIds": [],
+    "linkedDealIds": [],
+    "trackerIds": [
+      "C-035"
+    ],
+    "trackerNotes": [
+      "C-035 (Partnership Agreement): by 15 Oct. Bhavin: 'huge for our Europe and Middle East pipeline'"
+    ],
+    "clientCountry": "USA"
+  },
+  {
+    "id": "finserve",
+    "name": "FinServe Capital: \"mutual\" NDA",
+    "counterparty": "FinServe Capital",
+    "counterpartyAliases": [
+      "FinServe"
+    ],
+    "owner": "Karandeep",
+    "deadline": "2026-10-01",
+    "deadlineNote": "needed before the 1 Oct data walkthrough (tracker C-036)",
+    "status": "open",
+    "documentIds": [
+      "finserve-nda"
+    ],
+    "contextDocumentIds": [],
+    "noteIds": [],
+    "linkedDealIds": [],
+    "trackerIds": [
+      "C-036"
+    ],
+    "trackerNotes": [
+      "C-036 (Mutual NDA): Arjun: 'our standard mutual NDA' - needed before 1 Oct data walkthrough. K: will sign tonight"
+    ],
+    "clientCountry": "India"
+  },
+  {
+    "id": "loopmart",
+    "name": "LoopMart: mutual NDA",
+    "counterparty": "LoopMart",
+    "counterpartyAliases": [],
+    "owner": "Jay",
+    "deadlineNote": "No date",
+    "status": "open",
+    "documentIds": [
+      "loopmart-nda"
+    ],
+    "contextDocumentIds": [],
+    "noteIds": [],
+    "linkedDealIds": [],
+    "trackerIds": [
+      "C-038"
+    ],
+    "trackerNotes": [
+      "C-038 (Mutual NDA): Sania sent their standard one"
+    ],
+    "clientCountry": "India"
+  }
+]
