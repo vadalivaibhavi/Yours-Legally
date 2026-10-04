@@ -17,3 +17,4 @@ data/state/
 .DS_Store
 __MACOSX/
 data/*.log
+data/dev.log

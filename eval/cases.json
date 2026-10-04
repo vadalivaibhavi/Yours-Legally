@@ -1,0 +1,1533 @@
+{
+  "builtAt": "2026-10-04T18:43:22.471Z",
+  "from": "docs/Eval_Set.md + eval/case_keys.json",
+  "cases": [
+    {
+      "id": "EV-R1",
+      "section": "A. Register build (US-1 · FR-1, FR-2)",
+      "title": "17 signed documents",
+      "inputs": [],
+      "mustFind": [],
+      "mustNotFlag": [],
+      "spec": {
+        "kind": "register",
+        "registerKeys": [
+          "R1",
+          "R2",
+          "R3",
+          "R4"
+        ]
+      },
+      "source": {
+        "ID": "EV-R1",
+        "Input": "17 signed documents",
+        "Must find": "Al Noor GCC hospitality non-compete (binds Pvt Ltd + affiliates; \"Hospitality Business\" incl. distribution; \"in the GCC\" incl. properties located there; term to 14 Mar 2028 + 18 months; Seaside-only waiver) · Crestline MFN (Inc + affiliates; to 31 Jul 2027; retroactive credit; audit) · CloudSpan platform exclusivity (India + GCC; to 31 Aug 2028; 90-day exit) · Meridian no-hire incl. consultants (~Jul 2031)",
+        "Must not / must say": "Each with verbatim source quote + clause"
+      }
+    },
+    {
+      "id": "EV-R2",
+      "section": "A. Register build (US-1 · FR-1, FR-2)",
+      "title": "Northwind MSA, Rohan Iyer ICA, Acme MSA",
+      "inputs": [],
+      "mustFind": [],
+      "mustNotFlag": [],
+      "spec": {
+        "kind": "register",
+        "registerKeys": [
+          "I1",
+          "I2"
+        ],
+        "registerTypes": {
+          "I1": "ip_transfer",
+          "I2": "ip_retention"
+        }
+      },
+      "source": {
+        "ID": "EV-R2",
+        "Input": "Northwind MSA, Rohan Iyer ICA, Acme MSA",
+        "Must find": "IP given away: Northwind owns incorporated pre-existing tools (PipeKit) · Rohan retains Work Product IP while Acme was promised ownership",
+        "Must not / must say": "Classified as IP commitments, not restrictions"
+      }
+    },
+    {
+      "id": "EV-R3",
+      "section": "A. Register build (US-1 · FR-1, FR-2)",
+      "title": "Orbit MSA (scanned)",
+      "inputs": [],
+      "mustFind": [],
+      "mustNotFlag": [],
+      "spec": {
+        "kind": "register",
+        "registerKeys": [
+          "R6"
+        ],
+        "illegible": [
+          "orbit-msa:9"
+        ]
+      },
+      "source": {
+        "ID": "EV-R3",
+        "Input": "Orbit MSA (scanned)",
+        "Must find": "OTA non-compete recorded as **expired** (30 Jun 2025) · indemnity §9.1 reported as **illegible**",
+        "Must not / must say": "Never guess illegible text"
+      }
+    },
+    {
+      "id": "EV-R4",
+      "section": "A. Register build (US-1 · FR-1, FR-2)",
+      "title": "Brightwater, Al Noor, Northwind, Meridian",
+      "inputs": [],
+      "mustFind": [],
+      "mustNotFlag": [],
+      "expectedPrecedents": [
+        {
+          "docId": "brightwater-msa",
+          "label": "accident"
+        },
+        {
+          "docId": "alnoor-msa",
+          "label": "exception"
+        },
+        {
+          "docId": "northwind-msa",
+          "label": "concession"
+        },
+        {
+          "docId": "meridian-nda",
+          "label": "accident"
+        }
+      ],
+      "spec": {
+        "kind": "labels",
+        "expectedPrecedents": [
+          {
+            "docId": "brightwater-msa",
+            "label": "accident"
+          },
+          {
+            "docId": "alnoor-msa",
+            "label": "exception"
+          },
+          {
+            "docId": "northwind-msa",
+            "label": "concession"
+          },
+          {
+            "docId": "meridian-nda",
+            "label": "accident"
+          }
+        ]
+      },
+      "source": {
+        "ID": "EV-R4",
+        "Input": "Brightwater, Al Noor, Northwind, Meridian",
+        "Must find": "Deviations recorded with intent label: Brightwater = accident; Al Noor 10% LD cap = explicit exception; Northwind English law = concession; Meridian one-way NDA = accident",
+        "Must not / must say": "Accidents/exceptions never labelled \"standard\""
+      }
+    },
+    {
+      "id": "EV-R5",
+      "section": "A. Register build (US-1 · FR-1, FR-2)",
+      "title": "Register entry for Crestline MFN left unverified",
+      "inputs": [],
+      "dealId": "lakeshore",
+      "mustFind": [
+        "conflict:crestline-msa:mfn_pricing"
+      ],
+      "mustNotFlag": [],
+      "spec": {
+        "kind": "unverified",
+        "dealId": "lakeshore",
+        "mustFind": [
+          "conflict:crestline-msa:mfn_pricing"
+        ]
+      },
+      "source": {
+        "ID": "EV-R5",
+        "Input": "Register entry for Crestline MFN left unverified",
+        "Must find": "Lakeshore conflict still raised, labelled \"based on an unverified register entry\"; verifying removes the label",
+        "Must not / must say": "Never suppress a finding because its entry is unverified"
+      }
+    },
+    {
+      "id": "EV-01",
+      "section": "B. Incoming contracts (US-2 to US-7, US-11)",
+      "title": "Gulf Crown MSA",
+      "inputs": [],
+      "dealId": "gulfcrown",
+      "expectedVerdict": "HOLD",
+      "mustFind": [
+        "conflict:alnoor-msa:non_compete",
+        "conflict:alnoor-msa:non_compete@9.1",
+        "playbook:ld",
+        "playbook:payment"
+      ],
+      "mustNotFlag": [
+        "playbook:ip",
+        "playbook:confidentiality",
+        "playbook:indemnity",
+        "conflict:orbit-msa"
+      ],
+      "spec": {
+        "kind": "review",
+        "dealId": "gulfcrown",
+        "expectedVerdict": "HOLD",
+        "mustFind": [
+          "conflict:alnoor-msa:non_compete",
+          "conflict:alnoor-msa:non_compete@9.1",
+          "playbook:ld",
+          "playbook:payment"
+        ],
+        "mustNotFlag": [
+          "playbook:ip",
+          "playbook:confidentiality",
+          "playbook:indemnity",
+          "conflict:orbit-msa"
+        ]
+      },
+      "source": {
+        "ID": "EV-01",
+        "Contract": "Gulf Crown MSA",
+        "Expected verdict": "HOLD",
+        "Must find": "Al Noor collision (§12.1–12.3, §1.11, §1.14; waiver ¶3 doesn't apply; affiliate clause catches Inc); own warranty §9.1(d) false; LD 1% of contract value/week, no client-delay exclusion; 60-day payment",
+        "Must not flag": "IP, confidentiality, IP-only indemnity, 1× general cap",
+        "US · FR": "US-3, US-4 · FR-6, FR-7"
+      }
+    },
+    {
+      "id": "EV-02",
+      "section": "B. Incoming contracts (US-2 to US-7, US-11)",
+      "title": "Lakeshore MSA + rate card",
+      "inputs": [],
+      "dealId": "lakeshore",
+      "expectedVerdict": "HOLD",
+      "mustFind": [
+        "conflict:crestline-msa:mfn_pricing"
+      ],
+      "mustNotFlag": [
+        "playbook:ld",
+        "playbook:payment",
+        "playbook:ip",
+        "gate:entity",
+        "gate:payment",
+        "gate:ld_cap",
+        "gate:liability_cap",
+        "gate:governing_law"
+      ],
+      "spec": {
+        "kind": "review",
+        "dealId": "lakeshore",
+        "expectedVerdict": "HOLD",
+        "mustFind": [
+          "conflict:crestline-msa:mfn_pricing"
+        ],
+        "mustNotFlag": [
+          "playbook:ld",
+          "playbook:payment",
+          "playbook:ip",
+          "gate:entity",
+          "gate:payment",
+          "gate:ld_cap",
+          "gate:liability_cap",
+          "gate:governing_law"
+        ]
+      },
+      "source": {
+        "ID": "EV-02",
+        "Contract": "Lakeshore MSA + rate card",
+        "Expected verdict": "HOLD (at these rates)",
+        "Must find": "Crestline MFN vs rates $72/$55/$50 vs $85/$62/$58; rates locked 24 months; \"substantially similar\" flagged for judgment, not as breach",
+        "Must not flag": "LDs (match standard), 30-day payment, liability cap, IP, entity, law",
+        "US · FR": "US-3 · FR-6"
+      }
+    },
+    {
+      "id": "EV-03",
+      "section": "B. Incoming contracts (US-2 to US-7, US-11)",
+      "title": "TravelHub agreement",
+      "inputs": [],
+      "dealId": "travelhub",
+      "expectedVerdict": "SEND BACK",
+      "mustFind": [
+        "gate:entity",
+        "gate:invoicing_entity",
+        "conflict:alnoor-msa:non_compete"
+      ],
+      "mustNotFlag": [
+        "conflict:orbit-msa"
+      ],
+      "spec": {
+        "kind": "review",
+        "dealId": "travelhub",
+        "expectedVerdict": "SEND BACK",
+        "mustFind": [
+          "gate:entity",
+          "gate:invoicing_entity",
+          "conflict:alnoor-msa:non_compete"
+        ],
+        "mustNotFlag": [
+          "conflict:orbit-msa"
+        ]
+      },
+      "source": {
+        "ID": "EV-03",
+        "Contract": "TravelHub agreement",
+        "Expected verdict": "SEND BACK (+ judgment item)",
+        "Must find": "Gate: wrong entity (Inc for UAE client) + parties ≠ invoicing entity; deep review still runs (hybrid); Al Noor arguable via \"distribution services\" → needs judgment",
+        "Must not flag": "Orbit OTA non-compete (expired) — see EV-14",
+        "US · FR": "US-2, US-3 · FR-4, FR-6, FR-17"
+      }
+    },
+    {
+      "id": "EV-04",
+      "section": "B. Incoming contracts (US-2 to US-7, US-11)",
+      "title": "BlueOrchid pilot",
+      "inputs": [],
+      "dealId": "blueorchid",
+      "expectedVerdict": "SIGN AFTER CHANGES",
+      "mustFind": [
+        "conflict:alnoor-msa:non_compete"
+      ],
+      "mustNotFlag": [
+        "playbook:ld",
+        "playbook:payment",
+        "playbook:liability",
+        "playbook:ip",
+        "gate:governing_law"
+      ],
+      "spec": {
+        "kind": "review",
+        "dealId": "blueorchid",
+        "expectedVerdict": "SIGN AFTER CHANGES",
+        "mustFind": [
+          "conflict:alnoor-msa:non_compete"
+        ],
+        "mustNotFlag": [
+          "playbook:ld",
+          "playbook:payment",
+          "playbook:liability",
+          "playbook:ip",
+          "gate:governing_law"
+        ]
+      },
+      "source": {
+        "ID": "EV-04",
+        "Contract": "BlueOrchid pilot",
+        "Expected verdict": "SIGN AFTER CHANGES (carve out properties 10–12)",
+        "Must find": "3 GCC properties (Dubai ×2, Muscat) hit Al Noor §12.2; Seaside waiver doesn't cover Muscat Qurum",
+        "Must not flag": "LDs, payment, caps, IP, law",
+        "US · FR": "US-3 · FR-6"
+      }
+    },
+    {
+      "id": "EV-05",
+      "section": "B. Incoming contracts (US-2 to US-7, US-11)",
+      "title": "Datavane partnership",
+      "inputs": [],
+      "dealId": "datavane",
+      "expectedVerdict": "HOLD",
+      "mustFind": [
+        "conflict:cloudspan-spa:exclusivity",
+        "playbook:indemnity",
+        "playbook:restrictive"
+      ],
+      "mustNotFlag": [],
+      "spec": {
+        "kind": "review",
+        "dealId": "datavane",
+        "expectedVerdict": "HOLD",
+        "mustFind": [
+          "conflict:cloudspan-spa:exclusivity",
+          "playbook:indemnity",
+          "playbook:restrictive"
+        ],
+        "mustNotFlag": []
+      },
+      "source": {
+        "ID": "EV-05",
+        "Contract": "Datavane partnership",
+        "Expected verdict": "HOLD",
+        "Must find": "CloudSpan exclusivity (India + GCC); client-capture clause §5.2–5.3; 80% revenue share on services; no partner exit for 3 yrs; uncapped partner indemnity vs $10k cap",
+        "Must not flag": "—",
+        "US · FR": "US-3, US-4 · FR-6, FR-7"
+      }
+    },
+    {
+      "id": "EV-06",
+      "section": "B. Incoming contracts (US-2 to US-7, US-11)",
+      "title": "Rheinwerk agreement",
+      "inputs": [],
+      "dealId": "rheinwerk",
+      "expectedVerdict": "HOLD",
+      "mustFind": [
+        "conflict:northwind-msa:ip_transfer",
+        "gate:annex"
+      ],
+      "mustNotFlag": [
+        "playbook:ld",
+        "playbook:payment",
+        "gate:payment",
+        "gate:ld_cap",
+        "playbook:liability"
+      ],
+      "spec": {
+        "kind": "review",
+        "dealId": "rheinwerk",
+        "expectedVerdict": "HOLD",
+        "mustFind": [
+          "conflict:northwind-msa:ip_transfer",
+          "gate:annex"
+        ],
+        "mustNotFlag": [
+          "playbook:ld",
+          "playbook:payment",
+          "gate:payment",
+          "gate:ld_cap",
+          "playbook:liability"
+        ]
+      },
+      "source": {
+        "ID": "EV-06",
+        "Contract": "Rheinwerk agreement",
+        "Expected verdict": "HOLD",
+        "Must find": "PipeKit sole-ownership warranty §6.3 vs Northwind §9.2 (counsel, tier 4); DPA Annex 3 referenced but missing (gate) → deep review still runs",
+        "Must not flag": "LDs (match standard), payment, acceptance, liability (mandatory German law carve-outs)",
+        "US · FR": "US-2, US-3, US-6 · FR-4, FR-6, FR-9"
+      }
+    },
+    {
+      "id": "EV-07",
+      "section": "B. Incoming contracts (US-2 to US-7, US-11)",
+      "title": "FinServe \"mutual\" NDA",
+      "inputs": [],
+      "dealId": "finserve",
+      "expectedVerdict": "HOLD",
+      "mustFind": [
+        "nda:definition",
+        "nda:residuals",
+        "covenant:non_compete",
+        "nda:remedies"
+      ],
+      "mustNotFlag": [
+        "gate:entity",
+        "gate:governing_law"
+      ],
+      "spec": {
+        "kind": "review",
+        "dealId": "finserve",
+        "expectedVerdict": "HOLD",
+        "expectRoute": "nda_fast_lane",
+        "mustFind": [
+          "nda:definition",
+          "nda:residuals",
+          "covenant:non_compete",
+          "nda:remedies"
+        ],
+        "mustNotFlag": [
+          "gate:entity",
+          "gate:governing_law"
+        ]
+      },
+      "source": {
+        "ID": "EV-07",
+        "Contract": "FinServe \"mutual\" NDA",
+        "Expected verdict": "HOLD (hidden non-compete collides with live clients; redline to mutual), via **fast lane <1 min**",
+        "Must find": "Not mutual (CI defined one way; AtliQ = \"Recipient\"); one-way residuals; hidden non-compete §8.1 vs live/pipeline clients (Trustline, PayTrack, FinEdge); uncapped one-way indemnity; precedent: GlobalMart",
+        "Must not flag": "Indian law, entity",
+        "US · FR": "US-5 · FR-5, FR-8"
+      }
+    },
+    {
+      "id": "EV-08",
+      "section": "B. Incoming contracts (US-2 to US-7, US-11)",
+      "title": "LoopMart mutual NDA",
+      "inputs": [],
+      "dealId": "loopmart",
+      "expectedVerdict": "SIGN",
+      "mustFind": [],
+      "mustNotFlag": [
+        "severity:blocker",
+        "severity:high"
+      ],
+      "spec": {
+        "kind": "review",
+        "dealId": "loopmart",
+        "expectedVerdict": "SIGN",
+        "expectRoute": "nda_fast_lane",
+        "maxMedium": 1,
+        "mustFind": [],
+        "mustNotFlag": [
+          "severity:blocker",
+          "severity:high"
+        ]
+      },
+      "source": {
+        "ID": "EV-08",
+        "Contract": "LoopMart mutual NDA",
+        "Expected verdict": "**SIGN**, fast lane",
+        "Must find": "—",
+        "Must not flag": "Anything at blocker level; ≤1 medium",
+        "US · FR": "US-5 · FR-8"
+      }
+    },
+    {
+      "id": "EV-09",
+      "section": "B. Incoming contracts (US-2 to US-7, US-11)",
+      "title": "Sunrise SOW-2",
+      "inputs": [],
+      "dealId": "sunrise-sow2",
+      "expectedVerdict": "SIGN",
+      "mustFind": [],
+      "mustNotFlag": [
+        "playbook:ld",
+        "severity:blocker",
+        "severity:high"
+      ],
+      "spec": {
+        "kind": "review",
+        "dealId": "sunrise-sow2",
+        "expectedVerdict": "SIGN",
+        "maxMedium": 1,
+        "mustFind": [],
+        "mustNotFlag": [
+          "playbook:ld",
+          "severity:blocker",
+          "severity:high"
+        ]
+      },
+      "source": {
+        "ID": "EV-09",
+        "Contract": "Sunrise SOW-2",
+        "Expected verdict": "**SIGN**",
+        "Must find": "—",
+        "Must not flag": "\"Penalty for Delay\" section (matches standard exactly); anything at blocker level",
+        "US · FR": "US-4, US-7 · FR-7"
+      }
+    },
+    {
+      "id": "EV-10",
+      "section": "B. Incoming contracts (US-2 to US-7, US-11)",
+      "title": "Kriti subcontract (AtliQ paper)",
+      "inputs": [],
+      "dealId": "kriti",
+      "expectedVerdict": "SIGN AFTER CHANGES",
+      "mustFind": [
+        "playbook:ld",
+        "playbook:payment",
+        "playbook:indemnity",
+        "playbook:liability",
+        "flowdown:ip",
+        "flowdown:data",
+        "flowdown:consent"
+      ],
+      "mustNotFlag": [],
+      "spec": {
+        "kind": "review",
+        "dealId": "kriti",
+        "expectedVerdict": "SIGN AFTER CHANGES",
+        "mustFind": [
+          "playbook:ld",
+          "playbook:payment",
+          "playbook:indemnity",
+          "playbook:liability",
+          "flowdown:ip",
+          "flowdown:data",
+          "flowdown:consent"
+        ],
+        "mustNotFlag": []
+      },
+      "source": {
+        "ID": "EV-10",
+        "Contract": "Kriti subcontract (AtliQ paper)",
+        "Expected verdict": "SIGN AFTER CHANGES (fix before sending)",
+        "Must find": "Mirror test: 2%/day uncapped LDs, pay-when-paid up to 120 days, indemnity incl. AtliQ negligence, unlimited vendor liability (precedents: PixelCraft, PayTrack); flow-down vs Rheinwerk: IP retained by vendor vs exclusive rights promised, no data-protection terms, no client consent to subcontract; start date before client contract",
+        "Must not flag": "—",
+        "US · FR": "US-11, US-6 · FR-7, FR-9"
+      }
+    },
+    {
+      "id": "EV-11",
+      "section": "B. Incoming contracts (US-2 to US-7, US-11)",
+      "title": "Marcus Reed ICA (AtliQ paper)",
+      "inputs": [],
+      "dealId": "marcus",
+      "expectedVerdict": "SIGN AFTER CHANGES",
+      "mustFind": [
+        "gate:entity",
+        "playbook:restrictive",
+        "playbook:termination",
+        "dependency:lakeshore"
+      ],
+      "mustNotFlag": [
+        "playbook:ip",
+        "flowdown:ip"
+      ],
+      "spec": {
+        "kind": "review",
+        "dealId": "marcus",
+        "expectedVerdict": "SIGN AFTER CHANGES",
+        "mustFind": [
+          "gate:entity",
+          "playbook:restrictive",
+          "playbook:termination",
+          "dependency:lakeshore"
+        ],
+        "mustNotFlag": [
+          "playbook:ip",
+          "flowdown:ip"
+        ]
+      },
+      "source": {
+        "ID": "EV-11",
+        "Contract": "Marcus Reed ICA (AtliQ paper)",
+        "Expected verdict": "SIGN AFTER CHANGES (fix before sending)",
+        "Must find": "Gate: India template / Pvt Ltd for a US-resident contractor on a US-entity client; worldwide non-compete; exclusivity/misclassification risk (judgment); asymmetric termination; dependency on blocked Lakeshore deal",
+        "Must not flag": "IP assignment (correct)",
+        "US · FR": "US-2, US-11 · FR-4, FR-7"
+      }
+    },
+    {
+      "id": "EV-12",
+      "section": "B. Incoming contracts (US-2 to US-7, US-11)",
+      "title": "Harrington bundle (MSA, BAA, NDA, notes)",
+      "inputs": [],
+      "dealId": "harrington",
+      "expectedVerdict": "HOLD",
+      "expectComplianceAlert": true,
+      "mustFind": [
+        "notes:data_movement",
+        "bundle:sub-baa:ortiz",
+        "bundle:sub-baa:pvt-ltd",
+        "gate:insurance",
+        "playbook:ld",
+        "playbook:liability",
+        "playbook:indemnity",
+        "playbook:ip"
+      ],
+      "mustNotFlag": [],
+      "spec": {
+        "kind": "review",
+        "dealId": "harrington",
+        "expectedVerdict": "HOLD",
+        "expectComplianceAlert": true,
+        "mustFind": [
+          "notes:data_movement",
+          "bundle:sub-baa:ortiz",
+          "bundle:sub-baa:pvt-ltd",
+          "gate:insurance",
+          "playbook:ld",
+          "playbook:liability",
+          "playbook:indemnity",
+          "playbook:ip"
+        ],
+        "mustNotFlag": []
+      },
+      "source": {
+        "ID": "EV-12",
+        "Contract": "Harrington bundle (MSA, BAA, NDA, notes)",
+        "Expected verdict": "HOLD + **compliance alert**",
+        "Must find": "From notes (confirm): PHI extract with Pune engineers before any BAA (NDA §2.3, IC-BAA §3.4); missing sub-BAAs (Ortiz; Pvt Ltd for Harrington; IC-BAA is CareBridge-only); BAA forbids offshore subcontractors; insurance $5M asked vs $1M held; MSA: 2%/day uncapped LDs, unlimited liability, indemnity incl. client negligence, background IP assigned",
+        "Must not flag": "—",
+        "US · FR": "US-2, US-4, US-6 · FR-4, FR-7, FR-9, FR-10"
+      }
+    },
+    {
+      "id": "EV-13",
+      "section": "B. Incoming contracts (US-2 to US-7, US-11)",
+      "title": "Daniel Ortiz ICA + NDA (AtliQ paper)",
+      "inputs": [],
+      "dealId": "ortiz",
+      "expectedVerdict": "SIGN AFTER CHANGES",
+      "mustFind": [
+        "flowdown:data",
+        "flowdown:ip"
+      ],
+      "mustNotFlag": [
+        "nda:",
+        "playbook:payment",
+        "playbook:termination",
+        "playbook:liability"
+      ],
+      "spec": {
+        "kind": "review",
+        "dealId": "ortiz",
+        "expectedVerdict": "SIGN AFTER CHANGES",
+        "mustFind": [
+          "flowdown:data",
+          "flowdown:ip"
+        ],
+        "mustNotFlag": [
+          "nda:",
+          "playbook:payment",
+          "playbook:termination",
+          "playbook:liability"
+        ]
+      },
+      "source": {
+        "ID": "EV-13",
+        "Contract": "Daniel Ortiz ICA + NDA (AtliQ paper)",
+        "Expected verdict": "SIGN AFTER CHANGES",
+        "Must find": "Flow-down gaps vs Harrington: no HIPAA/sub-BAA terms; IP assigned only on payment; contractor tools licensed not assigned; background-check/training prerequisites missing",
+        "Must not flag": "Fairness items (agreement is balanced); NDA mutuality",
+        "US · FR": "US-11, US-6 · FR-7, FR-9"
+      }
+    },
+    {
+      "id": "EV-15",
+      "section": "B. Incoming contracts (US-2 to US-7, US-11)",
+      "title": "BlueOrchid contract vs seller's deal check declaring \"India hotels only\"",
+      "inputs": [],
+      "dealId": "blueorchid",
+      "mustFind": [
+        "mismatch:regions"
+      ],
+      "mustNotFlag": [],
+      "spec": {
+        "kind": "review",
+        "dealId": "blueorchid",
+        "mustFind": [
+          "mismatch:regions"
+        ],
+        "mustNotFlag": []
+      },
+      "source": {
+        "ID": "EV-15",
+        "Contract": "BlueOrchid contract vs seller's deal check declaring \"India hotels only\"",
+        "Expected verdict": "—",
+        "Must find": "Deal-facts mismatch (FR-20): contract includes 3 GCC properties not declared by the seller",
+        "Must not flag": "—",
+        "US · FR": "US-3, US-7 · FR-20"
+      }
+    },
+    {
+      "id": "EV-14",
+      "section": "B. Incoming contracts (US-2 to US-7, US-11)",
+      "title": "TravelHub (negative test)",
+      "inputs": [],
+      "dealId": "travelhub",
+      "mustFind": [],
+      "mustNotFlag": [
+        "conflict:orbit-msa"
+      ],
+      "spec": {
+        "kind": "review",
+        "dealId": "travelhub",
+        "mustFind": [],
+        "mustNotFlag": [
+          "conflict:orbit-msa"
+        ]
+      },
+      "source": {
+        "ID": "EV-14",
+        "Contract": "TravelHub (negative test)",
+        "Expected verdict": "—",
+        "Must find": "—",
+        "Must not flag": "**Orbit OTA non-compete must not be raised** (expired 30 Jun 2025)",
+        "US · FR": "US-3 · FR-6"
+      }
+    },
+    {
+      "id": "EV-C1",
+      "section": "B1. Compliance alerts & notes (FR-21)",
+      "title": "Harrington: Karandeep closes the PHI alert with \"Resolved off the record: Harrington privacy officer confirmed deletion, 5 Oct\"",
+      "inputs": [],
+      "dealId": "harrington",
+      "mustFind": [],
+      "mustNotFlag": [],
+      "spec": {
+        "kind": "compliance",
+        "dealId": "harrington"
+      },
+      "source": {
+        "ID": "EV-C1",
+        "Situation": "Harrington: Karandeep closes the PHI alert with \"Resolved off the record: Harrington privacy officer confirmed deletion, 5 Oct\"",
+        "Expected": "Alert shows \"resolved by Karandeep's note, 5 Oct\"; logged; analysis and other findings unchanged; verdict no longer blocked by the alert"
+      }
+    },
+    {
+      "id": "EV-C2",
+      "section": "B1. Compliance alerts & notes (FR-21)",
+      "title": "Gulf Crown: Karandeep adds a note \"Al Noor agreed verbally to waive for Gulf Crown\"",
+      "inputs": [],
+      "dealId": "gulfcrown",
+      "mustFind": [],
+      "mustNotFlag": [],
+      "spec": {
+        "kind": "compliance",
+        "dealId": "gulfcrown"
+      },
+      "source": {
+        "ID": "EV-C2",
+        "Situation": "Gulf Crown: Karandeep adds a note \"Al Noor agreed verbally to waive for Gulf Crown\"",
+        "Expected": "Al Noor blocker stays open as **\"pending written waiver\"**; note shown as context; verdict remains HOLD"
+      }
+    },
+    {
+      "id": "EV-L1",
+      "section": "B2. Deal linking (FR-3)",
+      "title": "Harrington BAA uploaded alone",
+      "inputs": [],
+      "mustFind": [],
+      "mustNotFlag": [],
+      "spec": {
+        "kind": "linking",
+        "docId": "harrington-baa",
+        "expect": {
+          "mode": "auto",
+          "dealId": "harrington"
+        }
+      },
+      "source": {
+        "ID": "EV-L1",
+        "Upload": "Harrington BAA uploaded alone",
+        "Expected": "Proposed deal: Harrington (via \"Exhibit D to Contract No. HHS-IT-2026-0193\"); user confirms"
+      }
+    },
+    {
+      "id": "EV-L2",
+      "section": "B2. Deal linking (FR-3)",
+      "title": "Kriti subcontract",
+      "inputs": [],
+      "mustFind": [],
+      "mustNotFlag": [],
+      "spec": {
+        "kind": "linking",
+        "docId": "kriti-sub",
+        "expect": {
+          "mode": "auto",
+          "dealId": "kriti",
+          "endClientDealId": "rheinwerk"
+        }
+      },
+      "source": {
+        "ID": "EV-L2",
+        "Upload": "Kriti subcontract",
+        "Expected": "Linked to the Kriti vendor deal **and** to Rheinwerk as end client for flow-down checks"
+      }
+    },
+    {
+      "id": "EV-L3",
+      "section": "B2. Deal linking (FR-3)",
+      "title": "Synthetic: NDA from an unknown counterparty with a name similar to an existing client",
+      "inputs": [],
+      "mustFind": [],
+      "mustNotFlag": [],
+      "spec": {
+        "kind": "linking",
+        "synthetic": {
+          "counterparty": "Gulf Crown Hospitality Holdings",
+          "docType": "NDA",
+          "text": "MUTUAL NON-DISCLOSURE AGREEMENT between Gulf Crown Hospitality Holdings W.L.L. (Bahrain) and AtliQ Technologies Pvt Ltd."
+        },
+        "expect": {
+          "mode": "ask"
+        }
+      },
+      "source": {
+        "ID": "EV-L3",
+        "Upload": "Synthetic: NDA from an unknown counterparty with a name similar to an existing client",
+        "Expected": "System asks \"part of [deal] or new deal?\"; never links silently"
+      }
+    },
+    {
+      "id": "EV-L4",
+      "section": "B2. Deal linking (FR-3)",
+      "title": "Synthetic: Northwind SOW-2 uploaded while the Northwind MSA/SOW-1 exist",
+      "inputs": [],
+      "mustFind": [],
+      "mustNotFlag": [],
+      "spec": {
+        "kind": "linking",
+        "synthetic": {
+          "counterparty": "Northwind Logistics",
+          "docType": "SOW",
+          "text": "STATEMENT OF WORK No. 2 (Dashboards) under the Master Services Agreement between Northwind Logistics Ltd and AtliQ Technologies Pvt Ltd."
+        },
+        "expect": {
+          "mode": "ask",
+          "notVersionOf": [
+            "northwind-msa"
+          ]
+        }
+      },
+      "source": {
+        "ID": "EV-L4",
+        "Upload": "Synthetic: Northwind SOW-2 uploaded while the Northwind MSA/SOW-1 exist",
+        "Expected": "Ambiguous → **asks once**; must **not** treat SOW-2 as a new version of the MSA or SOW-1"
+      }
+    },
+    {
+      "id": "EV-L5",
+      "section": "B2. Deal linking (FR-3)",
+      "title": "Harrington BAA deliberately placed in a new deal by the user",
+      "inputs": [],
+      "mustFind": [],
+      "mustNotFlag": [],
+      "spec": {
+        "kind": "linking",
+        "docId": "harrington-baa",
+        "userChoice": "new",
+        "expect": {
+          "mode": "user",
+          "note": "harrington"
+        }
+      },
+      "source": {
+        "ID": "EV-L5",
+        "Upload": "Harrington BAA deliberately placed in a new deal by the user",
+        "Expected": "Choice respected (no re-prompt, no re-matching); register/conflict checks still run; one note under \"what wasn't seen\" pointing to the Harrington deal with a one-click move"
+      }
+    },
+    {
+      "id": "EV-L6",
+      "section": "B2. Deal linking (FR-3)",
+      "title": "Rheinwerk draft with exactly one open Rheinwerk deal",
+      "inputs": [],
+      "mustFind": [],
+      "mustNotFlag": [],
+      "spec": {
+        "kind": "linking",
+        "docId": "rheinwerk-sa",
+        "expect": {
+          "mode": "auto",
+          "dealId": "rheinwerk"
+        }
+      },
+      "source": {
+        "ID": "EV-L6",
+        "Upload": "Rheinwerk draft with exactly one open Rheinwerk deal",
+        "Expected": "**Auto-linked**, shown with reason and \"Change\"; no question asked"
+      }
+    },
+    {
+      "id": "EV-A1",
+      "section": "B3. Access control (§8, §11)",
+      "title": "Seller (Jay) opens a deal he owns",
+      "inputs": [],
+      "mustFind": [],
+      "mustNotFlag": [],
+      "spec": {
+        "kind": "access"
+      },
+      "source": {
+        "ID": "EV-A1",
+        "Situation": "Seller (Jay) opens a deal he owns",
+        "Expected": "Sees his deal check, queue entry and re-check banners; cannot open Karandeep's brief or the Register screen"
+      }
+    },
+    {
+      "id": "EV-A2",
+      "section": "B3. Access control (§8, §11)",
+      "title": "Seller check on a US rate that hits the Crestline MFN",
+      "inputs": [],
+      "mustFind": [],
+      "mustNotFlag": [],
+      "spec": {
+        "kind": "access"
+      },
+      "source": {
+        "ID": "EV-A2",
+        "Situation": "Seller check on a US rate that hits the Crestline MFN",
+        "Expected": "Answer says a pricing floor applies; does **not** reveal Crestline's name or rates"
+      }
+    },
+    {
+      "id": "EV-A3",
+      "section": "B3. Access control (§8, §11)",
+      "title": "Seller tries to open another seller's deal or contract",
+      "inputs": [],
+      "mustFind": [],
+      "mustNotFlag": [],
+      "spec": {
+        "kind": "access"
+      },
+      "source": {
+        "ID": "EV-A3",
+        "Situation": "Seller tries to open another seller's deal or contract",
+        "Expected": "Access denied"
+      }
+    },
+    {
+      "id": "EV-V1",
+      "section": "C. Version pairs (US-7 · FR-17, FR-18) (synthetic, to be created)",
+      "title": "TravelHub: entity corrected to Pvt Ltd, invoicing aligned",
+      "inputs": [],
+      "dealId": "travelhub",
+      "mustFind": [],
+      "mustNotFlag": [],
+      "spec": {
+        "kind": "version",
+        "dealId": "travelhub",
+        "replace": {
+          "travelhub-sa": "synthetic/travelhub_v2_entity_fixed.md"
+        },
+        "resolved": [
+          "gate:entity",
+          "gate:invoicing_entity"
+        ],
+        "stillOpen": [
+          "conflict:alnoor-msa:non_compete"
+        ]
+      },
+      "source": {
+        "ID": "EV-V1",
+        "v1 → v2 change": "TravelHub: entity corrected to Pvt Ltd, invoicing aligned",
+        "Expected in v2": "Entity findings → **Resolved**; Al Noor judgment item → **Still open**; 0 late findings"
+      }
+    },
+    {
+      "id": "EV-V2",
+      "section": "C. Version pairs (US-7 · FR-17, FR-18) (synthetic, to be created)",
+      "title": "Rheinwerk: Annex 3 DPA added",
+      "inputs": [],
+      "dealId": "rheinwerk",
+      "mustFind": [],
+      "mustNotFlag": [],
+      "spec": {
+        "kind": "version",
+        "dealId": "rheinwerk",
+        "add": [
+          "synthetic/rheinwerk_annex3_dpa.md"
+        ],
+        "resolved": [
+          "gate:annex:annex-3"
+        ],
+        "stillOpen": [
+          "conflict:northwind-msa:ip_transfer"
+        ]
+      },
+      "source": {
+        "ID": "EV-V2",
+        "v1 → v2 change": "Rheinwerk: Annex 3 DPA added",
+        "Expected in v2": "Missing-annex finding → **Resolved**; DPA reviewed (new findings legitimately **New**); PipeKit → **Still open**; 0 late findings"
+      }
+    },
+    {
+      "id": "EV-V3",
+      "section": "C. Version pairs (US-7 · FR-17, FR-18) (synthetic, to be created)",
+      "title": "Harrington: sub-BAA for Daniel Ortiz added",
+      "inputs": [],
+      "dealId": "harrington",
+      "expectedVerdict": "HOLD",
+      "expectComplianceAlert": true,
+      "mustFind": [],
+      "mustNotFlag": [],
+      "spec": {
+        "kind": "version",
+        "dealId": "harrington",
+        "add": [
+          "synthetic/harrington_ortiz_sub_baa.md"
+        ],
+        "resolved": [
+          "bundle:sub-baa:ortiz"
+        ],
+        "stillOpen": [
+          "bundle:sub-baa:pvt-ltd",
+          "gate:insurance"
+        ],
+        "expectedVerdict": "HOLD",
+        "expectComplianceAlert": true
+      },
+      "source": {
+        "ID": "EV-V3",
+        "v1 → v2 change": "Harrington: sub-BAA for Daniel Ortiz added",
+        "Expected in v2": "Ortiz sub-BAA → **Resolved**; Pvt Ltd sub-BAA, PHI escalation, insurance → **Still open**; verdict still HOLD with the compliance alert open"
+      }
+    },
+    {
+      "id": "EV-V4",
+      "section": "C. Version pairs (US-7 · FR-17, FR-18) (synthetic, to be created)",
+      "title": "Synthetic: v1 deep review ran; v2 raises a finding on unchanged text",
+      "inputs": [],
+      "mustFind": [],
+      "mustNotFlag": [],
+      "spec": {
+        "kind": "skip",
+        "reason": "Late-finding detection (FR-18) is not built in the prototype (Build Plan §5, declared in README)."
+      },
+      "source": {
+        "ID": "EV-V4",
+        "v1 → v2 change": "Synthetic: v1 deep review ran; v2 raises a finding on unchanged text",
+        "Expected in v2": "Flagged as **late finding** (miss on v1)"
+      }
+    },
+    {
+      "id": "EV-S1",
+      "section": "D. Seller checks (US-9, US-10 · FR-13, FR-19) (synthetic inputs)",
+      "title": "Revenue-management analytics for a hotel group in Saudi Arabia",
+      "inputs": [],
+      "mustFind": [],
+      "mustNotFlag": [],
+      "spec": {
+        "kind": "seller",
+        "input": {
+          "client": "Desert Pearl Hotels",
+          "sectors": [
+            "hospitality"
+          ],
+          "regions": [
+            "Saudi Arabia"
+          ],
+          "services": [
+            "revenue management analytics"
+          ]
+        },
+        "expect": {
+          "status": "conflict",
+          "source": "alnoor-msa"
+        }
+      },
+      "source": {
+        "ID": "EV-S1",
+        "Seller plans to offer…": "Revenue-management analytics for a hotel group in Saudi Arabia",
+        "Expected": "**Conflict**: Al Noor GCC non-compete (to ~Sep 2029), source cited; \"talk to Karandeep\""
+      }
+    },
+    {
+      "id": "EV-S2",
+      "section": "D. Seller checks (US-9, US-10 · FR-13, FR-19) (synthetic inputs)",
+      "title": "Senior data engineer at $72/hr to a US retail client (then changed to $88/hr)",
+      "inputs": [],
+      "mustFind": [],
+      "mustNotFlag": [],
+      "spec": {
+        "kind": "seller",
+        "input": {
+          "client": "US retail client",
+          "sectors": [
+            "retail"
+          ],
+          "regions": [
+            "USA"
+          ],
+          "services": [
+            "data engineering"
+          ],
+          "rates": [
+            {
+              "role": "Senior Data Engineer",
+              "ratePerHourUsd": 72
+            }
+          ]
+        },
+        "expect": {
+          "status": "conflict",
+          "mustNotReveal": [
+            "Crestline",
+            "$85",
+            "85/hr"
+          ]
+        },
+        "recheck": {
+          "rates": [
+            {
+              "role": "Senior Data Engineer",
+              "ratePerHourUsd": 88
+            }
+          ],
+          "status": "clear"
+        }
+      },
+      "source": {
+        "ID": "EV-S2",
+        "Seller plans to offer…": "Senior data engineer at $72/hr to a US retail client (then changed to $88/hr)",
+        "Expected": "**Conflict** at $72 (Crestline MFN floor applies, without revealing Crestline's name/rates beyond need); re-check at $88 → **clear**"
+      }
+    },
+    {
+      "id": "EV-S3",
+      "section": "D. Seller checks (US-9, US-10 · FR-13, FR-19) (synthetic inputs)",
+      "title": "Reuse PipeKit for a new European client",
+      "inputs": [],
+      "mustFind": [],
+      "mustNotFlag": [],
+      "spec": {
+        "kind": "seller",
+        "input": {
+          "client": "European manufacturer",
+          "sectors": [
+            "manufacturing"
+          ],
+          "regions": [
+            "Germany"
+          ],
+          "services": [
+            "data pipelines"
+          ],
+          "assets": [
+            "PipeKit"
+          ]
+        },
+        "expect": {
+          "status": "attention",
+          "source": "northwind-msa"
+        }
+      },
+      "source": {
+        "ID": "EV-S3",
+        "Seller plans to offer…": "Reuse PipeKit for a new European client",
+        "Expected": "**Needs attention**: ownership unclear (Northwind assignment of incorporated tools); route to Karandeep"
+      }
+    },
+    {
+      "id": "EV-S4",
+      "section": "D. Seller checks (US-9, US-10 · FR-13, FR-19) (synthetic inputs)",
+      "title": "Become an implementation partner for another lakehouse platform in India",
+      "inputs": [],
+      "mustFind": [],
+      "mustNotFlag": [],
+      "spec": {
+        "kind": "seller",
+        "input": {
+          "client": "Lakehouse platform vendor",
+          "sectors": [
+            "data_platform"
+          ],
+          "regions": [
+            "India"
+          ],
+          "services": [
+            "implementation partner for a lakehouse platform"
+          ],
+          "partnership": true
+        },
+        "expect": {
+          "status": "conflict",
+          "source": "cloudspan-spa"
+        }
+      },
+      "source": {
+        "ID": "EV-S4",
+        "Seller plans to offer…": "Become an implementation partner for another lakehouse platform in India",
+        "Expected": "**Conflict**: CloudSpan exclusivity (India + GCC)"
+      }
+    },
+    {
+      "id": "EV-S5",
+      "section": "D. Seller checks (US-9, US-10 · FR-13, FR-19) (synthetic inputs)",
+      "title": "Same partnership, Europe only",
+      "inputs": [],
+      "mustFind": [],
+      "mustNotFlag": [],
+      "spec": {
+        "kind": "seller",
+        "input": {
+          "client": "Lakehouse platform vendor",
+          "sectors": [
+            "data_platform"
+          ],
+          "regions": [
+            "Europe"
+          ],
+          "services": [
+            "implementation partner for a lakehouse platform"
+          ],
+          "partnership": true
+        },
+        "expect": {
+          "status": "clear"
+        }
+      },
+      "source": {
+        "ID": "EV-S5",
+        "Seller plans to offer…": "Same partnership, Europe only",
+        "Expected": "**Clear** (CloudSpan §7.3 allows outside India/GCC)"
+      }
+    },
+    {
+      "id": "EV-S7",
+      "section": "D. Seller checks (US-9, US-10 · FR-13, FR-19) (synthetic inputs)",
+      "title": "Seller checked a deal on day 1; Karandeep runs a new brief version on that deal's contract on day 3",
+      "inputs": [],
+      "dealId": "gulfcrown",
+      "mustFind": [],
+      "mustNotFlag": [],
+      "spec": {
+        "kind": "seller-banner",
+        "dealId": "gulfcrown"
+      },
+      "source": {
+        "ID": "EV-S7",
+        "Seller plans to offer…": "Seller checked a deal on day 1; Karandeep runs a new brief version on that deal's contract on day 3",
+        "Expected": "Seller's deal shows the **re-check banner**; re-run produces a newly dated answer; old answer kept with its date"
+      }
+    },
+    {
+      "id": "EV-S8",
+      "section": "D. Seller checks (US-9, US-10 · FR-13, FR-19) (synthetic inputs)",
+      "title": "Synthetic: register updated with a new Al Noor waiver covering a named Saudi hotel group",
+      "inputs": [],
+      "mustFind": [],
+      "mustNotFlag": [],
+      "spec": {
+        "kind": "seller-waiver",
+        "input": {
+          "client": "Desert Pearl Hotels",
+          "sectors": [
+            "hospitality"
+          ],
+          "regions": [
+            "Saudi Arabia"
+          ],
+          "services": [
+            "revenue management analytics"
+          ]
+        },
+        "waiverFor": "Desert Pearl Hotels"
+      },
+      "source": {
+        "ID": "EV-S8",
+        "Seller plans to offer…": "Synthetic: register updated with a new Al Noor waiver covering a named Saudi hotel group",
+        "Expected": "Open seller checks for that client show the re-check banner; re-run turns **conflict → clear** for that client only"
+      }
+    },
+    {
+      "id": "EV-S6",
+      "section": "D. Seller checks (US-9, US-10 · FR-13, FR-19) (synthetic inputs)",
+      "title": "Free text: \"promise the client a named engineer full-time for 12 months\"",
+      "inputs": [],
+      "mustFind": [],
+      "mustNotFlag": [],
+      "spec": {
+        "kind": "seller",
+        "input": {
+          "client": "Any client",
+          "sectors": [
+            "retail"
+          ],
+          "regions": [
+            "India"
+          ],
+          "services": [
+            "analytics"
+          ],
+          "freeText": "promise the client a named engineer full-time for 12 months"
+        },
+        "expect": {
+          "freeTextStatus": "couldnt_check"
+        }
+      },
+      "source": {
+        "ID": "EV-S6",
+        "Seller plans to offer…": "Free text: \"promise the client a named engineer full-time for 12 months\"",
+        "Expected": "**Couldn't check: ask Karandeep** (no matching commitment type); never \"clear\""
+      }
+    },
+    {
+      "id": "EV-P1",
+      "section": "E. Similar past clauses (US-4 · FR-22)",
+      "title": "Gulf Crown LDs (1% of contract value/week, no client-delay exclusion)",
+      "inputs": [],
+      "mustFind": [],
+      "mustNotFlag": [],
+      "spec": {
+        "kind": "similar",
+        "query": {
+          "docId": "gulfcrown-msa",
+          "section": "12",
+          "clauseType": "ld"
+        },
+        "expect": [
+          {
+            "docId": "acme-msa",
+            "label": "standard"
+          },
+          {
+            "docId": "alnoor-msa",
+            "label": "exception"
+          },
+          {
+            "docId": "brightwater-msa",
+            "label": "accident"
+          }
+        ]
+      },
+      "source": {
+        "ID": "EV-P1",
+        "Incoming clause": "Gulf Crown LDs (1% of contract value/week, no client-delay exclusion)",
+        "Must appear in top 3 (with label)": "Acme MSA LDs (**standard**: 0.5%/week, 5% cap, client delays excluded) · Al Noor LD cap 10% (**exception: one-off, not a precedent**) · Brightwater LDs (**accident**)",
+        "Must not": "Al Noor or Brightwater shown as standard"
+      }
+    },
+    {
+      "id": "EV-P2",
+      "section": "E. Similar past clauses (US-4 · FR-22)",
+      "title": "FinServe NDA confidentiality definition / residuals",
+      "inputs": [],
+      "mustFind": [],
+      "mustNotFlag": [],
+      "spec": {
+        "kind": "similar",
+        "query": {
+          "docId": "finserve-nda",
+          "section": "1",
+          "clauseType": "confidentiality"
+        },
+        "expect": [
+          {
+            "anyOf": [
+              "alnoor-nda",
+              "harrington-nda"
+            ],
+            "label": "standard"
+          },
+          {
+            "docId": "meridian-nda",
+            "label": "accident"
+          }
+        ]
+      },
+      "source": {
+        "ID": "EV-P2",
+        "Incoming clause": "FinServe NDA confidentiality definition / residuals",
+        "Must appear in top 3 (with label)": "Al Noor NDA or Harrington NDA (**standard: genuinely mutual**) · Meridian NDA (**accident: one-way**)",
+        "Must not": "Meridian presented as acceptable precedent"
+      }
+    },
+    {
+      "id": "EV-P3",
+      "section": "E. Similar past clauses (US-4 · FR-22)",
+      "title": "Harrington BAA (liability, reporting, offshore)",
+      "inputs": [],
+      "mustFind": [],
+      "mustNotFlag": [],
+      "spec": {
+        "kind": "similar",
+        "query": {
+          "docId": "harrington-baa",
+          "section": "4",
+          "clauseType": "data_protection"
+        },
+        "expect": [
+          {
+            "docId": "carebridge-baa",
+            "label": "standard"
+          }
+        ]
+      },
+      "source": {
+        "ID": "EV-P3",
+        "Incoming clause": "Harrington BAA (liability, reporting, offshore)",
+        "Must appear in top 3 (with label)": "CareBridge BAA (**standard**, counsel-reviewed: capped liability, 5-day reporting, de-identified offshore route)",
+        "Must not": "—"
+      }
+    },
+    {
+      "id": "EV-P4",
+      "section": "E. Similar past clauses (US-4 · FR-22)",
+      "title": "Harrington MSA indemnity (covers client's own negligence)",
+      "inputs": [],
+      "mustFind": [],
+      "mustNotFlag": [],
+      "spec": {
+        "kind": "similar",
+        "query": {
+          "docId": "harrington-msa",
+          "section": "9",
+          "clauseType": "indemnity"
+        },
+        "expect": [
+          {
+            "docId": "paytrack-msa",
+            "label": "standard"
+          }
+        ]
+      },
+      "source": {
+        "ID": "EV-P4",
+        "Incoming clause": "Harrington MSA indemnity (covers client's own negligence)",
+        "Must appear in top 3 (with label)": "PayTrack §10.2 (**standard**: no indemnity for the indemnified party's own negligence)",
+        "Must not": "—"
+      }
+    },
+    {
+      "id": "EV-P5",
+      "section": "E. Similar past clauses (US-4 · FR-22)",
+      "title": "Kriti subcontract payment (pay-when-paid, up to 120 days)",
+      "inputs": [],
+      "mustFind": [],
+      "mustNotFlag": [],
+      "spec": {
+        "kind": "similar",
+        "query": {
+          "docId": "kriti-sub",
+          "section": "4",
+          "clauseType": "payment"
+        },
+        "expect": [
+          {
+            "docId": "trustline-msa",
+            "label": "standard"
+          }
+        ]
+      },
+      "source": {
+        "ID": "EV-P5",
+        "Incoming clause": "Kriti subcontract payment (pay-when-paid, up to 120 days)",
+        "Must appear in top 3 (with label)": "Trustline payment (**standard**: 45 days, negotiated maximum)",
+        "Must not": "—"
+      }
+    },
+    {
+      "id": "EV-P6",
+      "section": "E. Similar past clauses (US-4 · FR-22)",
+      "title": "Rheinwerk governing law (German law)",
+      "inputs": [],
+      "mustFind": [],
+      "mustNotFlag": [],
+      "spec": {
+        "kind": "similar",
+        "query": {
+          "docId": "rheinwerk-sa",
+          "section": "14",
+          "clauseType": "governing_law"
+        },
+        "expect": [
+          {
+            "docId": "northwind-msa",
+            "label": "concession"
+          }
+        ]
+      },
+      "source": {
+        "ID": "EV-P6",
+        "Incoming clause": "Rheinwerk governing law (German law)",
+        "Must appear in top 3 (with label)": "Northwind English law + LCIA (**concession**)",
+        "Must not": "Northwind shown as standard"
+      }
+    },
+    {
+      "id": "EV-P7",
+      "section": "E. Similar past clauses (US-4 · FR-22)",
+      "title": "Sunrise SOW-2 \"Penalty for Delay\" (negative test)",
+      "inputs": [],
+      "dealId": "sunrise-sow2",
+      "expectedVerdict": "SIGN",
+      "mustFind": [],
+      "mustNotFlag": [],
+      "spec": {
+        "kind": "similar",
+        "query": {
+          "docId": "sunrise-sow2",
+          "section": "8",
+          "clauseType": "ld"
+        },
+        "expect": [
+          {
+            "docId": "acme-msa",
+            "label": "standard"
+          }
+        ],
+        "dealId": "sunrise-sow2",
+        "expectedVerdict": "SIGN"
+      },
+      "source": {
+        "ID": "EV-P7",
+        "Incoming clause": "Sunrise SOW-2 \"Penalty for Delay\" (negative test)",
+        "Must appear in top 3 (with label)": "Acme LDs (**standard**, matching)",
+        "Must not": "Verdict changes from SIGN; any draft/unsigned document returned"
+      }
+    }
+  ]
+}
