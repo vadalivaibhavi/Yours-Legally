@@ -48,39 +48,41 @@ export default async function DealPage(props: PageProps<"/deal/[id]">) {
           <h1 className="font-serif text-2xl font-semibold">{deal.name}</h1>
           <DueBadge deadline={deal.deadline} />
           {deal.status === "waiting_for_input" && <Chip tone="warn">Waiting for input: {deal.waitingOn}</Chip>}
-          {deal.decision && deal.finalised && <DecisionBadge decision={deal.decision} size="lg" />}
+          {deal.decision && deal.finalised && <DecisionBadge decision={deal.decision} />}
           {deal.decision && !deal.finalised && isK && <Chip tone="warn">Draft decision: {deal.decision} · review in progress</Chip>}
         </div>
         <p className="text-sm text-muted">
           {deal.counterparty} · requested by {deal.owner} · {deal.clientCountry ?? "country unknown"} · {usd(deal.valueUsd)}
-          {deal.deadlineNote ? ` · ${deal.deadlineNote}` : ""}
+          {deal.deadlineNote ? ` · ${plainNote(deal.deadlineNote)}` : ""}
         </p>
       </div>
 
       {sp.quota === "1" && <div className="rounded-lg bg-change-soft p-4 text-sm text-change">{QUOTA_MESSAGE}{deal.stale ? " The new document is attached; re-check the deal then." : ""}</div>}
 
       {isK && (
-        <section id="brief" className="scroll-mt-4 space-y-3">
-          <h2 className="label">Decision brief</h2>
+        <section id="brief" className="scroll-mt-4">
           {shown ? (
             <Collapsible
               key={shown.version}
               defaultOpen={openBrief}
               summary={
-                <>
-                  <VerdictBadge verdict={shown.verdict} size="lg" />
-                  <span className="font-medium">{shown.headline}</span>
-                  <span className="text-xs text-muted">
-                    v{shown.version}
-                    {versions.length > 1 ? ` of ${versions.length}` : ""}
-                  </span>
-                </>
+                <div className="space-y-1.5">
+                  <h2 className="label">Decision brief</h2>
+                  <div className="flex flex-wrap items-center gap-3">
+                    <VerdictBadge verdict={shown.verdict} size="lg" />
+                    <span className="font-serif text-lg font-semibold">{shown.headline}</span>
+                    <span className="text-xs text-muted">
+                      v{shown.version}
+                      {versions.length > 1 ? ` of ${versions.length}` : ""}
+                    </span>
+                  </div>
+                </div>
               }
             >
               <BriefView dealId={deal.id} version={shown.version} />
             </Collapsible>
           ) : (
-            <div className="card p-4 text-sm text-muted">No brief yet. Run `npm run review -- {deal.id}`.</div>
+            <div className="card p-4 text-sm text-muted"><b className="label mr-2">Decision brief</b>No brief yet. Run `npm run review -- {deal.id}`.</div>
           )}
         </section>
       )}
@@ -184,4 +186,9 @@ export default async function DealPage(props: PageProps<"/deal/[id]">) {
       </div>
     </div>
   );
+}
+
+/** "by 3 Oct (tracker C-026)" → "by 3 Oct": the tracker / meeting reference is for the record, not the reader. */
+function plainNote(note: string): string {
+  return note.replace(/\s*\((?:tracker [^)]*|\d{1,2} \w{3} meeting)\)/g, "");
 }

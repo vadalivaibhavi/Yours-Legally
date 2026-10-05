@@ -5,11 +5,10 @@ import { FollowUpQuestion, ResolveAlertForm, SaveButton } from "@/components/Bri
 import { FindingCard, SimilarDetails } from "@/components/FindingCard";
 import { TextInput } from "@/components/Fields";
 import { EVIDENCE_TYPES, LIMITS } from "@/lib/limits";
-import { Chip, DecisionBadge, DueBadge, Quote, Section, VerdictBadge } from "@/components/ui";
+import { Chip, DecisionBadge, Quote, Section } from "@/components/ui";
 import { briefVersion, briefVersions, getDeal } from "@/lib/deals";
 import { fmtDate, fmtDateTime } from "@/lib/format";
-import type { Brief, Finding, SimilarPanel, Verdict } from "@/lib/review/types";
-import type { AuditEvent } from "@/lib/store";
+import type { Finding, SimilarPanel } from "@/lib/review/types";
 import { readState } from "@/lib/store";
 
 const PANEL_FOR: Record<string, string> = {
@@ -48,10 +47,7 @@ export async function BriefView({ dealId: id, version }: { dealId: string; versi
   const followUp = (s.followUps[id] ?? []).find((x) => x.version === b.version);
   const missed = (s.missed[id] ?? []).filter((m) => m.version === b.version);
   const dismissed = versions.find((x) => x.version === b.version)!.findings.filter((f) => reactions[f.key]?.reaction === "disagree");
-  const timeline = buildTimeline(versions, s.audit.filter((a) => a.dealId === id));
-  // Review progress: every reaction is saved as it's made, so partial work survives leaving the page.
-  const reactable = versions.find((x) => x.version === b.version)!.findings.filter((f) => f.severity !== "ok" && f.severity !== "low");
-  const reacted = reactable.filter((f) => reactions[f.key]).length;
+  // Review progress (blocker + high must be answered to finalise); every reaction is saved as it's made.
   const progress = isLatest ? reviewProgress(id) : null;
 
   const panelFor = (f: Finding): SimilarPanel | undefined => {
@@ -71,53 +67,39 @@ export async function BriefView({ dealId: id, version }: { dealId: string; versi
 
   return (
     <div className="space-y-6">
-      {/* ---------------------------------------------------------------- verdict first */}
+      {/* ---------------------------------------------------------------- versions + next step (verdict and headline are in the header above) */}
       <div className="space-y-3">
         <div className="flex flex-wrap items-center gap-2 text-sm text-muted">
-          <span>Brief version</span>
+          <span>Version</span>
           {versions.map((x) => (
             <Link key={x.version} href={`/deal/${id}?v=${x.version}&open=1#brief`} className={`chip ${x.version === b.version ? "bg-brand text-white" : "bg-gray-100"}`}>
               v{x.version}
             </Link>
           ))}
           {!isLatest && <Chip tone="warn">Older version: read only</Chip>}
+          <span className="ml-auto text-xs">
+            {b.route === "nda_fast_lane" ? "NDA fast lane · " : ""}
+            {b.trigger} · {fmtDate(b.createdAt)}
+          </span>
         </div>
-        <div className="card space-y-3 p-5">
-          <div className="flex flex-wrap items-center gap-3">
-            <VerdictBadge verdict={b.verdict} size="lg" />
-            <h2 className="font-serif text-xl font-semibold">{b.headline}</h2>
-            <span className="ml-auto">
-              <DueBadge deadline={deal.deadline} />
-            </span>
-          </div>
-          <p className="text-[15px]">
-            <span className="label mr-2">Next</span>
-            {b.nextAction}
+        <p className="text-[15px]">
+          <span className="label mr-2">Next</span>
+          {b.nextAction}
+        </p>
+        {progress && (
+          <p className="flex flex-wrap items-center gap-2 rounded bg-paper px-3 py-2 text-xs">
+            <b>Your review:</b> {progress.reacted} of {progress.total} blocker and high findings answered ·{" "}
+            {deal.decision ? (
+              <>
+                {deal.finalised ? "finalised" : "draft decision"} <DecisionBadge decision={deal.decision} />
+              </>
+            ) : (
+              "no decision yet"
+            )}
+            <span className="ml-auto text-muted">Saved automatically</span>
           </p>
-          <div className="flex flex-wrap gap-2 text-xs text-muted">
-            <Chip tone="brand">{b.route === "nda_fast_lane" ? "NDA fast lane" : "Full review"}</Chip>
-            <span>
-              v{b.version} · {b.trigger} · {fmtDate(b.createdAt)} · {(b.usage.ms / 1000).toFixed(0)}s{b.usage.calls === 0 ? " (cached)" : ""}
-            </span>
-            <span>
-              register {b.registerVersion} · playbook {b.playbookVersion} · prompts {b.promptVersion} · {b.models.join(", ")}
-            </span>
-          </div>
-          {isLatest && (
-            <p className="flex flex-wrap items-center gap-2 rounded bg-paper px-3 py-2 text-xs">
-              <b>Your review:</b> {progress?.reacted ?? reacted} of {progress?.total ?? reactable.length} findings answered ·{" "}
-              {deal.decision ? (
-                <>
-                  {deal.finalised ? "finalised" : "draft decision"} <DecisionBadge decision={deal.decision} />
-                </>
-              ) : (
-                "no decision yet"
-              )}
-              <span className="ml-auto text-muted">Saved automatically</span>
-            </p>
-          )}
-          {deal.stale && <p className="rounded bg-change-soft p-2 text-sm text-change">The register changed since this brief ({fmtDate(deal.stale)}). Re-check to apply it.</p>}
-        </div>
+        )}
+        {deal.stale && <p className="rounded bg-change-soft p-2 text-sm text-change">The register changed since this brief ({fmtDate(deal.stale)}). Re-check to apply it.</p>}
       </div>
 
       {/* ---------------------------------------------------------------- pinned compliance alert (FR-21) */}
@@ -326,8 +308,7 @@ export async function BriefView({ dealId: id, version }: { dealId: string; versi
 
       {/* ---------------------------------------------------------------- other key clauses vs past */}
       {otherPanels.length > 0 && (
-        <Section title="Clauses with no issue: how they compare with what you've signed">
-          <p className="text-sm text-muted">Clauses that raised nothing, next to the closest wording you&apos;ve signed.</p>
+        <Section title="Other clauses vs what you've signed">
           <div className="space-y-2">
             {otherPanels.map((p) => (
               <SimilarDetails key={p.docId + p.clauseType} panel={p} />
@@ -367,7 +348,9 @@ export async function BriefView({ dealId: id, version }: { dealId: string; versi
               <form key={f.key} action={undoReaction} className="flex flex-wrap items-center gap-2 px-4 py-2">
                 <input type="hidden" name="dealId" value={id} />
                 <input type="hidden" name="key" value={f.key} />
-                <span>{f.title}</span>
+                <span>
+                  <b className="capitalize">{f.severity}</b> - {f.title}
+                </span>
                 <span className="text-muted">· {reactions[f.key]?.reason ?? "no reason given"}</span>
                 {isLatest && <SaveButton className="ml-auto text-xs text-muted underline">Change</SaveButton>}
               </form>
@@ -375,27 +358,6 @@ export async function BriefView({ dealId: id, version }: { dealId: string; versi
           </div>
         </Section>
       )}
-
-      {/* ---------------------------------------------------------------- decision history (versions + decisions) */}
-      <Section title="Decision history">
-        <ol className="card space-y-3 p-5 text-sm">
-          {timeline.map((t, i) => (
-            <li key={i} className="grid grid-cols-[8.5rem_1fr] gap-3">
-              <span className="text-xs text-muted">{t.when}</span>
-              <span className="flex flex-wrap items-center gap-2">
-                {t.kind === "decision" ? (
-                  <DecisionBadge decision={t.label} />
-                ) : t.kind === "verdict" ? (
-                  <VerdictBadge verdict={t.label as Verdict} />
-                ) : (
-                  <Chip tone={t.kind === "cleared" ? "gray" : "warn"}>{t.label}</Chip>
-                )}
-                <span className={t.kind === "decision" ? "font-semibold" : "text-muted"}>{t.text}</span>
-              </span>
-            </li>
-          ))}
-        </ol>
-      </Section>
 
       {/* ---------------------------------------------------------------- decision & feedback panel (FR-12) */}
       {isLatest && (
@@ -524,22 +486,4 @@ function FactRow({ fact, dealId, state }: { fact: { id: string; statement: strin
       )}
     </div>
   );
-}
-
-type TimelineItem = { at: string; when: string; kind: "verdict" | "decision" | "cleared" | "alert"; label: string; text: string };
-
-/** How the verdict and Karandeep's decision changed, across brief versions and over time. */
-function buildTimeline(versions: Brief[], audit: AuditEvent[]): TimelineItem[] {
-  const items: TimelineItem[] = versions.map((v) => ({ at: v.createdAt, when: fmtDateTime(v.createdAt), kind: "verdict", label: v.verdict, text: `Brief v${v.version} issued (${v.trigger}): system verdict` }));
-  for (const a of audit) {
-    const d = (a.detail ?? {}) as Record<string, string>;
-    if (a.action === "decision") items.push({ at: a.at, when: fmtDateTime(a.at), kind: "decision", label: d.decision, text: `${a.user} chose${d.version ? ` on brief v${d.version}` : ""} (draft)` });
-    else if (a.action === "decision.clear") items.push({ at: a.at, when: fmtDateTime(a.at), kind: "cleared", label: "Decision cleared", text: `by ${a.user}` });
-    else if (a.action === "fact.confirmed") items.push({ at: a.at, when: fmtDateTime(a.at), kind: "alert", label: "Compliance event confirmed", text: "from the deal notes" });
-    else if (a.action === "alert.evidence" || a.action === "alert.note") items.push({ at: a.at, when: fmtDateTime(a.at), kind: "alert", label: "Compliance alert resolved", text: [d.file, d.note].filter(Boolean).join(": ") });
-    else if (a.action === "alert.open") items.push({ at: a.at, when: fmtDateTime(a.at), kind: "alert", label: "Compliance alert reopened", text: "" });
-    else if (a.action === "review.finalised") items.push({ at: a.at, when: fmtDateTime(a.at), kind: "decision", label: d.decision, text: `${a.user} finalised the review: status Decided` });
-    else if (a.action === "review.reopened") items.push({ at: a.at, when: fmtDateTime(a.at), kind: "cleared", label: "Review reopened", text: "back in review" });
-  }
-  return items.sort((x, y) => x.at.localeCompare(y.at));
 }

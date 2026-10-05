@@ -1,4 +1,4 @@
-# Yours Legally: Prototype Build Plan (v2)
+# Yours Legally, — Prototype Build Plan (v2)
 
 **Build mode:** KaVi builds in **Claude Code**; Claude (this chat) writes the phase specs and reviews each phase.
 **Deploy target:** Vercel, connected through GitHub in Phase 0.
@@ -64,7 +64,7 @@
 ## 4. `CLAUDE.md` (paste as-is)
 
 ```
-# Yours Legally (prototype)
+# Yours Legally, (prototype)
 Contract-review assistant for AtliQ (capstone). Spec: docs/PRD_Yours_Legally_v0.9.md (FR-IDs), tests: docs/Eval_Set.md (EV-IDs).
 
 ## Stack
@@ -114,7 +114,7 @@ All of these are declared in the README.
 
 > Read CLAUDE.md and docs/PRD_Yours_Legally_v0.9.md (§9.1 output spec, §6 FRs).
 > Set up the Phase 0 skeleton from docs/Build_Plan.md §5:
-> - Next.js App Router + TypeScript + Tailwind app named "Yours Legally".
+> - Next.js App Router + TypeScript + Tailwind app named "Yours Legally,".
 > - Pages: `/` Queue, `/deal/[id]` Deal, `/deal/[id]/brief/[v]` Brief, `/register` Register, with placeholder content and a clean, professional layout.
 > - A role switch in the header (Karandeep / Seller), kept in a cookie. Hide and block `/register` for Seller.
 > - `lib/llm.ts` with `callModel({task, system, input, schema})`, which reads the environment variables from Build_Plan §2, picks the model by task, and validates with zod. Return mock data for now.

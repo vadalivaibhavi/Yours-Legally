@@ -1,4 +1,4 @@
-# Yours Legally (prototype)
+# Yours Legally, (prototype)
 Contract-review assistant for AtliQ (capstone). Spec: docs/PRD_Yours_Legally_v0.9.md (FR-IDs), tests: docs/Eval_Set.md (EV-IDs).
 
 ## Stack

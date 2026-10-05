@@ -6,6 +6,7 @@
  */
 import { registerEntries } from "../register";
 import { readState } from "../store";
+import { sanitize, sanitizeFinding } from "./guardrails";
 import type { Brief, EffectiveBrief, Finding, Severity } from "./types";
 import { computeVerdict, sortFindings, templateHeadline } from "./verdict";
 
@@ -18,7 +19,7 @@ export function effectiveBrief(brief: Brief, prev: Brief | null): EffectiveBrief
 
   const findings: Finding[] = [];
   for (const f0 of brief.findings) {
-    const f: Finding = { ...f0 };
+    const f: Finding = sanitizeFinding({ ...f0 }); // briefs stored before a wording rule still read plainly
     const r = reactions[f.key];
     if (r?.reaction === "disagree") continue; // dismissed by Karandeep (reason logged): shown separately, not in the verdict
     if (r?.reaction === "severity" && r.severity) f.severity = r.severity as Severity;
@@ -80,7 +81,9 @@ export function effectiveBrief(brief: Brief, prev: Brief | null): EffectiveBrief
     ...brief,
     findings: sorted,
     verdict,
-    headline: verdict === brief.verdict ? brief.headline : templateHeadline(verdict, sorted, waitingFor, alertOpen),
+    headline: verdict === brief.verdict ? sanitize(brief.headline) : templateHeadline(verdict, sorted, waitingFor, alertOpen),
+    nextAction: sanitize(brief.nextAction),
+    similar: brief.similar.map((p) => ({ ...p, hits: p.hits.map((h) => ({ ...h, differs: sanitize(h.differs) })) })),
     complianceAlert,
     changes,
     waitingFor,

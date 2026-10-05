@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Chip, DecisionBadge, DueBadge, VerdictBadge } from "@/components/ui";
+import { Chip, DueBadge } from "@/components/ui";
 import { fmtDateTime } from "@/lib/format";
 import { reviewProgress } from "@/lib/review/progress";
 import { visibleDeals } from "@/lib/access";
@@ -8,6 +8,13 @@ import { dueLabel } from "@/lib/format";
 import { currentUser } from "@/lib/session";
 
 const STATUS_TEXT: Record<string, string> = { open: "In review", waiting_for_input: "Waiting for input", decided: "Decided", signed: "Signed" };
+/** Status colours: green = done, orange = in progress, red = blocked on someone, blue = not started. */
+const STATUS_TONE: Record<string, "good" | "warn" | "bad" | "brand"> = { open: "brand", waiting_for_input: "bad", decided: "good", signed: "good" };
+
+/** A verdict or decision as plain text in a neutral chip (the verdict column has no colour). */
+function Plain({ children }: { children: string }) {
+  return <span className="chip bg-gray-100 uppercase text-ink">{children}</span>;
+}
 
 /** Queue (F8, FR-14): due in / overdue from APP_TODAY, sorted by deadline. Deadline orders the list; it never changes risk. */
 export default async function QueuePage(props: PageProps<"/">) {
@@ -72,52 +79,36 @@ export default async function QueuePage(props: PageProps<"/">) {
                     <DueBadge deadline={d.deadline} />
                   </td>
                   <td className="px-4 py-3">
-                    {/* Karandeep's decision is the headline once he has made it; the system verdict stays visible, smaller. */}
-                    {d.decision && d.finalised ? (
+                    {/* One plain style for every verdict: the subtext says whose call it is. Colour is for status only. */}
+                    {d.decision && (d.finalised || isK) ? (
                       <div className="space-y-1">
-                        <DecisionBadge decision={d.decision} size="lg" />
+                        <Plain>{d.decision}</Plain>
                         <div className="text-xs text-muted">
-                          Karandeep&apos;s decision{d.finalisedAt ? `, ${fmtDateTime(d.finalisedAt)}` : ""}
-                          {brief && (
-                            <>
-                              {" "}· system: <b>{brief.verdict}</b> (v{brief.version})
-                            </>
-                          )}
+                          {d.finalised ? `Karandeep's decision${d.finalisedAt ? `, ${fmtDateTime(d.finalisedAt)}` : ""}` : "Draft decision, not finalised"}
+                          {brief && ` · system verdict ${brief.verdict} (v${brief.version})`}
                         </div>
-                      </div>
-                    ) : d.decision && isK ? (
-                      <div className="space-y-1">
-                        <span className="flex flex-wrap items-center gap-1.5">
-                          <span className="text-xs text-muted">Draft:</span>
-                          <DecisionBadge decision={d.decision} />
-                        </span>
-                        {brief && <div className="text-xs text-muted">System verdict {brief.verdict} (v{brief.version}) · not finalised</div>}
                       </div>
                     ) : brief ? (
                       <div className="space-y-1">
                         <span className="flex flex-wrap items-center gap-1.5">
-                          <VerdictBadge verdict={brief.verdict} />
+                          <Plain>{brief.verdict}</Plain>
                           {brief.complianceAlert && brief.complianceAlert.status !== "resolved" && <Chip tone="bad">Compliance alert</Chip>}
                         </span>
                         <div className="text-xs text-muted">System verdict, v{brief.version} · awaiting your decision</div>
                       </div>
-                    ) : isK ? (
-                      <span className="text-xs text-muted">Not reviewed yet</span>
                     ) : (
-                      <span className="text-xs text-muted">No decision yet</span>
+                      <span className="text-xs text-muted">{isK ? "Not reviewed yet" : "No decision yet"}</span>
                     )}
                   </td>
                   <td className="px-4 py-3">
                     {d.finalised ? (
-                      <Chip tone="brand">Decided</Chip>
+                      <Chip tone="good">Decided</Chip>
                     ) : progress?.started ? (
-                      <Chip tone="warn">
-                        {progress.complete ? "Ready to finalise" : `Review in progress · ${progress.reacted}/${progress.total}`}
-                      </Chip>
+                      <Chip tone="warn">{progress.complete ? "Ready to finalise" : `Review in progress · ${progress.reacted}/${progress.total}`}</Chip>
                     ) : d.status === "waiting_for_input" ? (
-                      <Chip tone="warn">Waiting for input{d.waitingOn ? `: ${d.waitingOn}` : ""}</Chip>
+                      <Chip tone="bad">Waiting for input{d.waitingOn ? `: ${d.waitingOn}` : ""}</Chip>
                     ) : (
-                      <Chip>{STATUS_TEXT[d.status]}</Chip>
+                      <Chip tone={STATUS_TONE[d.status]}>{STATUS_TEXT[d.status]}</Chip>
                     )}
                   </td>
                 </tr>

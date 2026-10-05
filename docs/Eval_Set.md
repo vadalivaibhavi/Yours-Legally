@@ -1,4 +1,4 @@
-# Yours Legally: Eval Set (internal reference)
+# Yours Legally, — Eval Set (internal reference)
 
 The concrete test cases behind the PRD's user stories (§4.2) and eval criteria (§11). Each case traces to a user story (US) and functional requirement (FR). Detailed ground truth for each case lives in `Step0_Answer_Key.md` (incoming documents) and `Obligations_Register.md` (signed documents).
 

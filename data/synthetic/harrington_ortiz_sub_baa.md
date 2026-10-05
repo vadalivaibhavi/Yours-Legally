@@ -1,4 +1,4 @@
-*(SYNTHETIC document for eval EV-V3, added to the dataset by the Yours Legally prototype: the subcontractor BAA for Daniel Ortiz, drafted after the Harrington brief flagged it missing. Teaching material, not a template.)*
+*(SYNTHETIC document for eval EV-V3, added to the dataset by the Yours Legally, prototype: the subcontractor BAA for Daniel Ortiz, drafted after the Harrington brief flagged it missing. Teaching material, not a template.)*
 
 # SUBCONTRACTOR BUSINESS ASSOCIATE AGREEMENT
 

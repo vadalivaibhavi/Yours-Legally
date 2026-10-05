@@ -63,7 +63,7 @@ export default async function UploadPage(props: PageProps<"/upload">) {
         <label className="block space-y-1">
           <span className="label">Deal</span>
           <select name="deal" defaultValue={preselect} className="w-full">
-            <option value="">Let Yours Legally propose (auto when certain, asks when ambiguous)</option>
+            <option value="">Let Yours Legally, propose (auto when certain, asks when ambiguous)</option>
             {deals.map((d) => (
               <option key={d.id} value={d.id}>
                 Put it in: {d.name}

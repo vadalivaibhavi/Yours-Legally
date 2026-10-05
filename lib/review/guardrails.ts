@@ -17,6 +17,12 @@ const RULES: Rule[] = [
   [/\bunenforceable\b/gi, "open to challenge (counsel to confirm)"],
   [/\benforceable\b/gi, "binding (counsel to confirm)"],
   [/\breject (the|this) (contract|agreement|deal)\b/gi, "send the $2 back"],
+  // "Redline" is lawyer jargon (marking up the contract with proposed edits): say what it means.
+  [/\bredlines\b/gi, "changes"],
+  [/\b(\d+|a|one) redline\b/gi, "$1 change to request"],
+  [/\bredlined\b/gi, "changed"],
+  [/\bRedline\b/g, "Ask for changes to"],
+  [/\bredline\b/gi, "ask for changes to"],
 ];
 
 export function sanitize(text: string): string {

@@ -1,4 +1,4 @@
-# Yours Legally: AI PRD (v0.9, working draft)
+# Yours Legally, — AI PRD (v0.9, working draft)
 
 > **Draft status.** Sections marked ✅ are stable (they derive from Steps 0–1 and won't change with the opportunity map). Sections marked ⏸ are **provisional** and will be finalised after the official opportunity-map template (~5 Oct). Feature IDs (F1–F12) follow `Traceability_Matrix.md`. Section numbers follow the body of `AI PRD Template.docx`.
 
@@ -6,7 +6,7 @@
 
 | Field | Detail |
 |---|---|
-| **Product name** | Yours Legally |
+| **Product name** | Yours Legally, |
 | **Author** | Vaibhavi Vadali (KaVi), AI Product Manager |
 | **Date** | 4 October 2026 |
 | **Version** | v0.9, Draft (adds similar past clauses to the playbook check: FR-22, clause index, retrieval strategy in §5, guardrail, eval EV-P1–P7; builds on v0.8) |
@@ -20,7 +20,7 @@
 
 | | |
 |---|---|
-| **What are we building?** | Yours Legally: an AI contract review assistant that gives AtliQ the memory it lacks. It builds a register of everything AtliQ has already promised, checks every incoming and outgoing contract against that register and AtliQ's own negotiation playbook, and hands the CEO a verdict-first, cited, decision-ready brief. |
+| **What are we building?** | Yours Legally, — an AI contract review assistant that gives AtliQ the memory it lacks. It builds a register of everything AtliQ has already promised, checks every incoming and outgoing contract against that register and AtliQ's own negotiation playbook, and hands the CEO a verdict-first, cited, decision-ready brief. |
 | **Why does it matter?** | 7 of 12 deals in today's queue carry their decisive risk in a different document. One forgotten non-compete (Al Noor, 2025) blocks three live deals worth $230k. A contract signed on a phone in 4 minutes (Brightwater) cost $9k + $14.2k in legal fees. Contract volume has nearly doubled (≈5 → 9/month), and every contract waits on one person. |
 | **Who is it for?** | **Primary:** Karandeep, CEO and the only reviewer and signer. **Secondary:** sellers (Bhavin, Dhaval, Jay), who bring deals in, make commercial promises, and wait on contracts to close. |
 | **How will we know it worked?** | **North Star: Decide-from-brief rate.** ≥90% of brief versions are ones Karandeep decides from without digging: correct verdict, no missed or wrongly flagged blocker, no need to re-read the contract or search for context. Briefs arrive in minutes (NDA <1 min, MSA <10 min). Baseline today: 3–4 hours of CEO review per client MSA, and contracts wait up to 9 days in the queue (ShopSwift). |
@@ -193,7 +193,7 @@ Stories describe the **user's need**, not the solution. How each need is met is 
 
 | Input | Source and how it arrives (MVP) | Notes |
 |---|---|---|
-| **Signed contracts** | One-time bulk upload to build the register (backfill); thereafter every contract signed through Yours Legally is stored automatically | Missing or illegible text recorded as such; referenced-but-absent documents listed (e.g. a waiver mentioned but not uploaded) |
+| **Signed contracts** | One-time bulk upload to build the register (backfill); thereafter every contract signed through Yours Legally, is stored automatically | Missing or illegible text recorded as such; referenced-but-absent documents listed (e.g. a waiver mentioned but not uploaded) |
 | **Incoming / outgoing drafts** | Uploaded by a seller or Karandeep into a deal (or as a new deal); linked by FR-3 with one-tap confirmation | Client paper and AtliQ's own paper; revised drafts create new brief versions |
 | **Tracker** | One-time CSV import to seed open deals (deadline, value, requester, notes) | After import, **the deal record replaces the tracker**: deadlines, status and owners live in F8, current because people work in it, not because it's synced |
 | **Meeting notes** | Attached or pasted onto the deal by whoever was in the meeting | The seller check asks "anything agreed or shared in meetings?"; briefs state "no meeting notes attached" when none exist |
@@ -257,7 +257,7 @@ Stories describe the **user's need**, not the solution. How each need is met is 
 |---|---|
 | **Per-finding reaction** | ✓ Agree · ✗ Disagree (reason required for blockers) · ⇅ Severity. Every blocker needs its own tap; "Accept all" only for medium items. |
 | **+ Something the brief missed** | Clause reference + short note; becomes an eval regression case. |
-| **Decision** | Sign · Sign after changes · Hold · Send back · Reject · Escalate to counsel. **Recorded, never executed:** it updates the queue and keeps sellers in sync, but Yours Legally sends, signs or contacts no one. Replies, signatures and client conversations stay with Karandeep, by design: the person who signs owns the commitment, and a tool that acted on his behalf would blur that accountability. |
+| **Decision** | Sign · Sign after changes · Hold · Send back · Reject · Escalate to counsel. **Recorded, never executed:** it updates the queue and keeps sellers in sync, but Yours Legally, sends, signs or contacts no one. Replies, signatures and client conversations stay with Karandeep, by design: the person who signs owns the commitment, and a tool that acted on his behalf would blur that accountability. |
 | **One follow-up question** | "Did you need to open the full contract or other documents to decide?" No / Yes → missing context · didn't trust a citation · brief unclear. |
 | **Brief version & change summary** | From v2 onwards the brief is grouped as **New in this version · Still open since previous · Resolved since previous**; earlier reactions carry forward, so only new or changed findings ask for a reaction. |
 
@@ -320,7 +320,7 @@ Stories describe the **user's need**, not the solution. How each need is met is 
 
 *Illustrative: the Rheinwerk draft arrives (deal owner Bhavin, client deadline 15 Oct).*
 
-1. **Upload** (≈10 seconds): Karandeep or Bhavin drops the draft into Yours Legally.
+1. **Upload** (≈10 seconds): Karandeep or Bhavin drops the draft into Yours Legally,
 2. **Identify** (system, seconds): Services Agreement · Rheinwerk Analytics GmbH (Germany) · AtliQ Technologies Pvt Ltd as supplier · German law · €88k · references Annex 3 (data-processing agreement).
 3. **Link to deal** (system): exactly one open Rheinwerk deal → linked automatically and shown: "Linked to *Rheinwerk – Pipeline modernisation* (only open deal with this client) · Change." No question asked; a question appears only when the match is ambiguous.
 4. **Gather context** (system): register entries relevant to the scope (Northwind's IP clause covering PipeKit; no restrictions covering Germany), playbook positions, linked documents (Kriti's subcontract names Rheinwerk as end client), notes attached to the deal.
@@ -441,7 +441,7 @@ Launch-readiness tests run on **`Eval_Set.md`**: 15 incoming documents (12 deals
 **North Star: Decide-from-brief rate. The % of brief versions on which Karandeep makes his decision without needing to dig: correct verdict, no missed or wrongly flagged blocker, and no need to re-read the contract or search for context. Target ≥90%.**
 
 **Why this North Star**
-- **It measures the handoff the product controls.** Yours Legally's output is the brief. After it, Karandeep's judgment, the counterparty's turnaround and the signature are human-dependent, so "contracts signed safely", "time to signature" or the number of negotiation rounds would blend the product's performance with things it can't influence. How many rounds a negotiation takes is between Karandeep and his clients.
+- **It measures the handoff the product controls.** Yours Legally,'s output is the brief. After it, Karandeep's judgment, the counterparty's turnaround and the signature are human-dependent, so "contracts signed safely", "time to signature" or the number of negotiation rounds would blend the product's performance with things it can't influence. How many rounds a negotiation takes is between Karandeep and his clients.
 - **Time isn't the North Star, because the system's part takes minutes.** Brief turnaround (NDA <1 min, MSA <10 min) is a requirement (§8) and a guardrail metric. Human waiting time (missing documents, unconfirmed facts) is tracked separately with the clock paused, not blamed on the product.
 - **It holds correctness and usefulness together.** A brief that is fast but wrong, or right but needs Karandeep to dig through the contract anyway, both fail.
 
@@ -519,7 +519,7 @@ Findings that are still open are repeated in every later version ("Still open si
 | **Stage 2: Register build & verification** | Build the register from all available signed contracts (entries usable immediately, labelled until verified); Karandeep verifies entries and tags past decisions (~30 min).<br>**Gate:** live restrictions verified; playbook approved v1. |
 | **Stage 3: Shadow mode (4 weeks)** | Every new contract gets a brief; Karandeep reviews as usual, then compares.<br>**Gate:** ≥85% blocker acceptance; 0 missed compliance alerts; <10% false alarms on clean contracts. |
 | **Stage 4: Assisted review** | Karandeep reviews *from* the brief; sellers start using the kick-off form.<br>**Gate:** decide-from-brief rate ≥80% for 4 consecutive weeks; "had to dig" and false-alarm rates trending down. |
-| **Stage 5: Default** | All contracts and deals go through Yours Legally; counsel escalations go via counsel packs.<br>**Gate:** decide-from-brief rate ≥90%; no repeat incident. |
+| **Stage 5: Default** | All contracts and deals go through Yours Legally, counsel escalations go via counsel packs.<br>**Gate:** decide-from-brief rate ≥90%; no repeat incident. |
 
 ### 14.1 Kill Switch Conditions
 

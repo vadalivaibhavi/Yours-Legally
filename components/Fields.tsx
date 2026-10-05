@@ -134,14 +134,15 @@ export function EvidenceField({ maxText, accept }: { maxText: number; accept: st
 export function Collapsible({ summary, children, defaultOpen = false, openLabel = "Open brief", closeLabel = "Close brief" }: { summary: ReactNode; children: ReactNode; defaultOpen?: boolean; openLabel?: string; closeLabel?: string }) {
   const [open, setOpen] = useState(defaultOpen);
   return (
-    <div className="space-y-4">
-      <div className="card flex flex-wrap items-center gap-3 p-4">
+    // One rectangle: the summary is the header, the content opens inside it.
+    <div className="card">
+      <div className="flex flex-wrap items-center gap-3 p-4">
         {summary}
         <button type="button" className="btn btn-primary ml-auto" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
           {open ? `${closeLabel} ▴` : `${openLabel} ▾`}
         </button>
       </div>
-      {open && <div>{children}</div>}
+      {open && <div className="border-t border-line p-4 md:p-5">{children}</div>}
     </div>
   );
 }

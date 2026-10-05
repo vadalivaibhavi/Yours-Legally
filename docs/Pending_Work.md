@@ -5,7 +5,7 @@ Tracks everything blocked by **model quota** (Gemini free tier: ~20 requests per
 ## 1. Auto-detected from the briefs (model quota)
 
 <!-- AUTO:START -->
-_Regenerated 2026-10-05 18:18 UTC by `npm run pending` from data/briefs and eval/results.json._
+_Regenerated 2026-10-05 20:05 UTC by `npm run pending` from data/briefs and eval/results.json._
 
 | What | Where | Why it's pending | How to clear it |
 |---|---|---|---|
@@ -23,6 +23,30 @@ Last eval run 2026-10-05 14:34 UTC: 42 passed, 4 failed (EV-03, EV-05, EV-10, EV
 | Q3 | **Consistency eval** (PRD §11: same contract reviewed 3× → same verdict and blockers, ≥95%) | Not run | needs ~3× the calls of a full review (~200) | needs a billed key; add a 3-run loop to `scripts/eval.ts` |
 | Q4 | **Latency targets** (NDA fast lane <1 min, MSA <10 min) under normal load | Not measured cleanly: NDA runs took 15 s (normal) and 365 s (waiting out 503 retries) | free-tier overload adds minutes of back-off | time `npm run review -- --deal finserve,loopmart,gulfcrown --force` on a billed key with `LLM_MIN_INTERVAL_MS=0` (per-call timings are in `data/runs/calls-*.jsonl`) |
 | Q5 | **Seller check free-text** (EV-S6) and **upload** flows exercised live | Pass in eval; live UI runs depend on available quota at the time | each call needs quota | try in the UI when quota is available |
+
+## 2a. Model-call batch: run together, once, to save quota and tokens
+
+Everything below needs model calls; nothing else in the UI does. Run them in one go when quota is fresh (it resets at midnight Pacific), so cached steps are shared and each deal is reviewed once:
+
+```
+npm run review                                   # fills the missing comparison lines (11 deals); complete deals are skipped
+npm run eval -- --case EV-03,EV-05,EV-10,EV-12,EV-V1,EV-V2,EV-V3
+npm run pending
+```
+
+The EV-V synthetic documents' header line changed with the product rename (5 Oct), so EV-V1–V3 re-run their v2 review anyway.
+
+**Live flow tests (your next round), and what each one costs in model calls:**
+
+| Flow | Model calls | Notes |
+|---|---|---|
+| Upload a file into a deal → automatic re-check (v2 draft) | 1 extract + a re-review (≈4–7; unchanged documents come from cache) | creates brief v2 with "Since v1" changes |
+| "Re-check now" on an unchanged deal | ≈0–1 (everything cached; only missing comparison lines call the model) | |
+| Upload a completely new contract | 1 extract + a full review (≈6–8) + clause embeddings | new deal in the queue |
+| Commitments register (verify, edit, reject) | 0 | rules + state only |
+| Seller deal check | 0, or 1 if "Anything else" free text is filled | |
+
+On the free tier that is well within a day's quota for one round of tests. If a step hits the daily quota, the page now says so and nothing is lost: retry the next day.
 
 ## 2b. Switch to Groq for the demo (after the foundations are done on Gemini)
 

@@ -3,11 +3,9 @@ import Link from "next/link";
 import "./globals.css";
 import { currentUser } from "@/lib/session";
 import { RoleSwitch } from "@/components/RoleSwitch";
-import { appToday } from "@/lib/config";
-import { fmtDate } from "@/lib/format";
 
 export const metadata: Metadata = {
-  title: "Yours Legally",
+  title: "Yours Legally,",
   description: "Contract review assistant for AtliQ: register-first, verdict-first, cited.",
 };
 
@@ -26,7 +24,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <header className="bg-brand text-white">
           <div className="mx-auto max-w-6xl px-4 py-3 flex flex-wrap items-center gap-x-6 gap-y-2">
             <Link href="/" className="flex items-baseline gap-2">
-              <span className="font-serif text-xl font-semibold tracking-tight">Yours Legally</span>
+              <span className="font-serif text-xl font-semibold tracking-tight">Yours Legally,</span>
               <span className="text-xs text-white/60 hidden sm:inline">AtliQ contract review</span>
             </Link>
             <nav className="flex items-center gap-4 text-sm">
@@ -34,16 +32,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               {user.role === "karandeep" && <Link href="/register" className="hover:underline">Commitments register</Link>}
             </nav>
             <div className="ml-auto flex items-center gap-4">
-              <span className="hidden text-xs text-white/70 sm:inline" title="APP_TODAY: fixed so the demo and evals are reproducible">
-                Demo date · {fmtDate(appToday())}
-              </span>
               <RoleSwitch current={user.id} />
             </div>
           </div>
         </header>
         <main className="mx-auto max-w-6xl px-4 py-6">{children}</main>
         <footer className="mx-auto max-w-6xl px-4 pb-8 text-xs text-muted">
-          Decision support, not legal advice. Yours Legally records decisions; it never sends, signs or contacts anyone.
+          Decision support, not legal advice. Yours Legally, records decisions; it never sends, signs or contacts anyone.
         </footer>
       </body>
     </html>

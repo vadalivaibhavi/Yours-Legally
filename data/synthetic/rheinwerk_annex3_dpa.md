@@ -1,4 +1,4 @@
-*(SYNTHETIC document for eval EV-V2, added to the dataset by the Yours Legally prototype: Rheinwerk's Annex 3, sent after the missing-annex finding. Teaching material, not a template.)*
+*(SYNTHETIC document for eval EV-V2, added to the dataset by the Yours Legally, prototype: Rheinwerk's Annex 3, sent after the missing-annex finding. Teaching material, not a template.)*
 
 # Annex 3 — Data Processing Agreement (Art. 28 GDPR) incl. Standard Contractual Clauses
 
