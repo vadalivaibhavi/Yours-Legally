@@ -10,7 +10,7 @@ import { appToday } from "../config";
 import { company as loadCompany, notes as allNotes, playbook as loadPlaybook, requiredDocs } from "../data";
 import { allDeals, allDocuments, briefVersions, getDeal, latestBrief } from "../deals";
 import { expandRegions } from "../geo";
-import { callModel, drainUsage, hash, modelsFor, PROMPT_VERSION } from "../llm";
+import { callModel, currentUsage, hash, modelsFor, PROMPT_VERSION, withUsage } from "../llm";
 import { registerCoverage, registerEntries, registerVersion } from "../register";
 import { latestSellerCheck } from "../sellerChecks";
 import type { Deal, Document } from "../types";
@@ -37,10 +37,15 @@ export type ReviewOptions = {
   log?: (msg: string) => void;
 };
 
+/** Each review gets its own usage scope, so deals can be reviewed in parallel (token counts stay per deal). */
 export async function reviewDeal(dealId: string, opts: ReviewOptions): Promise<Brief> {
+  const { result } = await withUsage(() => runReview(dealId, opts));
+  return result;
+}
+
+async function runReview(dealId: string, opts: ReviewOptions): Promise<Brief> {
   const t0 = Date.now();
   const log = opts.log ?? (() => {});
-  drainUsage();
   const deal = getDeal(dealId);
   if (!deal) throw new Error(`Unknown deal ${dealId}`);
   const everyDoc = allDocuments();
@@ -268,7 +273,7 @@ export async function reviewDeal(dealId: string, opts: ReviewOptions): Promise<B
       }
     : null;
 
-  const usage = drainUsage();
+  const usage = currentUsage();
   return {
     dealId: deal.id,
     version: opts.version,

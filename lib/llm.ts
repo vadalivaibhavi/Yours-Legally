@@ -8,6 +8,7 @@
  *   documents are instant and free.
  * Server-only: reads API keys from the environment.
  */
+import { AsyncLocalStorage } from "node:async_hooks";
 import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
@@ -72,9 +73,26 @@ export function modelsFor(task: Task): string[] {
 export const PROMPT_VERSION = "p1";
 
 // ---------------------------------------------------------------- usage log (feeds cost estimate)
-const usageLog: { task: Task; model: string; usage: Usage; ms: number; cached: boolean }[] = [];
+type UsageRecord = { task: Task; model: string; usage: Usage; ms: number; cached: boolean };
+const globalUsage: UsageRecord[] = [];
+/** Per-review usage, so deals reviewed in parallel don't mix their token counts. */
+const usageScope = new AsyncLocalStorage<UsageRecord[]>();
+const usageLog = { push: (r: UsageRecord) => (usageScope.getStore() ?? globalUsage).push(r) };
+
+/** Run fn with its own usage log; returns the result and every model call made inside it. */
+export async function withUsage<T>(fn: () => Promise<T>): Promise<{ result: T; usage: UsageRecord[] }> {
+  const usage: UsageRecord[] = [];
+  const result = await usageScope.run(usage, fn);
+  return { result, usage };
+}
+
+/** Model calls made so far in the current withUsage() scope. */
+export function currentUsage(): UsageRecord[] {
+  return [...(usageScope.getStore() ?? [])];
+}
+
 export function drainUsage() {
-  return usageLog.splice(0, usageLog.length);
+  return globalUsage.splice(0, globalUsage.length);
 }
 
 // ---------------------------------------------------------------- main entry
