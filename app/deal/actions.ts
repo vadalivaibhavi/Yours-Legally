@@ -13,7 +13,8 @@ import { nextVersion, reviewDeal } from "@/lib/review/pipeline";
 import { currentUser } from "@/lib/session";
 import { runSellerCheck } from "@/lib/seller";
 import { latestSellerCheck } from "@/lib/sellerChecks";
-import { mutate, type SellerInput } from "@/lib/store";
+import { mutate, readState, type SellerInput } from "@/lib/store";
+import { reviewProgress } from "@/lib/review/progress";
 import fs from "node:fs";
 import path from "node:path";
 import { writableDir } from "@/lib/config";
@@ -36,6 +37,7 @@ export async function reactToFinding(form: FormData) {
   const isBlocker = str(form, "severity") === "blocker";
   // FR-12: disagreeing with a blocker needs a reason code.
   if (reaction === "disagree" && isBlocker && !reason) throw new Error("A reason is required to disagree with a blocker.");
+  reopenIfFinalised(dealIdOf(form));
   mutate(
     (s) => {
       s.reactions[dealId] ??= {};
@@ -50,6 +52,7 @@ export async function undoReaction(form: FormData) {
   const u = await requireKarandeep();
   const dealId = str(form, "dealId");
   const key = str(form, "key");
+  reopenIfFinalised(dealIdOf(form));
   mutate((s) => void delete s.reactions[dealId]?.[key], { user: u.name, dealId, action: "finding.undo", detail: { key } });
   revalidatePath(`/deal/${dealId}`, "layout");
 }
@@ -58,6 +61,7 @@ export async function acceptAllMedium(form: FormData) {
   const u = await requireKarandeep();
   const dealId = str(form, "dealId");
   const keys = str(form, "keys").split(",").filter(Boolean);
+  reopenIfFinalised(dealIdOf(form));
   mutate(
     (s) => {
       s.reactions[dealId] ??= {};
@@ -104,6 +108,7 @@ export async function confirmFact(form: FormData) {
   const dealId = str(form, "dealId");
   const factId = str(form, "factId");
   const status = str(form, "status") as "confirmed" | "not_true" | "edited";
+  reopenIfFinalised(dealIdOf(form));
   mutate(
     (s) => {
       s.confirmations[dealId] ??= {};
@@ -153,7 +158,8 @@ export async function recordDecision(form: FormData) {
   const decision = str(form, "decision");
   mutate(
     (s) => {
-      s.dealOverrides[dealId] = { ...(s.dealOverrides[dealId] ?? {}), decision, decidedAt: now(), status: decision === "Sign" || decision === "Reject" ? "decided" : undefined };
+      // A chosen decision is a draft until the review is finalised (all items answered).
+      s.dealOverrides[dealId] = { ...(s.dealOverrides[dealId] ?? {}), decision, decidedAt: now(), finalised: false, finalisedAt: undefined, status: undefined };
     },
     { user: u.name, dealId, action: "decision", detail: { decision, version: str(form, "version"), note: "recorded only: nothing sent, signed or shared" } },
   );
@@ -289,6 +295,7 @@ export async function undoConfirmation(form: FormData) {
   const u = await requireKarandeep();
   const dealId = str(form, "dealId");
   const factId = str(form, "factId");
+  reopenIfFinalised(dealIdOf(form));
   mutate((s) => void delete s.confirmations[dealId]?.[factId], { user: u.name, dealId, action: "fact.undo", detail: { factId } });
   revalidatePath(`/deal/${dealId}`, "layout");
 }
@@ -318,10 +325,43 @@ export async function clearDecision(form: FormData) {
       if (o) {
         o.decision = undefined;
         o.decidedAt = undefined;
+        o.finalised = false;
+        o.finalisedAt = undefined;
         o.status = undefined;
       }
     },
     { user: u.name, dealId, action: "decision.clear" },
   );
+  revalidatePath("/", "layout");
+}
+
+// ---------------------------------------------------------------- finalise (two-step: answer everything, then finalise)
+const dealIdOf = (form: FormData) => String(form.get("dealId") ?? "");
+
+/** Any change to an answered item after finalising puts the deal back "in review" until finalised again. */
+function reopenIfFinalised(dealId: string) {
+  const o = readState().dealOverrides[dealId];
+  if (o?.finalised) mutate((s) => void Object.assign(s.dealOverrides[dealId], { finalised: false, finalisedAt: undefined, status: undefined }), { user: "Karandeep", dealId, action: "review.reopened" });
+}
+
+export async function finaliseReview(form: FormData) {
+  const u = await requireKarandeep();
+  const dealId = str(form, "dealId");
+  const p = reviewProgress(dealId);
+  if (!p) throw new Error("No brief to finalise");
+  if (!p.complete) throw new Error(`Not ready to finalise: ${p.missing.join(", ")}.`);
+  mutate(
+    (s) => {
+      s.dealOverrides[dealId] = { ...(s.dealOverrides[dealId] ?? {}), finalised: true, finalisedAt: now(), status: "decided" };
+    },
+    { user: u.name, dealId, action: "review.finalised", detail: { decision: p.decision, reacted: p.reacted, total: p.total } },
+  );
+  revalidatePath("/", "layout");
+}
+
+export async function reopenReview(form: FormData) {
+  const u = await requireKarandeep();
+  const dealId = str(form, "dealId");
+  mutate((s) => void Object.assign(s.dealOverrides[dealId] ?? (s.dealOverrides[dealId] = {}), { finalised: false, finalisedAt: undefined, status: undefined }), { user: u.name, dealId, action: "review.reopened" });
   revalidatePath("/", "layout");
 }

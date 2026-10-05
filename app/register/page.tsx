@@ -25,9 +25,9 @@ const TYPE_LABEL: Record<string, string> = {
 };
 /** Two different jobs: restrictions decide whether a NEW deal can be signed; duties are what AtliQ must keep doing on SIGNED ones. */
 const VIEWS: [string, string, string][] = [
-  ["restrictions", "Restrictions: can block a new deal", "Promises that limit what AtliQ can sell, to whom, where or at what price, and IP it has given away. The conflict check reads these on every new contract and every seller check."],
-  ["obligations", "Duties: keep performing on signed contracts", "What AtliQ must keep doing for existing clients: where data may live, breach-notice windows, insurance to hold, audit rights, consent before subcontracting. They rarely block a new deal, but they feed the deal-bundle and compliance checks (e.g. Harrington's NDA: no patient data before a BAA), and delivery teams must honour them."],
-  ["all", "Everything", "Every commitment extracted from the signed contracts."],
+  ["restrictions", "Restrictions: can block a new deal", "Promises that limit what AtliQ can sell, where, or at what price, and IP it has given away. Checked on every new contract."],
+  ["obligations", "Duties: keep performing on signed contracts", "What AtliQ must keep doing for existing clients: data location, breach notices, insurance, audits. Used in the compliance and paperwork checks."],
+  ["all", "Everything", ""],
 ];
 const RESTRICTIVE = ["non_compete", "exclusivity", "mfn_pricing", "ip_transfer", "ip_retention", "non_solicit"];
 
@@ -67,8 +67,7 @@ export default async function RegisterPage(props: PageProps<"/register">) {
         <div>
           <h1 className="font-serif text-2xl font-semibold">Commitments register</h1>
           <p className="text-sm text-muted">
-            Everything AtliQ has already promised, built by AI from {coverage.length} signed documents ({fmtDate(reg.builtAt)}). Version {registerVersion()}.{" "}
-            {unverified} entries unverified: they are used in every check now, and labelled until you verify them.
+            What AtliQ has already promised, from {coverage.length} signed contracts. {unverified} entries still to verify.
           </p>
         </div>
       </div>
@@ -128,7 +127,6 @@ export default async function RegisterPage(props: PageProps<"/register">) {
         <Link href={{ query: { view } }} className="btn">
           Clear filters
         </Link>
-        <span className="text-xs text-muted">Filters apply as you choose.</span>
       </form>
 
       {groups.map(([title, entries]) =>

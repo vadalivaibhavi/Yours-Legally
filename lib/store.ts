@@ -58,7 +58,7 @@ export type State = {
   registerRevision: number;
   uploadedDocuments: Document[];
   newDeals: Deal[];
-  dealOverrides: Record<string, { status?: Deal["status"]; decision?: string; decidedAt?: string; deadline?: string; addDocumentIds?: string[]; removeDocumentIds?: string[]; staleSince?: string }>;
+  dealOverrides: Record<string, { status?: Deal["status"]; decision?: string; decidedAt?: string; finalised?: boolean; finalisedAt?: string; deadline?: string; addDocumentIds?: string[]; removeDocumentIds?: string[]; staleSince?: string }>;
   briefs: Record<string, Brief[]>;
   reactions: Record<string, Record<string, Reaction>>;
   confirmations: Record<string, Record<string, { status: "confirmed" | "not_true" | "edited"; edit?: string; at: string }>>;

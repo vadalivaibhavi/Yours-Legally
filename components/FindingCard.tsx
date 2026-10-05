@@ -118,7 +118,6 @@ export function FindingCard({
           {f.precedents && f.precedents.length > 0 && (
             <div>
               <div className="label">Your position: how you decided this before</div>
-              <p className="text-xs text-muted">From your approved playbook: the deals that set (or broke) your rule on this point.</p>
               <PrecedentList>
                 {f.precedents.map((p) => (
                   <PrecedentRow key={p.docId + p.clauseRef} label={p.label} client={p.counterparty} clauseRef={p.clauseRef}>
@@ -189,7 +188,7 @@ export function FindingCard({
                   <input type="hidden" name="dealId" value={dealId} />
                   <input type="hidden" name="key" value={f.key} />
                   <TextArea name="note" defaultValue={blockerNote?.note} placeholder="e.g. Al Noor agreed verbally to waive" rows={3} max={LIMITS.note} required />
-                  <p className="text-xs text-muted">Shown as context. The blocker stays open until a written waiver or amendment is uploaded.</p>
+                  <p className="text-xs text-muted">A note doesn&apos;t clear the blocker; a written waiver does.</p>
                   <SaveButton className="btn btn-primary w-full">Save note</SaveButton>
                 </form>
               </Popover>
@@ -224,12 +223,7 @@ export function SimilarDetails({ panel, open = false, exclude = [] }: { panel: S
       <summary className="text-sm font-medium text-brand">
         {exclude.length ? `More signed clauses with similar wording (${hits.length})` : `${name} (${panel.clauseRef}): closest wording you've signed (${hits.length})`}
       </summary>
-      <p className="mt-1 text-xs text-muted">
-        {exclude.length
-          ? "Other signed clauses whose wording is closest to this one, beyond the precedents above. "
-          : "The signed clauses whose wording is closest to this one. "}
-        Reference only: never changes the severity or the verdict.
-      </p>
+      <p className="mt-1 text-xs text-muted">Reference only: never changes the verdict.</p>
       {hits.length === 0 ? (
         <p className="mt-2 text-sm text-muted">{panel.hits.length ? "The closest signed clauses are the precedents shown above." : "No similar clause signed before."}</p>
       ) : (

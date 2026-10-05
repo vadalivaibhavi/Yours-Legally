@@ -1,8 +1,7 @@
 import Link from "next/link";
 import { Chip, DecisionBadge, DueBadge, VerdictBadge } from "@/components/ui";
 import { fmtDateTime } from "@/lib/format";
-import { readState } from "@/lib/store";
-import type { EffectiveBrief } from "@/lib/review/types";
+import { reviewProgress } from "@/lib/review/progress";
 import { visibleDeals } from "@/lib/access";
 import { allDeals, latestBrief } from "@/lib/deals";
 import { dueLabel } from "@/lib/format";
@@ -32,7 +31,7 @@ export default async function QueuePage(props: PageProps<"/">) {
         <div>
           <h1 className="font-serif text-2xl font-semibold">Contract queue</h1>
           <p className="text-sm text-muted">
-            {deals.length} open {deals.length === 1 ? "deal" : "deals"} · sorted by client deadline · urgency sets the order, never how risks are judged
+            {deals.length} open {deals.length === 1 ? "deal" : "deals"} · sorted by deadline
           </p>
         </div>
         {isK && (
@@ -56,7 +55,7 @@ export default async function QueuePage(props: PageProps<"/">) {
           <tbody>
             {deals.map((d) => {
               const brief = isK ? latestBrief(d.id) : null;
-              const progress = isK && brief && !d.decision ? reviewProgress(d.id, brief) : null;
+              const progress = isK && brief ? reviewProgress(d.id) : null;
               return (
                 <tr key={d.id} className="border-b border-line last:border-0 hover:bg-paper/60">
                   <td className="px-4 py-3">
@@ -74,17 +73,25 @@ export default async function QueuePage(props: PageProps<"/">) {
                   </td>
                   <td className="px-4 py-3">
                     {/* Karandeep's decision is the headline once he has made it; the system verdict stays visible, smaller. */}
-                    {d.decision ? (
+                    {d.decision && d.finalised ? (
                       <div className="space-y-1">
                         <DecisionBadge decision={d.decision} size="lg" />
                         <div className="text-xs text-muted">
-                          Karandeep&apos;s decision{d.decidedAt ? `, ${fmtDateTime(d.decidedAt)}` : ""}
+                          Karandeep&apos;s decision{d.finalisedAt ? `, ${fmtDateTime(d.finalisedAt)}` : ""}
                           {brief && (
                             <>
                               {" "}· system: <b>{brief.verdict}</b> (v{brief.version})
                             </>
                           )}
                         </div>
+                      </div>
+                    ) : d.decision && isK ? (
+                      <div className="space-y-1">
+                        <span className="flex flex-wrap items-center gap-1.5">
+                          <span className="text-xs text-muted">Draft:</span>
+                          <DecisionBadge decision={d.decision} />
+                        </span>
+                        {brief && <div className="text-xs text-muted">System verdict {brief.verdict} (v{brief.version}) · not finalised</div>}
                       </div>
                     ) : brief ? (
                       <div className="space-y-1">
@@ -101,11 +108,11 @@ export default async function QueuePage(props: PageProps<"/">) {
                     )}
                   </td>
                   <td className="px-4 py-3">
-                    {d.decision ? (
+                    {d.finalised ? (
                       <Chip tone="brand">Decided</Chip>
-                    ) : progress && progress.reacted > 0 ? (
+                    ) : progress?.started ? (
                       <Chip tone="warn">
-                        Review in progress · {progress.reacted}/{progress.total}
+                        {progress.complete ? "Ready to finalise" : `Review in progress · ${progress.reacted}/${progress.total}`}
                       </Chip>
                     ) : d.status === "waiting_for_input" ? (
                       <Chip tone="warn">Waiting for input{d.waitingOn ? `: ${d.waitingOn}` : ""}</Chip>
@@ -120,19 +127,9 @@ export default async function QueuePage(props: PageProps<"/">) {
         </table>
       </div>
       {!isK && (
-        <p className="text-xs text-muted">
-          Seller view: open any deal to run a deal check before promising the client anything. Briefs and the register are Karandeep's.
-        </p>
+        <p className="text-xs text-muted">Open a deal to check it before promising the client anything.</p>
       )}
     </div>
   );
 }
 
-/** Findings Karandeep has reacted to on the latest brief (saved as he goes). */
-function reviewProgress(dealId: string, brief: EffectiveBrief) {
-  const reactions = readState().reactions[dealId] ?? {};
-  const items = brief.findings.filter((f) => f.severity !== "ok" && f.severity !== "low");
-  // Dismissed findings drop out of the effective brief but are still reviewed items.
-  const dismissed = Object.values(reactions).filter((r) => r.reaction === "disagree").length;
-  return { reacted: items.filter((f) => reactions[f.key]).length + dismissed, total: items.length + dismissed };
-}

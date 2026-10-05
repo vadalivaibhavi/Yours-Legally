@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Chip, DueBadge, Section, VerdictBadge } from "@/components/ui";
+import { Chip, DecisionBadge, DueBadge, Section, VerdictBadge } from "@/components/ui";
 import { canViewBrief, canViewDeal } from "@/lib/access";
 import { briefVersion, briefVersions, dealContextDocuments, dealDocuments, dealNotes, getDeal, latestBrief } from "@/lib/deals";
 import { BriefView } from "@/components/BriefView";
@@ -47,7 +47,8 @@ export default async function DealPage(props: PageProps<"/deal/[id]">) {
           <h1 className="font-serif text-2xl font-semibold">{deal.name}</h1>
           <DueBadge deadline={deal.deadline} />
           {deal.status === "waiting_for_input" && <Chip tone="warn">Waiting for input: {deal.waitingOn}</Chip>}
-          {deal.decision && <Chip tone="brand">Decision recorded: {deal.decision}</Chip>}
+          {deal.decision && deal.finalised && <DecisionBadge decision={deal.decision} size="lg" />}
+          {deal.decision && !deal.finalised && isK && <Chip tone="warn">Draft decision: {deal.decision} · review in progress</Chip>}
         </div>
         <p className="text-sm text-muted">
           {deal.counterparty} · requested by {deal.owner} · {deal.clientCountry ?? "country unknown"} · {usd(deal.valueUsd)}

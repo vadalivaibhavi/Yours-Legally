@@ -67,7 +67,7 @@ export function SellerCheckForm({ dealId, defaults }: { dealId: string; defaults
         <button className="btn btn-primary" disabled={pending}>
           {pending ? "Checking…" : "Check"}
         </button>
-        <span className="ml-3 text-xs text-muted">* required. Only changed items are re-checked. Silence is never &quot;safe&quot;: anything unmatched says &quot;couldn&apos;t check&quot;.</span>
+        <span className="ml-3 text-xs text-muted">* required</span>
       </div>
     </form>
   );

@@ -34,7 +34,10 @@ async function reviewOne(d: Deal, totals: { calls: number; cached: number; inTok
     if (brief.errors.length && existing && !existing.errors.length) {
       writeJson(`briefs/failed/${d.id}.json`, brief);
       console.log(`  [${d.id}] ! kept the existing complete brief; incomplete run saved to data/briefs/failed/${d.id}.json`);
-    } else writeJson(`briefs/${d.id}.json`, brief);
+    } else {
+      writeJson(`briefs/${d.id}.json`, brief);
+      fs.rmSync(`data/briefs/failed/${d.id}.json`, { force: true }); // superseded by a complete run
+    }
     totals.calls += brief.usage.calls;
     totals.cached += brief.usage.cachedCalls;
     totals.inTok += brief.usage.inputTokens;

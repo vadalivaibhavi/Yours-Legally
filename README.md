@@ -18,6 +18,8 @@ Capstone prototype. Spec: [`docs/PRD_Yours_Legally_v0.9.md`](docs/PRD_Yours_Lega
 | Anyone | **Upload** `/upload` | Upload a draft; it's extracted, linked to its deal (auto when certain, asks once when ambiguous, new deal otherwise), and a new brief version is issued. | FR-3, FR-17 |
 | Seller (one shared role) | **Deal** `/deal/[id]` | Every deal is visible to sellers. Deal check (client, sector, regions and services required, otherwise "not evaluated"): client, sector, regions/sites, services, rates by role, tools to reuse, data handling, free text → per item clear / needs attention / conflict / couldn't check, stamped "as of [date]", never revealing another client's name or rates. Re-check banner when Karandeep re-checks the deal or the register changes. | F7 · FR-13, FR-19 |
 
+**Review workflow.** Every reaction, confirmation and the chosen decision saves the moment it is made ("Saving… / Saved ✓"), and every choice can be changed. A chosen decision is a draft: the queue shows "Review in progress x/y" until every finding has a reaction, notes facts behind a compliance event are answered and a decision is chosen; the brief then prompts **Finalise review**, and only then does the deal show as Decided. Changing anything afterwards reopens the review. Each brief has a decision history (versions, drafts, finalisation, compliance events).
+
 **Roles.** A role switch in the header stands in for sign-in: Karandeep, or Seller (one shared view for Bhavin, Dhaval and Jay). Sellers see every deal's seller side, never the register, a brief, similar clauses or other clients' terms. `proxy.ts` blocks those routes and every page and server action re-checks the role.
 
 ---
@@ -183,6 +185,10 @@ The briefs were produced over several runs because Gemini's **free tier** allows
 - **Late-finding detection (FR-18):** not built (EV-V4 is reported as skipped).
 - **Email, Drive or calendar intake:** not built. Upload only, with a one-time tracker import.
 - **PDF / OCR upload:** the prototype reads `.md` / `.txt` (the dataset is already text; the scanned Orbit file keeps its OCR errors and illegible clause).
+
+## Pending work
+
+Everything that couldn't be run or checked yet because of model quota or tooling is tracked in [`docs/Pending_Work.md`](docs/Pending_Work.md); `npm run pending` refreshes its auto-detected part.
 
 ## Known limits
 

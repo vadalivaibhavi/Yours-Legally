@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { acceptAllMedium, addMissed, clearDecision, closeAlert, confirmFact, recheckDeal, recordDecision, removeMissed, undoConfirmation, undoFollowUp, undoReaction } from "@/app/deal/actions";
+import { acceptAllMedium, addMissed, clearDecision, closeAlert, confirmFact, finaliseReview, recheckDeal, recordDecision, removeMissed, reopenReview, undoConfirmation, undoFollowUp, undoReaction } from "@/app/deal/actions";
+import { reviewProgress } from "@/lib/review/progress";
 import { FollowUpQuestion, ResolveAlertForm, SaveButton } from "@/components/BriefControls";
 import { FindingCard, SimilarDetails } from "@/components/FindingCard";
 import { TextInput } from "@/components/Fields";
@@ -51,6 +52,7 @@ export async function BriefView({ dealId: id, version }: { dealId: string; versi
   // Review progress: every reaction is saved as it's made, so partial work survives leaving the page.
   const reactable = versions.find((x) => x.version === b.version)!.findings.filter((f) => f.severity !== "ok" && f.severity !== "low");
   const reacted = reactable.filter((f) => reactions[f.key]).length;
+  const progress = isLatest ? reviewProgress(id) : null;
 
   const panelFor = (f: Finding): SimilarPanel | undefined => {
     const t = PANEL_FOR[f.topic];
@@ -103,15 +105,15 @@ export async function BriefView({ dealId: id, version }: { dealId: string; versi
           </div>
           {isLatest && (
             <p className="flex flex-wrap items-center gap-2 rounded bg-paper px-3 py-2 text-xs">
-              <b>Your review:</b> {reacted} of {reactable.length} findings reacted ·{" "}
+              <b>Your review:</b> {progress?.reacted ?? reacted} of {progress?.total ?? reactable.length} findings answered ·{" "}
               {deal.decision ? (
                 <>
-                  decision recorded <DecisionBadge decision={deal.decision} />
+                  {deal.finalised ? "finalised" : "draft decision"} <DecisionBadge decision={deal.decision} />
                 </>
               ) : (
                 "no decision yet"
               )}
-              <span className="ml-auto text-muted">Every choice is saved as you make it, and can be changed.</span>
+              <span className="ml-auto text-muted">Saved automatically</span>
             </p>
           )}
           {deal.stale && <p className="rounded bg-change-soft p-2 text-sm text-change">The register changed since this brief ({fmtDate(deal.stale)}). Re-check to apply it.</p>}
@@ -127,7 +129,7 @@ export async function BriefView({ dealId: id, version }: { dealId: string; versi
           </div>
           <p className="text-sm">{b.complianceAlert.detail}</p>
           <p className="text-xs text-muted">
-            Owner: {b.complianceAlert.owner}. The analysis below is complete; the verdict can&apos;t be SIGN while this is open. Yours Legally notifies no one: next steps are a human decision (counsel, client, regulator).
+            Owner: {b.complianceAlert.owner}. The verdict can&apos;t be SIGN while this is open.
           </p>
           <div className="grid gap-2 md:grid-cols-2">
             {b.complianceAlert.citations.map((c, i) => (
@@ -160,7 +162,7 @@ export async function BriefView({ dealId: id, version }: { dealId: string; versi
               <form key={fid} action={undoConfirmation} className="text-xs text-muted">
                 <input type="hidden" name="dealId" value={id} />
                 <input type="hidden" name="factId" value={fid} />
-                Raised because you confirmed the fact from the deal notes. <SaveButton className="underline">Change</SaveButton>
+                You confirmed this from the deal notes. <SaveButton className="underline">Change</SaveButton>
               </form>
             ))}
         </section>
@@ -173,7 +175,7 @@ export async function BriefView({ dealId: id, version }: { dealId: string; versi
             .map((f) => (
               <FactRow key={f.id} fact={f} dealId={id} state={confirmations[f.id]?.status} />
             ))}
-          <p className="text-xs text-muted">Confirming pins a compliance alert for Karandeep and the named owner. The system takes no action itself.</p>
+          <p className="text-xs text-muted">Confirming raises a compliance alert.</p>
         </section>
       )}
 
@@ -199,7 +201,7 @@ export async function BriefView({ dealId: id, version }: { dealId: string; versi
 
       {/* ---------------------------------------------------------------- blockers (max 3) */}
       {blockers.length > 0 && (
-        <Section title={`Blockers · ${blockers.length}`} aside={blockers.length > 3 ? <span className="text-xs text-muted">Top 3 shown; the rest are under &quot;More&quot;</span> : null}>
+        <Section title={`Blockers · ${blockers.length}`} aside={blockers.length > 3 ? <span className="text-xs text-muted">Top 3 shown; the rest are under Must fix</span> : null}>
           <div className="space-y-3">
             {shownBlockers.map((f) => (
               <div key={f.key}>
@@ -230,7 +232,6 @@ export async function BriefView({ dealId: id, version }: { dealId: string; versi
                   <input type="hidden" name="dealId" value={id} />
                   <SaveButton className="btn btn-primary" savedLabel="Re-checked ✓" pendingLabel="Re-checking… (1–3 min)">Input added → re-check</SaveButton>
                 </form>
-                <span className="text-xs text-muted">Issues v{b.version + 1}: New · Still open · Resolved; your reactions carry forward.</span>
               </div>
             )}
           </div>
@@ -273,7 +274,7 @@ export async function BriefView({ dealId: id, version }: { dealId: string; versi
           }
         >
           <details className="space-y-3">
-            <summary className="text-sm text-muted">Show {medium.length} negotiable item{medium.length > 1 ? "s" : ""} with your counter-positions</summary>
+            <summary className="text-sm text-muted">Show {medium.length} item{medium.length > 1 ? "s" : ""}</summary>
             <div className="mt-3 space-y-3">{medium.map((f) => card(f, true))}</div>
           </details>
         </Section>
@@ -326,10 +327,7 @@ export async function BriefView({ dealId: id, version }: { dealId: string; versi
       {/* ---------------------------------------------------------------- other key clauses vs past */}
       {otherPanels.length > 0 && (
         <Section title="Clauses with no issue: how they compare with what you've signed">
-          <p className="text-sm text-muted">
-            These clauses raised nothing, so they aren&apos;t in the findings. Each is shown next to the closest clause of the same kind AtliQ has already signed, so you can see at a glance whether it matches
-            what you&apos;ve accepted before or quietly differs. Reference only: it never changes the verdict.
-          </p>
+          <p className="text-sm text-muted">Clauses that raised nothing, next to the closest wording you&apos;ve signed.</p>
           <div className="space-y-2">
             {otherPanels.map((p) => (
               <SimilarDetails key={p.docId + p.clauseType} panel={p} />
@@ -358,7 +356,6 @@ export async function BriefView({ dealId: id, version }: { dealId: string; versi
                 <li key={d}>{d}</li>
               ))}
             </ul>
-            <p className="mt-3 text-xs text-muted">Export is a static preview in the prototype. Yours Legally never sends anything to counsel.</p>
           </details>
         </Section>
       )}
@@ -406,7 +403,7 @@ export async function BriefView({ dealId: id, version }: { dealId: string; versi
           <div className="card space-y-4 p-5">
             {deal.decision ? (
               <div className="flex flex-wrap items-center gap-3">
-                <span className="text-sm">Your decision:</span>
+                <span className="text-sm">{deal.finalised ? "Your decision:" : "Draft decision:"}</span>
                 <DecisionBadge decision={deal.decision} size="lg" />
                 <span className="text-xs text-muted">recorded {fmtDateTime(deal.decidedAt)}</span>
                 <form action={clearDecision}>
@@ -415,7 +412,7 @@ export async function BriefView({ dealId: id, version }: { dealId: string; versi
                 </form>
               </div>
             ) : (
-              <p className="text-sm text-muted">No decision recorded yet. Your reactions above save as you go; recording a decision finalises this review.</p>
+              <p className="text-sm text-muted">No decision yet.</p>
             )}
             <form action={recordDecision} className="flex flex-wrap gap-2">
               <input type="hidden" name="dealId" value={id} />
@@ -426,23 +423,49 @@ export async function BriefView({ dealId: id, version }: { dealId: string; versi
                 </SaveButton>
               ))}
             </form>
-            <p className="text-sm text-muted">
-              This simply records where things stand, so the sellers and the queue stay in step with you. Nothing is sent, signed or shared on your behalf; the replies and the conversations with{" "}
-              {deal.counterparty} remain yours.
-            </p>
+            <p className="text-xs text-muted">Records your decision only. Nothing is sent or signed.</p>
             {deal.decision &&
               (followUp ? (
-                <form action={undoFollowUp} className="text-xs text-muted">
+                <form action={undoFollowUp} className="flex flex-wrap items-center gap-2 rounded-lg bg-paper p-3 text-sm">
                   <input type="hidden" name="dealId" value={id} />
                   <input type="hidden" name="version" value={b.version} />
-                  Follow-up:{" "}
-                  {followUp.answer === "no"
-                    ? "decided from the brief"
-                    : `had to open the documents${followUp.reason ? ` (${followUp.reason})` : ""}${followUp.note ? `: ${followUp.note}` : ""}`}
-                  . <SaveButton className="underline">Change</SaveButton>
+                  <span>Needed to open the full contract or other documents?</span>
+                  <b>{followUp.answer === "no" ? "No, decided from the brief" : "Yes"}</b>
+                  {followUp.answer === "yes" && (followUp.reason || followUp.note) && <span>· {[followUp.reason, followUp.note].filter(Boolean).join(": ")}</span>}
+                  <SaveButton className="ml-auto text-xs text-muted underline">Change</SaveButton>
                 </form>
               ) : (
                 <FollowUpQuestion dealId={id} version={b.version} />
+              ))}
+            {/* Two-step: everything answered, then finalise. Only a finalised review shows as Decided. */}
+            {progress &&
+              (progress.finalised ? (
+                <form action={reopenReview} className="flex flex-wrap items-center gap-3 rounded-lg border border-sign/40 bg-sign-soft p-3 text-sm">
+                  <input type="hidden" name="dealId" value={id} />
+                  <b className="text-sign">✓ Review finalised {fmtDateTime(progress.finalisedAt)}</b>
+                  <span className="text-muted">Status: Decided</span>
+                  <SaveButton className="ml-auto text-xs text-muted underline">Reopen review</SaveButton>
+                </form>
+              ) : (
+                <form action={finaliseReview} className={`flex flex-wrap items-center gap-3 rounded-lg p-3 text-sm ${progress.complete ? "border-2 border-brand bg-brand-soft" : "bg-paper"}`}>
+                  <input type="hidden" name="dealId" value={id} />
+                  {progress.complete ? (
+                    <b>Everything is answered. Finalise to mark this deal Decided.</b>
+                  ) : (
+                    <span>
+                      <b>Still to do before finalising:</b> {progress.missing.join(" · ")}
+                    </span>
+                  )}
+                  {progress.complete ? (
+                    <SaveButton className="btn btn-primary ml-auto" savedLabel="Finalised ✓">
+                      Finalise review
+                    </SaveButton>
+                  ) : (
+                    <button type="button" className="btn ml-auto" disabled>
+                      Finalise review
+                    </button>
+                  )}
+                </form>
               ))}
             <details>
               <summary className="text-sm text-brand">+ Something the brief missed</summary>
@@ -510,11 +533,13 @@ function buildTimeline(versions: Brief[], audit: AuditEvent[]): TimelineItem[] {
   const items: TimelineItem[] = versions.map((v) => ({ at: v.createdAt, when: fmtDateTime(v.createdAt), kind: "verdict", label: v.verdict, text: `Brief v${v.version} issued (${v.trigger}): system verdict` }));
   for (const a of audit) {
     const d = (a.detail ?? {}) as Record<string, string>;
-    if (a.action === "decision") items.push({ at: a.at, when: fmtDateTime(a.at), kind: "decision", label: d.decision, text: `${a.user} decided${d.version ? ` on brief v${d.version}` : ""}` });
+    if (a.action === "decision") items.push({ at: a.at, when: fmtDateTime(a.at), kind: "decision", label: d.decision, text: `${a.user} chose${d.version ? ` on brief v${d.version}` : ""} (draft)` });
     else if (a.action === "decision.clear") items.push({ at: a.at, when: fmtDateTime(a.at), kind: "cleared", label: "Decision cleared", text: `by ${a.user}` });
     else if (a.action === "fact.confirmed") items.push({ at: a.at, when: fmtDateTime(a.at), kind: "alert", label: "Compliance event confirmed", text: "from the deal notes" });
     else if (a.action === "alert.evidence" || a.action === "alert.note") items.push({ at: a.at, when: fmtDateTime(a.at), kind: "alert", label: "Compliance alert resolved", text: [d.file, d.note].filter(Boolean).join(": ") });
     else if (a.action === "alert.open") items.push({ at: a.at, when: fmtDateTime(a.at), kind: "alert", label: "Compliance alert reopened", text: "" });
+    else if (a.action === "review.finalised") items.push({ at: a.at, when: fmtDateTime(a.at), kind: "decision", label: d.decision, text: `${a.user} finalised the review: status Decided` });
+    else if (a.action === "review.reopened") items.push({ at: a.at, when: fmtDateTime(a.at), kind: "cleared", label: "Review reopened", text: "back in review" });
   }
   return items.sort((x, y) => x.at.localeCompare(y.at));
 }

@@ -10,7 +10,7 @@ import type { Brief, EffectiveBrief } from "./review/types";
 import { readState } from "./store";
 import type { Deal, Document, Note } from "./types";
 
-export type DealView = Deal & { decision?: string; decidedAt?: string; waitingOn?: string; stale?: string };
+export type DealView = Deal & { decision?: string; decidedAt?: string; finalised?: boolean; finalisedAt?: string; waitingOn?: string; stale?: string };
 
 export function allDocuments(): Document[] {
   return [...baseDocuments(), ...readState().uploadedDocuments];
@@ -32,10 +32,12 @@ export function allDeals(): DealView[] {
       deadline: o.deadline ?? d.deadline,
       decision: o.decision,
       decidedAt: o.decidedAt,
+      finalised: o.finalised,
+      finalisedAt: o.finalisedAt,
       stale: o.staleSince,
     };
     const brief = latestBrief(d.id);
-    if (brief && !o.decision) {
+    if (brief && !o.finalised) {
       if (brief.waitingFor.length) {
         view.status = "waiting_for_input";
         view.waitingOn = [...new Set(brief.waitingFor.map((w) => w.owner))].join(", ");

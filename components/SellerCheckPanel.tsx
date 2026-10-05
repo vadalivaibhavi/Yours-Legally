@@ -45,12 +45,12 @@ export function SellerCheckPanel({ deal, checks }: { deal: DealView; checks: Sel
                 </div>
                 <p>{i.meaning}</p>
                 <p className="text-muted">→ {i.todo}</p>
-                {i.source && <p className="text-xs text-muted">Source: AtliQ commitments register, signed client agreement {i.source.clauseRef} (client name withheld)</p>}
+                {i.source && <p className="text-xs text-muted">Source: a signed client agreement, {i.source.clauseRef}</p>}
               </li>
             ))}
           </ul>
           <p className="rounded bg-paper p-2 text-xs text-muted">
-            As of {fmtDate(latest.asOf)}, based on what you told us and AtliQ&apos;s commitments at that time (register {latest.registerVersion}). The contract review is the final word.
+            As of {fmtDate(latest.asOf)}, based on what you entered. Karandeep&apos;s contract review is the final word.
           </p>
           {checks.length > 1 && (
             <details className="text-xs text-muted">
