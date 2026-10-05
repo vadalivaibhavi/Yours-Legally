@@ -132,7 +132,12 @@ const rank = (s: SellerItem["status"]) => ({ clear: 0, couldnt_check: 1, attenti
 export async function runSellerCheck(dealId: string, by: string, input: SellerInput, previous?: SellerCheck | null): Promise<SellerCheck> {
   const entries = registerEntries();
   const sourceTexts = new Map(allDocuments().filter((d) => d.kind === "signed").map((d) => [d.id, d.text]));
-  const items: SellerItem[] = [regionItem(input, entries, sourceTexts), ...rateItems(input, entries), ...assetItems(input, entries, sourceTexts)];
+  // No sector or region → nothing to match against: never "clear" (silence is never safe).
+  const mainItem: SellerItem =
+    !input.sectors.length || !input.regions.length
+      ? { item: "Sector & regions", status: "couldnt_check", meaning: "The sector and regions/sites weren't given, so AtliQ's restrictions couldn't be checked.", todo: "Fill in the main details and check again." }
+      : regionItem(input, entries, sourceTexts);
+  const items: SellerItem[] = [mainItem, ...rateItems(input, entries), ...assetItems(input, entries, sourceTexts)];
   const data = dataItem(input);
   if (data) items.push(data);
   // FR-13: only changed items are re-run; unchanged free text keeps its previous answer (no model call).

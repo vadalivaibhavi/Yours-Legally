@@ -41,7 +41,7 @@ export default async function DealPage(props: PageProps<"/deal/[id]">) {
           {deal.decision && <Chip tone="brand">Decision recorded: {deal.decision}</Chip>}
         </div>
         <p className="text-sm text-muted">
-          {deal.counterparty} · owner {deal.owner} · {deal.clientCountry ?? "country unknown"} · {usd(deal.valueUsd)}
+          {deal.counterparty} · requested by {deal.owner} · {deal.clientCountry ?? "country unknown"} · {usd(deal.valueUsd)}
           {deal.deadlineNote ? ` · ${deal.deadlineNote}` : ""}
         </p>
       </div>

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Chip, Quote } from "@/components/ui";
 import { RegisterActions } from "@/components/RegisterActions";
+import { AutoSubmitSelect } from "@/components/Fields";
 import { canViewRegister } from "@/lib/access";
 import { baseRegister } from "@/lib/data";
 import { allDeals, documentById, latestBrief } from "@/lib/deals";
@@ -22,6 +23,12 @@ const TYPE_LABEL: Record<string, string> = {
   compliance: "Compliance obligation",
   other: "Other",
 };
+/** Two different jobs: restrictions decide whether a NEW deal can be signed; duties are what AtliQ must keep doing on SIGNED ones. */
+const VIEWS: [string, string, string][] = [
+  ["restrictions", "Restrictions: can block a new deal", "Promises that limit what AtliQ can sell, to whom, where or at what price, and IP it has given away. The conflict check reads these on every new contract and every seller check."],
+  ["obligations", "Duties: keep performing on signed contracts", "What AtliQ must keep doing for existing clients: where data may live, breach-notice windows, insurance to hold, audit rights, consent before subcontracting. They rarely block a new deal, but they feed the deal-bundle and compliance checks (e.g. Harrington's NDA: no patient data before a BAA), and delivery teams must honour them."],
+  ["all", "Everything", "Every commitment extracted from the signed contracts."],
+];
 const RESTRICTIVE = ["non_compete", "exclusivity", "mfn_pricing", "ip_transfer", "ip_retention", "non_solicit"];
 
 /** Register screen (FR-2): Karandeep only. Filter by live/expired, client, region, type. */
@@ -66,62 +73,62 @@ export default async function RegisterPage(props: PageProps<"/register">) {
         </div>
       </div>
 
-      <div className="flex flex-wrap gap-2 text-sm">
-        {[
-          ["restrictions", "Restrictions & IP"],
-          ["obligations", "Ongoing obligations"],
-          ["all", "Everything"],
-        ].map(([v, label]) => (
-          <Link key={v} href={{ query: { ...sp, view: v } }} className={`btn ${view === v ? "btn-primary" : ""}`}>
-            {label}
-          </Link>
-        ))}
+      <div className="space-y-2">
+        <div className="flex flex-wrap gap-2 text-sm">
+          {VIEWS.map(([v, label]) => (
+            <Link key={v} href={{ query: { ...sp, view: v } }} className={`btn ${view === v ? "btn-primary" : ""}`}>
+              {label}
+            </Link>
+          ))}
+        </div>
+        <p className="text-sm text-muted">{VIEWS.find(([v]) => v === view)?.[2]}</p>
       </div>
 
-      <form className="card flex flex-wrap items-end gap-3 p-3 text-sm">
+      {/* key: remount on every URL change so "Clear" and tab switches reset the selects */}
+      <form key={JSON.stringify(sp)} className="card flex flex-wrap items-end gap-3 p-3 text-sm">
         <input type="hidden" name="view" value={view} />
         <label className="flex flex-col gap-1">
           <span className="label">Status</span>
-          <select name="status" defaultValue={q("status")}>
+          <AutoSubmitSelect name="status" defaultValue={q("status")}>
             <option value="">Any</option>
             <option value="live">Live</option>
             <option value="expired">Expired</option>
             <option value="unknown">Unknown</option>
-          </select>
+          </AutoSubmitSelect>
         </label>
         <label className="flex flex-col gap-1">
           <span className="label">Type</span>
-          <select name="type" defaultValue={q("type")}>
+          <AutoSubmitSelect name="type" defaultValue={q("type")}>
             <option value="">Any</option>
             {Object.entries(TYPE_LABEL).map(([k, v]) => (
               <option key={k} value={k}>
                 {v}
               </option>
             ))}
-          </select>
+          </AutoSubmitSelect>
         </label>
         <label className="flex flex-col gap-1">
           <span className="label">Client</span>
-          <select name="client" defaultValue={q("client")}>
+          <AutoSubmitSelect name="client" defaultValue={q("client")}>
             <option value="">Any</option>
             {clients.map((c) => (
               <option key={c}>{c}</option>
             ))}
-          </select>
+          </AutoSubmitSelect>
         </label>
         <label className="flex flex-col gap-1">
           <span className="label">Region</span>
-          <select name="region" defaultValue={q("region")}>
+          <AutoSubmitSelect name="region" defaultValue={q("region")}>
             <option value="">Any</option>
             {regions.map((c) => (
               <option key={c}>{c}</option>
             ))}
-          </select>
+          </AutoSubmitSelect>
         </label>
-        <button className="btn btn-primary">Filter</button>
-        <Link href="/register" className="btn">
-          Clear
+        <Link href={{ query: { view } }} className="btn">
+          Clear filters
         </Link>
+        <span className="text-xs text-muted">Filters apply as you choose.</span>
       </form>
 
       {groups.map(([title, entries]) =>

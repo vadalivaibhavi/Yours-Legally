@@ -14,6 +14,7 @@ import { currentUser } from "@/lib/session";
 import { runSellerCheck } from "@/lib/seller";
 import { latestSellerCheck } from "@/lib/sellerChecks";
 import { mutate, type SellerInput } from "@/lib/store";
+import { field, LIMITS } from "@/lib/limits";
 
 async function requireKarandeep() {
   const u = await currentUser();
@@ -28,14 +29,14 @@ export async function reactToFinding(form: FormData) {
   const dealId = str(form, "dealId");
   const key = str(form, "key");
   const reaction = str(form, "reaction") as "agree" | "disagree" | "severity";
-  const reason = str(form, "reason");
+  const reason = field(form, "reason", LIMITS.name, "Reason");
   const isBlocker = str(form, "severity") === "blocker";
   // FR-12: disagreeing with a blocker needs a reason code.
   if (reaction === "disagree" && isBlocker && !reason) throw new Error("A reason is required to disagree with a blocker.");
   mutate(
     (s) => {
       s.reactions[dealId] ??= {};
-      s.reactions[dealId][key] = { reaction, reason: reason || undefined, severity: str(form, "newSeverity") || undefined, note: str(form, "note") || undefined, at: now(), version: Number(str(form, "version")) };
+      s.reactions[dealId][key] = { reaction, reason: reason || undefined, severity: str(form, "newSeverity") || undefined, note: field(form, "note", LIMITS.note, "Note") || undefined, at: now(), version: Number(str(form, "version")) };
     },
     { user: u.name, dealId, action: `finding.${reaction}`, detail: { key, reason, newSeverity: str(form, "newSeverity") } },
   );
@@ -68,7 +69,7 @@ export async function noteOnBlocker(form: FormData) {
   const u = await requireKarandeep();
   const dealId = str(form, "dealId");
   const key = str(form, "key");
-  const note = str(form, "note");
+  const note = field(form, "note", LIMITS.note, "Note");
   if (!note) return;
   mutate(
     (s) => {
@@ -83,7 +84,7 @@ export async function noteOnBlocker(form: FormData) {
 export async function addMissed(form: FormData) {
   const u = await requireKarandeep();
   const dealId = str(form, "dealId");
-  const entry = { clauseRef: str(form, "clauseRef"), note: str(form, "note"), at: now(), version: Number(str(form, "version")) };
+  const entry = { clauseRef: field(form, "clauseRef", LIMITS.clauseRef, "Clause"), note: field(form, "note", LIMITS.note, "Note"), at: now(), version: Number(str(form, "version")) };
   if (!entry.note) return;
   mutate(
     (s) => {
@@ -103,7 +104,7 @@ export async function confirmFact(form: FormData) {
   mutate(
     (s) => {
       s.confirmations[dealId] ??= {};
-      s.confirmations[dealId][factId] = { status, edit: str(form, "edit") || undefined, at: now() };
+      s.confirmations[dealId][factId] = { status, edit: field(form, "edit", LIMITS.note, "Correction") || undefined, at: now() };
     },
     { user: u.name, dealId, action: `fact.${status}`, detail: { factId, edit: str(form, "edit") } },
   );
@@ -114,7 +115,7 @@ export async function closeAlert(form: FormData) {
   const u = await requireKarandeep();
   const dealId = str(form, "dealId");
   const how = str(form, "how") as "evidence" | "note" | "open";
-  const note = str(form, "note");
+  const note = field(form, "note", LIMITS.note, "Note");
   if (how !== "open" && !note) throw new Error("Add the evidence reference or your note.");
   mutate(
     (s) => {
@@ -182,8 +183,8 @@ export async function registerAction(form: FormData) {
   const edits =
     action === "edit"
       ? {
-          title: str(form, "title") || entry.title,
-          summary: str(form, "summary") || entry.summary,
+          title: field(form, "title", LIMITS.name, "Title") || entry.title,
+          summary: field(form, "summary", LIMITS.summary, "Summary") || entry.summary,
           end: str(form, "end") || entry.end,
           includesAffiliates: form.get("includesAffiliates") === "on",
         }
@@ -210,28 +211,42 @@ export async function registerAction(form: FormData) {
 }
 
 // ---------------------------------------------------------------- seller deal check (F7, FR-13)
-export async function runDealCheck(form: FormData) {
+export type DealCheckState = { error?: string; ok?: boolean };
+
+const SECTOR_VALUES = new Set(["hospitality", "travel", "retail", "healthcare", "bfsi", "logistics", "manufacturing", "food", "technology", "data_platform", "other"]);
+
+export async function runDealCheck(_prev: DealCheckState, form: FormData): Promise<DealCheckState> {
   const u = await currentUser();
   const dealId = str(form, "dealId");
   const deal = getDeal(dealId);
-  if (!deal || !canViewDeal(u, deal)) throw new Error("Not allowed");
-  const list = (k: string) => str(form, k).split(",").map((x) => x.trim()).filter(Boolean);
-  const rates = str(form, "rates")
-    .split(/\n|;/)
-    .map((l) => l.match(/^(.+?)[\s:@-]+\$?(\d+(?:\.\d+)?)/))
-    .filter((m): m is RegExpMatchArray => !!m)
-    .map((m) => ({ role: m[1].trim(), ratePerHourUsd: Number(m[2]) }));
-  const input: SellerInput = {
-    client: str(form, "client") || deal.counterparty,
-    sectors: form.getAll("sectors").map(String),
-    regions: list("regions"),
-    services: list("services"),
-    rates,
-    assets: list("assets"),
-    dataHandling: str(form, "dataHandling"),
-    partnership: form.get("partnership") === "on",
-    freeText: str(form, "freeText"),
-  };
+  if (!deal || !canViewDeal(u, deal)) return { error: "You can only check your own deals." };
+  let input: SellerInput;
+  try {
+    const list = (k: string, label: string) => field(form, k, LIMITS.list, label).split(",").map((x) => x.trim()).filter(Boolean);
+    const rates = field(form, "rates", LIMITS.rates, "Rates")
+      .split(/\n|;/)
+      .map((l) => l.match(/^(.+?)[\s:@-]+\$?(\d+(?:\.\d+)?)/))
+      .filter((m): m is RegExpMatchArray => !!m)
+      .map((m) => ({ role: m[1].trim().slice(0, LIMITS.name), ratePerHourUsd: Number(m[2]) }));
+    input = {
+      client: field(form, "client", LIMITS.name, "Client"),
+      sectors: form.getAll("sectors").map(String).filter((s) => SECTOR_VALUES.has(s)),
+      regions: list("regions", "Regions / sites"),
+      services: list("services", "Services"),
+      rates,
+      assets: list("assets", "Tools / IP"),
+      dataHandling: field(form, "dataHandling", LIMITS.note, "Data handling"),
+      partnership: form.get("partnership") === "on",
+      freeText: field(form, "freeText", LIMITS.freeText, "Anything else"),
+    };
+  } catch (e) {
+    return { error: (e as Error).message };
+  }
+  // Never evaluate an empty plan: no green answer without the main details (FR-13, "silence is never safe").
+  const missing = [!input.client && "client", !input.sectors.length && "client sector", !input.regions.length && "regions / sites", !input.services.length && "services"].filter(Boolean);
+  if (missing.length) return { error: `The main details are missing (${missing.join(", ")}), so AtliQ's commitments can't be checked against this deal yet. Fill them in and check again.` };
+  if (str(form, "rates") && !input.rates.length) return { error: 'Rates couldn\'t be read. Use one per line, e.g. "Senior Data Engineer $72".' };
+
   const check = await runSellerCheck(dealId, u.name, input, latestSellerCheck(dealId));
   mutate(
     (s) => {
@@ -240,4 +255,5 @@ export async function runDealCheck(form: FormData) {
     { user: u.name, dealId, action: "seller.check", detail: { items: check.items.map((i) => `${i.item}: ${i.status}`) } },
   );
   revalidatePath(`/deal/${dealId}`);
+  return { ok: true };
 }

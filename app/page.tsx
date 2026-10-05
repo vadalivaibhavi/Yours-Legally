@@ -2,7 +2,7 @@ import Link from "next/link";
 import { DueBadge, Chip, VerdictBadge } from "@/components/ui";
 import { visibleDeals } from "@/lib/access";
 import { allDeals, latestBrief } from "@/lib/deals";
-import { dueLabel, usd } from "@/lib/format";
+import { dueLabel } from "@/lib/format";
 import { currentUser } from "@/lib/session";
 
 const STATUS_TEXT: Record<string, string> = { open: "In review", waiting_for_input: "Waiting for input", decided: "Decided", signed: "Signed" };
@@ -27,7 +27,7 @@ export default async function QueuePage(props: PageProps<"/">) {
       )}
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="font-serif text-2xl font-semibold">{isK ? "Contract queue" : `${user.name}'s deals`}</h1>
+          <h1 className="font-serif text-2xl font-semibold">Contract queue</h1>
           <p className="text-sm text-muted">
             {deals.length} open {deals.length === 1 ? "deal" : "deals"} · sorted by client deadline · urgency sets the order, never how risks are judged
           </p>
@@ -44,11 +44,10 @@ export default async function QueuePage(props: PageProps<"/">) {
           <thead>
             <tr className="border-b border-line text-left">
               <th className="label px-4 py-2">Deal</th>
-              <th className="label px-4 py-2">Owner</th>
+              <th className="label px-4 py-2">Requested by</th>
               <th className="label px-4 py-2">Deadline</th>
               <th className="label px-4 py-2">Status</th>
               {isK && <th className="label px-4 py-2">Latest verdict</th>}
-              <th className="label px-4 py-2 text-right">Value</th>
             </tr>
           </thead>
           <tbody>
@@ -86,7 +85,6 @@ export default async function QueuePage(props: PageProps<"/">) {
                       )}
                     </td>
                   )}
-                  <td className="px-4 py-3 text-right tabular-nums">{usd(d.valueUsd)}</td>
                 </tr>
               );
             })}
@@ -95,7 +93,7 @@ export default async function QueuePage(props: PageProps<"/">) {
       </div>
       {!isK && (
         <p className="text-xs text-muted">
-          You see your own deals only. Open a deal to run a deal check before promising the client anything.
+          Seller view: open any deal to run a deal check before promising the client anything. Briefs and the register are Karandeep's.
         </p>
       )}
     </div>

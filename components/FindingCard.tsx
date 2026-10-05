@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { noteOnBlocker, reactToFinding, undoReaction } from "@/app/deal/actions";
 import { Chip, clean, IntentBadge, Quote, SeverityBadge } from "@/components/ui";
+import { Popover, TextArea, TextInput } from "@/components/Fields";
+import { LIMITS } from "@/lib/limits";
 import { fmtDate } from "@/lib/format";
 import type { Finding, SimilarPanel } from "@/lib/review/types";
 import type { Reaction } from "@/lib/store";
@@ -151,9 +153,8 @@ export function FindingCard({
                 <Hidden dealId={dealId} f={f} version={version} reaction="agree" />
                 <button className="btn">✓ Agree</button>
               </form>
-              <details className="relative">
-                <summary className="btn list-none">✗ Disagree</summary>
-                <form action={reactToFinding} className="card absolute z-10 mt-1 w-72 space-y-2 p-3 shadow-lg">
+              <Popover label="✗ Disagree">
+                <form action={reactToFinding} className="space-y-2">
                   <Hidden dealId={dealId} f={f} version={version} reaction="disagree" />
                   <select name="reason" required={f.severity === "blocker"} className="w-full" defaultValue="">
                     <option value="" disabled>
@@ -163,13 +164,12 @@ export function FindingCard({
                       <option key={r}>{r}</option>
                     ))}
                   </select>
-                  <input name="note" placeholder="Note (optional)" className="w-full" />
+                  <TextInput name="note" placeholder="Note (optional)" max={LIMITS.note} />
                   <button className="btn btn-primary w-full">Record</button>
                 </form>
-              </details>
-              <details className="relative">
-                <summary className="btn list-none">⇅ Severity</summary>
-                <form action={reactToFinding} className="card absolute z-10 mt-1 w-56 space-y-2 p-3 shadow-lg">
+              </Popover>
+              <Popover label="⇅ Severity" width="w-56">
+                <form action={reactToFinding} className="space-y-2">
                   <Hidden dealId={dealId} f={f} version={version} reaction="severity" />
                   <select name="newSeverity" className="w-full" defaultValue={f.severity}>
                     {["blocker", "high", "medium", "low"].map((s) => (
@@ -178,20 +178,21 @@ export function FindingCard({
                   </select>
                   <button className="btn btn-primary w-full">Change</button>
                 </form>
-              </details>
+              </Popover>
             </>
           )}
           {(f.category === "conflict" || f.category === "covenant") && (
-            <details className="relative ml-auto">
-              <summary className="text-xs text-muted underline">{blockerNote ? "Note added" : "Add a note"}</summary>
-              <form action={noteOnBlocker} className="card absolute right-0 z-10 mt-1 w-80 space-y-2 p-3 shadow-lg">
-                <input type="hidden" name="dealId" value={dealId} />
-                <input type="hidden" name="key" value={f.key} />
-                <textarea name="note" defaultValue={blockerNote?.note} placeholder="e.g. Al Noor agreed verbally to waive" className="w-full" rows={3} />
-                <p className="text-xs text-muted">Shown as context. The blocker stays open until a written waiver or amendment is uploaded.</p>
-                <button className="btn btn-primary w-full">Save note</button>
-              </form>
-            </details>
+            <div className="ml-auto">
+              <Popover label={blockerNote ? "Note added" : "Add a note"} align="right" width="w-80" buttonClassName="text-xs text-muted underline">
+                <form action={noteOnBlocker} className="space-y-2">
+                  <input type="hidden" name="dealId" value={dealId} />
+                  <input type="hidden" name="key" value={f.key} />
+                  <TextArea name="note" defaultValue={blockerNote?.note} placeholder="e.g. Al Noor agreed verbally to waive" rows={3} max={LIMITS.note} required />
+                  <p className="text-xs text-muted">Shown as context. The blocker stays open until a written waiver or amendment is uploaded.</p>
+                  <button className="btn btn-primary w-full">Save note</button>
+                </form>
+              </Popover>
+            </div>
           )}
         </footer>
       )}

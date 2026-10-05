@@ -1,4 +1,4 @@
-import { runDealCheck } from "@/app/deal/actions";
+import { SellerCheckForm } from "@/components/SellerCheckForm";
 import { Chip } from "@/components/ui";
 import { fmtDate } from "@/lib/format";
 import { sellerBanner } from "@/lib/seller";
@@ -12,7 +12,6 @@ const STATUS: Record<string, { label: string; tone: "good" | "warn" | "bad" | "g
   couldnt_check: { label: "Couldn't check", tone: "gray", dot: "⚪" },
 };
 
-const SECTORS = ["hospitality", "travel", "retail", "healthcare", "bfsi", "logistics", "manufacturing", "food", "technology", "data_platform", "other"];
 
 /** F7 deal kick-off check (FR-13) + re-check banner (FR-19). Answers never reveal other clients' names or rates. */
 export function SellerCheckPanel({ deal, checks }: { deal: DealView; checks: SellerCheck[] }) {
@@ -69,54 +68,10 @@ export function SellerCheckPanel({ deal, checks }: { deal: DealView; checks: Sel
       )}
       <details className="card p-4" open={!latest}>
         <summary className="font-semibold">{latest ? "Update the plan and re-run the check" : "Run a deal check before promising the client anything"}</summary>
-        <form action={runDealCheck} className="mt-3 grid gap-3 text-sm md:grid-cols-2">
-          <input type="hidden" name="dealId" value={deal.id} />
-          <label className="space-y-1">
-            <span className="label">Client</span>
-            <input name="client" defaultValue={prev?.client ?? deal.counterparty} className="w-full" />
-          </label>
-          <label className="space-y-1">
-            <span className="label">Regions / sites (comma-separated countries)</span>
-            <input name="regions" defaultValue={prev?.regions.join(", ") ?? deal.clientCountry ?? ""} placeholder="e.g. India, UAE, Oman" className="w-full" />
-          </label>
-          <fieldset className="space-y-1 md:col-span-2">
-            <span className="label">Client sector</span>
-            <div className="flex flex-wrap gap-3">
-              {SECTORS.map((s) => (
-                <label key={s} className="flex items-center gap-1">
-                  <input type="checkbox" name="sectors" value={s} defaultChecked={prev?.sectors.includes(s)} /> {s.replace("_", " ")}
-                </label>
-              ))}
-            </div>
-          </fieldset>
-          <label className="space-y-1">
-            <span className="label">Services</span>
-            <input name="services" defaultValue={prev?.services.join(", ")} placeholder="e.g. revenue management analytics" className="w-full" />
-          </label>
-          <label className="space-y-1">
-            <span className="label">Tools / IP to reuse</span>
-            <input name="assets" defaultValue={prev?.assets.join(", ")} placeholder="e.g. PipeKit" className="w-full" />
-          </label>
-          <label className="space-y-1">
-            <span className="label">Rates by role (one per line: role $rate)</span>
-            <textarea name="rates" rows={3} defaultValue={prev?.rates.map((r) => `${r.role} $${r.ratePerHourUsd}`).join("\n")} placeholder="Senior Data Engineer $72" className="w-full" />
-          </label>
-          <label className="space-y-1">
-            <span className="label">Who touches the data, and where</span>
-            <textarea name="dataHandling" rows={3} defaultValue={prev?.dataHandling} placeholder="e.g. Pune team, de-identified only" className="w-full" />
-          </label>
-          <label className="flex items-center gap-2">
-            <input type="checkbox" name="partnership" defaultChecked={prev?.partnership} /> This is a platform partnership (implementation / reseller / referral)
-          </label>
-          <label className="space-y-1 md:col-span-2">
-            <span className="label">Anything else you&apos;re promising? (also: anything agreed or shared in meetings?)</span>
-            <input name="freeText" defaultValue={prev?.freeText} className="w-full" />
-          </label>
-          <div className="md:col-span-2">
-            <button className="btn btn-primary">Check</button>
-            <span className="ml-3 text-xs text-muted">Only changed items are re-checked. Silence is never &quot;safe&quot;: anything unmatched says &quot;couldn&apos;t check&quot;.</span>
-          </div>
-        </form>
+        <SellerCheckForm
+          dealId={deal.id}
+          defaults={{ ...(prev ?? {}), client: prev?.client ?? deal.counterparty, regions: prev?.regions ?? (deal.clientCountry ? [deal.clientCountry] : []) }}
+        />
       </details>
     </div>
   );

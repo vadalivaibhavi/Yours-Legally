@@ -3,10 +3,8 @@ export type User = { id: string; name: string; role: "karandeep" | "seller"; tit
 
 export const USERS: User[] = [
   { id: "karandeep", name: "Karandeep", role: "karandeep", title: "CEO · reviewer & signer" },
-  { id: "bhavin", name: "Bhavin", role: "seller", title: "Founder · seller" },
-  { id: "dhaval", name: "Dhaval", role: "seller", title: "Founder · seller" },
-  { id: "jay", name: "Jay", role: "seller", title: "Sales executive" },
-  { id: "pranav", name: "Pranav", role: "seller", title: "CTO · prepares AtliQ paper" },
+  // One shared seller view: Bhavin, Dhaval and Jay all see the same thing (no per-seller split).
+  { id: "seller", name: "Seller", role: "seller", title: "Sales team" },
 ];
 
 export const USER_COOKIE = "yl_user";

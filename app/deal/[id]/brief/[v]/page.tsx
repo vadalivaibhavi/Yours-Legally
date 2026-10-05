@@ -2,6 +2,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { acceptAllMedium, addMissed, answerFollowUp, closeAlert, confirmFact, recheckDeal, recordDecision } from "@/app/deal/actions";
 import { FindingCard, SimilarDetails } from "@/components/FindingCard";
+import { TextInput } from "@/components/Fields";
+import { LIMITS } from "@/lib/limits";
 import { Chip, DueBadge, Quote, Section, VerdictBadge } from "@/components/ui";
 import { canViewBrief } from "@/lib/access";
 import { briefVersion, briefVersions, getDeal } from "@/lib/deals";
@@ -132,13 +134,13 @@ export default async function BriefPage(props: PageProps<"/deal/[id]/brief/[v]">
                 <form action={closeAlert} className="flex flex-wrap gap-2">
                   <input type="hidden" name="dealId" value={id} />
                   <input type="hidden" name="how" value="evidence" />
-                  <input name="note" placeholder="Evidence (file / reference)" required />
+                  <TextInput name="note" placeholder="Evidence (file / reference)" required max={LIMITS.evidence} className="w-64" />
                   <button className="btn">Resolved: attach evidence</button>
                 </form>
                 <form action={closeAlert} className="flex flex-wrap gap-2">
                   <input type="hidden" name="dealId" value={id} />
                   <input type="hidden" name="how" value="note" />
-                  <input name="note" placeholder="Your attested note" required className="min-w-64" />
+                  <TextInput name="note" placeholder="Your attested note" required max={LIMITS.note} className="w-80" />
                   <button className="btn">Resolved off the record: add note</button>
                 </form>
               </div>
@@ -432,8 +434,8 @@ export default async function BriefPage(props: PageProps<"/deal/[id]/brief/[v]">
               <form action={addMissed} className="mt-2 flex flex-wrap gap-2">
                 <input type="hidden" name="dealId" value={id} />
                 <input type="hidden" name="version" value={b.version} />
-                <input name="clauseRef" placeholder="Clause (e.g. §7.2)" className="w-32" />
-                <input name="note" placeholder="What did it miss?" required className="min-w-72 flex-1" />
+                <TextInput name="clauseRef" placeholder="Clause (e.g. §7.2)" max={LIMITS.clauseRef} className="w-40" />
+                <TextInput name="note" placeholder="What did it miss?" required max={LIMITS.note} className="min-w-72 flex-1" />
                 <button className="btn">Add</button>
               </form>
               {missed.map((m) => (
@@ -469,7 +471,7 @@ function FactRow({ fact, dealId, state }: { fact: { id: string; statement: strin
           <button name="status" value="not_true" className="btn">
             Not true
           </button>
-          <input name="edit" placeholder="Correct it…" className="w-56" />
+          <TextInput name="edit" placeholder="Correct it…" max={LIMITS.note} className="w-64" />
           <button name="status" value="edited" className="btn">
             Edit
           </button>

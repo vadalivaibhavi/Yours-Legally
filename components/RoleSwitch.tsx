@@ -15,7 +15,7 @@ export function RoleSwitch({ current }: { current: string }) {
       >
         {USERS.map((u) => (
           <option key={u.id} value={u.id} className="text-black">
-            {u.name} ({u.role === "karandeep" ? "Karandeep, CEO" : u.title})
+            {u.name} · {u.title}
           </option>
         ))}
       </select>

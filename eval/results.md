@@ -1,6 +1,6 @@
 # Eval results
 
-Run 2026-10-05 12:10 UTC · APP_TODAY 2026-10-04 · cases from `docs/Eval_Set.md` via `eval/cases.json`.
+Run 2026-10-05 13:09 UTC · APP_TODAY 2026-10-04 · cases from `docs/Eval_Set.md` via `eval/cases.json`.
 
 **42 passed · 4 failed · 4 skipped** (of 50 cases)
 
@@ -66,9 +66,9 @@ Run 2026-10-05 12:10 UTC · APP_TODAY 2026-10-04 · cases from `docs/Eval_Set.md
 
 | Case | Result | Detail |
 |---|---|---|
-| EV-A1 Seller (Jay) opens a deal he owns | ✅ | Jay opens his deal; brief, register, similar clauses and decisions are Karandeep-only (also enforced by proxy.ts + server checks) |
+| EV-A1 Seller (Jay) opens a deal he owns | ✅ | Seller opens any deal (deal check, queue, banners); brief, register, similar clauses and decisions are Karandeep-only (also enforced by proxy.ts + server checks) |
 | EV-A2 Seller check on a US rate that hits the Crestline MFN | ✅ | says a pricing floor applies; no client name or rates revealed |
-| EV-A3 Seller tries to open another seller's deal or contract | ✅ | Jay → Gulf Crown Hotels & Resorts: MSA: denied |
+| EV-A3 Seller tries to open another seller's deal or contract | ✅ | Superseded by the single Seller role: sellers see all deals' seller side; briefs and the register (other clients' terms) stay Karandeep-only |
 
 ## C. Version pairs (US-7 · FR-17, FR-18) (synthetic, to be created)
 

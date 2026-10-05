@@ -1,4 +1,6 @@
 import { registerAction } from "@/app/deal/actions";
+import { Popover, TextArea, TextInput } from "@/components/Fields";
+import { LIMITS } from "@/lib/limits";
 import type { RegisterEntry } from "@/lib/types";
 
 /** FR-2: Verify / Edit / Reject (~1 minute per entry, source clause shown alongside). */
@@ -15,18 +17,17 @@ export function RegisterActions({ entry: e }: { entry: RegisterEntry }) {
   return (
     <div className="flex flex-wrap items-start gap-2">
       {e.verified ? btn("unverify", "Unverify") : btn("verify", "Verify", true)}
-      <details className="relative">
-        <summary className="btn list-none !py-1 !text-xs">Edit</summary>
-        <form action={registerAction} className="card absolute right-0 z-10 mt-1 w-80 space-y-2 p-3 text-sm shadow-lg">
+      <Popover label="Edit" align="right" width="w-80" buttonClassName="btn !py-1 !text-xs">
+        <form action={registerAction} className="space-y-2 text-sm">
           <input type="hidden" name="id" value={e.id} />
           <input type="hidden" name="action" value="edit" />
           <label className="block">
             <span className="label">Title</span>
-            <input name="title" defaultValue={e.title} className="w-full" />
+            <TextInput name="title" defaultValue={e.title} max={LIMITS.name} required />
           </label>
           <label className="block">
             <span className="label">Summary</span>
-            <textarea name="summary" defaultValue={e.summary} rows={3} className="w-full" />
+            <TextArea name="summary" defaultValue={e.summary} rows={3} max={LIMITS.summary} required />
           </label>
           <label className="block">
             <span className="label">End date</span>
@@ -38,7 +39,7 @@ export function RegisterActions({ entry: e }: { entry: RegisterEntry }) {
           <p className="text-xs text-muted">Saving verifies the entry and flags open deals for re-check.</p>
           <button className="btn btn-primary w-full">Save &amp; verify</button>
         </form>
-      </details>
+      </Popover>
       {btn("reject", "Reject")}
     </div>
   );

@@ -165,22 +165,24 @@ async function main() {
   }
 
   // ---------------------------------------------------------------- B3. access control
-  const jay = USERS.find((u) => u.id === "jay")!;
+  // One shared Seller role (product decision, 5 Oct): sellers see every deal's seller side, never Karandeep's views.
+  const seller = USERS.find((u) => u.role === "seller")!;
   const k = USERS.find((u) => u.id === "karandeep")!;
   for (const c of cases.filter((c) => c.spec.kind === "access")) {
     if (c.id === "EV-A1") {
-      const own = deals.find((d) => d.owner === "Jay")!;
-      const ok = canViewDeal(jay, own) && !canViewBrief(jay) && !canViewRegister(jay) && !canViewSimilarClauses(jay) && !canDecide(jay) && canViewBrief(k) && canViewRegister(k);
-      record(c, ok, "Jay opens his deal; brief, register, similar clauses and decisions are Karandeep-only (also enforced by proxy.ts + server checks)");
+      const ok = deals.every((d) => canViewDeal(seller, d)) && !canViewBrief(seller) && !canViewRegister(seller) && !canViewSimilarClauses(seller) && !canDecide(seller) && canViewBrief(k) && canViewRegister(k);
+      record(c, ok, "Seller opens any deal (deal check, queue, banners); brief, register, similar clauses and decisions are Karandeep-only (also enforced by proxy.ts + server checks)");
     } else if (c.id === "EV-A2") {
       useMemoryState();
-      const chk = await runSellerCheck("lakeshore", "Jay", sellerInput({ client: "US retail client", sectors: ["retail"], regions: ["USA"], services: ["data engineering"], rates: [{ role: "Senior Data Engineer", ratePerHourUsd: 72 }] }));
+      const chk = await runSellerCheck("lakeshore", "Seller", sellerInput({ client: "US retail client", sectors: ["retail"], regions: ["USA"], services: ["data engineering"], rates: [{ role: "Senior Data Engineer", ratePerHourUsd: 72 }] }));
       const text = JSON.stringify(chk.items);
       const leak = ["Crestline", "$85", "85/hr", "85.00"].filter((w) => text.includes(w));
       record(c, chk.items.some((i) => i.status === "conflict") && !leak.length, leak.length ? `leaks ${leak.join(", ")}` : "says a pricing floor applies; no client name or rates revealed");
     } else {
-      const other = deals.find((d) => d.owner === "Bhavin")!;
-      record(c, !canViewDeal(jay, other), `Jay → ${other.name}: denied`);
+      // EV-A3 ("seller can't open another seller's deal") no longer applies: there is one shared seller role.
+      // What still must hold: no seller can reach another client's terms through Karandeep's views.
+      const ok = deals.every((d) => !canViewBrief(seller) && canViewDeal(seller, d)) && !canViewRegister(seller);
+      record(c, ok, "Superseded by the single Seller role: sellers see all deals' seller side; briefs and the register (other clients' terms) stay Karandeep-only");
     }
   }
 

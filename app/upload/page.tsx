@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { chooseDeal, uploadDocument } from "./actions";
+import { TextArea } from "@/components/Fields";
+import { LIMITS } from "@/lib/limits";
 import { visibleDeals } from "@/lib/access";
 import { allDeals, allDocuments } from "@/lib/deals";
 import { proposeLink } from "@/lib/linking";
@@ -50,12 +52,12 @@ export default async function UploadPage(props: PageProps<"/upload">) {
       <h1 className="font-serif text-2xl font-semibold">Upload a contract</h1>
       <form action={uploadDocument} className="card space-y-4 p-5 text-sm">
         <label className="block space-y-1">
-          <span className="label">Contract file (.md / .txt)</span>
+          <span className="label">Contract file (.md / .txt, up to 1 MB)</span>
           <input type="file" name="file" accept=".md,.txt,.markdown" className="w-full" />
         </label>
         <label className="block space-y-1">
           <span className="label">…or paste the text</span>
-          <textarea name="text" rows={6} className="w-full font-serif" placeholder="Paste the contract text" />
+          <TextArea name="text" rows={6} className="font-serif" placeholder="Paste the contract text" max={LIMITS.contract} />
         </label>
         <label className="block space-y-1">
           <span className="label">Deal</span>

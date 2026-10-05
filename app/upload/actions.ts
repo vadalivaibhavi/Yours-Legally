@@ -12,6 +12,7 @@ import { extractDocument } from "@/lib/review/extract";
 import { nextVersion, reviewDeal } from "@/lib/review/pipeline";
 import { currentUser } from "@/lib/session";
 import { mutate, readState } from "@/lib/store";
+import { LIMITS } from "@/lib/limits";
 import type { Deal, Document } from "@/lib/types";
 
 export async function uploadDocument(form: FormData) {
@@ -22,10 +23,12 @@ export async function uploadDocument(form: FormData) {
   if (file && typeof file === "object" && "text" in file && (file as File).size > 0) {
     name = (file as File).name;
     if (!/\.(md|txt|markdown)$/i.test(name)) throw new Error("The prototype reads text (.md / .txt) contracts; PDF/OCR intake is declared out of scope.");
+    if ((file as File).size > LIMITS.fileBytes) throw new Error(`That file is ${Math.round((file as File).size / 1024)} KB; the limit is ${LIMITS.fileBytes / 1_000_000} MB.`);
     text = await (file as File).text();
   }
   text = text.replace(/\r\n/g, "\n").trim();
   if (text.length < 200) throw new Error("That document is too short to review.");
+  if (text.length > LIMITS.contract) throw new Error(`That contract is ${text.length.toLocaleString()} characters; the limit is ${LIMITS.contract.toLocaleString()}.`);
 
   const x = await extractDocument({ id: "upload", file: name, kind: "uploaded", docType: "Other", title: name, counterparty: "", date: "", sideOfTable: "supplier", paper: "client", text, ocr: false, references: [] } as Document);
   if (!x.ok) throw new Error("Couldn't read the document: review manually. " + x.error.slice(0, 120));

@@ -1,0 +1,24 @@
+/**
+ * Character limits for every free-text input. Enforced twice: in the browser (maxLength + live counter,
+ * components/Fields.tsx) and on the server (field(), used by every server action), so a crafted request
+ * can't bypass them.
+ */
+export const LIMITS = {
+  name: 120, // client name, register title
+  clauseRef: 40, // "§7.2"
+  evidence: 200, // evidence reference for closing an alert
+  list: 300, // comma-separated regions / services / tools
+  freeText: 300, // seller's "anything else you're promising?"
+  note: 500, // notes, reasons, corrections
+  rates: 500, // rates by role, one per line
+  summary: 1000, // register summary
+  contract: 200_000, // pasted contract text
+  fileBytes: 1_000_000, // uploaded contract file
+} as const;
+
+/** Read a trimmed text field and reject it if it's over the limit. */
+export function field(form: FormData, key: string, max: number, label = key): string {
+  const v = String(form.get(key) ?? "").trim();
+  if (v.length > max) throw new Error(`${label} is too long (${v.length} characters; the limit is ${max}).`);
+  return v;
+}

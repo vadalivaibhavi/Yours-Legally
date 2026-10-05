@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-05T12:10:45.338Z",
+  "at": "2026-10-05T13:09:42.054Z",
   "results": [
     {
       "id": "EV-R1",
@@ -202,7 +202,7 @@
       "section": "B3. Access control (§8, §11)",
       "title": "Seller (Jay) opens a deal he owns",
       "pass": true,
-      "detail": "Jay opens his deal; brief, register, similar clauses and decisions are Karandeep-only (also enforced by proxy.ts + server checks)"
+      "detail": "Seller opens any deal (deal check, queue, banners); brief, register, similar clauses and decisions are Karandeep-only (also enforced by proxy.ts + server checks)"
     },
     {
       "id": "EV-A2",
@@ -216,7 +216,7 @@
       "section": "B3. Access control (§8, §11)",
       "title": "Seller tries to open another seller's deal or contract",
       "pass": true,
-      "detail": "Jay → Gulf Crown Hotels & Resorts: MSA: denied"
+      "detail": "Superseded by the single Seller role: sellers see all deals' seller side; briefs and the register (other clients' terms) stay Karandeep-only"
     },
     {
       "id": "EV-V1",
