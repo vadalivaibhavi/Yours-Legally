@@ -1,0 +1,339 @@
+{
+  "dealId": "finserve",
+  "version": 1,
+  "createdAt": "2026-10-05T04:15:24.514Z",
+  "trigger": "initial review",
+  "inputsHash": "0235f47423881db4bb8b9162c80173cc",
+  "documentIds": [
+    "finserve-nda"
+  ],
+  "registerVersion": "reg-2026-10-04-57+r0",
+  "playbookVersion": "pb-v1-2026-10-04",
+  "models": [
+    "gemini-flash-lite-latest"
+  ],
+  "promptVersion": "p1",
+  "route": "nda_fast_lane",
+  "verdict": "HOLD",
+  "headline": "HOLD: 2 missing inputs",
+  "nextAction": "Sign when ready.",
+  "findings": [],
+  "fine": [
+    "Correct AtliQ entity: Pvt Ltd for a India counterparty",
+    "Parties = invoicing entity: Pvt Ltd throughout",
+    "Governing law matches entity: laws of India (Pvt Ltd → Indian law)"
+  ],
+  "notSeen": [
+    "No meeting notes attached to this deal.",
+    "Register built from 17 signed documents. Contracts referenced elsewhere but never collected (e.g. ShopSwift SOW, PixelCraft vendor agreement, intercompany services agreement) can't be checked.",
+    "Conflict check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more infor)",
+    "NDA check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more infor)"
+  ],
+  "documents": [
+    {
+      "docId": "finserve-nda",
+      "title": "FinServe Capital \"mutual\" NDA (draft)",
+      "docType": "NDA",
+      "paper": "client",
+      "route": "nda_fast_lane",
+      "facts": [
+        {
+          "field": "docType",
+          "label": "Document type",
+          "value": "NDA"
+        },
+        {
+          "field": "parties",
+          "label": "Counterparty",
+          "value": "FinServe Capital Private Limited (India)"
+        },
+        {
+          "field": "entity",
+          "label": "AtliQ entity (parties)",
+          "value": "Pvt Ltd",
+          "quote": "ATLIQ TECHNOLOGIES PRIVATE LIMITED**, a company incorporated under the Companies Act, 2013 (CIN U72900MH2019PTC321456; GSTIN 27AAKCA4821F1Z3"
+        },
+        {
+          "field": "invoicing",
+          "label": "AtliQ entity (invoicing)",
+          "value": "Pvt Ltd",
+          "quote": "ATLIQ TECHNOLOGIES PRIVATE LIMITED**, a company incorporated under the Companies Act, 2013 (CIN U72900MH2019PTC321456; GSTIN 27AAKCA4821F1Z3"
+        },
+        {
+          "field": "law",
+          "label": "Governing law",
+          "value": "laws of India",
+          "clauseRef": "11.4",
+          "quote": "This Agreement shall be governed by the laws of India"
+        },
+        {
+          "field": "forum",
+          "label": "Forum",
+          "value": "courts at Mumbai",
+          "clauseRef": "11.4",
+          "quote": "courts at Mumbai shall have exclusive jurisdiction"
+        },
+        {
+          "field": "payment",
+          "label": "Payment",
+          "value": "Not stated"
+        },
+        {
+          "field": "ld",
+          "label": "Delay penalties",
+          "value": "None"
+        },
+        {
+          "field": "liability",
+          "label": "Liability",
+          "value": "null"
+        },
+        {
+          "field": "insurance",
+          "label": "Insurance required",
+          "value": "None"
+        },
+        {
+          "field": "annexes",
+          "label": "Annexes referenced",
+          "value": "None"
+        },
+        {
+          "field": "scope",
+          "label": "Sectors · regions",
+          "value": "bfsi · India"
+        },
+        {
+          "field": "data",
+          "label": "Data handled",
+          "value": "personal_data"
+        }
+      ],
+      "gate": [
+        {
+          "rule": "entity",
+          "label": "Correct AtliQ entity",
+          "pass": true,
+          "detail": "Pvt Ltd for a India counterparty",
+          "citation": {
+            "docId": "finserve-nda",
+            "docTitle": "FinServe Capital \"mutual\" NDA (draft)",
+            "clauseRef": "",
+            "quote": "ATLIQ TECHNOLOGIES PRIVATE LIMITED**, a company incorporated under the Companies Act, 2013 (CIN U72900MH2019PTC321456; GSTIN 27AAKCA4821F1Z3",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "invoicing_entity",
+          "label": "Parties = invoicing entity",
+          "pass": true,
+          "detail": "Pvt Ltd throughout",
+          "citation": {
+            "docId": "finserve-nda",
+            "docTitle": "FinServe Capital \"mutual\" NDA (draft)",
+            "clauseRef": "",
+            "quote": "ATLIQ TECHNOLOGIES PRIVATE LIMITED**, a company incorporated under the Companies Act, 2013 (CIN U72900MH2019PTC321456; GSTIN 27AAKCA4821F1Z3",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "governing_law",
+          "label": "Governing law matches entity",
+          "pass": true,
+          "detail": "laws of India (Pvt Ltd → Indian law)",
+          "citation": {
+            "docId": "finserve-nda",
+            "docTitle": "FinServe Capital \"mutual\" NDA (draft)",
+            "clauseRef": "11.4",
+            "quote": "This Agreement shall be governed by the laws of India",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "payment",
+          "label": "Payment ≤ 45 days",
+          "pass": null,
+          "detail": "Not stated (may sit in the master agreement)"
+        },
+        {
+          "rule": "ld_cap",
+          "label": "Delay penalties capped",
+          "pass": null,
+          "detail": "No delay penalties"
+        },
+        {
+          "rule": "liability_cap",
+          "label": "Liability capped",
+          "pass": null,
+          "detail": "Not stated"
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "bundle": [],
+  "notesFacts": [
+    {
+      "id": "finserve-fact-1",
+      "statement": "Mutual NDA needed before data walkthrough on October 1",
+      "category": "deadline",
+      "noteId": "tracker",
+      "noteTitle": "Tracker notes",
+      "quote": "C-036 (Mutual NDA): Arjun: 'our standard mutual NDA' - needed before 1 Oct data walkthrough. K: will sign tonight",
+      "complianceEvent": false,
+      "whyItMatters": "A signed NDA must be in place prior to conducting the data walkthrough to protect proprietary information."
+    }
+  ],
+  "complianceCandidate": null,
+  "similar": [
+    {
+      "clauseType": "confidentiality",
+      "docId": "finserve-nda",
+      "clauseRef": "§1",
+      "quote": "1.1 \"**Affiliate**\" means any entity that controls, is controlled by or is under common control with a Party.\n\n1.2 \"**Confidential Information**\" means all information, in any form, disclosed or made available by or on behalf of the Company to the Recipient or its Representatives, whether before or after the Effective Date, including customer and portfolio data, credit models, product plans, pricing, technology architecture, business processes, and all analyses, compilations, notes or other documents prepared by the Recipient that contain or reflect such information.\n\n1.3 \"**Representatives**\" means a Party's directors, officers, employees and professional advisers.\n\n1.4 \"**Residuals**\" mean",
+      "hits": [
+        {
+          "docId": "alnoor-nda",
+          "counterparty": "Al Noor Hospitality Group",
+          "date": "2025-01-22",
+          "clauseNo": "1.2",
+          "heading": "DEFINITIONS",
+          "label": "standard",
+          "labelNote": "Genuinely mutual NDA: the template for what mutual looks like",
+          "score": 0.898,
+          "text": "1.2 \"**Representatives**\" means a Party's directors, officers, employees, professional advisers and subcontractors who need to know the Confidential Information for the Purpose.",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "meridian-nda",
+          "counterparty": "Meridian Healthcare",
+          "date": "2026-07-16",
+          "clauseNo": "2",
+          "heading": "CONFIDENTIAL INFORMATION",
+          "label": "accident",
+          "labelNote": "One-way NDA signed within the hour; contradicts \"we only sign mutual\"",
+          "score": 0.857,
+          "text": "2.1 \"**Confidential Information**\" means all information disclosed by or on behalf of Meridian to the Recipient, whether in writing, orally, electronically or by inspection, including patient and operational data, hospital performance metrics, financial information, vendor arrangements, technology systems, strategies and the existence and terms of the discussions between the parties.\n\n2.2 Confidential Information does not include information that the Recipient can show by written records:\n   (a) is or becomes public through no fault of the Recipient;\n   (b) was known to the Recipient before disclosure without restriction;\n   (c) is received from a third party lawfully and without restriction; or\n   (d) is independently developed by the Recipient without use of the Confidential Information.",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "acme-msa",
+          "counterparty": "Acme Retail Group",
+          "date": "2025-03-10",
+          "clauseNo": "8",
+          "heading": "CONFIDENTIALITY",
+          "label": "untagged",
+          "score": 0.854,
+          "text": "8.1 Each Party shall maintain the other Party's Confidential Information in strict confidence and shall not disclose it to any third party except to its employees and professional advisers on a need-to-know basis.\n\n8.2 These obligations shall survive for three (3) years after termination of this Agreement.",
+          "differs": "",
+          "alsoIn": [
+            "Trustline NBFC (2026-08)",
+            "Sunrise Foods (2025-04)"
+          ]
+        }
+      ]
+    },
+    {
+      "clauseType": "data_protection",
+      "docId": "finserve-nda",
+      "clauseRef": "§6",
+      "quote": "6.1 The Recipient acknowledges that the Company is regulated by the Reserve Bank of India and the Securities and Exchange Board of India, and agrees to provide such co-operation and access to records as the Company or its regulators may reasonably require in connection with the Confidential Information.\n\n6.2 The Recipient shall comply with the Digital Personal Data Protection Act, 2023 in respect of any personal data forming part of the Confidential Information, and shall notify the Company of any personal data breach within six (6) hours.",
+      "hits": [
+        {
+          "docId": "trustline-msa",
+          "counterparty": "Trustline NBFC",
+          "date": "2026-08-15",
+          "clauseNo": "13",
+          "heading": "DATA PROTECTION AND AUDIT",
+          "label": "untagged",
+          "score": 0.902,
+          "text": "13.1 The Service Provider shall comply with the Digital Personal Data Protection Act, 2023, the Information Technology Act, 2000 and applicable RBI directions in processing Company Data, and shall store Company Data only in India.\n\n13.2 The Service Provider shall report any security incident to the Company within six (6) hours of detection.\n\n13.3 The Company, its auditors and the Reserve Bank of India shall have the right to inspect and audit the Service Provider's records and facilities relating to the Services.",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "paytrack-msa",
+          "counterparty": "PayTrack Technologies",
+          "date": "2025-01-22",
+          "clauseNo": "12",
+          "heading": "DATA PROTECTION",
+          "label": "untagged",
+          "score": 0.902,
+          "text": "12.1 AtliQ shall process personal data comprised in Client Data only on PayTrack's documented instructions and in compliance with the Digital Personal Data Protection Act, 2023, the Information Technology Act, 2000 and applicable RBI directions.\n\n12.2 AtliQ shall notify PayTrack of any data breach within twenty-four (24) hours of becoming aware of it, and shall cooperate with PayTrack in any reporting to CERT-In or the RBI.\n\n12.3 AtliQ shall permit PayTrack and its regulators to audit its compliance with this Clause 12 on reasonable notice.",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "alnoor-nda",
+          "counterparty": "Al Noor Hospitality Group",
+          "date": "2025-01-22",
+          "clauseNo": "4",
+          "heading": "PERSONAL DATA",
+          "label": "untagged",
+          "score": 0.873,
+          "text": "4.1 Where Confidential Information includes personal data of guests or employees, the Receiving Party shall process it only as necessary for the Purpose and in accordance with applicable data protection law, including the UAE Federal Decree-Law No. 45 of 2021 and the Indian Digital Personal Data Protection Act, 2023, as applicable.",
+          "differs": "",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "non_compete",
+      "docId": "finserve-nda",
+      "clauseRef": "§8",
+      "quote": "8.1 In order to protect the Confidential Information, the Recipient shall not, during the term of this Agreement and for a period of twelve (12) months after its termination, provide services similar to those contemplated by the Proposed Transaction to any Competitor.\n\n8.2 The Recipient shall not, during the term of this Agreement and for a period of twenty-four (24) months after its termination, directly or indirectly solicit, hire or engage any employee or consultant of the Company.",
+      "hits": [
+        {
+          "docId": "alnoor-msa",
+          "counterparty": "Al Noor Hospitality Group",
+          "date": "2025-03-15",
+          "clauseNo": "12.1–5",
+          "heading": "RESTRICTIVE COVENANTS",
+          "label": "untagged",
+          "score": 0.899,
+          "text": "12.1 In consideration of the Client disclosing to the Supplier its Confidential Information, including its revenue strategies, pricing models and Guest Data, the Supplier undertakes that neither it nor any of its Affiliates shall, during the Restricted Period, directly or indirectly, provide data analytics, artificial intelligence or revenue-management services to any Hospitality Business in the GCC.\n12.2 For the purposes of Clause 12.1, services are provided \"in the GCC\" if the Hospitality Business receiving them is headquartered in, or the services relate to properties or operations located in, any state of the GCC, irrespective of where the services are performed.\n12.3 The Supplier shall procure that each of its Affiliates complies with this Clause 12 as if it were a party to this Agreement, and any breach by an Affiliate shall be deemed a breach by the Supplier.\n12.4 The Client may, in its sole discretion, waive the restriction in Clause 12.1 in respect of a specific engagement by written consent signed by an authorised signatory of the Client. Any such waiver shall be limited to its express terms.\n12.5 During the Term and for twelve (12) months thereafter, neither Party shall solicit for employment any employee of the other Party who was directly involved in the Services, save through general advertisements not targeted at such employees.",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "orbit-msa",
+          "counterparty": "Orbit Travels Pvt Ltd",
+          "date": "2022-07-01",
+          "clauseNo": "6",
+          "heading": "RESTRICTIVE C0VENANT",
+          "label": "untagged",
+          "score": 0.877,
+          "text": "6.1 In consideration of the access provided to the Client's business processes and supplier\narrangements, the Service Provider agrees that during the term of this Agreement and for a\nperiod of twelve (l2) months after its expiry or termination, it shall not develop, license or\nprovide travel-booking software to any online travel agency operating in India.\n6.2 Nothing in Clause 6.1 shall restrict the Service Provider from providing services to hotels,\nairlines or other businesses that are not online travel agencies, or from providing services\nunrelated to travel-booking software.",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "cloudspan-spa",
+          "counterparty": "CloudSpan Technologies",
+          "date": "2025-09-01",
+          "clauseNo": "7",
+          "heading": "EXCLUSIVITY",
+          "label": "untagged",
+          "score": 0.822,
+          "text": "7.1 In consideration of the Referral Fees, market development funds and other benefits under this Agreement, during the Term Partner and its Affiliates shall not act as an implementation, reseller or referral partner for any Competing Platform in India or the GCC.\n\n7.2 \"**Competing Platform**\" means any cloud data-warehouse, lakehouse or unified analytics platform offered as a service.\n\n7.3 For clarity, Clause 7.1 does not restrict Partner or its Affiliates from (a) providing services outside India and the GCC; or (b) providing services to a customer that has independently selected a platform, provided Partner does not hold a partner appointment with, or receive any fee or benefit from, the provider of that platform.\n\n7.4 In this Clause 7, \"GCC\" has the meaning given to the member states listed in the definition of Territory.",
+          "differs": "",
+          "alsoIn": []
+        }
+      ]
+    }
+  ],
+  "counselPack": null,
+  "errors": [
+    "Conflict check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more infor)",
+    "NDA check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more infor)"
+  ],
+  "usage": {
+    "calls": 0,
+    "cachedCalls": 2,
+    "inputTokens": 0,
+    "outputTokens": 0,
+    "ms": 19969
+  }
+}

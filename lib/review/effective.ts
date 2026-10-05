@@ -35,6 +35,8 @@ export function effectiveBrief(brief: Brief, prev: Brief | null): EffectiveBrief
   // Note facts: unconfirmed compliance events are a missing input; confirmed ones raise the alert.
   const waitingFor: { item: string; owner: string }[] = [];
   for (const f of findings) if (f.missingItem) waitingFor.push(f.missingItem);
+  // PRD §8: a failed check never returns "clean". Each failed step is an open item for Karandeep.
+  for (const e of brief.errors) waitingFor.push({ item: `Review manually: ${e.split(" (")[0]}`, owner: "Karandeep" });
   let complianceAlert: EffectiveBrief["complianceAlert"] = null;
   const cand = brief.complianceCandidate;
   if (cand) {

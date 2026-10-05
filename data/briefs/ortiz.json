@@ -1,0 +1,754 @@
+{
+  "dealId": "ortiz",
+  "version": 1,
+  "createdAt": "2026-10-05T04:15:35.365Z",
+  "trigger": "initial review",
+  "inputsHash": "847a5b8d100dad8c7a6cee90892510d7",
+  "documentIds": [
+    "ortiz-ica",
+    "ortiz-nda"
+  ],
+  "registerVersion": "reg-2026-10-04-57+r0",
+  "playbookVersion": "pb-v1-2026-10-04",
+  "models": [
+    "gemini-flash-lite-latest"
+  ],
+  "promptVersion": "p1",
+  "route": "full_review",
+  "verdict": "HOLD",
+  "headline": "HOLD: 3 missing inputs, 2 must-fix items",
+  "nextAction": "Karandeep: From deal notes (please confirm): Kevin Brooks sent a sample extract containing names, DOBs, and diagnosis codes on 12 Sep, which Pranav forwarded to Pune engineers Sneha and Vikram for profiling before a BAA was signed.",
+  "findings": [
+    {
+      "key": "notes:data_movement",
+      "category": "notes",
+      "topic": "data_movement",
+      "title": "From deal notes (please confirm): Kevin Brooks sent a sample extract containing names, DOBs, and diagnosis codes on 12 Sep, which Pranav forwarded to Pune engineers Sneha and Vikram for profiling before a BAA was signed.",
+      "impact": "Regulated patient data was accessed and moved offshore prior to the execution of the BAA.",
+      "severity": "high",
+      "confidence": "medium",
+      "needsJudgment": false,
+      "owner": "Karandeep",
+      "resolution": "confirm",
+      "citations": [
+        {
+          "docId": "note-2026-09-27",
+          "docTitle": "Harrington huddle",
+          "clauseRef": "note",
+          "quote": "It's real data I think — names, DOBs, some diagnosis codes",
+          "role": "note"
+        }
+      ]
+    },
+    {
+      "key": "dependency:harrington",
+      "category": "dependency",
+      "topic": "dependency",
+      "title": "Depends on Harrington Health: MSA + BAA, which is not signed (latest verdict HOLD)",
+      "impact": "Sending this commits AtliQ to a vendor/contractor before the client contract it serves is resolved. HOLD: 4 missing documents, 1 insurance gap, and 7 critical redlines pending resolution.",
+      "severity": "high",
+      "confidence": "high",
+      "needsJudgment": false,
+      "owner": "Karandeep",
+      "resolution": "business_fix",
+      "citations": []
+    },
+    {
+      "key": "playbook:liability",
+      "category": "playbook",
+      "topic": "liability",
+      "title": "Liability uncapped for Section 7",
+      "impact": "The general cap is fine, but Section 7 sits outside it: unlimited exposure where AtliQ handles the client's data.",
+      "severity": "medium",
+      "confidence": "medium",
+      "needsJudgment": false,
+      "owner": "Dhaval (fix before sending)",
+      "resolution": "fix_before_sending",
+      "docId": "ortiz-ica",
+      "citations": [
+        {
+          "docId": "ortiz-ica",
+          "docTitle": "Daniel Ortiz contractor agreement (AtliQ draft)",
+          "clauseRef": "9.2",
+          "quote": "Each Party's aggregate liability under this Agreement shall not exceed the total fees paid or payable to the Contractor under this Agreement in the twelve (12) months preceding the claim, except for breach of Section 7 or a Party's fraud or willful misconduct",
+          "role": "incoming"
+        }
+      ],
+      "precedents": [
+        {
+          "docId": "ref-negotiation-notes",
+          "counterparty": "Kessler Mobility",
+          "clauseRef": "negotiation notes",
+          "label": "standard",
+          "note": "Walked away from a €120k deal over unlimited liability (Jan 2026)"
+        },
+        {
+          "docId": "sunrise-msa",
+          "counterparty": "Sunrise Foods",
+          "clauseRef": "§13",
+          "label": "standard",
+          "note": "AtliQ-friendly master: capped liability"
+        },
+        {
+          "docId": "carebridge-baa",
+          "counterparty": "CareBridge Clinics",
+          "clauseRef": "§9",
+          "label": "standard",
+          "note": "Counsel-reviewed: BAA liability capped at 2× trailing-12-month fees"
+        },
+        {
+          "docId": "brightwater-msa",
+          "counterparty": "Brightwater Insurance",
+          "clauseRef": "§15",
+          "label": "accident",
+          "note": "LDs carved out of the 150% cap"
+        }
+      ]
+    }
+  ],
+  "fine": [
+    "Correct AtliQ entity: Inc for a USA end client",
+    "Parties = invoicing entity: Inc throughout",
+    "Governing law matches entity: laws of the State of Texas (Inc → US law)",
+    "Payment ≤ 45 days: 30 days",
+    "Correct AtliQ entity: Inc for a USA counterparty",
+    "Governing law matches entity: State of Texas (Inc → US law)"
+  ],
+  "notSeen": [
+    "Register built from 17 signed documents. Contracts referenced elsewhere but never collected (e.g. ShopSwift SOW, PixelCraft vendor agreement, intercompany services agreement) can't be checked.",
+    "NDA check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more infor)",
+    "Playbook check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more infor)"
+  ],
+  "documents": [
+    {
+      "docId": "ortiz-ica",
+      "title": "Daniel Ortiz contractor agreement (AtliQ draft)",
+      "docType": "ICA",
+      "paper": "atliq",
+      "route": "full_review",
+      "facts": [
+        {
+          "field": "docType",
+          "label": "Document type",
+          "value": "ICA"
+        },
+        {
+          "field": "parties",
+          "label": "Counterparty",
+          "value": "Daniel Ortiz (USA)"
+        },
+        {
+          "field": "entity",
+          "label": "AtliQ entity (parties)",
+          "value": "Inc",
+          "clauseRef": "Preamble",
+          "quote": "AtliQ Inc**, a Delaware corporation (EIN 88-4410273) with its principal place of business at 101 College Road East, Suite 210, Princeton, New Jersey 08540"
+        },
+        {
+          "field": "invoicing",
+          "label": "AtliQ entity (invoicing)",
+          "value": "Inc",
+          "clauseRef": "Preamble",
+          "quote": "AtliQ Inc**, a Delaware corporation (EIN 88-4410273) with its principal place of business at 101 College Road East, Suite 210, Princeton, New Jersey 08540"
+        },
+        {
+          "field": "law",
+          "label": "Governing law",
+          "value": "laws of the State of Texas",
+          "clauseRef": "10.1",
+          "quote": "This Agreement is governed by the laws of the State of Texas, without regard to its conflict of laws principles"
+        },
+        {
+          "field": "forum",
+          "label": "Forum",
+          "value": "state and federal courts located in Travis County, Texas",
+          "clauseRef": "10.1",
+          "quote": "The Parties submit to the exclusive jurisdiction of the state and federal courts located in Travis County, Texas"
+        },
+        {
+          "field": "payment",
+          "label": "Payment",
+          "value": "30 days",
+          "clauseRef": "3.2",
+          "quote": "The Company shall pay each undisputed invoice within thirty (30) days of receipt, by ACH transfer in U.S. Dollars"
+        },
+        {
+          "field": "ld",
+          "label": "Delay penalties",
+          "value": "None"
+        },
+        {
+          "field": "liability",
+          "label": "Liability",
+          "value": "total fees paid or payable to the Contractor under this Agreement in the twelve (12) months preceding the claim · uncapped for breach of Section 7, fraud, willful misconduct",
+          "clauseRef": "9.2",
+          "quote": "Each Party's aggregate liability under this Agreement shall not exceed the total fees paid or payable to the Contractor under this Agreement in the twelve (12) months preceding the claim, except for breach of Section 7 or a Party's fraud or willful misconduct"
+        },
+        {
+          "field": "insurance",
+          "label": "Insurance required",
+          "value": "None"
+        },
+        {
+          "field": "annexes",
+          "label": "Annexes referenced",
+          "value": "None"
+        },
+        {
+          "field": "scope",
+          "label": "Sectors · regions",
+          "value": "healthcare · USA"
+        },
+        {
+          "field": "data",
+          "label": "Data handled",
+          "value": "personal_data"
+        },
+        {
+          "field": "rates",
+          "label": "Rates",
+          "value": "Contractor $70/hr"
+        }
+      ],
+      "gate": [
+        {
+          "rule": "entity",
+          "label": "Correct AtliQ entity",
+          "pass": true,
+          "detail": "Inc for a USA end client",
+          "citation": {
+            "docId": "ortiz-ica",
+            "docTitle": "Daniel Ortiz contractor agreement (AtliQ draft)",
+            "clauseRef": "Preamble",
+            "quote": "AtliQ Inc**, a Delaware corporation (EIN 88-4410273) with its principal place of business at 101 College Road East, Suite 210, Princeton, New Jersey 08540",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "invoicing_entity",
+          "label": "Parties = invoicing entity",
+          "pass": true,
+          "detail": "Inc throughout",
+          "citation": {
+            "docId": "ortiz-ica",
+            "docTitle": "Daniel Ortiz contractor agreement (AtliQ draft)",
+            "clauseRef": "Preamble",
+            "quote": "AtliQ Inc**, a Delaware corporation (EIN 88-4410273) with its principal place of business at 101 College Road East, Suite 210, Princeton, New Jersey 08540",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "governing_law",
+          "label": "Governing law matches entity",
+          "pass": true,
+          "detail": "laws of the State of Texas (Inc → US law)",
+          "citation": {
+            "docId": "ortiz-ica",
+            "docTitle": "Daniel Ortiz contractor agreement (AtliQ draft)",
+            "clauseRef": "10.1",
+            "quote": "This Agreement is governed by the laws of the State of Texas, without regard to its conflict of laws principles",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "payment",
+          "label": "Payment ≤ 45 days",
+          "pass": true,
+          "detail": "30 days",
+          "citation": {
+            "docId": "ortiz-ica",
+            "docTitle": "Daniel Ortiz contractor agreement (AtliQ draft)",
+            "clauseRef": "3.2",
+            "quote": "The Company shall pay each undisputed invoice within thirty (30) days of receipt, by ACH transfer in U.S. Dollars",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "ld_cap",
+          "label": "Delay penalties capped",
+          "pass": null,
+          "detail": "No delay penalties"
+        },
+        {
+          "rule": "liability_cap",
+          "label": "Liability capped",
+          "pass": false,
+          "detail": "Capped (total fees paid or payable to the Contractor under this Agreement in the twelve (12) months preceding the claim) but uncapped for: Section 7",
+          "citation": {
+            "docId": "ortiz-ica",
+            "docTitle": "Daniel Ortiz contractor agreement (AtliQ draft)",
+            "clauseRef": "9.2",
+            "quote": "Each Party's aggregate liability under this Agreement shall not exceed the total fees paid or payable to the Contractor under this Agreement in the twelve (12) months preceding the claim, except for breach of Section 7 or a Party's fraud or willful misconduct",
+            "role": "incoming"
+          }
+        }
+      ],
+      "errors": []
+    },
+    {
+      "docId": "ortiz-nda",
+      "title": "Daniel Ortiz mutual NDA (AtliQ draft)",
+      "docType": "NDA",
+      "paper": "atliq",
+      "route": "nda_fast_lane",
+      "facts": [
+        {
+          "field": "docType",
+          "label": "Document type",
+          "value": "NDA"
+        },
+        {
+          "field": "parties",
+          "label": "Counterparty",
+          "value": "Daniel Ortiz (USA)"
+        },
+        {
+          "field": "entity",
+          "label": "AtliQ entity (parties)",
+          "value": "Inc",
+          "quote": "AtliQ Inc**, a Delaware corporation"
+        },
+        {
+          "field": "invoicing",
+          "label": "AtliQ entity (invoicing)",
+          "value": "Not named separately"
+        },
+        {
+          "field": "law",
+          "label": "Governing law",
+          "value": "State of Texas",
+          "clauseRef": "8.1",
+          "quote": "This Agreement is governed by the laws of the State of Texas"
+        },
+        {
+          "field": "forum",
+          "label": "Forum",
+          "value": "state and federal courts located in Travis County, Texas",
+          "clauseRef": "8.1",
+          "quote": "The Parties submit to the jurisdiction of the state and federal courts located in Travis County, Texas"
+        },
+        {
+          "field": "payment",
+          "label": "Payment",
+          "value": "Not stated"
+        },
+        {
+          "field": "ld",
+          "label": "Delay penalties",
+          "value": "None"
+        },
+        {
+          "field": "liability",
+          "label": "Liability",
+          "value": "null"
+        },
+        {
+          "field": "insurance",
+          "label": "Insurance required",
+          "value": "None"
+        },
+        {
+          "field": "annexes",
+          "label": "Annexes referenced",
+          "value": "None"
+        },
+        {
+          "field": "scope",
+          "label": "Sectors · regions",
+          "value": " · USA"
+        },
+        {
+          "field": "data",
+          "label": "Data handled",
+          "value": "none"
+        }
+      ],
+      "gate": [
+        {
+          "rule": "entity",
+          "label": "Correct AtliQ entity",
+          "pass": true,
+          "detail": "Inc for a USA counterparty",
+          "citation": {
+            "docId": "ortiz-nda",
+            "docTitle": "Daniel Ortiz mutual NDA (AtliQ draft)",
+            "clauseRef": "",
+            "quote": "AtliQ Inc**, a Delaware corporation",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "invoicing_entity",
+          "label": "Parties = invoicing entity",
+          "pass": null,
+          "detail": "No separate invoicing entity named"
+        },
+        {
+          "rule": "governing_law",
+          "label": "Governing law matches entity",
+          "pass": true,
+          "detail": "State of Texas (Inc → US law)",
+          "citation": {
+            "docId": "ortiz-nda",
+            "docTitle": "Daniel Ortiz mutual NDA (AtliQ draft)",
+            "clauseRef": "8.1",
+            "quote": "This Agreement is governed by the laws of the State of Texas",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "payment",
+          "label": "Payment ≤ 45 days",
+          "pass": null,
+          "detail": "Not stated (may sit in the master agreement)"
+        },
+        {
+          "rule": "ld_cap",
+          "label": "Delay penalties capped",
+          "pass": null,
+          "detail": "No delay penalties"
+        },
+        {
+          "rule": "liability_cap",
+          "label": "Liability capped",
+          "pass": null,
+          "detail": "Not stated"
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "bundle": [],
+  "notesFacts": [
+    {
+      "id": "ortiz-fact-1",
+      "statement": "Kevin Brooks sent a sample extract containing names, DOBs, and diagnosis codes on 12 Sep, which Pranav forwarded to Pune engineers Sneha and Vikram for profiling before a BAA was signed.",
+      "category": "data_movement",
+      "noteId": "note-2026-09-27",
+      "noteTitle": "Harrington huddle",
+      "quote": "It's real data I think — names, DOBs, some diagnosis codes",
+      "complianceEvent": true,
+      "whyItMatters": "Regulated patient data was accessed and moved offshore prior to the execution of the BAA."
+    },
+    {
+      "id": "ortiz-fact-2",
+      "statement": "Rebecca needs the MSA and BAA signed by 1 Oct.",
+      "category": "deadline",
+      "noteId": "note-2026-09-27",
+      "noteTitle": "Harrington huddle",
+      "quote": "Rebecca needs MSA + BAA by 1 Oct",
+      "complianceEvent": false,
+      "whyItMatters": "Establishes a strict contract execution deadline."
+    }
+  ],
+  "complianceCandidate": {
+    "title": "Kevin Brooks sent a sample extract containing names, DOBs, and diagnosis codes on 12 Sep, which Pranav forwarded to Pune engineers Sneha and Vikram for profiling before a BAA was signed.",
+    "detail": "Regulated patient data was accessed and moved offshore prior to the execution of the BAA.",
+    "owner": "Karandeep, with a named compliance owner (Pranav, CTO)",
+    "factIds": [
+      "ortiz-fact-1"
+    ],
+    "citations": [
+      {
+        "docId": "note-2026-09-27",
+        "docTitle": "Harrington huddle",
+        "clauseRef": "note",
+        "quote": "It's real data I think — names, DOBs, some diagnosis codes",
+        "role": "note"
+      }
+    ]
+  },
+  "similar": [
+    {
+      "clauseType": "payment",
+      "docId": "ortiz-ica",
+      "clauseRef": "§3",
+      "quote": "3.1 The Company shall pay the Contractor at the hourly rate stated in the Engagement Schedule.\n3.2 The Contractor shall submit a monthly invoice with a summary of hours worked. The Company shall pay each undisputed invoice within thirty (30) days of receipt, by ACH transfer in U.S. Dollars.\n3.3 If the Company disputes any portion of an invoice in good faith, it shall notify the Contractor within ten (10) days of receipt and pay the undisputed portion on time.\n3.4 Pre-approved, reasonable out-of-pocket expenses shall be reimbursed at cost against receipts.",
+      "hits": [
+        {
+          "docId": "rohan-ica",
+          "counterparty": "Rohan Iyer",
+          "date": "2025-04-28",
+          "clauseNo": "3",
+          "heading": "FEES AND PAYMENT",
+          "label": "standard",
+          "labelNote": "Fair freelancer terms: 30-day pay, mutual cap, mutual 15-day exit",
+          "score": 0.935,
+          "text": "3.1 AtliQ shall pay the Contractor the fees set out in the Engagement Schedule.\n\n3.2 The Contractor shall submit a monthly invoice, supported by a timesheet approved by the AtliQ project lead. AtliQ shall pay each undisputed invoice within thirty (30) days of receipt.\n\n3.3 AtliQ shall deduct tax at source under the Income Tax Act, 1961 as applicable and provide TDS certificates. The Contractor is responsible for his own GST registration (if required) and all other taxes.\n\n3.4 AtliQ shall reimburse reasonable pre-approved travel expenses incurred for client visits.",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "orbit-msa",
+          "counterparty": "Orbit Travels Pvt Ltd",
+          "date": "2022-07-01",
+          "clauseNo": "2",
+          "heading": "FEES AND PAYMENT",
+          "label": "untagged",
+          "score": 0.898,
+          "text": "2.1 The Client shall pay the fees set out in each SOW. Invoices shall be raised monthly and paid\nwithin thirty (30) days of receipt. Fees are exclusive of GST.\n2.2 Delayed payment shall carry interest @ l2% per annum.",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "crestline-msa",
+          "counterparty": "Crestline Retail Inc",
+          "date": "2024-08-01",
+          "clauseNo": "5",
+          "heading": "TIMEKEEPING AND INVOICING",
+          "label": "untagged",
+          "score": 0.89,
+          "text": "5.1 Supplier Personnel shall record time in Crestline's designated timekeeping system, and time shall be approved weekly by the Crestline Work Order manager.\n\n5.2 Supplier shall invoice monthly in arrears for approved hours at the applicable Rate Card rates.\n\n5.3 Crestline shall pay undisputed invoices within thirty (30) days of receipt.\n\n5.4 Travel expenses are reimbursable only if pre-approved in writing and incurred in accordance with Crestline's travel policy.",
+          "differs": "",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "ip",
+      "docId": "ortiz-ica",
+      "clauseRef": "§6",
+      "quote": "6.1 All work product, code, scripts, data pipelines, documentation and other materials created by the Contractor in performing the Services (the \"**Work Product**\") are works made for hire for the Company to the extent permitted by law. To the extent any Work Product is not a work made for hire, the Contractor hereby assigns to the Company all right, title and interest in it, including all intellectual property rights, effective upon payment for the Services to which it relates.\n6.2 The Contractor retains ownership of general skills, know-how and tools developed before the Effective Date and not specific to the Company or its clients (\"**Contractor Tools**\"). If any Contractor Tools are inco",
+      "hits": [
+        {
+          "docId": "rohan-ica",
+          "counterparty": "Rohan Iyer",
+          "date": "2025-04-28",
+          "clauseNo": "5",
+          "heading": "INTELLECTUAL PROPERTY",
+          "label": "accident",
+          "labelNote": "Rohan kept the Work Product IP (\"ok\" from phone) while Acme was promised ownership",
+          "score": 0.922,
+          "text": "5.1 In this Clause, \"**Work Product**\" means all dashboards, reports, data models, DAX measures, Power Query scripts, visual templates, documentation and other materials created by the Contractor in performing the Services.\n\n5.2 The Contractor retains ownership of all intellectual property rights in the Work Product and in any pre-existing materials, components and templates of the Contractor.\n\n5.3 The Contractor grants AtliQ a non-exclusive, perpetual, irrevocable, royalty-free, worldwide licence to use, copy, modify and deploy the Work Product for the purposes of AtliQ's business, including for delivery to AtliQ's clients.\n\n5.4 The Contractor shall not incorporate into the Work Product any third-party material that AtliQ is not entitled to use under Clause 5.3.",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "alnoor-msa",
+          "counterparty": "Al Noor Hospitality Group",
+          "date": "2025-03-15",
+          "clauseNo": "9",
+          "heading": "INTELLECTUAL PROPERTY",
+          "label": "untagged",
+          "score": 0.886,
+          "text": "9.1 Upon payment in full of the relevant Fees, all intellectual property rights in the Deliverables created specifically for the Client shall vest in the Client.\n\n9.2 The Supplier retains ownership of its pre-existing tools, libraries, methodologies and know-how (\"**Supplier Background IP**\"). To the extent any Supplier Background IP is incorporated into a Deliverable, the Supplier grants the Client a perpetual, non-exclusive, royalty-free licence to use it as part of that Deliverable.",
+          "differs": "",
+          "alsoIn": [
+            "Northwind Logistics (2025-06)"
+          ]
+        },
+        {
+          "docId": "orbit-msa",
+          "counterparty": "Orbit Travels Pvt Ltd",
+          "date": "2022-07-01",
+          "clauseNo": "5",
+          "heading": "INTELLECTUAL PR0PERTY",
+          "label": "untagged",
+          "score": 0.885,
+          "text": "5.1 All deliverables developed specifically for the Client shall be the property of the Client\nupon full payment. The Service Provider retains its pre-existing tools and know-how.",
+          "differs": "",
+          "alsoIn": [
+            "Trustline NBFC (2026-08)",
+            "Acme Retail Group (2025-03)"
+          ]
+        }
+      ]
+    },
+    {
+      "clauseType": "confidentiality",
+      "docId": "ortiz-ica",
+      "clauseRef": "§7",
+      "quote": "7.1 Each Party shall keep confidential the non-public business, technical and financial information of the other Party, and of the Company's clients, disclosed to it in connection with this Agreement, and shall use it only for the purposes of this Agreement.\n7.2 The obligations in Section 7.1 do not apply to information that is publicly available, already known to the receiving Party, lawfully received from a third party, or independently developed.\n7.3 The Parties have entered into, or will enter into, a Mutual Nondisclosure Agreement, which shall also apply. On termination, the Contractor shall return or delete Company and client information in the Contractor's possession.\n7.4 This Section",
+      "hits": [
+        {
+          "docId": "crestline-msa",
+          "counterparty": "Crestline Retail Inc",
+          "date": "2024-08-01",
+          "clauseNo": "7",
+          "heading": "CONFIDENTIALITY",
+          "label": "untagged",
+          "score": 0.946,
+          "text": "7.1 Each Party shall hold the other Party's Confidential Information in confidence, use it only to perform or receive the Services, and disclose it only to its personnel and advisors with a need to know who are bound by obligations at least as protective.\n\n7.2 The obligations in Section 7.1 do not apply to information that is or becomes publicly available without breach, was known to the recipient prior to disclosure, is independently developed, or is rightfully received from a third party.\n\n7.3 These obligations survive for three (3) years following termination, and indefinitely for trade secrets.",
+          "differs": "",
+          "alsoIn": [
+            "Northwind Logistics (2025-06)",
+            "CloudSpan Technologies (2025-09)",
+            "Acme Retail Group (2025-03)"
+          ]
+        },
+        {
+          "docId": "rohan-ica",
+          "counterparty": "Rohan Iyer",
+          "date": "2025-04-28",
+          "clauseNo": "6",
+          "heading": "CONFIDENTIALITY",
+          "label": "untagged",
+          "score": 0.946,
+          "text": "6.1 Each party shall keep confidential all non-public information of the other party, and in the case of AtliQ, of AtliQ's clients, received in connection with this Agreement, and shall use it only for the purposes of this Agreement.\n\n6.2 The Contractor shall comply with any confidentiality and data-security requirements of AtliQ's clients notified to him in writing, including restrictions on downloading client data to personal devices.\n\n6.3 This Clause 6 does not apply to information that is public, already lawfully known, independently developed, or required to be disclosed by law.\n\n6.4 The obligations in this Clause 6 survive for three (3) years after termination or expiry.",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "orbit-msa",
+          "counterparty": "Orbit Travels Pvt Ltd",
+          "date": "2022-07-01",
+          "clauseNo": "4",
+          "heading": "CONFIDENTIALITY",
+          "label": "untagged",
+          "score": 0.924,
+          "text": "4.1 Each party shall keep confidential all information received from the other party including\nfare data, supplier contracts, customer data and source code, and shall not disclose the same\nto any third party. This obligation shall survive for two (2) years after termination.",
+          "differs": "",
+          "alsoIn": [
+            "Sunrise Foods (2025-04)"
+          ]
+        }
+      ]
+    },
+    {
+      "clauseType": "non_solicit",
+      "docId": "ortiz-ica",
+      "clauseRef": "§8",
+      "quote": "8.1 During the term and for six (6) months after it, neither Party shall knowingly solicit for employment any employee of the other Party with whom it worked in connection with the Services. General advertisements not targeted at such persons are not a breach. Nothing in this Agreement restricts the Contractor from working for any client or competitor of the Company after the term.",
+      "hits": [
+        {
+          "docId": "orbit-msa",
+          "counterparty": "Orbit Travels Pvt Ltd",
+          "date": "2022-07-01",
+          "clauseNo": "10",
+          "heading": "N0N-SOLICITATION",
+          "label": "untagged",
+          "score": 0.951,
+          "text": "10.1 Neither party shall solicit the employees of the other during the term and six months\nthereafter.",
+          "differs": "",
+          "alsoIn": [
+            "Sunrise Foods (2025-04)",
+            "Acme Retail Group (2025-03)",
+            "PayTrack Technologies (2025-01)"
+          ]
+        },
+        {
+          "docId": "crestline-msa",
+          "counterparty": "Crestline Retail Inc",
+          "date": "2024-08-01",
+          "clauseNo": "15",
+          "heading": "NON-SOLICITATION",
+          "label": "untagged",
+          "score": 0.896,
+          "text": "15.1 During the Term and for twelve (12) months thereafter, Crestline shall not directly solicit for employment any Supplier Personnel assigned to Crestline, save with Supplier's consent.",
+          "differs": "",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "liability",
+      "docId": "ortiz-ica",
+      "clauseRef": "§9",
+      "quote": "9.1 The Contractor warrants that the Work Product will be original to the Contractor (except for Contractor Tools and open-source components disclosed to the Company) and will not knowingly infringe any third party's intellectual property rights.\n9.2 Each Party's aggregate liability under this Agreement shall not exceed the total fees paid or payable to the Contractor under this Agreement in the twelve (12) months preceding the claim, except for breach of Section 7 or a Party's fraud or willful misconduct.\n9.3 Neither Party shall be liable for indirect, incidental or consequential damages.",
+      "hits": [
+        {
+          "docId": "rohan-ica",
+          "counterparty": "Rohan Iyer",
+          "date": "2025-04-28",
+          "clauseNo": "8",
+          "heading": "LIABILITY",
+          "label": "standard",
+          "labelNote": "Fair freelancer terms: 30-day pay, mutual cap, mutual 15-day exit",
+          "score": 0.922,
+          "text": "8.1 Each party's aggregate liability under this Agreement shall not exceed the total fees paid or payable to the Contractor in the twelve (12) months preceding the claim, except for breach of Clause 6 or fraud.\n\n8.2 Neither party is liable for indirect or consequential loss.",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "paytrack-msa",
+          "counterparty": "PayTrack Technologies",
+          "date": "2025-01-22",
+          "clauseNo": "11",
+          "heading": "LIMITATION OF LIABILITY",
+          "label": "untagged",
+          "score": 0.896,
+          "text": "11.1 Neither Party shall be liable for any indirect, special, incidental or consequential damages, or loss of profits, revenue or goodwill.\n\n11.2 Each Party's total aggregate liability under or in connection with this Agreement shall not exceed the total fees paid or payable under the SOW giving rise to the claim.\n\n11.3 The limitations in this Clause 11 shall not apply to liability for fraud or wilful misconduct.",
+          "differs": "",
+          "alsoIn": [
+            "Trustline NBFC (2026-08)",
+            "Al Noor Hospitality Group (2025-03)",
+            "CloudSpan Technologies (2025-09)",
+            "Acme Retail Group (2025-03)",
+            "Northwind Logistics (2025-06)"
+          ]
+        },
+        {
+          "docId": "crestline-msa",
+          "counterparty": "Crestline Retail Inc",
+          "date": "2024-08-01",
+          "clauseNo": "12",
+          "heading": "LIMITATION OF LIABILITY",
+          "label": "untagged",
+          "score": 0.889,
+          "text": "12.1 EXCEPT FOR BREACH OF SECTION 7 OR A PARTY'S INDEMNIFICATION OBLIGATIONS, NEITHER PARTY SHALL BE LIABLE FOR ANY INDIRECT, INCIDENTAL, CONSEQUENTIAL, SPECIAL OR PUNITIVE DAMAGES.\n\n12.2 EXCEPT FOR BREACH OF SECTION 7 OR A PARTY'S INDEMNIFICATION OBLIGATIONS, EACH PARTY'S AGGREGATE LIABILITY SHALL NOT EXCEED THE FEES PAID OR PAYABLE BY CRESTLINE UNDER THIS AGREEMENT IN THE TWELVE (12) MONTHS PRECEDING THE CLAIM.",
+          "differs": "",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "confidentiality",
+      "docId": "ortiz-nda",
+      "clauseRef": "§1",
+      "quote": "1.1 The Parties wish to exchange information in connection with a proposed and ongoing engagement of Mr. Ortiz as an independent contractor providing data engineering services to AtliQ (the \"**Purpose**\").",
+      "hits": [
+        {
+          "docId": "harrington-nda",
+          "counterparty": "Harrington Health Systems Inc",
+          "date": "2026-08-20",
+          "clauseNo": "1",
+          "heading": "PURPOSE",
+          "label": "standard",
+          "labelNote": "Genuinely mutual NDA",
+          "score": 0.898,
+          "text": "1.1 The Parties wish to evaluate a potential engagement under which AtliQ would design and implement an enterprise clinical and operational analytics platform for Harrington (the \"**Purpose**\"), and each Party expects to disclose Confidential Information to the other in connection with the Purpose.",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "meridian-nda",
+          "counterparty": "Meridian Healthcare",
+          "date": "2026-07-16",
+          "clauseNo": "1",
+          "heading": "PURPOSE",
+          "label": "accident",
+          "labelNote": "One-way NDA signed within the hour; contradicts \"we only sign mutual\"",
+          "score": 0.869,
+          "text": "1.1 Meridian intends to disclose certain information to the Recipient for the purpose of evaluating a potential engagement relating to clinical operations analytics and hospital performance dashboards (the \"**Purpose**\"), including a walkthrough of Meridian's data environment.",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "alnoor-nda",
+          "counterparty": "Al Noor Hospitality Group",
+          "date": "2025-01-22",
+          "clauseNo": "1.1",
+          "heading": "DEFINITIONS",
+          "label": "standard",
+          "labelNote": "Genuinely mutual NDA: the template for what mutual looks like",
+          "score": 0.829,
+          "text": "1.1 \"**Confidential Information**\" means any information disclosed by one Party (the \"**Disclosing Party**\") to the other Party (the \"**Receiving Party**\") in connection with the Purpose, whether before or after the date of this Agreement, in any form, that is marked or identified as confidential or that a reasonable person would understand to be confidential, including guest and occupancy data, pricing, commercial proposals, solution architecture, source code, methodologies and business plans.",
+          "differs": "",
+          "alsoIn": []
+        }
+      ]
+    }
+  ],
+  "counselPack": null,
+  "errors": [
+    "NDA check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more infor)",
+    "Playbook check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more infor)"
+  ],
+  "usage": {
+    "calls": 0,
+    "cachedCalls": 3,
+    "inputTokens": 0,
+    "outputTokens": 0,
+    "ms": 4992
+  }
+}

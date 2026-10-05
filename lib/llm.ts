@@ -18,10 +18,11 @@ export type Task =
   | "extract" // F2 intake extraction (fast)
   | "route" // F2 doc-type routing (fast)
   | "classify" // clause typing for the index, seller free text (fast)
-  | "notes" // F5 notes scan (fast)
+  | "notes" // F5 notes scan (strong: feeds the compliance alert)
   | "register" // F1 register extraction (strong)
   | "conflict" // F3 collision reasoning (strong)
-  | "playbook" // F4 playbook / mirror / flow-down / NDA mutuality (strong)
+  | "playbook" // F4 playbook / mirror / flow-down (strong)
+  | "nda" // F2 fast lane: NDA mutuality checklist (strong model, low thinking: <1 min target)
   | "differs" // FR-22 "how it differs" lines (strong)
   | "brief"; // F6 headline + next action from findings (strong)
 
@@ -29,10 +30,11 @@ const TIER: Record<Task, "fast" | "strong"> = {
   extract: "fast",
   route: "fast",
   classify: "fast",
-  notes: "fast",
+  notes: "strong", // compliance events must never be missed (PRD §11: 100% on compliance-alert cases)
   register: "strong",
   conflict: "strong",
   playbook: "strong",
+  nda: "strong",
   differs: "strong",
   brief: "strong",
 };
@@ -135,12 +137,13 @@ type GenErr = { ok: false; error: string };
 async function generateWithFallback(task: Task, system: string, input: string, schema: object): Promise<GenOk | GenErr> {
   const errors: string[] = [];
   for (const model of modelsFor(task)) {
-    for (let attempt = 0; attempt < 3; attempt++) {
-      const r = await generateOnce(model, TIER[task], system, input, schema);
+    for (let attempt = 0; attempt < 4; attempt++) {
+      const r = await generateOnce(model, thinkingFor(task), system, input, schema);
       if (r.ok) return r;
-      errors.push(`${model}: ${r.error}`);
-      if (r.retry === "same" && attempt < 2) {
-        await sleep(r.waitMs ?? 4000 * (attempt + 1));
+      errors.push(`${model}: ${r.error.slice(0, 120)}`);
+      if (r.retry === "same" && attempt < 3) {
+        // Overloaded (503) models recover in tens of seconds: back off 15s, 30s, 60s.
+        await sleep(r.waitMs ?? 15_000 * 2 ** attempt);
         continue;
       }
       break; // quota / not found / fatal → next model in the chain
@@ -151,12 +154,12 @@ async function generateWithFallback(task: Task, system: string, input: string, s
 
 type Once = GenOk | (GenErr & { retry?: "same" | "next"; waitMs?: number });
 
-async function generateOnce(model: string, tier: "fast" | "strong", system: string, input: string, schema: object): Promise<Once> {
+async function generateOnce(model: string, thinking: "low" | "high", system: string, input: string, schema: object): Promise<Once> {
   const p = provider();
   const key = process.env.LLM_API_KEY;
   if (!key) return { ok: false, error: "LLM_API_KEY is not set", retry: "next" };
   try {
-    if (p === "gemini") return await gemini(model, tier, key, system, input, schema);
+    if (p === "gemini") return await gemini(model, thinking, key, system, input, schema);
     if (p === "anthropic") return await anthropic(model, key, system, input, schema);
     if (p === "openai") return await openai(model, key, system, input, schema);
     return { ok: false, error: `unknown LLM_PROVIDER ${p}` };
@@ -165,7 +168,7 @@ async function generateOnce(model: string, tier: "fast" | "strong", system: stri
   }
 }
 
-async function gemini(model: string, tier: string, key: string, system: string, input: string, schema: object): Promise<Once> {
+async function gemini(model: string, thinking: "low" | "high", key: string, system: string, input: string, schema: object): Promise<Once> {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
   const body = (withSchema: boolean) => ({
     systemInstruction: { parts: [{ text: system }] },
@@ -173,7 +176,7 @@ async function gemini(model: string, tier: string, key: string, system: string, 
     generationConfig: {
       responseMimeType: "application/json",
       ...(withSchema ? { responseJsonSchema: schema } : {}),
-      thinkingConfig: { thinkingLevel: tier === "fast" ? "low" : "high" },
+      thinkingConfig: { thinkingLevel: thinking },
     },
   });
   let res = await fetchWithTimeout(url, key, body(true));
@@ -239,6 +242,12 @@ async function openai(model: string, key: string, system: string, input: string,
     model,
     usage: { inputTokens: j.usage?.prompt_tokens ?? 0, outputTokens: j.usage?.completion_tokens ?? 0 },
   };
+}
+
+/** Reasoning depth per task: deep where judgment matters, shallow where latency matters. */
+const THINKING: Partial<Record<Task, "low" | "high">> = { nda: "low", differs: "low", brief: "low" };
+export function thinkingFor(task: Task): "low" | "high" {
+  return THINKING[task] ?? (TIER[task] === "fast" ? "low" : "high");
 }
 
 function classifyHttpError(status: number, body: string): GenErr & { retry?: "same" | "next"; waitMs?: number } {

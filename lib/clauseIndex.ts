@@ -36,6 +36,8 @@ function strip(c: ClauseChunk): ClauseChunkMeta {
 
 /** Same-label clauses this close are one repeated position (e.g. Acme/Northwind/Trustline LDs: 0.94–0.975). */
 const DUPLICATE_COSINE = 0.94;
+/** Near-ties go to clauses that carry Karandeep's intent label: a tagged precedent says how he decided. */
+const TAGGED_BOOST = 0.02;
 
 /**
  * Cosine-rank same-type signed clauses; one hit per contract; a repeated position (same intent label,
@@ -47,7 +49,7 @@ export function searchByVector(vec: number[], clauseType: ClauseType, k = 3, thr
     .filter((c) => c.clauseType === clauseType)
     .map((c) => ({ c, score: cosine(vec, c.embedding) }))
     .filter((h) => h.score >= threshold)
-    .sort((a, b) => b.score - a.score);
+    .sort((a, b) => b.score + (b.c.label !== "untagged" ? TAGGED_BOOST : 0) - (a.score + (a.c.label !== "untagged" ? TAGGED_BOOST : 0)));
   const picked: { c: ClauseChunk; score: number; alsoIn: string[] }[] = [];
   for (const h of ranked) {
     if (picked.some((p) => p.c.docId === h.c.docId)) continue;

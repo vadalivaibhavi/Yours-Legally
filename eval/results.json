@@ -1,0 +1,382 @@
+{
+  "at": "2026-10-05T04:19:22.998Z",
+  "results": [
+    {
+      "id": "EV-R1",
+      "section": "A. Register build (US-1 · FR-1, FR-2)",
+      "title": "17 signed documents",
+      "pass": true,
+      "detail": "R1, R2, R3, R4 present with quote + clause"
+    },
+    {
+      "id": "EV-R2",
+      "section": "A. Register build (US-1 · FR-1, FR-2)",
+      "title": "Northwind MSA, Rohan Iyer ICA, Acme MSA",
+      "pass": true,
+      "detail": "I1, I2 present with quote + clause"
+    },
+    {
+      "id": "EV-R3",
+      "section": "A. Register build (US-1 · FR-1, FR-2)",
+      "title": "Orbit MSA (scanned)",
+      "pass": true,
+      "detail": "R6 present with quote + clause; illegible clause reported"
+    },
+    {
+      "id": "EV-R4",
+      "section": "A. Register build (US-1 · FR-1, FR-2)",
+      "title": "Brightwater, Al Noor, Northwind, Meridian",
+      "pass": true,
+      "detail": "Brightwater=accident, Al Noor 10%=exception, Northwind law=concession, Meridian=accident; none labelled standard"
+    },
+    {
+      "id": "EV-01",
+      "section": "B. Incoming contracts (US-2 to US-7, US-11)",
+      "title": "Gulf Crown MSA",
+      "pass": false,
+      "detail": "missing playbook:ld; flagged playbook:indemnity (medium)"
+    },
+    {
+      "id": "EV-02",
+      "section": "B. Incoming contracts (US-2 to US-7, US-11)",
+      "title": "Lakeshore MSA + rate card",
+      "pass": false,
+      "detail": "flagged playbook:ld (medium)"
+    },
+    {
+      "id": "EV-03",
+      "section": "B. Incoming contracts (US-2 to US-7, US-11)",
+      "title": "TravelHub agreement",
+      "pass": false,
+      "detail": "verdict HOLD ≠ SEND BACK; missing conflict:alnoor-msa:non_compete"
+    },
+    {
+      "id": "EV-04",
+      "section": "B. Incoming contracts (US-2 to US-7, US-11)",
+      "title": "BlueOrchid pilot",
+      "pass": true,
+      "detail": "SIGN AFTER CHANGES · found conflict:alnoor-msa:non_compete · clean on playbook:ld, playbook:payment, playbook:liability, playbook:ip, gate:governing_law"
+    },
+    {
+      "id": "EV-05",
+      "section": "B. Incoming contracts (US-2 to US-7, US-11)",
+      "title": "Datavane partnership",
+      "pass": false,
+      "detail": "missing conflict:cloudspan-spa:exclusivity; missing playbook:indemnity; missing playbook:restrictive"
+    },
+    {
+      "id": "EV-06",
+      "section": "B. Incoming contracts (US-2 to US-7, US-11)",
+      "title": "Rheinwerk agreement",
+      "pass": false,
+      "detail": "missing conflict:northwind-msa:ip_transfer; flagged playbook:ld (high)"
+    },
+    {
+      "id": "EV-07",
+      "section": "B. Incoming contracts (US-2 to US-7, US-11)",
+      "title": "FinServe \"mutual\" NDA",
+      "pass": false,
+      "detail": "missing nda:definition; missing nda:residuals; missing covenant:non_compete; missing nda:remedies"
+    },
+    {
+      "id": "EV-08",
+      "section": "B. Incoming contracts (US-2 to US-7, US-11)",
+      "title": "LoopMart mutual NDA",
+      "pass": false,
+      "detail": "verdict HOLD ≠ SIGN"
+    },
+    {
+      "id": "EV-09",
+      "section": "B. Incoming contracts (US-2 to US-7, US-11)",
+      "title": "Sunrise SOW-2",
+      "pass": true,
+      "detail": "SIGN · found nothing to find · clean on playbook:ld, severity:blocker, severity:high"
+    },
+    {
+      "id": "EV-10",
+      "section": "B. Incoming contracts (US-2 to US-7, US-11)",
+      "title": "Kriti subcontract (AtliQ paper)",
+      "pass": false,
+      "detail": "verdict HOLD ≠ SIGN AFTER CHANGES; missing playbook:indemnity; missing playbook:liability; missing flowdown:ip; missing flowdown:data; missing flowdown:consent"
+    },
+    {
+      "id": "EV-11",
+      "section": "B. Incoming contracts (US-2 to US-7, US-11)",
+      "title": "Marcus Reed ICA (AtliQ paper)",
+      "pass": false,
+      "detail": "verdict HOLD ≠ SIGN AFTER CHANGES; missing playbook:restrictive; missing playbook:termination"
+    },
+    {
+      "id": "EV-12",
+      "section": "B. Incoming contracts (US-2 to US-7, US-11)",
+      "title": "Harrington bundle (MSA, BAA, NDA, notes)",
+      "pass": false,
+      "detail": "missing notes:data_movement; no compliance alert"
+    },
+    {
+      "id": "EV-13",
+      "section": "B. Incoming contracts (US-2 to US-7, US-11)",
+      "title": "Daniel Ortiz ICA + NDA (AtliQ paper)",
+      "pass": false,
+      "detail": "verdict HOLD ≠ SIGN AFTER CHANGES; missing flowdown:data; missing flowdown:ip; flagged playbook:liability (medium)"
+    },
+    {
+      "id": "EV-15",
+      "section": "B. Incoming contracts (US-2 to US-7, US-11)",
+      "title": "BlueOrchid contract vs seller's deal check declaring \"India hotels only\"",
+      "pass": true,
+      "detail": "SIGN AFTER CHANGES · found mismatch:regions"
+    },
+    {
+      "id": "EV-14",
+      "section": "B. Incoming contracts (US-2 to US-7, US-11)",
+      "title": "TravelHub (negative test)",
+      "pass": true,
+      "detail": "HOLD · found nothing to find · clean on conflict:orbit-msa"
+    },
+    {
+      "id": "EV-R5",
+      "section": "A. Register build (US-1 · FR-1, FR-2)",
+      "title": "Register entry for Crestline MFN left unverified",
+      "pass": true,
+      "detail": "raised while unverified (labelled), label removed after verify (crestline-msa#1)"
+    },
+    {
+      "id": "EV-C1",
+      "section": "B1. Compliance alerts & notes (FR-21)",
+      "title": "Harrington: Karandeep closes the PHI alert with \"Resolved off the record: Harrington privacy officer confirmed deletion, 5 Oct\"",
+      "pass": false,
+      "detail": "alert states undefined → undefined"
+    },
+    {
+      "id": "EV-C2",
+      "section": "B1. Compliance alerts & notes (FR-21)",
+      "title": "Gulf Crown: Karandeep adds a note \"Al Noor agreed verbally to waive for Gulf Crown\"",
+      "pass": true,
+      "detail": "blocker stays open, \"pending written waiver\"; verdict HOLD"
+    },
+    {
+      "id": "EV-L1",
+      "section": "B2. Deal linking (FR-3)",
+      "title": "Harrington BAA uploaded alone",
+      "pass": true,
+      "detail": "auto → harrington (only open deal with Harrington Health Systems Inc)"
+    },
+    {
+      "id": "EV-L2",
+      "section": "B2. Deal linking (FR-3)",
+      "title": "Kriti subcontract",
+      "pass": true,
+      "detail": "auto → kriti (only open deal with Kriti Data Labs) · end client rheinwerk"
+    },
+    {
+      "id": "EV-L3",
+      "section": "B2. Deal linking (FR-3)",
+      "title": "Synthetic: NDA from an unknown counterparty with a name similar to an existing client",
+      "pass": true,
+      "detail": "ask (name is similar to Gulf Crown Hotels & Resorts Co.) · options: gulfcrown/new"
+    },
+    {
+      "id": "EV-L4",
+      "section": "B2. Deal linking (FR-3)",
+      "title": "Synthetic: Northwind SOW-2 uploaded while the Northwind MSA/SOW-1 exist",
+      "pass": true,
+      "detail": "ask (AtliQ already has signed contracts with Northwind Logistics) · options: new"
+    },
+    {
+      "id": "EV-L5",
+      "section": "B2. Deal linking (FR-3)",
+      "title": "Harrington BAA deliberately placed in a new deal by the user",
+      "pass": true,
+      "detail": "user → new (Placed by you) · note: This document cross-references Harrington Health: MSA + BAA (HHS-IT-2026-0193). Move it there?"
+    },
+    {
+      "id": "EV-L6",
+      "section": "B2. Deal linking (FR-3)",
+      "title": "Rheinwerk draft with exactly one open Rheinwerk deal",
+      "pass": true,
+      "detail": "auto → rheinwerk (only open deal with Rheinwerk Analytics GmbH) · end client kriti"
+    },
+    {
+      "id": "EV-A1",
+      "section": "B3. Access control (§8, §11)",
+      "title": "Seller (Jay) opens a deal he owns",
+      "pass": true,
+      "detail": "Jay opens his deal; brief, register, similar clauses and decisions are Karandeep-only (also enforced by proxy.ts + server checks)"
+    },
+    {
+      "id": "EV-A2",
+      "section": "B3. Access control (§8, §11)",
+      "title": "Seller check on a US rate that hits the Crestline MFN",
+      "pass": true,
+      "detail": "says a pricing floor applies; no client name or rates revealed"
+    },
+    {
+      "id": "EV-A3",
+      "section": "B3. Access control (§8, §11)",
+      "title": "Seller tries to open another seller's deal or contract",
+      "pass": true,
+      "detail": "Jay → Gulf Crown Hotels & Resorts: MSA: denied"
+    },
+    {
+      "id": "EV-V1",
+      "section": "C. Version pairs (US-7 · FR-17, FR-18) (synthetic, to be created)",
+      "title": "TravelHub: entity corrected to Pvt Ltd, invoicing aligned",
+      "pass": null,
+      "detail": "skipped (--no-versions)"
+    },
+    {
+      "id": "EV-V2",
+      "section": "C. Version pairs (US-7 · FR-17, FR-18) (synthetic, to be created)",
+      "title": "Rheinwerk: Annex 3 DPA added",
+      "pass": null,
+      "detail": "skipped (--no-versions)"
+    },
+    {
+      "id": "EV-V3",
+      "section": "C. Version pairs (US-7 · FR-17, FR-18) (synthetic, to be created)",
+      "title": "Harrington: sub-BAA for Daniel Ortiz added",
+      "pass": null,
+      "detail": "skipped (--no-versions)"
+    },
+    {
+      "id": "EV-V4",
+      "section": "C. Version pairs (US-7 · FR-17, FR-18) (synthetic, to be created)",
+      "title": "Synthetic: v1 deep review ran; v2 raises a finding on unchanged text",
+      "pass": null,
+      "detail": "Late-finding detection (FR-18) is not built in the prototype (Build Plan §5, declared in README)."
+    },
+    {
+      "id": "EV-S1",
+      "section": "D. Seller checks (US-9, US-10 · FR-13, FR-19) (synthetic inputs)",
+      "title": "Revenue-management analytics for a hotel group in Saudi Arabia",
+      "pass": true,
+      "detail": "conflict (source alnoor-msa §12.1, name hidden) · stamped as of 2026-10-04, register reg-2026-10-04-57+r0"
+    },
+    {
+      "id": "EV-S2",
+      "section": "D. Seller checks (US-9, US-10 · FR-13, FR-19) (synthetic inputs)",
+      "title": "Senior data engineer at $72/hr to a US retail client (then changed to $88/hr)",
+      "pass": true,
+      "detail": "conflict (source crestline-msa §6.4, name hidden) · stamped as of 2026-10-04, register reg-2026-10-04-57+r0 → re-check at $88: clear"
+    },
+    {
+      "id": "EV-S3",
+      "section": "D. Seller checks (US-9, US-10 · FR-13, FR-19) (synthetic inputs)",
+      "title": "Reuse PipeKit for a new European client",
+      "pass": true,
+      "detail": "attention (source northwind-msa 9.2, name hidden) · stamped as of 2026-10-04, register reg-2026-10-04-57+r0"
+    },
+    {
+      "id": "EV-S4",
+      "section": "D. Seller checks (US-9, US-10 · FR-13, FR-19) (synthetic inputs)",
+      "title": "Become an implementation partner for another lakehouse platform in India",
+      "pass": true,
+      "detail": "conflict (source cloudspan-spa 7.1, name hidden) · stamped as of 2026-10-04, register reg-2026-10-04-57+r0"
+    },
+    {
+      "id": "EV-S5",
+      "section": "D. Seller checks (US-9, US-10 · FR-13, FR-19) (synthetic inputs)",
+      "title": "Same partnership, Europe only",
+      "pass": false,
+      "detail": "attention · stamped as of 2026-10-04, register reg-2026-10-04-57+r0"
+    },
+    {
+      "id": "EV-S7",
+      "section": "D. Seller checks (US-9, US-10 · FR-13, FR-19) (synthetic inputs)",
+      "title": "Seller checked a deal on day 1; Karandeep runs a new brief version on that deal's contract on day 3",
+      "pass": true,
+      "detail": "before: no banner · after brief v2: banner (Karandeep re-checked this deal's contract (brief v2)); old answer keeps its date 2026-10-04"
+    },
+    {
+      "id": "EV-S8",
+      "section": "D. Seller checks (US-9, US-10 · FR-13, FR-19) (synthetic inputs)",
+      "title": "Synthetic: register updated with a new Al Noor waiver covering a named Saudi hotel group",
+      "pass": true,
+      "detail": "conflict → register changed (banner: true) → re-run clear for Desert Pearl Hotels; other Saudi hotel group still conflict"
+    },
+    {
+      "id": "EV-S6",
+      "section": "D. Seller checks (US-9, US-10 · FR-13, FR-19) (synthetic inputs)",
+      "title": "Free text: \"promise the client a named engineer full-time for 12 months\"",
+      "pass": true,
+      "detail": "free text → couldnt_check: Couldn't check: ask Karandeep before promising it."
+    },
+    {
+      "id": "EV-P1",
+      "section": "E. Similar past clauses (US-4 · FR-22)",
+      "title": "Gulf Crown LDs (1% of contract value/week, no client-delay exclusion)",
+      "pass": true,
+      "detail": "top 3: Acme Retail Group §7 [standard] 0.95 · Brightwater Insurance Inc §9 [accident] 0.93 · Al Noor Hospitality Group §10 [exception] 0.91"
+    },
+    {
+      "id": "EV-P2",
+      "section": "E. Similar past clauses (US-4 · FR-22)",
+      "title": "FinServe NDA confidentiality definition / residuals",
+      "pass": true,
+      "detail": "top 3: Al Noor Hospitality Group §1.2 [standard] 0.90 · Meridian Healthcare §2 [accident] 0.86 · Acme Retail Group §8 [untagged] 0.85"
+    },
+    {
+      "id": "EV-P3",
+      "section": "E. Similar past clauses (US-4 · FR-22)",
+      "title": "Harrington BAA (liability, reporting, offshore)",
+      "pass": true,
+      "detail": "top 3: CareBridge Clinics Inc §6 [standard] 0.93 · AtliQ Technologies Pvt Ltd (intercompany) §3 [untagged] 0.89 · Brightwater Insurance Inc §13 [untagged] 0.84"
+    },
+    {
+      "id": "EV-P4",
+      "section": "E. Similar past clauses (US-4 · FR-22)",
+      "title": "Harrington MSA indemnity (covers client's own negligence)",
+      "pass": true,
+      "detail": "top 3: Orbit Travels Pvt Ltd §9 [untagged] 0.92 · PayTrack Technologies §10 [standard] 0.92 · Al Noor Hospitality Group §15 [untagged] 0.92"
+    },
+    {
+      "id": "EV-P5",
+      "section": "E. Similar past clauses (US-4 · FR-22)",
+      "title": "Kriti subcontract payment (pay-when-paid, up to 120 days)",
+      "pass": true,
+      "detail": "top 3: Rohan Iyer §3 [standard] 0.92 · PayTrack Technologies §4 [untagged] 0.92 · Trustline NBFC §4 [standard] 0.91"
+    },
+    {
+      "id": "EV-P6",
+      "section": "E. Similar past clauses (US-4 · FR-22)",
+      "title": "Rheinwerk governing law (German law)",
+      "pass": false,
+      "detail": "top 3: Crestline Retail Inc §16 [untagged] 0.87 · Brightwater Insurance Inc §20 [accident] 0.87 · Orbit Travels Pvt Ltd §11 [untagged] 0.86 | northwind-msa (concession) not in top 3"
+    },
+    {
+      "id": "EV-P7",
+      "section": "E. Similar past clauses (US-4 · FR-22)",
+      "title": "Sunrise SOW-2 \"Penalty for Delay\" (negative test)",
+      "pass": true,
+      "detail": "top 3: Acme Retail Group §7 [standard] 0.92 · Sunrise Foods §8 [standard] 0.90 · Brightwater Insurance Inc §9 [accident] 0.87"
+    }
+  ],
+  "crossCutting": [
+    {
+      "name": "Citation validity (all quotes string-matched to source)",
+      "pass": true,
+      "detail": "66/66"
+    },
+    {
+      "name": "Guardrails: no breach/enforceable in system prose; never Reject",
+      "pass": false,
+      "detail": "427 prose strings checked; 18 legal conclusions; 0 Reject recommendations"
+    },
+    {
+      "name": "Verdict identical with and without similar-clauses panel",
+      "pass": true,
+      "detail": "13 briefs"
+    },
+    {
+      "name": "NDA fast lane latency (<1 min)",
+      "pass": null,
+      "detail": "finserve 20s (cached) · loopmart 6s (cached)"
+    },
+    {
+      "name": "Recall@3 on EV-P (≥80%)",
+      "pass": true,
+      "detail": "9/10 = 90%"
+    }
+  ]
+}

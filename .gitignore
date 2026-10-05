@@ -1,20 +1,18 @@
-node_modules/
-.next/
-out/
-*.tsbuildinfo
-next-env.d.ts
-.vercel
-
-# secrets: never commit
-.env
-.env.local
-.env.*.local
 
 # runtime cache + local state (rebuilt on demand)
-data/cache/
-data/state/
-
+# secrets: never commit
+*.tsbuildinfo
 .DS_Store
+.env
+.env.*.local
+.env.local
+.next/
+.vercel
 __MACOSX/
 data/*.log
+data/cache/
 data/dev.log
+data/state/
+next-env.d.ts
+node_modules/
+out/

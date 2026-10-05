@@ -1,0 +1,926 @@
+{
+  "dealId": "gulfcrown",
+  "version": 1,
+  "createdAt": "2026-10-05T04:04:06.719Z",
+  "trigger": "initial review",
+  "inputsHash": "947fb967b8fd1d35bf3b8a5117dc9c34",
+  "documentIds": [
+    "gulfcrown-msa"
+  ],
+  "registerVersion": "reg-2026-10-04-57+r0",
+  "playbookVersion": "pb-v1-2026-10-04",
+  "models": [
+    "gemini-flash-lite-latest",
+    "gemini-3.5-flash",
+    "gemini-3-flash-preview"
+  ],
+  "promptVersion": "p1",
+  "route": "full_review",
+  "verdict": "HOLD",
+  "headline": "HOLD: 1 non-compete blocker and 5 terms requiring renegotiation",
+  "nextAction": "Karandeep must seek a waiver for the non-compete and renegotiate the outstanding liability and payment terms.",
+  "findings": [
+    {
+      "key": "conflict:alnoor-msa:non_compete",
+      "category": "conflict",
+      "topic": "non_compete",
+      "title": "Collides with Al Noor Hospitality Group: GCC hospitality data analytics non-compete",
+      "impact": "Collides with the Al Noor promise, live until September 2029.",
+      "severity": "blocker",
+      "confidence": "high",
+      "needsJudgment": false,
+      "owner": "Karandeep",
+      "resolution": "waiver",
+      "docId": "gulfcrown-msa",
+      "citations": [
+        {
+          "docId": "gulfcrown-msa",
+          "docTitle": "Gulf Crown Hotels & Resorts MSA (draft)",
+          "clauseRef": "Clause 4.1",
+          "quote": "The Service Provider shall design, develop, test, deploy and support a revenue management and guest analytics platform for the Company's nine (9) Properties located in the Kingdom of Saudi Arabia, as listed in Schedule 2",
+          "role": "incoming"
+        },
+        {
+          "docId": "gulfcrown-msa",
+          "docTitle": "Gulf Crown Hotels & Resorts MSA (draft)",
+          "clauseRef": "Clause 4.2(a)",
+          "quote": "Revenue Management Module** — demand forecasting at room-type and night level, dynamic rate recommendations, competitor rate ingestion, pickup and pace analysis, and a length-of-stay and overbooking optimisation engine",
+          "role": "incoming"
+        },
+        {
+          "docId": "gulfcrown-msa",
+          "docTitle": "Gulf Crown Hotels & Resorts MSA (draft)",
+          "clauseRef": "Clause 4.2(b)",
+          "quote": "Guest Analytics Module** — a unified guest profile consolidating data from the Company's property management system, central reservation system, loyalty programme and point-of-sale systems; guest segmentation; lifetime value scoring; and propensity models for upsell and repeat stay",
+          "role": "incoming"
+        },
+        {
+          "docId": "gulfcrown-msa",
+          "docTitle": "Gulf Crown Hotels & Resorts MSA (draft)",
+          "clauseRef": "Clause 9.1(d)",
+          "quote": "it is not bound by any agreement or restriction which would prevent or restrict it from performing the Services for the Company",
+          "role": "incoming"
+        },
+        {
+          "docId": "alnoor-msa",
+          "docTitle": "Al Noor Hospitality MSA",
+          "clauseRef": "§12.1",
+          "quote": "In consideration of the Client disclosing to the Supplier its Confidential Information, including its revenue strategies, pricing models and Guest Data, the Supplier undertakes that neither it nor any of its Affiliates shall, during the Restricted Period, directly or indirectly, provide data analytics, artificial intelligence or revenue-management services to any Hospitality Business in the GCC",
+          "role": "register"
+        },
+        {
+          "docId": "alnoor-msa",
+          "docTitle": "Al Noor Hospitality MSA",
+          "clauseRef": "§1.11",
+          "quote": "Hospitality Business**\" means any person, firm or entity that owns, operates, manages or franchises hotels, resorts or serviced apartments, or that provides distribution, revenue-management or guest-analytics services to any such person, firm or entity",
+          "role": "register"
+        },
+        {
+          "docId": "alnoor-msa",
+          "docTitle": "Al Noor Hospitality MSA",
+          "clauseRef": "§1.14",
+          "quote": "Restricted Period**\" means the Term and the period of eighteen (18) months following the expiry or termination of this Agreement",
+          "role": "register"
+        },
+        {
+          "docId": "alnoor-msa",
+          "docTitle": "Al Noor Hospitality MSA",
+          "clauseRef": "§1.9",
+          "quote": "GCC**\" means the member states of the Gulf Cooperation Council, being the United Arab Emirates, the Kingdom of Saudi Arabia, the State of Qatar, the State of Kuwait, the Kingdom of Bahrain and the Sultanate of Oman",
+          "role": "register"
+        }
+      ],
+      "counterPosition": "Seek a written waiver or consent from Al Noor Hospitality Group, or defer the engagement until after the restriction period ends in September 2029. The business team and legal counsel should decide on the appropriate strategy.",
+      "registerEntryId": "alnoor-msa#1",
+      "registerVerified": false,
+      "expiry": "2029-09-14",
+      "waiver": {
+        "docId": "alnoor-waiver",
+        "covers": "AtliQ providing demand-forecasting services to Seaside Hotels LLC, Muscat, Oman, solely as described in the statement of work between the Supplier and Seaside dated February 2026",
+        "applies": false,
+        "why": "The Al Noor waiver is strictly limited to the Seaside SOW for Seaside Hotels LLC in Oman and explicitly does not extend to other GCC hospitality businesses."
+      }
+    },
+    {
+      "key": "playbook:liability",
+      "category": "playbook",
+      "topic": "liability",
+      "title": "Uncapped liability for data protection conflictes",
+      "impact": "AtliQ faces unlimited financial risk in the event of a guest data conflict or regulatory incident.",
+      "severity": "high",
+      "confidence": "medium",
+      "needsJudgment": false,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "gulfcrown-msa",
+      "citations": [
+        {
+          "docId": "gulfcrown-msa",
+          "docTitle": "Gulf Crown Hotels & Resorts MSA (draft)",
+          "clauseRef": "10.2",
+          "quote": "Save in respect of liability arising from fraud, wilful misconduct, breach of Clause 7 (Confidentiality) or Clause 13 (Data Protection), each Party's aggregate liability under this Agreement shall not exceed the Contract Value",
+          "role": "incoming"
+        }
+      ],
+      "standard": "Each party's aggregate liability capped at 1× fees (paid or payable in the prior 12 months), mutual; carve-outs only for fraud, wilful misconduct and confidentiality (plus any carve-outs that are mandatory under the governing law, e.g. German law for intent/gross negligence and injury).",
+      "counterPosition": "Mutual cap of 1× fees paid or payable in the 12 months before the claim; data-protection liability under a separate super-cap (e.g. 2× fees).",
+      "precedents": [
+        {
+          "docId": "ref-negotiation-notes",
+          "counterparty": "Kessler Mobility",
+          "clauseRef": "negotiation notes",
+          "label": "standard",
+          "note": "Walked away from a €120k deal over unlimited liability (Jan 2026)"
+        },
+        {
+          "docId": "sunrise-msa",
+          "counterparty": "Sunrise Foods",
+          "clauseRef": "§13",
+          "label": "standard",
+          "note": "AtliQ-friendly master: capped liability"
+        },
+        {
+          "docId": "carebridge-baa",
+          "counterparty": "CareBridge Clinics",
+          "clauseRef": "§9",
+          "label": "standard",
+          "note": "Counsel-reviewed: BAA liability capped at 2× trailing-12-month fees"
+        },
+        {
+          "docId": "brightwater-msa",
+          "counterparty": "Brightwater Insurance",
+          "clauseRef": "§15",
+          "label": "accident",
+          "note": "LDs carved out of the 150% cap"
+        }
+      ]
+    },
+    {
+      "key": "gate:governing_law",
+      "category": "gate",
+      "topic": "governing_law",
+      "title": "Governing law: laws and regulations in force in the Kingdom of Saudi Arabia",
+      "impact": "AtliQ's position is Indian law for AtliQ Technologies Pvt Ltd. Client law has been accepted before to win a deal (DIFC, English, Singapore): a judgment call, not a blocker.",
+      "severity": "medium",
+      "confidence": "high",
+      "needsJudgment": true,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "gulfcrown-msa",
+      "citations": [
+        {
+          "docId": "gulfcrown-msa",
+          "docTitle": "Gulf Crown Hotels & Resorts MSA (draft)",
+          "clauseRef": "14.1",
+          "quote": "This Agreement shall be governed by and construed in accordance with the laws and regulations in force in the Kingdom of Saudi Arabia",
+          "role": "incoming"
+        }
+      ],
+      "standard": "Indian law for Pvt Ltd; US law for Inc.",
+      "counterPosition": "Laws of India; arbitration seated in India or a neutral seat."
+    },
+    {
+      "key": "playbook:indemnity",
+      "category": "playbook",
+      "topic": "indemnity",
+      "title": "Lack of mutual general indemnity for conflict",
+      "impact": "AtliQ is not protected against third-party claims arising from the client's negligence or contractual conflictes.",
+      "severity": "medium",
+      "confidence": "medium",
+      "needsJudgment": false,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "gulfcrown-msa",
+      "citations": [
+        {
+          "docId": "gulfcrown-msa",
+          "docTitle": "Gulf Crown Hotels & Resorts MSA (draft)",
+          "clauseRef": "11.1 and 11.2",
+          "quote": "The Service Provider shall indemnify the Company against all losses, claims and expenses arising from any claim by a third party that the Deliverables infringe the intellectual property rights of such third party.\n11.2 The Company shall indemnify the Service Provider against claims arising from the Service Provider's use, in accordance with this Agreement, of materials supplied by the Company",
+          "role": "incoming"
+        }
+      ],
+      "standard": "Mutual: each party covers its own breach and negligence; never the other side's negligence. IP-infringement indemnity for deliverables is normal.",
+      "counterPosition": "Each party indemnifies the other for third-party claims caused by its own conflict or negligence; no indemnity for losses caused by the indemnified party's own negligence.",
+      "precedents": [
+        {
+          "docId": "paytrack-msa",
+          "counterparty": "PayTrack Technologies",
+          "clauseRef": "§10.2",
+          "label": "standard",
+          "note": "Origin: \"we can't insure against PayTrack's own negligence\" (Jan 2025)"
+        },
+        {
+          "docId": "acme-msa",
+          "counterparty": "Acme Retail Group",
+          "clauseRef": "§11",
+          "label": "standard",
+          "note": "Mutual indemnity"
+        }
+      ]
+    },
+    {
+      "key": "playbook:payment",
+      "category": "playbook",
+      "topic": "payment",
+      "title": "Payment: 60 days",
+      "impact": "60-day payment against AtliQ's 30-day standard (45 max).",
+      "severity": "medium",
+      "confidence": "high",
+      "needsJudgment": false,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "gulfcrown-msa",
+      "citations": [
+        {
+          "docId": "gulfcrown-msa",
+          "docTitle": "Gulf Crown Hotels & Resorts MSA (draft)",
+          "clauseRef": "5.3",
+          "quote": "The Company shall pay each undisputed invoice within sixty (60) days from the date of receipt of a valid invoice",
+          "role": "incoming"
+        }
+      ],
+      "standard": "30 days from invoice; 45 days is the negotiated maximum.",
+      "counterPosition": "Payment within 30 days of receipt of invoice (45 days maximum); no pay-when-paid.",
+      "precedents": [
+        {
+          "docId": "trustline-msa",
+          "counterparty": "Trustline NBFC",
+          "clauseRef": "§4",
+          "label": "standard",
+          "note": "Negotiated 90 → 45 days (the maximum)"
+        },
+        {
+          "docId": "ref-negotiation-notes",
+          "counterparty": "PixelCraft Studio",
+          "clauseRef": "negotiation notes",
+          "label": "standard",
+          "note": "AtliQ's own paper: 60-day payment changed to 30 for a 6-person agency (Oct 2025)"
+        }
+      ]
+    },
+    {
+      "key": "playbook:termination",
+      "category": "playbook",
+      "topic": "termination",
+      "title": "Exclusion of work-in-progress from convenience termination payment",
+      "impact": "AtliQ may not be compensated for efforts expended on unaccepted milestones or work in progress if the client terminates early.",
+      "severity": "medium",
+      "confidence": "medium",
+      "needsJudgment": false,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "gulfcrown-msa",
+      "citations": [
+        {
+          "docId": "gulfcrown-msa",
+          "docTitle": "Gulf Crown Hotels & Resorts MSA (draft)",
+          "clauseRef": "6.3",
+          "quote": "in which event the Company shall pay for all Services performed and accepted up to the date of termination",
+          "role": "incoming"
+        }
+      ],
+      "standard": "On any termination for convenience AtliQ is paid for all work done, including work in progress; reasonable notice (≥30 days); mutual where possible.",
+      "counterPosition": "Payment for all services performed up to termination, including work in progress and committed costs; mutual notice period.",
+      "precedents": [
+        {
+          "docId": "rohan-ica",
+          "counterparty": "Rohan Iyer",
+          "clauseRef": "§9",
+          "label": "standard",
+          "note": "Mutual 15-day exit"
+        }
+      ]
+    }
+  ],
+  "fine": [
+    "Correct AtliQ entity: Pvt Ltd for a Saudi Arabia counterparty",
+    "Parties = invoicing entity: Pvt Ltd throughout",
+    "Delay penalties capped: Cap 10% of contract_value",
+    "Ownership of specific deliverables transfers upon payment, and Background IP is correctly retained by AtliQ with a license granted.",
+    "Confidentiality obligations are mutual in substance and include standard survival terms.",
+    "The agreement does not contain any non-compete or non-solicit restrictions.",
+    "Performance and conformance warranties match standard industry practice."
+  ],
+  "notSeen": [
+    "Register built from 17 signed documents. Contracts referenced elsewhere but never collected (e.g. ShopSwift SOW, PixelCraft vendor agreement, intercompany services agreement) can't be checked."
+  ],
+  "documents": [
+    {
+      "docId": "gulfcrown-msa",
+      "title": "Gulf Crown Hotels & Resorts MSA (draft)",
+      "docType": "MSA",
+      "paper": "client",
+      "route": "full_review",
+      "facts": [
+        {
+          "field": "docType",
+          "label": "Document type",
+          "value": "MSA"
+        },
+        {
+          "field": "parties",
+          "label": "Counterparty",
+          "value": "Gulf Crown Hotels & Resorts Co. (Saudi Arabia)"
+        },
+        {
+          "field": "entity",
+          "label": "AtliQ entity (parties)",
+          "value": "Pvt Ltd",
+          "clauseRef": "1.2",
+          "quote": "AtliQ Technologies Pvt Ltd**, a private limited company incorporated under the laws of the Republic of India"
+        },
+        {
+          "field": "invoicing",
+          "label": "AtliQ entity (invoicing)",
+          "value": "Pvt Ltd",
+          "clauseRef": "1.2",
+          "quote": "AtliQ Technologies Pvt Ltd**, a private limited company incorporated under the laws of the Republic of India"
+        },
+        {
+          "field": "law",
+          "label": "Governing law",
+          "value": "laws and regulations in force in the Kingdom of Saudi Arabia",
+          "clauseRef": "14.1",
+          "quote": "This Agreement shall be governed by and construed in accordance with the laws and regulations in force in the Kingdom of Saudi Arabia"
+        },
+        {
+          "field": "forum",
+          "label": "Forum",
+          "value": "competent courts in the City of Riyadh, Kingdom of Saudi Arabia",
+          "clauseRef": "14.3",
+          "quote": "the dispute shall be referred to the competent courts in the City of Riyadh, Kingdom of Saudi Arabia, which shall have exclusive jurisdiction"
+        },
+        {
+          "field": "payment",
+          "label": "Payment",
+          "value": "60 days",
+          "clauseRef": "5.3",
+          "quote": "The Company shall pay each undisputed invoice within sixty (60) days from the date of receipt of a valid invoice"
+        },
+        {
+          "field": "ld",
+          "label": "Delay penalties",
+          "value": "1% of contract_value per week, cap 10% of contract_value, client delays excluded",
+          "clauseRef": "12.2",
+          "quote": "an amount equal to one percent (1%) of the Contract Value for each week or part thereof of delay"
+        },
+        {
+          "field": "liability",
+          "label": "Liability",
+          "value": "each Party's aggregate liability under this Agreement shall not exceed the Contract Value. · uncapped for fraud, wilful misconduct, breach of Clause 7 (Confidentiality), breach of Clause 13 (Data Protection)",
+          "clauseRef": "10.2",
+          "quote": "Save in respect of liability arising from fraud, wilful misconduct, breach of Clause 7 (Confidentiality) or Clause 13 (Data Protection), each Party's aggregate liability under this Agreement shall not exceed the Contract Value"
+        },
+        {
+          "field": "insurance",
+          "label": "Insurance required",
+          "value": "None"
+        },
+        {
+          "field": "annexes",
+          "label": "Annexes referenced",
+          "value": "Schedule 1, Schedule 2, Schedule 3"
+        },
+        {
+          "field": "scope",
+          "label": "Sectors · regions",
+          "value": "hospitality, travel · Saudi Arabia"
+        },
+        {
+          "field": "data",
+          "label": "Data handled",
+          "value": "personal_data"
+        }
+      ],
+      "gate": [
+        {
+          "rule": "entity",
+          "label": "Correct AtliQ entity",
+          "pass": true,
+          "detail": "Pvt Ltd for a Saudi Arabia counterparty",
+          "citation": {
+            "docId": "gulfcrown-msa",
+            "docTitle": "Gulf Crown Hotels & Resorts MSA (draft)",
+            "clauseRef": "1.2",
+            "quote": "AtliQ Technologies Pvt Ltd**, a private limited company incorporated under the laws of the Republic of India",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "invoicing_entity",
+          "label": "Parties = invoicing entity",
+          "pass": true,
+          "detail": "Pvt Ltd throughout",
+          "citation": {
+            "docId": "gulfcrown-msa",
+            "docTitle": "Gulf Crown Hotels & Resorts MSA (draft)",
+            "clauseRef": "1.2",
+            "quote": "AtliQ Technologies Pvt Ltd**, a private limited company incorporated under the laws of the Republic of India",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "governing_law",
+          "label": "Governing law matches entity",
+          "pass": false,
+          "detail": "laws and regulations in force in the Kingdom of Saudi Arabia (Pvt Ltd → Indian law)",
+          "citation": {
+            "docId": "gulfcrown-msa",
+            "docTitle": "Gulf Crown Hotels & Resorts MSA (draft)",
+            "clauseRef": "14.1",
+            "quote": "This Agreement shall be governed by and construed in accordance with the laws and regulations in force in the Kingdom of Saudi Arabia",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "payment",
+          "label": "Payment ≤ 45 days",
+          "pass": false,
+          "detail": "60 days",
+          "citation": {
+            "docId": "gulfcrown-msa",
+            "docTitle": "Gulf Crown Hotels & Resorts MSA (draft)",
+            "clauseRef": "5.3",
+            "quote": "The Company shall pay each undisputed invoice within sixty (60) days from the date of receipt of a valid invoice",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "ld_cap",
+          "label": "Delay penalties capped",
+          "pass": true,
+          "detail": "Cap 10% of contract_value",
+          "citation": {
+            "docId": "gulfcrown-msa",
+            "docTitle": "Gulf Crown Hotels & Resorts MSA (draft)",
+            "clauseRef": "12.2",
+            "quote": "an amount equal to one percent (1%) of the Contract Value for each week or part thereof of delay",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "liability_cap",
+          "label": "Liability capped",
+          "pass": false,
+          "detail": "Capped (each Party's aggregate liability under this Agreement shall not exceed the Contract Value.) but uncapped for: Data Protection",
+          "citation": {
+            "docId": "gulfcrown-msa",
+            "docTitle": "Gulf Crown Hotels & Resorts MSA (draft)",
+            "clauseRef": "10.2",
+            "quote": "Save in respect of liability arising from fraud, wilful misconduct, breach of Clause 7 (Confidentiality) or Clause 13 (Data Protection), each Party's aggregate liability under this Agreement shall not exceed the Contract Value",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "annex:schedule-1",
+          "label": "Schedule 1 attached",
+          "pass": true,
+          "detail": "Attached in this document",
+          "citation": {
+            "docId": "gulfcrown-msa",
+            "docTitle": "Gulf Crown Hotels & Resorts MSA (draft)",
+            "clauseRef": "3.1",
+            "quote": "as further described in Clause 4 and Schedule 1",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "annex:schedule-2",
+          "label": "Schedule 2 attached",
+          "pass": true,
+          "detail": "Attached in this document"
+        },
+        {
+          "rule": "annex:schedule-3",
+          "label": "Schedule 3 attached",
+          "pass": true,
+          "detail": "Attached in this document"
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "bundle": [],
+  "notesFacts": [
+    {
+      "id": "gulfcrown-fact-1",
+      "statement": "Gulf Crown deal deadline is 10 October because Faisal has a summit on the 14th.",
+      "category": "deadline",
+      "noteId": "tracker",
+      "noteTitle": "Tracker notes",
+      "quote": "sign by 10 Oct!! Faisal has a summit on the 14th. biggest deal of the year (Bhavin",
+      "complianceEvent": false,
+      "whyItMatters": "Establishes the signing deadline required by the client's schedule."
+    },
+    {
+      "id": "gulfcrown-fact-2",
+      "statement": "Counsel needs every signed contract with restrictive covenants, exclusivity, or MFN before advising on Gulf Crown.",
+      "category": "commitment",
+      "noteId": "note-2026-09-25",
+      "noteTitle": "Call with counsel (Mehta Rao): Gulf Crown / Al Noor",
+      "quote": "she wants EVERY signed contract w/ restrictive covenants, exclusivity, MFN — \"I can't advise on one in isolation",
+      "complianceEvent": false,
+      "whyItMatters": "Requires locating and providing prior restrictive covenant documentation to external counsel."
+    }
+  ],
+  "complianceCandidate": null,
+  "similar": [
+    {
+      "clauseType": "payment",
+      "docId": "gulfcrown-msa",
+      "clauseRef": "§5",
+      "quote": "5.1 In consideration of the Services, the Company shall pay the Service Provider the Contract Value in accordance with the payment schedule in Schedule 3.\n5.2 The Service Provider shall submit an invoice upon the Company's written acceptance of each Milestone. Invoices shall be addressed to the Company's Finance Department and shall reference the Agreement Reference number.\n5.3 The Company shall pay each undisputed invoice within sixty (60) days from the date of receipt of a valid invoice.\n5.4 All fees are exclusive of Value Added Tax. Where the Company is required by law to withhold any tax from payments, the Company shall deduct such tax and provide the Service Provider with the relevant w",
+      "hits": [
+        {
+          "docId": "alnoor-msa",
+          "counterparty": "Al Noor Hospitality Group",
+          "date": "2025-03-15",
+          "clauseNo": "5",
+          "heading": "FEES AND PAYMENT",
+          "label": "untagged",
+          "score": 0.928,
+          "text": "5.1 The total Fees for SOW-1 are **USD 185,000** (one hundred and eighty-five thousand United States Dollars), payable against Milestones as set out in Schedule 1.\n\n5.2 The Supplier shall invoice upon achievement of each Milestone. Invoices are payable within thirty (30) days of receipt.\n\n5.3 All Fees are exclusive of VAT and any other applicable taxes. Where the Client is required by law to withhold tax, it shall provide the Supplier with the relevant withholding certificate.\n\n5.4 Late payments shall bear interest at one percent (1%) per month from the due date until the date of payment.\n\n5.5 The Client may dispute any invoice in good faith by written notice within ten (10) Business Days of receipt, and shall pay the undisputed portion by the due date.",
+          "differs": "sixty (60) days payment term instead of thirty (30) days; no late payment interest clause",
+          "alsoIn": []
+        },
+        {
+          "docId": "trustline-msa",
+          "counterparty": "Trustline NBFC",
+          "date": "2026-08-15",
+          "clauseNo": "4",
+          "heading": "FEES AND PAYMENT",
+          "label": "standard",
+          "labelNote": "45-day payment: the negotiated maximum (90 → 45)",
+          "score": 0.913,
+          "text": "4.1 The total fees for the Services are **USD 48,000** (United States Dollars Forty-Eight Thousand only), payable on completion of Milestones as set out in Annexure A.\n\n4.2 The Service Provider shall raise an invoice upon completion of each Milestone. The Company shall pay each undisputed invoice within forty-five (45) days of receipt of the invoice.\n\n4.3 All fees are exclusive of GST. The Company shall be entitled to deduct TDS as applicable.\n\n4.4 Any disputed amount shall be notified within ten (10) days of receipt of invoice, and the Parties shall resolve such dispute in good faith within thirty (30) days.",
+          "differs": "sixty (60) days payment term instead of forty-five (45) days; no 10-day dispute notification clause",
+          "alsoIn": []
+        },
+        {
+          "docId": "paytrack-msa",
+          "counterparty": "PayTrack Technologies",
+          "date": "2025-01-22",
+          "clauseNo": "4",
+          "heading": "FEES AND PAYMENT",
+          "label": "untagged",
+          "score": 0.9,
+          "text": "4.1 The total fees under SOW-1 are **USD 71,000** (United States Dollars Seventy-One Thousand only), payable in accordance with the milestone schedule in SOW-1.\n\n4.2 AtliQ shall invoice upon completion of each milestone. PayTrack shall pay each undisputed invoice within thirty (30) days of receipt.\n\n4.3 Fees are exclusive of GST. PayTrack may deduct TDS in accordance with Applicable Law.",
+          "differs": "sixty (60) days payment term instead of thirty (30) days; requires written acceptance of Milestones before invoicing",
+          "alsoIn": [
+            "Acme Retail Group (2025-03)"
+          ]
+        }
+      ]
+    },
+    {
+      "clauseType": "confidentiality",
+      "docId": "gulfcrown-msa",
+      "clauseRef": "§7",
+      "quote": "7.1 Each Party shall keep confidential all Confidential Information of the other Party and shall not disclose it to any third party without prior written consent, save to its employees, advisers and subcontractors who need to know it for the purposes of this Agreement and who are bound by obligations of confidentiality no less stringent than those herein.\n7.2 The obligations in this Clause 7 shall not apply to information which is or becomes publicly available other than through breach of this Agreement, was lawfully in the receiving Party's possession prior to disclosure, or is required to be disclosed by law or by a competent authority.\n7.3 The obligations in this Clause 7 shall survive fo",
+      "hits": [
+        {
+          "docId": "crestline-msa",
+          "counterparty": "Crestline Retail Inc",
+          "date": "2024-08-01",
+          "clauseNo": "7",
+          "heading": "CONFIDENTIALITY",
+          "label": "untagged",
+          "score": 0.96,
+          "text": "7.1 Each Party shall hold the other Party's Confidential Information in confidence, use it only to perform or receive the Services, and disclose it only to its personnel and advisors with a need to know who are bound by obligations at least as protective.\n\n7.2 The obligations in Section 7.1 do not apply to information that is or becomes publicly available without breach, was known to the recipient prior to disclosure, is independently developed, or is rightfully received from a third party.\n\n7.3 These obligations survive for three (3) years following termination, and indefinitely for trade secrets.",
+          "differs": "no three (3) year confidentiality survival limitation",
+          "alsoIn": [
+            "Northwind Logistics (2025-06)",
+            "CloudSpan Technologies (2025-09)",
+            "Acme Retail Group (2025-03)"
+          ]
+        },
+        {
+          "docId": "alnoor-msa",
+          "counterparty": "Al Noor Hospitality Group",
+          "date": "2025-03-15",
+          "clauseNo": "8",
+          "heading": "CONFIDENTIALITY",
+          "label": "untagged",
+          "score": 0.945,
+          "text": "8.1 \"**Confidential Information**\" means all information disclosed by one Party to the other, whether before or after the Effective Date, that is marked confidential or would reasonably be regarded as confidential, including Client Data, pricing strategies, rate plans, occupancy forecasts and business plans.\n\n8.2 Each Party shall keep the other's Confidential Information confidential, use it only for the purposes of this Agreement, and disclose it only to its employees and advisers who need to know it and are bound by equivalent obligations.\n\n8.3 These obligations do not apply to information that is public other than through breach, was lawfully known before disclosure, is independently developed, or is required to be disclosed by law.\n\n8.4 The obligations in this Clause 8 continue for five (5) years after expiry or termination.",
+          "differs": "lacks a detailed definition of Confidential Information",
+          "alsoIn": []
+        },
+        {
+          "docId": "trustline-msa",
+          "counterparty": "Trustline NBFC",
+          "date": "2026-08-15",
+          "clauseNo": "8",
+          "heading": "CONFIDENTIALITY",
+          "label": "untagged",
+          "score": 0.926,
+          "text": "8.1 Each Party shall hold the other Party's confidential information in strict confidence and shall not disclose it except to its employees, auditors and advisers on a need-to-know basis.\n\n8.2 The Service Provider acknowledges that Company Data includes customer information protected under the RBI Master Direction – Know Your Customer and shall not use it for any purpose other than performing the Services.\n\n8.3 This Clause 8 shall survive for five (5) years after termination.",
+          "differs": "lacks a five (5) year confidentiality survival limitation",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "ip",
+      "docId": "gulfcrown-msa",
+      "clauseRef": "§8",
+      "quote": "8.1 All Deliverables specifically created for the Company under this Agreement shall, upon payment in full, become the property of the Company.\n8.2 The Service Provider shall retain ownership of its pre-existing tools, methodologies and know-how (\"**Background IP**\"). To the extent any Background IP is incorporated into the Deliverables, the Service Provider grants the Company a non-exclusive, perpetual, royalty-free licence to use such Background IP solely as part of the Deliverables for the Company's internal business purposes.\n8.3 The Company shall retain all rights in its data, including Guest Data, and in any materials provided by the Company to the Service Provider.",
+      "hits": [
+        {
+          "docId": "orbit-msa",
+          "counterparty": "Orbit Travels Pvt Ltd",
+          "date": "2022-07-01",
+          "clauseNo": "5",
+          "heading": "INTELLECTUAL PR0PERTY",
+          "label": "untagged",
+          "score": 0.947,
+          "text": "5.1 All deliverables developed specifically for the Client shall be the property of the Client\nupon full payment. The Service Provider retains its pre-existing tools and know-how.",
+          "differs": "adds a license grant for incorporated Background IP",
+          "alsoIn": [
+            "Trustline NBFC (2026-08)",
+            "Al Noor Hospitality Group (2025-03)",
+            "Acme Retail Group (2025-03)"
+          ]
+        },
+        {
+          "docId": "crestline-msa",
+          "counterparty": "Crestline Retail Inc",
+          "date": "2024-08-01",
+          "clauseNo": "8",
+          "heading": "INTELLECTUAL PROPERTY",
+          "label": "untagged",
+          "score": 0.935,
+          "text": "8.1 Upon payment, Crestline shall own all right, title and interest in the Deliverables.\n\n8.2 Supplier retains all rights in its pre-existing materials, tools and know-how (\"**Supplier Materials**\"). To the extent Supplier Materials are incorporated in a Deliverable, Supplier grants Crestline a non-exclusive, perpetual, royalty-free license to use them as part of such Deliverable.",
+          "differs": "includes a clause explicitly retaining Company rights in its data",
+          "alsoIn": []
+        },
+        {
+          "docId": "paytrack-msa",
+          "counterparty": "PayTrack Technologies",
+          "date": "2025-01-22",
+          "clauseNo": "8",
+          "heading": "INTELLECTUAL PROPERTY",
+          "label": "untagged",
+          "score": 0.929,
+          "text": "8.1 Upon full payment, all intellectual property in the Deliverables developed specifically for PayTrack shall vest in PayTrack.\n\n8.2 AtliQ retains ownership of its pre-existing materials, tools and know-how and grants PayTrack a perpetual, non-exclusive, royalty-free licence to use such materials as incorporated in the Deliverables.",
+          "differs": "specifically limits the Background IP license to internal business purposes",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "liability",
+      "docId": "gulfcrown-msa",
+      "clauseRef": "§10",
+      "quote": "10.1 Neither Party shall be liable to the other for any indirect, special or consequential loss, or loss of profits, arising out of or in connection with this Agreement.\n10.2 Save in respect of liability arising from fraud, wilful misconduct, breach of Clause 7 (Confidentiality) or Clause 13 (Data Protection), each Party's aggregate liability under this Agreement shall not exceed the Contract Value.",
+      "hits": [
+        {
+          "docId": "paytrack-msa",
+          "counterparty": "PayTrack Technologies",
+          "date": "2025-01-22",
+          "clauseNo": "11",
+          "heading": "LIMITATION OF LIABILITY",
+          "label": "untagged",
+          "score": 0.946,
+          "text": "11.1 Neither Party shall be liable for any indirect, special, incidental or consequential damages, or loss of profits, revenue or goodwill.\n\n11.2 Each Party's total aggregate liability under or in connection with this Agreement shall not exceed the total fees paid or payable under the SOW giving rise to the claim.\n\n11.3 The limitations in this Clause 11 shall not apply to liability for fraud or wilful misconduct.",
+          "differs": "liability cap is Contract Value instead of fees paid/payable under SOW, with confidentiality and data protection exclusions",
+          "alsoIn": [
+            "Northwind Logistics (2025-06)",
+            "Trustline NBFC (2026-08)",
+            "CloudSpan Technologies (2025-09)",
+            "Acme Retail Group (2025-03)",
+            "Al Noor Hospitality Group (2025-03)"
+          ]
+        },
+        {
+          "docId": "sunrise-msa",
+          "counterparty": "Sunrise Foods",
+          "date": "2025-04-18",
+          "clauseNo": "13",
+          "heading": "LIMITATION OF LIABILITY",
+          "label": "standard",
+          "labelNote": "AtliQ-friendly master: capped liability, service credits capped at 5%",
+          "score": 0.93,
+          "text": "13.1 Neither Party shall be liable for indirect, consequential or special losses or loss of profits.\n\n13.2 Each Party's aggregate liability under an SOW shall not exceed the Fees paid or payable under that SOW.",
+          "differs": "cap is Contract Value instead of Fees paid/payable under SOW, and excludes fraud, misconduct, confidentiality, data protection",
+          "alsoIn": []
+        },
+        {
+          "docId": "rohan-ica",
+          "counterparty": "Rohan Iyer",
+          "date": "2025-04-28",
+          "clauseNo": "8",
+          "heading": "LIABILITY",
+          "label": "standard",
+          "labelNote": "Fair freelancer terms: 30-day pay, mutual cap, mutual 15-day exit",
+          "score": 0.915,
+          "text": "8.1 Each party's aggregate liability under this Agreement shall not exceed the total fees paid or payable to the Contractor in the twelve (12) months preceding the claim, except for breach of Clause 6 or fraud.\n\n8.2 Neither party is liable for indirect or consequential loss.",
+          "differs": "liability cap is Contract Value instead of prior 12 months' fees, with confidentiality and data protection exclusions",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "indemnity",
+      "docId": "gulfcrown-msa",
+      "clauseRef": "§11",
+      "quote": "11.1 The Service Provider shall indemnify the Company against all losses, claims and expenses arising from any claim by a third party that the Deliverables infringe the intellectual property rights of such third party.\n11.2 The Company shall indemnify the Service Provider against claims arising from the Service Provider's use, in accordance with this Agreement, of materials supplied by the Company.",
+      "hits": [
+        {
+          "docId": "alnoor-msa",
+          "counterparty": "Al Noor Hospitality Group",
+          "date": "2025-03-15",
+          "clauseNo": "15",
+          "heading": "INDEMNITY",
+          "label": "untagged",
+          "score": 0.952,
+          "text": "15.1 The Supplier shall indemnify the Client against losses arising from any third-party claim that the Deliverables (excluding Client materials) infringe that third party's intellectual property rights.\n\n15.2 The Client shall indemnify the Supplier against losses arising from any third-party claim that Client Data or Client materials infringe that third party's rights.\n\n15.3 The indemnified Party shall promptly notify the indemnifying Party, allow it conduct of the defence, and provide reasonable assistance.",
+          "differs": "lacks defense procedures (prompt notification, conduct of defense, assistance)",
+          "alsoIn": [
+            "Northwind Logistics (2025-06)",
+            "CloudSpan Technologies (2025-09)"
+          ]
+        },
+        {
+          "docId": "orbit-msa",
+          "counterparty": "Orbit Travels Pvt Ltd",
+          "date": "2022-07-01",
+          "clauseNo": "9",
+          "heading": "INDEMNITY",
+          "label": "untagged",
+          "score": 0.928,
+          "text": "9.1 The Service Provider shall indemnify the Client against third party claims of IP infringement\narising from the deliverables. [illegible] ... own negligence or wilful misconduct.",
+          "differs": "adds mutual IP indemnities, including Company indemnity for materials supplied",
+          "alsoIn": []
+        },
+        {
+          "docId": "acme-msa",
+          "counterparty": "Acme Retail Group",
+          "date": "2025-03-10",
+          "clauseNo": "11",
+          "heading": "INDEMNITY",
+          "label": "standard",
+          "labelNote": "Mutual indemnity",
+          "score": 0.921,
+          "text": "11.1 Each Party (\"**Indemnifying Party**\") shall indemnify the other against losses arising from third-party claims caused by the Indemnifying Party's breach of confidentiality, infringement of third-party intellectual property rights, or gross negligence or wilful misconduct.",
+          "differs": "replaces a single mutual indemnity with separate, specific IP indemnities for deliverables and supplied materials",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "ld",
+      "docId": "gulfcrown-msa",
+      "clauseRef": "§12",
+      "quote": "12.1 Time shall be of the essence in respect of the Milestone dates set out in Schedule 3.\n12.2 Should the Service Provider fail to achieve any Milestone by its scheduled completion date, the Service Provider shall pay to the Company, by way of liquidated damages and not as a penalty, an amount equal to one percent (1%) of the Contract Value for each week or part thereof of delay.\n12.3 The aggregate liquidated damages payable under this Clause 12 shall not exceed ten percent (10%) of the Contract Value.\n12.4 The Company may deduct any liquidated damages due from any amount payable to the Service Provider under this Agreement.\n12.5 The Service Provider shall not be liable for delay to the ext",
+      "hits": [
+        {
+          "docId": "acme-msa",
+          "counterparty": "Acme Retail Group",
+          "date": "2025-03-10",
+          "clauseNo": "7",
+          "heading": "DELAY AND LIQUIDATED DAMAGES",
+          "label": "standard",
+          "labelNote": "Origin of the LD playbook: 0.5% of milestone/week, 5% cap, client delays excluded (Mar 2025)",
+          "score": 0.945,
+          "text": "7.1 If the Service Provider fails to complete a Milestone by the agreed date for reasons solely attributable to the Service Provider, the Service Provider shall pay liquidated damages at the rate of 0.5% (half percent) of the Milestone Fee of the delayed Milestone for each complete week of delay.\n\n7.2 The aggregate liquidated damages in respect of any Milestone shall not exceed 5% (five percent) of the Milestone Fee of that Milestone.\n\n7.3 No liquidated damages shall be payable where the delay is caused by the Client, including delayed access to data or systems, delayed review of Deliverables, or changes in scope, or by a Force Majeure event.\n\n7.4 The Parties agree that the liquidated damages are a genuine pre-estimate of loss and shall be the Client's sole and exclusive remedy for delay.",
+          "differs": "higher 10% cap (vs 5%) on liquidated damages, calculated on Contract Value instead of Milestone Fee",
+          "alsoIn": [
+            "Trustline NBFC (2026-08)",
+            "Northwind Logistics (2025-06)"
+          ]
+        },
+        {
+          "docId": "brightwater-msa",
+          "counterparty": "Brightwater Insurance Inc",
+          "date": "2025-11-28",
+          "clauseNo": "9",
+          "heading": "DELAY AND LIQUIDATED DAMAGES",
+          "label": "accident",
+          "labelNote": "Signed on a phone in 4 minutes: 1%/day uncapped LDs, no client-delay exclusion, group set-off, English law on a US entity. Cost $9k + $14.2k legal",
+          "score": 0.932,
+          "text": "9.1 If the Supplier fails to achieve any Key Date, the Supplier shall pay to the Customer liquidated damages in the amount of one per cent (1%) of the Contract Value for each day or part day by which the relevant Key Date is missed.\n\n9.2 Liquidated damages under clause 9.1 shall be payable in addition to any other right or remedy available to the Customer under this Agreement or at law, and the Customer may deduct such liquidated damages from any sums due to the Supplier.\n\n9.3 The Supplier acknowledges that the liquidated damages set out in this clause 9 are proportionate to the Customer's legitimate interest in the timely delivery of the Services.",
+          "differs": "adds a 10% aggregate cap and weekly calculation instead of per-day calculation without a cap",
+          "alsoIn": []
+        },
+        {
+          "docId": "alnoor-msa",
+          "counterparty": "Al Noor Hospitality Group",
+          "date": "2025-03-15",
+          "clauseNo": "10",
+          "heading": "DELIVERY, ACCEPTANCE AND LIQUIDATED DAMAGES",
+          "label": "exception",
+          "labelNote": "One-off: \"strategic exception for Al Noor only, not our new standard\" (cap 10% of total fees)",
+          "score": 0.909,
+          "text": "10.1 The Supplier shall use all reasonable endeavours to achieve each Milestone by the date set out in the relevant SOW.\n\n10.2 Each Deliverable shall be subject to acceptance testing by the Client within ten (10) Business Days of delivery against the acceptance criteria in the SOW. Deliverables not rejected in writing within that period shall be deemed accepted.\n\n10.3 If the Supplier fails to achieve a Milestone by its due date for reasons attributable to the Supplier, the Supplier shall pay to the Client, as liquidated damages, one percent (1%) of the Fees payable for the affected Milestone for each complete week of delay, provided that the aggregate liquidated damages payable under this Agreement shall not exceed ten percent (10%) of the total Fees payable under this Agreement.\n\n10.4 The Parties agree that the liquidated damages in Clause 10.3 are a genuine pre-estimate of loss. No liquidated damages shall be payable for delay caused by the Client, its contractors, or a Force Majeure Event.",
+          "differs": "liquidated damages calculated on Contract Value instead of affected Milestone Fees, capped at 10%",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "data_protection",
+      "docId": "gulfcrown-msa",
+      "clauseRef": "§13",
+      "quote": "13.1 The Service Provider shall process Guest Data only on the documented instructions of the Company and in compliance with the Personal Data Protection Law issued by Royal Decree No. M/19 and its Implementing Regulations, and any other applicable law in the Kingdom.\n13.2 Guest Data shall be hosted within the Kingdom of Saudi Arabia unless the Company provides prior written approval for any transfer outside the Kingdom.\n13.3 The Service Provider shall implement appropriate technical and organisational measures to protect Guest Data and shall notify the Company of any personal data breach within seventy-two (72) hours of becoming aware of it.",
+      "hits": [
+        {
+          "docId": "alnoor-msa",
+          "counterparty": "Al Noor Hospitality Group",
+          "date": "2025-03-15",
+          "clauseNo": "16",
+          "heading": "DATA PROTECTION",
+          "label": "untagged",
+          "score": 0.926,
+          "text": "16.1 Each Party shall comply with applicable data protection laws, including the DIFC Data Protection Law No. 5 of 2020 and the UAE Federal Decree-Law No. 45 of 2021, to the extent applicable.\n\n16.2 The Supplier shall process Guest Data only on the documented instructions of the Client, implement appropriate technical and organisational measures, and notify the Client without undue delay (and in any event within forty-eight (48) hours) of any personal data breach.\n\n16.3 The Supplier shall not transfer Guest Data outside the UAE without the Client's prior written consent. Any Guest Data accessed from India shall be accessed remotely from UAE-hosted environments only.",
+          "differs": "governed by Saudi Arabian Personal Data Protection Law instead of DIFC/UAE laws; restricts hosting to Saudi Arabia",
+          "alsoIn": []
+        },
+        {
+          "docId": "trustline-msa",
+          "counterparty": "Trustline NBFC",
+          "date": "2026-08-15",
+          "clauseNo": "13",
+          "heading": "DATA PROTECTION AND AUDIT",
+          "label": "untagged",
+          "score": 0.899,
+          "text": "13.1 The Service Provider shall comply with the Digital Personal Data Protection Act, 2023, the Information Technology Act, 2000 and applicable RBI directions in processing Company Data, and shall store Company Data only in India.\n\n13.2 The Service Provider shall report any security incident to the Company within six (6) hours of detection.\n\n13.3 The Company, its auditors and the Reserve Bank of India shall have the right to inspect and audit the Service Provider's records and facilities relating to the Services.",
+          "differs": "governed by Saudi Arabian law instead of DPDP Act 2023; lacks audit rights and 6-hour incident reporting",
+          "alsoIn": []
+        },
+        {
+          "docId": "acme-msa",
+          "counterparty": "Acme Retail Group",
+          "date": "2025-03-10",
+          "clauseNo": "13",
+          "heading": "DATA PROTECTION",
+          "label": "untagged",
+          "score": 0.895,
+          "text": "13.1 The Service Provider shall process personal data received from the Client only for the purpose of the Services and in compliance with the Digital Personal Data Protection Act, 2023 and the rules made thereunder, as and when in force, and shall implement reasonable security practices.",
+          "differs": "governed by Saudi Arabian law instead of DPDP Act 2023; restricts hosting to Saudi Arabia",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "governing_law",
+      "docId": "gulfcrown-msa",
+      "clauseRef": "§14",
+      "quote": "14.1 This Agreement shall be governed by and construed in accordance with the laws and regulations in force in the Kingdom of Saudi Arabia.\n14.2 The Parties shall seek to resolve any dispute arising out of or in connection with this Agreement amicably through negotiation between senior executives within thirty (30) days.\n14.3 Failing amicable resolution, the dispute shall be referred to the competent courts in the City of Riyadh, Kingdom of Saudi Arabia, which shall have exclusive jurisdiction.",
+      "hits": [
+        {
+          "docId": "alnoor-msa",
+          "counterparty": "Al Noor Hospitality Group",
+          "date": "2025-03-15",
+          "clauseNo": "21",
+          "heading": "GOVERNING LAW AND DISPUTE RESOLUTION",
+          "label": "concession",
+          "labelNote": "DIFC law accepted as the client's group standard",
+          "score": 0.927,
+          "text": "21.1 This Agreement and any non-contractual obligations arising out of it shall be governed by the laws of the Dubai International Financial Centre.\n\n21.2 The Parties shall first attempt to resolve any dispute through good-faith negotiation between senior executives for thirty (30) days.\n\n21.3 Failing resolution, the courts of the Dubai International Financial Centre shall have exclusive jurisdiction.",
+          "differs": "governing law is Saudi Arabia instead of DIFC; courts of Riyadh have jurisdiction instead of DIFC courts",
+          "alsoIn": []
+        },
+        {
+          "docId": "cloudspan-spa",
+          "counterparty": "CloudSpan Technologies",
+          "date": "2025-09-01",
+          "clauseNo": "15",
+          "heading": "GOVERNING LAW AND DISPUTE RESOLUTION",
+          "label": "concession",
+          "labelNote": "Singapore law / SIAC accepted",
+          "score": 0.906,
+          "text": "15.1 This Agreement is governed by the laws of the Republic of Singapore.\n\n15.2 The Parties shall first attempt to resolve any dispute through good-faith discussions between senior executives for thirty (30) days.\n\n15.3 Any dispute not so resolved shall be referred to and finally resolved by arbitration administered by the Singapore International Arbitration Centre (\"**SIAC**\") under the SIAC Rules in force at the time. The seat of arbitration shall be Singapore. The tribunal shall consist of one (1) arbitrator. The language of arbitration shall be English.",
+          "differs": "governing law is Saudi Arabia (Riyadh courts) instead of Singapore (SIAC arbitration)",
+          "alsoIn": []
+        },
+        {
+          "docId": "paytrack-msa",
+          "counterparty": "PayTrack Technologies",
+          "date": "2025-01-22",
+          "clauseNo": "15",
+          "heading": "GOVERNING LAW AND DISPUTE RESOLUTION",
+          "label": "untagged",
+          "score": 0.897,
+          "text": "15.1 This Agreement shall be governed by the laws of India.\n\n15.2 Disputes not resolved by negotiation between senior management within thirty (30) days shall be referred to arbitration by a sole arbitrator under the Arbitration and Conciliation Act, 1996. The seat and venue of arbitration shall be Pune, and the language shall be English.",
+          "differs": "governing law is Saudi Arabia (Riyadh courts) instead of India (arbitration in Pune)",
+          "alsoIn": [
+            "Acme Retail Group (2025-03)",
+            "Trustline NBFC (2026-08)",
+            "Sunrise Foods (2025-04)"
+          ]
+        }
+      ]
+    }
+  ],
+  "counselPack": null,
+  "errors": [],
+  "usage": {
+    "calls": 2,
+    "cachedCalls": 4,
+    "inputTokens": 5775,
+    "outputTokens": 5242,
+    "ms": 1440725
+  }
+}

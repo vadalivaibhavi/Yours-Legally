@@ -1,0 +1,28 @@
+{
+  "deals": [
+    "travelhub",
+    "rheinwerk",
+    "sunrise-sow2",
+    "datavane",
+    "finserve",
+    "loopmart",
+    "ortiz",
+    "marcus",
+    "kriti"
+  ],
+  "calls": 6,
+  "cached": 23,
+  "inTok": 8728,
+  "outTok": 2623,
+  "rows": [
+    "travelhub     HOLD                0B 2H 2M  147s  ERR Conflict check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your cu",
+    "rheinwerk     HOLD                0B 4H 3M  150s  ERR Playbook check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your cu",
+    "sunrise-sow2  SIGN                0B 0H 0M  88s  ",
+    "datavane      HOLD                0B 0H 1M  102s  ERR Playbook check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your cu",
+    "finserve      HOLD                0B 0H 0M  20s  ERR Conflict check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your cu",
+    "loopmart      HOLD                0B 0H 0M  6s  ERR NDA check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your current",
+    "ortiz         HOLD                0B 2H 1M  5s  ERR NDA check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your current",
+    "marcus        HOLD                0B 2H 2M  4s  ERR Playbook check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your cu",
+    "kriti         HOLD                0B 3H 0M  4s  ERR Playbook check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your cu"
+  ]
+}

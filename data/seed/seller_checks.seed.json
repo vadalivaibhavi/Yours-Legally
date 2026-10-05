@@ -1,0 +1,28 @@
+{
+  "_source": "Synthetic seller deal check (declared in README): Jay's kick-off check for BlueOrchid, from the tracker note \"just India hotels I think\" (C-027). Drives EV-15 / FR-20 deal-facts mismatch.",
+  "checks": [
+    {
+      "id": "seed-blueorchid-1",
+      "dealId": "blueorchid",
+      "by": "Jay",
+      "at": "2026-09-21T10:00:00.000Z",
+      "asOf": "2026-09-21",
+      "registerVersion": "pre-register",
+      "briefVersionAtCheck": 0,
+      "input": {
+        "client": "BlueOrchid Hotels",
+        "sectors": ["hospitality"],
+        "regions": ["India"],
+        "services": ["guest analytics pilot", "revenue management pilot"],
+        "rates": [],
+        "assets": [],
+        "dataHandling": "Pune team, hotel PMS data",
+        "partnership": false,
+        "freeText": "Just India hotels, pilot before Diwali"
+      },
+      "items": [
+        { "item": "Sector & regions: hospitality · India", "status": "clear", "meaning": "No AtliQ commitment restricts hospitality work in India.", "todo": "Re-check if any property outside India is added." }
+      ]
+    }
+  ]
+}

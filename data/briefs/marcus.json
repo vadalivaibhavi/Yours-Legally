@@ -1,0 +1,611 @@
+{
+  "dealId": "marcus",
+  "version": 1,
+  "createdAt": "2026-10-05T04:15:39.414Z",
+  "trigger": "initial review",
+  "inputsHash": "26a7fb05ddf95a8adb59a5db26cbd41b",
+  "documentIds": [
+    "marcus-ica"
+  ],
+  "registerVersion": "reg-2026-10-04-57+r0",
+  "playbookVersion": "pb-v1-2026-10-04",
+  "models": [
+    "gemini-flash-lite-latest"
+  ],
+  "promptVersion": "p1",
+  "route": "full_review",
+  "verdict": "HOLD",
+  "headline": "HOLD: 1 missing input, 2 must-fix items",
+  "nextAction": "Jay (fix before sending): Name AtliQ Inc in the parties clause, invoicing clause and signature block and use the US template (US law, USD).",
+  "findings": [
+    {
+      "key": "gate:entity",
+      "category": "gate",
+      "topic": "entity",
+      "title": "Wrong AtliQ entity: Pvt Ltd instead of Inc",
+      "impact": "Names AtliQ Pvt Ltd, but the end client is in USA: AtliQ Inc is the entity for US work, so this should be AtliQ Inc. The entity decides who invoices, the tax regime and the bank account; a mismatch caused two payment delays in 2025.",
+      "severity": "high",
+      "confidence": "high",
+      "needsJudgment": false,
+      "owner": "Jay (fix before sending)",
+      "resolution": "fix_before_sending",
+      "docId": "marcus-ica",
+      "citations": [
+        {
+          "docId": "marcus-ica",
+          "docTitle": "Marcus Reed contractor agreement (AtliQ draft)",
+          "clauseRef": "Preamble",
+          "quote": "AtliQ Technologies Pvt Ltd**, a company incorporated under the Companies Act, 2013",
+          "role": "incoming"
+        }
+      ],
+      "standard": "AtliQ Inc contracts with US clients only; AtliQ Technologies Pvt Ltd with everyone else.",
+      "counterPosition": "Name AtliQ Inc in the parties clause, invoicing clause and signature block and use the US template (US law, USD)."
+    },
+    {
+      "key": "dependency:lakeshore",
+      "category": "dependency",
+      "topic": "dependency",
+      "title": "Depends on Lakeshore Grocers: MSA + SOW-1 + rate card, which is not signed (latest verdict HOLD)",
+      "impact": "Sending this commits AtliQ to a vendor/contractor before the client contract it serves is resolved. HOLD: 1 MFN pricing blocker, 2 redlines, and 1 missing subcontracting consent.",
+      "severity": "high",
+      "confidence": "high",
+      "needsJudgment": false,
+      "owner": "Karandeep",
+      "resolution": "business_fix",
+      "citations": []
+    },
+    {
+      "key": "gate:governing_law",
+      "category": "gate",
+      "topic": "governing_law",
+      "title": "Governing law: laws of India",
+      "impact": "AtliQ's position is US law for AtliQ Inc. Client law has been accepted before to win a deal (DIFC, English, Singapore): a judgment call, not a blocker.",
+      "severity": "medium",
+      "confidence": "high",
+      "needsJudgment": true,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "marcus-ica",
+      "citations": [
+        {
+          "docId": "marcus-ica",
+          "docTitle": "Marcus Reed contractor agreement (AtliQ draft)",
+          "clauseRef": "11.1",
+          "quote": "This Agreement is governed by the laws of India",
+          "role": "incoming"
+        }
+      ],
+      "standard": "Indian law for Pvt Ltd; US law for Inc.",
+      "counterPosition": "Law of the relevant US state; US forum."
+    },
+    {
+      "key": "playbook:payment",
+      "category": "playbook",
+      "topic": "payment",
+      "title": "Payment: 60 days",
+      "impact": "60-day payment against AtliQ's 30-day standard (45 max).",
+      "severity": "medium",
+      "confidence": "high",
+      "needsJudgment": false,
+      "owner": "Jay (fix before sending)",
+      "resolution": "fix_before_sending",
+      "docId": "marcus-ica",
+      "citations": [
+        {
+          "docId": "marcus-ica",
+          "docTitle": "Marcus Reed contractor agreement (AtliQ draft)",
+          "clauseRef": "4.3",
+          "quote": "Payment shall be made within sixty (60) days after the date of timesheet approval",
+          "role": "incoming"
+        }
+      ],
+      "standard": "30 days from invoice; 45 days is the negotiated maximum.",
+      "counterPosition": "Payment within 30 days of receipt of invoice (45 days maximum); no pay-when-paid.",
+      "precedents": [
+        {
+          "docId": "trustline-msa",
+          "counterparty": "Trustline NBFC",
+          "clauseRef": "§4",
+          "label": "standard",
+          "note": "Negotiated 90 → 45 days (the maximum)"
+        },
+        {
+          "docId": "ref-negotiation-notes",
+          "counterparty": "PixelCraft Studio",
+          "clauseRef": "negotiation notes",
+          "label": "standard",
+          "note": "AtliQ's own paper: 60-day payment changed to 30 for a 6-person agency (Oct 2025)"
+        }
+      ]
+    }
+  ],
+  "fine": [
+    "Parties = invoicing entity: Pvt Ltd throughout",
+    "Liability capped: The Company's liability to the Contractor shall not exceed the fees payable for the preceding three (3) months."
+  ],
+  "notSeen": [
+    "No meeting notes attached to this deal.",
+    "Register built from 17 signed documents. Contracts referenced elsewhere but never collected (e.g. ShopSwift SOW, PixelCraft vendor agreement, intercompany services agreement) can't be checked.",
+    "Playbook check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more infor)"
+  ],
+  "documents": [
+    {
+      "docId": "marcus-ica",
+      "title": "Marcus Reed contractor agreement (AtliQ draft)",
+      "docType": "ICA",
+      "paper": "atliq",
+      "route": "full_review",
+      "facts": [
+        {
+          "field": "docType",
+          "label": "Document type",
+          "value": "ICA"
+        },
+        {
+          "field": "parties",
+          "label": "Counterparty",
+          "value": "Marcus Reed (USA)"
+        },
+        {
+          "field": "entity",
+          "label": "AtliQ entity (parties)",
+          "value": "Pvt Ltd",
+          "clauseRef": "Preamble",
+          "quote": "AtliQ Technologies Pvt Ltd**, a company incorporated under the Companies Act, 2013"
+        },
+        {
+          "field": "invoicing",
+          "label": "AtliQ entity (invoicing)",
+          "value": "Pvt Ltd",
+          "clauseRef": "Preamble",
+          "quote": "AtliQ Technologies Pvt Ltd**, a company incorporated under the Companies Act, 2013"
+        },
+        {
+          "field": "law",
+          "label": "Governing law",
+          "value": "laws of India",
+          "clauseRef": "11.1",
+          "quote": "This Agreement is governed by the laws of India"
+        },
+        {
+          "field": "forum",
+          "label": "Forum",
+          "value": "courts at Pune, Maharashtra",
+          "clauseRef": "11.2",
+          "quote": "The courts at Pune, Maharashtra shall have exclusive jurisdiction"
+        },
+        {
+          "field": "payment",
+          "label": "Payment",
+          "value": "60 days",
+          "clauseRef": "4.3",
+          "quote": "Payment shall be made within sixty (60) days after the date of timesheet approval"
+        },
+        {
+          "field": "ld",
+          "label": "Delay penalties",
+          "value": "None"
+        },
+        {
+          "field": "liability",
+          "label": "Liability",
+          "value": "The Company's liability to the Contractor shall not exceed the fees payable for the preceding three (3) months.",
+          "clauseRef": "10.2",
+          "quote": "The Company's liability to the Contractor shall not exceed the fees payable for the preceding three (3) months"
+        },
+        {
+          "field": "insurance",
+          "label": "Insurance required",
+          "value": "None"
+        },
+        {
+          "field": "annexes",
+          "label": "Annexes referenced",
+          "value": "None"
+        },
+        {
+          "field": "scope",
+          "label": "Sectors · regions",
+          "value": "retail · India, USA"
+        },
+        {
+          "field": "data",
+          "label": "Data handled",
+          "value": "none"
+        },
+        {
+          "field": "rates",
+          "label": "Rates",
+          "value": "Contractor $58/hr"
+        }
+      ],
+      "gate": [
+        {
+          "rule": "entity",
+          "label": "Correct AtliQ entity",
+          "pass": false,
+          "detail": "Names AtliQ Pvt Ltd, but the end client is in USA: AtliQ Inc is the entity for US work, so this should be AtliQ Inc.",
+          "citation": {
+            "docId": "marcus-ica",
+            "docTitle": "Marcus Reed contractor agreement (AtliQ draft)",
+            "clauseRef": "Preamble",
+            "quote": "AtliQ Technologies Pvt Ltd**, a company incorporated under the Companies Act, 2013",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "invoicing_entity",
+          "label": "Parties = invoicing entity",
+          "pass": true,
+          "detail": "Pvt Ltd throughout",
+          "citation": {
+            "docId": "marcus-ica",
+            "docTitle": "Marcus Reed contractor agreement (AtliQ draft)",
+            "clauseRef": "Preamble",
+            "quote": "AtliQ Technologies Pvt Ltd**, a company incorporated under the Companies Act, 2013",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "governing_law",
+          "label": "Governing law matches entity",
+          "pass": false,
+          "detail": "laws of India (Inc → US law)",
+          "citation": {
+            "docId": "marcus-ica",
+            "docTitle": "Marcus Reed contractor agreement (AtliQ draft)",
+            "clauseRef": "11.1",
+            "quote": "This Agreement is governed by the laws of India",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "payment",
+          "label": "Payment ≤ 45 days",
+          "pass": false,
+          "detail": "60 days",
+          "citation": {
+            "docId": "marcus-ica",
+            "docTitle": "Marcus Reed contractor agreement (AtliQ draft)",
+            "clauseRef": "4.3",
+            "quote": "Payment shall be made within sixty (60) days after the date of timesheet approval",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "ld_cap",
+          "label": "Delay penalties capped",
+          "pass": null,
+          "detail": "No delay penalties"
+        },
+        {
+          "rule": "liability_cap",
+          "label": "Liability capped",
+          "pass": true,
+          "detail": "The Company's liability to the Contractor shall not exceed the fees payable for the preceding three (3) months.",
+          "citation": {
+            "docId": "marcus-ica",
+            "docTitle": "Marcus Reed contractor agreement (AtliQ draft)",
+            "clauseRef": "10.2",
+            "quote": "The Company's liability to the Contractor shall not exceed the fees payable for the preceding three (3) months",
+            "role": "incoming"
+          }
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "bundle": [],
+  "notesFacts": [
+    {
+      "id": "marcus-fact-1",
+      "statement": "Jay wants to send the contractor agreement by Thursday, October 1st.",
+      "category": "deadline",
+      "noteId": "tracker",
+      "noteTitle": "Tracker notes",
+      "quote": "C-040 (Contractor Agreement): Jay wants to send by Thu 1 Oct. India freelancer template - only name and rate changed",
+      "complianceEvent": false,
+      "whyItMatters": "Establishes a strict deadline for contract delivery using a specific template."
+    }
+  ],
+  "complianceCandidate": null,
+  "similar": [
+    {
+      "clauseType": "non_compete",
+      "docId": "marcus-ica",
+      "clauseRef": "§3",
+      "quote": "3.1 During the term of this Agreement, the Contractor shall devote his professional working time exclusively to the Company and shall not, directly or indirectly, provide services to, or be engaged or employed by, any other person, firm or company, whether paid or unpaid, without the Company's prior written consent.",
+      "hits": [
+        {
+          "docId": "alnoor-msa",
+          "counterparty": "Al Noor Hospitality Group",
+          "date": "2025-03-15",
+          "clauseNo": "12.1–5",
+          "heading": "RESTRICTIVE COVENANTS",
+          "label": "untagged",
+          "score": 0.836,
+          "text": "12.1 In consideration of the Client disclosing to the Supplier its Confidential Information, including its revenue strategies, pricing models and Guest Data, the Supplier undertakes that neither it nor any of its Affiliates shall, during the Restricted Period, directly or indirectly, provide data analytics, artificial intelligence or revenue-management services to any Hospitality Business in the GCC.\n12.2 For the purposes of Clause 12.1, services are provided \"in the GCC\" if the Hospitality Business receiving them is headquartered in, or the services relate to properties or operations located in, any state of the GCC, irrespective of where the services are performed.\n12.3 The Supplier shall procure that each of its Affiliates complies with this Clause 12 as if it were a party to this Agreement, and any breach by an Affiliate shall be deemed a breach by the Supplier.\n12.4 The Client may, in its sole discretion, waive the restriction in Clause 12.1 in respect of a specific engagement by written consent signed by an authorised signatory of the Client. Any such waiver shall be limited to its express terms.\n12.5 During the Term and for twelve (12) months thereafter, neither Party shall solicit for employment any employee of the other Party who was directly involved in the Services, save through general advertisements not targeted at such employees.",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "cloudspan-spa",
+          "counterparty": "CloudSpan Technologies",
+          "date": "2025-09-01",
+          "clauseNo": "7",
+          "heading": "EXCLUSIVITY",
+          "label": "untagged",
+          "score": 0.827,
+          "text": "7.1 In consideration of the Referral Fees, market development funds and other benefits under this Agreement, during the Term Partner and its Affiliates shall not act as an implementation, reseller or referral partner for any Competing Platform in India or the GCC.\n\n7.2 \"**Competing Platform**\" means any cloud data-warehouse, lakehouse or unified analytics platform offered as a service.\n\n7.3 For clarity, Clause 7.1 does not restrict Partner or its Affiliates from (a) providing services outside India and the GCC; or (b) providing services to a customer that has independently selected a platform, provided Partner does not hold a partner appointment with, or receive any fee or benefit from, the provider of that platform.\n\n7.4 In this Clause 7, \"GCC\" has the meaning given to the member states listed in the definition of Territory.",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "orbit-msa",
+          "counterparty": "Orbit Travels Pvt Ltd",
+          "date": "2022-07-01",
+          "clauseNo": "6",
+          "heading": "RESTRICTIVE C0VENANT",
+          "label": "untagged",
+          "score": 0.826,
+          "text": "6.1 In consideration of the access provided to the Client's business processes and supplier\narrangements, the Service Provider agrees that during the term of this Agreement and for a\nperiod of twelve (l2) months after its expiry or termination, it shall not develop, license or\nprovide travel-booking software to any online travel agency operating in India.\n6.2 Nothing in Clause 6.1 shall restrict the Service Provider from providing services to hotels,\nairlines or other businesses that are not online travel agencies, or from providing services\nunrelated to travel-booking software.",
+          "differs": "",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "payment",
+      "docId": "marcus-ica",
+      "clauseRef": "§4",
+      "quote": "4.1 The Company shall pay the Contractor at the hourly rate stated in the Engagement Schedule for hours worked and approved.\n4.2 The Contractor shall submit a monthly timesheet through the Company's timesheet system by the 3rd working day of each month. The Company's project manager shall review and approve timesheets at his discretion.\n4.3 The Contractor shall raise an invoice for approved hours. Payment shall be made within sixty (60) days after the date of timesheet approval.\n4.4 All fees are stated in United States Dollars but shall be paid in Indian Rupees by bank transfer, converted at an exchange rate determined by the Company at its discretion on the date of payment. Bank charges sha",
+      "hits": [
+        {
+          "docId": "rohan-ica",
+          "counterparty": "Rohan Iyer",
+          "date": "2025-04-28",
+          "clauseNo": "3",
+          "heading": "FEES AND PAYMENT",
+          "label": "standard",
+          "labelNote": "Fair freelancer terms: 30-day pay, mutual cap, mutual 15-day exit",
+          "score": 0.931,
+          "text": "3.1 AtliQ shall pay the Contractor the fees set out in the Engagement Schedule.\n\n3.2 The Contractor shall submit a monthly invoice, supported by a timesheet approved by the AtliQ project lead. AtliQ shall pay each undisputed invoice within thirty (30) days of receipt.\n\n3.3 AtliQ shall deduct tax at source under the Income Tax Act, 1961 as applicable and provide TDS certificates. The Contractor is responsible for his own GST registration (if required) and all other taxes.\n\n3.4 AtliQ shall reimburse reasonable pre-approved travel expenses incurred for client visits.",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "paytrack-msa",
+          "counterparty": "PayTrack Technologies",
+          "date": "2025-01-22",
+          "clauseNo": "4",
+          "heading": "FEES AND PAYMENT",
+          "label": "untagged",
+          "score": 0.907,
+          "text": "4.1 The total fees under SOW-1 are **USD 71,000** (United States Dollars Seventy-One Thousand only), payable in accordance with the milestone schedule in SOW-1.\n\n4.2 AtliQ shall invoice upon completion of each milestone. PayTrack shall pay each undisputed invoice within thirty (30) days of receipt.\n\n4.3 Fees are exclusive of GST. PayTrack may deduct TDS in accordance with Applicable Law.",
+          "differs": "",
+          "alsoIn": [
+            "Acme Retail Group (2025-03)"
+          ]
+        },
+        {
+          "docId": "trustline-msa",
+          "counterparty": "Trustline NBFC",
+          "date": "2026-08-15",
+          "clauseNo": "4",
+          "heading": "FEES AND PAYMENT",
+          "label": "standard",
+          "labelNote": "45-day payment: the negotiated maximum (90 → 45)",
+          "score": 0.895,
+          "text": "4.1 The total fees for the Services are **USD 48,000** (United States Dollars Forty-Eight Thousand only), payable on completion of Milestones as set out in Annexure A.\n\n4.2 The Service Provider shall raise an invoice upon completion of each Milestone. The Company shall pay each undisputed invoice within forty-five (45) days of receipt of the invoice.\n\n4.3 All fees are exclusive of GST. The Company shall be entitled to deduct TDS as applicable.\n\n4.4 Any disputed amount shall be notified within ten (10) days of receipt of invoice, and the Parties shall resolve such dispute in good faith within thirty (30) days.",
+          "differs": "",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "ip",
+      "docId": "marcus-ica",
+      "clauseRef": "§6",
+      "quote": "6.1 All work product, code, pipelines, documentation, reports and other materials created by the Contractor in the course of the Services (\"**Work Product**\") shall vest in the Company upon creation.\n6.2 The Contractor hereby assigns to the Company all present and future right, title and interest in the Work Product, including all intellectual property rights, worldwide and for the full term of such rights, and waives any moral rights therein. The assignment shall not lapse under Section 19(4) of the Copyright Act, 1957 if the rights are not exercised within one year.\n6.3 The Contractor shall execute any documents reasonably required to perfect the Company's rights.",
+      "hits": [
+        {
+          "docId": "rohan-ica",
+          "counterparty": "Rohan Iyer",
+          "date": "2025-04-28",
+          "clauseNo": "5",
+          "heading": "INTELLECTUAL PROPERTY",
+          "label": "accident",
+          "labelNote": "Rohan kept the Work Product IP (\"ok\" from phone) while Acme was promised ownership",
+          "score": 0.918,
+          "text": "5.1 In this Clause, \"**Work Product**\" means all dashboards, reports, data models, DAX measures, Power Query scripts, visual templates, documentation and other materials created by the Contractor in performing the Services.\n\n5.2 The Contractor retains ownership of all intellectual property rights in the Work Product and in any pre-existing materials, components and templates of the Contractor.\n\n5.3 The Contractor grants AtliQ a non-exclusive, perpetual, irrevocable, royalty-free, worldwide licence to use, copy, modify and deploy the Work Product for the purposes of AtliQ's business, including for delivery to AtliQ's clients.\n\n5.4 The Contractor shall not incorporate into the Work Product any third-party material that AtliQ is not entitled to use under Clause 5.3.",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "alnoor-msa",
+          "counterparty": "Al Noor Hospitality Group",
+          "date": "2025-03-15",
+          "clauseNo": "9",
+          "heading": "INTELLECTUAL PROPERTY",
+          "label": "untagged",
+          "score": 0.883,
+          "text": "9.1 Upon payment in full of the relevant Fees, all intellectual property rights in the Deliverables created specifically for the Client shall vest in the Client.\n\n9.2 The Supplier retains ownership of its pre-existing tools, libraries, methodologies and know-how (\"**Supplier Background IP**\"). To the extent any Supplier Background IP is incorporated into a Deliverable, the Supplier grants the Client a perpetual, non-exclusive, royalty-free licence to use it as part of that Deliverable.",
+          "differs": "",
+          "alsoIn": [
+            "Northwind Logistics (2025-06)"
+          ]
+        },
+        {
+          "docId": "orbit-msa",
+          "counterparty": "Orbit Travels Pvt Ltd",
+          "date": "2022-07-01",
+          "clauseNo": "5",
+          "heading": "INTELLECTUAL PR0PERTY",
+          "label": "untagged",
+          "score": 0.882,
+          "text": "5.1 All deliverables developed specifically for the Client shall be the property of the Client\nupon full payment. The Service Provider retains its pre-existing tools and know-how.",
+          "differs": "",
+          "alsoIn": [
+            "Trustline NBFC (2026-08)",
+            "Acme Retail Group (2025-03)"
+          ]
+        }
+      ]
+    },
+    {
+      "clauseType": "confidentiality",
+      "docId": "marcus-ica",
+      "clauseRef": "§7",
+      "quote": "7.1 The Contractor shall keep confidential all information relating to the Company, its clients and their business, data, systems, pricing and personnel that he receives in connection with this Agreement (\"**Confidential Information**\") and shall use it only to perform the Services.\n7.2 This obligation does not apply to information that is public through no fault of the Contractor or that the Contractor is required by law to disclose.\n7.3 On termination, the Contractor shall return or delete all Confidential Information and Company property.\n7.4 This Clause 7 survives termination for five (5) years.",
+      "hits": [
+        {
+          "docId": "rohan-ica",
+          "counterparty": "Rohan Iyer",
+          "date": "2025-04-28",
+          "clauseNo": "6",
+          "heading": "CONFIDENTIALITY",
+          "label": "untagged",
+          "score": 0.928,
+          "text": "6.1 Each party shall keep confidential all non-public information of the other party, and in the case of AtliQ, of AtliQ's clients, received in connection with this Agreement, and shall use it only for the purposes of this Agreement.\n\n6.2 The Contractor shall comply with any confidentiality and data-security requirements of AtliQ's clients notified to him in writing, including restrictions on downloading client data to personal devices.\n\n6.3 This Clause 6 does not apply to information that is public, already lawfully known, independently developed, or required to be disclosed by law.\n\n6.4 The obligations in this Clause 6 survive for three (3) years after termination or expiry.",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "crestline-msa",
+          "counterparty": "Crestline Retail Inc",
+          "date": "2024-08-01",
+          "clauseNo": "7",
+          "heading": "CONFIDENTIALITY",
+          "label": "untagged",
+          "score": 0.928,
+          "text": "7.1 Each Party shall hold the other Party's Confidential Information in confidence, use it only to perform or receive the Services, and disclose it only to its personnel and advisors with a need to know who are bound by obligations at least as protective.\n\n7.2 The obligations in Section 7.1 do not apply to information that is or becomes publicly available without breach, was known to the recipient prior to disclosure, is independently developed, or is rightfully received from a third party.\n\n7.3 These obligations survive for three (3) years following termination, and indefinitely for trade secrets.",
+          "differs": "",
+          "alsoIn": [
+            "Northwind Logistics (2025-06)",
+            "CloudSpan Technologies (2025-09)",
+            "Acme Retail Group (2025-03)"
+          ]
+        },
+        {
+          "docId": "trustline-msa",
+          "counterparty": "Trustline NBFC",
+          "date": "2026-08-15",
+          "clauseNo": "8",
+          "heading": "CONFIDENTIALITY",
+          "label": "untagged",
+          "score": 0.911,
+          "text": "8.1 Each Party shall hold the other Party's confidential information in strict confidence and shall not disclose it except to its employees, auditors and advisers on a need-to-know basis.\n\n8.2 The Service Provider acknowledges that Company Data includes customer information protected under the RBI Master Direction – Know Your Customer and shall not use it for any purpose other than performing the Services.\n\n8.3 This Clause 8 shall survive for five (5) years after termination.",
+          "differs": "",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "indemnity",
+      "docId": "marcus-ica",
+      "clauseRef": "§10",
+      "quote": "10.1 The Contractor shall indemnify the Company against losses arising from the Contractor's breach of Clauses 6 or 7 or his wilful misconduct.\n10.2 The Company's liability to the Contractor shall not exceed the fees payable for the preceding three (3) months.",
+      "hits": [
+        {
+          "docId": "brightwater-msa",
+          "counterparty": "Brightwater Insurance Inc",
+          "date": "2025-11-28",
+          "clauseNo": "15",
+          "heading": "INDEMNITIES AND LIABILITY",
+          "label": "untagged",
+          "score": 0.878,
+          "text": "15.1 The Supplier shall indemnify the Customer and each member of the Brightwater Group against all losses arising from (a) any breach by the Supplier of clauses 12 or 13, (b) any claim that the Deliverables infringe third-party rights, and (c) the negligence or wilful default of the Supplier.\n\n15.2 Neither party shall be liable for any indirect or consequential loss.\n\n15.3 Subject to clauses 9, 15.1 and 15.4, the Supplier's total liability under this Agreement shall not exceed one hundred and fifty per cent (150%) of the Contract Value.\n\n15.4 Nothing in this Agreement shall limit liability for death or personal injury caused by negligence, fraud or any other liability which cannot be limited by law.",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "paytrack-msa",
+          "counterparty": "PayTrack Technologies",
+          "date": "2025-01-22",
+          "clauseNo": "10",
+          "heading": "INDEMNITY",
+          "label": "standard",
+          "labelNote": "Origin of the mutual-indemnity position: no indemnity for the indemnified party's own negligence",
+          "score": 0.874,
+          "text": "10.1 Each Party (the \"**Indemnifying Party**\") shall indemnify, defend and hold harmless the other Party and its directors, officers and employees (the \"**Indemnified Party**\") from and against all Losses arising out of any third-party claim to the extent caused by: (a) the Indemnifying Party's breach of Clause 7 (Confidentiality) or Clause 12 (Data Protection); (b) the gross negligence, wilful misconduct or fraud of the Indemnifying Party or its personnel; or (c) in the case of AtliQ, any claim that the Deliverables infringe a third party's intellectual property rights, and in the case of PayTrack, any claim that Client Data or materials supplied by PayTrack infringe a third party's rights.\n\n10.2 Neither Party shall be required to indemnify the other to the extent any Losses are caused by the negligence, breach or wilful misconduct of the Indemnified Party.\n\n10.3 The Indemnified Party shall give prompt written notice of any claim, permit the Indemnifying Party to control the defence and settlement, and provide reasonable cooperation at the Indemnifying Party's cost.",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "acme-msa",
+          "counterparty": "Acme Retail Group",
+          "date": "2025-03-10",
+          "clauseNo": "11",
+          "heading": "INDEMNITY",
+          "label": "standard",
+          "labelNote": "Mutual indemnity",
+          "score": 0.869,
+          "text": "11.1 Each Party (\"**Indemnifying Party**\") shall indemnify the other against losses arising from third-party claims caused by the Indemnifying Party's breach of confidentiality, infringement of third-party intellectual property rights, or gross negligence or wilful misconduct.",
+          "differs": "",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "governing_law",
+      "docId": "marcus-ica",
+      "clauseRef": "§11",
+      "quote": "11.1 This Agreement is governed by the laws of India.\n11.2 The courts at Pune, Maharashtra shall have exclusive jurisdiction.",
+      "hits": [
+        {
+          "docId": "orbit-msa",
+          "counterparty": "Orbit Travels Pvt Ltd",
+          "date": "2022-07-01",
+          "clauseNo": "11",
+          "heading": "GOVERNING LAW AND DISPUTES",
+          "label": "untagged",
+          "score": 0.925,
+          "text": "11.1 This Agreernent shall be governed by the laws of India. Disputes shall be referred to a sole\narbitrator under the Arbitration and Conciliation Act, 1996. Seat of arbitration: New Delhi.\nCourts at New Delhi shall have jurisdiction.",
+          "differs": "",
+          "alsoIn": [
+            "Sunrise Foods (2025-04)",
+            "Trustline NBFC (2026-08)"
+          ]
+        },
+        {
+          "docId": "paytrack-msa",
+          "counterparty": "PayTrack Technologies",
+          "date": "2025-01-22",
+          "clauseNo": "15",
+          "heading": "GOVERNING LAW AND DISPUTE RESOLUTION",
+          "label": "untagged",
+          "score": 0.897,
+          "text": "15.1 This Agreement shall be governed by the laws of India.\n\n15.2 Disputes not resolved by negotiation between senior management within thirty (30) days shall be referred to arbitration by a sole arbitrator under the Arbitration and Conciliation Act, 1996. The seat and venue of arbitration shall be Pune, and the language shall be English.",
+          "differs": "",
+          "alsoIn": [
+            "Acme Retail Group (2025-03)"
+          ]
+        },
+        {
+          "docId": "crestline-msa",
+          "counterparty": "Crestline Retail Inc",
+          "date": "2024-08-01",
+          "clauseNo": "16",
+          "heading": "GOVERNING LAW; VENUE",
+          "label": "untagged",
+          "score": 0.871,
+          "text": "16.1 This Agreement shall be governed by the laws of the State of Ohio, without regard to its conflict-of-laws principles.\n\n16.2 The Parties consent to the exclusive jurisdiction of the state and federal courts located in Franklin County, Ohio.",
+          "differs": "",
+          "alsoIn": []
+        }
+      ]
+    }
+  ],
+  "counselPack": null,
+  "errors": [
+    "Playbook check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more infor)"
+  ],
+  "usage": {
+    "calls": 0,
+    "cachedCalls": 2,
+    "inputTokens": 0,
+    "outputTokens": 0,
+    "ms": 4047
+  }
+}

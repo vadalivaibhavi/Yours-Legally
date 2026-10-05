@@ -1,0 +1,796 @@
+{
+  "dealId": "blueorchid",
+  "version": 1,
+  "createdAt": "2026-10-05T03:40:05.981Z",
+  "trigger": "initial review",
+  "inputsHash": "aafc83ca8c384a7c316d6c96c94def61",
+  "documentIds": [
+    "blueorchid-pilot"
+  ],
+  "registerVersion": "reg-2026-10-04-57+r0",
+  "playbookVersion": "pb-v1-2026-10-04",
+  "models": [
+    "gemini-flash-lite-latest",
+    "gemini-3-flash-preview"
+  ],
+  "promptVersion": "p1",
+  "route": "full_review",
+  "verdict": "SIGN AFTER CHANGES",
+  "headline": "SIGN AFTER CHANGES: Resolve GCC non-compete collision and confirm expanded territory coverage",
+  "nextAction": "Karandeep must renegotiate the non-compete terms to address the Al Noor Hospitality Group collision.",
+  "findings": [
+    {
+      "key": "conflict:alnoor-msa:non_compete",
+      "category": "conflict",
+      "topic": "non_compete",
+      "title": "Collides with Al Noor Hospitality Group: GCC hospitality data analytics non-compete",
+      "impact": "collides with the Al Noor promise, live until Sep 2029",
+      "severity": "high",
+      "confidence": "high",
+      "needsJudgment": false,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "blueorchid-pilot",
+      "citations": [
+        {
+          "docId": "blueorchid-pilot",
+          "docTitle": "BlueOrchid Hotels pilot services agreement (draft)",
+          "clauseRef": "4.1",
+          "quote": "AtliQ shall deliver a guest review analytics solution for all twelve (12) Properties listed in Annexure B, comprising:\n   (a) automated ingestion of guest reviews from up to six (6) online sources and BlueOrchid's post-stay survey tool;\n   (b) multilingual sentiment and aspect analysis (English, Hindi, Arabic) covering room, cleanliness, F&B, service, location and value;\n   (c) property-level and portfolio-level dashboards in Power BI for General Managers, the Guest Experience team and senior management",
+          "role": "incoming"
+        },
+        {
+          "docId": "blueorchid-pilot",
+          "docTitle": "BlueOrchid Hotels pilot services agreement (draft)",
+          "clauseRef": "9.3",
+          "quote": "Each Party warrants that it has full power and authority to enter into this Agreement",
+          "role": "incoming"
+        },
+        {
+          "docId": "alnoor-msa",
+          "docTitle": "Al Noor Hospitality MSA",
+          "clauseRef": "§12.1",
+          "quote": "In consideration of the Client disclosing to the Supplier its Confidential Information, including its revenue strategies, pricing models and Guest Data, the Supplier undertakes that neither it nor any of its Affiliates shall, during the Restricted Period, directly or indirectly, provide data analytics, artificial intelligence or revenue-management services to any Hospitality Business in the GCC",
+          "role": "register"
+        },
+        {
+          "docId": "alnoor-msa",
+          "docTitle": "Al Noor Hospitality MSA",
+          "clauseRef": "§1.11",
+          "quote": "Hospitality Business**\" means any person, firm or entity that owns, operates, manages or franchises hotels, resorts or serviced apartments, or that provides distribution, revenue-management or guest-analytics services to any such person, firm or entity",
+          "role": "register"
+        },
+        {
+          "docId": "alnoor-msa",
+          "docTitle": "Al Noor Hospitality MSA",
+          "clauseRef": "§1.14",
+          "quote": "Restricted Period**\" means the Term and the period of eighteen (18) months following the expiry or termination of this Agreement",
+          "role": "register"
+        },
+        {
+          "docId": "alnoor-msa",
+          "docTitle": "Al Noor Hospitality MSA",
+          "clauseRef": "§1.9",
+          "quote": "GCC**\" means the member states of the Gulf Cooperation Council, being the United Arab Emirates, the Kingdom of Saudi Arabia, the State of Qatar, the State of Kuwait, the Kingdom of Bahrain and the Sultanate of Oman",
+          "role": "register"
+        }
+      ],
+      "counterPosition": "Modify Annexure B to exclude Property No. 10 (BlueOrchid Dubai Business Bay), No. 11 (Orchid Residences Dubai Marina), and No. 12 (BlueOrchid Muscat Qurum).",
+      "registerEntryId": "alnoor-msa#1",
+      "registerVerified": false,
+      "expiry": "2029-09-14",
+      "waiver": {
+        "docId": "alnoor-waiver",
+        "covers": "AtliQ providing demand-forecasting services to Seaside Hotels LLC, Muscat, Oman, solely as described in the statement of work between the Supplier and Seaside dated February 2026",
+        "applies": false,
+        "why": "The Al Noor waiver is strictly limited to demand-forecasting services for Seaside Hotels LLC and explicitly states it does not extend to any other Hospitality Business."
+      }
+    },
+    {
+      "key": "playbook:data_protection",
+      "category": "playbook",
+      "topic": "data_protection",
+      "title": "Global data law compliance without assessment",
+      "impact": "AtliQ may be held to data processing and security standards in foreign jurisdictions for which its Indian operations have not been legal-audited or technically prepared.",
+      "severity": "medium",
+      "confidence": "medium",
+      "needsJudgment": true,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "blueorchid-pilot",
+      "citations": [
+        {
+          "docId": "blueorchid-pilot",
+          "docTitle": "BlueOrchid Hotels pilot services agreement (draft)",
+          "clauseRef": "13.1",
+          "quote": "AtliQ shall process personal data contained in Client Data only for the purposes of the Pilot and in accordance with the Digital Personal Data Protection Act, 2023 and any other applicable data protection law, including the laws applicable to Properties located outside India",
+          "role": "incoming"
+        }
+      ],
+      "standard": "DPA (EU) or BAA (US health) signed before any personal/regulated data moves, with a sub-DPA / sub-BAA for every party that touches the data (incl. AtliQ's own Pune entity); engagement-specific scope; offshore access only as the agreement allows.",
+      "counterPosition": "Limit processing obligations to the Digital Personal Data Protection Act, 2023, and agree to execute a specific DPA for non-Indian jurisdictions only after a technical and legal assessment of cross-border data transfer requirements.",
+      "precedents": [
+        {
+          "docId": "carebridge-baa",
+          "counterparty": "CareBridge Clinics",
+          "clauseRef": "whole BAA",
+          "label": "standard",
+          "note": "Counsel-reviewed: capped liability, 5-day reporting, de-identified offshore route"
+        }
+      ]
+    },
+    {
+      "key": "mismatch:regions",
+      "category": "mismatch",
+      "topic": "regions",
+      "title": "Contract covers UAE, Oman: not in Jay's deal check (declared: India)",
+      "impact": "Jay's check on 2026-09-21 was answered for India only, so the commitments covering UAE, Oman were never checked for the seller.",
+      "severity": "medium",
+      "confidence": "high",
+      "needsJudgment": false,
+      "owner": "Jay",
+      "resolution": "confirm",
+      "citations": []
+    }
+  ],
+  "fine": [
+    "Correct AtliQ entity: Pvt Ltd for a India counterparty",
+    "Parties = invoicing entity: Pvt Ltd throughout",
+    "Governing law matches entity: laws of India (Pvt Ltd → Indian law)",
+    "Payment ≤ 45 days: 30 days",
+    "Delay penalties capped: Cap 5% of milestone",
+    "Liability capped: each Party's total aggregate liability under this Agreement shall not exceed the total fees paid or payable under this Agreement",
+    "Liquidated damages are correctly capped at 5% of the milestone fee, exclude client-caused delay, and are the sole remedy for delay.",
+    "The aggregate liability cap is mutual and set at 1x fees, with standard carve-outs for fraud and wilful misconduct.",
+    "Mutual indemnity for negligence and breach is standard; note that IP infringement is safely included under the general liability cap.",
+    "Ownership of specific deliverables transfers to the client only upon payment, and AtliQ retains all background IP and tools.",
+    "The 30-day convenience termination notice is reasonable and ensures AtliQ is paid for pro-rata work in progress.",
+    "Confidentiality terms are mutual with a standard 3-year survival period and appropriate exclusions.",
+    "The performance warranty is standard and includes a clear 30-day window for correcting any material non-conformities.",
+    "The agreement contains no non-compete or non-solicit restrictions on AtliQ."
+  ],
+  "notSeen": [
+    "Register built from 17 signed documents. Contracts referenced elsewhere but never collected (e.g. ShopSwift SOW, PixelCraft vendor agreement, intercompany services agreement) can't be checked."
+  ],
+  "documents": [
+    {
+      "docId": "blueorchid-pilot",
+      "title": "BlueOrchid Hotels pilot services agreement (draft)",
+      "docType": "MSA",
+      "paper": "client",
+      "route": "full_review",
+      "facts": [
+        {
+          "field": "docType",
+          "label": "Document type",
+          "value": "Other"
+        },
+        {
+          "field": "parties",
+          "label": "Counterparty",
+          "value": "BlueOrchid Hotels Pvt Ltd (India)"
+        },
+        {
+          "field": "entity",
+          "label": "AtliQ entity (parties)",
+          "value": "Pvt Ltd",
+          "clauseRef": "1",
+          "quote": "AtliQ Technologies Pvt Ltd**, a company incorporated under the Companies Act, 2013, bearing CIN U72900MH2019PTC321456 and GSTIN 27AAKCA4821F1Z3"
+        },
+        {
+          "field": "invoicing",
+          "label": "AtliQ entity (invoicing)",
+          "value": "Pvt Ltd",
+          "clauseRef": "1",
+          "quote": "AtliQ Technologies Pvt Ltd**, a company incorporated under the Companies Act, 2013, bearing CIN U72900MH2019PTC321456 and GSTIN 27AAKCA4821F1Z3"
+        },
+        {
+          "field": "law",
+          "label": "Governing law",
+          "value": "laws of India",
+          "clauseRef": "14.1",
+          "quote": "This Agreement shall be governed by the laws of India"
+        },
+        {
+          "field": "forum",
+          "label": "Forum",
+          "value": "courts at Mumbai",
+          "clauseRef": "14.4",
+          "quote": "Subject to the above, the courts at Mumbai shall have exclusive jurisdiction"
+        },
+        {
+          "field": "payment",
+          "label": "Payment",
+          "value": "30 days",
+          "clauseRef": "5.2",
+          "quote": "BlueOrchid shall pay each undisputed invoice within thirty (30) days of receipt"
+        },
+        {
+          "field": "ld",
+          "label": "Delay penalties",
+          "value": "0.5% of milestone per week, cap 5% of milestone, client delays excluded",
+          "clauseRef": "12.1",
+          "quote": "BlueOrchid shall be entitled to liquidated damages of 0.5% of the relevant Milestone Fee for each complete week of delay, subject to a maximum of 5% of that Milestone Fee"
+        },
+        {
+          "field": "liability",
+          "label": "Liability",
+          "value": "each Party's total aggregate liability under this Agreement shall not exceed the total fees paid or payable under this Agreement · uncapped for breach of confidentiality, fraud, wilful misconduct",
+          "clauseRef": "10.2",
+          "quote": "Except for breach of confidentiality, fraud or wilful misconduct, each Party's total aggregate liability under this Agreement shall not exceed the total fees paid or payable under this Agreement"
+        },
+        {
+          "field": "insurance",
+          "label": "Insurance required",
+          "value": "None"
+        },
+        {
+          "field": "annexes",
+          "label": "Annexes referenced",
+          "value": "Annexure A, Annexure B, Annexure C"
+        },
+        {
+          "field": "scope",
+          "label": "Sectors · regions",
+          "value": "hospitality · India, UAE, Oman"
+        },
+        {
+          "field": "data",
+          "label": "Data handled",
+          "value": "personal_data"
+        }
+      ],
+      "gate": [
+        {
+          "rule": "entity",
+          "label": "Correct AtliQ entity",
+          "pass": true,
+          "detail": "Pvt Ltd for a India counterparty",
+          "citation": {
+            "docId": "blueorchid-pilot",
+            "docTitle": "BlueOrchid Hotels pilot services agreement (draft)",
+            "clauseRef": "1",
+            "quote": "AtliQ Technologies Pvt Ltd**, a company incorporated under the Companies Act, 2013, bearing CIN U72900MH2019PTC321456 and GSTIN 27AAKCA4821F1Z3",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "invoicing_entity",
+          "label": "Parties = invoicing entity",
+          "pass": true,
+          "detail": "Pvt Ltd throughout",
+          "citation": {
+            "docId": "blueorchid-pilot",
+            "docTitle": "BlueOrchid Hotels pilot services agreement (draft)",
+            "clauseRef": "1",
+            "quote": "AtliQ Technologies Pvt Ltd**, a company incorporated under the Companies Act, 2013, bearing CIN U72900MH2019PTC321456 and GSTIN 27AAKCA4821F1Z3",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "governing_law",
+          "label": "Governing law matches entity",
+          "pass": true,
+          "detail": "laws of India (Pvt Ltd → Indian law)",
+          "citation": {
+            "docId": "blueorchid-pilot",
+            "docTitle": "BlueOrchid Hotels pilot services agreement (draft)",
+            "clauseRef": "14.1",
+            "quote": "This Agreement shall be governed by the laws of India",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "payment",
+          "label": "Payment ≤ 45 days",
+          "pass": true,
+          "detail": "30 days",
+          "citation": {
+            "docId": "blueorchid-pilot",
+            "docTitle": "BlueOrchid Hotels pilot services agreement (draft)",
+            "clauseRef": "5.2",
+            "quote": "BlueOrchid shall pay each undisputed invoice within thirty (30) days of receipt",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "ld_cap",
+          "label": "Delay penalties capped",
+          "pass": true,
+          "detail": "Cap 5% of milestone",
+          "citation": {
+            "docId": "blueorchid-pilot",
+            "docTitle": "BlueOrchid Hotels pilot services agreement (draft)",
+            "clauseRef": "12.1",
+            "quote": "BlueOrchid shall be entitled to liquidated damages of 0.5% of the relevant Milestone Fee for each complete week of delay, subject to a maximum of 5% of that Milestone Fee",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "liability_cap",
+          "label": "Liability capped",
+          "pass": true,
+          "detail": "each Party's total aggregate liability under this Agreement shall not exceed the total fees paid or payable under this Agreement",
+          "citation": {
+            "docId": "blueorchid-pilot",
+            "docTitle": "BlueOrchid Hotels pilot services agreement (draft)",
+            "clauseRef": "10.2",
+            "quote": "Except for breach of confidentiality, fraud or wilful misconduct, each Party's total aggregate liability under this Agreement shall not exceed the total fees paid or payable under this Agreement",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "annex:annexure-a",
+          "label": "Annexure A attached",
+          "pass": true,
+          "detail": "Attached in this document",
+          "citation": {
+            "docId": "blueorchid-pilot",
+            "docTitle": "BlueOrchid Hotels pilot services agreement (draft)",
+            "clauseRef": "4.1",
+            "quote": "guest review analytics solution for all twelve (12) Properties listed in Annexure B, comprising:\n   (a) automated ingestion of guest reviews from up to six (6) online sources and BlueOrchid's post-stay survey tool;\n   (b) multilingual sentiment and aspect analysis (English, Hindi, Arabic) covering room, cleanliness, F&B, service, location and value;\n   (c) property-level and portfolio-level dashboards in Power BI for General Managers, the Guest Experience team and senior management;\n   (d) a weekly automated \"Voice of Guest\" summary for each Property; and\n   (e) an alerting mechanism flagging recurring negative themes for the relevant Property's General Manager.\n4.2 The Pilot shall run for a period of sixteen (16) weeks from the Effective Date, comprising a twelve (12) week build and rollout phase and a four (4) week evaluation phase.\n4.3 BlueOrchid shall nominate a single point of contact (initially Ms. Farah Sayed, Director – Guest Experience) and shall provide timely access to data sources, systems and personnel reasonably required by AtliQ.\n4.4 Any change in scope shall be documented through a written change request agreed by both Parties.\n\n## 5. FEES AND PAYMENT\n\n5.1 The total fee for the Pilot is USD 38,000 (United States Dollars Thirty-Eight Thousand only), payable in accordance with the Milestones in Annexure C.\n5.2 AtliQ shall raise an invoice on completion of each Milestone. BlueOrchid shall pay each undisputed invoice within thirty (30) days of receipt.\n5.3 All amounts are exclusive of GST, which shall be charged at the applicable rate. BlueOrchid may deduct TDS as required under the Income-tax Act, 1961, and shall furnish TDS certificates within the statutory timelines.\n5.4 Any disputed portion of an invoice shall be notified within ten (10) days of receipt; the undisputed portion shall be paid in accordance with Clause 5.2.\n\n## 6. TERM AND TERMINATION\n\n6.1 This Agreement shall commence on the Effective Date and remain in force until completion of the Pilot, unless terminated earlier.\n6.2 Either Party may terminate this Agreement for material breach not remedied within thirty (30) days of written notice.\n6.3 BlueOrchid may terminate this Agreement for convenience on thirty (30) days' written notice, subject to payment for all work performed up to the effective date of termination, including a pro-rata amount for any Milestone in progress.\n6.4 Clauses 7, 8, 10, 11, 13 and 14 shall survive termination or expiry.\n\n## 7. CONFIDENTIALITY\n\n7.1 Each Party shall hold the other Party's confidential information in strict confidence, use it only for the purposes of this Agreement, and disclose it only to its employees and professional advisers on a need-to-know basis.\n7.2 These obligations shall not apply to information that is public, already known to the recipient, independently developed, or required to be disclosed by law.\n7.3 The obligations in this Clause shall continue for three (3) years after termination or expiry of this Agreement.\n\n## 8. INTELLECTUAL PROPERTY\n\n8.1 Upon payment in full, BlueOrchid shall own the dashboards, reports and configurations created specifically for BlueOrchid under this Agreement.\n8.2 Each Party retains all rights in its Pre-existing IP. AtliQ grants BlueOrchid a non-exclusive, non-transferable, royalty-free licence to use AtliQ's Pre-existing IP to the extent incorporated in the Deliverables, solely for BlueOrchid's internal business purposes.\n8.3 BlueOrchid retains all rights in Client Data.\n\n## 9. WARRANTIES\n\n9.1 AtliQ warrants that the Services shall be performed in a professional and workmanlike manner by suitably qualified personnel.\n9.2 AtliQ shall correct any material non-conformity in the Deliverables notified within thirty (30) days after completion of the Pilot.\n9.3 Each Party warrants that it has full power and authority to enter into this Agreement.\n\n## 10. LIMITATION OF LIABILITY\n\n10.1 Neither Party shall be liable for any indirect, incidental, special or consequential damages, including loss of profit, revenue or goodwill.\n10.2 Except for breach of confidentiality, fraud or wilful misconduct, each Party's total aggregate liability under this Agreement shall not exceed the total fees paid or payable under this Agreement.\n\n## 11. INDEMNITY\n\n11.1 Each Party (the \"Indemnifying Party\") shall indemnify the other against third-party claims to the extent arising from the Indemnifying Party's breach of this Agreement, negligence or wilful misconduct.\n11.2 AtliQ shall indemnify BlueOrchid against third-party claims that the Deliverables infringe any intellectual property right, save where such claim arises from Client Data or modifications made by BlueOrchid.\n\n## 12. DELAY\n\n12.1 If AtliQ fails to complete a Milestone by its scheduled date for reasons solely attributable to AtliQ, BlueOrchid shall be entitled to liquidated damages of 0.5% of the relevant Milestone Fee for each complete week of delay, subject to a maximum of 5% of that Milestone Fee.\n12.2 No liquidated damages shall be payable for any delay caused by BlueOrchid, its vendors, or a force majeure event.\n12.3 Liquidated damages under this Clause shall be BlueOrchid's sole and exclusive remedy for delay.\n\n## 13. DATA PROTECTION\n\n13.1 AtliQ shall process personal data contained in Client Data only for the purposes of the Pilot and in accordance with the Digital Personal Data Protection Act, 2023 and any other applicable data protection law, including the laws applicable to Properties located outside India.\n13.2 AtliQ shall implement reasonable security safeguards and shall notify BlueOrchid without undue delay of any personal data breach.\n13.3 On completion or termination of the Pilot, AtliQ shall return or delete Client Data as instructed by BlueOrchid.\n\n## 14. GOVERNING LAW AND DISPUTE RESOLUTION\n\n14.1 This Agreement shall be governed by the laws of India.\n14.2 Any dispute shall first be referred to senior management of both Parties for amicable settlement within thirty (30) days.\n14.3 Failing settlement, the dispute shall be finally resolved by arbitration under the Arbitration and Conciliation Act, 1996, by a sole arbitrator mutually appointed. The seat and venue of arbitration shall be Mumbai and the language shall be English.\n14.4 Subject to the above, the courts at Mumbai shall have exclusive jurisdiction.\n\n## 15. GENERAL\n\n15.1 **Force Majeure.** Neither Party shall be liable for delay or failure caused by events beyond its reasonable control.\n15.2 **Assignment.** Neither Party may assign this Agreement without the prior written consent of the other, not to be unreasonably withheld.\n15.3 **Independent Contractors.** The Parties are independent contractors; nothing herein creates a partnership or agency.\n15.4 **Notices.** Notices shall be in writing to the addresses above, marked to the attention of Ms. Farah Sayed (BlueOrchid) and the Chief Executive Officer (AtliQ).\n15.5 **Entire Agreement.** This Agreement, with its Annexures, is the entire agreement between the Parties regarding the Pilot.\n15.6 **Future Engagement.** Upon successful completion of the Pilot, the Parties may enter into a master services agreement for a full-scale rollout on terms to be mutually agreed.\n\n## ANNEXURE A",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "annex:annexure-b",
+          "label": "Annexure B attached",
+          "pass": true,
+          "detail": "Attached in this document",
+          "citation": {
+            "docId": "blueorchid-pilot",
+            "docTitle": "BlueOrchid Hotels pilot services agreement (draft)",
+            "clauseRef": "3.2",
+            "quote": "Properties**\" means the twelve (12) hotels listed in Annexure B",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "annex:annexure-c",
+          "label": "Annexure C attached",
+          "pass": true,
+          "detail": "Attached in this document",
+          "citation": {
+            "docId": "blueorchid-pilot",
+            "docTitle": "BlueOrchid Hotels pilot services agreement (draft)",
+            "clauseRef": "3.4",
+            "quote": "Milestone Fee**\" means the fee attributable to a Milestone as set out in Annexure C",
+            "role": "incoming"
+          }
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "bundle": [],
+  "notesFacts": [
+    {
+      "id": "blueorchid-fact-1",
+      "statement": "BlueOrchid pilot contract deadline is October 5",
+      "category": "deadline",
+      "noteId": "note-2026-09-22",
+      "noteTitle": "Internal contract queue meeting",
+      "quote": "BlueOrchid pilot (Jay) — $38k — by **5 Oct",
+      "complianceEvent": false,
+      "whyItMatters": "Establishes the internal review deadline for the contract team."
+    },
+    {
+      "id": "blueorchid-fact-2",
+      "statement": "Client wants to start before Diwali",
+      "category": "commitment",
+      "noteId": "tracker",
+      "noteTitle": "Tracker notes",
+      "quote": "by 5 Oct - want to start before Diwali",
+      "complianceEvent": false,
+      "whyItMatters": "Sets a business expectation for the commencement of services."
+    },
+    {
+      "id": "blueorchid-fact-3",
+      "statement": "Pilot scope is limited to India hotels",
+      "category": "commitment",
+      "noteId": "tracker",
+      "noteTitle": "Tracker notes",
+      "quote": "Jay: 'just India hotels I think",
+      "complianceEvent": false,
+      "whyItMatters": "Defines the geographic scope and limitations for the pilot agreement."
+    }
+  ],
+  "complianceCandidate": null,
+  "similar": [
+    {
+      "clauseType": "payment",
+      "docId": "blueorchid-pilot",
+      "clauseRef": "§5",
+      "quote": "5.1 The total fee for the Pilot is USD 38,000 (United States Dollars Thirty-Eight Thousand only), payable in accordance with the Milestones in Annexure C.\n5.2 AtliQ shall raise an invoice on completion of each Milestone. BlueOrchid shall pay each undisputed invoice within thirty (30) days of receipt.\n5.3 All amounts are exclusive of GST, which shall be charged at the applicable rate. BlueOrchid may deduct TDS as required under the Income-tax Act, 1961, and shall furnish TDS certificates within the statutory timelines.\n5.4 Any disputed portion of an invoice shall be notified within ten (10) days of receipt; the undisputed portion shall be paid in accordance with Clause 5.2.",
+      "hits": [
+        {
+          "docId": "paytrack-msa",
+          "counterparty": "PayTrack Technologies",
+          "date": "2025-01-22",
+          "clauseNo": "4",
+          "heading": "FEES AND PAYMENT",
+          "label": "untagged",
+          "score": 0.958,
+          "text": "4.1 The total fees under SOW-1 are **USD 71,000** (United States Dollars Seventy-One Thousand only), payable in accordance with the milestone schedule in SOW-1.\n\n4.2 AtliQ shall invoice upon completion of each milestone. PayTrack shall pay each undisputed invoice within thirty (30) days of receipt.\n\n4.3 Fees are exclusive of GST. PayTrack may deduct TDS in accordance with Applicable Law.",
+          "differs": "Fee is USD 38,000 instead of USD 71,000.",
+          "alsoIn": [
+            "Acme Retail Group (2025-03)"
+          ]
+        },
+        {
+          "docId": "trustline-msa",
+          "counterparty": "Trustline NBFC",
+          "date": "2026-08-15",
+          "clauseNo": "4",
+          "heading": "FEES AND PAYMENT",
+          "label": "standard",
+          "labelNote": "45-day payment: the negotiated maximum (90 → 45)",
+          "score": 0.943,
+          "text": "4.1 The total fees for the Services are **USD 48,000** (United States Dollars Forty-Eight Thousand only), payable on completion of Milestones as set out in Annexure A.\n\n4.2 The Service Provider shall raise an invoice upon completion of each Milestone. The Company shall pay each undisputed invoice within forty-five (45) days of receipt of the invoice.\n\n4.3 All fees are exclusive of GST. The Company shall be entitled to deduct TDS as applicable.\n\n4.4 Any disputed amount shall be notified within ten (10) days of receipt of invoice, and the Parties shall resolve such dispute in good faith within thirty (30) days.",
+          "differs": "USD 38,000 fee and 30-day payment term instead of USD 48,000 and 45-day term.",
+          "alsoIn": []
+        },
+        {
+          "docId": "sunrise-msa",
+          "counterparty": "Sunrise Foods",
+          "date": "2025-04-18",
+          "clauseNo": "5",
+          "heading": "FEES AND PAYMENT",
+          "label": "untagged",
+          "score": 0.936,
+          "text": "5.1 The total Fees under SOW-1 are **USD 33,000** (United States Dollars Thirty-Three Thousand only), comprising build fees payable on Milestones and a Monthly Support Fee for the support period, as detailed in SOW-1.\n\n5.2 AtliQ shall invoice build fees upon completion of each Milestone and the Monthly Support Fee monthly in arrears. Sunrise shall pay each undisputed invoice within thirty (30) days of the invoice date.\n\n5.3 All amounts are exclusive of GST, which shall be charged additionally at the applicable rate. Sunrise may deduct TDS as required by law.\n\n5.4 Delayed payments shall attract interest at twelve percent (12%) per annum.",
+          "differs": "Fee is USD 38,000 instead of USD 33,000; omits late payment interest clause.",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "confidentiality",
+      "docId": "blueorchid-pilot",
+      "clauseRef": "§7",
+      "quote": "7.1 Each Party shall hold the other Party's confidential information in strict confidence, use it only for the purposes of this Agreement, and disclose it only to its employees and professional advisers on a need-to-know basis.\n7.2 These obligations shall not apply to information that is public, already known to the recipient, independently developed, or required to be disclosed by law.\n7.3 The obligations in this Clause shall continue for three (3) years after termination or expiry of this Agreement.",
+      "hits": [
+        {
+          "docId": "crestline-msa",
+          "counterparty": "Crestline Retail Inc",
+          "date": "2024-08-01",
+          "clauseNo": "7",
+          "heading": "CONFIDENTIALITY",
+          "label": "untagged",
+          "score": 0.968,
+          "text": "7.1 Each Party shall hold the other Party's Confidential Information in confidence, use it only to perform or receive the Services, and disclose it only to its personnel and advisors with a need to know who are bound by obligations at least as protective.\n\n7.2 The obligations in Section 7.1 do not apply to information that is or becomes publicly available without breach, was known to the recipient prior to disclosure, is independently developed, or is rightfully received from a third party.\n\n7.3 These obligations survive for three (3) years following termination, and indefinitely for trade secrets.",
+          "differs": "Omits indefinite protection for trade secrets; excludes information required to be disclosed by law.",
+          "alsoIn": [
+            "CloudSpan Technologies (2025-09)",
+            "Acme Retail Group (2025-03)",
+            "Northwind Logistics (2025-06)"
+          ]
+        },
+        {
+          "docId": "alnoor-msa",
+          "counterparty": "Al Noor Hospitality Group",
+          "date": "2025-03-15",
+          "clauseNo": "8",
+          "heading": "CONFIDENTIALITY",
+          "label": "untagged",
+          "score": 0.944,
+          "text": "8.1 \"**Confidential Information**\" means all information disclosed by one Party to the other, whether before or after the Effective Date, that is marked confidential or would reasonably be regarded as confidential, including Client Data, pricing strategies, rate plans, occupancy forecasts and business plans.\n\n8.2 Each Party shall keep the other's Confidential Information confidential, use it only for the purposes of this Agreement, and disclose it only to its employees and advisers who need to know it and are bound by equivalent obligations.\n\n8.3 These obligations do not apply to information that is public other than through breach, was lawfully known before disclosure, is independently developed, or is required to be disclosed by law.\n\n8.4 The obligations in this Clause 8 continue for five (5) years after expiry or termination.",
+          "differs": "Includes a specific three-year survival period and excludes information required to be disclosed by law.",
+          "alsoIn": []
+        },
+        {
+          "docId": "rohan-ica",
+          "counterparty": "Rohan Iyer",
+          "date": "2025-04-28",
+          "clauseNo": "6",
+          "heading": "CONFIDENTIALITY",
+          "label": "untagged",
+          "score": 0.935,
+          "text": "6.1 Each party shall keep confidential all non-public information of the other party, and in the case of AtliQ, of AtliQ's clients, received in connection with this Agreement, and shall use it only for the purposes of this Agreement.\n\n6.2 The Contractor shall comply with any confidentiality and data-security requirements of AtliQ's clients notified to him in writing, including restrictions on downloading client data to personal devices.\n\n6.3 This Clause 6 does not apply to information that is public, already lawfully known, independently developed, or required to be disclosed by law.\n\n6.4 The obligations in this Clause 6 survive for three (3) years after termination or expiry.",
+          "differs": "Applies 3-year survival period to both parties instead of specific client-data restrictions for contractors.",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "ip",
+      "docId": "blueorchid-pilot",
+      "clauseRef": "§8",
+      "quote": "8.1 Upon payment in full, BlueOrchid shall own the dashboards, reports and configurations created specifically for BlueOrchid under this Agreement.\n8.2 Each Party retains all rights in its Pre-existing IP. AtliQ grants BlueOrchid a non-exclusive, non-transferable, royalty-free licence to use AtliQ's Pre-existing IP to the extent incorporated in the Deliverables, solely for BlueOrchid's internal business purposes.\n8.3 BlueOrchid retains all rights in Client Data.",
+      "hits": [
+        {
+          "docId": "paytrack-msa",
+          "counterparty": "PayTrack Technologies",
+          "date": "2025-01-22",
+          "clauseNo": "8",
+          "heading": "INTELLECTUAL PROPERTY",
+          "label": "untagged",
+          "score": 0.917,
+          "text": "8.1 Upon full payment, all intellectual property in the Deliverables developed specifically for PayTrack shall vest in PayTrack.\n\n8.2 AtliQ retains ownership of its pre-existing materials, tools and know-how and grants PayTrack a perpetual, non-exclusive, royalty-free licence to use such materials as incorporated in the Deliverables.",
+          "differs": "IP license for pre-existing materials is for internal business purposes rather than perpetual.",
+          "alsoIn": []
+        },
+        {
+          "docId": "orbit-msa",
+          "counterparty": "Orbit Travels Pvt Ltd",
+          "date": "2022-07-01",
+          "clauseNo": "5",
+          "heading": "INTELLECTUAL PR0PERTY",
+          "label": "untagged",
+          "score": 0.907,
+          "text": "5.1 All deliverables developed specifically for the Client shall be the property of the Client\nupon full payment. The Service Provider retains its pre-existing tools and know-how.",
+          "differs": "Adds a non-exclusive, non-transferable license for pre-existing IP used in deliverables.",
+          "alsoIn": [
+            "Al Noor Hospitality Group (2025-03)",
+            "Trustline NBFC (2026-08)",
+            "Acme Retail Group (2025-03)"
+          ]
+        },
+        {
+          "docId": "sunrise-msa",
+          "counterparty": "Sunrise Foods",
+          "date": "2025-04-18",
+          "clauseNo": "10",
+          "heading": "INTELLECTUAL PROPERTY",
+          "label": "untagged",
+          "score": 0.905,
+          "text": "10.1 Upon payment in full, Sunrise shall own all intellectual property rights in the Deliverables developed specifically for Sunrise under an SOW.\n\n10.2 AtliQ retains ownership of its pre-existing tools, components, libraries and know-how. AtliQ grants Sunrise a perpetual, non-exclusive, royalty-free licence to use any such pre-existing materials to the extent incorporated in the Deliverables.",
+          "differs": "Pre-existing IP license is for internal business purposes rather than perpetual.",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "liability",
+      "docId": "blueorchid-pilot",
+      "clauseRef": "§10",
+      "quote": "10.1 Neither Party shall be liable for any indirect, incidental, special or consequential damages, including loss of profit, revenue or goodwill.\n10.2 Except for breach of confidentiality, fraud or wilful misconduct, each Party's total aggregate liability under this Agreement shall not exceed the total fees paid or payable under this Agreement.",
+      "hits": [
+        {
+          "docId": "paytrack-msa",
+          "counterparty": "PayTrack Technologies",
+          "date": "2025-01-22",
+          "clauseNo": "11",
+          "heading": "LIMITATION OF LIABILITY",
+          "label": "untagged",
+          "score": 0.967,
+          "text": "11.1 Neither Party shall be liable for any indirect, special, incidental or consequential damages, or loss of profits, revenue or goodwill.\n\n11.2 Each Party's total aggregate liability under or in connection with this Agreement shall not exceed the total fees paid or payable under the SOW giving rise to the claim.\n\n11.3 The limitations in this Clause 11 shall not apply to liability for fraud or wilful misconduct.",
+          "differs": "Liability cap applies to the entire agreement rather than just the SOW giving rise to the claim.",
+          "alsoIn": [
+            "Trustline NBFC (2026-08)",
+            "Acme Retail Group (2025-03)",
+            "Al Noor Hospitality Group (2025-03)",
+            "Northwind Logistics (2025-06)",
+            "CloudSpan Technologies (2025-09)"
+          ]
+        },
+        {
+          "docId": "sunrise-msa",
+          "counterparty": "Sunrise Foods",
+          "date": "2025-04-18",
+          "clauseNo": "13",
+          "heading": "LIMITATION OF LIABILITY",
+          "label": "standard",
+          "labelNote": "AtliQ-friendly master: capped liability, service credits capped at 5%",
+          "score": 0.938,
+          "text": "13.1 Neither Party shall be liable for indirect, consequential or special losses or loss of profits.\n\n13.2 Each Party's aggregate liability under an SOW shall not exceed the Fees paid or payable under that SOW.",
+          "differs": "Liability cap covers the entire agreement and adds a carve-out for confidentiality breaches.",
+          "alsoIn": []
+        },
+        {
+          "docId": "rohan-ica",
+          "counterparty": "Rohan Iyer",
+          "date": "2025-04-28",
+          "clauseNo": "8",
+          "heading": "LIABILITY",
+          "label": "standard",
+          "labelNote": "Fair freelancer terms: 30-day pay, mutual cap, mutual 15-day exit",
+          "score": 0.925,
+          "text": "8.1 Each party's aggregate liability under this Agreement shall not exceed the total fees paid or payable to the Contractor in the twelve (12) months preceding the claim, except for breach of Clause 6 or fraud.\n\n8.2 Neither party is liable for indirect or consequential loss.",
+          "differs": "Liability cap is the total agreement fees instead of the preceding twelve months of fees.",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "indemnity",
+      "docId": "blueorchid-pilot",
+      "clauseRef": "§11",
+      "quote": "11.1 Each Party (the \"Indemnifying Party\") shall indemnify the other against third-party claims to the extent arising from the Indemnifying Party's breach of this Agreement, negligence or wilful misconduct.\n11.2 AtliQ shall indemnify BlueOrchid against third-party claims that the Deliverables infringe any intellectual property right, save where such claim arises from Client Data or modifications made by BlueOrchid.",
+      "hits": [
+        {
+          "docId": "acme-msa",
+          "counterparty": "Acme Retail Group",
+          "date": "2025-03-10",
+          "clauseNo": "11",
+          "heading": "INDEMNITY",
+          "label": "standard",
+          "labelNote": "Mutual indemnity",
+          "score": 0.959,
+          "text": "11.1 Each Party (\"**Indemnifying Party**\") shall indemnify the other against losses arising from third-party claims caused by the Indemnifying Party's breach of confidentiality, infringement of third-party intellectual property rights, or gross negligence or wilful misconduct.",
+          "differs": "Adds specific IP infringement indemnity for deliverables; requires general indemnity for any breach.",
+          "alsoIn": []
+        },
+        {
+          "docId": "sunrise-msa",
+          "counterparty": "Sunrise Foods",
+          "date": "2025-04-18",
+          "clauseNo": "12",
+          "heading": "INDEMNITY",
+          "label": "untagged",
+          "score": 0.958,
+          "text": "12.1 Each Party shall indemnify the other against third-party claims arising out of its breach of confidentiality, infringement of intellectual property rights, or gross negligence or wilful misconduct.",
+          "differs": "Requires indemnity for any breach of the agreement rather than only confidentiality or IP breaches.",
+          "alsoIn": [
+            "Trustline NBFC (2026-08)"
+          ]
+        },
+        {
+          "docId": "paytrack-msa",
+          "counterparty": "PayTrack Technologies",
+          "date": "2025-01-22",
+          "clauseNo": "10",
+          "heading": "INDEMNITY",
+          "label": "standard",
+          "labelNote": "Origin of the mutual-indemnity position: no indemnity for the indemnified party's own negligence",
+          "score": 0.946,
+          "text": "10.1 Each Party (the \"**Indemnifying Party**\") shall indemnify, defend and hold harmless the other Party and its directors, officers and employees (the \"**Indemnified Party**\") from and against all Losses arising out of any third-party claim to the extent caused by: (a) the Indemnifying Party's breach of Clause 7 (Confidentiality) or Clause 12 (Data Protection); (b) the gross negligence, wilful misconduct or fraud of the Indemnifying Party or its personnel; or (c) in the case of AtliQ, any claim that the Deliverables infringe a third party's intellectual property rights, and in the case of PayTrack, any claim that Client Data or materials supplied by PayTrack infringe a third party's rights.\n\n10.2 Neither Party shall be required to indemnify the other to the extent any Losses are caused by the negligence, breach or wilful misconduct of the Indemnified Party.\n\n10.3 The Indemnified Party shall give prompt written notice of any claim, permit the Indemnifying Party to control the defence and settlement, and provide reasonable cooperation at the Indemnifying Party's cost.",
+          "differs": "Indemnity covers any breach of agreement and negligence rather than specific data protection or gross negligence.",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "ld",
+      "docId": "blueorchid-pilot",
+      "clauseRef": "§12",
+      "quote": "12.1 If AtliQ fails to complete a Milestone by its scheduled date for reasons solely attributable to AtliQ, BlueOrchid shall be entitled to liquidated damages of 0.5% of the relevant Milestone Fee for each complete week of delay, subject to a maximum of 5% of that Milestone Fee.\n12.2 No liquidated damages shall be payable for any delay caused by BlueOrchid, its vendors, or a force majeure event.\n12.3 Liquidated damages under this Clause shall be BlueOrchid's sole and exclusive remedy for delay.",
+      "hits": [
+        {
+          "docId": "acme-msa",
+          "counterparty": "Acme Retail Group",
+          "date": "2025-03-10",
+          "clauseNo": "7",
+          "heading": "DELAY AND LIQUIDATED DAMAGES",
+          "label": "standard",
+          "labelNote": "Origin of the LD playbook: 0.5% of milestone/week, 5% cap, client delays excluded (Mar 2025)",
+          "score": 0.943,
+          "text": "7.1 If the Service Provider fails to complete a Milestone by the agreed date for reasons solely attributable to the Service Provider, the Service Provider shall pay liquidated damages at the rate of 0.5% (half percent) of the Milestone Fee of the delayed Milestone for each complete week of delay.\n\n7.2 The aggregate liquidated damages in respect of any Milestone shall not exceed 5% (five percent) of the Milestone Fee of that Milestone.\n\n7.3 No liquidated damages shall be payable where the delay is caused by the Client, including delayed access to data or systems, delayed review of Deliverables, or changes in scope, or by a Force Majeure event.\n\n7.4 The Parties agree that the liquidated damages are a genuine pre-estimate of loss and shall be the Client's sole and exclusive remedy for delay.",
+          "differs": "Same 0.5% rate and 5% cap, but adds specific carve-out for force majeure delays.",
+          "alsoIn": [
+            "Trustline NBFC (2026-08)",
+            "Northwind Logistics (2025-06)"
+          ]
+        },
+        {
+          "docId": "brightwater-msa",
+          "counterparty": "Brightwater Insurance Inc",
+          "date": "2025-11-28",
+          "clauseNo": "9",
+          "heading": "DELAY AND LIQUIDATED DAMAGES",
+          "label": "accident",
+          "labelNote": "Signed on a phone in 4 minutes: 1%/day uncapped LDs, no client-delay exclusion, group set-off, English law on a US entity. Cost $9k + $14.2k legal",
+          "score": 0.891,
+          "text": "9.1 If the Supplier fails to achieve any Key Date, the Supplier shall pay to the Customer liquidated damages in the amount of one per cent (1%) of the Contract Value for each day or part day by which the relevant Key Date is missed.\n\n9.2 Liquidated damages under clause 9.1 shall be payable in addition to any other right or remedy available to the Customer under this Agreement or at law, and the Customer may deduct such liquidated damages from any sums due to the Supplier.\n\n9.3 The Supplier acknowledges that the liquidated damages set out in this clause 9 are proportionate to the Customer's legitimate interest in the timely delivery of the Services.",
+          "differs": "Weekly rate of 0.5% with 5% cap instead of 1% daily rate; makes damages an exclusive remedy.",
+          "alsoIn": []
+        },
+        {
+          "docId": "alnoor-msa",
+          "counterparty": "Al Noor Hospitality Group",
+          "date": "2025-03-15",
+          "clauseNo": "10",
+          "heading": "DELIVERY, ACCEPTANCE AND LIQUIDATED DAMAGES",
+          "label": "exception",
+          "labelNote": "One-off: \"strategic exception for Al Noor only, not our new standard\" (cap 10% of total fees)",
+          "score": 0.874,
+          "text": "10.1 The Supplier shall use all reasonable endeavours to achieve each Milestone by the date set out in the relevant SOW.\n\n10.2 Each Deliverable shall be subject to acceptance testing by the Client within ten (10) Business Days of delivery against the acceptance criteria in the SOW. Deliverables not rejected in writing within that period shall be deemed accepted.\n\n10.3 If the Supplier fails to achieve a Milestone by its due date for reasons attributable to the Supplier, the Supplier shall pay to the Client, as liquidated damages, one percent (1%) of the Fees payable for the affected Milestone for each complete week of delay, provided that the aggregate liquidated damages payable under this Agreement shall not exceed ten percent (10%) of the total Fees payable under this Agreement.\n\n10.4 The Parties agree that the liquidated damages in Clause 10.3 are a genuine pre-estimate of loss. No liquidated damages shall be payable for delay caused by the Client, its contractors, or a Force Majeure Event.",
+          "differs": "Weekly rate of 0.5% with 5% cap instead of 1% flat fee; makes damages an exclusive remedy.",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "data_protection",
+      "docId": "blueorchid-pilot",
+      "clauseRef": "§13",
+      "quote": "13.1 AtliQ shall process personal data contained in Client Data only for the purposes of the Pilot and in accordance with the Digital Personal Data Protection Act, 2023 and any other applicable data protection law, including the laws applicable to Properties located outside India.\n13.2 AtliQ shall implement reasonable security safeguards and shall notify BlueOrchid without undue delay of any personal data breach.\n13.3 On completion or termination of the Pilot, AtliQ shall return or delete Client Data as instructed by BlueOrchid.",
+      "hits": [
+        {
+          "docId": "acme-msa",
+          "counterparty": "Acme Retail Group",
+          "date": "2025-03-10",
+          "clauseNo": "13",
+          "heading": "DATA PROTECTION",
+          "label": "untagged",
+          "score": 0.929,
+          "text": "13.1 The Service Provider shall process personal data received from the Client only for the purpose of the Services and in compliance with the Digital Personal Data Protection Act, 2023 and the rules made thereunder, as and when in force, and shall implement reasonable security practices.",
+          "differs": "Adds specific requirements for data return/deletion and notification of personal data breaches.",
+          "alsoIn": []
+        },
+        {
+          "docId": "paytrack-msa",
+          "counterparty": "PayTrack Technologies",
+          "date": "2025-01-22",
+          "clauseNo": "12",
+          "heading": "DATA PROTECTION",
+          "label": "untagged",
+          "score": 0.925,
+          "text": "12.1 AtliQ shall process personal data comprised in Client Data only on PayTrack's documented instructions and in compliance with the Digital Personal Data Protection Act, 2023, the Information Technology Act, 2000 and applicable RBI directions.\n\n12.2 AtliQ shall notify PayTrack of any data breach within twenty-four (24) hours of becoming aware of it, and shall cooperate with PayTrack in any reporting to CERT-In or the RBI.\n\n12.3 AtliQ shall permit PayTrack and its regulators to audit its compliance with this Clause 12 on reasonable notice.",
+          "differs": "Omits 24-hour breach notification deadline, audit rights, and specific RBI/CERT-In compliance requirements.",
+          "alsoIn": []
+        },
+        {
+          "docId": "sunrise-msa",
+          "counterparty": "Sunrise Foods",
+          "date": "2025-04-18",
+          "clauseNo": "14",
+          "heading": "DATA PROTECTION",
+          "label": "untagged",
+          "score": 0.925,
+          "text": "14.1 AtliQ shall comply with the Information Technology Act, 2000, the rules thereunder, and the Digital Personal Data Protection Act, 2023 to the extent applicable, in relation to any personal data of distributors or employees processed in performing the Services.",
+          "differs": "Specifically includes laws for properties outside India and adds data return or deletion requirements.",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "governing_law",
+      "docId": "blueorchid-pilot",
+      "clauseRef": "§14",
+      "quote": "14.1 This Agreement shall be governed by the laws of India.\n14.2 Any dispute shall first be referred to senior management of both Parties for amicable settlement within thirty (30) days.\n14.3 Failing settlement, the dispute shall be finally resolved by arbitration under the Arbitration and Conciliation Act, 1996, by a sole arbitrator mutually appointed. The seat and venue of arbitration shall be Mumbai and the language shall be English.\n14.4 Subject to the above, the courts at Mumbai shall have exclusive jurisdiction.",
+      "hits": [
+        {
+          "docId": "paytrack-msa",
+          "counterparty": "PayTrack Technologies",
+          "date": "2025-01-22",
+          "clauseNo": "15",
+          "heading": "GOVERNING LAW AND DISPUTE RESOLUTION",
+          "label": "untagged",
+          "score": 0.978,
+          "text": "15.1 This Agreement shall be governed by the laws of India.\n\n15.2 Disputes not resolved by negotiation between senior management within thirty (30) days shall be referred to arbitration by a sole arbitrator under the Arbitration and Conciliation Act, 1996. The seat and venue of arbitration shall be Pune, and the language shall be English.",
+          "differs": "Arbitration seat and venue is Mumbai instead of Pune.",
+          "alsoIn": [
+            "Trustline NBFC (2026-08)",
+            "Acme Retail Group (2025-03)",
+            "Sunrise Foods (2025-04)"
+          ]
+        },
+        {
+          "docId": "orbit-msa",
+          "counterparty": "Orbit Travels Pvt Ltd",
+          "date": "2022-07-01",
+          "clauseNo": "11",
+          "heading": "GOVERNING LAW AND DISPUTES",
+          "label": "untagged",
+          "score": 0.936,
+          "text": "11.1 This Agreernent shall be governed by the laws of India. Disputes shall be referred to a sole\narbitrator under the Arbitration and Conciliation Act, 1996. Seat of arbitration: New Delhi.\nCourts at New Delhi shall have jurisdiction.",
+          "differs": "Arbitration seat and venue is Mumbai instead of New Delhi; adds 30-day senior management mediation.",
+          "alsoIn": []
+        },
+        {
+          "docId": "cloudspan-spa",
+          "counterparty": "CloudSpan Technologies",
+          "date": "2025-09-01",
+          "clauseNo": "15",
+          "heading": "GOVERNING LAW AND DISPUTE RESOLUTION",
+          "label": "concession",
+          "labelNote": "Singapore law / SIAC accepted",
+          "score": 0.92,
+          "text": "15.1 This Agreement is governed by the laws of the Republic of Singapore.\n\n15.2 The Parties shall first attempt to resolve any dispute through good-faith discussions between senior executives for thirty (30) days.\n\n15.3 Any dispute not so resolved shall be referred to and finally resolved by arbitration administered by the Singapore International Arbitration Centre (\"**SIAC**\") under the SIAC Rules in force at the time. The seat of arbitration shall be Singapore. The tribunal shall consist of one (1) arbitrator. The language of arbitration shall be English.",
+          "differs": "Governed by Indian law with Mumbai arbitration instead of Singapore law and SIAC arbitration.",
+          "alsoIn": []
+        }
+      ]
+    }
+  ],
+  "counselPack": null,
+  "errors": [],
+  "usage": {
+    "calls": 6,
+    "cachedCalls": 0,
+    "inputTokens": 19003,
+    "outputTokens": 13310,
+    "ms": 70614
+  }
+}

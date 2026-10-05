@@ -67,7 +67,12 @@ export function Quote({ children, cite }: { children: ReactNode; cite?: string }
   return (
     <figure className="space-y-1">
       {cite && <figcaption className="text-xs font-semibold text-muted">{cite}</figcaption>}
-      <blockquote className="quote text-sm">{children}</blockquote>
+      <blockquote className="quote text-sm">{typeof children === "string" ? clean(children) : children}</blockquote>
     </figure>
   );
+}
+
+/** Display only: drop markdown emphasis marks from verbatim spans (the stored quote stays exact). */
+export function clean(text: string): string {
+  return text.replace(/\*\*/g, "").replace(/(^|\s)\*(\S)/g, "$1$2");
 }

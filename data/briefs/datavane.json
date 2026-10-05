@@ -1,0 +1,537 @@
+{
+  "dealId": "datavane",
+  "version": 1,
+  "createdAt": "2026-10-05T04:15:04.543Z",
+  "trigger": "initial review",
+  "inputsHash": "fc6ba519e2227964a69a839e690dc2ae",
+  "documentIds": [
+    "datavane-spa"
+  ],
+  "registerVersion": "reg-2026-10-04-57+r0",
+  "playbookVersion": "pb-v1-2026-10-04",
+  "models": [
+    "gemini-flash-lite-latest",
+    "gemini-3.6-flash"
+  ],
+  "promptVersion": "p1",
+  "route": "full_review",
+  "verdict": "HOLD",
+  "headline": "HOLD: 2 manual checks pending for Datavane strategic partnership",
+  "nextAction": "Karandeep must manually complete the playbook and conflict checks.",
+  "findings": [
+    {
+      "key": "gate:governing_law",
+      "category": "gate",
+      "topic": "governing_law",
+      "title": "Governing law: State of Delaware",
+      "impact": "AtliQ's position is Indian law for AtliQ Technologies Pvt Ltd. Client law has been accepted before to win a deal (DIFC, English, Singapore): a judgment call, not a blocker.",
+      "severity": "medium",
+      "confidence": "high",
+      "needsJudgment": true,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "datavane-spa",
+      "citations": [
+        {
+          "docId": "datavane-spa",
+          "docTitle": "Datavane strategic partnership (draft)",
+          "clauseRef": "13.1",
+          "quote": "This Agreement shall be governed by and construed in accordance with the laws of the State of Delaware",
+          "role": "incoming"
+        }
+      ],
+      "standard": "Indian law for Pvt Ltd; US law for Inc.",
+      "counterPosition": "Laws of India; arbitration seated in India or a neutral seat."
+    }
+  ],
+  "fine": [
+    "Payment ≤ 45 days: 30 days"
+  ],
+  "notSeen": [
+    "No meeting notes attached to this deal.",
+    "Register built from 17 signed documents. Contracts referenced elsewhere but never collected (e.g. ShopSwift SOW, PixelCraft vendor agreement, intercompany services agreement) can't be checked.",
+    "Playbook check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more infor)",
+    "Conflict check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more infor)"
+  ],
+  "documents": [
+    {
+      "docId": "datavane-spa",
+      "title": "Datavane strategic partnership (draft)",
+      "docType": "Partnership",
+      "paper": "client",
+      "route": "full_review",
+      "facts": [
+        {
+          "field": "docType",
+          "label": "Document type",
+          "value": "Partnership"
+        },
+        {
+          "field": "parties",
+          "label": "Counterparty",
+          "value": "Datavane, Inc. (USA)"
+        },
+        {
+          "field": "entity",
+          "label": "AtliQ entity (parties)",
+          "value": "Pvt Ltd",
+          "clauseRef": "Preamble",
+          "quote": "AtliQ Technologies Pvt Ltd**, a private limited company incorporated under the laws of India"
+        },
+        {
+          "field": "invoicing",
+          "label": "AtliQ entity (invoicing)",
+          "value": "Not named separately"
+        },
+        {
+          "field": "law",
+          "label": "Governing law",
+          "value": "State of Delaware",
+          "clauseRef": "13.1",
+          "quote": "This Agreement shall be governed by and construed in accordance with the laws of the State of Delaware"
+        },
+        {
+          "field": "forum",
+          "label": "Forum",
+          "value": "state or federal courts located in the City and County of San Francisco, California",
+          "clauseRef": "13.2",
+          "quote": "Any action or proceeding arising out of or relating to this Agreement shall be brought exclusively in the state or federal courts located in the City and County of San Francisco, California"
+        },
+        {
+          "field": "payment",
+          "label": "Payment",
+          "value": "30 days",
+          "clauseRef": "6.2",
+          "quote": "in which case Partner shall remit Datavane's share within thirty (30) days of Partner's invoice date"
+        },
+        {
+          "field": "ld",
+          "label": "Delay penalties",
+          "value": "None"
+        },
+        {
+          "field": "liability",
+          "label": "Liability",
+          "value": "null"
+        },
+        {
+          "field": "insurance",
+          "label": "Insurance required",
+          "value": "None"
+        },
+        {
+          "field": "annexes",
+          "label": "Annexes referenced",
+          "value": "Schedule 1"
+        },
+        {
+          "field": "scope",
+          "label": "Sectors · regions",
+          "value": "technology, data_platform · India, UAE, Saudi Arabia, Qatar, Kuwait, Bahrain, Oman, GCC, Europe, UK, USA"
+        },
+        {
+          "field": "data",
+          "label": "Data handled",
+          "value": "none"
+        },
+        {
+          "field": "assets",
+          "label": "Tools / IP reused",
+          "value": "Datavane Lakehouse Platform, Partner Portal"
+        }
+      ],
+      "gate": [
+        {
+          "rule": "entity",
+          "label": "Correct AtliQ entity",
+          "pass": null,
+          "detail": "Partnership: no client-country rule",
+          "citation": {
+            "docId": "datavane-spa",
+            "docTitle": "Datavane strategic partnership (draft)",
+            "clauseRef": "Preamble",
+            "quote": "AtliQ Technologies Pvt Ltd**, a private limited company incorporated under the laws of India",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "invoicing_entity",
+          "label": "Parties = invoicing entity",
+          "pass": null,
+          "detail": "No separate invoicing entity named"
+        },
+        {
+          "rule": "governing_law",
+          "label": "Governing law matches entity",
+          "pass": false,
+          "detail": "State of Delaware (Pvt Ltd → Indian law)",
+          "citation": {
+            "docId": "datavane-spa",
+            "docTitle": "Datavane strategic partnership (draft)",
+            "clauseRef": "13.1",
+            "quote": "This Agreement shall be governed by and construed in accordance with the laws of the State of Delaware",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "payment",
+          "label": "Payment ≤ 45 days",
+          "pass": true,
+          "detail": "30 days",
+          "citation": {
+            "docId": "datavane-spa",
+            "docTitle": "Datavane strategic partnership (draft)",
+            "clauseRef": "6.2",
+            "quote": "in which case Partner shall remit Datavane's share within thirty (30) days of Partner's invoice date",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "ld_cap",
+          "label": "Delay penalties capped",
+          "pass": null,
+          "detail": "No delay penalties"
+        },
+        {
+          "rule": "liability_cap",
+          "label": "Liability capped",
+          "pass": null,
+          "detail": "Not stated"
+        },
+        {
+          "rule": "annex:schedule-1",
+          "label": "Schedule 1 attached",
+          "pass": true,
+          "detail": "Attached in this document",
+          "citation": {
+            "docId": "datavane-spa",
+            "docTitle": "Datavane strategic partnership (draft)",
+            "clauseRef": "Schedule 1",
+            "quote": "SCHEDULE 1 — PARTNER TIER AND BENEFITS (SUMMARY",
+            "role": "incoming"
+          }
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "bundle": [],
+  "notesFacts": [
+    {
+      "id": "datavane-fact-1",
+      "statement": "Partnership Agreement deadline is 15 Oct",
+      "category": "deadline",
+      "noteId": "tracker",
+      "noteTitle": "Tracker notes",
+      "quote": "C-035 (Partnership Agreement): by 15 Oct",
+      "complianceEvent": false,
+      "whyItMatters": "Contract reviewer must ensure the agreement is executed by the specified deadline."
+    }
+  ],
+  "complianceCandidate": null,
+  "similar": [
+    {
+      "clauseType": "payment",
+      "docId": "datavane-spa",
+      "clauseRef": "§6",
+      "quote": "6.1 **Joint Deal Revenue Share.** Joint Deal Revenue shall be shared between the Parties in the proportion of eighty percent (80%) to Datavane and twenty percent (20%) to Partner, irrespective of whether Platform subscription fees or Partner Services fees are the larger component of such Joint Deal.\n6.2 **Billing.** Datavane shall invoice Datavane Accounts for all Joint Deal Revenue, unless Datavane agrees in writing that Partner may invoice Partner Services directly, in which case Partner shall remit Datavane's share within thirty (30) days of Partner's invoice date.\n6.3 **Payment to Partner.** Datavane shall pay Partner's share of Joint Deal Revenue within sixty (60) days after the end of ",
+      "hits": [
+        {
+          "docId": "cloudspan-spa",
+          "counterparty": "CloudSpan Technologies",
+          "date": "2025-09-01",
+          "clauseNo": "4.1–5",
+          "heading": "REFERRALS AND REFERRAL FEES",
+          "label": "untagged",
+          "score": 0.88,
+          "text": "4.1 Partner may submit Referral Registrations for prospective customers. CloudSpan shall accept or reject each Referral Registration within ten (10) business days. A registration shall be rejected only where the prospect is an existing Customer or is already the subject of an active opportunity registered by CloudSpan or another partner in the preceding ninety (90) days.\n4.2 An accepted Referral Registration shall remain valid for one hundred and eighty (180) days. If the prospect signs a subscription order with CloudSpan within that period, it becomes a Referred Customer.\n4.3 CloudSpan shall pay Partner a referral fee equal to twelve per cent (12%) of the First-Year Subscription Fees received from each Referred Customer (the \"**Referral Fee**\").\n4.4 CloudSpan shall provide Partner with a quarterly statement of Referral Fees within fifteen (15) days of the end of each calendar quarter. Partner shall invoice CloudSpan on the basis of that statement, and CloudSpan shall pay each undisputed invoice within thirty (30) days of receipt.\n4.5 Referral Fees are exclusive of GST and other applicable taxes. Where CloudSpan is required by law to withhold tax, it shall provide Partner with the relevant certificate to enable Partner to claim credit.",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "alnoor-msa",
+          "counterparty": "Al Noor Hospitality Group",
+          "date": "2025-03-15",
+          "clauseNo": "5",
+          "heading": "FEES AND PAYMENT",
+          "label": "untagged",
+          "score": 0.851,
+          "text": "5.1 The total Fees for SOW-1 are **USD 185,000** (one hundred and eighty-five thousand United States Dollars), payable against Milestones as set out in Schedule 1.\n\n5.2 The Supplier shall invoice upon achievement of each Milestone. Invoices are payable within thirty (30) days of receipt.\n\n5.3 All Fees are exclusive of VAT and any other applicable taxes. Where the Client is required by law to withhold tax, it shall provide the Supplier with the relevant withholding certificate.\n\n5.4 Late payments shall bear interest at one percent (1%) per month from the due date until the date of payment.\n\n5.5 The Client may dispute any invoice in good faith by written notice within ten (10) Business Days of receipt, and shall pay the undisputed portion by the due date.",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "paytrack-msa",
+          "counterparty": "PayTrack Technologies",
+          "date": "2025-01-22",
+          "clauseNo": "4",
+          "heading": "FEES AND PAYMENT",
+          "label": "untagged",
+          "score": 0.849,
+          "text": "4.1 The total fees under SOW-1 are **USD 71,000** (United States Dollars Seventy-One Thousand only), payable in accordance with the milestone schedule in SOW-1.\n\n4.2 AtliQ shall invoice upon completion of each milestone. PayTrack shall pay each undisputed invoice within thirty (30) days of receipt.\n\n4.3 Fees are exclusive of GST. PayTrack may deduct TDS in accordance with Applicable Law.",
+          "differs": "",
+          "alsoIn": [
+            "Acme Retail Group (2025-03)"
+          ]
+        }
+      ]
+    },
+    {
+      "clauseType": "ip",
+      "docId": "datavane-spa",
+      "clauseRef": "§8",
+      "quote": "8.1 Datavane retains all right, title and interest in the Platform, its documentation, the Partner Portal and all related intellectual property.\n8.2 Datavane grants Partner a non-exclusive, non-transferable, revocable licence during the Term to use Datavane's Marks in the Territory solely to promote the Platform in accordance with Datavane's brand guidelines.\n8.3 Partner grants Datavane a non-exclusive, royalty-free licence to use Partner's name and logo in Datavane's partner directory and marketing materials.\n8.4 Partner hereby grants Datavane a perpetual, irrevocable, royalty-free licence to use any feedback, connectors, templates or implementation accelerators that Partner submits to the ",
+      "hits": [
+        {
+          "docId": "cloudspan-spa",
+          "counterparty": "CloudSpan Technologies",
+          "date": "2025-09-01",
+          "clauseNo": "8",
+          "heading": "INTELLECTUAL PROPERTY",
+          "label": "untagged",
+          "score": 0.889,
+          "text": "8.1 Each Party retains all rights in its own intellectual property. CloudSpan owns the CloudSpan Platform and all improvements to it.\n\n8.2 Partner retains all rights in its own methodologies, accelerators, tools, templates and know-how, whether developed before or during the Term, including those used in delivering Implementation Services.\n\n8.3 Any feedback provided by Partner concerning the CloudSpan Platform may be used by CloudSpan without restriction, provided Partner's Confidential Information is not disclosed.",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "crestline-msa",
+          "counterparty": "Crestline Retail Inc",
+          "date": "2024-08-01",
+          "clauseNo": "8",
+          "heading": "INTELLECTUAL PROPERTY",
+          "label": "untagged",
+          "score": 0.87,
+          "text": "8.1 Upon payment, Crestline shall own all right, title and interest in the Deliverables.\n\n8.2 Supplier retains all rights in its pre-existing materials, tools and know-how (\"**Supplier Materials**\"). To the extent Supplier Materials are incorporated in a Deliverable, Supplier grants Crestline a non-exclusive, perpetual, royalty-free license to use them as part of such Deliverable.",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "orbit-msa",
+          "counterparty": "Orbit Travels Pvt Ltd",
+          "date": "2022-07-01",
+          "clauseNo": "5",
+          "heading": "INTELLECTUAL PR0PERTY",
+          "label": "untagged",
+          "score": 0.863,
+          "text": "5.1 All deliverables developed specifically for the Client shall be the property of the Client\nupon full payment. The Service Provider retains its pre-existing tools and know-how.",
+          "differs": "",
+          "alsoIn": [
+            "Trustline NBFC (2026-08)",
+            "Al Noor Hospitality Group (2025-03)",
+            "Acme Retail Group (2025-03)"
+          ]
+        }
+      ]
+    },
+    {
+      "clauseType": "confidentiality",
+      "docId": "datavane-spa",
+      "clauseRef": "§9",
+      "quote": "9.1 \"**Confidential Information**\" means all non-public information disclosed by a Party that is marked confidential or would reasonably be understood to be confidential, including information relating to Datavane Accounts.\n9.2 Each Party shall hold the other's Confidential Information in confidence, use it only for the purposes of this Agreement, and disclose it only to personnel and advisers with a need to know who are bound by obligations at least as protective.\n9.3 The obligations in this Section 9 do not apply to information that is or becomes public through no fault of the recipient, was lawfully known before disclosure, is lawfully received from a third party without restriction, or i",
+      "hits": [
+        {
+          "docId": "crestline-msa",
+          "counterparty": "Crestline Retail Inc",
+          "date": "2024-08-01",
+          "clauseNo": "7",
+          "heading": "CONFIDENTIALITY",
+          "label": "untagged",
+          "score": 0.971,
+          "text": "7.1 Each Party shall hold the other Party's Confidential Information in confidence, use it only to perform or receive the Services, and disclose it only to its personnel and advisors with a need to know who are bound by obligations at least as protective.\n\n7.2 The obligations in Section 7.1 do not apply to information that is or becomes publicly available without breach, was known to the recipient prior to disclosure, is independently developed, or is rightfully received from a third party.\n\n7.3 These obligations survive for three (3) years following termination, and indefinitely for trade secrets.",
+          "differs": "",
+          "alsoIn": [
+            "CloudSpan Technologies (2025-09)",
+            "Acme Retail Group (2025-03)",
+            "Northwind Logistics (2025-06)"
+          ]
+        },
+        {
+          "docId": "orbit-msa",
+          "counterparty": "Orbit Travels Pvt Ltd",
+          "date": "2022-07-01",
+          "clauseNo": "4",
+          "heading": "CONFIDENTIALITY",
+          "label": "untagged",
+          "score": 0.935,
+          "text": "4.1 Each party shall keep confidential all information received from the other party including\nfare data, supplier contracts, customer data and source code, and shall not disclose the same\nto any third party. This obligation shall survive for two (2) years after termination.",
+          "differs": "",
+          "alsoIn": [
+            "Sunrise Foods (2025-04)"
+          ]
+        },
+        {
+          "docId": "alnoor-msa",
+          "counterparty": "Al Noor Hospitality Group",
+          "date": "2025-03-15",
+          "clauseNo": "8",
+          "heading": "CONFIDENTIALITY",
+          "label": "untagged",
+          "score": 0.934,
+          "text": "8.1 \"**Confidential Information**\" means all information disclosed by one Party to the other, whether before or after the Effective Date, that is marked confidential or would reasonably be regarded as confidential, including Client Data, pricing strategies, rate plans, occupancy forecasts and business plans.\n\n8.2 Each Party shall keep the other's Confidential Information confidential, use it only for the purposes of this Agreement, and disclose it only to its employees and advisers who need to know it and are bound by equivalent obligations.\n\n8.3 These obligations do not apply to information that is public other than through breach, was lawfully known before disclosure, is independently developed, or is required to be disclosed by law.\n\n8.4 The obligations in this Clause 8 continue for five (5) years after expiry or termination.",
+          "differs": "",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "indemnity",
+      "docId": "datavane-spa",
+      "clauseRef": "§11",
+      "quote": "11.1 **By Partner.** Partner shall defend, indemnify and hold harmless Datavane, its Affiliates and their respective directors, officers, employees and agents from and against any and all Losses arising out of or relating to (a) the Partner Services; (b) any breach of this Agreement by Partner or its Affiliates; (c) any representation made by Partner regarding the Platform; (d) any claim by a Datavane Account relating to Partner Services or any Joint Deal; or (e) any act or omission of Partner's personnel or subcontractors. Partner's obligations under this Section 11.1 shall not be subject to any limitation or cap.\n11.2 **By Datavane.** Datavane shall defend Partner against any third-party c",
+      "hits": [
+        {
+          "docId": "alnoor-msa",
+          "counterparty": "Al Noor Hospitality Group",
+          "date": "2025-03-15",
+          "clauseNo": "15",
+          "heading": "INDEMNITY",
+          "label": "untagged",
+          "score": 0.923,
+          "text": "15.1 The Supplier shall indemnify the Client against losses arising from any third-party claim that the Deliverables (excluding Client materials) infringe that third party's intellectual property rights.\n\n15.2 The Client shall indemnify the Supplier against losses arising from any third-party claim that Client Data or Client materials infringe that third party's rights.\n\n15.3 The indemnified Party shall promptly notify the indemnifying Party, allow it conduct of the defence, and provide reasonable assistance.",
+          "differs": "",
+          "alsoIn": [
+            "CloudSpan Technologies (2025-09)",
+            "Northwind Logistics (2025-06)"
+          ]
+        },
+        {
+          "docId": "paytrack-msa",
+          "counterparty": "PayTrack Technologies",
+          "date": "2025-01-22",
+          "clauseNo": "10",
+          "heading": "INDEMNITY",
+          "label": "standard",
+          "labelNote": "Origin of the mutual-indemnity position: no indemnity for the indemnified party's own negligence",
+          "score": 0.916,
+          "text": "10.1 Each Party (the \"**Indemnifying Party**\") shall indemnify, defend and hold harmless the other Party and its directors, officers and employees (the \"**Indemnified Party**\") from and against all Losses arising out of any third-party claim to the extent caused by: (a) the Indemnifying Party's breach of Clause 7 (Confidentiality) or Clause 12 (Data Protection); (b) the gross negligence, wilful misconduct or fraud of the Indemnifying Party or its personnel; or (c) in the case of AtliQ, any claim that the Deliverables infringe a third party's intellectual property rights, and in the case of PayTrack, any claim that Client Data or materials supplied by PayTrack infringe a third party's rights.\n\n10.2 Neither Party shall be required to indemnify the other to the extent any Losses are caused by the negligence, breach or wilful misconduct of the Indemnified Party.\n\n10.3 The Indemnified Party shall give prompt written notice of any claim, permit the Indemnifying Party to control the defence and settlement, and provide reasonable cooperation at the Indemnifying Party's cost.",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "sunrise-msa",
+          "counterparty": "Sunrise Foods",
+          "date": "2025-04-18",
+          "clauseNo": "12",
+          "heading": "INDEMNITY",
+          "label": "untagged",
+          "score": 0.903,
+          "text": "12.1 Each Party shall indemnify the other against third-party claims arising out of its breach of confidentiality, infringement of intellectual property rights, or gross negligence or wilful misconduct.",
+          "differs": "",
+          "alsoIn": [
+            "Trustline NBFC (2026-08)"
+          ]
+        }
+      ]
+    },
+    {
+      "clauseType": "liability",
+      "docId": "datavane-spa",
+      "clauseRef": "§12",
+      "quote": "12.1 **Exclusion.** IN NO EVENT SHALL DATAVANE BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL OR PUNITIVE DAMAGES, OR FOR LOSS OF PROFITS, REVENUE, BUSINESS OR GOODWILL, ARISING OUT OF OR RELATING TO THIS AGREEMENT.\n12.2 **Cap on Datavane Liability.** DATAVANE'S TOTAL AGGREGATE LIABILITY ARISING OUT OF OR RELATING TO THIS AGREEMENT, INCLUDING UNDER SECTION 11.2, SHALL NOT EXCEED TEN THOUSAND UNITED STATES DOLLARS (USD 10,000).\n12.3 **Partner Liability.** NOTHING IN THIS AGREEMENT SHALL LIMIT PARTNER'S LIABILITY UNDER SECTION 5, SECTION 9 OR SECTION 11.1.",
+      "hits": [
+        {
+          "docId": "paytrack-msa",
+          "counterparty": "PayTrack Technologies",
+          "date": "2025-01-22",
+          "clauseNo": "11",
+          "heading": "LIMITATION OF LIABILITY",
+          "label": "untagged",
+          "score": 0.908,
+          "text": "11.1 Neither Party shall be liable for any indirect, special, incidental or consequential damages, or loss of profits, revenue or goodwill.\n\n11.2 Each Party's total aggregate liability under or in connection with this Agreement shall not exceed the total fees paid or payable under the SOW giving rise to the claim.\n\n11.3 The limitations in this Clause 11 shall not apply to liability for fraud or wilful misconduct.",
+          "differs": "",
+          "alsoIn": [
+            "Trustline NBFC (2026-08)",
+            "CloudSpan Technologies (2025-09)",
+            "Northwind Logistics (2025-06)",
+            "Acme Retail Group (2025-03)",
+            "Al Noor Hospitality Group (2025-03)"
+          ]
+        },
+        {
+          "docId": "crestline-msa",
+          "counterparty": "Crestline Retail Inc",
+          "date": "2024-08-01",
+          "clauseNo": "12",
+          "heading": "LIMITATION OF LIABILITY",
+          "label": "untagged",
+          "score": 0.897,
+          "text": "12.1 EXCEPT FOR BREACH OF SECTION 7 OR A PARTY'S INDEMNIFICATION OBLIGATIONS, NEITHER PARTY SHALL BE LIABLE FOR ANY INDIRECT, INCIDENTAL, CONSEQUENTIAL, SPECIAL OR PUNITIVE DAMAGES.\n\n12.2 EXCEPT FOR BREACH OF SECTION 7 OR A PARTY'S INDEMNIFICATION OBLIGATIONS, EACH PARTY'S AGGREGATE LIABILITY SHALL NOT EXCEED THE FEES PAID OR PAYABLE BY CRESTLINE UNDER THIS AGREEMENT IN THE TWELVE (12) MONTHS PRECEDING THE CLAIM.",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "sunrise-msa",
+          "counterparty": "Sunrise Foods",
+          "date": "2025-04-18",
+          "clauseNo": "13",
+          "heading": "LIMITATION OF LIABILITY",
+          "label": "standard",
+          "labelNote": "AtliQ-friendly master: capped liability, service credits capped at 5%",
+          "score": 0.887,
+          "text": "13.1 Neither Party shall be liable for indirect, consequential or special losses or loss of profits.\n\n13.2 Each Party's aggregate liability under an SOW shall not exceed the Fees paid or payable under that SOW.",
+          "differs": "",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "governing_law",
+      "docId": "datavane-spa",
+      "clauseRef": "§13",
+      "quote": "13.1 **Governing Law.** This Agreement shall be governed by and construed in accordance with the laws of the State of Delaware, without regard to its conflict of laws principles. The United Nations Convention on Contracts for the International Sale of Goods shall not apply.\n13.2 **Venue.** Any action or proceeding arising out of or relating to this Agreement shall be brought exclusively in the state or federal courts located in the City and County of San Francisco, California, and each Party irrevocably submits to the personal jurisdiction of such courts and waives any objection based on inconvenient forum.\n13.3 **Injunctive Relief.** Datavane may seek injunctive or other equitable relief in",
+      "hits": [
+        {
+          "docId": "crestline-msa",
+          "counterparty": "Crestline Retail Inc",
+          "date": "2024-08-01",
+          "clauseNo": "16",
+          "heading": "GOVERNING LAW; VENUE",
+          "label": "untagged",
+          "score": 0.901,
+          "text": "16.1 This Agreement shall be governed by the laws of the State of Ohio, without regard to its conflict-of-laws principles.\n\n16.2 The Parties consent to the exclusive jurisdiction of the state and federal courts located in Franklin County, Ohio.",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "brightwater-msa",
+          "counterparty": "Brightwater Insurance Inc",
+          "date": "2025-11-28",
+          "clauseNo": "20",
+          "heading": "GOVERNING LAW AND JURISDICTION",
+          "label": "accident",
+          "labelNote": "Signed on a phone in 4 minutes: 1%/day uncapped LDs, no client-delay exclusion, group set-off, English law on a US entity. Cost $9k + $14.2k legal",
+          "score": 0.881,
+          "text": "20.1 This Agreement and any dispute or claim (including non-contractual disputes or claims) arising out of or in connection with it or its subject matter shall be governed by and construed in accordance with the law of England and Wales.\n\n20.2 Each party irrevocably agrees that the courts of London, England shall have exclusive jurisdiction to settle any dispute or claim arising out of or in connection with this Agreement.\n\n---",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "alnoor-msa",
+          "counterparty": "Al Noor Hospitality Group",
+          "date": "2025-03-15",
+          "clauseNo": "21",
+          "heading": "GOVERNING LAW AND DISPUTE RESOLUTION",
+          "label": "concession",
+          "labelNote": "DIFC law accepted as the client's group standard",
+          "score": 0.876,
+          "text": "21.1 This Agreement and any non-contractual obligations arising out of it shall be governed by the laws of the Dubai International Financial Centre.\n\n21.2 The Parties shall first attempt to resolve any dispute through good-faith negotiation between senior executives for thirty (30) days.\n\n21.3 Failing resolution, the courts of the Dubai International Financial Centre shall have exclusive jurisdiction.",
+          "differs": "",
+          "alsoIn": []
+        }
+      ]
+    }
+  ],
+  "counselPack": null,
+  "errors": [
+    "Playbook check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more infor)",
+    "Conflict check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more infor)"
+  ],
+  "usage": {
+    "calls": 1,
+    "cachedCalls": 2,
+    "inputTokens": 200,
+    "outputTokens": 32,
+    "ms": 101787
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "deals": [
+    "rheinwerk"
+  ],
+  "calls": 0,
+  "cached": 4,
+  "inTok": 0,
+  "outTok": 0,
+  "rows": [
+    "rheinwerk     HOLD                0B 3H 4M  5s  ERR Conflict check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your cu"
+  ]
+}

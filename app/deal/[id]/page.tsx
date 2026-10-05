@@ -5,6 +5,13 @@ import { canViewBrief, canViewDeal } from "@/lib/access";
 import { briefVersions, dealContextDocuments, dealDocuments, dealNotes, getDeal, latestBrief } from "@/lib/deals";
 import { fmtDate, usd } from "@/lib/format";
 import { currentUser } from "@/lib/session";
+import { sellerChecksFor } from "@/lib/sellerChecks";
+import { SellerCheckPanel } from "@/components/SellerCheckPanel";
+import { recheckDeal } from "@/app/deal/actions";
+
+
+/** Re-checks run the review pipeline inside server actions on this page (Vercel: up to 300s). */
+export const maxDuration = 300;
 
 export default async function DealPage(props: PageProps<"/deal/[id]">) {
   const { id } = await props.params;
@@ -65,7 +72,26 @@ export default async function DealPage(props: PageProps<"/deal/[id]">) {
         </Section>
       )}
 
-      <Section title={`Documents in this deal · ${docs.length}`}>
+      <Section title={isK ? "Seller deal check (what the seller was told)" : "Deal check: is AtliQ free to offer this?"}>
+        <SellerCheckPanel deal={deal} checks={sellerChecksFor(deal.id)} />
+      </Section>
+
+      <Section
+        title={`Documents in this deal · ${docs.length}`}
+        aside={
+          <div className="flex gap-2">
+            <Link href={`/upload?deal=${deal.id}`} className="btn !py-1 !text-xs">
+              Upload into this deal
+            </Link>
+            {isK && (
+              <form action={recheckDeal}>
+                <input type="hidden" name="dealId" value={deal.id} />
+                <button className="btn btn-primary !py-1 !text-xs">Re-check now</button>
+              </form>
+            )}
+          </div>
+        }
+      >
         <div className="space-y-2">
           {docs.map((d) => (
             <details key={d.id} className="card p-4">

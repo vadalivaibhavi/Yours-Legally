@@ -1,0 +1,325 @@
+{
+  "dealId": "loopmart",
+  "version": 1,
+  "createdAt": "2026-10-05T04:15:30.372Z",
+  "trigger": "initial review",
+  "inputsHash": "e94cbdcafa164d9692080b2dca39e595",
+  "documentIds": [
+    "loopmart-nda"
+  ],
+  "registerVersion": "reg-2026-10-04-57+r0",
+  "playbookVersion": "pb-v1-2026-10-04",
+  "models": [
+    "gemini-flash-lite-latest"
+  ],
+  "promptVersion": "p1",
+  "route": "nda_fast_lane",
+  "verdict": "HOLD",
+  "headline": "HOLD: 1 missing input",
+  "nextAction": "Sign when ready.",
+  "findings": [],
+  "fine": [
+    "Correct AtliQ entity: Pvt Ltd for a India counterparty",
+    "Parties = invoicing entity: Pvt Ltd throughout",
+    "Governing law matches entity: laws of India (Pvt Ltd → Indian law)"
+  ],
+  "notSeen": [
+    "No meeting notes attached to this deal.",
+    "Register built from 17 signed documents. Contracts referenced elsewhere but never collected (e.g. ShopSwift SOW, PixelCraft vendor agreement, intercompany services agreement) can't be checked.",
+    "NDA check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more infor)"
+  ],
+  "documents": [
+    {
+      "docId": "loopmart-nda",
+      "title": "LoopMart mutual NDA (draft)",
+      "docType": "NDA",
+      "paper": "client",
+      "route": "nda_fast_lane",
+      "facts": [
+        {
+          "field": "docType",
+          "label": "Document type",
+          "value": "NDA"
+        },
+        {
+          "field": "parties",
+          "label": "Counterparty",
+          "value": "LoopMart Retail Private Limited (India)"
+        },
+        {
+          "field": "entity",
+          "label": "AtliQ entity (parties)",
+          "value": "Pvt Ltd",
+          "quote": "ATLIQ TECHNOLOGIES PRIVATE LIMITED**, a company incorporated under the Companies Act, 2013 (CIN U72900MH2019PTC321456; GSTIN 27AAKCA4821F1Z3), having its registered office at 4th Floor, Baner Business Bay, Pune 411045, Maharashtra, India (\"**AtliQ"
+        },
+        {
+          "field": "invoicing",
+          "label": "AtliQ entity (invoicing)",
+          "value": "Pvt Ltd",
+          "quote": "ATLIQ TECHNOLOGIES PRIVATE LIMITED**, a company incorporated under the Companies Act, 2013 (CIN U72900MH2019PTC321456; GSTIN 27AAKCA4821F1Z3"
+        },
+        {
+          "field": "law",
+          "label": "Governing law",
+          "value": "laws of India",
+          "clauseRef": "10.3",
+          "quote": "This Agreement is governed by the laws of India"
+        },
+        {
+          "field": "forum",
+          "label": "Forum",
+          "value": "The courts at Bengaluru",
+          "clauseRef": "10.3",
+          "quote": "The courts at Bengaluru shall have exclusive jurisdiction"
+        },
+        {
+          "field": "payment",
+          "label": "Payment",
+          "value": "Not stated"
+        },
+        {
+          "field": "ld",
+          "label": "Delay penalties",
+          "value": "None"
+        },
+        {
+          "field": "liability",
+          "label": "Liability",
+          "value": "null"
+        },
+        {
+          "field": "insurance",
+          "label": "Insurance required",
+          "value": "None"
+        },
+        {
+          "field": "annexes",
+          "label": "Annexes referenced",
+          "value": "None"
+        },
+        {
+          "field": "scope",
+          "label": "Sectors · regions",
+          "value": "retail · India"
+        },
+        {
+          "field": "data",
+          "label": "Data handled",
+          "value": "personal_data"
+        }
+      ],
+      "gate": [
+        {
+          "rule": "entity",
+          "label": "Correct AtliQ entity",
+          "pass": true,
+          "detail": "Pvt Ltd for a India counterparty",
+          "citation": {
+            "docId": "loopmart-nda",
+            "docTitle": "LoopMart mutual NDA (draft)",
+            "clauseRef": "",
+            "quote": "ATLIQ TECHNOLOGIES PRIVATE LIMITED**, a company incorporated under the Companies Act, 2013 (CIN U72900MH2019PTC321456; GSTIN 27AAKCA4821F1Z3), having its registered office at 4th Floor, Baner Business Bay, Pune 411045, Maharashtra, India (\"**AtliQ",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "invoicing_entity",
+          "label": "Parties = invoicing entity",
+          "pass": true,
+          "detail": "Pvt Ltd throughout",
+          "citation": {
+            "docId": "loopmart-nda",
+            "docTitle": "LoopMart mutual NDA (draft)",
+            "clauseRef": "",
+            "quote": "ATLIQ TECHNOLOGIES PRIVATE LIMITED**, a company incorporated under the Companies Act, 2013 (CIN U72900MH2019PTC321456; GSTIN 27AAKCA4821F1Z3",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "governing_law",
+          "label": "Governing law matches entity",
+          "pass": true,
+          "detail": "laws of India (Pvt Ltd → Indian law)",
+          "citation": {
+            "docId": "loopmart-nda",
+            "docTitle": "LoopMart mutual NDA (draft)",
+            "clauseRef": "10.3",
+            "quote": "This Agreement is governed by the laws of India",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "payment",
+          "label": "Payment ≤ 45 days",
+          "pass": null,
+          "detail": "Not stated (may sit in the master agreement)"
+        },
+        {
+          "rule": "ld_cap",
+          "label": "Delay penalties capped",
+          "pass": null,
+          "detail": "No delay penalties"
+        },
+        {
+          "rule": "liability_cap",
+          "label": "Liability capped",
+          "pass": null,
+          "detail": "Not stated"
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "bundle": [],
+  "notesFacts": [],
+  "complianceCandidate": null,
+  "similar": [
+    {
+      "clauseType": "confidentiality",
+      "docId": "loopmart-nda",
+      "clauseRef": "§1",
+      "quote": "1.1 The Parties intend to discuss a possible engagement for AtliQ to build a customer analytics and demand-forecasting solution for LoopMart's stores and online storefront (the \"**Purpose**\"). Each Party may disclose Confidential Information to the other for the Purpose.",
+      "hits": [
+        {
+          "docId": "harrington-nda",
+          "counterparty": "Harrington Health Systems Inc",
+          "date": "2026-08-20",
+          "clauseNo": "1",
+          "heading": "PURPOSE",
+          "label": "standard",
+          "labelNote": "Genuinely mutual NDA",
+          "score": 0.928,
+          "text": "1.1 The Parties wish to evaluate a potential engagement under which AtliQ would design and implement an enterprise clinical and operational analytics platform for Harrington (the \"**Purpose**\"), and each Party expects to disclose Confidential Information to the other in connection with the Purpose.",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "meridian-nda",
+          "counterparty": "Meridian Healthcare",
+          "date": "2026-07-16",
+          "clauseNo": "1",
+          "heading": "PURPOSE",
+          "label": "accident",
+          "labelNote": "One-way NDA signed within the hour; contradicts \"we only sign mutual\"",
+          "score": 0.882,
+          "text": "1.1 Meridian intends to disclose certain information to the Recipient for the purpose of evaluating a potential engagement relating to clinical operations analytics and hospital performance dashboards (the \"**Purpose**\"), including a walkthrough of Meridian's data environment.",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "alnoor-nda",
+          "counterparty": "Al Noor Hospitality Group",
+          "date": "2025-01-22",
+          "clauseNo": "1.1",
+          "heading": "DEFINITIONS",
+          "label": "standard",
+          "labelNote": "Genuinely mutual NDA: the template for what mutual looks like",
+          "score": 0.85,
+          "text": "1.1 \"**Confidential Information**\" means any information disclosed by one Party (the \"**Disclosing Party**\") to the other Party (the \"**Receiving Party**\") in connection with the Purpose, whether before or after the date of this Agreement, in any form, that is marked or identified as confidential or that a reasonable person would understand to be confidential, including guest and occupancy data, pricing, commercial proposals, solution architecture, source code, methodologies and business plans.",
+          "differs": "",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "data_protection",
+      "docId": "loopmart-nda",
+      "clauseRef": "§5",
+      "quote": "5.1 Where Confidential Information includes personal data, the Receiving Party shall process it only for the Purpose and in compliance with the Digital Personal Data Protection Act, 2023.",
+      "hits": [
+        {
+          "docId": "alnoor-nda",
+          "counterparty": "Al Noor Hospitality Group",
+          "date": "2025-01-22",
+          "clauseNo": "4",
+          "heading": "PERSONAL DATA",
+          "label": "untagged",
+          "score": 0.949,
+          "text": "4.1 Where Confidential Information includes personal data of guests or employees, the Receiving Party shall process it only as necessary for the Purpose and in accordance with applicable data protection law, including the UAE Federal Decree-Law No. 45 of 2021 and the Indian Digital Personal Data Protection Act, 2023, as applicable.",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "acme-msa",
+          "counterparty": "Acme Retail Group",
+          "date": "2025-03-10",
+          "clauseNo": "13",
+          "heading": "DATA PROTECTION",
+          "label": "untagged",
+          "score": 0.915,
+          "text": "13.1 The Service Provider shall process personal data received from the Client only for the purpose of the Services and in compliance with the Digital Personal Data Protection Act, 2023 and the rules made thereunder, as and when in force, and shall implement reasonable security practices.",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "sunrise-msa",
+          "counterparty": "Sunrise Foods",
+          "date": "2025-04-18",
+          "clauseNo": "14",
+          "heading": "DATA PROTECTION",
+          "label": "untagged",
+          "score": 0.899,
+          "text": "14.1 AtliQ shall comply with the Information Technology Act, 2000, the rules thereunder, and the Digital Personal Data Protection Act, 2023 to the extent applicable, in relation to any personal data of distributors or employees processed in performing the Services.",
+          "differs": "",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "ip",
+      "docId": "loopmart-nda",
+      "clauseRef": "§8",
+      "quote": "8.1 Confidential Information remains the property of the Disclosing Party. No licence is granted except the limited right to use it for the Purpose.\n\n8.2 Neither Party is obliged to enter into any further agreement. Each Party remains free to work with third parties, provided it does not use or disclose the other Party's Confidential Information.",
+      "hits": [
+        {
+          "docId": "cloudspan-spa",
+          "counterparty": "CloudSpan Technologies",
+          "date": "2025-09-01",
+          "clauseNo": "8",
+          "heading": "INTELLECTUAL PROPERTY",
+          "label": "untagged",
+          "score": 0.854,
+          "text": "8.1 Each Party retains all rights in its own intellectual property. CloudSpan owns the CloudSpan Platform and all improvements to it.\n\n8.2 Partner retains all rights in its own methodologies, accelerators, tools, templates and know-how, whether developed before or during the Term, including those used in delivering Implementation Services.\n\n8.3 Any feedback provided by Partner concerning the CloudSpan Platform may be used by CloudSpan without restriction, provided Partner's Confidential Information is not disclosed.",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "rohan-ica",
+          "counterparty": "Rohan Iyer",
+          "date": "2025-04-28",
+          "clauseNo": "5",
+          "heading": "INTELLECTUAL PROPERTY",
+          "label": "accident",
+          "labelNote": "Rohan kept the Work Product IP (\"ok\" from phone) while Acme was promised ownership",
+          "score": 0.829,
+          "text": "5.1 In this Clause, \"**Work Product**\" means all dashboards, reports, data models, DAX measures, Power Query scripts, visual templates, documentation and other materials created by the Contractor in performing the Services.\n\n5.2 The Contractor retains ownership of all intellectual property rights in the Work Product and in any pre-existing materials, components and templates of the Contractor.\n\n5.3 The Contractor grants AtliQ a non-exclusive, perpetual, irrevocable, royalty-free, worldwide licence to use, copy, modify and deploy the Work Product for the purposes of AtliQ's business, including for delivery to AtliQ's clients.\n\n5.4 The Contractor shall not incorporate into the Work Product any third-party material that AtliQ is not entitled to use under Clause 5.3.",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "crestline-msa",
+          "counterparty": "Crestline Retail Inc",
+          "date": "2024-08-01",
+          "clauseNo": "8",
+          "heading": "INTELLECTUAL PROPERTY",
+          "label": "untagged",
+          "score": 0.829,
+          "text": "8.1 Upon payment, Crestline shall own all right, title and interest in the Deliverables.\n\n8.2 Supplier retains all rights in its pre-existing materials, tools and know-how (\"**Supplier Materials**\"). To the extent Supplier Materials are incorporated in a Deliverable, Supplier grants Crestline a non-exclusive, perpetual, royalty-free license to use them as part of such Deliverable.",
+          "differs": "",
+          "alsoIn": []
+        }
+      ]
+    }
+  ],
+  "counselPack": null,
+  "errors": [
+    "NDA check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more infor)"
+  ],
+  "usage": {
+    "calls": 0,
+    "cachedCalls": 2,
+    "inputTokens": 0,
+    "outputTokens": 0,
+    "ms": 5855
+  }
+}
