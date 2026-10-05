@@ -1,0 +1,169 @@
+# Yours Legally
+
+A contract-review assistant for AtliQ, a 2-entity analytics company with no legal team. It gives AtliQ the memory it lacks. It builds a **register of everything AtliQ has already promised**, checks every incoming and outgoing contract against that register and AtliQ's own negotiation playbook, and hands the CEO (Karandeep) a **verdict-first, cited, decision-ready brief**. Sellers get a dated heads-up before they promise a client anything.
+
+Capstone prototype. Spec: [`docs/PRD_Yours_Legally_v0.9.md`](docs/PRD_Yours_Legally_v0.9.md) (FR IDs) · tests: [`docs/Eval_Set.md`](docs/Eval_Set.md) (EV IDs) · plan: [`docs/Build_Plan.md`](docs/Build_Plan.md) and [`docs/Phase1_Spec.md`](docs/Phase1_Spec.md).
+
+> Decision support, not legal advice. The product records decisions; it never sends, signs or contacts anyone.
+
+---
+
+## What you can do in it
+
+| Who | Screen | What it does | PRD |
+|---|---|---|---|
+| Karandeep | **Queue** `/` | Every open deal with "due in X days" / "overdue" (from a fixed demo date), status incl. *waiting for input (owner)*, latest verdict. Deadline orders the list; it never changes risk. | F8 · FR-14 |
+| Karandeep | **Brief** `/deal/[id]/brief/[v]` | Verdict + next action → pinned compliance alert → ≤3 blockers with both clauses side by side → waiting for input (upload slot, re-check) → must fix → please confirm (from notes) → worth negotiating → what's fine / what wasn't seen → deal bundle → contract facts card → counsel pack → decision & feedback panel. Every key clause has an expandable **similar past clauses** panel. | F6 · FR-11, FR-12, FR-17, FR-21, FR-22 |
+| Karandeep | **Register** `/register` | All commitments AI-extracted from the 17 signed documents: live / expired / unknown, filter by type, client, region; source clause + definitions; Verify / Edit / Reject; which open deals each entry affects; coverage (illegible clauses, documents referenced but never collected). | F1 · FR-1, FR-2 |
+| Anyone | **Upload** `/upload` | Upload a draft; it's extracted, linked to its deal (auto when certain, asks once when ambiguous, new deal otherwise), and a new brief version is issued. | FR-3, FR-17 |
+| Seller | **Deal** `/deal/[id]` | Deal check: client, sector, regions/sites, services, rates by role, tools to reuse, data handling, free text → per item clear / needs attention / conflict / couldn't check, stamped "as of [date]", never revealing another client's name or rates. Re-check banner when Karandeep re-checks the deal or the register changes. | F7 · FR-13, FR-19 |
+
+**Roles.** A role switch in the header stands in for sign-in (Karandeep, or a seller: Bhavin, Dhaval, Jay, Pranav). Sellers see only their own deals, never the Register, a brief, similar clauses or other clients' terms. `proxy.ts` blocks those routes and every page and server action re-checks the role.
+
+---
+
+## Architecture
+
+```
+signed contracts ──► F1 register build (strong model, 1 call/doc) ──► data/register.json ──┐ structured filter
+                 └─► clause chunking + intent labels + embeddings ──► data/clause_index.json ──┐ vector similarity
+                                                                                            │  │
+draft ─► F2 extract (fast) ─► gate RULES ─► route ─┬─ NDA fast lane: mutuality checklist ───┤  │
+                                                   └─ full review: F3 conflict ◄────────────┘  │
+                                                                   F4 playbook / mirror / flow-down
+                                                                   F5 bundle RULES + notes scan
+                         findings ─► verdict RULES ─► F6 brief text (from findings only)
+                                                   └─► similar past clauses attached AFTER the verdict ◄┘
+```
+
+**Rules where a rule works, AI where judgment is needed (PRD §5).**
+- *Plain TypeScript rules* (`lib/review/gate.ts`, `verdict.ts`, `bundle.ts`, `lib/dates.ts`): entity vs client country, parties = invoicing entity, governing law vs entity, payment ≤ 45 days, LDs capped and never on contract value or per day, liability capped, insurance asked vs held, annexes present, required documents per party, expiry / live status, the verdict itself.
+- *AI* (`lib/llm.ts`, one provider-neutral wrapper): fact extraction with verbatim snippets, collision reasoning over definitions and scope, playbook / mirror / flow-down comparison, NDA mutuality, notes scan, "how it differs" lines, the headline. Every output is validated with zod; on invalid JSON it retries once, then returns *"couldn't complete: review manually"*. A failed step can never produce a clean verdict.
+
+**Two retrieval modes, each where it fits (Build Plan §3).**
+
+| | Conflict check (F3) | Similar past clauses (F4, FR-22) |
+|---|---|---|
+| Question | Does a live commitment apply to this deal? | Have we signed something like this, and how did we decide? |
+| Method | **Structured filter** on register fields (`lib/review/conflict.ts → filterRegister`): type, bound entity incl. affiliates, sector, region (GCC expanded), assets, live status. The model then reasons only over the filtered entries. | **Vector similarity** (`lib/clauseIndex.ts → search`): same clause type, cosine, one hit per contract, repeated positions collapsed to their origin (Acme for the LD standard), labelled near-ties preferred, top 3 above a threshold. |
+| Why | A miss is the worst failure: matching must be exact and testable. | A near miss costs little: it's reference material. |
+| Effect on verdict | Sets blockers | **None.** `computeVerdict()` takes findings only; the eval checks every brief's verdict with and without the panel. |
+
+**Guardrails in code.**
+- Every quote is string-matched to its source (`lib/quotes.ts`). Findings without a valid citation are dropped.
+- Model-written prose is sanitised: no "breach" or "enforceable" conclusions, and Reject is never recommended (`guardrails.ts`).
+- Expired commitments are never candidates.
+- Unverified register entries are used immediately but labelled.
+- On AtliQ's own paper, findings are "fix before sending", not blockers.
+- A note can close a compliance alert, but never a contractual blocker.
+- Similar clauses are Karandeep-only.
+
+**Storage.** No database (Build Plan §4). Pre-built JSON in `data/` (committed) plus runtime state (uploads, decisions, reactions, verification, seller checks, audit log) in one JSON file: `data/state/` locally, `/tmp` on Vercel. Model results are cached by request hash in `data/cache/`. Production would move the register, deals, clauses and vectors into Postgres + a vector extension, behind the same `lib/clauseIndex.ts` / `lib/register.ts` interfaces.
+
+**Model choice.** Provider-neutral: `LLM_PROVIDER` = `gemini` | `anthropic` | `openai` | `mock`. Each task has a tier: `extract`, `route` and `classify` use the fast model; `register`, `conflict`, `playbook`, `nda`, `notes`, `differs` and `brief` use the strong one. Each tier is a comma-separated fallback chain. The prototype runs on Google Gemini (flash for strong, flash-lite for fast; `gemini-embedding-001` at 768 dims).
+
+### Code map
+
+```
+app/            Queue, deal, brief, register, upload pages + server actions (app/deal/actions.ts, app/upload/actions.ts)
+components/     FindingCard (clauses side by side, precedent, similar clauses, reactions), SellerCheckPanel, RegisterActions, ui
+lib/llm.ts      the one LLM wrapper          lib/embed.ts       the one embedding wrapper
+lib/clauseIndex.ts  clause search (FR-22)    lib/register.ts    effective register (+ Verify/Edit/Reject overlay)
+lib/review/     extract · gate · conflict · playbook (incl. NDA) · similar · bundle · notes · verdict · effective · pipeline
+lib/seller.ts   seller deal check            lib/linking.ts     deal linking on upload
+lib/store.ts    runtime state + audit log    lib/types.ts       zod schemas for every data shape
+scripts/        ingest · buildRegister · checkRegister · buildClauseIndex · search · buildEvalCases · review · eval
+data/           raw dataset, seeds, register.json, clause_index.json, playbook.json, required_docs.json, briefs/, runs/
+```
+
+---
+
+## Run it
+
+Requirements: Node 20+ (built on Node 24), npm.
+
+```bash
+npm install
+cp .env.example .env.local   # then add LLM_API_KEY / EMBED_API_KEY
+npm run dev                  # http://localhost:3000
+```
+
+The committed `data/` already holds the register, clause index and one brief per deal, so the app works without running any script. To rebuild from the dataset:
+
+| Command | Phase | What it does |
+|---|---|---|
+| `npm run ingest` | 1a | Dataset → documents, notes, deals, company facts (hand-checked map + `data/seed/deals.seed.json`) |
+| `npm run build:register` | 1b | One strong-model call per signed document → `data/register.json` (quotes verified, status from `APP_TODAY`, waivers linked) |
+| `npm run check:register` | 1b | Compares with the hand-built key `data/expected/register.expected.json` |
+| `npm run build:index` | 1c | Clause chunks + labels + embeddings → `data/clause_index.json` |
+| `npm run search -- "liquidated damages 1% per week uncapped" ld` | 1c | Smoke test of similar-clause search |
+| `npm run build:eval` | 1d | `docs/Eval_Set.md` + `eval/case_keys.json` → `eval/cases.json` |
+| `npm run review` (or `-- gulfcrown`) | 2 | Review pipeline → `data/briefs/<deal>.json` (v1 per deal) |
+| `npm run eval` | 2 | All EV cases → `eval/results.md` |
+
+Token counts and timings for every script run are written to `data/runs/` (input for the cost estimate).
+
+### Environment
+
+| Variable | Example | Notes |
+|---|---|---|
+| `LLM_PROVIDER` | `gemini` | `gemini` · `anthropic` · `openai` · `mock` |
+| `LLM_API_KEY` | | server-only; never in client code |
+| `LLM_MODEL_FAST` | `gemini-flash-lite-latest,gemini-3.5-flash-lite` | comma = fallback chain |
+| `LLM_MODEL_STRONG` | `gemini-flash-latest,gemini-3.5-flash,…` | comma = fallback chain |
+| `EMBED_PROVIDER` / `EMBED_API_KEY` / `EMBED_MODEL` | `gemini` / same key / `gemini-embedding-001` | `local` works offline (hashed bag-of-words) |
+| `APP_TODAY` | `2026-10-04` | fixed "today" so expiry, due-in and evals are reproducible |
+
+### Deploy (GitHub → Vercel)
+
+1. Create an empty **private** GitHub repo named `yours-legally`, then from this folder:
+   ```bash
+   git remote add origin https://github.com/<you>/yours-legally.git
+   git push -u origin main
+   ```
+2. In Vercel: **Add New → Project**, import the repo, add the environment variables above, deploy. Every push to `main` redeploys; branches get preview URLs.
+3. `next.config.ts` ships `data/**` with the serverless functions. Pages that re-check set `maxDuration = 300`. `.env.local` is gitignored.
+
+---
+
+## Eval results
+
+See [`eval/results.md`](eval/results.md) (regenerate with `npm run eval`). Summary: _filled in after the final run, see below._
+
+---
+
+## Dataset: what was added or hand-prepared (declared, per the brief)
+
+**Hand-prepared seeds** (stand-ins for one-time human work, PRD §14 Stage 2):
+- `data/seed/deals.seed.json`: deal grouping + linking (Harrington MSA+BAA with the signed NDA as context; Ortiz → Harrington; Kriti → Rheinwerk; Marcus → Lakeshore), deadlines from the 22 Sep meeting and tracker notes. Stands in for the tracker import + linking.
+- `data/seed/labels.seed.json`: intent labels (standard / exception / concession / accident) for past clauses, from `Obligations_Register.md` §C/§E/§G. Stands in for Karandeep's ~30-minute tagging session.
+- `data/seed/company.seed.json`: entities from the finance sheet; insurance held = $1M cyber only (everything else unknown); client list by sector for the reverse covenant scan.
+- `data/playbook.json`: 14 rules from the checklist, negotiation notes and register §G, **seeded as approved on Karandeep's behalf**.
+- `data/required_docs.json`: deal type → documents per party.
+- `data/expected/register.expected.json`: the hand-built register answer key.
+
+**Synthetic documents and inputs** (teaching material, clearly marked in each file):
+- `data/synthetic/travelhub_v2_entity_fixed.md`: TravelHub revised draft with Pvt Ltd as the party (EV-V1).
+- `data/synthetic/rheinwerk_annex3_dpa.md`: Rheinwerk's missing Annex 3 DPA incl. SCCs (EV-V2).
+- `data/synthetic/harrington_ortiz_sub_baa.md`: subcontractor BAA for Daniel Ortiz (EV-V3).
+- `data/seed/seller_checks.seed.json`: Jay's BlueOrchid deal check declaring "India hotels only" (EV-15, FR-20).
+- Seller-check inputs (EV-S1–S8), deal-linking uploads (EV-L3, EV-L4) and a synthetic Saudi hotel waiver (EV-S8) live in `eval/case_keys.json`.
+
+---
+
+## Faked or left out on purpose
+
+- **Real login:** a role switch stands in for SSO.
+- **Counsel-pack export:** a static preview inside the brief; nothing is sent.
+- **Playbook proposals (FR-16):** not built. "+ Something the brief missed" and reactions are recorded in the audit log for that loop.
+- **Late-finding detection (FR-18):** not built (EV-V4 is reported as skipped).
+- **Email, Drive or calendar intake:** not built. Upload only, with a one-time tracker import.
+- **PDF / OCR upload:** the prototype reads `.md` / `.txt` (the dataset is already text; the scanned Orbit file keeps its OCR errors and illegible clause).
+
+## Known limits
+
+- **Free model tier.** Gemini's free tier allows about 20 requests per model per day, so the review uses fallback chains and caches every call. A full review of all 13 deals is about 60 strong-model calls. A real deployment needs a paid key; the cost estimate uses `data/runs/`.
+- **Model variance.** Severity on interpretive points can move between runs; deterministic rules pin the critical ones (entity, LD base/cap, payment, liability, insurance, required documents, expiry), and the verdict is computed by rule. The 3-run consistency eval (PRD §11) is not automated: results are cached by input hash, so re-runs of unchanged documents are identical by construction.
+- **State on Vercel is ephemeral** (`/tmp`): uploads, decisions and verifications reset when the function instance is recycled. The committed briefs always load.
+- **The register is only as complete as the documents collected:** ~10 referenced contracts are not in the dataset (ShopSwift SOW, PixelCraft, the intercompany services agreement…). Every brief says so under "what wasn't seen".
+- The demo date (`APP_TODAY`) is fixed at 4 Oct 2026; event timestamps (decisions, uploads) use the real clock.

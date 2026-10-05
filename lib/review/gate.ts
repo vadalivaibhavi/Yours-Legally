@@ -265,6 +265,13 @@ export function runGate(ctx: GateContext): { results: GateResult[]; findings: Fi
     const aCite = cite(doc, a.clauseRef, a.quote);
     results.push({ rule: `annex:${slug(a.name)}`, label: `${a.name} attached`, pass: present.found, detail: present.found ? present.where : `${a.description}: referenced but not attached`, citation: aCite });
     if (!present.found) {
+      // Annexes that carry substantive terms block; administrative ones (travel policy, forms) are noted.
+      const substantive = /data|process|secur|statement of work|\bsow\b|specification|pric|rate|fee|milestone|baa|dpa|scc|service level|sla/i.test(`${a.name} ${a.description}`);
+      if (!substantive) {
+        notSeen.push(`${a.name} (${a.description}) is referenced but not attached: not reviewed.`);
+        results[results.length - 1].detail += " (administrative: noted, not blocking)";
+        continue;
+      }
       findings.push({
         key: `gate:annex:${slug(a.name)}`,
         category: "gate",

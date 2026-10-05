@@ -298,7 +298,10 @@ export async function reviewDeal(dealId: string, opts: ReviewOptions): Promise<B
 }
 
 /** One finding per key: max severity, union of citations, richer model-written text wins. */
-function mergeFindings(list: Finding[]): Finding[] {
+function mergeFindings(input: Finding[]): Finding[] {
+  // The deterministic insurance gate owns insurance findings; the playbook's view folds into it.
+  const insuranceGate = input.find((f) => f.key.startsWith("gate:insurance:"))?.key;
+  const list = insuranceGate ? input.map((f) => (f.key === "playbook:insurance" ? { ...f, key: insuranceGate, category: "gate" as const } : f)) : input;
   const out = new Map<string, Finding>();
   for (const f of list) {
     const prev = out.get(f.key);

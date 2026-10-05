@@ -315,17 +315,13 @@ function cachePath(key: string) {
   return path.join(writableDir(path.join("cache", "llm")), key + ".json");
 }
 function readCache(key: string): CacheEntry | null {
-  // Committed seed cache (data/cache-seed) lets a fresh deploy re-use precomputed answers.
-  for (const p of [cachePath(key), path.join(process.cwd(), "data", "cache-seed", "llm", key + ".json")]) {
-    if (fs.existsSync(p)) {
-      try {
-        return JSON.parse(fs.readFileSync(p, "utf8"));
-      } catch {
-        /* corrupt cache entry: ignore */
-      }
-    }
+  const p = cachePath(key);
+  if (!fs.existsSync(p)) return null;
+  try {
+    return JSON.parse(fs.readFileSync(p, "utf8"));
+  } catch {
+    return null; // corrupt cache entry: ignore
   }
-  return null;
 }
 function writeCache(key: string, entry: CacheEntry) {
   try {

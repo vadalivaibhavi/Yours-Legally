@@ -97,7 +97,7 @@ function assetItems(input: SellerInput, entries: RegisterEntry[], sourceTexts: M
 
 function dataItem(input: SellerInput): SellerItem | null {
   const t = `${input.dataHandling} ${input.services.join(" ")} ${input.sectors.join(" ")}`.toLowerCase();
-  if (/patient|phi|health|clinic|hospital/.test(t))
+  if (/\b(patients?|phi|healthcare|health data|medical|clinics?|hospitals?)\b/.test(t))
     return { item: "Data handling", status: "attention", meaning: "Patient data needs NDA + MSA + BAA, plus a sub-BAA for every party that touches it (including the Pune team), before any data moves.", todo: "Don't accept sample data until Karandeep confirms the agreements are signed." };
   if (/germany|europe|eu\b|gdpr/.test(t + " " + input.regions.join(" ").toLowerCase()))
     return { item: "Data handling", status: "attention", meaning: "EU personal data needs a DPA with transfer clauses (SCCs) before it reaches India or any subcontractor.", todo: "Ask the client for their DPA early." };

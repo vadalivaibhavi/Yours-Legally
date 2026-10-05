@@ -35,7 +35,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             </nav>
             <div className="ml-auto flex items-center gap-4">
               <span className="text-xs text-white/70" title="APP_TODAY: fixed so the demo and evals are reproducible">
-                Today · {fmtDate(appToday())}
+                Demo date · {fmtDate(appToday())}
               </span>
               <RoleSwitch current={user.id} />
             </div>
