@@ -154,16 +154,30 @@ function fail(error: string): LlmErr {
 type GenOk = { ok: true; text: string; model: string; usage: Usage };
 type GenErr = { ok: false; error: string };
 
+/**
+ * Total time budget for one model call across all retries and fallback models (LLM_CALL_BUDGET_MS,
+ * default 5 min). When it runs out the call fails cleanly → "couldn't complete: review manually",
+ * so an overloaded provider can never hang a review (PRD §9.2 System failure).
+ */
+export function callBudgetMs(): number {
+  return Number(process.env.LLM_CALL_BUDGET_MS || 300_000);
+}
+
 async function generateWithFallback(task: Task, system: string, input: string, schema: object): Promise<GenOk | GenErr> {
   const errors: string[] = [];
+  const deadline = Date.now() + callBudgetMs();
+  const timedOut = () => ({ ok: false as const, error: `timed out after ${Math.round(callBudgetMs() / 1000)}s across retries | ${errors.join(" | ")}`.slice(0, 2000) });
   for (const model of modelsFor(task)) {
     for (let attempt = 0; attempt < 4; attempt++) {
-      const r = await generateOnce(model, thinkingFor(task), system, input, schema);
+      if (Date.now() >= deadline) return timedOut();
+      const r = await generateOnce(model, thinkingFor(task), system, input, schema, deadline);
       if (r.ok) return r;
       errors.push(`${model}: ${r.error.slice(0, 120)}`);
       if (r.retry === "same" && attempt < 3) {
-        // Overloaded (503) models recover in tens of seconds: back off 15s, 30s, 60s.
-        await sleep(r.waitMs ?? 15_000 * 2 ** attempt);
+        // Overloaded (503) models recover in tens of seconds: back off 15s, 30s, 60s (never past the deadline).
+        const wait = r.waitMs ?? 15_000 * 2 ** attempt;
+        if (Date.now() + wait >= deadline) return timedOut();
+        await sleep(wait);
         continue;
       }
       break; // quota / not found / fatal → next model in the chain
@@ -174,21 +188,23 @@ async function generateWithFallback(task: Task, system: string, input: string, s
 
 type Once = GenOk | (GenErr & { retry?: "same" | "next"; waitMs?: number });
 
-async function generateOnce(model: string, thinking: "low" | "high", system: string, input: string, schema: object): Promise<Once> {
+async function generateOnce(model: string, thinking: "low" | "high", system: string, input: string, schema: object, deadline: number): Promise<Once> {
+  // Each request is cut off at the call deadline (and never waits more than 4 min on its own).
+  const ms = Math.max(1_000, Math.min(240_000, deadline - Date.now()));
   const p = provider();
   const key = process.env.LLM_API_KEY;
   if (!key) return { ok: false, error: "LLM_API_KEY is not set", retry: "next" };
   try {
-    if (p === "gemini") return await gemini(model, thinking, key, system, input, schema);
-    if (p === "anthropic") return await anthropic(model, key, system, input, schema);
-    if (p === "openai") return await openai(model, key, system, input, schema);
+    if (p === "gemini") return await gemini(model, thinking, key, system, input, schema, ms);
+    if (p === "anthropic") return await anthropic(model, key, system, input, schema, ms);
+    if (p === "openai") return await openai(model, key, system, input, schema, ms);
     return { ok: false, error: `unknown LLM_PROVIDER ${p}` };
   } catch (e) {
     return { ok: false, error: String(e).slice(0, 300), retry: "same" };
   }
 }
 
-async function gemini(model: string, thinking: "low" | "high", key: string, system: string, input: string, schema: object): Promise<Once> {
+async function gemini(model: string, thinking: "low" | "high", key: string, system: string, input: string, schema: object, ms: number): Promise<Once> {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
   const body = (withSchema: boolean) => ({
     systemInstruction: { parts: [{ text: system }] },
@@ -199,13 +215,13 @@ async function gemini(model: string, thinking: "low" | "high", key: string, syst
       thinkingConfig: { thinkingLevel: thinking },
     },
   });
-  let res = await fetchWithTimeout(url, key, body(true));
+  let res = await fetchWithTimeout(url, key, body(true), ms);
   if (res.status === 400) {
     // Some models reject parts of the schema or the thinking config: retry plain JSON mode.
     const plain = body(false) as Record<string, unknown>;
     (plain.generationConfig as Record<string, unknown>).thinkingConfig = undefined;
     plain.contents = [{ role: "user", parts: [{ text: input + "\n\nReturn JSON matching this JSON Schema:\n" + JSON.stringify(schema) }] }];
-    res = await fetchWithTimeout(url, key, plain);
+    res = await fetchWithTimeout(url, key, plain, ms);
   }
   const txt = await res.text();
   if (!res.ok) return classifyHttpError(res.status, txt);
@@ -222,9 +238,10 @@ async function gemini(model: string, thinking: "low" | "high", key: string, syst
   };
 }
 
-async function anthropic(model: string, key: string, system: string, input: string, schema: object): Promise<Once> {
+async function anthropic(model: string, key: string, system: string, input: string, schema: object, ms: number): Promise<Once> {
   const res = await fetch("https://api.anthropic.com/v1/messages", {
     method: "POST",
+    signal: AbortSignal.timeout(ms),
     headers: { "content-type": "application/json", "x-api-key": key, "anthropic-version": "2023-06-01" },
     body: JSON.stringify({
       model,
@@ -240,9 +257,10 @@ async function anthropic(model: string, key: string, system: string, input: stri
   return { ok: true, text, model, usage: { inputTokens: j.usage?.input_tokens ?? 0, outputTokens: j.usage?.output_tokens ?? 0 } };
 }
 
-async function openai(model: string, key: string, system: string, input: string, schema: object): Promise<Once> {
+async function openai(model: string, key: string, system: string, input: string, schema: object, ms: number): Promise<Once> {
   const res = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
+    signal: AbortSignal.timeout(ms),
     headers: { "content-type": "application/json", authorization: `Bearer ${key}` },
     body: JSON.stringify({
       model,
@@ -283,7 +301,7 @@ function classifyHttpError(status: number, body: string): GenErr & { retry?: "sa
   return { ok: false, error: msg, retry: "next" };
 }
 
-async function fetchWithTimeout(url: string, key: string, body: unknown, ms = 240_000): Promise<Response> {
+async function fetchWithTimeout(url: string, key: string, body: unknown, ms: number): Promise<Response> {
   const ctrl = new AbortController();
   const t = setTimeout(() => ctrl.abort(), ms);
   try {

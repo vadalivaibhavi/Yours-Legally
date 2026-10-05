@@ -112,6 +112,8 @@ Token counts and timings for every script run are written to `data/runs/` (input
 | `LLM_MODEL_FAST` | `gemini-flash-lite-latest,gemini-3.5-flash-lite` | comma = fallback chain |
 | `LLM_MODEL_STRONG` | `gemini-flash-latest,gemini-3.5-flash,…` | comma = fallback chain |
 | `EMBED_PROVIDER` / `EMBED_API_KEY` / `EMBED_MODEL` | `gemini` / same key / `gemini-embedding-001` | `local` works offline (hashed bag-of-words) |
+| `LLM_CALL_BUDGET_MS` | `300000` | total time for one model call across retries and fallbacks; then it fails cleanly to "review manually" |
+| `REVIEW_CONCURRENCY` | `3` | deals reviewed in parallel by `npm run review` (dependants wait for their client deal) |
 | `APP_TODAY` | `2026-10-04` | fixed "today" so expiry, due-in and evals are reproducible |
 
 ### Deploy (GitHub → Vercel)
