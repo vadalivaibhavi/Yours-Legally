@@ -11,6 +11,7 @@ import { fmtDate, usd } from "@/lib/format";
 import { currentUser } from "@/lib/session";
 import { sellerChecksFor } from "@/lib/sellerChecks";
 import { SellerCheckPanel } from "@/components/SellerCheckPanel";
+import { QUOTA_MESSAGE } from "@/lib/limits";
 import { recheckDeal } from "@/app/deal/actions";
 
 
@@ -55,6 +56,8 @@ export default async function DealPage(props: PageProps<"/deal/[id]">) {
           {deal.deadlineNote ? ` · ${deal.deadlineNote}` : ""}
         </p>
       </div>
+
+      {sp.quota === "1" && <div className="rounded-lg bg-change-soft p-4 text-sm text-change">{QUOTA_MESSAGE}{deal.stale ? " The new document is attached; re-check the deal then." : ""}</div>}
 
       {isK && (
         <section id="brief" className="scroll-mt-4 space-y-3">

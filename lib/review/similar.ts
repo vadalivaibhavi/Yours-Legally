@@ -6,7 +6,7 @@
 import { z } from "zod";
 import { splitSections, typeFromHeading } from "../chunker";
 import { searchMany } from "../clauseIndex";
-import { callModel } from "../llm";
+import { callModel, isQuotaExhausted } from "../llm";
 import type { ClauseType, Document } from "../types";
 import { sanitize } from "./guardrails";
 import type { SimilarPanel } from "./types";
@@ -35,6 +35,7 @@ export async function similarPanels(doc: Document): Promise<{ panels: SimilarPan
   try {
     results = await searchMany(clauses.map((c) => ({ text: `${c.heading}\n${c.text}`.slice(0, 3000), clauseType: c.clauseType })));
   } catch (e) {
+    if (isQuotaExhausted(e)) throw e; // a quota stop ends the run; it is not a partial result
     return { panels: [], error: `Similar past clauses unavailable (${String(e).slice(0, 120)})` };
   }
   const panels: SimilarPanel[] = clauses.map((c, i) => ({

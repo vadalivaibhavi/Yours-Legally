@@ -6,7 +6,7 @@
  */
 import fs from "node:fs";
 import path from "node:path";
-import { hash } from "./llm";
+import { hash, logCall, QuotaExhaustedError } from "./llm";
 import { writableDir } from "./config";
 
 export const EMBED_DIM = 768;
@@ -44,7 +44,9 @@ async function embedBatch(texts: string[]): Promise<number[][]> {
   if (p === "local" || p === "mock") return texts.map(localEmbed);
   const key = process.env.EMBED_API_KEY || process.env.LLM_API_KEY;
   if (!key) throw new Error("EMBED_API_KEY is not set");
-  tokensUsed += texts.reduce((n, t) => n + Math.ceil(t.length / 4), 0);
+  const approxTokens = texts.reduce((n, t) => n + Math.ceil(t.length / 4), 0);
+  tokensUsed += approxTokens;
+  logCall({ task: "embed", model: embedModel(), inputTokens: approxTokens, outputTokens: 0, ms: 0, cached: false, ok: true });
 
   if (p === "gemini") {
     const model = embedModel();
@@ -98,6 +100,8 @@ async function withRetry(f: () => Promise<Response>): Promise<Response> {
     const body = await r.text();
     last = `HTTP ${r.status}: ${body.slice(0, 200)}`;
     if (r.status !== 429 && r.status < 500) break;
+    // Daily embedding quota used up: stop the run cleanly (resume tomorrow), like the LLM wrapper.
+    if (r.status === 429 && /PerDay|limit: 0/i.test(body)) throw new QuotaExhaustedError([`embeddings (${embedModel()})`]);
     // Free tiers limit embeddings per minute: wait out the window the API asks for.
     const m = body.match(/retry in ([\d.]+)s|"retryDelay":\s*"(\d+)s"/i);
     const wait = m ? Number(m[1] ?? m[2]) * 1000 + 1000 : r.status === 429 ? 61_000 : 5000 * (i + 1);

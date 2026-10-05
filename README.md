@@ -100,10 +100,13 @@ The committed `data/` already holds the register, clause index and one brief per
 | `npm run build:index` | 1c | Clause chunks + labels + embeddings → `data/clause_index.json` |
 | `npm run search -- "liquidated damages 1% per week uncapped" ld` | 1c | Smoke test of similar-clause search |
 | `npm run build:eval` | 1d | `docs/Eval_Set.md` + `eval/case_keys.json` → `eval/cases.json` |
-| `npm run review` (or `-- gulfcrown`) | 2 | Review pipeline → `data/briefs/<deal>.json` (v1 per deal) |
-| `npm run eval` | 2 | All EV cases → `eval/results.md` |
+| `npm run review` (or `-- --deal gulfcrown`) | 2 | Review pipeline → `data/briefs/<deal>.json` (v1 per deal). Resumable: skips deals whose brief is complete and built from the current inputs (`--force` to redo) |
+| `npm run eval` (or `-- --case EV-10`, `-- --deal kriti`) | 2 | EV cases → `eval/results.md`; a filtered run updates its cases inside the last full report |
+| `npm run pending` (or `-- --deal kriti`) | – | Regenerates the auto part of `docs/Pending_Work.md` (with `--deal`: prints that deal's pending items) |
 
-Token counts and timings for every script run are written to `data/runs/` (input for the cost estimate).
+**Free tier.** Everything runs one deal and one case at a time, with model calls spaced `LLM_MIN_INTERVAL_MS` apart. A per-minute 429 waits the delay Google returns and retries. When a model's daily quota is used up, the next model in its chain is tried. When the whole chain is out, the run stops with "daily quota reached, resume tomorrow": nothing incomplete is written, and the same command resumes after the reset (midnight Pacific), because finished calls are cached and complete briefs are skipped. Eval cases stopped by quota are reported as "not run (quota)", never as failures. In the app, a re-check, upload or seller check that hits the daily quota shows a message instead of an error.
+
+Every model call (input/output tokens, task, model, deal, eval case, cache hit or not) is appended to `data/runs/calls-<date>.jsonl`; each review run also writes `data/runs/review-<time>.json` with a per-task, per-model token summary (input for the cost estimate).
 
 ### Environment
 
@@ -114,8 +117,9 @@ Token counts and timings for every script run are written to `data/runs/` (input
 | `LLM_MODEL_FAST` | `gemini-flash-lite-latest,gemini-3.5-flash-lite` | comma = fallback chain |
 | `LLM_MODEL_STRONG` | `gemini-flash-latest,gemini-3.5-flash,…` | comma = fallback chain |
 | `EMBED_PROVIDER` / `EMBED_API_KEY` / `EMBED_MODEL` | `gemini` / same key / `gemini-embedding-001` | `local` works offline (hashed bag-of-words) |
-| `LLM_CALL_BUDGET_MS` | `300000` | total time for one model call across retries and fallbacks; then it fails cleanly to "review manually" |
-| `REVIEW_CONCURRENCY` | `3` | deals reviewed in parallel by `npm run review` (dependants wait for their client deal) |
+| `LLM_CALL_BUDGET_MS` | `300000` | total time for one model call across retries and fallbacks; then it fails cleanly to "review manually" (waiting out a per-minute 429 doesn't count) |
+| `LLM_MIN_INTERVAL_MS` | `4000` | minimum gap between model calls (free-tier pacing; `0` on a billed key) |
+| `REVIEW_CONCURRENCY` | `1` | deals reviewed at once by `npm run review` (dependants wait for their client deal); raise it on a billed key |
 | `APP_TODAY` | `2026-10-04` | fixed "today" so expiry, due-in and evals are reproducible |
 
 ### Deploy (GitHub → Vercel)
@@ -152,7 +156,7 @@ Full table: [`eval/results.md`](eval/results.md) (regenerate with `npm run eval`
 - **EV-10 Kriti / EV-12 Harrington:** one IP finding each (Kriti's IP flow-down to Rheinwerk; Harrington's background-IP assignment) was found in earlier runs and missed in this one. Both verdicts are right.
 - In earlier runs, EV-11 (Marcus) and EV-13 (Ortiz) failed instead. Marcus flags a real tools-licence gap the answer key doesn't list. Ortiz was fixed by aligning the termination rule with the Rohan Iyer precedent.
 
-The briefs were produced over several runs because Gemini's **free tier** allows 20 requests per model per day per project. A single `npm run review` on a billed key regenerates them all on the current prompts and playbook.
+The briefs were produced over several runs because Gemini's **free tier** allows 20 requests per model per day per project. On the free tier, run `npm run review` once a day until it finishes without the quota message: each run picks up where the last one stopped. On a billed key (`LLM_MIN_INTERVAL_MS=0`, `REVIEW_CONCURRENCY=3`) one run regenerates everything.
 
 **Cost (from `npm run cost`, Gemini flash pricing placeholders $0.30 / $2.50 per 1M tokens):** register build ≈ $0.35 one-off for 17 contracts; a review ≈ 9.6k input / 8.6k output tokens ≈ $0.02–0.07 per deal, so roughly **$0.25–0.50/month at 9–20 contracts**, model cost only. NDA fast lane ran in 15 s when the model wasn't overloaded (one run took 365 s waiting out 503 "high demand" retries on the free tier).
 

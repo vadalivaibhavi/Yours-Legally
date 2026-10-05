@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { chooseDeal, uploadDocument } from "./actions";
 import { TextArea } from "@/components/Fields";
-import { LIMITS } from "@/lib/limits";
+import { LIMITS, QUOTA_MESSAGE } from "@/lib/limits";
 import { visibleDeals } from "@/lib/access";
 import { allDeals, allDocuments } from "@/lib/deals";
 import { proposeLink } from "@/lib/linking";
@@ -50,6 +50,7 @@ export default async function UploadPage(props: PageProps<"/upload">) {
         ← Queue
       </Link>
       <h1 className="font-serif text-2xl font-semibold">Upload a contract</h1>
+      {sp.quota === "1" && <div className="rounded-lg bg-change-soft p-4 text-sm text-change">{QUOTA_MESSAGE}</div>}
       <form action={uploadDocument} className="card space-y-4 p-5 text-sm">
         <label className="block space-y-1">
           <span className="label">Contract file (.md / .txt, up to 1 MB)</span>

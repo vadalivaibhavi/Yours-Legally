@@ -8,6 +8,8 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { canDecide, canViewDeal } from "@/lib/access";
 import { allDeals, getDeal } from "@/lib/deals";
+import { QUOTA_MESSAGE } from "@/lib/limits";
+import { isQuotaExhausted } from "@/lib/llm";
 import { registerEntry } from "@/lib/register";
 import { nextVersion, reviewDeal } from "@/lib/review/pipeline";
 import { currentUser } from "@/lib/session";
@@ -193,7 +195,13 @@ export async function recheckDeal(form: FormData) {
   const deal = getDeal(dealId);
   if (!deal || !canViewDeal(u, deal)) throw new Error("Not allowed");
   const version = nextVersion(dealId);
-  const brief = await reviewDeal(dealId, { trigger: str(form, "trigger") || "input added → re-check", version });
+  let brief;
+  try {
+    brief = await reviewDeal(dealId, { trigger: str(form, "trigger") || "input added → re-check", version });
+  } catch (e) {
+    if (!isQuotaExhausted(e)) throw e;
+    redirect(`/deal/${dealId}?quota=1`); // no partial brief: re-check again after the reset
+  }
   mutate(
     (s) => {
       s.briefs[dealId] = [...(s.briefs[dealId] ?? []), brief];
@@ -279,7 +287,13 @@ export async function runDealCheck(_prev: DealCheckState, form: FormData): Promi
   if (missing.length) return { error: `The main details are missing (${missing.join(", ")}), so AtliQ's commitments can't be checked against this deal yet. Fill them in and check again.` };
   if (str(form, "rates") && !input.rates.length) return { error: 'Rates couldn\'t be read. Use one per line, e.g. "Senior Data Engineer $72".' };
 
-  const check = await runSellerCheck(dealId, u.name, input, latestSellerCheck(dealId));
+  let check;
+  try {
+    check = await runSellerCheck(dealId, u.name, input, latestSellerCheck(dealId));
+  } catch (e) {
+    if (isQuotaExhausted(e)) return { error: QUOTA_MESSAGE };
+    throw e;
+  }
   mutate(
     (s) => {
       s.sellerChecks[dealId] = [...(s.sellerChecks[dealId] ?? []), check];

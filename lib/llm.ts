@@ -42,6 +42,70 @@ const TIER: Record<Task, "fast" | "strong"> = {
 
 export const MANUAL_REVIEW = "couldn't complete: review manually";
 
+/**
+ * Every model in the task's chain has used its daily quota. Runs stop cleanly on this (resume tomorrow:
+ * completed calls are cached); it is never turned into a "review manually" result.
+ */
+export class QuotaExhaustedError extends Error {
+  constructor(public readonly models: string[]) {
+    super(`daily quota reached for ${models.join(", ")}: resume tomorrow (completed steps are cached)`);
+    this.name = "QuotaExhaustedError";
+  }
+}
+export const isQuotaExhausted = (e: unknown): e is QuotaExhaustedError => e instanceof Error && e.name === "QuotaExhaustedError";
+
+/** Who a call is for (script + deal): stamped on every line of the call log. */
+type RunContext = { script?: string; dealId?: string; caseId?: string };
+const runContext = new AsyncLocalStorage<RunContext>();
+export function withRunContext<T>(ctx: RunContext, fn: () => Promise<T>): Promise<T> {
+  return runContext.run({ ...(runContext.getStore() ?? {}), ...ctx }, fn);
+}
+
+/** One JSON line per model call (cached, succeeded or failed) in data/runs/calls-<date>.jsonl: tokens per task and model. */
+export function logCall(rec: { task: string; model: string; inputTokens: number; outputTokens: number; ms: number; cached: boolean; ok: boolean; error?: string }) {
+  try {
+    const line = JSON.stringify({ at: new Date().toISOString(), ...(runContext.getStore() ?? {}), ...rec, error: rec.error?.slice(0, 200) });
+    fs.appendFileSync(path.join(writableDir("runs"), `calls-${new Date().toISOString().slice(0, 10)}.jsonl`), line + "\n");
+  } catch {
+    /* logging is best-effort */
+  }
+}
+
+/** Free tiers cap requests per minute: space out model requests (LLM_MIN_INTERVAL_MS, default 4 s ≈ 15/min). */
+let nextSlot = 0;
+async function throttle() {
+  const gap = Number(process.env.LLM_MIN_INTERVAL_MS ?? 4000);
+  if (gap <= 0) return;
+  const now = Date.now();
+  const wait = Math.max(0, nextSlot - now);
+  nextSlot = Math.max(now, nextSlot) + gap;
+  if (wait) await sleep(wait);
+}
+
+/** Models whose daily quota is used up, remembered until Google's reset (midnight Pacific) so runs skip them. */
+const quotaDay = () => new Date().toLocaleDateString("en-CA", { timeZone: "America/Los_Angeles" });
+function exhaustedFile() {
+  return path.join(writableDir("cache"), "quota-exhausted.json");
+}
+function exhaustedToday(): Set<string> {
+  try {
+    const j = JSON.parse(fs.readFileSync(exhaustedFile(), "utf8")) as Record<string, string>;
+    return new Set(Object.entries(j).filter(([, day]) => day === quotaDay()).map(([m]) => m));
+  } catch {
+    return new Set();
+  }
+}
+function markExhausted(model: string) {
+  try {
+    const f = exhaustedFile();
+    const j = fs.existsSync(f) ? (JSON.parse(fs.readFileSync(f, "utf8")) as Record<string, string>) : {};
+    j[model] = quotaDay();
+    fs.writeFileSync(f, JSON.stringify(j, null, 1));
+  } catch {
+    /* best effort */
+  }
+}
+
 export type Usage = { inputTokens: number; outputTokens: number };
 export type LlmOk<T> = { ok: true; data: T; model: string; usage: Usage; cached: boolean; ms: number };
 export type LlmErr = { ok: false; error: string; message: typeof MANUAL_REVIEW };
@@ -117,6 +181,7 @@ export async function callModel<S extends z.ZodType>(args: CallArgs<S>): Promise
       const parsed = schema.safeParse(hit.data);
       if (parsed.success) {
         usageLog.push({ task, model: hit.model, usage: { inputTokens: 0, outputTokens: 0 }, ms: 0, cached: true });
+        logCall({ task, model: hit.model, inputTokens: 0, outputTokens: 0, ms: 0, cached: true, ok: true });
         return { ok: true, data: parsed.data, model: hit.model, usage: hit.usage, cached: true, ms: 0 };
       }
     }
@@ -127,16 +192,22 @@ export async function callModel<S extends z.ZodType>(args: CallArgs<S>): Promise
   let prompt = input;
   // Attempt 1 + one retry on invalid JSON / schema mismatch (CLAUDE.md).
   for (let attempt = 0; attempt < 2; attempt++) {
-    const res = await generateWithFallback(task, system, prompt, jsonSchema);
-    if (!res.ok) return fail(res.error);
+    const res = await generateWithFallback(task, system, prompt, jsonSchema); // throws QuotaExhaustedError when the chain is out of daily quota
+    if (!res.ok) {
+      logCall({ task, model: modelsFor(task).join(","), inputTokens: 0, outputTokens: 0, ms: Date.now() - started, cached: false, ok: false, error: res.error });
+      return fail(res.error);
+    }
     const json = parseJsonLoose(res.text);
     const parsed = json === undefined ? null : schema.safeParse(json);
     if (parsed && parsed.success) {
       const ms = Date.now() - started;
       writeCache(key, { model: res.model, usage: res.usage, data: parsed.data });
       usageLog.push({ task, model: res.model, usage: res.usage, ms, cached: false });
+      logCall({ task, model: res.model, inputTokens: res.usage.inputTokens, outputTokens: res.usage.outputTokens, ms, cached: false, ok: true });
       return { ok: true, data: parsed.data, model: res.model, usage: res.usage, cached: false, ms };
     }
+    // Invalid JSON still cost tokens: log the attempt before retrying.
+    logCall({ task, model: res.model, inputTokens: res.usage.inputTokens, outputTokens: res.usage.outputTokens, ms: Date.now() - started, cached: false, ok: false, error: "invalid JSON / schema" });
     lastError = json === undefined ? "invalid JSON" : `schema mismatch: ${parsed?.error.message.slice(0, 1500)}`;
     prompt =
       input +
@@ -165,28 +236,46 @@ export function callBudgetMs(): number {
 
 async function generateWithFallback(task: Task, system: string, input: string, schema: object): Promise<GenOk | GenErr> {
   const errors: string[] = [];
-  const deadline = Date.now() + callBudgetMs();
+  let deadline = Date.now() + callBudgetMs();
   const timedOut = () => ({ ok: false as const, error: `timed out after ${Math.round(callBudgetMs() / 1000)}s across retries | ${errors.join(" | ")}`.slice(0, 2000) });
-  for (const model of modelsFor(task)) {
+  const chain = modelsFor(task);
+  const exhausted = exhaustedToday();
+  for (const model of chain) {
+    if (exhausted.has(model)) continue; // known to be out of daily quota until the reset
     for (let attempt = 0; attempt < 4; attempt++) {
       if (Date.now() >= deadline) return timedOut();
+      await throttle();
       const r = await generateOnce(model, thinkingFor(task), system, input, schema, deadline);
       if (r.ok) return r;
       errors.push(`${model}: ${r.error.slice(0, 120)}`);
+      if (r.daily) {
+        exhausted.add(model);
+        markExhausted(model);
+        break; // next model in the chain
+      }
       if (r.retry === "same" && attempt < 3) {
+        if (r.rateLimited) {
+          // Per-minute limit: wait exactly what Google asks, then retry. Rate-limit waits don't eat the call budget.
+          const wait = r.waitMs ?? 30_000;
+          deadline += wait;
+          await sleep(wait);
+          continue;
+        }
         // Overloaded (503) models recover in tens of seconds: back off 15s, 30s, 60s (never past the deadline).
         const wait = r.waitMs ?? 15_000 * 2 ** attempt;
         if (Date.now() + wait >= deadline) return timedOut();
         await sleep(wait);
         continue;
       }
-      break; // quota / not found / fatal → next model in the chain
+      break; // not found / fatal → next model in the chain
     }
   }
+  // Every model in the chain is out of daily quota: stop the run cleanly instead of "review manually".
+  if (chain.every((m) => exhausted.has(m))) throw new QuotaExhaustedError(chain);
   return { ok: false, error: errors.join(" | ").slice(0, 2000) };
 }
 
-type Once = GenOk | (GenErr & { retry?: "same" | "next"; waitMs?: number });
+type Once = GenOk | (GenErr & { retry?: "same" | "next"; waitMs?: number; daily?: boolean; rateLimited?: boolean });
 
 async function generateOnce(model: string, thinking: "low" | "high", system: string, input: string, schema: object, deadline: number): Promise<Once> {
   // Each request is cut off at the call deadline (and never waits more than 4 min on its own).
@@ -288,14 +377,14 @@ export function thinkingFor(task: Task): "low" | "high" {
   return THINKING[task] ?? (TIER[task] === "fast" ? "low" : "high");
 }
 
-function classifyHttpError(status: number, body: string): GenErr & { retry?: "same" | "next"; waitMs?: number } {
+function classifyHttpError(status: number, body: string): GenErr & { retry?: "same" | "next"; waitMs?: number; daily?: boolean; rateLimited?: boolean } {
   const msg = `HTTP ${status}: ${body.replace(/\s+/g, " ").slice(0, 240)}`;
   if (status === 429) {
-    // Per-minute limits are worth one wait; daily/zero quotas move to the next model.
-    const perDay = /PerDay|limit: 0/i.test(body);
-    const m = body.match(/retry in ([\d.]+)s/i);
-    const wait = m ? Math.min(Number(m[1]) * 1000 + 500, 65_000) : 30_000;
-    return perDay ? { ok: false, error: msg, retry: "next" } : { ok: false, error: msg, retry: "same", waitMs: wait };
+    // Daily (or zero) quota → this model is done for today. Per-minute → wait the delay Google returns and retry.
+    if (/PerDay|limit: 0\b/i.test(body)) return { ok: false, error: msg, retry: "next", daily: true };
+    const m = body.match(/"retryDelay":\s*"([\d.]+)s"/) ?? body.match(/retry in ([\d.]+)s/i);
+    const wait = m ? Math.min(Number(m[1]) * 1000 + 1000, 180_000) : 30_000;
+    return { ok: false, error: msg, retry: "same", waitMs: wait, rateLimited: true };
   }
   if (status >= 500) return { ok: false, error: msg, retry: "same" };
   return { ok: false, error: msg, retry: "next" };

@@ -7,6 +7,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { allDeals, allDocuments, getDeal } from "@/lib/deals";
 import { proposeLink, type LinkProposal } from "@/lib/linking";
+import { isQuotaExhausted } from "@/lib/llm";
 import { extractReferences } from "@/lib/references";
 import { extractDocument } from "@/lib/review/extract";
 import { nextVersion, reviewDeal } from "@/lib/review/pipeline";
@@ -30,7 +31,13 @@ export async function uploadDocument(form: FormData) {
   if (text.length < 200) throw new Error("That document is too short to review.");
   if (text.length > LIMITS.contract) throw new Error(`That contract is ${text.length.toLocaleString()} characters; the limit is ${LIMITS.contract.toLocaleString()}.`);
 
-  const x = await extractDocument({ id: "upload", file: name, kind: "uploaded", docType: "Other", title: name, counterparty: "", date: "", sideOfTable: "supplier", paper: "client", text, ocr: false, references: [] } as Document);
+  let x;
+  try {
+    x = await extractDocument({ id: "upload", file: name, kind: "uploaded", docType: "Other", title: name, counterparty: "", date: "", sideOfTable: "supplier", paper: "client", text, ocr: false, references: [] } as Document);
+  } catch (e) {
+    if (!isQuotaExhausted(e)) throw e;
+    redirect(`/upload?quota=1${form.get("deal") ? `&deal=${encodeURIComponent(String(form.get("deal")))}` : ""}`); // nothing saved yet: upload again tomorrow
+  }
   if (!x.ok) throw new Error("Couldn't read the document: review manually. " + x.error.slice(0, 120));
   const id = `up-${Date.now().toString(36)}`;
   const doc: Document = {
@@ -110,7 +117,16 @@ async function attach(doc: Document, dealId: string, proposal: LinkProposal, by:
   });
   // New input → automatic re-check: a new brief version (FR-17).
   const version = nextVersion(target);
-  const brief = await reviewDeal(target, { trigger: `uploaded ${doc.file}`, version });
+  let brief;
+  try {
+    brief = await reviewDeal(target, { trigger: `uploaded ${doc.file}`, version });
+  } catch (e) {
+    if (!isQuotaExhausted(e)) throw e;
+    // The document stays attached; the deal is marked as needing a re-check once the quota resets.
+    mutate((s) => void (s.dealOverrides[target] = { ...(s.dealOverrides[target] ?? {}), staleSince: new Date().toISOString() }));
+    revalidatePath("/", "layout");
+    redirect(`/deal/${target}?quota=1`);
+  }
   if (proposal.note) brief.notSeen.unshift(proposal.note.text);
   mutate((s) => void (s.briefs[target] = [...(s.briefs[target] ?? []), brief]), { user: by, dealId: target, action: "brief.recheck", detail: { version } });
   revalidatePath("/", "layout");

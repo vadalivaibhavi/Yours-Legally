@@ -5,23 +5,23 @@ Tracks everything blocked by **model quota** (Gemini free tier: ~20 requests per
 ## 1. Auto-detected from the briefs (model quota)
 
 <!-- AUTO:START -->
-_Regenerated 2026-10-05 14:43 UTC by `npm run pending` from data/briefs and eval/results.json._
+_Regenerated 2026-10-05 18:18 UTC by `npm run pending` from data/briefs and eval/results.json._
 
 | What | Where | Why it's pending | How to clear it |
 |---|---|---|---|
-| Comparison lines ("Worse for AtliQ than …") missing | datavane (18/18), finserve (9/9), harrington (33/33), kriti (21/21), lakeshore (24/24), loopmart (9/9), marcus (18/18), ortiz (17/17), rheinwerk (24/24), sunrise-sow2 (6/6), travelhub (21/21) | model quota ran out during the regeneration | `npm run review` (only the missing lines call the model; everything else is cached) |
+| Comparison lines ("Worse for AtliQ than …") missing | datavane (18/18), finserve (9/9), harrington (33/33), kriti (21/21), lakeshore (24/24), loopmart (9/9), marcus (18/18), ortiz (17/17), rheinwerk (24/24), sunrise-sow2 (6/6), travelhub (21/21) | model quota ran out during the regeneration | `npm run review` (resumes: complete deals are skipped, finished calls are cached; one deal: `--deal datavane`) |
 
-Last eval run 2026-10-05 14:34 UTC: 42 passed, 4 failed (EV-03, EV-05, EV-10, EV-12), 4 skipped (EV-V1, EV-V2, EV-V3, EV-V4).
+Last eval run 2026-10-05 14:34 UTC: 42 passed, 4 failed (EV-03, EV-05, EV-10, EV-12), 0 not run because of quota, 4 skipped (EV-V1, EV-V2, EV-V3, EV-V4).
 <!-- AUTO:END -->
 
 ## 2. Model-quota items to re-run (tracked by hand)
 
 | # | What | Status | Why | How to clear it |
 |---|---|---|---|---|
-| Q1 | **Version-pair evals EV-V1–V3** on the current prompts (TravelHub entity fix, Rheinwerk Annex 3, Harrington Ortiz sub-BAA) | Last passed on 5 Oct (earlier prompts); skipped since with `--no-versions` | each pair re-runs a full review (~5 model calls) | `npm run eval` (without `--no-versions`) |
-| Q2 | **Judgment-call cases that flip between runs**: EV-03 TravelHub (HOLD vs expected SEND BACK), EV-05 Datavane (SIGN AFTER CHANGES vs HOLD), EV-10 Kriti (IP flow-down finding), EV-12 Harrington (background-IP finding) | Failing on the current briefs; earlier runs passed EV-10/EV-12 | each needs fresh strong-model calls to tell variance from a real gap | `npm run review -- travelhub datavane kriti harrington`, then `npm run eval` |
+| Q1 | **Version-pair evals EV-V1–V3** on the current prompts (TravelHub entity fix, Rheinwerk Annex 3, Harrington Ortiz sub-BAA) | Last passed on 5 Oct (earlier prompts); skipped since with `--no-versions` | each pair re-runs a full review (~5 model calls) | `npm run eval -- --case EV-V1,EV-V2,EV-V3` (one pair at a time; a quota stop reports "not run (quota)") |
+| Q2 | **Judgment-call cases that flip between runs**: EV-03 TravelHub (HOLD vs expected SEND BACK), EV-05 Datavane (SIGN AFTER CHANGES vs HOLD), EV-10 Kriti (IP flow-down finding), EV-12 Harrington (background-IP finding) | Failing on the current briefs; earlier runs passed EV-10/EV-12 | each needs fresh strong-model calls to tell variance from a real gap | `npm run review -- --deal travelhub,datavane,kriti,harrington --force`, then `npm run eval -- --case EV-03,EV-05,EV-10,EV-12` |
 | Q3 | **Consistency eval** (PRD §11: same contract reviewed 3× → same verdict and blockers, ≥95%) | Not run | needs ~3× the calls of a full review (~200) | needs a billed key; add a 3-run loop to `scripts/eval.ts` |
-| Q4 | **Latency targets** (NDA fast lane <1 min, MSA <10 min) under normal load | Not measured cleanly: NDA runs took 15 s (normal) and 365 s (waiting out 503 retries) | free-tier overload adds minutes of back-off | time `npm run review -- finserve loopmart gulfcrown` on a billed key |
+| Q4 | **Latency targets** (NDA fast lane <1 min, MSA <10 min) under normal load | Not measured cleanly: NDA runs took 15 s (normal) and 365 s (waiting out 503 retries) | free-tier overload adds minutes of back-off | time `npm run review -- --deal finserve,loopmart,gulfcrown --force` on a billed key with `LLM_MIN_INTERVAL_MS=0` (per-call timings are in `data/runs/calls-*.jsonl`) |
 | Q5 | **Seller check free-text** (EV-S6) and **upload** flows exercised live | Pass in eval; live UI runs depend on available quota at the time | each call needs quota | try in the UI when quota is available |
 
 ## 3. Tooling limits (not quota)

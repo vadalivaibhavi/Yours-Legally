@@ -26,3 +26,6 @@ export function field(form: FormData, key: string, max: number, label = key): st
 
 /** Evidence files accepted when closing a compliance alert. */
 export const EVIDENCE_TYPES = [".pdf", ".png", ".jpg", ".jpeg", ".docx", ".doc", ".txt", ".md", ".eml", ".msg"];
+
+/** What the app shows when an action stops on the daily quota. */
+export const QUOTA_MESSAGE = "Daily AI quota reached, so this check couldn't run. Nothing was lost: try again tomorrow (the quota resets at midnight Pacific).";

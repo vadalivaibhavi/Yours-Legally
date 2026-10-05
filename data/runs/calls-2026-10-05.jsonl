@@ -1,0 +1,6 @@
+{"at":"2026-10-05T18:18:20.593Z","script":"review","dealId":"gulfcrown","task":"extract","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-05T18:18:20.618Z","script":"review","dealId":"gulfcrown","task":"conflict","model":"gemini-3.6-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-05T18:18:20.625Z","script":"review","dealId":"gulfcrown","task":"playbook","model":"gemini-3.6-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-05T18:18:20.680Z","script":"review","dealId":"gulfcrown","task":"differs","model":"gemini-3.5-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-05T18:18:20.689Z","script":"review","dealId":"gulfcrown","task":"notes","model":"gemini-3.5-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-05T18:18:20.700Z","script":"review","dealId":"gulfcrown","task":"brief","model":"gemini-3.6-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}

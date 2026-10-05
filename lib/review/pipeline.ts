@@ -279,7 +279,12 @@ async function runReview(dealId: string, opts: ReviewOptions): Promise<Brief> {
     version: opts.version,
     createdAt: new Date().toISOString(),
     trigger: opts.trigger,
-    inputsHash: hash([PROMPT_VERSION, registerVersion(), pb.version, ...docs.map((d) => d.text), ...notes.map((n) => n.text)].join("|")),
+    inputsHash: inputsHash(
+      docs.map((d) => d.text),
+      notes.map((n) => n.text),
+      pb.version,
+      endClient ? (latestBrief(endClient.id)?.verdict ?? "none") : null,
+    ),
     documentIds: docs.map((d) => d.id),
     registerVersion: registerVersion(),
     playbookVersion: pb.version,
@@ -412,4 +417,23 @@ async function briefText(a: { deal: Deal; verdict: string; findings: Finding[]; 
 export function nextVersion(dealId: string): number {
   const v = briefVersions(dealId);
   return v.length ? v[v.length - 1].version + 1 : 1;
+}
+
+/** Everything a brief depends on: prompts, register, playbook, document and note texts, and for AtliQ paper the client deal verdict. */
+function inputsHash(docTexts: string[], noteTexts: string[], playbookVersion: string, endClientVerdict: string | null): string {
+  // The end-client part is appended only when present, so briefs hashed before it existed still match.
+  return hash([PROMPT_VERSION, registerVersion(), playbookVersion, ...docTexts, ...noteTexts, ...(endClientVerdict ? [`endclient:${endClientVerdict}`] : [])].join("|"));
+}
+
+/** Current input hash for a deal (resumable runs: a complete brief with the same hash needs no re-run). */
+export function currentInputsHash(dealId: string): string | null {
+  const deal = getDeal(dealId);
+  if (!deal) return null;
+  const docs = allDocuments();
+  const texts = deal.documentIds.map((id) => docs.find((d) => d.id === id)?.text ?? "");
+  const noteTexts = allNotes()
+    .filter((n) => deal.noteIds.includes(n.id))
+    .map((n) => n.text);
+  const endClientVerdict = deal.endClientDealId ? (latestBrief(deal.endClientDealId)?.verdict ?? "none") : null;
+  return inputsHash(texts, noteTexts, loadPlaybook().version, endClientVerdict);
 }
