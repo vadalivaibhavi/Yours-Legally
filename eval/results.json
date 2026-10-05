@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-05T09:25:20.179Z",
+  "at": "2026-10-05T12:10:45.338Z",
   "results": [
     {
       "id": "EV-R1",
@@ -61,8 +61,8 @@
       "id": "EV-05",
       "section": "B. Incoming contracts (US-2 to US-7, US-11)",
       "title": "Datavane partnership",
-      "pass": true,
-      "detail": "HOLD · found conflict:cloudspan-spa:exclusivity, playbook:indemnity, playbook:restrictive"
+      "pass": false,
+      "detail": "verdict SIGN AFTER CHANGES ≠ HOLD"
     },
     {
       "id": "EV-06",
@@ -96,15 +96,15 @@
       "id": "EV-10",
       "section": "B. Incoming contracts (US-2 to US-7, US-11)",
       "title": "Kriti subcontract (AtliQ paper)",
-      "pass": true,
-      "detail": "SIGN AFTER CHANGES · found playbook:ld, playbook:payment, playbook:indemnity, playbook:liability, flowdown:ip, flowdown:data, flowdown:consent"
+      "pass": false,
+      "detail": "missing flowdown:ip"
     },
     {
       "id": "EV-11",
       "section": "B. Incoming contracts (US-2 to US-7, US-11)",
       "title": "Marcus Reed ICA (AtliQ paper)",
-      "pass": false,
-      "detail": "flagged flowdown:ip (medium)"
+      "pass": true,
+      "detail": "SIGN AFTER CHANGES · found gate:entity, playbook:restrictive, playbook:termination, dependency:lakeshore · clean on playbook:ip, flowdown:ip"
     },
     {
       "id": "EV-12",
@@ -117,8 +117,8 @@
       "id": "EV-13",
       "section": "B. Incoming contracts (US-2 to US-7, US-11)",
       "title": "Daniel Ortiz ICA + NDA (AtliQ paper)",
-      "pass": false,
-      "detail": "flagged playbook:termination (medium)"
+      "pass": true,
+      "detail": "SIGN AFTER CHANGES · found flowdown:data, flowdown:ip · clean on nda:, playbook:payment, playbook:termination, playbook:liability"
     },
     {
       "id": "EV-15",
@@ -356,12 +356,12 @@
     {
       "name": "Citation validity (all quotes string-matched to source)",
       "pass": true,
-      "detail": "131/131"
+      "detail": "136/136"
     },
     {
       "name": "Guardrails: no breach/enforceable in system prose; never Reject",
       "pass": true,
-      "detail": "529 prose strings checked; 0 legal conclusions; 0 Reject recommendations"
+      "detail": "520 prose strings checked; 0 legal conclusions; 0 Reject recommendations"
     },
     {
       "name": "Verdict identical with and without similar-clauses panel",

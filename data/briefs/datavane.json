@@ -1,53 +1,31 @@
 {
   "dealId": "datavane",
   "version": 1,
-  "createdAt": "2026-10-05T07:22:05.474Z",
+  "createdAt": "2026-10-05T11:07:22.627Z",
   "trigger": "initial review",
-  "inputsHash": "7e5d43b03f7f4286ed7911f6b732d635",
+  "inputsHash": "f7d3dd7a1af6965e38d88b9b600b5a8d",
   "documentIds": [
     "datavane-spa"
   ],
-  "registerVersion": "reg-2026-10-04-57+r1",
-  "playbookVersion": "pb-v1-2026-10-04",
+  "registerVersion": "reg-2026-10-04-57+r0",
+  "playbookVersion": "pb-v1.1-2026-10-05",
   "models": [
     "gemini-flash-lite-latest",
+    "gemini-3.5-flash",
     "gemini-3-flash-preview"
   ],
   "promptVersion": "p1",
   "route": "full_review",
-  "verdict": "HOLD",
-  "headline": "HOLD: 1 blocker on client restrictions and high-risk exclusivity and liability terms",
-  "nextAction": "Karandeep must renegotiate the client restrictions and exclusivity conflicts to align with existing obligations.",
+  "verdict": "SIGN AFTER CHANGES",
+  "headline": "SIGN AFTER CHANGES: 3 high-priority blockers regarding exclusivity and uncapped indemnity",
+  "nextAction": "Karandeep must renegotiate the exclusivity, indemnity, and non-compete clauses with Datavane.",
   "findings": [
-    {
-      "key": "covenant:non_compete",
-      "category": "covenant",
-      "topic": "restrictive",
-      "title": "Restriction in this contract hits current clients: Any client registered as a Prospect, Any client introduced to Datavane",
-      "impact": "Prevents AtliQ from providing any data platform services (including CloudSpan, Snowflake, or AWS) to any client it introduces to Datavane for the duration of the partnership plus two years.",
-      "severity": "blocker",
-      "confidence": "high",
-      "needsJudgment": false,
-      "owner": "Karandeep",
-      "resolution": "redline",
-      "docId": "datavane-spa",
-      "citations": [
-        {
-          "docId": "datavane-spa",
-          "docTitle": "Datavane strategic partnership (draft)",
-          "clauseRef": "5.3",
-          "quote": "During the Term and for a period of twenty-four (24) months following expiration or termination of this Agreement for any reason, Partner shall not, and shall cause its Affiliates not to, directly or indirectly solicit, market to, or provide any implementation, migration, managed or consulting services to any Datavane Account in connection with any cloud data warehouse, lakehouse, data platform or analytics platform other than the Datavane Platform",
-          "role": "incoming"
-        }
-      ],
-      "counterPosition": "Delete the restriction (no non-competes inside an NDA or services agreement), or limit it to named competitors for the term only."
-    },
     {
       "key": "conflict:cloudspan-spa:exclusivity",
       "category": "conflict",
       "topic": "exclusivity",
       "title": "Collides with CloudSpan Technologies: Competing Platform exclusivity in India and GCC",
-      "impact": "Collides with the CloudSpan exclusivity promise which is live until August 31, 2028.",
+      "impact": "Collides with the CloudSpan exclusivity promise, live until August 31, 2028.",
       "severity": "high",
       "confidence": "high",
       "needsJudgment": false,
@@ -58,36 +36,36 @@
         {
           "docId": "datavane-spa",
           "docTitle": "Datavane strategic partnership (draft)",
-          "clauseRef": "2.1",
-          "quote": "Subject to the terms of this Agreement, Datavane appoints Partner, and Partner accepts appointment, as a non-exclusive \"Datavane Premier Implementation Partner\" for the Territory",
+          "clauseRef": "Recital A",
+          "quote": "Datavane develops and offers the Datavane Lakehouse Platform, a cloud-native lakehouse and unified analytics platform offered on a subscription basis",
           "role": "incoming"
         },
         {
           "docId": "datavane-spa",
           "docTitle": "Datavane strategic partnership (draft)",
-          "clauseRef": "1.10",
+          "clauseRef": "Section 1.10",
           "quote": "Territory**\" means the Republic of India; the member states of the Gulf Cooperation Council (United Arab Emirates, Kingdom of Saudi Arabia, State of Qatar, State of Kuwait, Kingdom of Bahrain and Sultanate of Oman); and Europe (the member states of the European Union and the European Economic Area, the United Kingdom and Switzerland",
           "role": "incoming"
         },
         {
           "docId": "datavane-spa",
           "docTitle": "Datavane strategic partnership (draft)",
-          "clauseRef": "6.1",
-          "quote": "Joint Deal Revenue shall be shared between the Parties in the proportion of eighty percent (80%) to Datavane and twenty percent (20%) to Partner, irrespective of whether Platform subscription fees or Partner Services fees are the larger component of such Joint Deal",
+          "clauseRef": "Section 2.1",
+          "quote": "Subject to the terms of this Agreement, Datavane appoints Partner, and Partner accepts appointment, as a non-exclusive \"Datavane Premier Implementation Partner\" for the Territory",
           "role": "incoming"
         },
         {
           "docId": "datavane-spa",
           "docTitle": "Datavane strategic partnership (draft)",
-          "clauseRef": "6.4",
+          "clauseRef": "Section 2.2",
+          "quote": "Partner shall (a) actively promote the Platform to Prospects in the Territory; (b) register all Prospects in the Partner Portal within five (5) business days of first substantive contact; (c) deliver Partner Services to Datavane Accounts in accordance with Datavane's published implementation methodology; and (d) participate in joint marketing activities as agreed in the annual joint business plan",
+          "role": "incoming"
+        },
+        {
+          "docId": "datavane-spa",
+          "docTitle": "Datavane strategic partnership (draft)",
+          "clauseRef": "Section 6.4",
           "quote": "For Prospects referred by Partner that purchase a Platform subscription without Partner Services, Datavane shall pay Partner a referral fee of eight percent (8%) of first-year net subscription fees actually received by Datavane",
-          "role": "incoming"
-        },
-        {
-          "docId": "datavane-spa",
-          "docTitle": "Datavane strategic partnership (draft)",
-          "clauseRef": "10.1",
-          "quote": "Each Party warrants that it has full power and authority to enter into this Agreement",
           "role": "incoming"
         },
         {
@@ -119,7 +97,7 @@
           "role": "register"
         }
       ],
-      "counterPosition": "Exclue India and the GCC member states from the definition of Territory and the scope of the appointment until after August 31, 2028.",
+      "counterPosition": "Renegotiate Section 1.10 of the Datavane agreement to exclude India and the GCC member states from the Territory until September 1, 2028, or seek consent/waiver from CloudSpan.",
       "registerEntryId": "cloudspan-spa#1",
       "registerVerified": false,
       "expiry": "2028-08-31",
@@ -129,8 +107,8 @@
       "key": "playbook:indemnity",
       "category": "playbook",
       "topic": "indemnity",
-      "title": "One-way uncapped indemnity",
-      "impact": "AtliQ could be forced to pay unlimited damages for third-party claims regardless of the actual severity of its fault.",
+      "title": "Uncapped, one-way indemnification obligations on AtliQ",
+      "impact": "AtliQ must cover broad liabilities and defense costs for Datavane without reciprocal protection or a cap.",
       "severity": "high",
       "confidence": "medium",
       "needsJudgment": false,
@@ -147,7 +125,7 @@
         }
       ],
       "standard": "Mutual: each party covers its own breach and negligence; never the other side's negligence. IP-infringement indemnity for deliverables is normal.",
-      "counterPosition": "Each party indemnifies the other for third-party claims caused by its own conflict or negligence; indemnities subject to the liability cap (IP infringement excepted).",
+      "counterPosition": "Restructure the indemnity to be mutual, cover only third-party claims arising from a party's own negligence or contract non-compliance, and make the indemnity subject to the mutual liability cap.",
       "precedents": [
         {
           "docId": "paytrack-msa",
@@ -166,105 +144,11 @@
       ]
     },
     {
-      "key": "playbook:liability",
-      "category": "playbook",
-      "topic": "liability",
-      "title": "Asymmetric and uncapped liability",
-      "impact": "AtliQ is exposed to unlimited financial risk while having virtually no recourse against Datavane for significant losses.",
-      "severity": "high",
-      "confidence": "medium",
-      "needsJudgment": false,
-      "owner": "Karandeep",
-      "resolution": "redline",
-      "docId": "datavane-spa",
-      "citations": [
-        {
-          "docId": "datavane-spa",
-          "docTitle": "Datavane strategic partnership (draft)",
-          "clauseRef": "12.2 and 12.3",
-          "quote": "DATAVANE'S TOTAL AGGREGATE LIABILITY ARISING OUT OF OR RELATING TO THIS AGREEMENT, INCLUDING UNDER SECTION 11.2, SHALL NOT EXCEED TEN THOUSAND UNITED STATES DOLLARS (USD 10,000).\n12.3 **Partner Liability.** NOTHING IN THIS AGREEMENT SHALL LIMIT PARTNER'S LIABILITY UNDER SECTION 5, SECTION 9 OR SECTION 11.1",
-          "role": "incoming"
-        }
-      ],
-      "standard": "Each party's aggregate liability capped at 1× fees (paid or payable in the prior 12 months), mutual; carve-outs only for fraud, wilful misconduct and confidentiality (plus any carve-outs that are mandatory under the governing law, e.g. German law for intent/gross negligence and injury).",
-      "counterPosition": "Mutual cap of 1x fees paid or payable in the 12 months before the claim; carve-outs limited to fraud, wilful misconduct and non-compliance with confidentiality.",
-      "precedents": [
-        {
-          "docId": "ref-negotiation-notes",
-          "counterparty": "Kessler Mobility",
-          "clauseRef": "negotiation notes",
-          "label": "standard",
-          "note": "Walked away from a €120k deal over unlimited liability (Jan 2026)"
-        },
-        {
-          "docId": "sunrise-msa",
-          "counterparty": "Sunrise Foods",
-          "clauseRef": "§13",
-          "label": "standard",
-          "note": "AtliQ-friendly master: capped liability"
-        },
-        {
-          "docId": "carebridge-baa",
-          "counterparty": "CareBridge Clinics",
-          "clauseRef": "§9",
-          "label": "standard",
-          "note": "Counsel-reviewed: BAA liability capped at 2× trailing-12-month fees"
-        },
-        {
-          "docId": "brightwater-msa",
-          "counterparty": "Brightwater Insurance",
-          "clauseRef": "§15",
-          "label": "accident",
-          "note": "LDs carved out of the 150% cap"
-        }
-      ]
-    },
-    {
-      "key": "playbook:payment",
-      "category": "playbook",
-      "topic": "payment",
-      "title": "Extended pay-when-paid terms",
-      "impact": "AtliQ faces significant cash-flow risk and may never be paid for services performed if the end customer defaults or delays payment.",
-      "severity": "high",
-      "confidence": "medium",
-      "needsJudgment": false,
-      "owner": "Karandeep",
-      "resolution": "redline",
-      "docId": "datavane-spa",
-      "citations": [
-        {
-          "docId": "datavane-spa",
-          "docTitle": "Datavane strategic partnership (draft)",
-          "clauseRef": "6.3",
-          "quote": "Datavane shall pay Partner's share of Joint Deal Revenue within sixty (60) days after the end of the calendar quarter in which Datavane receives payment from the relevant Datavane Account",
-          "role": "incoming"
-        }
-      ],
-      "standard": "Invoices payable within 30 days of receipt; 45 days is the negotiated maximum.",
-      "counterPosition": "Payment within 30 days of receipt of invoice (45 days maximum); no pay-when-paid.",
-      "precedents": [
-        {
-          "docId": "trustline-msa",
-          "counterparty": "Trustline NBFC",
-          "clauseRef": "§4",
-          "label": "standard",
-          "note": "Negotiated 90 → 45 days (the maximum)"
-        },
-        {
-          "docId": "ref-negotiation-notes",
-          "counterparty": "PixelCraft Studio",
-          "clauseRef": "negotiation notes",
-          "label": "standard",
-          "note": "AtliQ's own paper: 60-day payment changed to 30 for a 6-person agency (Oct 2025)"
-        }
-      ]
-    },
-    {
       "key": "playbook:restrictive",
       "category": "playbook",
       "topic": "restrictive",
-      "title": "Broad 24-month non-compete",
-      "impact": "This prevents AtliQ from working with its own clients on other platforms, effectively allowing Datavane to capture AtliQ's client relationships.",
+      "title": "Broad 24-month non-compete and client-capture restriction",
+      "impact": "AtliQ would be barred from servicing its own clients with other technology platforms for two years post-partnership.",
       "severity": "high",
       "confidence": "medium",
       "needsJudgment": false,
@@ -281,7 +165,7 @@
         }
       ],
       "standard": "None, or narrow geography + short duration, always checked against the register; mutual exit where possible. No non-competes on freelancers/vendors beyond non-solicit of client staff.",
-      "counterPosition": "Delete the restrictive covenant or limit it to a narrow non-solicitation of specific Datavane staff for a maximum of 6 months.",
+      "counterPosition": "Delete Section 5.3 entirely, or limit it to standard mutual non-solicitation of direct employees.",
       "precedents": [
         {
           "docId": "alnoor-msa",
@@ -303,46 +187,6 @@
           "clauseRef": "§6.4",
           "label": "accident",
           "note": "MFN accepted on a false premise (\"we never discount\")"
-        }
-      ]
-    },
-    {
-      "key": "playbook:termination",
-      "category": "playbook",
-      "topic": "termination",
-      "title": "One-sided convenience termination",
-      "impact": "AtliQ is locked into a long-term commitment while Datavane can exit at any time with minimal notice.",
-      "severity": "high",
-      "confidence": "medium",
-      "needsJudgment": false,
-      "owner": "Karandeep",
-      "resolution": "redline",
-      "docId": "datavane-spa",
-      "citations": [
-        {
-          "docId": "datavane-spa",
-          "docTitle": "Datavane strategic partnership (draft)",
-          "clauseRef": "7.2 and 7.3",
-          "quote": "Datavane may terminate this Agreement at any time, for any reason or no reason, upon fifteen (15) days' written notice to Partner.\n7.3 **No Termination for Convenience by Partner.** Partner acknowledges the investment made by Datavane in enabling Partner and agrees that Partner may not terminate this Agreement for convenience during the initial term",
-          "role": "incoming"
-        },
-        {
-          "docId": "datavane-spa",
-          "docTitle": "Datavane strategic partnership (draft)",
-          "clauseRef": "7.5(c)",
-          "quote": "no revenue share or referral fee shall be payable in respect of any Joint Deal or referral not fully paid by the relevant Datavane Account before the effective date of termination",
-          "role": "incoming"
-        }
-      ],
-      "standard": "On any termination for convenience AtliQ is paid for all work done, including work in progress; reasonable notice (≥30 days); mutual where possible.",
-      "counterPosition": "Mutual notice period of at least 30 days for termination for convenience.",
-      "precedents": [
-        {
-          "docId": "rohan-ica",
-          "counterparty": "Rohan Iyer",
-          "clauseRef": "§9",
-          "label": "standard",
-          "note": "Mutual 15-day exit"
         }
       ]
     },
@@ -369,52 +213,16 @@
       ],
       "standard": "Indian law for Pvt Ltd; US law for Inc.",
       "counterPosition": "Laws of India; arbitration seated in India or a neutral seat."
-    },
-    {
-      "key": "playbook:ip",
-      "category": "playbook",
-      "topic": "ip",
-      "title": "Perpetual license to AtliQ tools",
-      "impact": "AtliQ loses control over its proprietary pre-existing tools and accelerators by granting Datavane perpetual rights to them.",
-      "severity": "medium",
-      "confidence": "medium",
-      "needsJudgment": false,
-      "owner": "Karandeep",
-      "resolution": "redline",
-      "docId": "datavane-spa",
-      "citations": [
-        {
-          "docId": "datavane-spa",
-          "docTitle": "Datavane strategic partnership (draft)",
-          "clauseRef": "8.4",
-          "quote": "Partner hereby grants Datavane a perpetual, irrevocable, royalty-free licence to use any feedback, connectors, templates or implementation accelerators that Partner submits to the Datavane Partner Marketplace",
-          "role": "incoming"
-        }
-      ],
-      "standard": "The client owns what AtliQ builds specifically for it (on payment); AtliQ keeps its background IP, pre-existing tools and know-how and grants a licence to use them as part of the deliverables.",
-      "counterPosition": "AtliQ retains background IP and grants a non-exclusive, perpetual, royalty-free licence to use it only as part of the deliverables provided to specific customers.",
-      "precedents": [
-        {
-          "docId": "acme-msa",
-          "counterparty": "Acme Retail Group",
-          "clauseRef": "§9",
-          "label": "standard",
-          "note": "Client owns deliverables, AtliQ keeps background IP"
-        },
-        {
-          "docId": "northwind-msa",
-          "counterparty": "Northwind Logistics",
-          "clauseRef": "§9.2",
-          "label": "accident",
-          "note": "Pre-existing tools incl. PipeKit assigned to Northwind (\"I skimmed the IP\")"
-        }
-      ]
     }
   ],
   "fine": [
-    "No liquidated damages or delay penalties are included in this partnership agreement.",
-    "The professional services warranty is standard and acceptable.",
-    "Confidentiality terms are mutual and largely align with the standard."
+    "Payment ≤ 45 days: 30 days",
+    "No delay penalties are present in the agreement.",
+    "Intellectual property provisions protect AtliQ's background IP and only license marketplace submissions.",
+    "Confidentiality obligations are mutual with a standard three-year post-termination duration.",
+    "The agreement does not impose any insurance requirements on AtliQ.",
+    "No set-off clauses are included, which aligns with the playbook.",
+    "The agreement does not contain any formal acceptance or cure procedures."
   ],
   "notSeen": [
     "No meeting notes attached to this deal.",
@@ -898,10 +706,10 @@
   "counselPack": null,
   "errors": [],
   "usage": {
-    "calls": 5,
-    "cachedCalls": 1,
-    "inputTokens": 16474,
-    "outputTokens": 11121,
-    "ms": 63477
+    "calls": 1,
+    "cachedCalls": 5,
+    "inputTokens": 270,
+    "outputTokens": 631,
+    "ms": 126716
   }
 }

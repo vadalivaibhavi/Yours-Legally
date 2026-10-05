@@ -1,24 +1,25 @@
 {
   "dealId": "rheinwerk",
   "version": 1,
-  "createdAt": "2026-10-05T08:09:00.840Z",
+  "createdAt": "2026-10-05T10:57:57.258Z",
   "trigger": "initial review",
-  "inputsHash": "25962779d1b5feb77e2dbb157f2da931",
+  "inputsHash": "bc21afffaf8fa4d5194eed89660db95c",
   "documentIds": [
     "rheinwerk-sa"
   ],
   "registerVersion": "reg-2026-10-04-57+r0",
-  "playbookVersion": "pb-v1-2026-10-04",
+  "playbookVersion": "pb-v1.1-2026-10-05",
   "models": [
     "gemini-flash-lite-latest",
+    "gemini-flash-latest",
     "gemini-3-flash-preview",
-    "gemini-flash-latest"
+    "gemini-3.5-flash"
   ],
   "promptVersion": "p1",
   "route": "full_review",
   "verdict": "HOLD",
-  "headline": "HOLD: 1 blocker and 3 missing documents require resolution",
-  "nextAction": "Karandeep must consult counsel regarding the Northwind Logistics IP assignment collision.",
+  "headline": "HOLD: 1 IP blocker and 3 missing documents",
+  "nextAction": "Karandeep must instruct counsel to resolve the Northwind Logistics IP assignment conflict.",
   "findings": [
     {
       "key": "conflict:northwind-msa:ip_transfer",
@@ -192,8 +193,8 @@
       "key": "playbook:confidentiality",
       "category": "playbook",
       "topic": "confidentiality",
-      "title": "Extended confidentiality duration",
-      "impact": "AtliQ must maintain confidentiality protocols and records for an extended period after the engagement ends.",
+      "title": "Extended Confidentiality Term",
+      "impact": "AtliQ must manage and track confidential information for an extended duration post-engagement.",
       "severity": "low",
       "confidence": "medium",
       "needsJudgment": false,
@@ -210,7 +211,7 @@
         }
       ],
       "standard": "Mutual in substance, not just in title: both parties' information protected, both bound by the same obligations, residuals mutual or none, mutual remedies, fixed term, and no non-competes or non-solicits hidden inside an NDA.",
-      "counterPosition": "Fixed 2–3 year term.",
+      "counterPosition": "The confidentiality obligation shall continue for three (3) years after termination of this Agreement.",
       "precedents": [
         {
           "docId": "ref-negotiation-notes",
@@ -246,8 +247,8 @@
       "key": "playbook:ld",
       "category": "playbook",
       "topic": "ld",
-      "title": "LDs not specified as sole remedy",
-      "impact": "AtliQ remains potentially liable for actual damages that exceed the 5% contractual penalty cap.",
+      "title": "LDs not sole remedy",
+      "impact": "AtliQ could potentially be liable for actual damages exceeding the 5% cap if the client can prove higher losses.",
       "severity": "low",
       "confidence": "medium",
       "needsJudgment": false,
@@ -264,7 +265,7 @@
         }
       ],
       "standard": "0.5% of the affected milestone fee per week of delay attributable to AtliQ, capped at 5% of that milestone fee; no LDs for client-caused delay; LDs are the sole remedy for delay.",
-      "counterPosition": "0.5% of the affected milestone fee per week, capped at 5% of that milestone fee; no LDs where the delay is caused by the client; LDs are the sole and exclusive remedy for delay.",
+      "counterPosition": "The contractual penalty shall be the sole and exclusive remedy for any delay.",
       "precedents": [
         {
           "docId": "acme-msa",
@@ -309,16 +310,14 @@
     "Parties = invoicing entity: Pvt Ltd throughout",
     "Payment ≤ 45 days: 30 days",
     "Liability capped: total remuneration under this Agreement",
-    "Liability is capped at 1x total remuneration with standard statutory carve-outs for German law.",
-    "The mutual indemnity for breach and IP infringement aligns with the playbook.",
-    "Ownership of deliverables vests upon payment and AtliQ retains rights to PipeKit as background IP.",
-    "The 10-day review period and deemed acceptance mechanism meet AtliQ's standards.",
-    "Termination for convenience provides for payment of services rendered and committed costs.",
-    "The DPA and SCC framework for EU-India data transfer is standard for this jurisdiction.",
-    "The agreement contains no non-compete or non-solicit restrictions.",
-    "The contract does not impose specific insurance requirements or limits.",
-    "The 12-month warranty period for software deliverables is standard.",
-    "The payment clause excludes deductions, effectively preventing unauthorized set-off."
+    "Payment within 30 days of receipt matches the standard.",
+    "Aggregate liability capped at total remuneration (fees) for slight negligence; mandatory law carve-outs for German law (intent, gross negligence) are acceptable.",
+    "Indemnity is mutual for breach and negligence, and includes standard IP infringement coverage subject to general liability limits.",
+    "AtliQ retains ownership of its background IP (PipeKit) and grants a license, while client owns specific work results upon payment.",
+    "Termination for convenience ensures AtliQ is paid for services rendered and committed costs.",
+    "Includes a 10-day review period and deemed acceptance if the client fails to respond.",
+    "Standard data protection language referencing DPA and SCCs for transfer to India.",
+    "Requirement for written consent to subcontract is a standard operational control rather than a non-compete."
   ],
   "notSeen": [
     "Register built from 17 signed documents. Contracts referenced elsewhere but never collected (e.g. ShopSwift SOW, PixelCraft vendor agreement, intercompany services agreement) can't be checked."
@@ -1026,8 +1025,8 @@
   "usage": {
     "calls": 2,
     "cachedCalls": 4,
-    "inputTokens": 4000,
-    "outputTokens": 12192,
-    "ms": 171478
+    "inputTokens": 5371,
+    "outputTokens": 4170,
+    "ms": 637641
   }
 }

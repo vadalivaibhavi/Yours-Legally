@@ -1,6 +1,6 @@
 # Eval results
 
-Run 2026-10-05 09:25 UTC · APP_TODAY 2026-10-04 · cases from `docs/Eval_Set.md` via `eval/cases.json`.
+Run 2026-10-05 12:10 UTC · APP_TODAY 2026-10-04 · cases from `docs/Eval_Set.md` via `eval/cases.json`.
 
 **42 passed · 4 failed · 4 skipped** (of 50 cases)
 
@@ -8,8 +8,8 @@ Run 2026-10-05 09:25 UTC · APP_TODAY 2026-10-04 · cases from `docs/Eval_Set.md
 
 | Check | Result | Detail |
 |---|---|---|
-| Citation validity (all quotes string-matched to source) | ✅ | 131/131 |
-| Guardrails: no breach/enforceable in system prose; never Reject | ✅ | 529 prose strings checked; 0 legal conclusions; 0 Reject recommendations |
+| Citation validity (all quotes string-matched to source) | ✅ | 136/136 |
+| Guardrails: no breach/enforceable in system prose; never Reject | ✅ | 520 prose strings checked; 0 legal conclusions; 0 Reject recommendations |
 | Verdict identical with and without similar-clauses panel | ✅ | 13 briefs |
 | NDA fast lane latency (<1 min) | info | finserve 0s (cached) · loopmart 0s (cached) |
 | Recall@3 on EV-P (≥80%) | ✅ | 10/10 = 100% |
@@ -32,15 +32,15 @@ Run 2026-10-05 09:25 UTC · APP_TODAY 2026-10-04 · cases from `docs/Eval_Set.md
 | EV-02 Lakeshore MSA + rate card | ✅ | HOLD · found conflict:crestline-msa:mfn_pricing · clean on playbook:ld, playbook:payment, playbook:ip, gate:entity, gate:payment, gate:ld_cap, gate:liability_cap, gate:governing_law |
 | EV-03 TravelHub agreement | ❌ | verdict HOLD ≠ SEND BACK |
 | EV-04 BlueOrchid pilot | ✅ | SIGN AFTER CHANGES · found conflict:alnoor-msa:non_compete · clean on playbook:ld, playbook:payment, playbook:liability, playbook:ip, gate:governing_law |
-| EV-05 Datavane partnership | ✅ | HOLD · found conflict:cloudspan-spa:exclusivity, playbook:indemnity, playbook:restrictive |
+| EV-05 Datavane partnership | ❌ | verdict SIGN AFTER CHANGES ≠ HOLD |
 | EV-06 Rheinwerk agreement | ✅ | HOLD · found conflict:northwind-msa:ip_transfer, gate:annex · clean on playbook:ld, playbook:payment, gate:payment, gate:ld_cap, playbook:liability |
 | EV-07 FinServe "mutual" NDA | ✅ | HOLD · found nda:definition, nda:residuals, covenant:non_compete, nda:remedies · clean on gate:entity, gate:governing_law |
 | EV-08 LoopMart mutual NDA | ✅ | SIGN · found nothing to find · clean on severity:blocker, severity:high |
 | EV-09 Sunrise SOW-2 | ✅ | SIGN · found nothing to find · clean on playbook:ld, severity:blocker, severity:high |
-| EV-10 Kriti subcontract (AtliQ paper) | ✅ | SIGN AFTER CHANGES · found playbook:ld, playbook:payment, playbook:indemnity, playbook:liability, flowdown:ip, flowdown:data, flowdown:consent |
-| EV-11 Marcus Reed ICA (AtliQ paper) | ❌ | flagged flowdown:ip (medium) |
+| EV-10 Kriti subcontract (AtliQ paper) | ❌ | missing flowdown:ip |
+| EV-11 Marcus Reed ICA (AtliQ paper) | ✅ | SIGN AFTER CHANGES · found gate:entity, playbook:restrictive, playbook:termination, dependency:lakeshore · clean on playbook:ip, flowdown:ip |
 | EV-12 Harrington bundle (MSA, BAA, NDA, notes) | ❌ | missing playbook:ip |
-| EV-13 Daniel Ortiz ICA + NDA (AtliQ paper) | ❌ | flagged playbook:termination (medium) |
+| EV-13 Daniel Ortiz ICA + NDA (AtliQ paper) | ✅ | SIGN AFTER CHANGES · found flowdown:data, flowdown:ip · clean on nda:, playbook:payment, playbook:termination, playbook:liability |
 | EV-15 BlueOrchid contract vs seller's deal check declaring "India  | ✅ | SIGN AFTER CHANGES · found mismatch:regions |
 | EV-14 TravelHub (negative test) | ✅ | HOLD · found nothing to find · clean on conflict:orbit-msa |
 

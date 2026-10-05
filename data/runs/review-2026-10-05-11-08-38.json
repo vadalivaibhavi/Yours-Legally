@@ -1,0 +1,26 @@
+{
+  "deals": [
+    "lakeshore",
+    "travelhub",
+    "rheinwerk",
+    "sunrise-sow2",
+    "datavane",
+    "ortiz",
+    "marcus",
+    "kriti"
+  ],
+  "calls": 15,
+  "cached": 32,
+  "inTok": 54185,
+  "outTok": 68523,
+  "rows": [
+    "lakeshore     HOLD                1B 0H 1M  651s  ",
+    "travelhub     HOLD                1B 2H 3M  3888s  ",
+    "rheinwerk     HOLD                1B 2H 2M  638s  ",
+    "sunrise-sow2  SIGN                0B 0H 0M  303s  ",
+    "datavane      SIGN AFTER CHANGES  0B 3H 1M  148s  ",
+    "ortiz         SIGN AFTER CHANGES  0B 2H 5M  126s  ",
+    "marcus        SIGN AFTER CHANGES  0B 4H 6M  62s  ",
+    "kriti         SIGN AFTER CHANGES  0B 7H 3M  2s  "
+  ]
+}

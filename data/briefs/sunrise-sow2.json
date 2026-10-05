@@ -1,14 +1,14 @@
 {
   "dealId": "sunrise-sow2",
   "version": 1,
-  "createdAt": "2026-10-05T07:21:01.991Z",
+  "createdAt": "2026-10-05T11:03:00.275Z",
   "trigger": "initial review",
-  "inputsHash": "172c1d6daf0d1cfa6524b1fe0e451332",
+  "inputsHash": "3322fd9fec81ca0bab6b6479544b3796",
   "documentIds": [
     "sunrise-sow2"
   ],
-  "registerVersion": "reg-2026-10-04-57+r1",
-  "playbookVersion": "pb-v1-2026-10-04",
+  "registerVersion": "reg-2026-10-04-57+r0",
+  "playbookVersion": "pb-v1.1-2026-10-05",
   "models": [
     "gemini-flash-lite-latest",
     "gemini-3-flash-preview",
@@ -27,14 +27,14 @@
     "Payment ≤ 45 days: 30 days",
     "Delay penalties capped: Cap 5% of milestone",
     "No live AtliQ commitment covers this food work in India",
-    "The mutual 1x fees liability cap in MSA 13.2 matches the playbook standard.",
-    "IP ownership vests in the Client only upon payment, and AtliQ retains ownership of its pre-existing tools as required.",
-    "MSA 6.3 ensures AtliQ is paid for all work performed up to the termination date, including work in progress.",
-    "The confidentiality obligations are mutual and have a standard three-year survival period.",
-    "SOW 6 provides a clear 7-day review period with a deemed acceptance mechanism.",
-    "The agreement includes standard compliance with Indian data protection laws, including the DPDPA 2023.",
-    "The non-solicitation clause is mutual and limited to a reasonable six-month period.",
-    "The mutual indemnities are capped and cover appropriate categories like IP and confidentiality."
+    "Delay penalties match the 0.5% per week rate, are capped at 5% of the milestone fee, exclude client-caused delays, and are the sole remedy for delay.",
+    "Payment within 30 days of receipt matches the playbook standard.",
+    "IP ownership vests in the client upon payment, with AtliQ retaining ownership of background IP and granting a perpetual license.",
+    "The convenience termination clause ensures AtliQ is paid for all work performed up to the termination date.",
+    "Confidentiality obligations are mutual with a standard 3-year survival period.",
+    "The non-solicitation clause is mutual and limited to employees, which is acceptable.",
+    "Data protection liability is subject to the general aggregate cap, avoiding the risk of uncapped data incident liability.",
+    "The 7-day review period and deemed acceptance upon production use are in line with standard practice."
   ],
   "notSeen": [
     "Register built from 17 signed documents. Contracts referenced elsewhere but never collected (e.g. ShopSwift SOW, PixelCraft vendor agreement, intercompany services agreement) can't be checked."
@@ -346,10 +346,10 @@
   "counselPack": null,
   "errors": [],
   "usage": {
-    "calls": 3,
-    "cachedCalls": 2,
-    "inputTokens": 8470,
-    "outputTokens": 11414,
-    "ms": 58607
+    "calls": 1,
+    "cachedCalls": 4,
+    "inputTokens": 5655,
+    "outputTokens": 10064,
+    "ms": 303016
   }
 }

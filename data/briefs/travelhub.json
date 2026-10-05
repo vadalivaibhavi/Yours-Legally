@@ -1,23 +1,24 @@
 {
   "dealId": "travelhub",
   "version": 1,
-  "createdAt": "2026-10-05T08:06:09.359Z",
+  "createdAt": "2026-10-05T10:47:19.615Z",
   "trigger": "initial review",
-  "inputsHash": "ecb99c20db8bab644e27714f4b1c2d5d",
+  "inputsHash": "bae9c86203b694533267663dcfc09a8b",
   "documentIds": [
     "travelhub-sa"
   ],
   "registerVersion": "reg-2026-10-04-57+r0",
-  "playbookVersion": "pb-v1-2026-10-04",
+  "playbookVersion": "pb-v1.1-2026-10-05",
   "models": [
     "gemini-flash-lite-latest",
-    "gemini-3-flash-preview"
+    "gemini-3-flash-preview",
+    "gemini-3.5-flash"
   ],
   "promptVersion": "p1",
   "route": "full_review",
   "verdict": "HOLD",
-  "headline": "HOLD: 1 blocker non-compete collision and 2 entity document errors",
-  "nextAction": "Karandeep must seek consent/waiver from Al Noor Hospitality Group regarding the non-compete restriction.",
+  "headline": "HOLD: Seek consent/waiver for non-compete and resolve entity discrepancies.",
+  "nextAction": "Karandeep must request a waiver from Al Noor Hospitality Group and obtain corrected entity documents from the counterparty.",
   "findings": [
     {
       "key": "conflict:alnoor-msa:non_compete",
@@ -175,11 +176,11 @@
       "key": "playbook:data_protection",
       "category": "playbook",
       "topic": "data_protection",
-      "title": "Data transfer restriction and missing Pune entity consent",
-      "impact": "AtliQ cannot utilize its Indian delivery center for data processing without further written consent and proper sub-processor flow-downs.",
+      "title": "Data protection terms without executed DPA",
+      "impact": "AtliQ risks processing user personal data without a fully compliant, dedicated data processing agreement in place.",
       "severity": "medium",
       "confidence": "medium",
-      "needsJudgment": true,
+      "needsJudgment": false,
       "owner": "Karandeep",
       "resolution": "redline",
       "docId": "travelhub-sa",
@@ -187,13 +188,13 @@
         {
           "docId": "travelhub-sa",
           "docTitle": "TravelHub software development & services agreement (draft)",
-          "clauseRef": "14.2",
-          "quote": "AtliQ shall not transfer Customer Data outside the TravelHub cloud environment without prior written approval",
+          "clauseRef": "14.1",
+          "quote": "AtliQ shall process personal data only on TravelHub's documented instructions and in compliance with Federal Decree-Law No. 45 of 2021 on the Protection of Personal Data and, where applicable, the Saudi Personal Data Protection Law",
           "role": "incoming"
         }
       ],
       "standard": "DPA (EU) or BAA (US health) signed before any personal/regulated data moves, with a sub-DPA / sub-BAA for every party that touches the data (incl. AtliQ's own Pune entity); engagement-specific scope; offshore access only as the agreement allows.",
-      "counterPosition": "Authorize the AtliQ Pune entity as a sub-processor and permit the transfer of data for processing purposes within the AtliQ group in accordance with a DPA.",
+      "counterPosition": "Require the execution of AtliQ's standard Data Protection Agreement (DPA) before any personal data is transferred or processed under this agreement.",
       "precedents": [
         {
           "docId": "carebridge-baa",
@@ -205,12 +206,12 @@
       ]
     },
     {
-      "key": "playbook:indemnity",
+      "key": "playbook:termination",
       "category": "playbook",
-      "topic": "indemnity",
-      "title": "Indemnity mutuality limited to specific triggers",
-      "impact": "AtliQ is not indemnified for general third-party claims arising from the customer's own negligence or non-compliance with contract.",
-      "severity": "low",
+      "topic": "termination",
+      "title": "One-sided convenience termination notice",
+      "impact": "AtliQ cannot terminate this agreement for convenience if the commercial relationship becomes unviable.",
+      "severity": "medium",
       "confidence": "medium",
       "needsJudgment": false,
       "owner": "Karandeep",
@@ -220,36 +221,29 @@
         {
           "docId": "travelhub-sa",
           "docTitle": "TravelHub software development & services agreement (draft)",
-          "clauseRef": "13",
-          "quote": "13.1 AtliQ shall defend and indemnify TravelHub against third-party claims alleging that the Deliverables infringe any intellectual property right.\n13.2 TravelHub shall defend and indemnify AtliQ against third-party claims arising from Customer Data or TravelHub's use of the Deliverables in breach of applicable law",
+          "clauseRef": "8.3",
+          "quote": "TravelHub may terminate for convenience with thirty (30) days' written notice and shall pay for all work performed up to the termination date",
           "role": "incoming"
         }
       ],
-      "standard": "Mutual: each party covers its own breach and negligence; never the other side's negligence. IP-infringement indemnity for deliverables is normal.",
-      "counterPosition": "Each party should indemnify the other for third-party claims caused by its own conflict or negligence.",
+      "standard": "On any termination for convenience AtliQ is paid for all work done, including work in progress. Notice is mutual. Client contracts: reasonable notice (typically 30+ days). Freelancer / vendor agreements: a mutual short exit (about 15 days, as with Rohan Iyer) is AtliQ's standard and fair to both sides.",
+      "counterPosition": "Make the convenience termination right mutual with thirty (30) days' written notice for either party, ensuring AtliQ is paid for all work performed up to the termination date, including work in progress and committed costs.",
       "precedents": [
         {
-          "docId": "paytrack-msa",
-          "counterparty": "PayTrack Technologies",
-          "clauseRef": "§10.2",
+          "docId": "rohan-ica",
+          "counterparty": "Rohan Iyer",
+          "clauseRef": "§9",
           "label": "standard",
-          "note": "Origin: \"we can't insure against PayTrack's own negligence\" (Jan 2025)"
-        },
-        {
-          "docId": "acme-msa",
-          "counterparty": "Acme Retail Group",
-          "clauseRef": "§11",
-          "label": "standard",
-          "note": "Mutual indemnity"
+          "note": "Mutual 15-day exit"
         }
       ]
     },
     {
-      "key": "playbook:liability",
+      "key": "playbook:payment",
       "category": "playbook",
-      "topic": "liability",
-      "title": "Liability cap excludes fees payable",
-      "impact": "If a claim arises before milestones are paid, the liability cap may be interpreted as zero or be significantly reduced.",
+      "topic": "payment",
+      "title": "Payment terms trigger from invoice date rather than receipt",
+      "impact": "Any delay in the transmission or receipt of the invoice will shorten AtliQ's actual payment cycle.",
       "severity": "low",
       "confidence": "medium",
       "needsJudgment": false,
@@ -260,56 +254,42 @@
         {
           "docId": "travelhub-sa",
           "docTitle": "TravelHub software development & services agreement (draft)",
-          "clauseRef": "12.2",
-          "quote": "Each Party's total liability arising out of this Agreement shall not exceed the total fees paid under this Agreement in the twelve (12) months preceding the claim",
+          "clauseRef": "7.2",
+          "quote": "TravelHub shall pay each undisputed invoice within thirty (30) days of the invoice date by wire transfer to the bank account specified on the invoice",
           "role": "incoming"
         }
       ],
-      "standard": "Each party's aggregate liability capped at 1× fees (paid or payable in the prior 12 months), mutual; carve-outs only for fraud, wilful misconduct and confidentiality (plus any carve-outs that are mandatory under the governing law, e.g. German law for intent/gross negligence and injury).",
-      "counterPosition": "Aggregate liability should be capped at 1x fees paid or payable in the 12 months preceding the claim.",
+      "standard": "Invoices payable within 30 days of receipt; 45 days is the negotiated maximum.",
+      "counterPosition": "Amend the payment trigger to state that payments are due within thirty (30) days of receipt of the invoice.",
       "precedents": [
         {
+          "docId": "trustline-msa",
+          "counterparty": "Trustline NBFC",
+          "clauseRef": "§4",
+          "label": "standard",
+          "note": "Negotiated 90 → 45 days (the maximum)"
+        },
+        {
           "docId": "ref-negotiation-notes",
-          "counterparty": "Kessler Mobility",
+          "counterparty": "PixelCraft Studio",
           "clauseRef": "negotiation notes",
           "label": "standard",
-          "note": "Walked away from a €120k deal over unlimited liability (Jan 2026)"
-        },
-        {
-          "docId": "sunrise-msa",
-          "counterparty": "Sunrise Foods",
-          "clauseRef": "§13",
-          "label": "standard",
-          "note": "AtliQ-friendly master: capped liability"
-        },
-        {
-          "docId": "carebridge-baa",
-          "counterparty": "CareBridge Clinics",
-          "clauseRef": "§9",
-          "label": "standard",
-          "note": "Counsel-reviewed: BAA liability capped at 2× trailing-12-month fees"
-        },
-        {
-          "docId": "brightwater-msa",
-          "counterparty": "Brightwater Insurance",
-          "clauseRef": "§15",
-          "label": "accident",
-          "note": "LDs carved out of the 150% cap"
+          "note": "AtliQ's own paper: 60-day payment changed to 30 for a 6-person agency (Oct 2025)"
         }
       ]
     }
   ],
   "fine": [
-    "Payment ≤ 45 days: 30 days",
-    "Absence of delay penalties is acceptable as it avoids uncapped or milestone-based penalties.",
-    "The 30-day payment term is within the 45-day maximum approved in the playbook.",
-    "IP ownership vests in the client only upon full payment and AtliQ retains its background technology.",
-    "Termination for convenience includes a 30-day notice period and payment for all work performed.",
-    "Confidentiality obligations are mutual with a standard 3-year survival period.",
-    "The non-solicitation clause is mutual and limited to a 12-month duration.",
-    "The 10-day review period includes a deemed acceptance provision.",
-    "The professional services warranty and 60-day conformity period are standard.",
-    "The agreement does not impose any insurance requirements that exceed AtliQ's current coverage."
+    "Liability capped: Each Party's total liability arising out of this Agreement shall not exceed the total fees paid under this Agreement in the twelve (12) months preceding the claim",
+    "No liquidated damages or delay penalties are specified in this agreement, which is highly favorable.",
+    "The liability limit is mutual, capped at 1x fees paid in the preceding 12 months, and contains standard mutual carve-outs.",
+    "Indemnification obligations are limited and AtliQ's IP indemnity remains subject to the general liability cap, which is favorable.",
+    "IP ownership of custom deliverables transfers to the client only upon full payment, and AtliQ retains ownership of its background technology.",
+    "Confidentiality obligations are mutual, balanced, and have a standard three-year survival period.",
+    "The non-solicitation clause is mutual and limited to twelve months post-termination, which is acceptable.",
+    "No insurance requirements or minimum coverage limits are imposed on AtliQ in this draft.",
+    "The review period is ten business days with an automatic deemed acceptance mechanism, which matches standard requirements.",
+    "Standard warranty of professional services and a reasonable sixty-day conformity period are provided."
   ],
   "notSeen": [
     "Register built from 17 signed documents. Contracts referenced elsewhere but never collected (e.g. ShopSwift SOW, PixelCraft vendor agreement, intercompany services agreement) can't be checked."
@@ -877,10 +857,10 @@
   "counselPack": null,
   "errors": [],
   "usage": {
-    "calls": 1,
-    "cachedCalls": 5,
-    "inputTokens": 4227,
-    "outputTokens": 2647,
-    "ms": 328706
+    "calls": 2,
+    "cachedCalls": 4,
+    "inputTokens": 4967,
+    "outputTokens": 6337,
+    "ms": 3887791
   }
 }

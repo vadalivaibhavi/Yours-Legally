@@ -128,25 +128,25 @@ Token counts and timings for every script run are written to `data/runs/` (input
 
 ## Eval results
 
-Full table: [`eval/results.md`](eval/results.md) (regenerate with `npm run eval`). Last run: **42 passed · 4 failed · 4 skipped of 50 cases.** Skipped: EV-V1–V3 (version pairs need model calls; all three passed in the previous full run) and EV-V4 (FR-18 not built).
+Full table: [`eval/results.md`](eval/results.md) (regenerate with `npm run eval`). Last run: **42 passed · 4 failed · 4 skipped of 50 cases** (best single run so far: 47). Skipped: EV-V1–V3 (version pairs need model calls; all three passed in the previous full run) and EV-V4 (FR-18 not built).
 
 | PRD §11 dimension | Threshold | Result |
 |---|---|---|
 | Register accuracy & coverage (EV-R1–R5) | ≥90% fields exact, 100% live restrictions | 7/7 must-have entries, 86/86 fields exact; Orbit expired + illegible §9.1 reported; unverified label works |
-| Verdicts on incoming contracts (EV-01–15) | expected verdict, must-find, must-not-flag | 11/15: Gulf Crown, Lakeshore, BlueOrchid, Datavane, Rheinwerk, FinServe (fast lane), LoopMart (clean), Sunrise (clean), Kriti, EV-14, EV-15 |
+| Verdicts on incoming contracts (EV-01–15) | expected verdict, must-find, must-not-flag | 11/15: Gulf Crown, Lakeshore, BlueOrchid, Rheinwerk, FinServe (fast lane), LoopMart (clean), Sunrise (clean), Marcus, Ortiz, EV-14, EV-15 |
 | Compliance alerts & notes (EV-C1–C2) | alert closed by note; note never clears a blocker | 2/2 |
 | Deal linking (EV-L1–L6) | auto when certain, ask when ambiguous, user choice final | 6/6 |
 | Access control (EV-A1–A3) | sellers can't see brief/register/other deals/other clients' rates | 3/3 |
 | Seller checks (EV-S1–S8) | expected status per item; unmatched → couldn't check; banner on change | 8/8 |
 | Similar past clauses (EV-P1–P7) | recall@3 ≥80%, labels right, verdict unchanged | recall@3 **100%** (10/10); verdict identical with and without the panel on all 13 briefs |
-| Citation validity | 100% | 131/131 quotes string-matched to source |
-| Guardrails | 0 legal conclusions, 0 Reject | 0 / 0 across 529 model-written strings |
+| Citation validity | 100% | 136/136 quotes string-matched to source |
+| Guardrails | 0 legal conclusions, 0 Reject | 0 / 0 across 520 model-written strings |
 
-**The 4 failures, honestly.**
-- **EV-03 TravelHub:** HOLD instead of SEND BACK. The model reads TravelHub (a hotel distribution platform; hotel-ranking AI for UAE/KSA hotels) as squarely inside Al Noor's "Hospitality Business" definition; the answer key calls it arguable, for counsel. The system errs cautious: it blocks rather than misses.
-- **EV-11 Marcus:** flags a medium flow-down gap the answer key doesn't list. Marcus assigns work product (§6.2), but nothing licenses his pre-existing tools, while Lakeshore §7.2 is promised a licence to tools incorporated in deliverables. This looks like a real gap; consider adding it to the answer key.
-- **EV-12 Harrington:** the latest run missed the background-IP assignment (MSA §7.2), which an earlier run found. That's model variance on a fresh call; the verdict (HOLD + compliance alert) is right.
-- **EV-13 Ortiz:** this brief predates the playbook fix that made a mutual ~15-day freelancer exit the standard (Rohan Iyer precedent). Re-running Ortiz clears it.
+**The 4 failures, honestly.** All four are judgment calls where the model's answer varies between runs; the deterministic checks don't vary.
+- **EV-03 TravelHub:** HOLD instead of SEND BACK. The model reads TravelHub (a hotel distribution platform building hotel-ranking AI for UAE/KSA hotels) as squarely inside Al Noor's "Hospitality Business" definition; the answer key calls it arguable, for counsel. The system errs cautious: it blocks rather than misses.
+- **EV-05 Datavane:** SIGN AFTER CHANGES instead of HOLD. The CloudSpan exclusivity collision *is* found, but this run judged it fixable by carving India + GCC out of the territory (high, not blocker); the previous run called it a blocker.
+- **EV-10 Kriti / EV-12 Harrington:** one IP finding each (Kriti's IP flow-down to Rheinwerk; Harrington's background-IP assignment) was found in earlier runs and missed in this one. Both verdicts are right.
+- In earlier runs, EV-11 (Marcus) and EV-13 (Ortiz) failed instead. Marcus flags a real tools-licence gap the answer key doesn't list. Ortiz was fixed by aligning the termination rule with the Rohan Iyer precedent.
 
 The briefs were produced over several runs because Gemini's **free tier** allows 20 requests per model per day per project. A single `npm run review` on a billed key regenerates them all on the current prompts and playbook.
 

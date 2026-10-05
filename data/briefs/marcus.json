@@ -1,23 +1,24 @@
 {
   "dealId": "marcus",
   "version": 1,
-  "createdAt": "2026-10-05T08:15:26.545Z",
+  "createdAt": "2026-10-05T11:08:36.347Z",
   "trigger": "initial review",
-  "inputsHash": "26a7fb05ddf95a8adb59a5db26cbd41b",
+  "inputsHash": "b12e6b41f8d5afa13c6e78839db93192",
   "documentIds": [
     "marcus-ica"
   ],
   "registerVersion": "reg-2026-10-04-57+r0",
-  "playbookVersion": "pb-v1-2026-10-04",
+  "playbookVersion": "pb-v1.1-2026-10-05",
   "models": [
     "gemini-flash-lite-latest",
-    "gemini-3.5-flash"
+    "gemini-3.5-flash",
+    "gemini-3-flash-preview"
   ],
   "promptVersion": "p1",
   "route": "full_review",
   "verdict": "SIGN AFTER CHANGES",
-  "headline": "SIGN AFTER CHANGES: Three high-severity entity, non-compete, and dependency issues remain",
-  "nextAction": "Jay must renegotiate the restrictive non-compete and correct the entity before proceeding.",
+  "headline": "SIGN AFTER CHANGES: 3 entity/term blockers and 1 dependency on unsigned master agreement",
+  "nextAction": "Jay must update the contracting entity and liability terms while Karandeep secures the Lakeshore MSA.",
   "findings": [
     {
       "key": "gate:entity",
@@ -47,8 +48,8 @@
       "key": "playbook:restrictive",
       "category": "playbook",
       "topic": "restrictive",
-      "title": "Worldwide post-termination non-compete is overly restrictive",
-      "impact": "Such a broad restrictive covenant is highly disfavored under US labor standards and increases the risk of employee misclassification.",
+      "title": "Non-solicitation of clients",
+      "impact": "This is a 'client-capture' provision that AtliQ's playbook explicitly flags as a term to never accept from a client.",
       "severity": "high",
       "confidence": "medium",
       "needsJudgment": false,
@@ -59,13 +60,27 @@
         {
           "docId": "marcus-ica",
           "docTitle": "Marcus Reed contractor agreement (AtliQ draft)",
-          "clauseRef": "Clause 8.1",
+          "clauseRef": "3.1",
+          "quote": "During the term of this Agreement, the Contractor shall devote his professional working time exclusively to the Company and shall not, directly or indirectly, provide services to, or be engaged or employed by, any other person, firm or company, whether paid or unpaid, without the Company's prior written consent",
+          "role": "incoming"
+        },
+        {
+          "docId": "marcus-ica",
+          "docTitle": "Marcus Reed contractor agreement (AtliQ draft)",
+          "clauseRef": "8.1",
           "quote": "For a period of twelve (12) months after termination or expiry of this Agreement, the Contractor shall not, anywhere in the world, directly or indirectly, provide any software or data services to any person, whether as an employee, consultant, contractor, partner or otherwise, in competition with the Company",
+          "role": "incoming"
+        },
+        {
+          "docId": "marcus-ica",
+          "docTitle": "Marcus Reed contractor agreement (AtliQ draft)",
+          "clauseRef": "8.2",
+          "quote": "For a period of twelve (12) months after termination or expiry, the Contractor shall not solicit or accept work from any client of the Company for whom he performed Services",
           "role": "incoming"
         }
       ],
       "standard": "None, or narrow geography + short duration, always checked against the register; mutual exit where possible. No non-competes on freelancers/vendors beyond non-solicit of client staff.",
-      "counterPosition": "Delete the post-termination non-compete obligation in Clause 8.1.",
+      "counterPosition": "Limit non-solicitation to AtliQ's employees only.",
       "precedents": [
         {
           "docId": "alnoor-msa",
@@ -91,11 +106,51 @@
       ]
     },
     {
+      "key": "playbook:termination",
+      "category": "playbook",
+      "topic": "termination",
+      "title": "One-sided notice periods",
+      "impact": "The notice periods are extremely imbalanced and do not meet the 15-day mutual standard for freelancer agreements.",
+      "severity": "high",
+      "confidence": "medium",
+      "needsJudgment": false,
+      "owner": "Jay (fix before sending)",
+      "resolution": "fix_before_sending",
+      "docId": "marcus-ica",
+      "citations": [
+        {
+          "docId": "marcus-ica",
+          "docTitle": "Marcus Reed contractor agreement (AtliQ draft)",
+          "clauseRef": "9.1 and 9.2",
+          "quote": "The Company may terminate this Agreement at any time by giving twenty-four (24) hours' written notice (including by email) to the Contractor.\n9.2 The Contractor may terminate this Agreement by giving sixty (60) days' written notice to the Company",
+          "role": "incoming"
+        },
+        {
+          "docId": "marcus-ica",
+          "docTitle": "Marcus Reed contractor agreement (AtliQ draft)",
+          "clauseRef": "9.4",
+          "quote": "On termination, the Company shall pay for approved hours up to the termination date in accordance with Clause 4",
+          "role": "incoming"
+        }
+      ],
+      "standard": "On any termination for convenience AtliQ is paid for all work done, including work in progress. Notice is mutual. Client contracts: reasonable notice (typically 30+ days). Freelancer / vendor agreements: a mutual short exit (about 15 days, as with Rohan Iyer) is AtliQ's standard and fair to both sides.",
+      "counterPosition": "Make the notice period mutual (e.g., 15 days).",
+      "precedents": [
+        {
+          "docId": "rohan-ica",
+          "counterparty": "Rohan Iyer",
+          "clauseRef": "§9",
+          "label": "standard",
+          "note": "Mutual 15-day exit"
+        }
+      ]
+    },
+    {
       "key": "dependency:lakeshore",
       "category": "dependency",
       "topic": "dependency",
       "title": "Depends on Lakeshore Grocers: MSA + SOW-1 + rate card, which is not signed (latest verdict HOLD)",
-      "impact": "Sending this commits AtliQ to a vendor/contractor before the client contract it serves is resolved. HOLD: 1 blocker, renegotiate pricing and liability terms before signing.",
+      "impact": "Sending this commits AtliQ to a vendor/contractor before the client contract it serves is resolved. HOLD: 1 blocker and 3 risks require contract revisions and consent verification.",
       "severity": "high",
       "confidence": "high",
       "needsJudgment": false,
@@ -131,11 +186,11 @@
       "key": "flowdown:data",
       "category": "flowdown",
       "topic": "flowdown_data",
-      "title": "Missing flow-down of client's data security and incident requirements",
-      "impact": "AtliQ could face severe liability if the contractor fails to secure client data or report a security incident within the client's strict timelines.",
+      "title": "Missing conflict notification",
+      "impact": "AtliQ may be unable to meet its 72-hour reporting obligation to Lakeshore if the contractor does not report incidents immediately.",
       "severity": "medium",
       "confidence": "medium",
-      "needsJudgment": true,
+      "needsJudgment": false,
       "owner": "Jay (fix before sending)",
       "resolution": "fix_before_sending",
       "docId": "marcus-ica",
@@ -143,20 +198,20 @@
         {
           "docId": "marcus-ica",
           "docTitle": "Marcus Reed contractor agreement (AtliQ draft)",
-          "clauseRef": "Clause 5.1 and 5.2",
-          "quote": "5.1 The Contractor shall perform the Services diligently and to a professional standard, and comply with the Company's reasonable instructions, security policies and the policies of the Company's clients notified to him.\n5.2 The Contractor shall use his own equipment unless otherwise agreed, and shall access client systems only through Company-approved environments",
+          "clauseRef": "5.1",
+          "quote": "The Contractor shall perform the Services diligently and to a professional standard, and comply with the Company's reasonable instructions, security policies and the policies of the Company's clients notified to him",
           "role": "incoming"
         },
         {
           "docId": "lakeshore-msa",
           "docTitle": "Lakeshore Grocers MSA + SOW-1 + rate card (draft)",
-          "clauseRef": "MSA Section 12.1 and 12.2",
-          "quote": "12.1 Vendor shall comply with Lakeshore's Information Security Requirements (Exhibit C) and applicable privacy laws, including the Illinois Personal Information Protection Act.\n12.2 Vendor shall notify Lakeshore within seventy-two (72) hours of discovering any unauthorized access to Lakeshore Data",
+          "clauseRef": "12.2",
+          "quote": "Vendor shall notify Lakeshore within seventy-two (72) hours of discovering any unauthorized access to Lakeshore Data",
           "role": "linked"
         }
       ],
       "standard": "DPA (EU) or BAA (US health) signed before any personal/regulated data moves, with a sub-DPA / sub-BAA for every party that touches the data (incl. AtliQ's own Pune entity); engagement-specific scope; offshore access only as the agreement allows.",
-      "counterPosition": "Add an explicit data protection schedule requiring the contractor to comply with the Illinois Personal Information Protection Act, Lakeshore's security requirements, and to report any security incident to AtliQ within 24 hours.",
+      "counterPosition": "Add a specific requirement for the contractor to notify AtliQ of any data incident within 24-48 hours.",
       "precedents": [
         {
           "docId": "carebridge-baa",
@@ -168,91 +223,11 @@
       ]
     },
     {
-      "key": "flowdown:ip",
-      "category": "flowdown",
-      "topic": "flowdown_ip",
-      "title": "Missing flow-down license for contractor pre-existing tools",
-      "impact": "AtliQ cannot legally grant the perpetual, non-exclusive license to Lakeshore for pre-existing tools used by the contractor.",
-      "severity": "medium",
-      "confidence": "medium",
-      "needsJudgment": true,
-      "owner": "Jay (fix before sending)",
-      "resolution": "fix_before_sending",
-      "docId": "marcus-ica",
-      "citations": [
-        {
-          "docId": "marcus-ica",
-          "docTitle": "Marcus Reed contractor agreement (AtliQ draft)",
-          "clauseRef": "Clause 6",
-          "quote": "6.1 All work product, code, pipelines, documentation, reports and other materials created by the Contractor in the course of the Services (\"**Work Product**\") shall vest in the Company upon creation.\n6.2 The Contractor hereby assigns to the Company all present and future right, title and interest in the Work Product, including all intellectual property rights, worldwide and for the full term of such rights, and waives any moral rights therein. The assignment shall not lapse under Section 19(4) of the Copyright Act, 1957 if the rights are not exercised within one year",
-          "role": "incoming"
-        },
-        {
-          "docId": "lakeshore-msa",
-          "docTitle": "Lakeshore Grocers MSA + SOW-1 + rate card (draft)",
-          "clauseRef": "MSA Section 7.2",
-          "quote": "7.2 Vendor retains all rights in its pre-existing tools, code libraries and methodologies (\"**Vendor Tools**\"). Vendor grants Lakeshore a perpetual, non-exclusive, royalty-free license to use any Vendor Tools incorporated in the Deliverables for Lakeshore's internal business purposes",
-          "role": "linked"
-        }
-      ],
-      "standard": "Every freelancer / vendor assigns the work product to AtliQ (from creation or at least on payment) so AtliQ can give clients what it promises; their pre-existing tools are licensed broadly enough for the client deal.",
-      "counterPosition": "Add a license clause for pre-existing materials, granting AtliQ a perpetual, worldwide, royalty-free, transferable license to use and sublicense any contractor pre-existing tools.",
-      "precedents": [
-        {
-          "docId": "rohan-ica",
-          "counterparty": "Rohan Iyer",
-          "clauseRef": "§5.2–5.3",
-          "label": "accident",
-          "note": "Rohan kept the Work Product while Acme was promised ownership (\"ok\" from phone)"
-        }
-      ]
-    },
-    {
-      "key": "flowdown:sequencing",
-      "category": "flowdown",
-      "topic": "sequencing",
-      "title": "Contractor agreement precedes execution of the main client contract",
-      "impact": "AtliQ risks being financially bound to pay the contractor without having an active, revenue-generating client contract in place.",
-      "severity": "medium",
-      "confidence": "medium",
-      "needsJudgment": true,
-      "owner": "Jay (fix before sending)",
-      "resolution": "fix_before_sending",
-      "docId": "marcus-ica",
-      "citations": [
-        {
-          "docId": "marcus-ica",
-          "docTitle": "Marcus Reed contractor agreement (AtliQ draft)",
-          "clauseRef": "Preamble",
-          "quote": "This Independent Contractor Agreement (\"**Agreement**\") is made on ____________, 2026 (the \"**Effective Date**\") between",
-          "role": "incoming"
-        },
-        {
-          "docId": "lakeshore-msa",
-          "docTitle": "Lakeshore Grocers MSA + SOW-1 + rate card (draft)",
-          "clauseRef": "MSA Preamble",
-          "quote": "This Master Services Agreement (this \"**Agreement**\") is made as of ____________, 2026 (the \"**Effective Date**\") between",
-          "role": "linked"
-        }
-      ],
-      "standard": "Apply the same standard AtliQ asks for as a supplier: capped penalties or none, 30-day pay, mutual caps, no pay-when-paid, fair termination. Pass the client's obligations down (IP, confidentiality, data protection, consent), never the client's leverage.",
-      "counterPosition": "Add a condition precedent stating that the agreement is contingent upon and shall only become effective once the Lakeshore Grocers Inc. MSA is fully executed.",
-      "precedents": [
-        {
-          "docId": "ref-negotiation-notes",
-          "counterparty": "PixelCraft Studio",
-          "clauseRef": "negotiation notes",
-          "label": "standard",
-          "note": "Deleted the 1%/day penalty, 30-day payment, liability capped for both sides (Oct 2025)"
-        }
-      ]
-    },
-    {
-      "key": "playbook:misclassification",
+      "key": "playbook:indemnity",
       "category": "playbook",
-      "topic": "misclassification",
-      "title": "Exclusivity clause risks employee misclassification",
-      "impact": "This extreme restriction risks legally reclassifying the freelancer as an employee under US labor laws.",
+      "topic": "indemnity",
+      "title": "One-way uncapped indemnity",
+      "impact": "The contractor is required to indemnify AtliQ for direct losses without any reciprocal protection for the contractor's own risks.",
       "severity": "medium",
       "confidence": "medium",
       "needsJudgment": false,
@@ -263,22 +238,114 @@
         {
           "docId": "marcus-ica",
           "docTitle": "Marcus Reed contractor agreement (AtliQ draft)",
-          "clauseRef": "Clause 3.1",
-          "quote": "During the term of this Agreement, the Contractor shall devote his professional working time exclusively to the Company and shall not, directly or indirectly, provide services to, or be engaged or employed by, any other person, firm or company, whether paid or unpaid, without the Company's prior written consent",
+          "clauseRef": "10.1",
+          "quote": "The Contractor shall indemnify the Company against losses arising from the Contractor's breach of Clauses 6 or 7 or his wilful misconduct",
           "role": "incoming"
         }
       ],
-      "standard": "Apply the same standard AtliQ asks for as a supplier: capped penalties or none, 30-day pay, mutual caps, no pay-when-paid, fair termination. Pass the client's obligations down (IP, confidentiality, data protection, consent), never the client's leverage.",
-      "counterPosition": "Delete Clause 3.1 entirely to ensure the contractor remains an independent contractor.",
+      "standard": "Mutual: each party covers its own breach and negligence; never the other side's negligence. IP-infringement indemnity for deliverables is normal.",
+      "counterPosition": "Provide mutual indemnities for third-party claims arising from a party's negligence or conflict, subject to the liability cap.",
+      "precedents": [
+        {
+          "docId": "paytrack-msa",
+          "counterparty": "PayTrack Technologies",
+          "clauseRef": "§10.2",
+          "label": "standard",
+          "note": "Origin: \"we can't insure against PayTrack's own negligence\" (Jan 2025)"
+        },
+        {
+          "docId": "acme-msa",
+          "counterparty": "Acme Retail Group",
+          "clauseRef": "§11",
+          "label": "standard",
+          "note": "Mutual indemnity"
+        }
+      ]
+    },
+    {
+      "key": "playbook:liability",
+      "category": "playbook",
+      "topic": "liability",
+      "title": "One-sided liability cap",
+      "impact": "The contractor remains exposed to unlimited liability while AtliQ's liability is strictly limited.",
+      "severity": "medium",
+      "confidence": "medium",
+      "needsJudgment": false,
+      "owner": "Jay (fix before sending)",
+      "resolution": "fix_before_sending",
+      "docId": "marcus-ica",
+      "citations": [
+        {
+          "docId": "marcus-ica",
+          "docTitle": "Marcus Reed contractor agreement (AtliQ draft)",
+          "clauseRef": "10.2",
+          "quote": "The Company's liability to the Contractor shall not exceed the fees payable for the preceding three (3) months",
+          "role": "incoming"
+        }
+      ],
+      "standard": "Each party's aggregate liability capped at 1× fees (paid or payable in the prior 12 months), mutual; carve-outs only for fraud, wilful misconduct and confidentiality (plus any carve-outs that are mandatory under the governing law, e.g. German law for intent/gross negligence and injury).",
+      "counterPosition": "Make the cap mutual and set it at 1x fees paid or payable in the 12 months preceding the claim.",
       "precedents": [
         {
           "docId": "ref-negotiation-notes",
-          "counterparty": "PixelCraft Studio",
+          "counterparty": "Kessler Mobility",
           "clauseRef": "negotiation notes",
           "label": "standard",
-          "note": "Deleted the 1%/day penalty, 30-day payment, liability capped for both sides (Oct 2025)"
+          "note": "Walked away from a €120k deal over unlimited liability (Jan 2026)"
+        },
+        {
+          "docId": "sunrise-msa",
+          "counterparty": "Sunrise Foods",
+          "clauseRef": "§13",
+          "label": "standard",
+          "note": "AtliQ-friendly master: capped liability"
+        },
+        {
+          "docId": "carebridge-baa",
+          "counterparty": "CareBridge Clinics",
+          "clauseRef": "§9",
+          "label": "standard",
+          "note": "Counsel-reviewed: BAA liability capped at 2× trailing-12-month fees"
+        },
+        {
+          "docId": "brightwater-msa",
+          "counterparty": "Brightwater Insurance",
+          "clauseRef": "§15",
+          "label": "accident",
+          "note": "LDs carved out of the 150% cap"
         }
       ]
+    },
+    {
+      "key": "playbook:other",
+      "category": "playbook",
+      "topic": "other",
+      "title": "Discretionary timesheet approval",
+      "impact": "This allows AtliQ to withhold payment for work performed without objective grounds, which AtliQ would reject if proposed by a client.",
+      "severity": "medium",
+      "confidence": "medium",
+      "needsJudgment": false,
+      "owner": "Jay (fix before sending)",
+      "resolution": "fix_before_sending",
+      "docId": "marcus-ica",
+      "citations": [
+        {
+          "docId": "marcus-ica",
+          "docTitle": "Marcus Reed contractor agreement (AtliQ draft)",
+          "clauseRef": "4.4",
+          "quote": "All fees are stated in United States Dollars but shall be paid in Indian Rupees by bank transfer, converted at an exchange rate determined by the Company at its discretion on the date of payment",
+          "role": "incoming"
+        },
+        {
+          "docId": "marcus-ica",
+          "docTitle": "Marcus Reed contractor agreement (AtliQ draft)",
+          "clauseRef": "4.2",
+          "quote": "The Company's project manager shall review and approve timesheets at his discretion",
+          "role": "incoming"
+        }
+      ],
+      "standard": "The project manager has absolute discretion to approve or reject timesheets.",
+      "counterPosition": "Approval should not be unreasonably withheld or delayed for work performed in accordance with the agreement."
     },
     {
       "key": "playbook:payment",
@@ -321,14 +388,14 @@
       ]
     },
     {
-      "key": "playbook:termination",
-      "category": "playbook",
-      "topic": "termination",
-      "title": "Highly unequal and one-sided termination notice periods",
-      "impact": "This extreme imbalance is highly unfair and strongly indicates an employment relationship rather than an independent contractor arrangement.",
-      "severity": "medium",
+      "key": "flowdown:other",
+      "category": "flowdown",
+      "topic": "flowdown_other",
+      "title": "Missing insurance limits",
+      "impact": "AtliQ may face a gap in coverage if the contractor's negligence causes a loss exceeding their personal means and they lack the client-required insurance.",
+      "severity": "low",
       "confidence": "medium",
-      "needsJudgment": false,
+      "needsJudgment": true,
       "owner": "Jay (fix before sending)",
       "resolution": "fix_before_sending",
       "docId": "marcus-ica",
@@ -336,33 +403,36 @@
         {
           "docId": "marcus-ica",
           "docTitle": "Marcus Reed contractor agreement (AtliQ draft)",
-          "clauseRef": "Clause 9.1 and 9.2",
-          "quote": "9.1 The Company may terminate this Agreement at any time by giving twenty-four (24) hours' written notice (including by email) to the Contractor.\n9.2 The Contractor may terminate this Agreement by giving sixty (60) days' written notice to the Company",
+          "clauseRef": "5.3",
+          "quote": "The Contractor is responsible for his own taxes, insurance and statutory compliance",
           "role": "incoming"
+        },
+        {
+          "docId": "lakeshore-msa",
+          "docTitle": "Lakeshore Grocers MSA + SOW-1 + rate card (draft)",
+          "clauseRef": "14.4",
+          "quote": "Vendor shall maintain commercial general liability ($1,000,000) and professional liability ($2,000,000) insurance",
+          "role": "linked"
         }
       ],
-      "standard": "On any termination for convenience AtliQ is paid for all work done, including work in progress; reasonable notice (≥30 days); mutual where possible.",
-      "counterPosition": "Amend both notice periods to be mutual, such as 30 days' written notice for convenience by either party.",
+      "standard": "Apply the same standard AtliQ asks for as a supplier: capped penalties or none, 30-day pay, mutual caps, no pay-when-paid, fair termination. Pass the client's obligations down (IP, confidentiality, data protection, consent), never the client's leverage.",
+      "counterPosition": "Require the contractor to maintain professional liability and general liability insurance at levels sufficient to cover their potential indemnity obligations.",
       "precedents": [
         {
-          "docId": "rohan-ica",
-          "counterparty": "Rohan Iyer",
-          "clauseRef": "§9",
+          "docId": "ref-negotiation-notes",
+          "counterparty": "PixelCraft Studio",
+          "clauseRef": "negotiation notes",
           "label": "standard",
-          "note": "Mutual 15-day exit"
+          "note": "Deleted the 1%/day penalty, 30-day payment, liability capped for both sides (Oct 2025)"
         }
       ]
     }
   ],
   "fine": [
     "Parties = invoicing entity: Pvt Ltd throughout",
-    "Liability capped: The Company's liability to the Contractor shall not exceed the fees payable for the preceding three (3) months.",
-    "No delay liquidated damages are included, which aligns with AtliQ's preference.",
-    "The contractor indemnifies AtliQ for their own errors and intellectual property, without requiring AtliQ to indemnify for its own negligence.",
-    "Confidentiality obligations are standard and protect AtliQ's and its clients' data.",
-    "Contractor warrants standard professional performance and compliance of the services.",
-    "No unilateral set-off rights are given to the contractor.",
-    "Subcontracting is strictly prohibited without prior written consent, meeting client expectations."
+    "IP assignment language is robust and vests work product in AtliQ upon creation, meeting the standard for a buyer.",
+    "The 5-year confidentiality survival period and standard exclusions are acceptable for a freelancer agreement.",
+    "No liquidated damages are imposed on the contractor, which is favorable for AtliQ's paper."
   ],
   "notSeen": [
     "No meeting notes attached to this deal.",
@@ -850,10 +920,10 @@
   "counselPack": null,
   "errors": [],
   "usage": {
-    "calls": 4,
-    "cachedCalls": 1,
-    "inputTokens": 11775,
-    "outputTokens": 15395,
-    "ms": 89155
+    "calls": 2,
+    "cachedCalls": 3,
+    "inputTokens": 7372,
+    "outputTokens": 7867,
+    "ms": 62469
   }
 }

@@ -1,15 +1,15 @@
 {
   "dealId": "ortiz",
   "version": 1,
-  "createdAt": "2026-10-05T08:21:56.540Z",
+  "createdAt": "2026-10-05T11:07:33.876Z",
   "trigger": "initial review",
-  "inputsHash": "847a5b8d100dad8c7a6cee90892510d7",
+  "inputsHash": "6af3476fd8cb3a79f77213398a17bd84",
   "documentIds": [
     "ortiz-ica",
     "ortiz-nda"
   ],
   "registerVersion": "reg-2026-10-04-57+r0",
-  "playbookVersion": "pb-v1-2026-10-04",
+  "playbookVersion": "pb-v1.1-2026-10-05",
   "models": [
     "gemini-flash-lite-latest",
     "gemini-3.5-flash",
@@ -19,15 +19,15 @@
   "promptVersion": "p1",
   "route": "full_review",
   "verdict": "SIGN AFTER CHANGES",
-  "headline": "SIGN AFTER CHANGES: 2 high risks including PHI restriction and unsigned parent agreement",
-  "nextAction": "Dhaval must renegotiate PHI and IP terms while Karandeep completes the parent agreement business fix.",
+  "headline": "SIGN AFTER CHANGES: 2 high-severity blockers including missing BAA flow-down and unsigned MSA",
+  "nextAction": "Dhaval must add the HIPAA flow-down and IP assignment terms before sending to Ortiz.",
   "findings": [
     {
       "key": "flowdown:data",
       "category": "flowdown",
       "topic": "flowdown_data",
-      "title": "Missing domestic PHI restriction",
-      "impact": "If the contractor accesses the client environment while traveling abroad, AtliQ would be in conflict with the Harrington BAA.",
+      "title": "Missing HIPAA/BAA flow-down",
+      "impact": "AtliQ is in conflict with Harrington BAA Article 4.3 and faces high regulatory risk by giving a subcontractor access to PHI without a back-to-back BAA.",
       "severity": "high",
       "confidence": "medium",
       "needsJudgment": false,
@@ -38,34 +38,20 @@
         {
           "docId": "ortiz-ica",
           "docTitle": "Daniel Ortiz contractor agreement (AtliQ draft)",
-          "clauseRef": "7.3",
+          "clauseRef": "Section 7.3",
           "quote": "The Parties have entered into, or will enter into, a Mutual Nondisclosure Agreement, which shall also apply",
           "role": "incoming"
         },
         {
           "docId": "harrington-baa",
           "docTitle": "Harrington Health BAA, Exhibit D (draft)",
-          "clauseRef": "4.3",
+          "clauseRef": "Article 4.3",
           "quote": "Business Associate shall ensure that each Subcontractor agrees in writing, prior to any access to PHI, to the same restrictions, conditions and requirements that apply to Business Associate under this BAA",
-          "role": "linked"
-        },
-        {
-          "docId": "ortiz-ica",
-          "docTitle": "Daniel Ortiz contractor agreement (AtliQ draft)",
-          "clauseRef": "5.2",
-          "quote": "The Company shall provide the Contractor with user accounts and access credentials to the Company's project repositories and communication tools as needed for the Services",
-          "role": "incoming"
-        },
-        {
-          "docId": "harrington-msa",
-          "docTitle": "Harrington Health MSA (draft)",
-          "clauseRef": "12.4",
-          "quote": "No PHI shall be accessed, stored or processed outside the United States without Client's prior written consent",
           "role": "linked"
         }
       ],
       "standard": "DPA (EU) or BAA (US health) signed before any personal/regulated data moves, with a sub-DPA / sub-BAA for every party that touches the data (incl. AtliQ's own Pune entity); engagement-specific scope; offshore access only as the agreement allows.",
-      "counterPosition": "Contractor shall not, and shall ensure that its personnel do not, access, store, or process any Client PHI from any location outside the United States.",
+      "counterPosition": "Execute a sub-BAA with the Contractor that mirrors the Harrington BAA, including the prohibition on offshore access (Art 4.1).",
       "precedents": [
         {
           "docId": "carebridge-baa",
@@ -81,7 +67,7 @@
       "category": "dependency",
       "topic": "dependency",
       "title": "Depends on Harrington Health: MSA + BAA, which is not signed (latest verdict HOLD)",
-      "impact": "Sending this commits AtliQ to a vendor/contractor before the client contract it serves is resolved. HOLD: Multiple missing agreements, client consents, and unconfirmed offshore patient data disclosure.",
+      "impact": "Sending this commits AtliQ to a vendor/contractor before the client contract it serves is resolved. HOLD: 4 missing documents, 7 high-risk redlines, and unconfirmed data exposure.",
       "severity": "high",
       "confidence": "high",
       "needsJudgment": false,
@@ -90,11 +76,11 @@
       "citations": []
     },
     {
-      "key": "flowdown:ip",
+      "key": "flowdown:consent",
       "category": "flowdown",
-      "topic": "flowdown_ip",
-      "title": "IP assignment timing gap",
-      "impact": "There is a legal gap where AtliQ might deliver work to Harrington that it does not yet technically own, potentially causing a non-compliance with the client's ownership warranty.",
+      "topic": "flowdown_consent",
+      "title": "Missing client consent for subcontracting",
+      "impact": "AtliQ may be in conflict with the Harrington MSA by assigning Daniel to the project without the client's formal written sign-off.",
       "severity": "medium",
       "confidence": "medium",
       "needsJudgment": false,
@@ -105,20 +91,60 @@
         {
           "docId": "ortiz-ica",
           "docTitle": "Daniel Ortiz contractor agreement (AtliQ draft)",
-          "clauseRef": "6.1",
-          "quote": "the Contractor hereby assigns to the Company all right, title and interest in it, including all intellectual property rights, effective upon payment for the Services to which it relates",
+          "clauseRef": "Section 10.2",
+          "quote": "The Contractor may not assign or subcontract this Agreement without the Company's prior written consent",
+          "role": "incoming"
+        },
+        {
+          "docId": "harrington-baa",
+          "docTitle": "Harrington Health BAA, Exhibit D (draft)",
+          "clauseRef": "Article 4.2",
+          "quote": "Business Associate shall not engage any Subcontractor in connection with the Services without Covered Entity's prior written approval of such Subcontractor",
+          "role": "linked"
+        }
+      ],
+      "standard": "Apply the same standard AtliQ asks for as a supplier: capped penalties or none, 30-day pay, mutual caps, no pay-when-paid, fair termination. Pass the client's obligations down (IP, confidentiality, data protection, consent), never the client's leverage.",
+      "counterPosition": "Make Daniel's engagement contingent on Harrington providing written consent as required by Article 2.5 of the MSA.",
+      "precedents": [
+        {
+          "docId": "ref-negotiation-notes",
+          "counterparty": "PixelCraft Studio",
+          "clauseRef": "negotiation notes",
+          "label": "standard",
+          "note": "Deleted the 1%/day penalty, 30-day payment, liability capped for both sides (Oct 2025)"
+        }
+      ]
+    },
+    {
+      "key": "flowdown:ip",
+      "category": "flowdown",
+      "topic": "flowdown_ip",
+      "title": "IP assignment timing conflict",
+      "impact": "AtliQ may be in conflict with its client contract if rights haven't vested in AtliQ due to a pending payment at the time Harrington expects ownership.",
+      "severity": "medium",
+      "confidence": "medium",
+      "needsJudgment": false,
+      "owner": "Dhaval (fix before sending)",
+      "resolution": "fix_before_sending",
+      "docId": "ortiz-ica",
+      "citations": [
+        {
+          "docId": "ortiz-ica",
+          "docTitle": "Daniel Ortiz contractor agreement (AtliQ draft)",
+          "clauseRef": "Section 6.1",
+          "quote": "To the extent any Work Product is not a work made for hire, the Contractor hereby assigns to the Company all right, title and interest in it, including all intellectual property rights, effective upon payment for the Services to which it relates",
           "role": "incoming"
         },
         {
           "docId": "harrington-msa",
           "docTitle": "Harrington Health MSA (draft)",
-          "clauseRef": "7.1",
-          "quote": "all Deliverables, whether complete or incomplete, and all Client Materials; (b) provide transition assistance as reasonably requested by Client for up to ninety (90) days at the rates in the applicable SOW; and (c) certify in writing the return or destruction of all PHI in accordance with the BAA.\n5.6 **Survival.** Articles 6, 7, 9, 10, 11, 12, 14 and 15 shall survive expiration or termination.\n\n## ARTICLE 6 — CONFIDENTIALITY\n\n6.1 \"**Confidential Information**\" means all non-public information disclosed by a Party, including business plans, financial information, patient information, trade secrets and Client Materials.\n6.2 Each Party shall (a) hold the other Party's Confidential Information in strict confidence, (b) use it only to perform or receive the Services, and (c) disclose it only to those employees and contractors with a need to know who are bound by written obligations at least as protective.\n6.3 The foregoing obligations shall not apply to information that (a) is or becomes publicly available through no fault of the receiving Party; (b) was rightfully known without restriction prior to disclosure; (c) is rightfully received from a third party without restriction; or (d) is independently developed without use of the disclosing Party's Confidential Information.\n6.4 A receiving Party may disclose Confidential Information to the extent required by law, provided it gives prompt prior notice (where legally permitted) and cooperates in seeking protective treatment.\n6.5 Contractor acknowledges that any breach of this Article may cause irreparable harm for which monetary damages would be inadequate, and that Client shall be entitled to injunctive relief without the posting of bond.\n\n## ARTICLE 7 — INTELLECTUAL PROPERTY\n\n7.1 **Work Made for Hire.** All Deliverables shall be deemed \"works made for hire\" as defined in the U.S. Copyright Act, 17 U.S.C. § 101, and shall be the sole and exclusive property of Client from creation",
+          "clauseRef": "Article 7.1",
+          "quote": "All Deliverables shall be deemed \"works made for hire\" as defined in the U.S. Copyright Act, 17 U.S.C. § 101, and shall be the sole and exclusive property of Client from creation",
           "role": "linked"
         }
       ],
       "standard": "Every freelancer / vendor assigns the work product to AtliQ (from creation or at least on payment) so AtliQ can give clients what it promises; their pre-existing tools are licensed broadly enough for the client deal.",
-      "counterPosition": "Contractor hereby assigns all right, title and interest in the Work Product to the Company immediately upon creation.",
+      "counterPosition": "Make assignment effective from creation to ensure AtliQ can meet its obligations to Harrington.",
       "precedents": [
         {
           "docId": "rohan-ica",
@@ -133,8 +159,8 @@
       "key": "flowdown:other",
       "category": "flowdown",
       "topic": "flowdown_other",
-      "title": "Missing mandatory background checks",
-      "impact": "AtliQ cannot permit the contractor to access Harrington's systems without these checks, likely delaying the project start.",
+      "title": "Missing personnel vetting requirements",
+      "impact": "AtliQ cannot fulfill its personnel-qualification promises to Harrington regarding the clinical analytics project.",
       "severity": "medium",
       "confidence": "medium",
       "needsJudgment": false,
@@ -145,20 +171,20 @@
         {
           "docId": "ortiz-ica",
           "docTitle": "Daniel Ortiz contractor agreement (AtliQ draft)",
-          "clauseRef": "1.2",
+          "clauseRef": "Section 1.2",
           "quote": "The Contractor shall perform the Services in a professional and workmanlike manner consistent with generally accepted industry standards, and shall comply with the Company's reasonable instructions regarding deliverables and timelines",
           "role": "incoming"
         },
         {
           "docId": "harrington-msa",
           "docTitle": "Harrington Health MSA (draft)",
-          "clauseRef": "2.4",
+          "clauseRef": "Article 2.4",
           "quote": "Contractor Personnel accessing Client facilities or systems shall complete Client's background check, drug screening, immunization and compliance training requirements",
           "role": "linked"
         }
       ],
       "standard": "Apply the same standard AtliQ asks for as a supplier: capped penalties or none, 30-day pay, mutual caps, no pay-when-paid, fair termination. Pass the client's obligations down (IP, confidentiality, data protection, consent), never the client's leverage.",
-      "counterPosition": "Contractor shall complete and pass all background checks, drug screenings, and compliance training required by the Client as a condition of performing the Services.",
+      "counterPosition": "Add a clause requiring the Contractor to complete and pass Harrington’s background check and compliance training prior to starting work.",
       "precedents": [
         {
           "docId": "ref-negotiation-notes",
@@ -170,11 +196,44 @@
       ]
     },
     {
-      "key": "playbook:termination",
+      "key": "flowdown:sequencing",
+      "category": "flowdown",
+      "topic": "sequencing",
+      "title": "Work starts before client signature",
+      "impact": "AtliQ will incur costs and provide platform access before securing the revenue contract or finalizing the flow-down of liabilities.",
+      "severity": "medium",
+      "confidence": "medium",
+      "needsJudgment": true,
+      "owner": "Dhaval (fix before sending)",
+      "resolution": "fix_before_sending",
+      "docId": "ortiz-ica",
+      "citations": [
+        {
+          "docId": "ortiz-ica",
+          "docTitle": "Daniel Ortiz contractor agreement (AtliQ draft)",
+          "clauseRef": "Engagement Schedule - Start Date",
+          "quote": "October 5, 2026 (or the Effective Date, if later",
+          "role": "incoming"
+        }
+      ],
+      "standard": "Apply the same standard AtliQ asks for as a supplier: capped penalties or none, 30-day pay, mutual caps, no pay-when-paid, fair termination. Pass the client's obligations down (IP, confidentiality, data protection, consent), never the client's leverage.",
+      "counterPosition": "Sync the start date with the execution of the Harrington MSA and BAA.",
+      "precedents": [
+        {
+          "docId": "ref-negotiation-notes",
+          "counterparty": "PixelCraft Studio",
+          "clauseRef": "negotiation notes",
+          "label": "standard",
+          "note": "Deleted the 1%/day penalty, 30-day payment, liability capped for both sides (Oct 2025)"
+        }
+      ]
+    },
+    {
+      "key": "playbook:indemnity",
       "category": "playbook",
-      "topic": "termination",
-      "title": "Short termination notice period",
-      "impact": "AtliQ risks losing the contractor on very short notice, potentially disrupting the Harrington project delivery.",
+      "topic": "indemnity",
+      "title": "Missing general indemnity",
+      "impact": "AtliQ has no contractual mechanism to recover from Daniel for third-party claims (e.g. data incident or negligence) other than a basic conflict claim.",
       "severity": "medium",
       "confidence": "medium",
       "needsJudgment": false,
@@ -185,20 +244,27 @@
         {
           "docId": "ortiz-ica",
           "docTitle": "Daniel Ortiz contractor agreement (AtliQ draft)",
-          "clauseRef": "2.2",
-          "quote": "Either Party may terminate this Agreement for any reason on fourteen (14) days' written notice to the other Party",
+          "clauseRef": "Section 9",
+          "quote": "9.1 The Contractor warrants that the Work Product will be original to the Contractor (except for Contractor Tools and open-source components disclosed to the Company) and will not knowingly infringe any third party's intellectual property rights.\n9.2 Each Party's aggregate liability under this Agreement shall not exceed the total fees",
           "role": "incoming"
         }
       ],
-      "standard": "On any termination for convenience AtliQ is paid for all work done, including work in progress; reasonable notice (≥30 days); mutual where possible.",
-      "counterPosition": "Either Party may terminate this Agreement for any reason on thirty (30) days' written notice to the other Party.",
+      "standard": "Mutual: each party covers its own breach and negligence; never the other side's negligence. IP-infringement indemnity for deliverables is normal.",
+      "counterPosition": "Include a mutual indemnity for third-party claims caused by a party's conflict or negligence, subject to the liability cap.",
       "precedents": [
         {
-          "docId": "rohan-ica",
-          "counterparty": "Rohan Iyer",
-          "clauseRef": "§9",
+          "docId": "paytrack-msa",
+          "counterparty": "PayTrack Technologies",
+          "clauseRef": "§10.2",
           "label": "standard",
-          "note": "Mutual 15-day exit"
+          "note": "Origin: \"we can't insure against PayTrack's own negligence\" (Jan 2025)"
+        },
+        {
+          "docId": "acme-msa",
+          "counterparty": "Acme Retail Group",
+          "clauseRef": "§11",
+          "label": "standard",
+          "note": "Mutual indemnity"
         }
       ]
     },
@@ -270,8 +336,8 @@
     "NDA remedies: Remedies are mutual, allowing each party to seek injunctive relief in addition to other remedies, with no lopsided indemnities or liability caps.",
     "NDA covenants: The agreement contains no hidden non-compete, non-solicit, or exclusivity covenants.",
     "NDA term: The term is mutual and reasonable, with a two-year disclosure period and a three-year survival period for the obligations.",
-    "30-day terms match the playbook standard.",
-    "The 1x fees cap is mutual and includes standard carve-outs for fraud and confidentiality."
+    "30-day payment terms match AtliQ's preferred standard.",
+    "The mutual 1x fees cap with appropriate carve-outs for confidentiality and fraud is standard."
   ],
   "notSeen": [
     "Register built from 17 signed documents. Contracts referenced elsewhere but never collected (e.g. ShopSwift SOW, PixelCraft vendor agreement, intercompany services agreement) can't be checked."
@@ -902,8 +968,8 @@
   "usage": {
     "calls": 2,
     "cachedCalls": 6,
-    "inputTokens": 13839,
-    "outputTokens": 3991,
-    "ms": 23300
+    "inputTokens": 13973,
+    "outputTokens": 4941,
+    "ms": 126095
   }
 }

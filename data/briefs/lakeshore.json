@@ -1,32 +1,32 @@
 {
   "dealId": "lakeshore",
   "version": 1,
-  "createdAt": "2026-10-05T07:13:47.473Z",
+  "createdAt": "2026-10-05T09:42:31.819Z",
   "trigger": "initial review",
-  "inputsHash": "52b5b38effe1bdf5e64d5ef522faecfa",
+  "inputsHash": "f32ab3e751b6bb03cce0d26c1239501b",
   "documentIds": [
     "lakeshore-msa"
   ],
-  "registerVersion": "reg-2026-10-04-57+r1",
-  "playbookVersion": "pb-v1-2026-10-04",
+  "registerVersion": "reg-2026-10-04-57+r0",
+  "playbookVersion": "pb-v1.1-2026-10-05",
   "models": [
     "gemini-flash-lite-latest",
-    "gemini-3-flash-preview",
+    "gemini-3.6-flash",
     "gemini-flash-latest",
     "gemini-3.5-flash"
   ],
   "promptVersion": "p1",
   "route": "full_review",
   "verdict": "HOLD",
-  "headline": "HOLD: 1 blocker, renegotiate pricing and liability terms before signing",
-  "nextAction": "Karandeep must renegotiate the rate card pricing and uncapped liability terms with Lakeshore Grocers.",
+  "headline": "HOLD: 1 blocker and 3 risks require contract revisions and consent verification",
+  "nextAction": "Karandeep must renegotiate the rate card to resolve the MFN pricing collision.",
   "findings": [
     {
       "key": "conflict:crestline-msa:mfn_pricing",
       "category": "conflict",
       "topic": "mfn_pricing",
       "title": "Collides with Crestline Retail Inc: Crestline Rate Card MFN Pricing",
-      "impact": "Collides with the Crestline MFN pricing promise which remains live until July 2027.",
+      "impact": "Collides with Crestline MFN pricing commitment live until July 2027 by offering lower hourly rates for identical roles.",
       "severity": "blocker",
       "confidence": "high",
       "needsJudgment": false,
@@ -37,8 +37,29 @@
         {
           "docId": "lakeshore-msa",
           "docTitle": "Lakeshore Grocers MSA + SOW-1 + rate card (draft)",
-          "clauseRef": "4.2",
+          "clauseRef": "§4.2",
           "quote": "Time-and-materials work, change orders and any additional SOWs shall be charged at the rates set out in the Rate Card, which shall remain fixed for the first twenty-four (24) months of this Agreement",
+          "role": "incoming"
+        },
+        {
+          "docId": "lakeshore-msa",
+          "docTitle": "Lakeshore Grocers MSA + SOW-1 + rate card (draft)",
+          "clauseRef": "Exhibit A",
+          "quote": "| Senior Data Engineer | $72 |",
+          "role": "incoming"
+        },
+        {
+          "docId": "lakeshore-msa",
+          "docTitle": "Lakeshore Grocers MSA + SOW-1 + rate card (draft)",
+          "clauseRef": "Exhibit A",
+          "quote": "| Data Engineer | $55 |",
+          "role": "incoming"
+        },
+        {
+          "docId": "lakeshore-msa",
+          "docTitle": "Lakeshore Grocers MSA + SOW-1 + rate card (draft)",
+          "clauseRef": "Exhibit A",
+          "quote": "| BI Developer | $50 |",
           "role": "incoming"
         },
         {
@@ -56,51 +77,18 @@
           "role": "register"
         }
       ],
-      "counterPosition": "Increase the hourly rates in Exhibit A to at least $85 for Senior Data Engineer, $62 for Data Engineer, and $58 for BI Developer to align with the Crestline MFN floor.",
+      "counterPosition": "Redline Exhibit A hourly rates to at least $85/hr for Senior Data Engineer, $62/hr for Data Engineer, and $58/hr for BI Developer, or obtain a written waiver from Crestline.",
       "registerEntryId": "crestline-msa#1",
       "registerVerified": false,
       "expiry": "2027-07-31",
       "waiver": null
     },
     {
-      "key": "playbook:data_protection",
-      "category": "playbook",
-      "topic": "data_protection",
-      "title": "Uncapped liability for confidentiality conflicts covers data incidents",
-      "impact": "AtliQ could face uncapped liability for data security incidents, which conflict with the playbook requirement to avoid uncapped liability for data incidents.",
-      "severity": "medium",
-      "confidence": "medium",
-      "needsJudgment": false,
-      "owner": "Karandeep",
-      "resolution": "redline",
-      "docId": "lakeshore-msa",
-      "citations": [
-        {
-          "docId": "lakeshore-msa",
-          "docTitle": "Lakeshore Grocers MSA + SOW-1 + rate card (draft)",
-          "clauseRef": "9.2",
-          "quote": "EACH PARTY'S AGGREGATE LIABILITY UNDER THIS AGREEMENT SHALL NOT EXCEED THE FEES PAID OR PAYABLE UNDER THE APPLICABLE SOW IN THE TWELVE (12) MONTHS PRECEDING THE CLAIM, EXCEPT FOR BREACH OF CONFIDENTIALITY, INDEMNIFICATION OBLIGATIONS, OR GROSS NEGLIGENCE OR WILLFUL MISCONDUCT",
-          "role": "incoming"
-        }
-      ],
-      "standard": "DPA (EU) or BAA (US health) signed before any personal/regulated data moves, with a sub-DPA / sub-BAA for every party that touches the data (incl. AtliQ's own Pune entity); engagement-specific scope; offshore access only as the agreement allows.",
-      "counterPosition": "Establish a separate, reasonable super-cap (such as 2x fees) for confidentiality and data-protection conflicts.",
-      "precedents": [
-        {
-          "docId": "carebridge-baa",
-          "counterparty": "CareBridge Clinics",
-          "clauseRef": "whole BAA",
-          "label": "standard",
-          "note": "Counsel-reviewed: capped liability, 5-day reporting, de-identified offshore route"
-        }
-      ]
-    },
-    {
       "key": "playbook:liability",
       "category": "playbook",
       "topic": "liability",
       "title": "Indemnification obligations are carved out of the liability cap",
-      "impact": "AtliQ faces unlimited liability for non-IP indemnities, such as third-party claims for property damage or bodily injury under Clause 10.2.",
+      "impact": "AtliQ could face unlimited liability for third-party claims under the general negligence or property damage indemnity.",
       "severity": "medium",
       "confidence": "medium",
       "needsJudgment": false,
@@ -111,13 +99,13 @@
         {
           "docId": "lakeshore-msa",
           "docTitle": "Lakeshore Grocers MSA + SOW-1 + rate card (draft)",
-          "clauseRef": "9.2",
+          "clauseRef": "Clause 9.2",
           "quote": "EACH PARTY'S AGGREGATE LIABILITY UNDER THIS AGREEMENT SHALL NOT EXCEED THE FEES PAID OR PAYABLE UNDER THE APPLICABLE SOW IN THE TWELVE (12) MONTHS PRECEDING THE CLAIM, EXCEPT FOR BREACH OF CONFIDENTIALITY, INDEMNIFICATION OBLIGATIONS, OR GROSS NEGLIGENCE OR WILLFUL MISCONDUCT",
           "role": "incoming"
         }
       ],
       "standard": "Each party's aggregate liability capped at 1× fees (paid or payable in the prior 12 months), mutual; carve-outs only for fraud, wilful misconduct and confidentiality (plus any carve-outs that are mandatory under the governing law, e.g. German law for intent/gross negligence and injury).",
-      "counterPosition": "Limit the indemnity carve-out from the liability cap solely to third-party intellectual property infringement claims.",
+      "counterPosition": "Subject all indemnification obligations (except intellectual property infringement) to the mutual 1x fees aggregate liability cap.",
       "precedents": [
         {
           "docId": "ref-negotiation-notes",
@@ -166,8 +154,8 @@
       "key": "playbook:ld",
       "category": "playbook",
       "topic": "ld",
-      "title": "Liquidated damages are not specified as the sole remedy",
-      "impact": "The client might attempt to seek actual damages in addition to liquidated damages for project delays.",
+      "title": "Liquidated damages not designated as sole remedy",
+      "impact": "The client might seek additional actual or compensatory damages for delays beyond the capped 5% liquidated damages.",
       "severity": "low",
       "confidence": "medium",
       "needsJudgment": false,
@@ -178,13 +166,13 @@
         {
           "docId": "lakeshore-msa",
           "docTitle": "Lakeshore Grocers MSA + SOW-1 + rate card (draft)",
-          "clauseRef": "11.1",
+          "clauseRef": "Clause 11.1",
           "quote": "If Vendor fails to complete a milestone by the date specified in the SOW due to causes attributable to Vendor, Lakeshore may assess liquidated damages of one-half percent (0.5%) of the affected Milestone Fee per week of delay, up to a maximum of five percent (5%) of that Milestone Fee",
           "role": "incoming"
         }
       ],
       "standard": "0.5% of the affected milestone fee per week of delay attributable to AtliQ, capped at 5% of that milestone fee; no LDs for client-caused delay; LDs are the sole remedy for delay.",
-      "counterPosition": "Specify that liquidated damages are the sole and exclusive remedy for any performance delays.",
+      "counterPosition": "Specify that the liquidated damages are AtliQ's sole and exclusive liability, and Lakeshore's sole and exclusive remedy, for any delay.",
       "precedents": [
         {
           "docId": "acme-msa",
@@ -229,12 +217,15 @@
     "Parties = invoicing entity: Inc throughout",
     "Governing law matches entity: laws of the State of Illinois (Inc → US law)",
     "Payment ≤ 45 days: 30 days",
-    "Payment terms of 30 days from invoice receipt are acceptable and align with the playbook.",
-    "Deliverables ownership transfer upon full payment and the perpetual license for background Vendor Tools match the standard.",
-    "The mutual indemnity for negligence and standard IP infringement protection for deliverables are acceptable.",
-    "The 30-day notice for convenience termination with payment for all services performed through the termination date matches the standard.",
-    "The mutual non-solicitation clause is standard and contains no non-compete restrictions.",
-    "No complex or unreasonable acceptance criteria are included, with a standard warranty re-performance period for non-conforming deliverables."
+    "Deliverable ownership vests in Lakeshore only upon payment in full, and AtliQ retains background IP (Vendor Tools) with a non-exclusive license.",
+    "Indemnification is mutual for third-party claims arising from negligence or willful misconduct, and the IP infringement indemnity is standard.",
+    "Lakeshore's convenience termination of an SOW requires 30 days' notice and payment for all services performed up to termination.",
+    "Confidentiality obligations are mutual and survive for a standard period of three years.",
+    "Non-solicitation obligation is mutual and reasonably limited to 12 months, with no non-competes.",
+    "Data security requirements and 72-hour breach notification align with standard privacy guidelines.",
+    "The acceptance process relies on standard milestone delivery without complex or unfair customer rejection criteria.",
+    "Standard warranty and disclaimer of implied warranties are used.",
+    "No set-off provisions are included, protecting AtliQ from unilateral payment withholdings."
   ],
   "notSeen": [
     "Insurance: general liability $1M required: AtliQ's general liability cover isn't recorded anywhere. Confirm with finance.",
@@ -911,10 +902,10 @@
   "counselPack": null,
   "errors": [],
   "usage": {
-    "calls": 4,
-    "cachedCalls": 2,
-    "inputTokens": 11970,
-    "outputTokens": 11474,
-    "ms": 293689
+    "calls": 2,
+    "cachedCalls": 4,
+    "inputTokens": 4967,
+    "outputTokens": 8821,
+    "ms": 651192
   }
 }

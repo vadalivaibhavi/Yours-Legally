@@ -1,0 +1,20 @@
+{
+  "deals": [
+    "ortiz",
+    "marcus",
+    "kriti",
+    "datavane"
+  ],
+  "concurrency": 4,
+  "seconds": 3909,
+  "calls": 6,
+  "cached": 17,
+  "inTok": 24062,
+  "outTok": 14207,
+  "rows": [
+    "ortiz         SIGN AFTER CHANGES  0B 2H 4M  83s  ",
+    "datavane      SIGN AFTER CHANGES  0B 3H 1M  127s  ",
+    "kriti         SIGN AFTER CHANGES  0B 7H 3M  418s  ",
+    "marcus        HOLD                0B 2H 2M  3909s  ERR Playbook check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your cu"
+  ]
+}
