@@ -112,7 +112,8 @@ Every model call (input/output tokens, task, model, deal, eval case, cache hit o
 
 | Variable | Example | Notes |
 |---|---|---|
-| `LLM_PROVIDER` | `gemini` | `gemini` · `anthropic` · `openai` · `mock` |
+| `LLM_PROVIDER` | `gemini` | `gemini` (development) · `groq` (demo) · `anthropic` · `openai` · `mock` |
+| `GROQ_API_KEY` / `GROQ_MODEL_FAST` / `GROQ_MODEL_STRONG` | — / `openai/gpt-oss-20b` / `openai/gpt-oss-120b` | used only when `LLM_PROVIDER=groq`; `LLM_API_KEY` stays the Gemini key |
 | `LLM_API_KEY` | | server-only; never in client code |
 | `LLM_MODEL_FAST` | `gemini-flash-lite-latest,gemini-3.5-flash-lite` | comma = fallback chain |
 | `LLM_MODEL_STRONG` | `gemini-flash-latest,gemini-3.5-flash,…` | comma = fallback chain |
@@ -121,6 +122,16 @@ Every model call (input/output tokens, task, model, deal, eval case, cache hit o
 | `LLM_MIN_INTERVAL_MS` | `4000` | minimum gap between model calls (free-tier pacing; `0` on a billed key) |
 | `REVIEW_CONCURRENCY` | `1` | deals reviewed at once by `npm run review` (dependants wait for their client deal); raise it on a billed key |
 | `APP_TODAY` | `2026-10-04` | fixed "today" so expiry, due-in and evals are reproducible |
+
+### Switching to Groq (demo provider)
+
+Gemini is for development only; the demo, the final eval numbers and the cost estimate come from Groq. The Groq adapter (`lib/llm.ts`, OpenAI-compatible API) is built and **off** until the review engine and screens are done on Gemini. Embeddings stay on Gemini: Groq has no embedding model, and the clause index is built once.
+
+1. In the Groq console, **set a spending limit first**, then create a paid API key.
+2. In `.env.local`: `LLM_PROVIDER=groq` and `GROQ_API_KEY=…` (models default to `openai/gpt-oss-20b` fast and `openai/gpt-oss-120b` strong). On the paid tier, also set `LLM_MIN_INTERVAL_MS=0` and `REVIEW_CONCURRENCY=3`.
+3. `npm run eval` once. Every step re-runs: the cache and the brief hashes are per provider, so no Gemini answer is reused. Expect some prompt fixes, because a different model behaves differently.
+4. Pre-warm: `npm run review -- --force`, so every committed brief is regenerated on Groq. `npm run eval` warns about any brief still made on Gemini.
+5. Record the final numbers: `npm run eval` (the report header names the provider and models) and `npm run cost -- --provider groq` (Groq list prices per model, from the per-call log).
 
 ### Deploy (GitHub → Vercel)
 

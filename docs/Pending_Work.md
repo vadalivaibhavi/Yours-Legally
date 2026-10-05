@@ -24,6 +24,16 @@ Last eval run 2026-10-05 14:34 UTC: 42 passed, 4 failed (EV-03, EV-05, EV-10, EV
 | Q4 | **Latency targets** (NDA fast lane <1 min, MSA <10 min) under normal load | Not measured cleanly: NDA runs took 15 s (normal) and 365 s (waiting out 503 retries) | free-tier overload adds minutes of back-off | time `npm run review -- --deal finserve,loopmart,gulfcrown --force` on a billed key with `LLM_MIN_INTERVAL_MS=0` (per-call timings are in `data/runs/calls-*.jsonl`) |
 | Q5 | **Seller check free-text** (EV-S6) and **upload** flows exercised live | Pass in eval; live UI runs depend on available quota at the time | each call needs quota | try in the UI when quota is available |
 
+## 2b. Switch to Groq for the demo (after the foundations are done on Gemini)
+
+Final eval results and cost numbers must come from Groq, because that is what will be demoed; the Gemini runs are for development. The adapter is built and switched off. Steps are in the README ("Switching to Groq").
+
+| # | What | Status | How |
+|---|---|---|---|
+| G1 | Set a spending limit in the Groq console, then add a paid key | Not started (user action) | Groq console → billing limits; `GROQ_API_KEY` in `.env.local` |
+| G2 | Switch `LLM_PROVIDER=groq` and run the full evals once; fix prompts where the new model behaves differently | Not started | `npm run eval` |
+| G3 | Pre-warm all briefs on Groq, demo, and record the final eval numbers and cost on Groq | Not started | `npm run review -- --force` → `npm run eval` → `npm run cost -- --provider groq` |
+
 ## 3. Tooling limits (not quota)
 
 | # | What | Why | How to clear it |

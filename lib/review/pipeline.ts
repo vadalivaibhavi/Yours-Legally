@@ -10,7 +10,7 @@ import { appToday } from "../config";
 import { company as loadCompany, notes as allNotes, playbook as loadPlaybook, requiredDocs } from "../data";
 import { allDeals, allDocuments, briefVersions, getDeal, latestBrief } from "../deals";
 import { expandRegions } from "../geo";
-import { callModel, currentUsage, hash, modelsFor, PROMPT_VERSION, withUsage } from "../llm";
+import { callModel, currentUsage, hash, modelsFor, PROMPT_VERSION, providerTag, withUsage } from "../llm";
 import { registerCoverage, registerEntries, registerVersion } from "../register";
 import { latestSellerCheck } from "../sellerChecks";
 import type { Deal, Document } from "../types";
@@ -422,7 +422,7 @@ export function nextVersion(dealId: string): number {
 /** Everything a brief depends on: prompts, register, playbook, document and note texts, and for AtliQ paper the client deal verdict. */
 function inputsHash(docTexts: string[], noteTexts: string[], playbookVersion: string, endClientVerdict: string | null): string {
   // The end-client part is appended only when present, so briefs hashed before it existed still match.
-  return hash([PROMPT_VERSION, registerVersion(), playbookVersion, ...docTexts, ...noteTexts, ...(endClientVerdict ? [`endclient:${endClientVerdict}`] : [])].join("|"));
+  return hash([PROMPT_VERSION, ...providerTag(), registerVersion(), playbookVersion, ...docTexts, ...noteTexts, ...(endClientVerdict ? [`endclient:${endClientVerdict}`] : [])].join("|"));
 }
 
 /** Current input hash for a deal (resumable runs: a complete brief with the same hash needs no re-run). */

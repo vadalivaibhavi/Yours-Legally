@@ -21,6 +21,7 @@ Next.js App Router + TypeScript + Tailwind. No auth library (role switch), no da
 
 ## Project notes (Next.js 16)
 - `proxy.ts` replaces middleware; `cookies()`, `headers()`, `params`, `searchParams` are async.
+- LLM provider: Gemini for development; Groq (`LLM_PROVIDER=groq`, off until the foundations are done) is the demo provider, so final eval and cost numbers must come from Groq. Embeddings stay on Gemini.
 - `APP_TODAY` (default 2026-10-04) fixes "today" for expiry, due-in and live/expired.
 - Scripts: `npm run ingest`, `build:register`, `check:register`, `build:index`, `search`, `build:eval`, `review`, `eval`.
 

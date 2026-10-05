@@ -6,6 +6,8 @@
  *   "couldn't complete: review manually" (CLAUDE.md rule; PRD §9.2 System failure).
  * - Results are cached by a hash of the full request in data/cache/llm, so re-runs of unchanged
  *   documents are instant and free.
+ * Providers: gemini · groq (OpenAI-compatible API) · anthropic · openai · mock. Embeddings are separate
+ * (lib/embed.ts) and stay on Gemini whatever LLM_PROVIDER says.
  * Server-only: reads API keys from the environment.
  */
 import { AsyncLocalStorage } from "node:async_hooks";
@@ -64,7 +66,7 @@ export function withRunContext<T>(ctx: RunContext, fn: () => Promise<T>): Promis
 /** One JSON line per model call (cached, succeeded or failed) in data/runs/calls-<date>.jsonl: tokens per task and model. */
 export function logCall(rec: { task: string; model: string; inputTokens: number; outputTokens: number; ms: number; cached: boolean; ok: boolean; error?: string }) {
   try {
-    const line = JSON.stringify({ at: new Date().toISOString(), ...(runContext.getStore() ?? {}), ...rec, error: rec.error?.slice(0, 200) });
+    const line = JSON.stringify({ at: new Date().toISOString(), provider: provider(), ...(runContext.getStore() ?? {}), ...rec, error: rec.error?.slice(0, 200) });
     fs.appendFileSync(path.join(writableDir("runs"), `calls-${new Date().toISOString().slice(0, 10)}.jsonl`), line + "\n");
   } catch {
     /* logging is best-effort */
@@ -126,9 +128,32 @@ export function provider(): string {
   return (process.env.LLM_PROVIDER || "mock").toLowerCase();
 }
 
+/**
+ * Cached answers belong to the provider that produced them: switching LLM_PROVIDER must re-run every
+ * step, never replay another provider's output. Gemini (the first provider) has no tag, so its
+ * existing cache and brief hashes stay valid.
+ */
+export function providerTag(): string[] {
+  const p = provider();
+  return p === "gemini" ? [] : [p];
+}
+
+/** The key for the current provider: GROQ_API_KEY for groq (so LLM_API_KEY can stay the Gemini key), else LLM_API_KEY. */
+function apiKey(): string | undefined {
+  return (provider() === "groq" ? process.env.GROQ_API_KEY : undefined) || process.env.LLM_API_KEY;
+}
+
 export function modelsFor(task: Task): string[] {
   const tier = TIER[task];
-  const raw = tier === "fast" ? process.env.LLM_MODEL_FAST : process.env.LLM_MODEL_STRONG;
+  // Groq has its own model settings, so switching provider is one line (LLM_PROVIDER=groq).
+  const raw =
+    provider() === "groq"
+      ? tier === "fast"
+        ? process.env.GROQ_MODEL_FAST || "openai/gpt-oss-20b"
+        : process.env.GROQ_MODEL_STRONG || "openai/gpt-oss-120b"
+      : tier === "fast"
+        ? process.env.LLM_MODEL_FAST
+        : process.env.LLM_MODEL_STRONG;
   const list = (raw || "").split(",").map((s) => s.trim()).filter(Boolean);
   return list.length ? list : ["mock-model"];
 }
@@ -163,7 +188,7 @@ export function drainUsage() {
 export async function callModel<S extends z.ZodType>(args: CallArgs<S>): Promise<LlmResult<z.infer<S>>> {
   const { task, system, input, schema } = args;
   const jsonSchema = toJsonSchema(schema);
-  const key = hash([PROMPT_VERSION, task, TIER[task], system, input, JSON.stringify(jsonSchema)].join("\u0000"));
+  const key = hash([PROMPT_VERSION, ...providerTag(), task, TIER[task], system, input, JSON.stringify(jsonSchema)].join("\u0000"));
 
   if (provider() === "mock") {
     if (args.mock === undefined) return fail("LLM_PROVIDER=mock and no mock value for task " + task);
@@ -281,10 +306,11 @@ async function generateOnce(model: string, thinking: "low" | "high", system: str
   // Each request is cut off at the call deadline (and never waits more than 4 min on its own).
   const ms = Math.max(1_000, Math.min(240_000, deadline - Date.now()));
   const p = provider();
-  const key = process.env.LLM_API_KEY;
-  if (!key) return { ok: false, error: "LLM_API_KEY is not set", retry: "next" };
+  const key = apiKey();
+  if (!key) return { ok: false, error: `${p === "groq" ? "GROQ_API_KEY" : "LLM_API_KEY"} is not set`, retry: "next" };
   try {
     if (p === "gemini") return await gemini(model, thinking, key, system, input, schema, ms);
+    if (p === "groq") return await groq(model, thinking, key, system, input, schema, ms);
     if (p === "anthropic") return await anthropic(model, key, system, input, schema, ms);
     if (p === "openai") return await openai(model, key, system, input, schema, ms);
     return { ok: false, error: `unknown LLM_PROVIDER ${p}` };
@@ -371,21 +397,64 @@ async function openai(model: string, key: string, system: string, input: string,
   };
 }
 
+/**
+ * Groq: OpenAI-compatible chat completions. JSON schema in best-effort mode (strict mode would need every
+ * property required and additionalProperties:false; zod validates the answer anyway). Models that don't
+ * take a schema fall back to JSON-object mode with the schema in the prompt. gpt-oss models get a
+ * reasoning effort; their reasoning tokens are billed inside completion_tokens.
+ */
+async function groq(model: string, thinking: "low" | "high", key: string, system: string, input: string, schema: object, ms: number): Promise<Once> {
+  const reasoning = /gpt-oss/.test(model) ? { reasoning_effort: thinking === "high" ? "high" : "low", include_reasoning: false } : {};
+  const send = (withSchema: boolean) =>
+    fetch("https://api.groq.com/openai/v1/chat/completions", {
+      method: "POST",
+      signal: AbortSignal.timeout(ms),
+      headers: { "content-type": "application/json", authorization: `Bearer ${key}` },
+      body: JSON.stringify({
+        model,
+        messages: [
+          { role: "system", content: withSchema ? system : system + "\n\nReturn ONLY a JSON object matching this JSON Schema, no prose:\n" + JSON.stringify(schema) },
+          { role: "user", content: input },
+        ],
+        response_format: withSchema ? { type: "json_schema", json_schema: { name: "result", strict: false, schema } } : { type: "json_object" },
+        max_completion_tokens: 32_768,
+        temperature: 0.2,
+        ...reasoning,
+      }),
+    });
+  let res = await send(true);
+  if (res.status === 400) {
+    const body = await res.clone().text();
+    // Model without schema support (or a schema it can't take): plain JSON mode. Other 400s are real errors.
+    if (/response_format|json_schema|schema/i.test(body)) res = await send(false);
+  }
+  const txt = await res.text();
+  if (!res.ok) return classifyHttpError(res.status, txt, res.headers.get("retry-after"));
+  const j = JSON.parse(txt);
+  const text = j.choices?.[0]?.message?.content ?? "";
+  if (!text) return { ok: false, error: `empty response (${j.choices?.[0]?.finish_reason ?? "no choice"})`, retry: "same" };
+  return { ok: true, text, model, usage: { inputTokens: j.usage?.prompt_tokens ?? 0, outputTokens: j.usage?.completion_tokens ?? 0 } };
+}
+
 /** Reasoning depth per task: deep where judgment matters, shallow where latency matters. */
 const THINKING: Partial<Record<Task, "low" | "high">> = { nda: "low", brief: "low" };
 export function thinkingFor(task: Task): "low" | "high" {
   return THINKING[task] ?? (TIER[task] === "fast" ? "low" : "high");
 }
 
-function classifyHttpError(status: number, body: string): GenErr & { retry?: "same" | "next"; waitMs?: number; daily?: boolean; rateLimited?: boolean } {
+function classifyHttpError(status: number, body: string, retryAfter?: string | null): GenErr & { retry?: "same" | "next"; waitMs?: number; daily?: boolean; rateLimited?: boolean } {
   const msg = `HTTP ${status}: ${body.replace(/\s+/g, " ").slice(0, 240)}`;
   if (status === 429) {
-    // Daily (or zero) quota → this model is done for today. Per-minute → wait the delay Google returns and retry.
-    if (/PerDay|limit: 0\b/i.test(body)) return { ok: false, error: msg, retry: "next", daily: true };
-    const m = body.match(/"retryDelay":\s*"([\d.]+)s"/) ?? body.match(/retry in ([\d.]+)s/i);
-    const wait = m ? Math.min(Number(m[1]) * 1000 + 1000, 180_000) : 30_000;
+    // Daily (or zero) quota → this model is done for today (Gemini: "PerDay"; Groq: "per day (TPD/RPD)").
+    if (/PerDay|limit: 0\b|per day|\((?:TPD|RPD)\)/i.test(body)) return { ok: false, error: msg, retry: "next", daily: true };
+    // Per-minute → wait the delay the provider returns and retry (Gemini retryDelay; Groq retry-after / "try again in 1m2.5s").
+    const g = body.match(/"retryDelay":\s*"([\d.]+)s"/) ?? body.match(/retry in ([\d.]+)s/i);
+    const q = body.match(/try again in (?:(\d+)m)?([\d.]+)s/i);
+    const secs = g ? Number(g[1]) : q ? Number(q[1] ?? 0) * 60 + Number(q[2]) : retryAfter ? Number(retryAfter) : NaN;
+    const wait = Number.isFinite(secs) ? Math.min(secs * 1000 + 1000, 180_000) : 30_000;
     return { ok: false, error: msg, retry: "same", waitMs: wait, rateLimited: true };
   }
+  if (status === 498) return { ok: false, error: msg, retry: "same", waitMs: 15_000 }; // Groq: capacity exceeded
   if (status >= 500) return { ok: false, error: msg, retry: "same" };
   return { ok: false, error: msg, retry: "next" };
 }

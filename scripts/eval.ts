@@ -27,7 +27,7 @@ import { readJson } from "../lib/config";
 import { baseDeals, baseDocuments } from "../lib/data";
 import { briefVersions } from "../lib/deals";
 import { proposeLink } from "../lib/linking";
-import { isQuotaExhausted, withRunContext } from "../lib/llm";
+import { isQuotaExhausted, modelsFor, provider, withRunContext } from "../lib/llm";
 import { locateQuote } from "../lib/quotes";
 import { effectiveBrief } from "../lib/review/effective";
 import { hasLegalConclusion } from "../lib/review/guardrails";
@@ -886,10 +886,18 @@ async function main() {
   };
 
   const sections = [...new Set(results.map((r) => r.section))];
+  // Which provider produced these numbers (the final numbers must come from the demo provider).
+  const briefModels = [...new Set(deals.flatMap((d) => v1(d.id)?.models ?? []))];
+  const modelLine = `LLM ${provider()} (fast: ${modelsFor("extract").join(", ")}; strong: ${modelsFor("conflict").join(", ")}) · committed briefs made by ${briefModels.join(", ") || "none"}`;
+  const onOtherProvider = (m: string) => (provider() === "gemini" ? !/^gemini/.test(m) : /^gemini/.test(m));
+  const mixed = deals.filter((d) => v1(d.id)?.models.some(onOtherProvider)).map((d) => d.id);
+  console.log(`\n${modelLine}${mixed.length ? `\n! briefs made on another provider: ${mixed.join(", ")}` : ""}`);
   const md = [
     `# Eval results`,
     ``,
     `Run ${new Date().toISOString().slice(0, 16).replace("T", " ")} UTC · APP_TODAY ${process.env.APP_TODAY ?? "2026-10-04"} · cases from \`docs/Eval_Set.md\` via \`eval/cases.json\`.`,
+    ``,
+    `Models: ${modelLine}.${mixed.length ? ` **Warning: ${mixed.join(", ")} were reviewed on another provider; regenerate them before quoting these numbers.**` : ""}`,
     ``,
     `**${passCount} passed · ${failCount} failed · ${quotaCount} not run (quota) · ${skipCount} skipped** (of ${results.length} cases)${prev ? ` · last partial run: ${[...args.cases, ...dealFilter].join(", ")}` : ""}`,
     ...(quotaCount
@@ -926,7 +934,7 @@ async function main() {
   fs.writeFileSync(
     "eval/results.json",
     JSON.stringify(
-      { at: new Date().toISOString(), results, crossCutting },
+      { at: new Date().toISOString(), provider: provider(), models: modelLine, results, crossCutting },
       null,
       2,
     ) + "\n",
