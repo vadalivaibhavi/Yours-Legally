@@ -26,7 +26,7 @@ export function keyClauses(doc: Document): { clauseType: ClauseType; clauseRef: 
   return out;
 }
 
-const Differs = z.object({ lines: z.array(z.object({ panel: z.number(), hit: z.number(), differs: z.string().describe("≤20 words, concrete: rates, caps, carve-outs, who is protected") })) });
+const Differs = z.object({ lines: z.array(z.object({ panel: z.number(), hit: z.number(), differs: z.string().describe("one line, max 25 words: direction for AtliQ vs the past client, then the difference that matters") })) });
 
 export async function similarPanels(doc: Document): Promise<{ panels: SimilarPanel[]; error?: string }> {
   const clauses = keyClauses(doc);
@@ -57,19 +57,37 @@ export async function similarPanels(doc: Document): Promise<{ panels: SimilarPan
     })),
   }));
 
+  const mirror = doc.paper === "atliq" && doc.sideOfTable === "buyer";
   const pairs = panels.flatMap((p, pi) => p.hits.map((h, hi) => ({ pi, hi, p, h })));
   if (pairs.length) {
     const input = pairs
-      .map(({ pi, hi, p, h }) => `panel ${pi} hit ${hi}\nNEW (${doc.title} ${p.clauseRef}): ${p.quote.slice(0, 600)}\nSIGNED (${h.counterparty} §${h.clauseNo}, ${h.label}): ${h.text.slice(0, 600)}`)
+      .map(({ pi, hi, p, h }) => `panel ${pi} hit ${hi}\nTHIS CONTRACT (${doc.counterparty}, ${p.clauseRef}): ${p.quote.slice(0, 600)}\nPAST CLAUSE AtliQ SIGNED with ${h.counterparty} (§${h.clauseNo}, tagged ${h.label}): ${h.text.slice(0, 600)}`)
       .join("\n\n---\n\n");
     const r = await callModel({
       task: "differs",
-      system:
-        "For each pair, write one line saying how the NEW clause differs from the SIGNED one (e.g. 'same 5% cap, but no client-delay exclusion'). Concrete numbers, factual, ≤20 words. Never say breach/enforceable.",
+      system: [
+        "You help AtliQ's CEO decide quickly whether to accept a clause, by comparing it with one AtliQ signed before.",
+        mirror
+          ? "THIS CONTRACT is AtliQ's OWN paper for a vendor or freelancer: AtliQ is the BUYER and pays. AtliQ applies its own standard both ways (mirror test), so judge whether the clause is harsher or fairer TO THE VENDOR."
+          : `In THIS CONTRACT AtliQ is the ${doc.sideOfTable === "supplier" ? "SUPPLIER: it delivers the work and gets paid" : doc.sideOfTable === "partner" ? "PARTNER" : "other party to a mutual NDA"}. Judge whether the clause is better or worse FOR ATLIQ.`,
+        "For each pair write ONE line (max 25 words) in plain business English:",
+        mirror
+          ? '- Start with "Harsher on the vendor than {client}:", "Fairer to the vendor than {client}:" or "Same as {client}:", using the past client\'s name.'
+          : '- Start with "Worse for AtliQ than {client}:", "Better for AtliQ than {client}:" or "Same as {client}:", using the past client\'s name.',
+        "- Then the one difference in the clause's substance that matters (rates, caps, days, scope, who is protected, what AtliQ may do), with the numbers.",
+        "- Reason about direction carefully: fewer payment days is better for whoever is paid; a lower or capped penalty is better for whoever pays it; a narrower restriction is better for whoever is restricted.",
+        "- Compare only what the two clauses say. Ignore contract values, fees, party names and anything outside the clauses.",
+        'Never write "NEW", "SIGNED", "clause A/B" or legal citations. Never say breach or enforceable.',
+        'Example (AtliQ as supplier): "Worse for AtliQ than Acme: 1% of the whole contract value per week, against 0.5% of the late milestone, and no exclusion for client delays."',
+      ].join("\n"),
       input,
       schema: Differs,
     });
-    if (r.ok) for (const l of r.data.lines) if (panels[l.panel]?.hits[l.hit]) panels[l.panel].hits[l.hit].differs = sanitize(l.differs);
+    if (!r.ok) return { panels, error: `Similar past clauses for ${doc.title}: comparison lines couldn't be written (${r.error.slice(0, 80)}); the matching clauses are still shown` };
+    for (const l of r.data.lines) {
+      const hit = panels[l.panel]?.hits[l.hit];
+      if (hit) hit.differs = sanitize(l.differs);
+    }
   }
   return { panels };
 }

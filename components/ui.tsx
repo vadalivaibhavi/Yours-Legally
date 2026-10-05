@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { dueLabel } from "@/lib/format";
+import { ClampedText } from "@/components/Fields";
 
 export type Verdict = "SIGN" | "SIGN AFTER CHANGES" | "SEND BACK" | "HOLD";
 
@@ -67,7 +68,7 @@ export function Quote({ children, cite }: { children: ReactNode; cite?: string }
   return (
     <figure className="space-y-1">
       {cite && <figcaption className="text-xs font-semibold text-muted">{cite}</figcaption>}
-      <blockquote className="quote text-sm">{typeof children === "string" ? clean(children) : children}</blockquote>
+      <blockquote className="quote text-sm">{typeof children === "string" ? <ClampedText text={clean(children)} /> : children}</blockquote>
     </figure>
   );
 }

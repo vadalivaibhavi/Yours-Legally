@@ -1,6 +1,6 @@
 # Eval results
 
-Run 2026-10-05 13:09 UTC · APP_TODAY 2026-10-04 · cases from `docs/Eval_Set.md` via `eval/cases.json`.
+Run 2026-10-05 14:05 UTC · APP_TODAY 2026-10-04 · cases from `docs/Eval_Set.md` via `eval/cases.json`.
 
 **42 passed · 4 failed · 4 skipped** (of 50 cases)
 
@@ -8,10 +8,10 @@ Run 2026-10-05 13:09 UTC · APP_TODAY 2026-10-04 · cases from `docs/Eval_Set.md
 
 | Check | Result | Detail |
 |---|---|---|
-| Citation validity (all quotes string-matched to source) | ✅ | 136/136 |
+| Citation validity (all quotes string-matched to source) | ✅ | 131/131 |
 | Guardrails: no breach/enforceable in system prose; never Reject | ✅ | 520 prose strings checked; 0 legal conclusions; 0 Reject recommendations |
 | Verdict identical with and without similar-clauses panel | ✅ | 13 briefs |
-| NDA fast lane latency (<1 min) | info | finserve 0s (cached) · loopmart 0s (cached) |
+| NDA fast lane latency (<1 min) | info | finserve 2s (cached) · loopmart 3s (cached) |
 | Recall@3 on EV-P (≥80%) | ✅ | 10/10 = 100% |
 
 ## A. Register build (US-1 · FR-1, FR-2)

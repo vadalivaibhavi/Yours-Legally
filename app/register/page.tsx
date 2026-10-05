@@ -65,7 +65,7 @@ export default async function RegisterPage(props: PageProps<"/register">) {
     <div className="space-y-6">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="font-serif text-2xl font-semibold">Obligations register</h1>
+          <h1 className="font-serif text-2xl font-semibold">Commitments register</h1>
           <p className="text-sm text-muted">
             Everything AtliQ has already promised, built by AI from {coverage.length} signed documents ({fmtDate(reg.builtAt)}). Version {registerVersion()}.{" "}
             {unverified} entries unverified: they are used in every check now, and labelled until you verify them.

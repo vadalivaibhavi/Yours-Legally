@@ -283,7 +283,7 @@ async function openai(model: string, key: string, system: string, input: string,
 }
 
 /** Reasoning depth per task: deep where judgment matters, shallow where latency matters. */
-const THINKING: Partial<Record<Task, "low" | "high">> = { nda: "low", differs: "low", brief: "low" };
+const THINKING: Partial<Record<Task, "low" | "high">> = { nda: "low", brief: "low" };
 export function thinkingFor(task: Task): "low" | "high" {
   return THINKING[task] ?? (TIER[task] === "fast" ? "low" : "high");
 }

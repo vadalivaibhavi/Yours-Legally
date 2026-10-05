@@ -62,7 +62,7 @@ export type State = {
   briefs: Record<string, Brief[]>;
   reactions: Record<string, Record<string, Reaction>>;
   confirmations: Record<string, Record<string, { status: "confirmed" | "not_true" | "edited"; edit?: string; at: string }>>;
-  alerts: Record<string, { status: "open" | "resolved"; how?: "evidence" | "note"; note?: string; evidence?: string; at: string }>;
+  alerts: Record<string, { status: "open" | "resolved"; how?: "evidence" | "note"; note?: string; evidence?: string; evidenceFile?: { name: string; stored: string; bytes: number }; at: string }>;
   blockerNotes: Record<string, Record<string, { note: string; at: string }>>;
   missed: Record<string, { clauseRef: string; note: string; at: string; version: number }[]>;
   followUps: Record<string, { version: number; answer: string; reason?: string; at: string }[]>;

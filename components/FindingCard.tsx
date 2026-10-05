@@ -2,6 +2,7 @@ import Link from "next/link";
 import { noteOnBlocker, reactToFinding, undoReaction } from "@/app/deal/actions";
 import { Chip, clean, IntentBadge, Quote, SeverityBadge } from "@/components/ui";
 import { Popover, TextArea, TextInput } from "@/components/Fields";
+import { PrecedentList, PrecedentRow } from "@/components/PrecedentRow";
 import { LIMITS } from "@/lib/limits";
 import { fmtDate } from "@/lib/format";
 import type { Finding, SimilarPanel } from "@/lib/review/types";
@@ -73,8 +74,8 @@ export function FindingCard({
           {incoming.length > 0 && (
             <div className="space-y-2">
               <div className="label">This contract</div>
-              {incoming.map((c) => (
-                <Quote key={c.clauseRef + c.quote.slice(0, 20)} cite={c.clauseRef}>
+              {incoming.map((c, i) => (
+                <Quote key={i} cite={c.clauseRef}>
                   {c.quote}
                 </Quote>
               ))}
@@ -83,8 +84,8 @@ export function FindingCard({
           {other.length > 0 && (
             <div className="space-y-2">
               <div className="label">{f.category === "conflict" ? "What AtliQ already promised" : f.category === "flowdown" ? "Linked client contract" : "Source"}</div>
-              {other.map((c) => (
-                <Quote key={c.docId + c.clauseRef + c.quote.slice(0, 20)} cite={`${c.docTitle} ${c.clauseRef}`}>
+              {other.map((c, i) => (
+                <Quote key={i} cite={`${c.docTitle} ${c.clauseRef}`}>
                   {c.quote}
                 </Quote>
               ))}
@@ -96,8 +97,8 @@ export function FindingCard({
         <details>
           <summary className="text-sm text-brand">Clause {incoming[0].clauseRef}</summary>
           <div className="mt-2 space-y-2">
-            {f.citations.map((c) => (
-              <Quote key={c.docId + c.clauseRef + c.quote.slice(0, 20)} cite={`${c.role === "incoming" ? "" : c.docTitle + " "}${c.clauseRef}`}>
+            {f.citations.map((c, i) => (
+                <Quote key={i} cite={`${c.role === "incoming" ? "" : c.docTitle + " "}${c.clauseRef}`}>
                 {c.quote}
               </Quote>
             ))}
@@ -106,7 +107,7 @@ export function FindingCard({
       )}
 
       {(f.counterPosition || f.precedents?.length) && (
-        <div className="grid gap-3 text-sm md:grid-cols-2">
+        <div className="space-y-3 text-sm">
           {f.counterPosition && (
             <div>
               <div className="label mb-1">Ask for</div>
@@ -116,16 +117,13 @@ export function FindingCard({
           {f.precedents && f.precedents.length > 0 && (
             <div>
               <div className="label mb-1">Your precedent</div>
-              <ul className="space-y-1">
+              <PrecedentList>
                 {f.precedents.map((p) => (
-                  <li key={p.docId + p.clauseRef} className="flex flex-wrap items-center gap-1.5">
-                    <IntentBadge label={p.label} />
-                    <span>
-                      <b>{p.counterparty}</b> {p.clauseRef}: {p.note}
-                    </span>
-                  </li>
+                  <PrecedentRow key={p.docId + p.clauseRef} label={p.label} client={p.counterparty} clauseRef={p.clauseRef}>
+                    <p className="text-muted">{p.note}</p>
+                  </PrecedentRow>
                 ))}
-              </ul>
+              </PrecedentList>
             </div>
           )}
         </div>
@@ -224,26 +222,19 @@ export function SimilarDetails({ panel, open = false }: { panel: SimilarPanel; o
       {panel.hits.length === 0 ? (
         <p className="mt-2 text-sm text-muted">No similar clause signed before.</p>
       ) : (
-        <ul className="mt-2 space-y-3">
+        <PrecedentList>
           {panel.hits.map((h) => (
-            <li key={h.docId + h.clauseNo} className="space-y-1 text-sm">
-              <div className="flex flex-wrap items-center gap-2">
-                <IntentBadge label={h.label} />
-                <b>{h.counterparty}</b>
-                <span className="text-muted">
-                  §{h.clauseNo} · {fmtDate(h.date)} · similarity {h.score.toFixed(2)}
-                </span>
-              </div>
-              {h.differs && <p>How it differs: {h.differs}</p>}
-              {h.labelNote && <p className="text-xs text-muted">{h.labelNote}</p>}
+            <PrecedentRow key={h.docId + h.clauseNo} label={h.label} client={h.counterparty} clauseRef={`§${h.clauseNo}`} date={h.date}>
+              {h.differs && <p>{h.differs}</p>}
+              {h.labelNote && <p className="text-muted">{h.labelNote}</p>}
               {h.alsoIn.length > 0 && <p className="text-xs text-muted">Same position also in: {h.alsoIn.join(", ")}</p>}
               <details>
-                <summary className="text-xs text-muted">Show clause</summary>
+                <summary className="text-xs text-muted">Show the signed clause</summary>
                 <blockquote className="quote mt-1 text-xs">{clean(h.text)}</blockquote>
               </details>
-            </li>
+            </PrecedentRow>
           ))}
-        </ul>
+        </PrecedentList>
       )}
     </details>
   );

@@ -14,7 +14,10 @@ import { currentUser } from "@/lib/session";
 import { runSellerCheck } from "@/lib/seller";
 import { latestSellerCheck } from "@/lib/sellerChecks";
 import { mutate, type SellerInput } from "@/lib/store";
-import { field, LIMITS } from "@/lib/limits";
+import fs from "node:fs";
+import path from "node:path";
+import { writableDir } from "@/lib/config";
+import { EVIDENCE_TYPES, field, LIMITS } from "@/lib/limits";
 
 async function requireKarandeep() {
   const u = await currentUser();
@@ -115,14 +118,29 @@ export async function closeAlert(form: FormData) {
   const u = await requireKarandeep();
   const dealId = str(form, "dealId");
   const how = str(form, "how") as "evidence" | "note" | "open";
-  const note = field(form, "note", LIMITS.note, "Note");
-  if (how !== "open" && !note) throw new Error("Add the evidence reference or your note.");
+  const note = field(form, "note", how === "evidence" ? LIMITS.evidence : LIMITS.note, how === "evidence" ? "Evidence reference" : "Note");
+  // Evidence can be a reference, an attached file, or both (FR-21 "Resolved: attach evidence").
+  const file = form.get("file");
+  let evidenceFile: { name: string; stored: string; bytes: number } | undefined;
+  if (how === "evidence" && file instanceof File && file.size > 0) {
+    const ext = path.extname(file.name).toLowerCase();
+    if (!EVIDENCE_TYPES.includes(ext)) throw new Error(`Evidence files can be ${EVIDENCE_TYPES.join(", ")}.`);
+    if (file.size > LIMITS.evidenceBytes) throw new Error(`That file is ${Math.round(file.size / 1024)} KB; the limit is ${LIMITS.evidenceBytes / 1_000_000} MB.`);
+    const name = file.name.replace(/[^\w.\- ]+/g, "_").slice(0, LIMITS.name);
+    const stored = `${dealId}-${Date.now()}${ext}`;
+    fs.writeFileSync(path.join(writableDir("evidence"), stored), Buffer.from(await file.arrayBuffer()));
+    evidenceFile = { name, stored, bytes: file.size };
+  }
+  if (how !== "open" && !note && !evidenceFile) throw new Error("Add the evidence (a reference or a file) or your note.");
   mutate(
     (s) => {
       // FR-21: attested notes may close compliance events; they never clear contractual blockers.
-      s.alerts[dealId] = how === "open" ? { status: "open", at: now() } : { status: "resolved", how, note: how === "note" ? note : undefined, evidence: how === "evidence" ? note : undefined, at: now() };
+      s.alerts[dealId] =
+        how === "open"
+          ? { status: "open", at: now() }
+          : { status: "resolved", how, note: how === "note" ? note : undefined, evidence: how === "evidence" ? note || undefined : undefined, evidenceFile, at: now() };
     },
-    { user: u.name, dealId, action: `alert.${how}`, detail: { note } },
+    { user: u.name, dealId, action: `alert.${how}`, detail: { note, file: evidenceFile?.name } },
   );
   revalidatePath(`/deal/${dealId}`, "layout");
 }
@@ -170,7 +188,7 @@ export async function recheckDeal(form: FormData) {
     { user: u.name, dealId, action: "brief.recheck", detail: { version } },
   );
   revalidatePath("/", "layout");
-  redirect(u.role === "karandeep" ? `/deal/${dealId}/brief/${version}` : `/deal/${dealId}`);
+  redirect(u.role === "karandeep" ? `/deal/${dealId}?v=${version}&open=1#brief` : `/deal/${dealId}`);
 }
 
 // ---------------------------------------------------------------- register (FR-2)

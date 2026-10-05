@@ -54,19 +54,18 @@ export function locateQuote(source: string, quote: string): string | null {
   if (!parts.length) return null;
   const src = normCached(source);
   let from = 0;
-  let start = -1;
-  let end = -1;
+  const spans: string[] = [];
   for (const part of parts) {
     const q = normalise(part).text.replace(/^[\s"'(]+|[\s"'.,;:)]+$/g, "");
     if (q.length < 4) continue;
     const at = src.text.indexOf(q, from);
     if (at < 0) return null;
-    if (start < 0) start = at;
-    end = at + q.length - 1;
+    spans.push(source.slice(src.map[at], src.map[at + q.length - 1] + 1));
     from = at + q.length;
   }
-  if (start < 0) return null;
-  return source.slice(src.map[start], src.map[end] + 1);
+  if (!spans.length) return null;
+  // Elided quotes return only the matched fragments (each exact), never everything in between.
+  return spans.join(" … ");
 }
 
 export function quoteMatches(source: string, quote: string): boolean {

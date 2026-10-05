@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-05T13:09:42.054Z",
+  "at": "2026-10-05T14:05:26.756Z",
   "results": [
     {
       "id": "EV-R1",
@@ -356,7 +356,7 @@
     {
       "name": "Citation validity (all quotes string-matched to source)",
       "pass": true,
-      "detail": "136/136"
+      "detail": "131/131"
     },
     {
       "name": "Guardrails: no breach/enforceable in system prose; never Reject",
@@ -371,7 +371,7 @@
     {
       "name": "NDA fast lane latency (<1 min)",
       "pass": null,
-      "detail": "finserve 0s (cached) · loopmart 0s (cached)"
+      "detail": "finserve 2s (cached) · loopmart 3s (cached)"
     },
     {
       "name": "Recall@3 on EV-P (≥80%)",

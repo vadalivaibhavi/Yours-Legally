@@ -1,0 +1,38 @@
+{
+  "deals": [
+    "harrington",
+    "ortiz",
+    "lakeshore",
+    "marcus",
+    "blueorchid",
+    "gulfcrown",
+    "travelhub",
+    "rheinwerk",
+    "kriti",
+    "sunrise-sow2",
+    "datavane",
+    "finserve",
+    "loopmart"
+  ],
+  "concurrency": 3,
+  "seconds": 217,
+  "calls": 2,
+  "cached": 64,
+  "inTok": 12656,
+  "outTok": 14612,
+  "rows": [
+    "blueorchid    SIGN AFTER CHANGES  0B 1H 1M  104s  ",
+    "lakeshore     HOLD                1B 0H 1M  156s  ",
+    "harrington    HOLD                0B 11H 3M  164s  ",
+    "gulfcrown     HOLD                1B 3H 2M  71s  ",
+    "travelhub     HOLD                1B 2H 3M  23s  ",
+    "datavane      SIGN AFTER CHANGES  0B 3H 1M  3s  ",
+    "finserve      HOLD                1B 4H 2M  2s  ",
+    "loopmart      SIGN                0B 0H 0M  3s  ",
+    "ortiz         SIGN AFTER CHANGES  0B 2H 5M  3s  ",
+    "marcus        SIGN AFTER CHANGES  0B 4H 6M  3s  ",
+    "rheinwerk     HOLD                1B 2H 2M  40s  ",
+    "kriti         SIGN AFTER CHANGES  0B 7H 3M  3s  ",
+    "sunrise-sow2  SIGN                0B 0H 0M  42s  "
+  ]
+}

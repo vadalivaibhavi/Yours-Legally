@@ -48,7 +48,13 @@ export function effectiveBrief(brief: Brief, prev: Brief | null): EffectiveBrief
       complianceAlert = {
         ...cand,
         status: closure?.status === "resolved" ? "resolved" : "open",
-        resolution: closure?.status === "resolved" ? (closure.how === "note" ? `Resolved by Karandeep's note, ${fmt(closure.at)}: ${closure.note}` : `Resolved with evidence (${closure.evidence}), ${fmt(closure.at)}`) : undefined,
+        resolution:
+          closure?.status === "resolved"
+            ? closure.how === "note"
+              ? `Resolved by Karandeep's note, ${fmt(closure.at)}: ${closure.note}`
+              : `Resolved with evidence (${[closure.evidenceFile?.name, closure.evidence].filter(Boolean).join(": ")}), ${fmt(closure.at)}`
+            : undefined,
+        evidenceFile: closure?.status === "resolved" ? closure.evidenceFile : undefined,
       };
     } else if (!allDenied) {
       waitingFor.push({ item: `Confirm from deal notes: ${cand.title}`, owner: "Karandeep" });

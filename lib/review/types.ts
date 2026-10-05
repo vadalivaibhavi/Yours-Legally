@@ -145,7 +145,7 @@ export type Brief = {
 
 /** Brief + Karandeep's inputs (confirmations, alert closure, reactions) → what the screen shows. */
 export type EffectiveBrief = Brief & {
-  complianceAlert: (ComplianceAlert & { status: "open" | "resolved"; resolution?: string }) | null;
+  complianceAlert: (ComplianceAlert & { status: "open" | "resolved"; resolution?: string; evidenceFile?: { name: string; stored: string; bytes: number } }) | null;
   changes: { new: string[]; stillOpen: string[]; resolved: Finding[] } | null;
   waitingFor: { item: string; owner: string }[];
 };

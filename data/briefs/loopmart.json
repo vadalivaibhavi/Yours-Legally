@@ -1,7 +1,7 @@
 {
   "dealId": "loopmart",
   "version": 1,
-  "createdAt": "2026-10-05T09:11:36.187Z",
+  "createdAt": "2026-10-05T14:03:29.975Z",
   "trigger": "initial review",
   "inputsHash": "a66bc0be4f5194838195790376a35569",
   "documentIds": [
@@ -207,7 +207,7 @@
           "labelNote": "Genuinely mutual NDA",
           "score": 0.928,
           "text": "1.1 The Parties wish to evaluate a potential engagement under which AtliQ would design and implement an enterprise clinical and operational analytics platform for Harrington (the \"**Purpose**\"), and each Party expects to disclose Confidential Information to the other in connection with the Purpose.",
-          "differs": "New defines Purpose as retail analytics for LoopMart; Signed specifies enterprise clinical analytics for Harrington.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -220,7 +220,7 @@
           "labelNote": "One-way NDA signed within the hour; contradicts \"we only sign mutual\"",
           "score": 0.882,
           "text": "1.1 Meridian intends to disclose certain information to the Recipient for the purpose of evaluating a potential engagement relating to clinical operations analytics and hospital performance dashboards (the \"**Purpose**\"), including a walkthrough of Meridian's data environment.",
-          "differs": "New is mutual for LoopMart retail analytics; Signed is one-way disclosure by Meridian for hospital analytics.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -233,7 +233,7 @@
           "labelNote": "Genuinely mutual NDA: the template for what mutual looks like",
           "score": 0.85,
           "text": "1.1 \"**Confidential Information**\" means any information disclosed by one Party (the \"**Disclosing Party**\") to the other Party (the \"**Receiving Party**\") in connection with the Purpose, whether before or after the date of this Agreement, in any form, that is marked or identified as confidential or that a reasonable person would understand to be confidential, including guest and occupancy data, pricing, commercial proposals, solution architecture, source code, methodologies and business plans.",
-          "differs": "New defines Purpose for LoopMart engagement; Signed defines 'Confidential Information' with specific examples and marking requirements.",
+          "differs": "",
           "alsoIn": []
         }
       ]
@@ -253,7 +253,7 @@
           "label": "untagged",
           "score": 0.949,
           "text": "4.1 Where Confidential Information includes personal data of guests or employees, the Receiving Party shall process it only as necessary for the Purpose and in accordance with applicable data protection law, including the UAE Federal Decree-Law No. 45 of 2021 and the Indian Digital Personal Data Protection Act, 2023, as applicable.",
-          "differs": "New references only DPDPA 2023; Signed also covers guest/employee data and UAE Federal Decree-Law No. 45.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -265,7 +265,7 @@
           "label": "untagged",
           "score": 0.915,
           "text": "13.1 The Service Provider shall process personal data received from the Client only for the purpose of the Services and in compliance with the Digital Personal Data Protection Act, 2023 and the rules made thereunder, as and when in force, and shall implement reasonable security practices.",
-          "differs": "New applies to Receiving Party; Signed applies to Service Provider and explicitly mandates reasonable security practices.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -277,7 +277,7 @@
           "label": "untagged",
           "score": 0.899,
           "text": "14.1 AtliQ shall comply with the Information Technology Act, 2000, the rules thereunder, and the Digital Personal Data Protection Act, 2023 to the extent applicable, in relation to any personal data of distributors or employees processed in performing the Services.",
-          "differs": "New cites DPDPA 2023 generally; Signed specifically cites IT Act 2000 and applies to distributor/employee data.",
+          "differs": "",
           "alsoIn": []
         }
       ]
@@ -297,7 +297,7 @@
           "label": "untagged",
           "score": 0.854,
           "text": "8.1 Each Party retains all rights in its own intellectual property. CloudSpan owns the CloudSpan Platform and all improvements to it.\n\n8.2 Partner retains all rights in its own methodologies, accelerators, tools, templates and know-how, whether developed before or during the Term, including those used in delivering Implementation Services.\n\n8.3 Any feedback provided by Partner concerning the CloudSpan Platform may be used by CloudSpan without restriction, provided Partner's Confidential Information is not disclosed.",
-          "differs": "New covers CI ownership and third-party freedom; Signed governs platform/methodology IP rights and feedback licensing.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -310,7 +310,7 @@
           "labelNote": "Rohan kept the Work Product IP (\"ok\" from phone) while Acme was promised ownership",
           "score": 0.829,
           "text": "5.1 In this Clause, \"**Work Product**\" means all dashboards, reports, data models, DAX measures, Power Query scripts, visual templates, documentation and other materials created by the Contractor in performing the Services.\n\n5.2 The Contractor retains ownership of all intellectual property rights in the Work Product and in any pre-existing materials, components and templates of the Contractor.\n\n5.3 The Contractor grants AtliQ a non-exclusive, perpetual, irrevocable, royalty-free, worldwide licence to use, copy, modify and deploy the Work Product for the purposes of AtliQ's business, including for delivery to AtliQ's clients.\n\n5.4 The Contractor shall not incorporate into the Work Product any third-party material that AtliQ is not entitled to use under Clause 5.3.",
-          "differs": "New reserves CI ownership without licensing; Signed assigns Work Product IP to Contractor with a license to AtliQ.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -322,7 +322,7 @@
           "label": "untagged",
           "score": 0.829,
           "text": "8.1 Upon payment, Crestline shall own all right, title and interest in the Deliverables.\n\n8.2 Supplier retains all rights in its pre-existing materials, tools and know-how (\"**Supplier Materials**\"). To the extent Supplier Materials are incorporated in a Deliverable, Supplier grants Crestline a non-exclusive, perpetual, royalty-free license to use them as part of such Deliverable.",
-          "differs": "New limits CI use without licensing; Signed transfers Deliverable ownership to Crestline with a license for Supplier Materials.",
+          "differs": "",
           "alsoIn": []
         }
       ]
@@ -332,9 +332,9 @@
   "errors": [],
   "usage": {
     "calls": 0,
-    "cachedCalls": 5,
+    "cachedCalls": 4,
     "inputTokens": 0,
     "outputTokens": 0,
-    "ms": 74
+    "ms": 2659
   }
 }

@@ -1,7 +1,7 @@
 {
   "dealId": "datavane",
   "version": 1,
-  "createdAt": "2026-10-05T11:07:22.627Z",
+  "createdAt": "2026-10-05T14:03:24.861Z",
   "trigger": "initial review",
   "inputsHash": "f7d3dd7a1af6965e38d88b9b600b5a8d",
   "documentIds": [
@@ -430,7 +430,7 @@
           "label": "untagged",
           "score": 0.88,
           "text": "4.1 Partner may submit Referral Registrations for prospective customers. CloudSpan shall accept or reject each Referral Registration within ten (10) business days. A registration shall be rejected only where the prospect is an existing Customer or is already the subject of an active opportunity registered by CloudSpan or another partner in the preceding ninety (90) days.\n4.2 An accepted Referral Registration shall remain valid for one hundred and eighty (180) days. If the prospect signs a subscription order with CloudSpan within that period, it becomes a Referred Customer.\n4.3 CloudSpan shall pay Partner a referral fee equal to twelve per cent (12%) of the First-Year Subscription Fees received from each Referred Customer (the \"**Referral Fee**\").\n4.4 CloudSpan shall provide Partner with a quarterly statement of Referral Fees within fifteen (15) days of the end of each calendar quarter. Partner shall invoice CloudSpan on the basis of that statement, and CloudSpan shall pay each undisputed invoice within thirty (30) days of receipt.\n4.5 Referral Fees are exclusive of GST and other applicable taxes. Where CloudSpan is required by law to withhold tax, it shall provide Partner with the relevant certificate to enable Partner to claim credit.",
-          "differs": "Uses 80/20 revenue share instead of referral registration procedures and 180-day validity periods.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -443,7 +443,7 @@
           "labelNote": "45-day payment: the negotiated maximum (90 → 45)",
           "score": 0.843,
           "text": "4.1 The total fees for the Services are **USD 48,000** (United States Dollars Forty-Eight Thousand only), payable on completion of Milestones as set out in Annexure A.\n\n4.2 The Service Provider shall raise an invoice upon completion of each Milestone. The Company shall pay each undisputed invoice within forty-five (45) days of receipt of the invoice.\n\n4.3 All fees are exclusive of GST. The Company shall be entitled to deduct TDS as applicable.\n\n4.4 Any disputed amount shall be notified within ten (10) days of receipt of invoice, and the Parties shall resolve such dispute in good faith within thirty (30) days.",
-          "differs": "Sets 80/20 revenue share and 30-day partner remittance instead of USD 48,000 milestone-based fees.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -456,7 +456,7 @@
           "labelNote": "Fair freelancer terms: 30-day pay, mutual cap, mutual 15-day exit",
           "score": 0.833,
           "text": "3.1 AtliQ shall pay the Contractor the fees set out in the Engagement Schedule.\n\n3.2 The Contractor shall submit a monthly invoice, supported by a timesheet approved by the AtliQ project lead. AtliQ shall pay each undisputed invoice within thirty (30) days of receipt.\n\n3.3 AtliQ shall deduct tax at source under the Income Tax Act, 1961 as applicable and provide TDS certificates. The Contractor is responsible for his own GST registration (if required) and all other taxes.\n\n3.4 AtliQ shall reimburse reasonable pre-approved travel expenses incurred for client visits.",
-          "differs": "Establishes 80/20 revenue share rather than monthly invoicing of hourly fees supported by timesheets.",
+          "differs": "",
           "alsoIn": []
         }
       ]
@@ -476,7 +476,7 @@
           "label": "untagged",
           "score": 0.889,
           "text": "8.1 Each Party retains all rights in its own intellectual property. CloudSpan owns the CloudSpan Platform and all improvements to it.\n\n8.2 Partner retains all rights in its own methodologies, accelerators, tools, templates and know-how, whether developed before or during the Term, including those used in delivering Implementation Services.\n\n8.3 Any feedback provided by Partner concerning the CloudSpan Platform may be used by CloudSpan without restriction, provided Partner's Confidential Information is not disclosed.",
-          "differs": "Adds mutual trademark/logo licenses and a perpetual license for Datavane to use partner feedback.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -489,7 +489,7 @@
           "labelNote": "Rohan kept the Work Product IP (\"ok\" from phone) while Acme was promised ownership",
           "score": 0.859,
           "text": "5.1 In this Clause, \"**Work Product**\" means all dashboards, reports, data models, DAX measures, Power Query scripts, visual templates, documentation and other materials created by the Contractor in performing the Services.\n\n5.2 The Contractor retains ownership of all intellectual property rights in the Work Product and in any pre-existing materials, components and templates of the Contractor.\n\n5.3 The Contractor grants AtliQ a non-exclusive, perpetual, irrevocable, royalty-free, worldwide licence to use, copy, modify and deploy the Work Product for the purposes of AtliQ's business, including for delivery to AtliQ's clients.\n\n5.4 The Contractor shall not incorporate into the Work Product any third-party material that AtliQ is not entitled to use under Clause 5.3.",
-          "differs": "Datavane retains platform ownership and gains trademark/logo licenses instead of contractor retaining ownership of work product.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -501,7 +501,7 @@
           "label": "untagged",
           "score": 0.87,
           "text": "8.1 Upon payment, Crestline shall own all right, title and interest in the Deliverables.\n\n8.2 Supplier retains all rights in its pre-existing materials, tools and know-how (\"**Supplier Materials**\"). To the extent Supplier Materials are incorporated in a Deliverable, Supplier grants Crestline a non-exclusive, perpetual, royalty-free license to use them as part of such Deliverable.",
-          "differs": "Datavane retains platform ownership and gains trademark licenses instead of client owning all deliverables upon payment.",
+          "differs": "",
           "alsoIn": []
         }
       ]
@@ -521,7 +521,7 @@
           "label": "untagged",
           "score": 0.971,
           "text": "7.1 Each Party shall hold the other Party's Confidential Information in confidence, use it only to perform or receive the Services, and disclose it only to its personnel and advisors with a need to know who are bound by obligations at least as protective.\n\n7.2 The obligations in Section 7.1 do not apply to information that is or becomes publicly available without breach, was known to the recipient prior to disclosure, is independently developed, or is rightfully received from a third party.\n\n7.3 These obligations survive for three (3) years following termination, and indefinitely for trade secrets.",
-          "differs": "Specifies protection for Datavane Account information and removes the three-year survival limit on confidentiality.",
+          "differs": "",
           "alsoIn": [
             "CloudSpan Technologies (2025-09)",
             "Acme Retail Group (2025-03)",
@@ -537,7 +537,7 @@
           "label": "untagged",
           "score": 0.935,
           "text": "4.1 Each party shall keep confidential all information received from the other party including\nfare data, supplier contracts, customer data and source code, and shall not disclose the same\nto any third party. This obligation shall survive for two (2) years after termination.",
-          "differs": "Adds specific exceptions for public/pre-known info and removes the two-year survival limit on confidentiality.",
+          "differs": "",
           "alsoIn": [
             "Sunrise Foods (2025-04)"
           ]
@@ -551,7 +551,7 @@
           "label": "untagged",
           "score": 0.934,
           "text": "8.1 \"**Confidential Information**\" means all information disclosed by one Party to the other, whether before or after the Effective Date, that is marked confidential or would reasonably be regarded as confidential, including Client Data, pricing strategies, rate plans, occupancy forecasts and business plans.\n\n8.2 Each Party shall keep the other's Confidential Information confidential, use it only for the purposes of this Agreement, and disclose it only to its employees and advisers who need to know it and are bound by equivalent obligations.\n\n8.3 These obligations do not apply to information that is public other than through breach, was lawfully known before disclosure, is independently developed, or is required to be disclosed by law.\n\n8.4 The obligations in this Clause 8 continue for five (5) years after expiry or termination.",
-          "differs": "Specifically includes Datavane Account information and omits the 30-day negotiation period for disputes.",
+          "differs": "",
           "alsoIn": []
         }
       ]
@@ -572,7 +572,7 @@
           "labelNote": "Origin of the mutual-indemnity position: no indemnity for the indemnified party's own negligence",
           "score": 0.916,
           "text": "10.1 Each Party (the \"**Indemnifying Party**\") shall indemnify, defend and hold harmless the other Party and its directors, officers and employees (the \"**Indemnified Party**\") from and against all Losses arising out of any third-party claim to the extent caused by: (a) the Indemnifying Party's breach of Clause 7 (Confidentiality) or Clause 12 (Data Protection); (b) the gross negligence, wilful misconduct or fraud of the Indemnifying Party or its personnel; or (c) in the case of AtliQ, any claim that the Deliverables infringe a third party's intellectual property rights, and in the case of PayTrack, any claim that Client Data or materials supplied by PayTrack infringe a third party's rights.\n\n10.2 Neither Party shall be required to indemnify the other to the extent any Losses are caused by the negligence, breach or wilful misconduct of the Indemnified Party.\n\n10.3 The Indemnified Party shall give prompt written notice of any claim, permit the Indemnifying Party to control the defence and settlement, and provide reasonable cooperation at the Indemnifying Party's cost.",
-          "differs": "Requires partner to indemnify for any contract conflict and representations, not limited to IP or gross negligence.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -584,7 +584,7 @@
           "label": "untagged",
           "score": 0.923,
           "text": "15.1 The Supplier shall indemnify the Client against losses arising from any third-party claim that the Deliverables (excluding Client materials) infringe that third party's intellectual property rights.\n\n15.2 The Client shall indemnify the Supplier against losses arising from any third-party claim that Client Data or Client materials infringe that third party's rights.\n\n15.3 The indemnified Party shall promptly notify the indemnifying Party, allow it conduct of the defence, and provide reasonable assistance.",
-          "differs": "Partner indemnifies for services, contract conflicts, and representations rather than just mutual IP infringement claims.",
+          "differs": "",
           "alsoIn": [
             "CloudSpan Technologies (2025-09)",
             "Northwind Logistics (2025-06)"
@@ -600,7 +600,7 @@
           "labelNote": "Mutual indemnity",
           "score": 0.901,
           "text": "11.1 Each Party (\"**Indemnifying Party**\") shall indemnify the other against losses arising from third-party claims caused by the Indemnifying Party's breach of confidentiality, infringement of third-party intellectual property rights, or gross negligence or wilful misconduct.",
-          "differs": "Expands partner indemnity to all contract conflicts and personnel acts, not just IP or gross negligence.",
+          "differs": "",
           "alsoIn": []
         }
       ]
@@ -620,7 +620,7 @@
           "label": "untagged",
           "score": 0.908,
           "text": "11.1 Neither Party shall be liable for any indirect, special, incidental or consequential damages, or loss of profits, revenue or goodwill.\n\n11.2 Each Party's total aggregate liability under or in connection with this Agreement shall not exceed the total fees paid or payable under the SOW giving rise to the claim.\n\n11.3 The limitations in this Clause 11 shall not apply to liability for fraud or wilful misconduct.",
-          "differs": "Imposes a fixed USD 10,000 cap on Datavane instead of a cap based on fees paid.",
+          "differs": "",
           "alsoIn": [
             "Trustline NBFC (2026-08)",
             "CloudSpan Technologies (2025-09)",
@@ -639,7 +639,7 @@
           "labelNote": "AtliQ-friendly master: capped liability, service credits capped at 5%",
           "score": 0.887,
           "text": "13.1 Neither Party shall be liable for indirect, consequential or special losses or loss of profits.\n\n13.2 Each Party's aggregate liability under an SOW shall not exceed the Fees paid or payable under that SOW.",
-          "differs": "Sets a USD 10,000 cap for Datavane while leaving partner liability unlimited for specific sections.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -651,7 +651,7 @@
           "label": "untagged",
           "score": 0.897,
           "text": "12.1 EXCEPT FOR BREACH OF SECTION 7 OR A PARTY'S INDEMNIFICATION OBLIGATIONS, NEITHER PARTY SHALL BE LIABLE FOR ANY INDIRECT, INCIDENTAL, CONSEQUENTIAL, SPECIAL OR PUNITIVE DAMAGES.\n\n12.2 EXCEPT FOR BREACH OF SECTION 7 OR A PARTY'S INDEMNIFICATION OBLIGATIONS, EACH PARTY'S AGGREGATE LIABILITY SHALL NOT EXCEED THE FEES PAID OR PAYABLE BY CRESTLINE UNDER THIS AGREEMENT IN THE TWELVE (12) MONTHS PRECEDING THE CLAIM.",
-          "differs": "Replaces a 12-month fee-based cap with a flat USD 10,000 cap specifically for Datavane.",
+          "differs": "",
           "alsoIn": []
         }
       ]
@@ -671,7 +671,7 @@
           "label": "untagged",
           "score": 0.901,
           "text": "16.1 This Agreement shall be governed by the laws of the State of Ohio, without regard to its conflict-of-laws principles.\n\n16.2 The Parties consent to the exclusive jurisdiction of the state and federal courts located in Franklin County, Ohio.",
-          "differs": "Changes law to Delaware and venue to San Francisco instead of Ohio law and Franklin County venue.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -684,7 +684,7 @@
           "labelNote": "Signed on a phone in 4 minutes: 1%/day uncapped LDs, no client-delay exclusion, group set-off, English law on a US entity. Cost $9k + $14.2k legal",
           "score": 0.881,
           "text": "20.1 This Agreement and any dispute or claim (including non-contractual disputes or claims) arising out of or in connection with it or its subject matter shall be governed by and construed in accordance with the law of England and Wales.\n\n20.2 Each party irrevocably agrees that the courts of London, England shall have exclusive jurisdiction to settle any dispute or claim arising out of or in connection with this Agreement.\n\n---",
-          "differs": "Changes law to Delaware and venue to San Francisco instead of English law and London courts.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -697,7 +697,7 @@
           "labelNote": "DIFC law accepted as the client's group standard",
           "score": 0.876,
           "text": "21.1 This Agreement and any non-contractual obligations arising out of it shall be governed by the laws of the Dubai International Financial Centre.\n\n21.2 The Parties shall first attempt to resolve any dispute through good-faith negotiation between senior executives for thirty (30) days.\n\n21.3 Failing resolution, the courts of the Dubai International Financial Centre shall have exclusive jurisdiction.",
-          "differs": "Changes law to Delaware and venue to San Francisco instead of DIFC law and mandatory negotiation.",
+          "differs": "",
           "alsoIn": []
         }
       ]
@@ -706,10 +706,10 @@
   "counselPack": null,
   "errors": [],
   "usage": {
-    "calls": 1,
+    "calls": 0,
     "cachedCalls": 5,
-    "inputTokens": 270,
-    "outputTokens": 631,
-    "ms": 126716
+    "inputTokens": 0,
+    "outputTokens": 0,
+    "ms": 2764
   }
 }

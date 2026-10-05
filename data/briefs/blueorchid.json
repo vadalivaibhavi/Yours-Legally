@@ -1,7 +1,7 @@
 {
   "dealId": "blueorchid",
   "version": 1,
-  "createdAt": "2026-10-05T09:09:36.042Z",
+  "createdAt": "2026-10-05T14:02:07.728Z",
   "trigger": "initial review",
   "inputsHash": "fd05aad9f1610a111881ab4e88c87ef3",
   "documentIds": [
@@ -11,8 +11,9 @@
   "playbookVersion": "pb-v1.1-2026-10-05",
   "models": [
     "gemini-flash-lite-latest",
-    "gemini-3.5-flash",
-    "gemini-3.6-flash"
+    "gemini-3.6-flash",
+    "gemini-3-flash-preview",
+    "gemini-3.5-flash"
   ],
   "promptVersion": "p1",
   "route": "full_review",
@@ -296,7 +297,7 @@
             "docId": "blueorchid-pilot",
             "docTitle": "BlueOrchid Hotels pilot services agreement (draft)",
             "clauseRef": "4.1",
-            "quote": "guest review analytics solution for all twelve (12) Properties listed in Annexure B, comprising:\n   (a) automated ingestion of guest reviews from up to six (6) online sources and BlueOrchid's post-stay survey tool;\n   (b) multilingual sentiment and aspect analysis (English, Hindi, Arabic) covering room, cleanliness, F&B, service, location and value;\n   (c) property-level and portfolio-level dashboards in Power BI for General Managers, the Guest Experience team and senior management;\n   (d) a weekly automated \"Voice of Guest\" summary for each Property; and\n   (e) an alerting mechanism flagging recurring negative themes for the relevant Property's General Manager.\n4.2 The Pilot shall run for a period of sixteen (16) weeks from the Effective Date, comprising a twelve (12) week build and rollout phase and a four (4) week evaluation phase.\n4.3 BlueOrchid shall nominate a single point of contact (initially Ms. Farah Sayed, Director – Guest Experience) and shall provide timely access to data sources, systems and personnel reasonably required by AtliQ.\n4.4 Any change in scope shall be documented through a written change request agreed by both Parties.\n\n## 5. FEES AND PAYMENT\n\n5.1 The total fee for the Pilot is USD 38,000 (United States Dollars Thirty-Eight Thousand only), payable in accordance with the Milestones in Annexure C.\n5.2 AtliQ shall raise an invoice on completion of each Milestone. BlueOrchid shall pay each undisputed invoice within thirty (30) days of receipt.\n5.3 All amounts are exclusive of GST, which shall be charged at the applicable rate. BlueOrchid may deduct TDS as required under the Income-tax Act, 1961, and shall furnish TDS certificates within the statutory timelines.\n5.4 Any disputed portion of an invoice shall be notified within ten (10) days of receipt; the undisputed portion shall be paid in accordance with Clause 5.2.\n\n## 6. TERM AND TERMINATION\n\n6.1 This Agreement shall commence on the Effective Date and remain in force until completion of the Pilot, unless terminated earlier.\n6.2 Either Party may terminate this Agreement for material breach not remedied within thirty (30) days of written notice.\n6.3 BlueOrchid may terminate this Agreement for convenience on thirty (30) days' written notice, subject to payment for all work performed up to the effective date of termination, including a pro-rata amount for any Milestone in progress.\n6.4 Clauses 7, 8, 10, 11, 13 and 14 shall survive termination or expiry.\n\n## 7. CONFIDENTIALITY\n\n7.1 Each Party shall hold the other Party's confidential information in strict confidence, use it only for the purposes of this Agreement, and disclose it only to its employees and professional advisers on a need-to-know basis.\n7.2 These obligations shall not apply to information that is public, already known to the recipient, independently developed, or required to be disclosed by law.\n7.3 The obligations in this Clause shall continue for three (3) years after termination or expiry of this Agreement.\n\n## 8. INTELLECTUAL PROPERTY\n\n8.1 Upon payment in full, BlueOrchid shall own the dashboards, reports and configurations created specifically for BlueOrchid under this Agreement.\n8.2 Each Party retains all rights in its Pre-existing IP. AtliQ grants BlueOrchid a non-exclusive, non-transferable, royalty-free licence to use AtliQ's Pre-existing IP to the extent incorporated in the Deliverables, solely for BlueOrchid's internal business purposes.\n8.3 BlueOrchid retains all rights in Client Data.\n\n## 9. WARRANTIES\n\n9.1 AtliQ warrants that the Services shall be performed in a professional and workmanlike manner by suitably qualified personnel.\n9.2 AtliQ shall correct any material non-conformity in the Deliverables notified within thirty (30) days after completion of the Pilot.\n9.3 Each Party warrants that it has full power and authority to enter into this Agreement.\n\n## 10. LIMITATION OF LIABILITY\n\n10.1 Neither Party shall be liable for any indirect, incidental, special or consequential damages, including loss of profit, revenue or goodwill.\n10.2 Except for breach of confidentiality, fraud or wilful misconduct, each Party's total aggregate liability under this Agreement shall not exceed the total fees paid or payable under this Agreement.\n\n## 11. INDEMNITY\n\n11.1 Each Party (the \"Indemnifying Party\") shall indemnify the other against third-party claims to the extent arising from the Indemnifying Party's breach of this Agreement, negligence or wilful misconduct.\n11.2 AtliQ shall indemnify BlueOrchid against third-party claims that the Deliverables infringe any intellectual property right, save where such claim arises from Client Data or modifications made by BlueOrchid.\n\n## 12. DELAY\n\n12.1 If AtliQ fails to complete a Milestone by its scheduled date for reasons solely attributable to AtliQ, BlueOrchid shall be entitled to liquidated damages of 0.5% of the relevant Milestone Fee for each complete week of delay, subject to a maximum of 5% of that Milestone Fee.\n12.2 No liquidated damages shall be payable for any delay caused by BlueOrchid, its vendors, or a force majeure event.\n12.3 Liquidated damages under this Clause shall be BlueOrchid's sole and exclusive remedy for delay.\n\n## 13. DATA PROTECTION\n\n13.1 AtliQ shall process personal data contained in Client Data only for the purposes of the Pilot and in accordance with the Digital Personal Data Protection Act, 2023 and any other applicable data protection law, including the laws applicable to Properties located outside India.\n13.2 AtliQ shall implement reasonable security safeguards and shall notify BlueOrchid without undue delay of any personal data breach.\n13.3 On completion or termination of the Pilot, AtliQ shall return or delete Client Data as instructed by BlueOrchid.\n\n## 14. GOVERNING LAW AND DISPUTE RESOLUTION\n\n14.1 This Agreement shall be governed by the laws of India.\n14.2 Any dispute shall first be referred to senior management of both Parties for amicable settlement within thirty (30) days.\n14.3 Failing settlement, the dispute shall be finally resolved by arbitration under the Arbitration and Conciliation Act, 1996, by a sole arbitrator mutually appointed. The seat and venue of arbitration shall be Mumbai and the language shall be English.\n14.4 Subject to the above, the courts at Mumbai shall have exclusive jurisdiction.\n\n## 15. GENERAL\n\n15.1 **Force Majeure.** Neither Party shall be liable for delay or failure caused by events beyond its reasonable control.\n15.2 **Assignment.** Neither Party may assign this Agreement without the prior written consent of the other, not to be unreasonably withheld.\n15.3 **Independent Contractors.** The Parties are independent contractors; nothing herein creates a partnership or agency.\n15.4 **Notices.** Notices shall be in writing to the addresses above, marked to the attention of Ms. Farah Sayed (BlueOrchid) and the Chief Executive Officer (AtliQ).\n15.5 **Entire Agreement.** This Agreement, with its Annexures, is the entire agreement between the Parties regarding the Pilot.\n15.6 **Future Engagement.** Upon successful completion of the Pilot, the Parties may enter into a master services agreement for a full-scale rollout on terms to be mutually agreed.\n\n## ANNEXURE A",
+            "quote": "guest review analytics solution for all twelve (12) Properties listed in Annexure B, comprising:\n   (a) automated ingestion … ANNEXURE A",
             "role": "incoming"
           }
         },
@@ -381,7 +382,7 @@
           "labelNote": "45-day payment: the negotiated maximum (90 → 45)",
           "score": 0.943,
           "text": "4.1 The total fees for the Services are **USD 48,000** (United States Dollars Forty-Eight Thousand only), payable on completion of Milestones as set out in Annexure A.\n\n4.2 The Service Provider shall raise an invoice upon completion of each Milestone. The Company shall pay each undisputed invoice within forty-five (45) days of receipt of the invoice.\n\n4.3 All fees are exclusive of GST. The Company shall be entitled to deduct TDS as applicable.\n\n4.4 Any disputed amount shall be notified within ten (10) days of receipt of invoice, and the Parties shall resolve such dispute in good faith within thirty (30) days.",
-          "differs": "New fee is USD 38,000 (not USD 48,000) and payment terms are 30 days (not 45 days).",
+          "differs": "Better for AtliQ than Trustline NBFC: shorter payment term of 30 days from receipt instead of 45 days.",
           "alsoIn": []
         },
         {
@@ -393,7 +394,7 @@
           "label": "untagged",
           "score": 0.958,
           "text": "4.1 The total fees under SOW-1 are **USD 71,000** (United States Dollars Seventy-One Thousand only), payable in accordance with the milestone schedule in SOW-1.\n\n4.2 AtliQ shall invoice upon completion of each milestone. PayTrack shall pay each undisputed invoice within thirty (30) days of receipt.\n\n4.3 Fees are exclusive of GST. PayTrack may deduct TDS in accordance with Applicable Law.",
-          "differs": "New fee is USD 38,000 instead of USD 71,000.",
+          "differs": "Same as PayTrack Technologies: payment term is 30 days from receipt of invoice.",
           "alsoIn": [
             "Acme Retail Group (2025-03)"
           ]
@@ -407,7 +408,7 @@
           "label": "untagged",
           "score": 0.936,
           "text": "5.1 The total Fees under SOW-1 are **USD 33,000** (United States Dollars Thirty-Three Thousand only), comprising build fees payable on Milestones and a Monthly Support Fee for the support period, as detailed in SOW-1.\n\n5.2 AtliQ shall invoice build fees upon completion of each Milestone and the Monthly Support Fee monthly in arrears. Sunrise shall pay each undisputed invoice within thirty (30) days of the invoice date.\n\n5.3 All amounts are exclusive of GST, which shall be charged additionally at the applicable rate. Sunrise may deduct TDS as required by law.\n\n5.4 Delayed payments shall attract interest at twelve percent (12%) per annum.",
-          "differs": "New fee is USD 38,000 instead of USD 33,000, without monthly support fees.",
+          "differs": "Worse for AtliQ than Sunrise Foods: payment is due 30 days from receipt of invoice instead of 30 days from the invoice date.",
           "alsoIn": []
         }
       ]
@@ -427,7 +428,7 @@
           "label": "untagged",
           "score": 0.968,
           "text": "7.1 Each Party shall hold the other Party's Confidential Information in confidence, use it only to perform or receive the Services, and disclose it only to its personnel and advisors with a need to know who are bound by obligations at least as protective.\n\n7.2 The obligations in Section 7.1 do not apply to information that is or becomes publicly available without breach, was known to the recipient prior to disclosure, is independently developed, or is rightfully received from a third party.\n\n7.3 These obligations survive for three (3) years following termination, and indefinitely for trade secrets.",
-          "differs": "Three-year survival term applies to all confidential information, without indefinite survival for trade secrets.",
+          "differs": "Better for AtliQ than Crestline Retail Inc: confidentiality obligations expire after 3 years without an indefinite survival period for trade secrets.",
           "alsoIn": [
             "CloudSpan Technologies (2025-09)",
             "Acme Retail Group (2025-03)",
@@ -443,7 +444,7 @@
           "label": "untagged",
           "score": 0.944,
           "text": "8.1 \"**Confidential Information**\" means all information disclosed by one Party to the other, whether before or after the Effective Date, that is marked confidential or would reasonably be regarded as confidential, including Client Data, pricing strategies, rate plans, occupancy forecasts and business plans.\n\n8.2 Each Party shall keep the other's Confidential Information confidential, use it only for the purposes of this Agreement, and disclose it only to its employees and advisers who need to know it and are bound by equivalent obligations.\n\n8.3 These obligations do not apply to information that is public other than through breach, was lawfully known before disclosure, is independently developed, or is required to be disclosed by law.\n\n8.4 The obligations in this Clause 8 continue for five (5) years after expiry or termination.",
-          "differs": "New clause lacks specific examples of Confidential Information and has a three-year survival term.",
+          "differs": "Same as Al Noor Hospitality Group: standard mutual confidentiality obligations and a need-to-know disclosure restriction.",
           "alsoIn": []
         },
         {
@@ -456,7 +457,7 @@
           "labelNote": "Genuinely mutual NDA: the template for what mutual looks like",
           "score": 0.917,
           "text": "2.1 Each Party, as Receiving Party, shall:\n   (a) use the Disclosing Party's Confidential Information solely for the Purpose;\n   (b) not disclose it to any third party other than its Representatives who are bound by confidentiality obligations no less protective than those in this Agreement;\n   (c) protect it using at least the same degree of care it uses for its own confidential information, and no less than reasonable care; and\n   (d) promptly notify the Disclosing Party on becoming aware of any unauthorised use or disclosure.\n\n2.2 Each Party is responsible for any breach of this Agreement by its Representatives.",
-          "differs": "New clause includes exceptions to confidentiality and defines a three-year survival period.",
+          "differs": "Same as Al Noor Hospitality Group: standard mutual confidentiality obligations and use for the specific purpose only.",
           "alsoIn": [
             "Harrington Health Systems Inc (2026-08)"
           ]
@@ -479,7 +480,7 @@
           "labelNote": "Rohan kept the Work Product IP (\"ok\" from phone) while Acme was promised ownership",
           "score": 0.9,
           "text": "5.1 In this Clause, \"**Work Product**\" means all dashboards, reports, data models, DAX measures, Power Query scripts, visual templates, documentation and other materials created by the Contractor in performing the Services.\n\n5.2 The Contractor retains ownership of all intellectual property rights in the Work Product and in any pre-existing materials, components and templates of the Contractor.\n\n5.3 The Contractor grants AtliQ a non-exclusive, perpetual, irrevocable, royalty-free, worldwide licence to use, copy, modify and deploy the Work Product for the purposes of AtliQ's business, including for delivery to AtliQ's clients.\n\n5.4 The Contractor shall not incorporate into the Work Product any third-party material that AtliQ is not entitled to use under Clause 5.3.",
-          "differs": "New clause grants IP ownership to BlueOrchid upon full payment instead of Contractor retaining ownership.",
+          "differs": "Worse for AtliQ than Rohan Iyer: the client owns the specific dashboards and configurations upon payment instead of AtliQ retaining ownership.",
           "alsoIn": []
         },
         {
@@ -491,7 +492,7 @@
           "label": "untagged",
           "score": 0.917,
           "text": "8.1 Upon full payment, all intellectual property in the Deliverables developed specifically for PayTrack shall vest in PayTrack.\n\n8.2 AtliQ retains ownership of its pre-existing materials, tools and know-how and grants PayTrack a perpetual, non-exclusive, royalty-free licence to use such materials as incorporated in the Deliverables.",
-          "differs": "AtliQ's pre-existing IP license to BlueOrchid is non-transferable and for internal business only, not perpetual.",
+          "differs": "Better for AtliQ than PayTrack Technologies: license for pre-existing IP is restricted to internal business purposes and is non-transferable.",
           "alsoIn": []
         },
         {
@@ -503,7 +504,7 @@
           "label": "untagged",
           "score": 0.907,
           "text": "5.1 All deliverables developed specifically for the Client shall be the property of the Client\nupon full payment. The Service Provider retains its pre-existing tools and know-how.",
-          "differs": "New clause specifies a non-exclusive, non-transferable license and explicit retention of Client Data.",
+          "differs": "Same as Orbit Travels Pvt Ltd: deliverables developed specifically for the client are owned by the client upon full payment.",
           "alsoIn": [
             "Al Noor Hospitality Group (2025-03)",
             "Trustline NBFC (2026-08)",
@@ -527,7 +528,7 @@
           "label": "untagged",
           "score": 0.967,
           "text": "11.1 Neither Party shall be liable for any indirect, special, incidental or consequential damages, or loss of profits, revenue or goodwill.\n\n11.2 Each Party's total aggregate liability under or in connection with this Agreement shall not exceed the total fees paid or payable under the SOW giving rise to the claim.\n\n11.3 The limitations in this Clause 11 shall not apply to liability for fraud or wilful misconduct.",
-          "differs": "New clause includes confidentiality conflict as an exception to the liability cap.",
+          "differs": "Worse for AtliQ than PayTrack Technologies: liability for confidentiality non-compliance is excluded from the aggregate cap.",
           "alsoIn": [
             "Trustline NBFC (2026-08)",
             "Acme Retail Group (2025-03)",
@@ -546,7 +547,7 @@
           "labelNote": "AtliQ-friendly master: capped liability, service credits capped at 5%",
           "score": 0.938,
           "text": "13.1 Neither Party shall be liable for indirect, consequential or special losses or loss of profits.\n\n13.2 Each Party's aggregate liability under an SOW shall not exceed the Fees paid or payable under that SOW.",
-          "differs": "New liability cap is based on total fees under the Agreement, with confidentiality/fraud/misconduct exceptions.",
+          "differs": "Worse for AtliQ than Sunrise Foods: liability cap is based on total fees under the agreement instead of individual SOW values.",
           "alsoIn": []
         },
         {
@@ -559,7 +560,7 @@
           "labelNote": "Fair freelancer terms: 30-day pay, mutual cap, mutual 15-day exit",
           "score": 0.925,
           "text": "8.1 Each party's aggregate liability under this Agreement shall not exceed the total fees paid or payable to the Contractor in the twelve (12) months preceding the claim, except for breach of Clause 6 or fraud.\n\n8.2 Neither party is liable for indirect or consequential loss.",
-          "differs": "New liability cap is total fees under the Agreement, instead of fees paid in preceding 12 months.",
+          "differs": "Worse for AtliQ than Rohan Iyer: aggregate liability is capped at the total contract fees rather than the preceding twelve months' fees.",
           "alsoIn": []
         }
       ]
@@ -580,7 +581,7 @@
           "labelNote": "Mutual indemnity",
           "score": 0.959,
           "text": "11.1 Each Party (\"**Indemnifying Party**\") shall indemnify the other against losses arising from third-party claims caused by the Indemnifying Party's breach of confidentiality, infringement of third-party intellectual property rights, or gross negligence or wilful misconduct.",
-          "differs": "New clause adds mutual indemnification for negligence/misconduct and specific IP indemnity from AtliQ.",
+          "differs": "Worse for AtliQ than Acme Retail Group: indemnity covers any non-compliance and simple negligence instead of specific non-compliance and gross negligence.",
           "alsoIn": []
         },
         {
@@ -593,7 +594,7 @@
           "labelNote": "Origin of the mutual-indemnity position: no indemnity for the indemnified party's own negligence",
           "score": 0.946,
           "text": "10.1 Each Party (the \"**Indemnifying Party**\") shall indemnify, defend and hold harmless the other Party and its directors, officers and employees (the \"**Indemnified Party**\") from and against all Losses arising out of any third-party claim to the extent caused by: (a) the Indemnifying Party's breach of Clause 7 (Confidentiality) or Clause 12 (Data Protection); (b) the gross negligence, wilful misconduct or fraud of the Indemnifying Party or its personnel; or (c) in the case of AtliQ, any claim that the Deliverables infringe a third party's intellectual property rights, and in the case of PayTrack, any claim that Client Data or materials supplied by PayTrack infringe a third party's rights.\n\n10.2 Neither Party shall be required to indemnify the other to the extent any Losses are caused by the negligence, breach or wilful misconduct of the Indemnified Party.\n\n10.3 The Indemnified Party shall give prompt written notice of any claim, permit the Indemnifying Party to control the defence and settlement, and provide reasonable cooperation at the Indemnifying Party's cost.",
-          "differs": "New clause simplifies indemnification triggers, using negligence instead of gross negligence, and omits specific RBI/data terms.",
+          "differs": "Worse for AtliQ than PayTrack Technologies: indemnity covers any non-compliance and simple negligence rather than specific events and gross negligence.",
           "alsoIn": []
         },
         {
@@ -605,7 +606,7 @@
           "label": "untagged",
           "score": 0.958,
           "text": "12.1 Each Party shall indemnify the other against third-party claims arising out of its breach of confidentiality, infringement of intellectual property rights, or gross negligence or wilful misconduct.",
-          "differs": "New clause covers general negligence (not gross negligence) and adds specific IP indemnity carve-outs.",
+          "differs": "Worse for AtliQ than Sunrise Foods: indemnity covers any non-compliance and simple negligence instead of specific items and gross negligence.",
           "alsoIn": [
             "Trustline NBFC (2026-08)"
           ]
@@ -628,7 +629,7 @@
           "labelNote": "Origin of the LD playbook: 0.5% of milestone/week, 5% cap, client delays excluded (Mar 2025)",
           "score": 0.943,
           "text": "7.1 If the Service Provider fails to complete a Milestone by the agreed date for reasons solely attributable to the Service Provider, the Service Provider shall pay liquidated damages at the rate of 0.5% (half percent) of the Milestone Fee of the delayed Milestone for each complete week of delay.\n\n7.2 The aggregate liquidated damages in respect of any Milestone shall not exceed 5% (five percent) of the Milestone Fee of that Milestone.\n\n7.3 No liquidated damages shall be payable where the delay is caused by the Client, including delayed access to data or systems, delayed review of Deliverables, or changes in scope, or by a Force Majeure event.\n\n7.4 The Parties agree that the liquidated damages are a genuine pre-estimate of loss and shall be the Client's sole and exclusive remedy for delay.",
-          "differs": "New clause excludes delay damages caused by vendors or force majeure, with simplified client delay wording.",
+          "differs": "Better for AtliQ than Acme Retail Group: liquidated damages are explicitly stated as the sole and exclusive remedy for delays.",
           "alsoIn": [
             "Trustline NBFC (2026-08)",
             "Northwind Logistics (2025-06)"
@@ -644,7 +645,7 @@
           "labelNote": "Signed on a phone in 4 minutes: 1%/day uncapped LDs, no client-delay exclusion, group set-off, English law on a US entity. Cost $9k + $14.2k legal",
           "score": 0.891,
           "text": "9.1 If the Supplier fails to achieve any Key Date, the Supplier shall pay to the Customer liquidated damages in the amount of one per cent (1%) of the Contract Value for each day or part day by which the relevant Key Date is missed.\n\n9.2 Liquidated damages under clause 9.1 shall be payable in addition to any other right or remedy available to the Customer under this Agreement or at law, and the Customer may deduct such liquidated damages from any sums due to the Supplier.\n\n9.3 The Supplier acknowledges that the liquidated damages set out in this clause 9 are proportionate to the Customer's legitimate interest in the timely delivery of the Services.",
-          "differs": "New rate is 0.5% per week capped at 5%, instead of 1% per day uncapped.",
+          "differs": "Better for AtliQ than Brightwater Insurance Inc: liquidated damages are 0.5% of the milestone fee per week, capped at 5%, and are the exclusive remedy.",
           "alsoIn": []
         },
         {
@@ -657,7 +658,7 @@
           "labelNote": "One-off: \"strategic exception for Al Noor only, not our new standard\" (cap 10% of total fees)",
           "score": 0.874,
           "text": "10.1 The Supplier shall use all reasonable endeavours to achieve each Milestone by the date set out in the relevant SOW.\n\n10.2 Each Deliverable shall be subject to acceptance testing by the Client within ten (10) Business Days of delivery against the acceptance criteria in the SOW. Deliverables not rejected in writing within that period shall be deemed accepted.\n\n10.3 If the Supplier fails to achieve a Milestone by its due date for reasons attributable to the Supplier, the Supplier shall pay to the Client, as liquidated damages, one percent (1%) of the Fees payable for the affected Milestone for each complete week of delay, provided that the aggregate liquidated damages payable under this Agreement shall not exceed ten percent (10%) of the total Fees payable under this Agreement.\n\n10.4 The Parties agree that the liquidated damages in Clause 10.3 are a genuine pre-estimate of loss. No liquidated damages shall be payable for delay caused by the Client, its contractors, or a Force Majeure Event.",
-          "differs": "New rate is 0.5% per week (capped at 5%), instead of 1% per week uncapped.",
+          "differs": "Better for AtliQ than Al Noor Hospitality Group: lower rate of 0.5% per week and an express 5% cap on milestone fee liability.",
           "alsoIn": []
         }
       ]
@@ -677,7 +678,7 @@
           "label": "untagged",
           "score": 0.929,
           "text": "13.1 The Service Provider shall process personal data received from the Client only for the purpose of the Services and in compliance with the Digital Personal Data Protection Act, 2023 and the rules made thereunder, as and when in force, and shall implement reasonable security practices.",
-          "differs": "New clause adds data incident notifications, data deletion/return requirements, and global property laws.",
+          "differs": "Worse for AtliQ than Acme Retail Group: includes additional requirements to comply with international laws and formal data return or deletion procedures.",
           "alsoIn": []
         },
         {
@@ -689,7 +690,7 @@
           "label": "untagged",
           "score": 0.925,
           "text": "12.1 AtliQ shall process personal data comprised in Client Data only on PayTrack's documented instructions and in compliance with the Digital Personal Data Protection Act, 2023, the Information Technology Act, 2000 and applicable RBI directions.\n\n12.2 AtliQ shall notify PayTrack of any data breach within twenty-four (24) hours of becoming aware of it, and shall cooperate with PayTrack in any reporting to CERT-In or the RBI.\n\n12.3 AtliQ shall permit PayTrack and its regulators to audit its compliance with this Clause 12 on reasonable notice.",
-          "differs": "New clause has undue delay conflict notification, omits RBI/audit rights, and adds global property laws.",
+          "differs": "Better for AtliQ than PayTrack Technologies: notification of security incidents is required without undue delay rather than within twenty-four hours and removes audit rights.",
           "alsoIn": []
         },
         {
@@ -701,7 +702,7 @@
           "label": "untagged",
           "score": 0.925,
           "text": "14.1 AtliQ shall comply with the Information Technology Act, 2000, the rules thereunder, and the Digital Personal Data Protection Act, 2023 to the extent applicable, in relation to any personal data of distributors or employees processed in performing the Services.",
-          "differs": "New clause adds data incident notification, data deletion requirements, and mentions of non-Indian property laws.",
+          "differs": "Worse for AtliQ than Sunrise Foods: requires compliance with data protection laws for properties located outside of India.",
           "alsoIn": []
         }
       ]
@@ -721,7 +722,7 @@
           "label": "untagged",
           "score": 0.978,
           "text": "15.1 This Agreement shall be governed by the laws of India.\n\n15.2 Disputes not resolved by negotiation between senior management within thirty (30) days shall be referred to arbitration by a sole arbitrator under the Arbitration and Conciliation Act, 1996. The seat and venue of arbitration shall be Pune, and the language shall be English.",
-          "differs": "New seat, venue, and exclusive court jurisdiction are Mumbai instead of Pune.",
+          "differs": "Same as PayTrack Technologies: disputes are resolved by a sole arbitrator under Indian law, though the venue is Mumbai instead of Pune.",
           "alsoIn": [
             "Trustline NBFC (2026-08)",
             "Acme Retail Group (2025-03)",
@@ -738,7 +739,7 @@
           "labelNote": "Singapore law / SIAC accepted",
           "score": 0.92,
           "text": "15.1 This Agreement is governed by the laws of the Republic of Singapore.\n\n15.2 The Parties shall first attempt to resolve any dispute through good-faith discussions between senior executives for thirty (30) days.\n\n15.3 Any dispute not so resolved shall be referred to and finally resolved by arbitration administered by the Singapore International Arbitration Centre (\"**SIAC**\") under the SIAC Rules in force at the time. The seat of arbitration shall be Singapore. The tribunal shall consist of one (1) arbitrator. The language of arbitration shall be English.",
-          "differs": "New clause is governed by Indian law with Mumbai arbitration, instead of Singapore law/SIAC.",
+          "differs": "Better for AtliQ than CloudSpan Technologies: governing law is Indian law and arbitration is local, rather than Singapore law and SIAC arbitration.",
           "alsoIn": []
         },
         {
@@ -750,7 +751,7 @@
           "label": "untagged",
           "score": 0.936,
           "text": "11.1 This Agreernent shall be governed by the laws of India. Disputes shall be referred to a sole\narbitrator under the Arbitration and Conciliation Act, 1996. Seat of arbitration: New Delhi.\nCourts at New Delhi shall have jurisdiction.",
-          "differs": "New seat, venue, and exclusive court jurisdiction are Mumbai instead of New Delhi.",
+          "differs": "Same as Orbit Travels Pvt Ltd: disputes are settled by a sole arbitrator under Indian law, despite the change in venue to Mumbai.",
           "alsoIn": []
         }
       ]
@@ -759,10 +760,10 @@
   "counselPack": null,
   "errors": [],
   "usage": {
-    "calls": 3,
-    "cachedCalls": 3,
-    "inputTokens": 9590,
-    "outputTokens": 8710,
-    "ms": 1571640
+    "calls": 1,
+    "cachedCalls": 5,
+    "inputTokens": 6274,
+    "outputTokens": 8204,
+    "ms": 104116
   }
 }

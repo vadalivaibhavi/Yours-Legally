@@ -2,7 +2,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Chip, DueBadge, Section, VerdictBadge } from "@/components/ui";
 import { canViewBrief, canViewDeal } from "@/lib/access";
-import { briefVersions, dealContextDocuments, dealDocuments, dealNotes, getDeal, latestBrief } from "@/lib/deals";
+import { briefVersion, briefVersions, dealContextDocuments, dealDocuments, dealNotes, getDeal, latestBrief } from "@/lib/deals";
+import { BriefView } from "@/components/BriefView";
+import { Collapsible } from "@/components/Fields";
 import { fmtDate, usd } from "@/lib/format";
 import { currentUser } from "@/lib/session";
 import { sellerChecksFor } from "@/lib/sellerChecks";
@@ -27,6 +29,10 @@ export default async function DealPage(props: PageProps<"/deal/[id]">) {
   const notes = dealNotes(deal);
   const versions = isK ? briefVersions(deal.id) : [];
   const latest = isK ? latestBrief(deal.id) : null;
+  // ?v=N picks a version; ?open=1 (or a version link) opens the brief in place.
+  const sp = await props.searchParams;
+  const shown = isK ? (sp.v ? briefVersion(deal.id, Number(sp.v)) : null) ?? latest : null;
+  const openBrief = sp.open === "1" || !!sp.v;
 
   return (
     <div className="space-y-6">
@@ -47,34 +53,37 @@ export default async function DealPage(props: PageProps<"/deal/[id]">) {
       </div>
 
       {isK && (
-        <Section title="Decision brief">
-          {latest ? (
-            <div className="card flex flex-wrap items-center gap-3 p-4">
-              <VerdictBadge verdict={latest.verdict} size="lg" />
-              <span className="font-medium">{latest.headline}</span>
-              <Link href={`/deal/${deal.id}/brief/${latest.version}`} className="btn btn-primary ml-auto">
-                Open brief v{latest.version}
-              </Link>
-              {versions.length > 1 && (
-                <div className="w-full text-xs text-muted">
-                  Versions:{" "}
-                  {versions.map((v) => (
-                    <Link key={v.version} href={`/deal/${deal.id}/brief/${v.version}`} className="mr-2 underline">
-                      v{v.version} ({v.trigger}, {fmtDate(v.createdAt)})
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
+        <section id="brief" className="scroll-mt-4 space-y-3">
+          <h2 className="label">Decision brief</h2>
+          {shown ? (
+            <Collapsible
+              key={shown.version}
+              defaultOpen={openBrief}
+              summary={
+                <>
+                  <VerdictBadge verdict={shown.verdict} size="lg" />
+                  <span className="font-medium">{shown.headline}</span>
+                  <span className="text-xs text-muted">
+                    v{shown.version}
+                    {versions.length > 1 ? ` of ${versions.length}` : ""}
+                  </span>
+                </>
+              }
+            >
+              <BriefView dealId={deal.id} version={shown.version} />
+            </Collapsible>
           ) : (
             <div className="card p-4 text-sm text-muted">No brief yet. Run `npm run review -- {deal.id}`.</div>
           )}
-        </Section>
+        </section>
       )}
 
-      <Section title={isK ? "Seller deal check (what the seller was told)" : "Deal check: is AtliQ free to offer this?"}>
-        <SellerCheckPanel deal={deal} checks={sellerChecksFor(deal.id)} />
-      </Section>
+      {/* The deal check is the seller's tool (F7); Karandeep sees its effect as the deal-facts mismatch finding in the brief (FR-20). */}
+      {!isK && (
+        <Section title="Deal check: is AtliQ free to offer this?">
+          <SellerCheckPanel deal={deal} checks={sellerChecksFor(deal.id)} />
+        </Section>
+      )}
 
       <Section
         title={`Documents in this deal · ${docs.length}`}

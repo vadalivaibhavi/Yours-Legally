@@ -14,6 +14,7 @@ export const LIMITS = {
   summary: 1000, // register summary
   contract: 200_000, // pasted contract text
   fileBytes: 1_000_000, // uploaded contract file
+  evidenceBytes: 5_000_000, // evidence attached to close a compliance alert
 } as const;
 
 /** Read a trimmed text field and reject it if it's over the limit. */
@@ -22,3 +23,6 @@ export function field(form: FormData, key: string, max: number, label = key): st
   if (v.length > max) throw new Error(`${label} is too long (${v.length} characters; the limit is ${max}).`);
   return v;
 }
+
+/** Evidence files accepted when closing a compliance alert. */
+export const EVIDENCE_TYPES = [".pdf", ".png", ".jpg", ".jpeg", ".docx", ".doc", ".txt", ".md", ".eml", ".msg"];

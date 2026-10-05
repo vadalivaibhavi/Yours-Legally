@@ -1,7 +1,7 @@
 {
   "dealId": "rheinwerk",
   "version": 1,
-  "createdAt": "2026-10-05T10:57:57.258Z",
+  "createdAt": "2026-10-05T14:03:46.875Z",
   "trigger": "initial review",
   "inputsHash": "bc21afffaf8fa4d5194eed89660db95c",
   "documentIds": [
@@ -591,7 +591,7 @@
           "labelNote": "45-day payment: the negotiated maximum (90 → 45)",
           "score": 0.912,
           "text": "4.1 The total fees for the Services are **USD 48,000** (United States Dollars Forty-Eight Thousand only), payable on completion of Milestones as set out in Annexure A.\n\n4.2 The Service Provider shall raise an invoice upon completion of each Milestone. The Company shall pay each undisputed invoice within forty-five (45) days of receipt of the invoice.\n\n4.3 All fees are exclusive of GST. The Company shall be entitled to deduct TDS as applicable.\n\n4.4 Any disputed amount shall be notified within ten (10) days of receipt of invoice, and the Parties shall resolve such dispute in good faith within thirty (30) days.",
-          "differs": "EUR 88,000 fee and 30-day payment term instead of USD 48,000 and 45-day term.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -603,7 +603,7 @@
           "label": "untagged",
           "score": 0.911,
           "text": "4.1 The total fees under SOW-1 are **USD 71,000** (United States Dollars Seventy-One Thousand only), payable in accordance with the milestone schedule in SOW-1.\n\n4.2 AtliQ shall invoice upon completion of each milestone. PayTrack shall pay each undisputed invoice within thirty (30) days of receipt.\n\n4.3 Fees are exclusive of GST. PayTrack may deduct TDS in accordance with Applicable Law.",
-          "differs": "EUR 88,000 total fee instead of USD 71,000; invoices payable after milestone acceptance.",
+          "differs": "",
           "alsoIn": [
             "Acme Retail Group (2025-03)"
           ]
@@ -618,7 +618,7 @@
           "labelNote": "Fair freelancer terms: 30-day pay, mutual cap, mutual 15-day exit",
           "score": 0.885,
           "text": "3.1 AtliQ shall pay the Contractor the fees set out in the Engagement Schedule.\n\n3.2 The Contractor shall submit a monthly invoice, supported by a timesheet approved by the AtliQ project lead. AtliQ shall pay each undisputed invoice within thirty (30) days of receipt.\n\n3.3 AtliQ shall deduct tax at source under the Income Tax Act, 1961 as applicable and provide TDS certificates. The Contractor is responsible for his own GST registration (if required) and all other taxes.\n\n3.4 AtliQ shall reimburse reasonable pre-approved travel expenses incurred for client visits.",
-          "differs": "EUR 88,000 milestone-based fee instead of monthly billing supported by timesheets.",
+          "differs": "",
           "alsoIn": []
         }
       ]
@@ -639,7 +639,7 @@
           "labelNote": "Rohan kept the Work Product IP (\"ok\" from phone) while Acme was promised ownership",
           "score": 0.88,
           "text": "5.1 In this Clause, \"**Work Product**\" means all dashboards, reports, data models, DAX measures, Power Query scripts, visual templates, documentation and other materials created by the Contractor in performing the Services.\n\n5.2 The Contractor retains ownership of all intellectual property rights in the Work Product and in any pre-existing materials, components and templates of the Contractor.\n\n5.3 The Contractor grants AtliQ a non-exclusive, perpetual, irrevocable, royalty-free, worldwide licence to use, copy, modify and deploy the Work Product for the purposes of AtliQ's business, including for delivery to AtliQ's clients.\n\n5.4 The Contractor shall not incorporate into the Work Product any third-party material that AtliQ is not entitled to use under Clause 5.3.",
-          "differs": "Specifies proprietary \"PipeKit\" accelerator instead of generic work product; grants perpetual license to Client.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -651,7 +651,7 @@
           "label": "untagged",
           "score": 0.889,
           "text": "5.1 All deliverables developed specifically for the Client shall be the property of the Client\nupon full payment. The Service Provider retains its pre-existing tools and know-how.",
-          "differs": "Grants perpetual license to specific proprietary \"PipeKit\" accelerator rather than just retaining generic pre-existing tools.",
+          "differs": "",
           "alsoIn": [
             "Northwind Logistics (2025-06)",
             "Al Noor Hospitality Group (2025-03)",
@@ -668,7 +668,7 @@
           "label": "untagged",
           "score": 0.878,
           "text": "8.1 Upon payment, Crestline shall own all right, title and interest in the Deliverables.\n\n8.2 Supplier retains all rights in its pre-existing materials, tools and know-how (\"**Supplier Materials**\"). To the extent Supplier Materials are incorporated in a Deliverable, Supplier grants Crestline a non-exclusive, perpetual, royalty-free license to use them as part of such Deliverable.",
-          "differs": "Grants license for specific \"PipeKit\" accelerator instead of generic supplier materials; includes right to modify.",
+          "differs": "",
           "alsoIn": []
         }
       ]
@@ -689,7 +689,7 @@
           "labelNote": "Origin of the LD playbook: 0.5% of milestone/week, 5% cap, client delays excluded (Mar 2025)",
           "score": 0.933,
           "text": "7.1 If the Service Provider fails to complete a Milestone by the agreed date for reasons solely attributable to the Service Provider, the Service Provider shall pay liquidated damages at the rate of 0.5% (half percent) of the Milestone Fee of the delayed Milestone for each complete week of delay.\n\n7.2 The aggregate liquidated damages in respect of any Milestone shall not exceed 5% (five percent) of the Milestone Fee of that Milestone.\n\n7.3 No liquidated damages shall be payable where the delay is caused by the Client, including delayed access to data or systems, delayed review of Deliverables, or changes in scope, or by a Force Majeure event.\n\n7.4 The Parties agree that the liquidated damages are a genuine pre-estimate of loss and shall be the Client's sole and exclusive remedy for delay.",
-          "differs": "Same 0.5% rate and 5% cap, but penalty is credited against damage claims.",
+          "differs": "",
           "alsoIn": [
             "Trustline NBFC (2026-08)",
             "Northwind Logistics (2025-06)"
@@ -705,7 +705,7 @@
           "labelNote": "Signed on a phone in 4 minutes: 1%/day uncapped LDs, no client-delay exclusion, group set-off, English law on a US entity. Cost $9k + $14.2k legal",
           "score": 0.895,
           "text": "9.1 If the Supplier fails to achieve any Key Date, the Supplier shall pay to the Customer liquidated damages in the amount of one per cent (1%) of the Contract Value for each day or part day by which the relevant Key Date is missed.\n\n9.2 Liquidated damages under clause 9.1 shall be payable in addition to any other right or remedy available to the Customer under this Agreement or at law, and the Customer may deduct such liquidated damages from any sums due to the Supplier.\n\n9.3 The Supplier acknowledges that the liquidated damages set out in this clause 9 are proportionate to the Customer's legitimate interest in the timely delivery of the Services.",
-          "differs": "0.5% weekly penalty capped at 5%, replacing 1% daily penalty with no stated cap.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -718,7 +718,7 @@
           "labelNote": "One-off: \"strategic exception for Al Noor only, not our new standard\" (cap 10% of total fees)",
           "score": 0.893,
           "text": "10.1 The Supplier shall use all reasonable endeavours to achieve each Milestone by the date set out in the relevant SOW.\n\n10.2 Each Deliverable shall be subject to acceptance testing by the Client within ten (10) Business Days of delivery against the acceptance criteria in the SOW. Deliverables not rejected in writing within that period shall be deemed accepted.\n\n10.3 If the Supplier fails to achieve a Milestone by its due date for reasons attributable to the Supplier, the Supplier shall pay to the Client, as liquidated damages, one percent (1%) of the Fees payable for the affected Milestone for each complete week of delay, provided that the aggregate liquidated damages payable under this Agreement shall not exceed ten percent (10%) of the total Fees payable under this Agreement.\n\n10.4 The Parties agree that the liquidated damages in Clause 10.3 are a genuine pre-estimate of loss. No liquidated damages shall be payable for delay caused by the Client, its contractors, or a Force Majeure Event.",
-          "differs": "0.5% weekly penalty capped at 5% instead of 1% liquidated damages with no cap.",
+          "differs": "",
           "alsoIn": []
         }
       ]
@@ -739,7 +739,7 @@
           "labelNote": "Counsel-reviewed BAA (Calloway Stern, $3.8k): capped liability, 5-day reporting, de-identified offshore route",
           "score": 0.87,
           "text": "9.1 Each Party's liability arising out of or relating to this BAA, including any Breach, is subject to the limitations and exclusions of liability in the Master Services Agreement, under which aggregate liability for claims relating to a Breach or a violation of this BAA shall not exceed two (2) times the Fees paid or payable under the Master Services Agreement in the twelve (12) months preceding the event giving rise to the claim.",
-          "differs": "Liability capped at total remuneration for slight negligence; unlimited for intent or gross negligence.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -752,7 +752,7 @@
           "labelNote": "Fair freelancer terms: 30-day pay, mutual cap, mutual 15-day exit",
           "score": 0.865,
           "text": "8.1 Each party's aggregate liability under this Agreement shall not exceed the total fees paid or payable to the Contractor in the twelve (12) months preceding the claim, except for breach of Clause 6 or fraud.\n\n8.2 Neither party is liable for indirect or consequential loss.",
-          "differs": "Unlimited liability for gross negligence; slight negligence capped at total remuneration instead of 12 months' fees.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -764,7 +764,7 @@
           "label": "untagged",
           "score": 0.88,
           "text": "11.1 Neither Party shall be liable for any indirect, special, incidental or consequential damages, or loss of profits, revenue or goodwill.\n\n11.2 Each Party's total aggregate liability under or in connection with this Agreement shall not exceed the total fees paid or payable under the SOW giving rise to the claim.\n\n11.3 The limitations in this Clause 11 shall not apply to liability for fraud or wilful misconduct.",
-          "differs": "Unlimited liability for gross negligence; slight negligence capped at total remuneration instead of fees for one SOW.",
+          "differs": "",
           "alsoIn": [
             "Northwind Logistics (2025-06)",
             "Al Noor Hospitality Group (2025-03)",
@@ -791,7 +791,7 @@
           "labelNote": "Origin of the mutual-indemnity position: no indemnity for the indemnified party's own negligence",
           "score": 0.939,
           "text": "10.1 Each Party (the \"**Indemnifying Party**\") shall indemnify, defend and hold harmless the other Party and its directors, officers and employees (the \"**Indemnified Party**\") from and against all Losses arising out of any third-party claim to the extent caused by: (a) the Indemnifying Party's breach of Clause 7 (Confidentiality) or Clause 12 (Data Protection); (b) the gross negligence, wilful misconduct or fraud of the Indemnifying Party or its personnel; or (c) in the case of AtliQ, any claim that the Deliverables infringe a third party's intellectual property rights, and in the case of PayTrack, any claim that Client Data or materials supplied by PayTrack infringe a third party's rights.\n\n10.2 Neither Party shall be required to indemnify the other to the extent any Losses are caused by the negligence, breach or wilful misconduct of the Indemnified Party.\n\n10.3 The Indemnified Party shall give prompt written notice of any claim, permit the Indemnifying Party to control the defence and settlement, and provide reasonable cooperation at the Indemnifying Party's cost.",
-          "differs": "Broad mutual indemnity for any culpable conflict instead of specific list of covered conflicts.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -804,7 +804,7 @@
           "labelNote": "Mutual indemnity",
           "score": 0.925,
           "text": "11.1 Each Party (\"**Indemnifying Party**\") shall indemnify the other against losses arising from third-party claims caused by the Indemnifying Party's breach of confidentiality, infringement of third-party intellectual property rights, or gross negligence or wilful misconduct.",
-          "differs": "Mutual indemnity for any culpable conflict instead of limited list like confidentiality or IP infringement.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -816,7 +816,7 @@
           "label": "untagged",
           "score": 0.929,
           "text": "15.1 The Supplier shall indemnify the Client against losses arising from any third-party claim that the Deliverables (excluding Client materials) infringe that third party's intellectual property rights.\n\n15.2 The Client shall indemnify the Supplier against losses arising from any third-party claim that Client Data or Client materials infringe that third party's rights.\n\n15.3 The indemnified Party shall promptly notify the indemnifying Party, allow it conduct of the defence, and provide reasonable assistance.",
-          "differs": "Mutual indemnity for any culpable conflict instead of only IP infringement claims.",
+          "differs": "",
           "alsoIn": [
             "CloudSpan Technologies (2025-09)",
             "Northwind Logistics (2025-06)"
@@ -839,7 +839,7 @@
           "label": "untagged",
           "score": 0.94,
           "text": "7.1 Each Party shall hold the other Party's Confidential Information in confidence, use it only to perform or receive the Services, and disclose it only to its personnel and advisors with a need to know who are bound by obligations at least as protective.\n\n7.2 The obligations in Section 7.1 do not apply to information that is or becomes publicly available without breach, was known to the recipient prior to disclosure, is independently developed, or is rightfully received from a third party.\n\n7.3 These obligations survive for three (3) years following termination, and indefinitely for trade secrets.",
-          "differs": "Fixed 5-year post-termination term instead of 3 years or indefinite for trade secrets.",
+          "differs": "",
           "alsoIn": [
             "Northwind Logistics (2025-06)",
             "CloudSpan Technologies (2025-09)",
@@ -855,7 +855,7 @@
           "label": "untagged",
           "score": 0.932,
           "text": "8.1 \"**Confidential Information**\" means all information disclosed by one Party to the other, whether before or after the Effective Date, that is marked confidential or would reasonably be regarded as confidential, including Client Data, pricing strategies, rate plans, occupancy forecasts and business plans.\n\n8.2 Each Party shall keep the other's Confidential Information confidential, use it only for the purposes of this Agreement, and disclose it only to its employees and advisers who need to know it and are bound by equivalent obligations.\n\n8.3 These obligations do not apply to information that is public other than through breach, was lawfully known before disclosure, is independently developed, or is required to be disclosed by law.\n\n8.4 The obligations in this Clause 8 continue for five (5) years after expiry or termination.",
-          "differs": "Includes a fixed 5-year post-termination survival period for confidentiality obligations.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -867,7 +867,7 @@
           "label": "untagged",
           "score": 0.926,
           "text": "4.1 Each party shall keep confidential all information received from the other party including\nfare data, supplier contracts, customer data and source code, and shall not disclose the same\nto any third party. This obligation shall survive for two (2) years after termination.",
-          "differs": "Confidentiality survives for 5 years post-termination instead of 2 years.",
+          "differs": "",
           "alsoIn": [
             "Sunrise Foods (2025-04)"
           ]
@@ -889,7 +889,7 @@
           "label": "untagged",
           "score": 0.935,
           "text": "14.1 Each party shall comply with the UK GDPR and the Data Protection Act 2018. To the extent the Supplier processes personal data on behalf of the Client, it shall do so only on the Client's documented instructions and in accordance with the data processing terms in Schedule 3.\n\n14.2 Any transfer of personal data to India shall be made subject to the UK International Data Transfer Addendum to the EU Standard Contractual Clauses.",
-          "differs": "Governed by Art. 28 GDPR and EU SCCs instead of UK GDPR and UK Transfer Addendum.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -901,7 +901,7 @@
           "label": "untagged",
           "score": 0.909,
           "text": "13.1 The Service Provider shall process personal data received from the Client only for the purpose of the Services and in compliance with the Digital Personal Data Protection Act, 2023 and the rules made thereunder, as and when in force, and shall implement reasonable security practices.",
-          "differs": "References Art. 28 GDPR and EU SCCs instead of India's Digital Personal Data Protection Act.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -913,7 +913,7 @@
           "label": "untagged",
           "score": 0.895,
           "text": "16.1 Each Party shall comply with applicable data protection laws, including the DIFC Data Protection Law No. 5 of 2020 and the UAE Federal Decree-Law No. 45 of 2021, to the extent applicable.\n\n16.2 The Supplier shall process Guest Data only on the documented instructions of the Client, implement appropriate technical and organisational measures, and notify the Client without undue delay (and in any event within forty-eight (48) hours) of any personal data breach.\n\n16.3 The Supplier shall not transfer Guest Data outside the UAE without the Client's prior written consent. Any Guest Data accessed from India shall be accessed remotely from UAE-hosted environments only.",
-          "differs": "Governed by GDPR and EU SCCs instead of DIFC and UAE Federal data laws.",
+          "differs": "",
           "alsoIn": []
         }
       ]
@@ -934,7 +934,7 @@
           "labelNote": "Signed on a phone in 4 minutes: 1%/day uncapped LDs, no client-delay exclusion, group set-off, English law on a US entity. Cost $9k + $14.2k legal",
           "score": 0.872,
           "text": "20.1 This Agreement and any dispute or claim (including non-contractual disputes or claims) arising out of or in connection with it or its subject matter shall be governed by and construed in accordance with the law of England and Wales.\n\n20.2 Each party irrevocably agrees that the courts of London, England shall have exclusive jurisdiction to settle any dispute or claim arising out of or in connection with this Agreement.\n\n---",
-          "differs": "Governed by German law with Munich jurisdiction instead of English law and London courts.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -947,7 +947,7 @@
           "labelNote": "English law + LCIA: \"not worth losing the deal over\"",
           "score": 0.859,
           "text": "17.1 This Agreement and any dispute or claim (including non-contractual disputes or claims) arising out of or in connection with it shall be governed by the law of England and Wales.\n\n17.2 Any dispute arising out of or in connection with this Agreement shall be referred to and finally resolved by arbitration under the LCIA Rules. The number of arbitrators shall be one. The seat of arbitration shall be London. The language of the arbitration shall be English.",
-          "differs": "German law and Munich courts instead of English law and LCIA arbitration in London.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -959,7 +959,7 @@
           "label": "untagged",
           "score": 0.873,
           "text": "16.1 This Agreement shall be governed by the laws of the State of Ohio, without regard to its conflict-of-laws principles.\n\n16.2 The Parties consent to the exclusive jurisdiction of the state and federal courts located in Franklin County, Ohio.",
-          "differs": "German law and Munich jurisdiction instead of Ohio law and Franklin County courts.",
+          "differs": "",
           "alsoIn": []
         }
       ]
@@ -1023,10 +1023,10 @@
   },
   "errors": [],
   "usage": {
-    "calls": 2,
-    "cachedCalls": 4,
-    "inputTokens": 5371,
-    "outputTokens": 4170,
-    "ms": 637641
+    "calls": 0,
+    "cachedCalls": 5,
+    "inputTokens": 0,
+    "outputTokens": 0,
+    "ms": 39668
   }
 }

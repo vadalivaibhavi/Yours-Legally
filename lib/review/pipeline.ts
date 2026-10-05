@@ -231,7 +231,7 @@ async function runReview(dealId: string, opts: ReviewOptions): Promise<Brief> {
   // ---- merge, guardrails, AtliQ-paper cap, precedents
   findings = mergeFindings(findings).map((f) => {
     const doc = f.docId ? byId.get(f.docId) : undefined;
-    let g = sanitizeFinding(f);
+    let g = sanitizeFinding({ ...f, citations: dedupeCitations(f.citations) });
     if (doc?.paper === "atliq" && doc.sideOfTable === "buyer" && g.severity === "blocker") g = { ...g, severity: "high", resolution: "fix_before_sending" };
     if (!g.precedents && (g.category === "playbook" || g.category === "flowdown")) g.precedents = ruleFor(pb.rules, g.topic, doc?.paper === "atliq")?.precedents;
     return g;
@@ -309,11 +309,24 @@ async function runReview(dealId: string, opts: ReviewOptions): Promise<Brief> {
   };
 }
 
+/** Drop a citation already contained in another citation from the same document (fragments of one clause). */
+function dedupeCitations(cites: Citation[]): Citation[] {
+  const norm = (q: string) => q.toLowerCase().replace(/\*+/g, "").replace(/\s+/g, " ").trim();
+  const parts = (q: string) => norm(q).split(/\s*…\s*/).filter(Boolean);
+  return cites.filter((c, i) => {
+    const mine = parts(c.quote);
+    return !cites.some((o, j) => j !== i && o.docId === c.docId && (norm(o.quote).length > norm(c.quote).length || (norm(o.quote) === norm(c.quote) && j < i)) && mine.every((p) => norm(o.quote).includes(p)));
+  });
+}
+
 /** One finding per key: max severity, union of citations, richer model-written text wins. */
 function mergeFindings(input: Finding[]): Finding[] {
   // The deterministic insurance gate owns insurance findings; the playbook's view folds into it.
   const insuranceGate = input.find((f) => f.key.startsWith("gate:insurance:"))?.key;
-  const list = insuranceGate ? input.map((f) => (f.key === "playbook:insurance" ? { ...f, key: insuranceGate, category: "gate" as const } : f)) : input;
+  // Only citations that are actually about insurance come along (the model sometimes quotes a neighbouring clause).
+  const list = insuranceGate
+    ? input.map((f) => (f.key === "playbook:insurance" ? { ...f, key: insuranceGate, category: "gate" as const, citations: f.citations.filter((c) => /insur|coverage|policy|additional insured/i.test(c.quote)) } : f))
+    : input;
   const out = new Map<string, Finding>();
   for (const f of list) {
     const prev = out.get(f.key);

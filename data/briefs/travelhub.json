@@ -1,7 +1,7 @@
 {
   "dealId": "travelhub",
   "version": 1,
-  "createdAt": "2026-10-05T10:47:19.615Z",
+  "createdAt": "2026-10-05T14:03:22.093Z",
   "trigger": "initial review",
   "inputsHash": "bae9c86203b694533267663dcfc09a8b",
   "documentIds": [
@@ -536,7 +536,7 @@
           "labelNote": "45-day payment: the negotiated maximum (90 → 45)",
           "score": 0.882,
           "text": "4.1 The total fees for the Services are **USD 48,000** (United States Dollars Forty-Eight Thousand only), payable on completion of Milestones as set out in Annexure A.\n\n4.2 The Service Provider shall raise an invoice upon completion of each Milestone. The Company shall pay each undisputed invoice within forty-five (45) days of receipt of the invoice.\n\n4.3 All fees are exclusive of GST. The Company shall be entitled to deduct TDS as applicable.\n\n4.4 Any disputed amount shall be notified within ten (10) days of receipt of invoice, and the Parties shall resolve such dispute in good faith within thirty (30) days.",
-          "differs": "Higher fee ($52,000 vs $48,000) and excludes travel expense reimbursement provision found in the new clause.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -548,7 +548,7 @@
           "label": "untagged",
           "score": 0.889,
           "text": "5.1 The total Fees under SOW-1 are **USD 33,000** (United States Dollars Thirty-Three Thousand only), comprising build fees payable on Milestones and a Monthly Support Fee for the support period, as detailed in SOW-1.\n\n5.2 AtliQ shall invoice build fees upon completion of each Milestone and the Monthly Support Fee monthly in arrears. Sunrise shall pay each undisputed invoice within thirty (30) days of the invoice date.\n\n5.3 All amounts are exclusive of GST, which shall be charged additionally at the applicable rate. Sunrise may deduct TDS as required by law.\n\n5.4 Delayed payments shall attract interest at twelve percent (12%) per annum.",
-          "differs": "Higher fee ($52,000 vs $33,000) and includes travel expense reimbursement not present in the signed clause.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -561,7 +561,7 @@
           "labelNote": "Fair freelancer terms: 30-day pay, mutual cap, mutual 15-day exit",
           "score": 0.863,
           "text": "3.1 AtliQ shall pay the Contractor the fees set out in the Engagement Schedule.\n\n3.2 The Contractor shall submit a monthly invoice, supported by a timesheet approved by the AtliQ project lead. AtliQ shall pay each undisputed invoice within thirty (30) days of receipt.\n\n3.3 AtliQ shall deduct tax at source under the Income Tax Act, 1961 as applicable and provide TDS certificates. The Contractor is responsible for his own GST registration (if required) and all other taxes.\n\n3.4 AtliQ shall reimburse reasonable pre-approved travel expenses incurred for client visits.",
-          "differs": "Specifies fixed $52,000 fee and instalment schedule, whereas signed version uses separate Engagement Schedules and timesheets.",
+          "differs": "",
           "alsoIn": []
         }
       ]
@@ -581,7 +581,7 @@
           "label": "untagged",
           "score": 0.971,
           "text": "7.1 Each Party shall hold the other Party's Confidential Information in confidence, use it only to perform or receive the Services, and disclose it only to its personnel and advisors with a need to know who are bound by obligations at least as protective.\n\n7.2 The obligations in Section 7.1 do not apply to information that is or becomes publicly available without breach, was known to the recipient prior to disclosure, is independently developed, or is rightfully received from a third party.\n\n7.3 These obligations survive for three (3) years following termination, and indefinitely for trade secrets.",
-          "differs": "Three-year survival period for all information; signed version adds indefinite protection for trade secrets.",
+          "differs": "",
           "alsoIn": [
             "CloudSpan Technologies (2025-09)",
             "Sunrise Foods (2025-04)",
@@ -598,7 +598,7 @@
           "label": "untagged",
           "score": 0.942,
           "text": "6.1 Each party shall keep confidential all non-public information of the other party, and in the case of AtliQ, of AtliQ's clients, received in connection with this Agreement, and shall use it only for the purposes of this Agreement.\n\n6.2 The Contractor shall comply with any confidentiality and data-security requirements of AtliQ's clients notified to him in writing, including restrictions on downloading client data to personal devices.\n\n6.3 This Clause 6 does not apply to information that is public, already lawfully known, independently developed, or required to be disclosed by law.\n\n6.4 The obligations in this Clause 6 survive for three (3) years after termination or expiry.",
-          "differs": "Adds a specific three-year survival term; signed version lacks a survival duration and includes client data security rules.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -610,7 +610,7 @@
           "label": "untagged",
           "score": 0.931,
           "text": "8.1 \"**Confidential Information**\" means all information disclosed by one Party to the other, whether before or after the Effective Date, that is marked confidential or would reasonably be regarded as confidential, including Client Data, pricing strategies, rate plans, occupancy forecasts and business plans.\n\n8.2 Each Party shall keep the other's Confidential Information confidential, use it only for the purposes of this Agreement, and disclose it only to its employees and advisers who need to know it and are bound by equivalent obligations.\n\n8.3 These obligations do not apply to information that is public other than through breach, was lawfully known before disclosure, is independently developed, or is required to be disclosed by law.\n\n8.4 The obligations in this Clause 8 continue for five (5) years after expiry or termination.",
-          "differs": "Lacks specific examples like pricing or occupancy forecasts; adds a three-year survival term missing in the signed snippet.",
+          "differs": "",
           "alsoIn": []
         }
       ]
@@ -630,7 +630,7 @@
           "label": "untagged",
           "score": 0.917,
           "text": "10.1 Upon payment in full, Sunrise shall own all intellectual property rights in the Deliverables developed specifically for Sunrise under an SOW.\n\n10.2 AtliQ retains ownership of its pre-existing tools, components, libraries and know-how. AtliQ grants Sunrise a perpetual, non-exclusive, royalty-free licence to use any such pre-existing materials to the extent incorporated in the Deliverables.",
-          "differs": "Explicitly includes trained models and hotel ranking modules in the definition of deliverables.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -642,7 +642,7 @@
           "label": "untagged",
           "score": 0.909,
           "text": "8.1 Upon full payment, all intellectual property in the Deliverables developed specifically for PayTrack shall vest in PayTrack.\n\n8.2 AtliQ retains ownership of its pre-existing materials, tools and know-how and grants PayTrack a perpetual, non-exclusive, royalty-free licence to use such materials as incorporated in the Deliverables.",
-          "differs": "Includes specific mention of trained models and hotel ranking modules as owned deliverables.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -654,7 +654,7 @@
           "label": "untagged",
           "score": 0.897,
           "text": "5.1 All deliverables developed specifically for the Client shall be the property of the Client\nupon full payment. The Service Provider retains its pre-existing tools and know-how.",
-          "differs": "Grants perpetual, royalty-free license to background technology and explicitly mentions models and hotel ranking modules.",
+          "differs": "",
           "alsoIn": [
             "Trustline NBFC (2026-08)",
             "Al Noor Hospitality Group (2025-03)",
@@ -678,7 +678,7 @@
           "label": "untagged",
           "score": 0.965,
           "text": "11.1 Neither Party shall be liable for any indirect, special, incidental or consequential damages, or loss of profits, revenue or goodwill.\n\n11.2 Each Party's total aggregate liability under or in connection with this Agreement shall not exceed the total fees paid or payable under the SOW giving rise to the claim.\n\n11.3 The limitations in this Clause 11 shall not apply to liability for fraud or wilful misconduct.",
-          "differs": "Liability cap based on preceding 12 months' fees; signed version uses total fees paid or payable under SOW.",
+          "differs": "",
           "alsoIn": [
             "Trustline NBFC (2026-08)",
             "Acme Retail Group (2025-03)",
@@ -696,7 +696,7 @@
           "labelNote": "Fair freelancer terms: 30-day pay, mutual cap, mutual 15-day exit",
           "score": 0.942,
           "text": "8.1 Each party's aggregate liability under this Agreement shall not exceed the total fees paid or payable to the Contractor in the twelve (12) months preceding the claim, except for breach of Clause 6 or fraud.\n\n8.2 Neither party is liable for indirect or consequential loss.",
-          "differs": "Carves out confidentiality and wilful misconduct from the cap; signed version carves out confidentiality and fraud.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -708,7 +708,7 @@
           "label": "untagged",
           "score": 0.959,
           "text": "12.1 EXCEPT FOR BREACH OF SECTION 7 OR A PARTY'S INDEMNIFICATION OBLIGATIONS, NEITHER PARTY SHALL BE LIABLE FOR ANY INDIRECT, INCIDENTAL, CONSEQUENTIAL, SPECIAL OR PUNITIVE DAMAGES.\n\n12.2 EXCEPT FOR BREACH OF SECTION 7 OR A PARTY'S INDEMNIFICATION OBLIGATIONS, EACH PARTY'S AGGREGATE LIABILITY SHALL NOT EXCEED THE FEES PAID OR PAYABLE BY CRESTLINE UNDER THIS AGREEMENT IN THE TWELVE (12) MONTHS PRECEDING THE CLAIM.",
-          "differs": "Cap excludes confidentiality and wilful misconduct; signed version excludes confidentiality and indemnification obligations.",
+          "differs": "",
           "alsoIn": []
         }
       ]
@@ -729,7 +729,7 @@
           "labelNote": "Origin of the mutual-indemnity position: no indemnity for the indemnified party's own negligence",
           "score": 0.911,
           "text": "10.1 Each Party (the \"**Indemnifying Party**\") shall indemnify, defend and hold harmless the other Party and its directors, officers and employees (the \"**Indemnified Party**\") from and against all Losses arising out of any third-party claim to the extent caused by: (a) the Indemnifying Party's breach of Clause 7 (Confidentiality) or Clause 12 (Data Protection); (b) the gross negligence, wilful misconduct or fraud of the Indemnifying Party or its personnel; or (c) in the case of AtliQ, any claim that the Deliverables infringe a third party's intellectual property rights, and in the case of PayTrack, any claim that Client Data or materials supplied by PayTrack infringe a third party's rights.\n\n10.2 Neither Party shall be required to indemnify the other to the extent any Losses are caused by the negligence, breach or wilful misconduct of the Indemnified Party.\n\n10.3 The Indemnified Party shall give prompt written notice of any claim, permit the Indemnifying Party to control the defence and settlement, and provide reasonable cooperation at the Indemnifying Party's cost.",
-          "differs": "Specific to IP infringement and customer data usage; signed version covers broad losses like gross negligence and fraud.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -741,7 +741,7 @@
           "label": "untagged",
           "score": 0.925,
           "text": "15.1 The Supplier shall indemnify the Client against losses arising from any third-party claim that the Deliverables (excluding Client materials) infringe that third party's intellectual property rights.\n\n15.2 The Client shall indemnify the Supplier against losses arising from any third-party claim that Client Data or Client materials infringe that third party's rights.\n\n15.3 The indemnified Party shall promptly notify the indemnifying Party, allow it conduct of the defence, and provide reasonable assistance.",
-          "differs": "Includes indemnity for use of deliverables in conflict with law; signed version focuses strictly on IP infringement.",
+          "differs": "",
           "alsoIn": [
             "Northwind Logistics (2025-06)",
             "CloudSpan Technologies (2025-09)"
@@ -757,7 +757,7 @@
           "labelNote": "Mutual indemnity",
           "score": 0.888,
           "text": "11.1 Each Party (\"**Indemnifying Party**\") shall indemnify the other against losses arising from third-party claims caused by the Indemnifying Party's breach of confidentiality, infringement of third-party intellectual property rights, or gross negligence or wilful misconduct.",
-          "differs": "Limits AtliQ's indemnity to IP infringement; signed version includes confidentiality, gross negligence, and wilful misconduct.",
+          "differs": "",
           "alsoIn": []
         }
       ]
@@ -777,7 +777,7 @@
           "label": "untagged",
           "score": 0.912,
           "text": "14.1 AtliQ shall comply with the Information Technology Act, 2000, the rules thereunder, and the Digital Personal Data Protection Act, 2023 to the extent applicable, in relation to any personal data of distributors or employees processed in performing the Services.",
-          "differs": "Governed by UAE and Saudi data laws; signed version cites Indian IT and DPDP Acts.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -789,7 +789,7 @@
           "label": "untagged",
           "score": 0.905,
           "text": "16.1 Each Party shall comply with applicable data protection laws, including the DIFC Data Protection Law No. 5 of 2020 and the UAE Federal Decree-Law No. 45 of 2021, to the extent applicable.\n\n16.2 The Supplier shall process Guest Data only on the documented instructions of the Client, implement appropriate technical and organisational measures, and notify the Client without undue delay (and in any event within forty-eight (48) hours) of any personal data breach.\n\n16.3 The Supplier shall not transfer Guest Data outside the UAE without the Client's prior written consent. Any Guest Data accessed from India shall be accessed remotely from UAE-hosted environments only.",
-          "differs": "References Saudi law; signed version requires 48-hour conflict notification and restricts data transfer outside UAE.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -801,7 +801,7 @@
           "label": "untagged",
           "score": 0.9,
           "text": "12.1 AtliQ shall process personal data comprised in Client Data only on PayTrack's documented instructions and in compliance with the Digital Personal Data Protection Act, 2023, the Information Technology Act, 2000 and applicable RBI directions.\n\n12.2 AtliQ shall notify PayTrack of any data breach within twenty-four (24) hours of becoming aware of it, and shall cooperate with PayTrack in any reporting to CERT-In or the RBI.\n\n12.3 AtliQ shall permit PayTrack and its regulators to audit its compliance with this Clause 12 on reasonable notice.",
-          "differs": "Governed by UAE and Saudi laws; signed version follows Indian laws and includes 24-hour conflict notification.",
+          "differs": "",
           "alsoIn": []
         }
       ]
@@ -822,7 +822,7 @@
           "labelNote": "DIFC law accepted as the client's group standard",
           "score": 0.909,
           "text": "21.1 This Agreement and any non-contractual obligations arising out of it shall be governed by the laws of the Dubai International Financial Centre.\n\n21.2 The Parties shall first attempt to resolve any dispute through good-faith negotiation between senior executives for thirty (30) days.\n\n21.3 Failing resolution, the courts of the Dubai International Financial Centre shall have exclusive jurisdiction.",
-          "differs": "Uses onshore Dubai courts and UAE federal law; signed version uses DIFC courts and DIFC law.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -835,7 +835,7 @@
           "labelNote": "Signed on a phone in 4 minutes: 1%/day uncapped LDs, no client-delay exclusion, group set-off, English law on a US entity. Cost $9k + $14.2k legal",
           "score": 0.891,
           "text": "20.1 This Agreement and any dispute or claim (including non-contractual disputes or claims) arising out of or in connection with it or its subject matter shall be governed by and construed in accordance with the law of England and Wales.\n\n20.2 Each party irrevocably agrees that the courts of London, England shall have exclusive jurisdiction to settle any dispute or claim arising out of or in connection with this Agreement.\n\n---",
-          "differs": "Uses Dubai courts and UAE law; signed version uses London courts and English law.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -848,7 +848,7 @@
           "labelNote": "English law + LCIA: \"not worth losing the deal over\"",
           "score": 0.867,
           "text": "17.1 This Agreement and any dispute or claim (including non-contractual disputes or claims) arising out of or in connection with it shall be governed by the law of England and Wales.\n\n17.2 Any dispute arising out of or in connection with this Agreement shall be referred to and finally resolved by arbitration under the LCIA Rules. The number of arbitrators shall be one. The seat of arbitration shall be London. The language of the arbitration shall be English.",
-          "differs": "Uses onshore Dubai courts and UAE law; signed version uses LCIA arbitration in London and English law.",
+          "differs": "",
           "alsoIn": []
         }
       ]
@@ -857,10 +857,10 @@
   "counselPack": null,
   "errors": [],
   "usage": {
-    "calls": 2,
-    "cachedCalls": 4,
-    "inputTokens": 4967,
-    "outputTokens": 6337,
-    "ms": 3887791
+    "calls": 0,
+    "cachedCalls": 5,
+    "inputTokens": 0,
+    "outputTokens": 0,
+    "ms": 22523
   }
 }

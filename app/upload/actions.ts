@@ -115,5 +115,5 @@ async function attach(doc: Document, dealId: string, proposal: LinkProposal, by:
   mutate((s) => void (s.briefs[target] = [...(s.briefs[target] ?? []), brief]), { user: by, dealId: target, action: "brief.recheck", detail: { version } });
   revalidatePath("/", "layout");
   const u = await currentUser();
-  redirect(u.role === "karandeep" ? `/deal/${target}/brief/${version}?linked=${encodeURIComponent(proposal.mode + ": " + proposal.reason)}` : `/deal/${target}`);
+  redirect(u.role === "karandeep" ? `/deal/${target}?v=${version}&open=1#brief` : `/deal/${target}`);
 }

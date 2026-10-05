@@ -31,7 +31,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             </Link>
             <nav className="flex items-center gap-4 text-sm">
               <Link href="/" className="hover:underline">Queue</Link>
-              {user.role === "karandeep" && <Link href="/register" className="hover:underline">Register</Link>}
+              {user.role === "karandeep" && <Link href="/register" className="hover:underline">Commitments register</Link>}
             </nav>
             <div className="ml-auto flex items-center gap-4">
               <span className="hidden text-xs text-white/70 sm:inline" title="APP_TODAY: fixed so the demo and evals are reproducible">

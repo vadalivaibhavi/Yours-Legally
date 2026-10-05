@@ -1,7 +1,7 @@
 {
   "dealId": "ortiz",
   "version": 1,
-  "createdAt": "2026-10-05T11:07:33.876Z",
+  "createdAt": "2026-10-05T14:03:32.650Z",
   "trigger": "initial review",
   "inputsHash": "6af3476fd8cb3a79f77213398a17bd84",
   "documentIds": [
@@ -12,9 +12,8 @@
   "playbookVersion": "pb-v1.1-2026-10-05",
   "models": [
     "gemini-flash-lite-latest",
-    "gemini-3.5-flash",
-    "gemini-3.6-flash",
-    "gemini-3-flash-preview"
+    "gemini-3-flash-preview",
+    "gemini-3.5-flash"
   ],
   "promptVersion": "p1",
   "route": "full_review",
@@ -67,7 +66,7 @@
       "category": "dependency",
       "topic": "dependency",
       "title": "Depends on Harrington Health: MSA + BAA, which is not signed (latest verdict HOLD)",
-      "impact": "Sending this commits AtliQ to a vendor/contractor before the client contract it serves is resolved. HOLD: 4 missing documents, 7 high-risk redlines, and unconfirmed data exposure.",
+      "impact": "Sending this commits AtliQ to a vendor/contractor before the client contract it serves is resolved. HOLD: 12 open issues including missing BAAs and offshore data access restrictions.",
       "severity": "high",
       "confidence": "high",
       "needsJudgment": false,
@@ -139,7 +138,7 @@
           "docId": "harrington-msa",
           "docTitle": "Harrington Health MSA (draft)",
           "clauseRef": "Article 7.1",
-          "quote": "All Deliverables shall be deemed \"works made for hire\" as defined in the U.S. Copyright Act, 17 U.S.C. § 101, and shall be the sole and exclusive property of Client from creation",
+          "quote": "All Deliverables shall be deemed \"works made for hire … and shall be the sole and exclusive property of Client from creation",
           "role": "linked"
         }
       ],
@@ -245,7 +244,7 @@
           "docId": "ortiz-ica",
           "docTitle": "Daniel Ortiz contractor agreement (AtliQ draft)",
           "clauseRef": "Section 9",
-          "quote": "9.1 The Contractor warrants that the Work Product will be original to the Contractor (except for Contractor Tools and open-source components disclosed to the Company) and will not knowingly infringe any third party's intellectual property rights.\n9.2 Each Party's aggregate liability under this Agreement shall not exceed the total fees",
+          "quote": "9.1 The Contractor warrants that the Work Product will be original … 9.2 Each Party's aggregate liability … shall not exceed the total fees",
           "role": "incoming"
         }
       ],
@@ -331,13 +330,13 @@
     "Liability capped: total fees paid or payable to the Contractor under this Agreement in the twelve (12) months preceding the claim",
     "Correct AtliQ entity: Inc for a USA counterparty",
     "Governing law matches entity: State of Texas (Inc → US law)",
-    "NDA definition: The definition of Confidential Information is mutual and covers information disclosed by either party, specifically including Mr. Ortiz's rates and proprietary tools.",
-    "NDA residuals: The agreement does not contain a residuals clause, which protects both parties from unauthorized retention of mental impressions.",
-    "NDA remedies: Remedies are mutual, allowing each party to seek injunctive relief in addition to other remedies, with no lopsided indemnities or liability caps.",
-    "NDA covenants: The agreement contains no hidden non-compete, non-solicit, or exclusivity covenants.",
-    "NDA term: The term is mutual and reasonable, with a two-year disclosure period and a three-year survival period for the obligations.",
     "30-day payment terms match AtliQ's preferred standard.",
-    "The mutual 1x fees cap with appropriate carve-outs for confidentiality and fraud is standard."
+    "The mutual 1x fees cap with appropriate carve-outs for confidentiality and fraud is standard.",
+    "14-day mutual notice for convenience is consistent with AtliQ's 15-day freelancer standard.",
+    "No liquidated damages are included, avoiding the 'Never accept' daily penalties in Harrington's paper.",
+    "The 6-month non-solicit is narrow and specifically allows working for competitors after the term.",
+    "NDA definition: The definition of Confidential Information is mutual and covers information disclosed by either party, specifically including Mr. Ortiz's rates and proprietary tools.",
+    "NDA residuals: The agreement does not contain a residuals clause, which protects both parties from unauthorized retention of mental impressions."
   ],
   "notSeen": [
     "Register built from 17 signed documents. Contracts referenced elsewhere but never collected (e.g. ShopSwift SOW, PixelCraft vendor agreement, intercompany services agreement) can't be checked."
@@ -702,7 +701,7 @@
           "labelNote": "Fair freelancer terms: 30-day pay, mutual cap, mutual 15-day exit",
           "score": 0.935,
           "text": "3.1 AtliQ shall pay the Contractor the fees set out in the Engagement Schedule.\n\n3.2 The Contractor shall submit a monthly invoice, supported by a timesheet approved by the AtliQ project lead. AtliQ shall pay each undisputed invoice within thirty (30) days of receipt.\n\n3.3 AtliQ shall deduct tax at source under the Income Tax Act, 1961 as applicable and provide TDS certificates. The Contractor is responsible for his own GST registration (if required) and all other taxes.\n\n3.4 AtliQ shall reimburse reasonable pre-approved travel expenses incurred for client visits.",
-          "differs": "hourly instead of fees; adds 10-day dispute notice, ACH in USD, and out-of-pocket expenses instead of travel.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -715,7 +714,7 @@
           "labelNote": "45-day payment: the negotiated maximum (90 → 45)",
           "score": 0.886,
           "text": "4.1 The total fees for the Services are **USD 48,000** (United States Dollars Forty-Eight Thousand only), payable on completion of Milestones as set out in Annexure A.\n\n4.2 The Service Provider shall raise an invoice upon completion of each Milestone. The Company shall pay each undisputed invoice within forty-five (45) days of receipt of the invoice.\n\n4.3 All fees are exclusive of GST. The Company shall be entitled to deduct TDS as applicable.\n\n4.4 Any disputed amount shall be notified within ten (10) days of receipt of invoice, and the Parties shall resolve such dispute in good faith within thirty (30) days.",
-          "differs": "hourly rate instead of $48,000; 30-day payment instead of 45; adds out-of-pocket expenses.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -727,7 +726,7 @@
           "label": "untagged",
           "score": 0.898,
           "text": "2.1 The Client shall pay the fees set out in each SOW. Invoices shall be raised monthly and paid\nwithin thirty (30) days of receipt. Fees are exclusive of GST.\n2.2 Delayed payment shall carry interest @ l2% per annum.",
-          "differs": "adds hourly rate billing details, 10-day dispute notice, expense reimbursement; removes 12% interest on late payments.",
+          "differs": "",
           "alsoIn": []
         }
       ]
@@ -748,7 +747,7 @@
           "labelNote": "Rohan kept the Work Product IP (\"ok\" from phone) while Acme was promised ownership",
           "score": 0.922,
           "text": "5.1 In this Clause, \"**Work Product**\" means all dashboards, reports, data models, DAX measures, Power Query scripts, visual templates, documentation and other materials created by the Contractor in performing the Services.\n\n5.2 The Contractor retains ownership of all intellectual property rights in the Work Product and in any pre-existing materials, components and templates of the Contractor.\n\n5.3 The Contractor grants AtliQ a non-exclusive, perpetual, irrevocable, royalty-free, worldwide licence to use, copy, modify and deploy the Work Product for the purposes of AtliQ's business, including for delivery to AtliQ's clients.\n\n5.4 The Contractor shall not incorporate into the Work Product any third-party material that AtliQ is not entitled to use under Clause 5.3.",
-          "differs": "assigns Work Product ownership to Company upon payment instead of licensing it while Contractor retains ownership.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -760,7 +759,7 @@
           "label": "untagged",
           "score": 0.886,
           "text": "9.1 Upon payment in full of the relevant Fees, all intellectual property rights in the Deliverables created specifically for the Client shall vest in the Client.\n\n9.2 The Supplier retains ownership of its pre-existing tools, libraries, methodologies and know-how (\"**Supplier Background IP**\"). To the extent any Supplier Background IP is incorporated into a Deliverable, the Supplier grants the Client a perpetual, non-exclusive, royalty-free licence to use it as part of that Deliverable.",
-          "differs": "uses \"Work Product\" instead of \"Deliverables\" and defines it to include code, scripts, and data pipelines.",
+          "differs": "",
           "alsoIn": [
             "Northwind Logistics (2025-06)"
           ]
@@ -774,7 +773,7 @@
           "label": "untagged",
           "score": 0.885,
           "text": "5.1 All deliverables developed specifically for the Client shall be the property of the Client\nupon full payment. The Service Provider retains its pre-existing tools and know-how.",
-          "differs": "assigns ownership effective upon payment; adds specific definitions of Work Product components and pre-existing tools.",
+          "differs": "",
           "alsoIn": [
             "Trustline NBFC (2026-08)",
             "Acme Retail Group (2025-03)"
@@ -797,7 +796,7 @@
           "label": "untagged",
           "score": 0.946,
           "text": "7.1 Each Party shall hold the other Party's Confidential Information in confidence, use it only to perform or receive the Services, and disclose it only to its personnel and advisors with a need to know who are bound by obligations at least as protective.\n\n7.2 The obligations in Section 7.1 do not apply to information that is or becomes publicly available without breach, was known to the recipient prior to disclosure, is independently developed, or is rightfully received from a third party.\n\n7.3 These obligations survive for three (3) years following termination, and indefinitely for trade secrets.",
-          "differs": "adds references to Company clients, an external Mutual NDA, and returns/destroys data upon termination; no 3-year survival.",
+          "differs": "",
           "alsoIn": [
             "Northwind Logistics (2025-06)",
             "CloudSpan Technologies (2025-09)",
@@ -813,7 +812,7 @@
           "label": "untagged",
           "score": 0.946,
           "text": "6.1 Each party shall keep confidential all non-public information of the other party, and in the case of AtliQ, of AtliQ's clients, received in connection with this Agreement, and shall use it only for the purposes of this Agreement.\n\n6.2 The Contractor shall comply with any confidentiality and data-security requirements of AtliQ's clients notified to him in writing, including restrictions on downloading client data to personal devices.\n\n6.3 This Clause 6 does not apply to information that is public, already lawfully known, independently developed, or required to be disclosed by law.\n\n6.4 The obligations in this Clause 6 survive for three (3) years after termination or expiry.",
-          "differs": "adds reference to an external Mutual NDA; removes specific client data-security requirements and download restrictions.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -825,7 +824,7 @@
           "label": "untagged",
           "score": 0.924,
           "text": "4.1 Each party shall keep confidential all information received from the other party including\nfare data, supplier contracts, customer data and source code, and shall not disclose the same\nto any third party. This obligation shall survive for two (2) years after termination.",
-          "differs": "adds Company's clients, exceptions for public/known info, and external NDA reference; removes 2-year survival limit.",
+          "differs": "",
           "alsoIn": [
             "Sunrise Foods (2025-04)"
           ]
@@ -847,7 +846,7 @@
           "label": "untagged",
           "score": 0.951,
           "text": "10.1 Neither party shall solicit the employees of the other during the term and six months\nthereafter.",
-          "differs": "limits nonsolicitation to known employees worked with; allows general ads; explicitly permits working for competitors.",
+          "differs": "",
           "alsoIn": [
             "Sunrise Foods (2025-04)",
             "Acme Retail Group (2025-03)",
@@ -863,7 +862,7 @@
           "label": "untagged",
           "score": 0.896,
           "text": "15.1 During the Term and for twelve (12) months thereafter, Crestline shall not directly solicit for employment any Supplier Personnel assigned to Crestline, save with Supplier's consent.",
-          "differs": "6-month nonsolicit limit instead of 12; applies to both Parties; adds general ad and competitor exclusions.",
+          "differs": "",
           "alsoIn": []
         }
       ]
@@ -884,7 +883,7 @@
           "labelNote": "Fair freelancer terms: 30-day pay, mutual cap, mutual 15-day exit",
           "score": 0.922,
           "text": "8.1 Each party's aggregate liability under this Agreement shall not exceed the total fees paid or payable to the Contractor in the twelve (12) months preceding the claim, except for breach of Clause 6 or fraud.\n\n8.2 Neither party is liable for indirect or consequential loss.",
-          "differs": "adds Contractor IP warranty and willful misconduct liability exception; adds \"incidental\" to damages exclusion.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -897,7 +896,7 @@
           "labelNote": "AtliQ-friendly master: capped liability, service credits capped at 5%",
           "score": 0.884,
           "text": "13.1 Neither Party shall be liable for indirect, consequential or special losses or loss of profits.\n\n13.2 Each Party's aggregate liability under an SOW shall not exceed the Fees paid or payable under that SOW.",
-          "differs": "adds Contractor IP warranty; 12-month trailing fee liability cap instead of SOW cap, with fraud/willful misconduct exceptions.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -910,7 +909,7 @@
           "labelNote": "Counsel-reviewed BAA (Calloway Stern, $3.8k): capped liability, 5-day reporting, de-identified offshore route",
           "score": 0.878,
           "text": "9.1 Each Party's liability arising out of or relating to this BAA, including any Breach, is subject to the limitations and exclusions of liability in the Master Services Agreement, under which aggregate liability for claims relating to a Breach or a violation of this BAA shall not exceed two (2) times the Fees paid or payable under the Master Services Agreement in the twelve (12) months preceding the event giving rise to the claim.",
-          "differs": "adds IP warranty; liability cap is 1x trailing 12-month fees instead of 2x, with Section 7 and fraud/misconduct exclusions.",
+          "differs": "",
           "alsoIn": []
         }
       ]
@@ -931,7 +930,7 @@
           "labelNote": "Genuinely mutual NDA",
           "score": 0.898,
           "text": "1.1 The Parties wish to evaluate a potential engagement under which AtliQ would design and implement an enterprise clinical and operational analytics platform for Harrington (the \"**Purpose**\"), and each Party expects to disclose Confidential Information to the other in connection with the Purpose.",
-          "differs": "Covers Daniel Ortiz's data engineering services to AtliQ, rather than AtliQ's analytics platform services for Harrington.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -944,7 +943,7 @@
           "labelNote": "One-way NDA signed within the hour; contradicts \"we only sign mutual\"",
           "score": 0.869,
           "text": "1.1 Meridian intends to disclose certain information to the Recipient for the purpose of evaluating a potential engagement relating to clinical operations analytics and hospital performance dashboards (the \"**Purpose**\"), including a walkthrough of Meridian's data environment.",
-          "differs": "Covers Ortiz providing data engineering services to AtliQ instead of Meridian disclosing information for clinical analytics evaluation.",
+          "differs": "",
           "alsoIn": []
         },
         {
@@ -957,7 +956,7 @@
           "labelNote": "Genuinely mutual NDA: the template for what mutual looks like",
           "score": 0.829,
           "text": "1.1 \"**Confidential Information**\" means any information disclosed by one Party (the \"**Disclosing Party**\") to the other Party (the \"**Receiving Party**\") in connection with the Purpose, whether before or after the date of this Agreement, in any form, that is marked or identified as confidential or that a reasonable person would understand to be confidential, including guest and occupancy data, pricing, commercial proposals, solution architecture, source code, methodologies and business plans.",
-          "differs": "Defines the Purpose for contractor services, whereas SIGNED provides a general definition of Confidential Information.",
+          "differs": "",
           "alsoIn": []
         }
       ]
@@ -966,10 +965,10 @@
   "counselPack": null,
   "errors": [],
   "usage": {
-    "calls": 2,
+    "calls": 0,
     "cachedCalls": 6,
-    "inputTokens": 13973,
-    "outputTokens": 4941,
-    "ms": 126095
+    "inputTokens": 0,
+    "outputTokens": 0,
+    "ms": 2672
   }
 }
