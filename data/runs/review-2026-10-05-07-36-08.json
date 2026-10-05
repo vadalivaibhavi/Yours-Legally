@@ -1,0 +1,36 @@
+{
+  "deals": [
+    "harrington",
+    "lakeshore",
+    "blueorchid",
+    "gulfcrown",
+    "travelhub",
+    "rheinwerk",
+    "sunrise-sow2",
+    "datavane",
+    "finserve",
+    "loopmart",
+    "ortiz",
+    "marcus",
+    "kriti"
+  ],
+  "calls": 43,
+  "cached": 20,
+  "inTok": 120181,
+  "outTok": 129470,
+  "rows": [
+    "harrington    HOLD                0B 11H 4M  391s  ",
+    "lakeshore     HOLD                1B 0H 2M  294s  ",
+    "blueorchid    SIGN AFTER CHANGES  0B 1H 1M  112s  ",
+    "gulfcrown     HOLD                1B 3H 2M  80s  ",
+    "travelhub     HOLD                1B 2H 2M  78s  ",
+    "rheinwerk     HOLD                2B 2H 2M  106s  ",
+    "sunrise-sow2  SIGN                0B 0H 0M  59s  ",
+    "datavane      HOLD                1B 6H 2M  63s  ",
+    "finserve      HOLD                0B 0H 0M  417s  ERR Conflict check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your cu",
+    "loopmart      SIGN                0B 0H 0M  365s  ",
+    "ortiz         HOLD                0B 1H 1M  31s  ERR Playbook check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your cu",
+    "marcus        HOLD                0B 2H 2M  16s  ERR Playbook check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your cu",
+    "kriti         HOLD                0B 3H 0M  14s  ERR Playbook check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your cu"
+  ]
+}

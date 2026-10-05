@@ -5,7 +5,7 @@ import { USERS } from "@/lib/users";
 export function RoleSwitch({ current }: { current: string }) {
   return (
     <form action={switchUser} className="flex items-center gap-2">
-      <label htmlFor="user" className="label !text-white/70">Viewing as</label>
+      <label htmlFor="user" className="label hidden !text-white/70 sm:inline">Viewing as</label>
       <select
         id="user"
         name="user"

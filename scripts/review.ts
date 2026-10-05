@@ -6,6 +6,7 @@
  * Client deals run before the AtliQ-paper deals that depend on them (Kriti → Rheinwerk).
  */
 import "./_env";
+import fs from "node:fs";
 import { baseDeals } from "../lib/data";
 import { writeJson } from "../lib/config";
 import { reviewDeal } from "../lib/review/pipeline";
@@ -21,7 +22,12 @@ async function main() {
     const t = Date.now();
     try {
       const brief = await reviewDeal(d.id, { trigger: "initial review", version: 1, log: (m) => console.log(`  · ${m}`) });
-      writeJson(`briefs/${d.id}.json`, brief);
+      // Never replace a complete brief with an incomplete one (e.g. a run that hit the model quota).
+      const existing = fs.existsSync(`data/briefs/${d.id}.json`) ? JSON.parse(fs.readFileSync(`data/briefs/${d.id}.json`, "utf8")) : null;
+      if (brief.errors.length && existing && !existing.errors.length) {
+        writeJson(`briefs/failed/${d.id}.json`, brief);
+        console.log(`  ! kept the existing complete brief; incomplete run saved to data/briefs/failed/${d.id}.json`);
+      } else writeJson(`briefs/${d.id}.json`, brief);
       totals.calls += brief.usage.calls;
       totals.cached += brief.usage.cachedCalls;
       totals.inTok += brief.usage.inputTokens;

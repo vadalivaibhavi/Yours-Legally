@@ -165,6 +165,13 @@ export async function reviewDeal(dealId: string, opts: ReviewOptions): Promise<B
   findings.push(...bundle.findings);
   const notesRes = await scanNotes({ deal, notes, bundle: bundle.rows });
   if (notesRes.error) errors.push(notesRes.error);
+  // A compliance event is owned (and pinned) on the client deal. On AtliQ's own paper for a vendor or
+  // contractor staffing that deal, the same note is context: it never raises a second alert.
+  if (endClient && docs.every((d) => d.paper === "atliq" && d.sideOfTable !== "supplier") && notesRes.candidate) {
+    notesRes.candidate = null;
+    notesRes.findings = notesRes.findings.filter((f) => f.category !== "notes");
+    notesRes.facts = notesRes.facts.map((f) => (f.complianceEvent ? { ...f, complianceEvent: false, whyItMatters: `${f.whyItMatters} Tracked as a compliance alert on ${endClient.name}.` } : f));
+  }
   findings.push(...notesRes.findings);
   const candidate = notesRes.candidate;
   if (candidate) {

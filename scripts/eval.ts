@@ -77,7 +77,8 @@ function confirmAllCompliance(b: Brief) {
 
 function syntheticDoc(file: string, meta: Partial<Document> & Pick<Document, "id" | "docType" | "counterparty" | "sideOfTable" | "paper">): Document {
   const text = fs.readFileSync(path.join("data", file), "utf8").replace(/\r\n/g, "\n");
-  return { file, kind: "uploaded", title: meta.title ?? meta.id, date: "2026-10-04", ocr: false, references: [], text, ...meta } as Document;
+  // The synthetic text must win over any text carried in the metadata (e.g. the original v1 document).
+  return { kind: "uploaded", title: meta.title ?? meta.id, date: "2026-10-04", ocr: false, references: [], ...meta, file, text } as Document;
 }
 
 async function main() {

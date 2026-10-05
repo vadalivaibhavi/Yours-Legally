@@ -1,32 +1,38 @@
 {
   "dealId": "loopmart",
   "version": 1,
-  "createdAt": "2026-10-05T04:15:30.372Z",
+  "createdAt": "2026-10-05T07:35:08.137Z",
   "trigger": "initial review",
-  "inputsHash": "e94cbdcafa164d9692080b2dca39e595",
+  "inputsHash": "6c9352faf18fafbbf72fae2a8aa7c60c",
   "documentIds": [
     "loopmart-nda"
   ],
-  "registerVersion": "reg-2026-10-04-57+r0",
+  "registerVersion": "reg-2026-10-04-57+r1",
   "playbookVersion": "pb-v1-2026-10-04",
   "models": [
-    "gemini-flash-lite-latest"
+    "gemini-flash-lite-latest",
+    "gemini-3.6-flash"
   ],
   "promptVersion": "p1",
   "route": "nda_fast_lane",
-  "verdict": "HOLD",
-  "headline": "HOLD: 1 missing input",
-  "nextAction": "Sign when ready.",
+  "verdict": "SIGN",
+  "headline": "SIGN: No blockers or missing documents identified for execution",
+  "nextAction": "Jane Doe signs the LoopMart mutual NDA today.",
   "findings": [],
   "fine": [
     "Correct AtliQ entity: Pvt Ltd for a India counterparty",
     "Parties = invoicing entity: Pvt Ltd throughout",
-    "Governing law matches entity: laws of India (Pvt Ltd → Indian law)"
+    "Governing law matches entity: laws of India (Pvt Ltd → Indian law)",
+    "NDA definition: The definition of Confidential Information is mutual, covering non-public information disclosed by either party.",
+    "NDA obligations: Obligations to maintain confidentiality, restrict access, and exercise reasonable care apply equally to both parties.",
+    "NDA residuals: The agreement does not contain a residuals clause, nor does it grant implied licenses, leaving both parties' proprietary rights intact.",
+    "NDA remedies: The remedies clause allows either party as a Disclosing Party to seek injunctive relief without disproportionate liabilities or indemnities.",
+    "NDA covenants: There are no restrictive covenants such as non-competes or non-solicits; clause 8.2 explicitly clarifies that parties remain free to work with third parties.",
+    "NDA term: The agreement has a fixed term of 2 years, with confidentiality obligations surviving for a reasonable, fixed period of 3 years post-termination."
   ],
   "notSeen": [
     "No meeting notes attached to this deal.",
-    "Register built from 17 signed documents. Contracts referenced elsewhere but never collected (e.g. ShopSwift SOW, PixelCraft vendor agreement, intercompany services agreement) can't be checked.",
-    "NDA check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more infor)"
+    "Register built from 17 signed documents. Contracts referenced elsewhere but never collected (e.g. ShopSwift SOW, PixelCraft vendor agreement, intercompany services agreement) can't be checked."
   ],
   "documents": [
     {
@@ -171,7 +177,18 @@
     }
   ],
   "bundle": [],
-  "notesFacts": [],
+  "notesFacts": [
+    {
+      "id": "loopmart-fact-1",
+      "statement": "Sania sent LoopMart's standard mutual NDA form.",
+      "category": "other",
+      "noteId": "tracker",
+      "noteTitle": "Tracker notes",
+      "quote": "Sania sent their standard one",
+      "complianceEvent": false,
+      "whyItMatters": "The contract reviewer must review the counterparty's standard template rather than our standard NDA."
+    }
+  ],
   "complianceCandidate": null,
   "similar": [
     {
@@ -190,7 +207,7 @@
           "labelNote": "Genuinely mutual NDA",
           "score": 0.928,
           "text": "1.1 The Parties wish to evaluate a potential engagement under which AtliQ would design and implement an enterprise clinical and operational analytics platform for Harrington (the \"**Purpose**\"), and each Party expects to disclose Confidential Information to the other in connection with the Purpose.",
-          "differs": "",
+          "differs": "New defines Purpose as retail analytics for LoopMart; Signed specifies enterprise clinical analytics for Harrington.",
           "alsoIn": []
         },
         {
@@ -203,7 +220,7 @@
           "labelNote": "One-way NDA signed within the hour; contradicts \"we only sign mutual\"",
           "score": 0.882,
           "text": "1.1 Meridian intends to disclose certain information to the Recipient for the purpose of evaluating a potential engagement relating to clinical operations analytics and hospital performance dashboards (the \"**Purpose**\"), including a walkthrough of Meridian's data environment.",
-          "differs": "",
+          "differs": "New is mutual for LoopMart retail analytics; Signed is one-way disclosure by Meridian for hospital analytics.",
           "alsoIn": []
         },
         {
@@ -216,7 +233,7 @@
           "labelNote": "Genuinely mutual NDA: the template for what mutual looks like",
           "score": 0.85,
           "text": "1.1 \"**Confidential Information**\" means any information disclosed by one Party (the \"**Disclosing Party**\") to the other Party (the \"**Receiving Party**\") in connection with the Purpose, whether before or after the date of this Agreement, in any form, that is marked or identified as confidential or that a reasonable person would understand to be confidential, including guest and occupancy data, pricing, commercial proposals, solution architecture, source code, methodologies and business plans.",
-          "differs": "",
+          "differs": "New defines Purpose for LoopMart engagement; Signed defines 'Confidential Information' with specific examples and marking requirements.",
           "alsoIn": []
         }
       ]
@@ -236,7 +253,7 @@
           "label": "untagged",
           "score": 0.949,
           "text": "4.1 Where Confidential Information includes personal data of guests or employees, the Receiving Party shall process it only as necessary for the Purpose and in accordance with applicable data protection law, including the UAE Federal Decree-Law No. 45 of 2021 and the Indian Digital Personal Data Protection Act, 2023, as applicable.",
-          "differs": "",
+          "differs": "New references only DPDPA 2023; Signed also covers guest/employee data and UAE Federal Decree-Law No. 45.",
           "alsoIn": []
         },
         {
@@ -248,7 +265,7 @@
           "label": "untagged",
           "score": 0.915,
           "text": "13.1 The Service Provider shall process personal data received from the Client only for the purpose of the Services and in compliance with the Digital Personal Data Protection Act, 2023 and the rules made thereunder, as and when in force, and shall implement reasonable security practices.",
-          "differs": "",
+          "differs": "New applies to Receiving Party; Signed applies to Service Provider and explicitly mandates reasonable security practices.",
           "alsoIn": []
         },
         {
@@ -260,7 +277,7 @@
           "label": "untagged",
           "score": 0.899,
           "text": "14.1 AtliQ shall comply with the Information Technology Act, 2000, the rules thereunder, and the Digital Personal Data Protection Act, 2023 to the extent applicable, in relation to any personal data of distributors or employees processed in performing the Services.",
-          "differs": "",
+          "differs": "New cites DPDPA 2023 generally; Signed specifically cites IT Act 2000 and applies to distributor/employee data.",
           "alsoIn": []
         }
       ]
@@ -280,7 +297,7 @@
           "label": "untagged",
           "score": 0.854,
           "text": "8.1 Each Party retains all rights in its own intellectual property. CloudSpan owns the CloudSpan Platform and all improvements to it.\n\n8.2 Partner retains all rights in its own methodologies, accelerators, tools, templates and know-how, whether developed before or during the Term, including those used in delivering Implementation Services.\n\n8.3 Any feedback provided by Partner concerning the CloudSpan Platform may be used by CloudSpan without restriction, provided Partner's Confidential Information is not disclosed.",
-          "differs": "",
+          "differs": "New covers CI ownership and third-party freedom; Signed governs platform/methodology IP rights and feedback licensing.",
           "alsoIn": []
         },
         {
@@ -293,7 +310,7 @@
           "labelNote": "Rohan kept the Work Product IP (\"ok\" from phone) while Acme was promised ownership",
           "score": 0.829,
           "text": "5.1 In this Clause, \"**Work Product**\" means all dashboards, reports, data models, DAX measures, Power Query scripts, visual templates, documentation and other materials created by the Contractor in performing the Services.\n\n5.2 The Contractor retains ownership of all intellectual property rights in the Work Product and in any pre-existing materials, components and templates of the Contractor.\n\n5.3 The Contractor grants AtliQ a non-exclusive, perpetual, irrevocable, royalty-free, worldwide licence to use, copy, modify and deploy the Work Product for the purposes of AtliQ's business, including for delivery to AtliQ's clients.\n\n5.4 The Contractor shall not incorporate into the Work Product any third-party material that AtliQ is not entitled to use under Clause 5.3.",
-          "differs": "",
+          "differs": "New reserves CI ownership without licensing; Signed assigns Work Product IP to Contractor with a license to AtliQ.",
           "alsoIn": []
         },
         {
@@ -305,21 +322,19 @@
           "label": "untagged",
           "score": 0.829,
           "text": "8.1 Upon payment, Crestline shall own all right, title and interest in the Deliverables.\n\n8.2 Supplier retains all rights in its pre-existing materials, tools and know-how (\"**Supplier Materials**\"). To the extent Supplier Materials are incorporated in a Deliverable, Supplier grants Crestline a non-exclusive, perpetual, royalty-free license to use them as part of such Deliverable.",
-          "differs": "",
+          "differs": "New limits CI use without licensing; Signed transfers Deliverable ownership to Crestline with a license for Supplier Materials.",
           "alsoIn": []
         }
       ]
     }
   ],
   "counselPack": null,
-  "errors": [
-    "NDA check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more infor)"
-  ],
+  "errors": [],
   "usage": {
-    "calls": 0,
-    "cachedCalls": 2,
-    "inputTokens": 0,
-    "outputTokens": 0,
-    "ms": 5855
+    "calls": 4,
+    "cachedCalls": 1,
+    "inputTokens": 3185,
+    "outputTokens": 2180,
+    "ms": 365453
   }
 }

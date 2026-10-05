@@ -1,26 +1,89 @@
 {
   "dealId": "travelhub",
   "version": 1,
-  "createdAt": "2026-10-05T04:09:25.125Z",
+  "createdAt": "2026-10-05T07:38:23.393Z",
   "trigger": "initial review",
-  "inputsHash": "ecb99c20db8bab644e27714f4b1c2d5d",
+  "inputsHash": "30791e7c3539d34ba5334a0453ee906c",
   "documentIds": [
     "travelhub-sa"
   ],
-  "registerVersion": "reg-2026-10-04-57+r0",
+  "registerVersion": "reg-2026-10-04-57+r1",
   "playbookVersion": "pb-v1-2026-10-04",
   "models": [
     "gemini-flash-lite-latest",
-    "gemini-3.5-flash",
     "gemini-3-flash-preview",
-    "gemini-3.7-flash"
+    "gemini-3.5-flash-lite"
   ],
   "promptVersion": "p1",
   "route": "full_review",
-  "verdict": "HOLD",
-  "headline": "HOLD: 2 entity blockers and 2 redline items require resolution",
-  "nextAction": "Karandeep must manually review the conflict check and renegotiate the governing law and DPA terms with the other side.",
+  "verdict": "SEND BACK",
+  "headline": "SEND BACK: 3 high-risk items and 4 redline changes required",
+  "nextAction": "Karandeep drafts the redlines and sends them to the other side for correction.",
   "findings": [
+    {
+      "key": "conflict:alnoor-msa:non_compete",
+      "category": "conflict",
+      "topic": "non_compete",
+      "title": "Possible collision with Al Noor Hospitality Group: GCC hospitality data analytics non-compete",
+      "impact": "Collides with the Al Noor non-compete commitment restricting AI and analytics services to GCC hospitality businesses, live until September 2029.",
+      "severity": "high",
+      "confidence": "low",
+      "needsJudgment": true,
+      "readings": [
+        "Reading 1: TravelHub is a software platform and travel app, not a hospitality business, so the restriction does not apply.",
+        "Reading 2: TravelHub provides distribution and booking services to Partner Hotels, making it a Hospitality Business under the extended definition."
+      ],
+      "owner": "counsel (via Karandeep)",
+      "resolution": "waiver",
+      "docId": "travelhub-sa",
+      "citations": [
+        {
+          "docId": "travelhub-sa",
+          "docTitle": "TravelHub software development & services agreement (draft)",
+          "clauseRef": "Clause 4.1(b)",
+          "quote": "Partner Hotel Ranking Module** — a ranking and recommendation service that scores, ranks and surfaces Partner Hotels in the United Arab Emirates and the Kingdom of Saudi Arabia to TravelHub users at the point of search and itinerary building, taking into account user fit, price competitiveness, partner commission tier, availability and conversion likelihood, and that drives the sort order of hotel results and \"recommended stay\" placements for booking through the TravelHub App",
+          "role": "incoming"
+        },
+        {
+          "docId": "alnoor-msa",
+          "docTitle": "Al Noor Hospitality MSA",
+          "clauseRef": "§12.1",
+          "quote": "In consideration of the Client disclosing to the Supplier its Confidential Information, including its revenue strategies, pricing models and Guest Data, the Supplier undertakes that neither it nor any of its Affiliates shall, during the Restricted Period, directly or indirectly, provide data analytics, artificial intelligence or revenue-management services to any Hospitality Business in the GCC",
+          "role": "register"
+        },
+        {
+          "docId": "alnoor-msa",
+          "docTitle": "Al Noor Hospitality MSA",
+          "clauseRef": "§1.11",
+          "quote": "Hospitality Business**\" means any person, firm or entity that owns, operates, manages or franchises hotels, resorts or serviced apartments, or that provides distribution, revenue-management or guest-analytics services to any such person, firm or entity",
+          "role": "register"
+        },
+        {
+          "docId": "alnoor-msa",
+          "docTitle": "Al Noor Hospitality MSA",
+          "clauseRef": "§1.14",
+          "quote": "Restricted Period**\" means the Term and the period of eighteen (18) months following the expiry or termination of this Agreement",
+          "role": "register"
+        },
+        {
+          "docId": "alnoor-msa",
+          "docTitle": "Al Noor Hospitality MSA",
+          "clauseRef": "§1.9",
+          "quote": "GCC**\" means the member states of the Gulf Cooperation Council, being the United Arab Emirates, the Kingdom of Saudi Arabia, the State of Qatar, the State of Kuwait, the Kingdom of Bahrain and the Sultanate of Oman",
+          "role": "register"
+        }
+      ],
+      "counterPosition": "Seek a waiver from Al Noor for the TravelHub engagement or carve out UAE and KSA partner hotel ranking services from the scope.",
+      "registerEntryId": "alnoor-msa#1",
+      "registerVerified": true,
+      "expiry": "2029-09-14",
+      "waiver": {
+        "docId": "alnoor-waiver",
+        "covers": "AtliQ providing demand-forecasting services to Seaside Hotels LLC, Muscat, Oman, solely as described in the statement of work between the Supplier and Seaside dated February 2026",
+        "applies": false,
+        "why": "The existing waiver is strictly limited to Seaside Hotels LLC in Oman and expressly excludes any other Hospitality Business or GCC jurisdiction."
+      }
+    },
     {
       "key": "gate:entity",
       "category": "gate",
@@ -103,8 +166,8 @@
       "key": "playbook:data_protection",
       "category": "playbook",
       "topic": "data_protection",
-      "title": "Missing DPA and sub-DPA for Indian affiliate processing data",
-      "impact": "AtliQ's Indian development team may technically conflict data transfer restrictions or local data regulations by accessing the customer's cloud environment or data from offshore without an executed DPA.",
+      "title": "Data transfer restriction and missing Pune entity consent",
+      "impact": "AtliQ cannot utilize its Indian delivery center for data processing without further written consent and proper sub-processor flow-downs.",
       "severity": "medium",
       "confidence": "medium",
       "needsJudgment": true,
@@ -115,13 +178,13 @@
         {
           "docId": "travelhub-sa",
           "docTitle": "TravelHub software development & services agreement (draft)",
-          "clauseRef": "14.1 and 14.2",
-          "quote": "14.1 AtliQ shall process personal data only on TravelHub's documented instructions and in compliance with Federal Decree-Law No. 45 of 2021 on the Protection of Personal Data and, where applicable, the Saudi Personal Data Protection Law.\n14.2 AtliQ shall not transfer Customer Data outside the TravelHub cloud environment without prior written approval",
+          "clauseRef": "14.2",
+          "quote": "AtliQ shall not transfer Customer Data outside the TravelHub cloud environment without prior written approval",
           "role": "incoming"
         }
       ],
       "standard": "DPA (EU) or BAA (US health) signed before any personal/regulated data moves, with a sub-DPA / sub-BAA for every party that touches the data (incl. AtliQ's own Pune entity); engagement-specific scope; offshore access only as the agreement allows.",
-      "counterPosition": "Add a standard Data Protection Addendum (DPA) as an annex and include language explicitly authorizing offshore data processing/access by AtliQ's Indian affiliate, AtliQ Technologies Pvt Ltd.",
+      "counterPosition": "Authorize the AtliQ Pune entity as a sub-processor and permit the transfer of data for processing purposes within the AtliQ group in accordance with a DPA.",
       "precedents": [
         {
           "docId": "carebridge-baa",
@@ -131,27 +194,116 @@
           "note": "Counsel-reviewed: capped liability, 5-day reporting, de-identified offshore route"
         }
       ]
+    },
+    {
+      "key": "playbook:indemnity",
+      "category": "playbook",
+      "topic": "indemnity",
+      "title": "Indemnity mutuality limited to specific triggers",
+      "impact": "AtliQ is not indemnified for general third-party claims arising from the customer's own negligence or non-compliance with contract.",
+      "severity": "low",
+      "confidence": "medium",
+      "needsJudgment": false,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "travelhub-sa",
+      "citations": [
+        {
+          "docId": "travelhub-sa",
+          "docTitle": "TravelHub software development & services agreement (draft)",
+          "clauseRef": "13",
+          "quote": "13.1 AtliQ shall defend and indemnify TravelHub against third-party claims alleging that the Deliverables infringe any intellectual property right.\n13.2 TravelHub shall defend and indemnify AtliQ against third-party claims arising from Customer Data or TravelHub's use of the Deliverables in breach of applicable law",
+          "role": "incoming"
+        }
+      ],
+      "standard": "Mutual: each party covers its own breach and negligence; never the other side's negligence. IP-infringement indemnity for deliverables is normal.",
+      "counterPosition": "Each party should indemnify the other for third-party claims caused by its own conflict or negligence.",
+      "precedents": [
+        {
+          "docId": "paytrack-msa",
+          "counterparty": "PayTrack Technologies",
+          "clauseRef": "§10.2",
+          "label": "standard",
+          "note": "Origin: \"we can't insure against PayTrack's own negligence\" (Jan 2025)"
+        },
+        {
+          "docId": "acme-msa",
+          "counterparty": "Acme Retail Group",
+          "clauseRef": "§11",
+          "label": "standard",
+          "note": "Mutual indemnity"
+        }
+      ]
+    },
+    {
+      "key": "playbook:liability",
+      "category": "playbook",
+      "topic": "liability",
+      "title": "Liability cap excludes fees payable",
+      "impact": "If a claim arises before milestones are paid, the liability cap may be interpreted as zero or be significantly reduced.",
+      "severity": "low",
+      "confidence": "medium",
+      "needsJudgment": false,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "travelhub-sa",
+      "citations": [
+        {
+          "docId": "travelhub-sa",
+          "docTitle": "TravelHub software development & services agreement (draft)",
+          "clauseRef": "12.2",
+          "quote": "Each Party's total liability arising out of this Agreement shall not exceed the total fees paid under this Agreement in the twelve (12) months preceding the claim",
+          "role": "incoming"
+        }
+      ],
+      "standard": "Each party's aggregate liability capped at 1× fees (paid or payable in the prior 12 months), mutual; carve-outs only for fraud, wilful misconduct and confidentiality (plus any carve-outs that are mandatory under the governing law, e.g. German law for intent/gross negligence and injury).",
+      "counterPosition": "Aggregate liability should be capped at 1x fees paid or payable in the 12 months preceding the claim.",
+      "precedents": [
+        {
+          "docId": "ref-negotiation-notes",
+          "counterparty": "Kessler Mobility",
+          "clauseRef": "negotiation notes",
+          "label": "standard",
+          "note": "Walked away from a €120k deal over unlimited liability (Jan 2026)"
+        },
+        {
+          "docId": "sunrise-msa",
+          "counterparty": "Sunrise Foods",
+          "clauseRef": "§13",
+          "label": "standard",
+          "note": "AtliQ-friendly master: capped liability"
+        },
+        {
+          "docId": "carebridge-baa",
+          "counterparty": "CareBridge Clinics",
+          "clauseRef": "§9",
+          "label": "standard",
+          "note": "Counsel-reviewed: BAA liability capped at 2× trailing-12-month fees"
+        },
+        {
+          "docId": "brightwater-msa",
+          "counterparty": "Brightwater Insurance",
+          "clauseRef": "§15",
+          "label": "accident",
+          "note": "LDs carved out of the 150% cap"
+        }
+      ]
     }
   ],
   "fine": [
     "Payment ≤ 45 days: 30 days",
-    "Liability capped: Each Party's total liability arising out of this Agreement shall not exceed the total fees paid under this Agreement in the twelve (12) months preceding the claim",
-    "No liquidated damages or delay penalties are specified in the agreement, which is highly favorable for AtliQ.",
-    "Payment terms are 30 days from invoice date (meeting the 45-day maximum) with no set-off or pay-when-paid clauses.",
-    "Liability is mutually capped at 1x the fees paid in the preceding 12 months, with standard carve-outs for confidentiality and wilful misconduct.",
-    "AtliQ's indemnity is limited to standard third-party IP infringement, and all indemnities are safely capped under the general liability limit.",
-    "IP ownership in custom deliverables vests in the customer only upon full payment, and AtliQ retains ownership of its background technology with a non-exclusive license.",
-    "Termination for convenience requires a reasonable 30 days' notice, and AtliQ is entitled to payment for all work performed up to the termination date.",
-    "Confidentiality obligations are mutual and survive for a standard and reasonable period of 3 years post-termination.",
-    "The non-solicitation clause is mutual, restricted only to personnel directly involved in the services, and limited to 12 months.",
-    "No insurance requirements, minimum coverage limits, or certificate provisions are imposed on AtliQ.",
-    "The contract includes a supplier-friendly 10-business-day review period with a clear deemed acceptance mechanism.",
-    "The warranty period is limited to a reasonable 60 days post-acceptance and restricted to material conformity with agreed specs.",
-    "The agreement contains no set-off clauses, preventing the customer from unilaterally withholding payments."
+    "Absence of delay penalties is acceptable as it avoids uncapped or milestone-based penalties.",
+    "The 30-day payment term is within the 45-day maximum approved in the playbook.",
+    "IP ownership vests in the client only upon full payment and AtliQ retains its background technology.",
+    "Termination for convenience includes a 30-day notice period and payment for all work performed.",
+    "Confidentiality obligations are mutual with a standard 3-year survival period.",
+    "The non-solicitation clause is mutual and limited to a 12-month duration.",
+    "The 10-day review period includes a deemed acceptance provision.",
+    "The professional services warranty and 60-day conformity period are standard.",
+    "The agreement does not impose any insurance requirements that exceed AtliQ's current coverage."
   ],
   "notSeen": [
-    "Register built from 17 signed documents. Contracts referenced elsewhere but never collected (e.g. ShopSwift SOW, PixelCraft vendor agreement, intercompany services agreement) can't be checked.",
-    "Conflict check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more infor)"
+    "Register built from 17 signed documents. Contracts referenced elsewhere but never collected (e.g. ShopSwift SOW, PixelCraft vendor agreement, intercompany services agreement) can't be checked."
   ],
   "documents": [
     {
@@ -335,7 +487,48 @@
     }
   ],
   "bundle": [],
-  "notesFacts": [],
+  "notesFacts": [
+    {
+      "id": "travelhub-fact-1",
+      "statement": "The deal is valued at $52k and is based in Dubai.",
+      "category": "other",
+      "noteId": "note-2026-09-22",
+      "noteTitle": "Internal contract queue meeting",
+      "quote": "TravelHub (Karandeep) — $52k, Dubai — no date",
+      "complianceEvent": false,
+      "whyItMatters": "Establishes the deal value and jurisdictional scope for the contract."
+    },
+    {
+      "id": "travelhub-fact-2",
+      "statement": "The MSA draft (C-024) identifies the US company as the contracting party based on LinkedIn information.",
+      "category": "other",
+      "noteId": "tracker",
+      "noteTitle": "Tracker notes",
+      "quote": "we put your US company since you're US-listed on LinkedIn",
+      "complianceEvent": false,
+      "whyItMatters": "The legal entity must be verified against the corporate structure before signing."
+    },
+    {
+      "id": "travelhub-fact-3",
+      "statement": "Potential exclusivity or non-compete conflict regarding hotel-related services in the Gulf region.",
+      "category": "commitment",
+      "noteId": "note-2026-09-22",
+      "noteTitle": "Internal contract queue meeting",
+      "quote": "didn't we sign something with the Dubai hotel people that stops us doing hotels in the Gulf?",
+      "complianceEvent": false,
+      "whyItMatters": "Reviewer must check the Al Noor contract to ensure this deal does not violate existing non-compete commitments."
+    },
+    {
+      "id": "travelhub-fact-4",
+      "statement": "The contract review is planned for the upcoming weekend.",
+      "category": "deadline",
+      "noteId": "note-2026-09-22",
+      "noteTitle": "Internal contract queue meeting",
+      "quote": "Karandeep will go through them this weekend",
+      "complianceEvent": false,
+      "whyItMatters": "Internal timeline for clearing the review queue."
+    }
+  ],
   "complianceCandidate": null,
   "similar": [
     {
@@ -344,18 +537,6 @@
       "clauseRef": "§6",
       "quote": "6.1 The total fixed fee for the Services is USD 52,000 (fifty-two thousand US dollars), payable in instalments as set out in Schedule B.\n6.2 The fees are exclusive of any applicable value added tax, which, if applicable, shall be charged in addition.\n6.3 Reasonable pre-approved travel expenses, if any, shall be reimbursed at cost.",
       "hits": [
-        {
-          "docId": "sunrise-msa",
-          "counterparty": "Sunrise Foods",
-          "date": "2025-04-18",
-          "clauseNo": "5",
-          "heading": "FEES AND PAYMENT",
-          "label": "untagged",
-          "score": 0.889,
-          "text": "5.1 The total Fees under SOW-1 are **USD 33,000** (United States Dollars Thirty-Three Thousand only), comprising build fees payable on Milestones and a Monthly Support Fee for the support period, as detailed in SOW-1.\n\n5.2 AtliQ shall invoice build fees upon completion of each Milestone and the Monthly Support Fee monthly in arrears. Sunrise shall pay each undisputed invoice within thirty (30) days of the invoice date.\n\n5.3 All amounts are exclusive of GST, which shall be charged additionally at the applicable rate. Sunrise may deduct TDS as required by law.\n\n5.4 Delayed payments shall attract interest at twelve percent (12%) per annum.",
-          "differs": "Fee increased to $52,000 from $33,000; includes travel expense reimbursement at cost.",
-          "alsoIn": []
-        },
         {
           "docId": "trustline-msa",
           "counterparty": "Trustline NBFC",
@@ -366,22 +547,33 @@
           "labelNote": "45-day payment: the negotiated maximum (90 → 45)",
           "score": 0.882,
           "text": "4.1 The total fees for the Services are **USD 48,000** (United States Dollars Forty-Eight Thousand only), payable on completion of Milestones as set out in Annexure A.\n\n4.2 The Service Provider shall raise an invoice upon completion of each Milestone. The Company shall pay each undisputed invoice within forty-five (45) days of receipt of the invoice.\n\n4.3 All fees are exclusive of GST. The Company shall be entitled to deduct TDS as applicable.\n\n4.4 Any disputed amount shall be notified within ten (10) days of receipt of invoice, and the Parties shall resolve such dispute in good faith within thirty (30) days.",
-          "differs": "Fee increased to $52,000 from $48,000; lacks the 45-day payment term and 10-day dispute window.",
+          "differs": "Higher fee ($52,000 vs $48,000) and excludes travel expense reimbursement provision found in the new clause.",
           "alsoIn": []
         },
         {
-          "docId": "paytrack-msa",
-          "counterparty": "PayTrack Technologies",
-          "date": "2025-01-22",
-          "clauseNo": "4",
+          "docId": "sunrise-msa",
+          "counterparty": "Sunrise Foods",
+          "date": "2025-04-18",
+          "clauseNo": "5",
           "heading": "FEES AND PAYMENT",
           "label": "untagged",
-          "score": 0.877,
-          "text": "4.1 The total fees under SOW-1 are **USD 71,000** (United States Dollars Seventy-One Thousand only), payable in accordance with the milestone schedule in SOW-1.\n\n4.2 AtliQ shall invoice upon completion of each milestone. PayTrack shall pay each undisputed invoice within thirty (30) days of receipt.\n\n4.3 Fees are exclusive of GST. PayTrack may deduct TDS in accordance with Applicable Law.",
-          "differs": "Fee decreased to $52,000 from $71,000; explicitly includes travel expense reimbursement at cost.",
-          "alsoIn": [
-            "Acme Retail Group (2025-03)"
-          ]
+          "score": 0.889,
+          "text": "5.1 The total Fees under SOW-1 are **USD 33,000** (United States Dollars Thirty-Three Thousand only), comprising build fees payable on Milestones and a Monthly Support Fee for the support period, as detailed in SOW-1.\n\n5.2 AtliQ shall invoice build fees upon completion of each Milestone and the Monthly Support Fee monthly in arrears. Sunrise shall pay each undisputed invoice within thirty (30) days of the invoice date.\n\n5.3 All amounts are exclusive of GST, which shall be charged additionally at the applicable rate. Sunrise may deduct TDS as required by law.\n\n5.4 Delayed payments shall attract interest at twelve percent (12%) per annum.",
+          "differs": "Higher fee ($52,000 vs $33,000) and includes travel expense reimbursement not present in the signed clause.",
+          "alsoIn": []
+        },
+        {
+          "docId": "rohan-ica",
+          "counterparty": "Rohan Iyer",
+          "date": "2025-04-28",
+          "clauseNo": "3",
+          "heading": "FEES AND PAYMENT",
+          "label": "standard",
+          "labelNote": "Fair freelancer terms: 30-day pay, mutual cap, mutual 15-day exit",
+          "score": 0.863,
+          "text": "3.1 AtliQ shall pay the Contractor the fees set out in the Engagement Schedule.\n\n3.2 The Contractor shall submit a monthly invoice, supported by a timesheet approved by the AtliQ project lead. AtliQ shall pay each undisputed invoice within thirty (30) days of receipt.\n\n3.3 AtliQ shall deduct tax at source under the Income Tax Act, 1961 as applicable and provide TDS certificates. The Contractor is responsible for his own GST registration (if required) and all other taxes.\n\n3.4 AtliQ shall reimburse reasonable pre-approved travel expenses incurred for client visits.",
+          "differs": "Specifies fixed $52,000 fee and instalment schedule, whereas signed version uses separate Engagement Schedules and timesheets.",
+          "alsoIn": []
         }
       ]
     },
@@ -400,7 +592,7 @@
           "label": "untagged",
           "score": 0.971,
           "text": "7.1 Each Party shall hold the other Party's Confidential Information in confidence, use it only to perform or receive the Services, and disclose it only to its personnel and advisors with a need to know who are bound by obligations at least as protective.\n\n7.2 The obligations in Section 7.1 do not apply to information that is or becomes publicly available without breach, was known to the recipient prior to disclosure, is independently developed, or is rightfully received from a third party.\n\n7.3 These obligations survive for three (3) years following termination, and indefinitely for trade secrets.",
-          "differs": "Lacks indefinite trade secret protection; excludes disclosure to personnel or advisors from the primary definition.",
+          "differs": "Three-year survival period for all information; signed version adds indefinite protection for trade secrets.",
           "alsoIn": [
             "CloudSpan Technologies (2025-09)",
             "Sunrise Foods (2025-04)",
@@ -417,7 +609,7 @@
           "label": "untagged",
           "score": 0.942,
           "text": "6.1 Each party shall keep confidential all non-public information of the other party, and in the case of AtliQ, of AtliQ's clients, received in connection with this Agreement, and shall use it only for the purposes of this Agreement.\n\n6.2 The Contractor shall comply with any confidentiality and data-security requirements of AtliQ's clients notified to him in writing, including restrictions on downloading client data to personal devices.\n\n6.3 This Clause 6 does not apply to information that is public, already lawfully known, independently developed, or required to be disclosed by law.\n\n6.4 The obligations in this Clause 6 survive for three (3) years after termination or expiry.",
-          "differs": "Lacks specific client data security requirements and personal device restrictions found in the signed version.",
+          "differs": "Adds a specific three-year survival term; signed version lacks a survival duration and includes client data security rules.",
           "alsoIn": []
         },
         {
@@ -429,7 +621,7 @@
           "label": "untagged",
           "score": 0.931,
           "text": "8.1 \"**Confidential Information**\" means all information disclosed by one Party to the other, whether before or after the Effective Date, that is marked confidential or would reasonably be regarded as confidential, including Client Data, pricing strategies, rate plans, occupancy forecasts and business plans.\n\n8.2 Each Party shall keep the other's Confidential Information confidential, use it only for the purposes of this Agreement, and disclose it only to its employees and advisers who need to know it and are bound by equivalent obligations.\n\n8.3 These obligations do not apply to information that is public other than through breach, was lawfully known before disclosure, is independently developed, or is required to be disclosed by law.\n\n8.4 The obligations in this Clause 8 continue for five (5) years after expiry or termination.",
-          "differs": "Lacks specific examples of confidential information like pricing or occupancy forecasts and need-to-know disclosure rules.",
+          "differs": "Lacks specific examples like pricing or occupancy forecasts; adds a three-year survival term missing in the signed snippet.",
           "alsoIn": []
         }
       ]
@@ -449,7 +641,7 @@
           "label": "untagged",
           "score": 0.917,
           "text": "10.1 Upon payment in full, Sunrise shall own all intellectual property rights in the Deliverables developed specifically for Sunrise under an SOW.\n\n10.2 AtliQ retains ownership of its pre-existing tools, components, libraries and know-how. AtliQ grants Sunrise a perpetual, non-exclusive, royalty-free licence to use any such pre-existing materials to the extent incorporated in the Deliverables.",
-          "differs": "Explicitly includes ownership of trained models and model weights; uses the term 'Background Technology'.",
+          "differs": "Explicitly includes trained models and hotel ranking modules in the definition of deliverables.",
           "alsoIn": []
         },
         {
@@ -461,7 +653,7 @@
           "label": "untagged",
           "score": 0.909,
           "text": "8.1 Upon full payment, all intellectual property in the Deliverables developed specifically for PayTrack shall vest in PayTrack.\n\n8.2 AtliQ retains ownership of its pre-existing materials, tools and know-how and grants PayTrack a perpetual, non-exclusive, royalty-free licence to use such materials as incorporated in the Deliverables.",
-          "differs": "Adds specific ownership of Itinerary Personalization Engine models and weights; uses 'Background Technology' terminology.",
+          "differs": "Includes specific mention of trained models and hotel ranking modules as owned deliverables.",
           "alsoIn": []
         },
         {
@@ -473,7 +665,7 @@
           "label": "untagged",
           "score": 0.897,
           "text": "5.1 All deliverables developed specifically for the Client shall be the property of the Client\nupon full payment. The Service Provider retains its pre-existing tools and know-how.",
-          "differs": "Adds specific ownership of trained models/weights and includes a perpetual licence for Background Technology.",
+          "differs": "Grants perpetual, royalty-free license to background technology and explicitly mentions models and hotel ranking modules.",
           "alsoIn": [
             "Trustline NBFC (2026-08)",
             "Al Noor Hospitality Group (2025-03)",
@@ -497,13 +689,26 @@
           "label": "untagged",
           "score": 0.965,
           "text": "11.1 Neither Party shall be liable for any indirect, special, incidental or consequential damages, or loss of profits, revenue or goodwill.\n\n11.2 Each Party's total aggregate liability under or in connection with this Agreement shall not exceed the total fees paid or payable under the SOW giving rise to the claim.\n\n11.3 The limitations in this Clause 11 shall not apply to liability for fraud or wilful misconduct.",
-          "differs": "Liability cap changed to 12 months' fees instead of fees paid under the specific SOW.",
+          "differs": "Liability cap based on preceding 12 months' fees; signed version uses total fees paid or payable under SOW.",
           "alsoIn": [
             "Trustline NBFC (2026-08)",
             "Acme Retail Group (2025-03)",
             "CloudSpan Technologies (2025-09)",
             "Northwind Logistics (2025-06)"
           ]
+        },
+        {
+          "docId": "rohan-ica",
+          "counterparty": "Rohan Iyer",
+          "date": "2025-04-28",
+          "clauseNo": "8",
+          "heading": "LIABILITY",
+          "label": "standard",
+          "labelNote": "Fair freelancer terms: 30-day pay, mutual cap, mutual 15-day exit",
+          "score": 0.942,
+          "text": "8.1 Each party's aggregate liability under this Agreement shall not exceed the total fees paid or payable to the Contractor in the twelve (12) months preceding the claim, except for breach of Clause 6 or fraud.\n\n8.2 Neither party is liable for indirect or consequential loss.",
+          "differs": "Carves out confidentiality and wilful misconduct from the cap; signed version carves out confidentiality and fraud.",
+          "alsoIn": []
         },
         {
           "docId": "crestline-msa",
@@ -514,19 +719,7 @@
           "label": "untagged",
           "score": 0.959,
           "text": "12.1 EXCEPT FOR BREACH OF SECTION 7 OR A PARTY'S INDEMNIFICATION OBLIGATIONS, NEITHER PARTY SHALL BE LIABLE FOR ANY INDIRECT, INCIDENTAL, CONSEQUENTIAL, SPECIAL OR PUNITIVE DAMAGES.\n\n12.2 EXCEPT FOR BREACH OF SECTION 7 OR A PARTY'S INDEMNIFICATION OBLIGATIONS, EACH PARTY'S AGGREGATE LIABILITY SHALL NOT EXCEED THE FEES PAID OR PAYABLE BY CRESTLINE UNDER THIS AGREEMENT IN THE TWELVE (12) MONTHS PRECEDING THE CLAIM.",
-          "differs": "Adds exclusion for loss of profits; confidentiality breach is a specific exception to the liability cap.",
-          "alsoIn": []
-        },
-        {
-          "docId": "alnoor-msa",
-          "counterparty": "Al Noor Hospitality Group",
-          "date": "2025-03-15",
-          "clauseNo": "14",
-          "heading": "LIMITATION OF LIABILITY",
-          "label": "untagged",
-          "score": 0.954,
-          "text": "14.1 Neither Party shall be liable for any indirect, consequential or special loss, or for loss of profits, revenue, goodwill or anticipated savings.\n\n14.2 Subject to Clause 14.3, each Party's total aggregate liability arising out of or in connection with this Agreement shall not exceed an amount equal to the Fees paid by the Client to the Supplier in the twelve (12) months immediately preceding the event giving rise to the claim.\n\n14.3 Nothing in this Agreement limits liability for fraud, wilful misconduct, breach of Clause 8 (Confidentiality), or death or personal injury caused by negligence.",
-          "differs": "Lacks exclusions for fraud and death/personal injury; confidentiality breach is the primary liability cap exception.",
+          "differs": "Cap excludes confidentiality and wilful misconduct; signed version excludes confidentiality and indemnification obligations.",
           "alsoIn": []
         }
       ]
@@ -538,21 +731,6 @@
       "quote": "13.1 AtliQ shall defend and indemnify TravelHub against third-party claims alleging that the Deliverables infringe any intellectual property right.\n13.2 TravelHub shall defend and indemnify AtliQ against third-party claims arising from Customer Data or TravelHub's use of the Deliverables in breach of applicable law.",
       "hits": [
         {
-          "docId": "alnoor-msa",
-          "counterparty": "Al Noor Hospitality Group",
-          "date": "2025-03-15",
-          "clauseNo": "15",
-          "heading": "INDEMNITY",
-          "label": "untagged",
-          "score": 0.925,
-          "text": "15.1 The Supplier shall indemnify the Client against losses arising from any third-party claim that the Deliverables (excluding Client materials) infringe that third party's intellectual property rights.\n\n15.2 The Client shall indemnify the Supplier against losses arising from any third-party claim that Client Data or Client materials infringe that third party's rights.\n\n15.3 The indemnified Party shall promptly notify the indemnifying Party, allow it conduct of the defence, and provide reasonable assistance.",
-          "differs": "Adds TravelHub's indemnity for use of deliverables in breach of law; lacks prompt notice procedure.",
-          "alsoIn": [
-            "Northwind Logistics (2025-06)",
-            "CloudSpan Technologies (2025-09)"
-          ]
-        },
-        {
           "docId": "paytrack-msa",
           "counterparty": "PayTrack Technologies",
           "date": "2025-01-22",
@@ -562,19 +740,35 @@
           "labelNote": "Origin of the mutual-indemnity position: no indemnity for the indemnified party's own negligence",
           "score": 0.911,
           "text": "10.1 Each Party (the \"**Indemnifying Party**\") shall indemnify, defend and hold harmless the other Party and its directors, officers and employees (the \"**Indemnified Party**\") from and against all Losses arising out of any third-party claim to the extent caused by: (a) the Indemnifying Party's breach of Clause 7 (Confidentiality) or Clause 12 (Data Protection); (b) the gross negligence, wilful misconduct or fraud of the Indemnifying Party or its personnel; or (c) in the case of AtliQ, any claim that the Deliverables infringe a third party's intellectual property rights, and in the case of PayTrack, any claim that Client Data or materials supplied by PayTrack infringe a third party's rights.\n\n10.2 Neither Party shall be required to indemnify the other to the extent any Losses are caused by the negligence, breach or wilful misconduct of the Indemnified Party.\n\n10.3 The Indemnified Party shall give prompt written notice of any claim, permit the Indemnifying Party to control the defence and settlement, and provide reasonable cooperation at the Indemnifying Party's cost.",
-          "differs": "Standardizes mutual indemnity for IP/data; removes specific indemnities for gross negligence, fraud, or personnel claims.",
+          "differs": "Specific to IP infringement and customer data usage; signed version covers broad losses like gross negligence and fraud.",
           "alsoIn": []
         },
         {
-          "docId": "crestline-msa",
-          "counterparty": "Crestline Retail Inc",
-          "date": "2024-08-01",
-          "clauseNo": "10",
-          "heading": "INDEMNIFICATION",
+          "docId": "alnoor-msa",
+          "counterparty": "Al Noor Hospitality Group",
+          "date": "2025-03-15",
+          "clauseNo": "15",
+          "heading": "INDEMNITY",
           "label": "untagged",
-          "score": 0.899,
-          "text": "10.1 Supplier shall defend, indemnify and hold harmless Crestline from third-party claims arising from (a) Supplier's gross negligence or willful misconduct, (b) infringement by the Deliverables of any third-party intellectual property right, or (c) any claim by Supplier Personnel for wages, benefits or employment status.\n\n10.2 Crestline shall defend, indemnify and hold harmless Supplier from third-party claims arising from materials provided by Crestline or Crestline's gross negligence or willful misconduct.",
-          "differs": "Replaces gross negligence and personnel claim indemnities with specific IP and data breach indemnities.",
+          "score": 0.925,
+          "text": "15.1 The Supplier shall indemnify the Client against losses arising from any third-party claim that the Deliverables (excluding Client materials) infringe that third party's intellectual property rights.\n\n15.2 The Client shall indemnify the Supplier against losses arising from any third-party claim that Client Data or Client materials infringe that third party's rights.\n\n15.3 The indemnified Party shall promptly notify the indemnifying Party, allow it conduct of the defence, and provide reasonable assistance.",
+          "differs": "Includes indemnity for use of deliverables in conflict with law; signed version focuses strictly on IP infringement.",
+          "alsoIn": [
+            "Northwind Logistics (2025-06)",
+            "CloudSpan Technologies (2025-09)"
+          ]
+        },
+        {
+          "docId": "acme-msa",
+          "counterparty": "Acme Retail Group",
+          "date": "2025-03-10",
+          "clauseNo": "11",
+          "heading": "INDEMNITY",
+          "label": "standard",
+          "labelNote": "Mutual indemnity",
+          "score": 0.888,
+          "text": "11.1 Each Party (\"**Indemnifying Party**\") shall indemnify the other against losses arising from third-party claims caused by the Indemnifying Party's breach of confidentiality, infringement of third-party intellectual property rights, or gross negligence or wilful misconduct.",
+          "differs": "Limits AtliQ's indemnity to IP infringement; signed version includes confidentiality, gross negligence, and wilful misconduct.",
           "alsoIn": []
         }
       ]
@@ -594,7 +788,7 @@
           "label": "untagged",
           "score": 0.912,
           "text": "14.1 AtliQ shall comply with the Information Technology Act, 2000, the rules thereunder, and the Digital Personal Data Protection Act, 2023 to the extent applicable, in relation to any personal data of distributors or employees processed in performing the Services.",
-          "differs": "References UAE/Saudi laws instead of Indian IT and Data Protection Acts; adds cloud transfer restrictions.",
+          "differs": "Governed by UAE and Saudi data laws; signed version cites Indian IT and DPDP Acts.",
           "alsoIn": []
         },
         {
@@ -606,7 +800,7 @@
           "label": "untagged",
           "score": 0.905,
           "text": "16.1 Each Party shall comply with applicable data protection laws, including the DIFC Data Protection Law No. 5 of 2020 and the UAE Federal Decree-Law No. 45 of 2021, to the extent applicable.\n\n16.2 The Supplier shall process Guest Data only on the documented instructions of the Client, implement appropriate technical and organisational measures, and notify the Client without undue delay (and in any event within forty-eight (48) hours) of any personal data breach.\n\n16.3 The Supplier shall not transfer Guest Data outside the UAE without the Client's prior written consent. Any Guest Data accessed from India shall be accessed remotely from UAE-hosted environments only.",
-          "differs": "Adds Saudi Law compliance; requires prior approval for cloud transfers rather than just UAE export consent.",
+          "differs": "References Saudi law; signed version requires 48-hour conflict notification and restricts data transfer outside UAE.",
           "alsoIn": []
         },
         {
@@ -618,7 +812,7 @@
           "label": "untagged",
           "score": 0.9,
           "text": "12.1 AtliQ shall process personal data comprised in Client Data only on PayTrack's documented instructions and in compliance with the Digital Personal Data Protection Act, 2023, the Information Technology Act, 2000 and applicable RBI directions.\n\n12.2 AtliQ shall notify PayTrack of any data breach within twenty-four (24) hours of becoming aware of it, and shall cooperate with PayTrack in any reporting to CERT-In or the RBI.\n\n12.3 AtliQ shall permit PayTrack and its regulators to audit its compliance with this Clause 12 on reasonable notice.",
-          "differs": "References UAE/Saudi laws instead of Indian Acts; lacks 24-hour breach notification and audit rights.",
+          "differs": "Governed by UAE and Saudi laws; signed version follows Indian laws and includes 24-hour conflict notification.",
           "alsoIn": []
         }
       ]
@@ -639,7 +833,7 @@
           "labelNote": "DIFC law accepted as the client's group standard",
           "score": 0.909,
           "text": "21.1 This Agreement and any non-contractual obligations arising out of it shall be governed by the laws of the Dubai International Financial Centre.\n\n21.2 The Parties shall first attempt to resolve any dispute through good-faith negotiation between senior executives for thirty (30) days.\n\n21.3 Failing resolution, the courts of the Dubai International Financial Centre shall have exclusive jurisdiction.",
-          "differs": "Governed by Dubai/UAE federal laws and onshore courts instead of DIFC laws and DIFC courts.",
+          "differs": "Uses onshore Dubai courts and UAE federal law; signed version uses DIFC courts and DIFC law.",
           "alsoIn": []
         },
         {
@@ -652,37 +846,80 @@
           "labelNote": "Signed on a phone in 4 minutes: 1%/day uncapped LDs, no client-delay exclusion, group set-off, English law on a US entity. Cost $9k + $14.2k legal",
           "score": 0.891,
           "text": "20.1 This Agreement and any dispute or claim (including non-contractual disputes or claims) arising out of or in connection with it or its subject matter shall be governed by and construed in accordance with the law of England and Wales.\n\n20.2 Each party irrevocably agrees that the courts of London, England shall have exclusive jurisdiction to settle any dispute or claim arising out of or in connection with this Agreement.\n\n---",
-          "differs": "Governed by Dubai/UAE law and courts instead of England and Wales law and London courts.",
+          "differs": "Uses Dubai courts and UAE law; signed version uses London courts and English law.",
           "alsoIn": []
         },
         {
-          "docId": "paytrack-msa",
-          "counterparty": "PayTrack Technologies",
-          "date": "2025-01-22",
-          "clauseNo": "15",
+          "docId": "northwind-msa",
+          "counterparty": "Northwind Logistics",
+          "date": "2025-06-20",
+          "clauseNo": "17",
           "heading": "GOVERNING LAW AND DISPUTE RESOLUTION",
-          "label": "untagged",
-          "score": 0.885,
-          "text": "15.1 This Agreement shall be governed by the laws of India.\n\n15.2 Disputes not resolved by negotiation between senior management within thirty (30) days shall be referred to arbitration by a sole arbitrator under the Arbitration and Conciliation Act, 1996. The seat and venue of arbitration shall be Pune, and the language shall be English.",
-          "differs": "Governed by Dubai law/onshore courts instead of Indian law and arbitration in Pune.",
-          "alsoIn": [
-            "Trustline NBFC (2026-08)",
-            "Acme Retail Group (2025-03)",
-            "Sunrise Foods (2025-04)"
-          ]
+          "label": "concession",
+          "labelNote": "English law + LCIA: \"not worth losing the deal over\"",
+          "score": 0.867,
+          "text": "17.1 This Agreement and any dispute or claim (including non-contractual disputes or claims) arising out of or in connection with it shall be governed by the law of England and Wales.\n\n17.2 Any dispute arising out of or in connection with this Agreement shall be referred to and finally resolved by arbitration under the LCIA Rules. The number of arbitrators shall be one. The seat of arbitration shall be London. The language of the arbitration shall be English.",
+          "differs": "Uses onshore Dubai courts and UAE law; signed version uses LCIA arbitration in London and English law.",
+          "alsoIn": []
         }
       ]
     }
   ],
-  "counselPack": null,
-  "errors": [
-    "Conflict check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more infor)"
-  ],
+  "counselPack": {
+    "question": "Possible collision with Al Noor Hospitality Group: GCC hospitality data analytics non-compete: which reading applies? (a) Reading 1: TravelHub is a software platform and travel app, not a hospitality business, so the restriction does not apply. (b) Reading 2: TravelHub provides distribution and booking services to Partner Hotels, making it a Hospitality Business under the extended definition.",
+    "documents": [
+      "TravelHub software development & services agreement (draft)",
+      "Al Noor Hospitality MSA"
+    ],
+    "clauses": [
+      {
+        "docId": "travelhub-sa",
+        "docTitle": "TravelHub software development & services agreement (draft)",
+        "clauseRef": "Clause 4.1(b)",
+        "quote": "Partner Hotel Ranking Module** — a ranking and recommendation service that scores, ranks and surfaces Partner Hotels in the United Arab Emirates and the Kingdom of Saudi Arabia to TravelHub users at the point of search and itinerary building, taking into account user fit, price competitiveness, partner commission tier, availability and conversion likelihood, and that drives the sort order of hotel results and \"recommended stay\" placements for booking through the TravelHub App",
+        "role": "incoming"
+      },
+      {
+        "docId": "alnoor-msa",
+        "docTitle": "Al Noor Hospitality MSA",
+        "clauseRef": "§12.1",
+        "quote": "In consideration of the Client disclosing to the Supplier its Confidential Information, including its revenue strategies, pricing models and Guest Data, the Supplier undertakes that neither it nor any of its Affiliates shall, during the Restricted Period, directly or indirectly, provide data analytics, artificial intelligence or revenue-management services to any Hospitality Business in the GCC",
+        "role": "register"
+      },
+      {
+        "docId": "alnoor-msa",
+        "docTitle": "Al Noor Hospitality MSA",
+        "clauseRef": "§1.11",
+        "quote": "Hospitality Business**\" means any person, firm or entity that owns, operates, manages or franchises hotels, resorts or serviced apartments, or that provides distribution, revenue-management or guest-analytics services to any such person, firm or entity",
+        "role": "register"
+      },
+      {
+        "docId": "alnoor-msa",
+        "docTitle": "Al Noor Hospitality MSA",
+        "clauseRef": "§1.14",
+        "quote": "Restricted Period**\" means the Term and the period of eighteen (18) months following the expiry or termination of this Agreement",
+        "role": "register"
+      },
+      {
+        "docId": "alnoor-msa",
+        "docTitle": "Al Noor Hospitality MSA",
+        "clauseRef": "§1.9",
+        "quote": "GCC**\" means the member states of the Gulf Cooperation Council, being the United Arab Emirates, the Kingdom of Saudi Arabia, the State of Qatar, the State of Kuwait, the Kingdom of Bahrain and the Sultanate of Oman",
+        "role": "register"
+      }
+    ],
+    "entityFacts": [
+      "AtliQ Technologies Pvt Ltd (India): serves India, Middle East, Europe, Rest of world (outside the US)",
+      "AtliQ Inc (USA): serves USA",
+      "Delivery teams for both entities sit in Pune. AtliQ Inc sub-contracts delivery to AtliQ Technologies Pvt Ltd under an intercompany agreement (not in the dataset)."
+    ]
+  },
+  "errors": [],
   "usage": {
-    "calls": 1,
+    "calls": 2,
     "cachedCalls": 4,
-    "inputTokens": 289,
-    "outputTokens": 54,
-    "ms": 147292
+    "inputTokens": 4593,
+    "outputTokens": 4360,
+    "ms": 22118
   }
 }

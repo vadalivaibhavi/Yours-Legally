@@ -1,23 +1,373 @@
 {
   "dealId": "finserve",
   "version": 1,
-  "createdAt": "2026-10-05T04:15:24.514Z",
+  "createdAt": "2026-10-05T07:38:52.396Z",
   "trigger": "initial review",
-  "inputsHash": "0235f47423881db4bb8b9162c80173cc",
+  "inputsHash": "291748d9e1eb85793cdfc8858b183cf7",
   "documentIds": [
     "finserve-nda"
   ],
-  "registerVersion": "reg-2026-10-04-57+r0",
+  "registerVersion": "reg-2026-10-04-57+r1",
   "playbookVersion": "pb-v1-2026-10-04",
   "models": [
-    "gemini-flash-lite-latest"
+    "gemini-flash-lite-latest",
+    "gemini-3.5-flash-lite",
+    "gemini-3.6-flash"
   ],
   "promptVersion": "p1",
   "route": "nda_fast_lane",
   "verdict": "HOLD",
-  "headline": "HOLD: 2 missing inputs",
-  "nextAction": "Sign when ready.",
-  "findings": [],
+  "headline": "HOLD: 1 blocker, 6 high severity issues",
+  "nextAction": "Karandeep will redline the contract to remove the client restrictions and make the terms mutual.",
+  "findings": [
+    {
+      "key": "covenant:non_compete",
+      "category": "covenant",
+      "topic": "restrictive",
+      "title": "Restriction in this contract hits current clients: PayTrack Technologies, Trustline NBFC, FinEdge Bank",
+      "impact": "Collides with existing live and pipeline clients in the banking, NBFC, and fintech sectors, restricting AtliQ from providing data analytics and reporting solutions to Trustline NBFC, FinEdge Bank, and PayTrack Technologies.",
+      "severity": "blocker",
+      "confidence": "high",
+      "needsJudgment": false,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "finserve-nda",
+      "citations": [
+        {
+          "docId": "finserve-nda",
+          "docTitle": "FinServe Capital \"mutual\" NDA (draft)",
+          "clauseRef": "8.1",
+          "quote": "In order to protect the Confidential Information, the Recipient shall not, during the term of this Agreement and for a period of twelve (12) months after its termination, provide services similar to those contemplated by the Proposed Transaction to any Competitor",
+          "role": "incoming"
+        }
+      ],
+      "counterPosition": "Delete the restriction (no non-competes inside an NDA or services agreement), or limit it to named competitors for the term only."
+    },
+    {
+      "key": "nda:covenants",
+      "category": "nda",
+      "topic": "covenants",
+      "title": "Not mutual: covenants",
+      "impact": "The agreement includes restrictive covenants imposing a non-compete and a non-solicitation obligation solely on the Recipient.",
+      "severity": "high",
+      "confidence": "high",
+      "needsJudgment": false,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "finserve-nda",
+      "citations": [
+        {
+          "docId": "finserve-nda",
+          "docTitle": "FinServe Capital \"mutual\" NDA (draft)",
+          "clauseRef": "Clause 8.1 and 8.2",
+          "quote": "In order to protect the Confidential Information, the Recipient shall not, during the term of this Agreement and for a period of twelve (12) months after its termination, provide services similar to those contemplated by the Proposed Transaction to any Competitor",
+          "role": "incoming"
+        }
+      ],
+      "standard": "Mutual in substance, not just in title: both parties' information protected, both bound by the same obligations, residuals mutual or none, mutual remedies, fixed term, and no non-competes or non-solicits hidden inside an NDA.",
+      "counterPosition": "Remove restrictive covenants from an NDA context, or make them mutual.",
+      "precedents": [
+        {
+          "docId": "ref-negotiation-notes",
+          "counterparty": "GlobalMart",
+          "clauseRef": "negotiation notes",
+          "label": "standard",
+          "note": "\"We only sign mutual: we'll be sharing our architecture too\" (Mar 2026). They agreed"
+        },
+        {
+          "docId": "alnoor-nda",
+          "counterparty": "Al Noor Hospitality",
+          "clauseRef": "whole NDA",
+          "label": "standard",
+          "note": "Genuinely mutual"
+        },
+        {
+          "docId": "harrington-nda",
+          "counterparty": "Harrington Health",
+          "clauseRef": "whole NDA",
+          "label": "standard",
+          "note": "Genuinely mutual"
+        },
+        {
+          "docId": "meridian-nda",
+          "counterparty": "Meridian Healthcare",
+          "clauseRef": "whole NDA",
+          "label": "accident",
+          "note": "One-way, uncapped indemnity, 24-month no-hire, signed within the hour"
+        }
+      ]
+    },
+    {
+      "key": "nda:definition",
+      "category": "nda",
+      "topic": "definition",
+      "title": "Not mutual: definition",
+      "impact": "The definition of Confidential Information is entirely unlateral, protecting only information disclosed by the Company, and explicitly including derivative work notes prepared by the Recipient.",
+      "severity": "high",
+      "confidence": "high",
+      "needsJudgment": false,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "finserve-nda",
+      "citations": [
+        {
+          "docId": "finserve-nda",
+          "docTitle": "FinServe Capital \"mutual\" NDA (draft)",
+          "clauseRef": "Clause 1.2",
+          "quote": "Confidential Information**\" means all information, in any form, disclosed or made available by or on behalf of the Company to the Recipient or its Representatives, whether before or after the Effective Date, including customer and portfolio data, credit models, product plans, pricing, technology architecture, business processes, and all analyses, compilations, notes or other documents prepared by the Recipient that contain or reflect such information",
+          "role": "incoming"
+        }
+      ],
+      "standard": "Mutual in substance, not just in title: both parties' information protected, both bound by the same obligations, residuals mutual or none, mutual remedies, fixed term, and no non-competes or non-solicits hidden inside an NDA.",
+      "counterPosition": "Amend to make the definition mutual, covering information disclosed by either party.",
+      "precedents": [
+        {
+          "docId": "ref-negotiation-notes",
+          "counterparty": "GlobalMart",
+          "clauseRef": "negotiation notes",
+          "label": "standard",
+          "note": "\"We only sign mutual: we'll be sharing our architecture too\" (Mar 2026). They agreed"
+        },
+        {
+          "docId": "alnoor-nda",
+          "counterparty": "Al Noor Hospitality",
+          "clauseRef": "whole NDA",
+          "label": "standard",
+          "note": "Genuinely mutual"
+        },
+        {
+          "docId": "harrington-nda",
+          "counterparty": "Harrington Health",
+          "clauseRef": "whole NDA",
+          "label": "standard",
+          "note": "Genuinely mutual"
+        },
+        {
+          "docId": "meridian-nda",
+          "counterparty": "Meridian Healthcare",
+          "clauseRef": "whole NDA",
+          "label": "accident",
+          "note": "One-way, uncapped indemnity, 24-month no-hire, signed within the hour"
+        }
+      ]
+    },
+    {
+      "key": "nda:obligations",
+      "category": "nda",
+      "topic": "obligations",
+      "title": "Not mutual: obligations",
+      "impact": "Only the Recipient is bound by use and protection obligations; the Company has no corresponding duties regarding any information AtliQ might disclose.",
+      "severity": "high",
+      "confidence": "high",
+      "needsJudgment": false,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "finserve-nda",
+      "citations": [
+        {
+          "docId": "finserve-nda",
+          "docTitle": "FinServe Capital \"mutual\" NDA (draft)",
+          "clauseRef": "Clause 2.1",
+          "quote": "The Recipient shall:\n   (a) use the Confidential Information solely for the purpose of evaluating and, if applicable, performing the Proposed Transaction;\n   (b) keep the Confidential Information strictly confidential and not disclose it to any person other than its Representatives who need to know it and are bound by obligations at least as protective as this Agreement;\n   (c) apply security measures no less stringent than those required under the Company's information-security policy as notified to the Recipient from time to time; and\n   (d) be responsible for any breach of this Agreement by its Representatives",
+          "role": "incoming"
+        }
+      ],
+      "standard": "Mutual in substance, not just in title: both parties' information protected, both bound by the same obligations, residuals mutual or none, mutual remedies, fixed term, and no non-competes or non-solicits hidden inside an NDA.",
+      "counterPosition": "Make all protective obligations mutual so both parties are bound.",
+      "precedents": [
+        {
+          "docId": "ref-negotiation-notes",
+          "counterparty": "GlobalMart",
+          "clauseRef": "negotiation notes",
+          "label": "standard",
+          "note": "\"We only sign mutual: we'll be sharing our architecture too\" (Mar 2026). They agreed"
+        },
+        {
+          "docId": "alnoor-nda",
+          "counterparty": "Al Noor Hospitality",
+          "clauseRef": "whole NDA",
+          "label": "standard",
+          "note": "Genuinely mutual"
+        },
+        {
+          "docId": "harrington-nda",
+          "counterparty": "Harrington Health",
+          "clauseRef": "whole NDA",
+          "label": "standard",
+          "note": "Genuinely mutual"
+        },
+        {
+          "docId": "meridian-nda",
+          "counterparty": "Meridian Healthcare",
+          "clauseRef": "whole NDA",
+          "label": "accident",
+          "note": "One-way, uncapped indemnity, 24-month no-hire, signed within the hour"
+        }
+      ]
+    },
+    {
+      "key": "nda:remedies",
+      "category": "nda",
+      "topic": "remedies",
+      "title": "Not mutual: remedies",
+      "impact": "Remedies such as injunctive relief and indemnification apply unilaterally in favor of the Company against the Recipient only.",
+      "severity": "high",
+      "confidence": "high",
+      "needsJudgment": false,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "finserve-nda",
+      "citations": [
+        {
+          "docId": "finserve-nda",
+          "docTitle": "FinServe Capital \"mutual\" NDA (draft)",
+          "clauseRef": "Clause 10.1 and 10.2",
+          "quote": "The Recipient shall indemnify the Company for all losses, costs and expenses (including legal fees) arising from any breach of this Agreement by the Recipient or its Representatives",
+          "role": "incoming"
+        }
+      ],
+      "standard": "Mutual in substance, not just in title: both parties' information protected, both bound by the same obligations, residuals mutual or none, mutual remedies, fixed term, and no non-competes or non-solicits hidden inside an NDA.",
+      "counterPosition": "Make remedies mutual for both parties.",
+      "precedents": [
+        {
+          "docId": "ref-negotiation-notes",
+          "counterparty": "GlobalMart",
+          "clauseRef": "negotiation notes",
+          "label": "standard",
+          "note": "\"We only sign mutual: we'll be sharing our architecture too\" (Mar 2026). They agreed"
+        },
+        {
+          "docId": "alnoor-nda",
+          "counterparty": "Al Noor Hospitality",
+          "clauseRef": "whole NDA",
+          "label": "standard",
+          "note": "Genuinely mutual"
+        },
+        {
+          "docId": "harrington-nda",
+          "counterparty": "Harrington Health",
+          "clauseRef": "whole NDA",
+          "label": "standard",
+          "note": "Genuinely mutual"
+        },
+        {
+          "docId": "meridian-nda",
+          "counterparty": "Meridian Healthcare",
+          "clauseRef": "whole NDA",
+          "label": "accident",
+          "note": "One-way, uncapped indemnity, 24-month no-hire, signed within the hour"
+        }
+      ]
+    },
+    {
+      "key": "nda:term",
+      "category": "nda",
+      "topic": "term",
+      "title": "Not mutual: term",
+      "impact": "The confidentiality obligations survive in perpetuity, and the agreement term continues until terminated on thirty days' notice.",
+      "severity": "high",
+      "confidence": "high",
+      "needsJudgment": false,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "finserve-nda",
+      "citations": [
+        {
+          "docId": "finserve-nda",
+          "docTitle": "FinServe Capital \"mutual\" NDA (draft)",
+          "clauseRef": "Clause 7.1 and 7.2",
+          "quote": "The obligations of the Recipient under this Agreement shall survive termination and shall continue in perpetuity",
+          "role": "incoming"
+        }
+      ],
+      "standard": "Mutual in substance, not just in title: both parties' information protected, both bound by the same obligations, residuals mutual or none, mutual remedies, fixed term, and no non-competes or non-solicits hidden inside an NDA.",
+      "counterPosition": "Limit survival of obligations to a reasonable fixed period, such as 2 to 3 years.",
+      "precedents": [
+        {
+          "docId": "ref-negotiation-notes",
+          "counterparty": "GlobalMart",
+          "clauseRef": "negotiation notes",
+          "label": "standard",
+          "note": "\"We only sign mutual: we'll be sharing our architecture too\" (Mar 2026). They agreed"
+        },
+        {
+          "docId": "alnoor-nda",
+          "counterparty": "Al Noor Hospitality",
+          "clauseRef": "whole NDA",
+          "label": "standard",
+          "note": "Genuinely mutual"
+        },
+        {
+          "docId": "harrington-nda",
+          "counterparty": "Harrington Health",
+          "clauseRef": "whole NDA",
+          "label": "standard",
+          "note": "Genuinely mutual"
+        },
+        {
+          "docId": "meridian-nda",
+          "counterparty": "Meridian Healthcare",
+          "clauseRef": "whole NDA",
+          "label": "accident",
+          "note": "One-way, uncapped indemnity, 24-month no-hire, signed within the hour"
+        }
+      ]
+    },
+    {
+      "key": "nda:residuals",
+      "category": "nda",
+      "topic": "residuals",
+      "title": "Not mutual: residuals",
+      "impact": "The residuals clause explicitly grants the right to use residuals solely to the Company, omitting the Recipient.",
+      "severity": "medium",
+      "confidence": "high",
+      "needsJudgment": false,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "finserve-nda",
+      "citations": [
+        {
+          "docId": "finserve-nda",
+          "docTitle": "FinServe Capital \"mutual\" NDA (draft)",
+          "clauseRef": "Clause 4.1",
+          "quote": "Notwithstanding anything in this Agreement, the Company shall be free to use Residuals for any purpose, including the development, marketing and procurement of products and services, provided that this Clause 4.1 does not grant any licence under any patent or copyright",
+          "role": "incoming"
+        }
+      ],
+      "standard": "Mutual in substance, not just in title: both parties' information protected, both bound by the same obligations, residuals mutual or none, mutual remedies, fixed term, and no non-competes or non-solicits hidden inside an NDA.",
+      "counterPosition": "Extend the residuals right mutually to both parties.",
+      "precedents": [
+        {
+          "docId": "ref-negotiation-notes",
+          "counterparty": "GlobalMart",
+          "clauseRef": "negotiation notes",
+          "label": "standard",
+          "note": "\"We only sign mutual: we'll be sharing our architecture too\" (Mar 2026). They agreed"
+        },
+        {
+          "docId": "alnoor-nda",
+          "counterparty": "Al Noor Hospitality",
+          "clauseRef": "whole NDA",
+          "label": "standard",
+          "note": "Genuinely mutual"
+        },
+        {
+          "docId": "harrington-nda",
+          "counterparty": "Harrington Health",
+          "clauseRef": "whole NDA",
+          "label": "standard",
+          "note": "Genuinely mutual"
+        },
+        {
+          "docId": "meridian-nda",
+          "counterparty": "Meridian Healthcare",
+          "clauseRef": "whole NDA",
+          "label": "accident",
+          "note": "One-way, uncapped indemnity, 24-month no-hire, signed within the hour"
+        }
+      ]
+    }
+  ],
   "fine": [
     "Correct AtliQ entity: Pvt Ltd for a India counterparty",
     "Parties = invoicing entity: Pvt Ltd throughout",
@@ -25,9 +375,7 @@
   ],
   "notSeen": [
     "No meeting notes attached to this deal.",
-    "Register built from 17 signed documents. Contracts referenced elsewhere but never collected (e.g. ShopSwift SOW, PixelCraft vendor agreement, intercompany services agreement) can't be checked.",
-    "Conflict check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more infor)",
-    "NDA check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more infor)"
+    "Register built from 17 signed documents. Contracts referenced elsewhere but never collected (e.g. ShopSwift SOW, PixelCraft vendor agreement, intercompany services agreement) can't be checked."
   ],
   "documents": [
     {
@@ -175,13 +523,23 @@
   "notesFacts": [
     {
       "id": "finserve-fact-1",
-      "statement": "Mutual NDA needed before data walkthrough on October 1",
+      "statement": "The mutual NDA is required prior to the October 1 data walkthrough.",
       "category": "deadline",
       "noteId": "tracker",
       "noteTitle": "Tracker notes",
-      "quote": "C-036 (Mutual NDA): Arjun: 'our standard mutual NDA' - needed before 1 Oct data walkthrough. K: will sign tonight",
+      "quote": "needed before 1 Oct data walkthrough",
       "complianceEvent": false,
-      "whyItMatters": "A signed NDA must be in place prior to conducting the data walkthrough to protect proprietary information."
+      "whyItMatters": "Ensures that appropriate legal coverage is executed prior to sharing any company or project data."
+    },
+    {
+      "id": "finserve-fact-2",
+      "statement": "Karandeep committed to signing the mutual NDA tonight.",
+      "category": "commitment",
+      "noteId": "tracker",
+      "noteTitle": "Tracker notes",
+      "quote": "K: will sign tonight",
+      "complianceEvent": false,
+      "whyItMatters": "Confirms execution timeline to ensure the agreement is active before data sharing occurs."
     }
   ],
   "complianceCandidate": null,
@@ -202,7 +560,7 @@
           "labelNote": "Genuinely mutual NDA: the template for what mutual looks like",
           "score": 0.898,
           "text": "1.2 \"**Representatives**\" means a Party's directors, officers, employees, professional advisers and subcontractors who need to know the Confidential Information for the Purpose.",
-          "differs": "",
+          "differs": "Adds specific financial and credit model definitions to confidential information.",
           "alsoIn": []
         },
         {
@@ -215,23 +573,21 @@
           "labelNote": "One-way NDA signed within the hour; contradicts \"we only sign mutual\"",
           "score": 0.857,
           "text": "2.1 \"**Confidential Information**\" means all information disclosed by or on behalf of Meridian to the Recipient, whether in writing, orally, electronically or by inspection, including patient and operational data, hospital performance metrics, financial information, vendor arrangements, technology systems, strategies and the existence and terms of the discussions between the parties.\n\n2.2 Confidential Information does not include information that the Recipient can show by written records:\n   (a) is or becomes public through no fault of the Recipient;\n   (b) was known to the Recipient before disclosure without restriction;\n   (c) is received from a third party lawfully and without restriction; or\n   (d) is independently developed by the Recipient without use of the Confidential Information.",
-          "differs": "",
+          "differs": "Includes financial and credit models in confidential information.",
           "alsoIn": []
         },
         {
-          "docId": "acme-msa",
-          "counterparty": "Acme Retail Group",
-          "date": "2025-03-10",
-          "clauseNo": "8",
-          "heading": "CONFIDENTIALITY",
-          "label": "untagged",
-          "score": 0.854,
-          "text": "8.1 Each Party shall maintain the other Party's Confidential Information in strict confidence and shall not disclose it to any third party except to its employees and professional advisers on a need-to-know basis.\n\n8.2 These obligations shall survive for three (3) years after termination of this Agreement.",
-          "differs": "",
-          "alsoIn": [
-            "Trustline NBFC (2026-08)",
-            "Sunrise Foods (2025-04)"
-          ]
+          "docId": "harrington-nda",
+          "counterparty": "Harrington Health Systems Inc",
+          "date": "2026-08-20",
+          "clauseNo": "2",
+          "heading": "CONFIDENTIAL INFORMATION",
+          "label": "standard",
+          "labelNote": "Genuinely mutual NDA",
+          "score": 0.843,
+          "text": "2.1 \"**Confidential Information**\" means all non-public information disclosed by a Party (the \"**Disclosing Party**\") to the other Party (the \"**Receiving Party**\") in connection with the Purpose, in any form, that is marked or identified as confidential or that a reasonable person would understand to be confidential, including system architecture, security documentation, pricing, proposals, methodologies, source code and business plans.\n\n2.2 Confidential Information does not include information that the Receiving Party can demonstrate (a) is or becomes publicly available through no fault of the Receiving Party; (b) was lawfully known to it before disclosure; (c) is lawfully received from a third party without a duty of confidentiality; or (d) is independently developed without use of the Disclosing Party's Confidential Information.\n\n2.3 **Protected Health Information.** Protected Health Information, as defined at 45 C.F.R. § 160.103, is excluded from this Agreement and shall be disclosed only after execution of a Business Associate Agreement between the Parties. Harrington shall not disclose, and AtliQ shall not request, Protected Health Information under this Agreement.",
+          "differs": "Covers financial and credit models without requiring a marking requirement.",
+          "alsoIn": []
         }
       ]
     },
@@ -250,7 +606,7 @@
           "label": "untagged",
           "score": 0.902,
           "text": "13.1 The Service Provider shall comply with the Digital Personal Data Protection Act, 2023, the Information Technology Act, 2000 and applicable RBI directions in processing Company Data, and shall store Company Data only in India.\n\n13.2 The Service Provider shall report any security incident to the Company within six (6) hours of detection.\n\n13.3 The Company, its auditors and the Reserve Bank of India shall have the right to inspect and audit the Service Provider's records and facilities relating to the Services.",
-          "differs": "",
+          "differs": "Adds SEBI regulation and a shorter six-hour incident notice period.",
           "alsoIn": []
         },
         {
@@ -262,7 +618,7 @@
           "label": "untagged",
           "score": 0.902,
           "text": "12.1 AtliQ shall process personal data comprised in Client Data only on PayTrack's documented instructions and in compliance with the Digital Personal Data Protection Act, 2023, the Information Technology Act, 2000 and applicable RBI directions.\n\n12.2 AtliQ shall notify PayTrack of any data breach within twenty-four (24) hours of becoming aware of it, and shall cooperate with PayTrack in any reporting to CERT-In or the RBI.\n\n12.3 AtliQ shall permit PayTrack and its regulators to audit its compliance with this Clause 12 on reasonable notice.",
-          "differs": "",
+          "differs": "Includes SEBI and a six-hour conflict notification instead of twenty-four hours.",
           "alsoIn": []
         },
         {
@@ -274,7 +630,7 @@
           "label": "untagged",
           "score": 0.873,
           "text": "4.1 Where Confidential Information includes personal data of guests or employees, the Receiving Party shall process it only as necessary for the Purpose and in accordance with applicable data protection law, including the UAE Federal Decree-Law No. 45 of 2021 and the Indian Digital Personal Data Protection Act, 2023, as applicable.",
-          "differs": "",
+          "differs": "Adds SEBI oversight, co-operation terms, and a six-hour conflict notice.",
           "alsoIn": []
         }
       ]
@@ -294,7 +650,7 @@
           "label": "untagged",
           "score": 0.899,
           "text": "12.1 In consideration of the Client disclosing to the Supplier its Confidential Information, including its revenue strategies, pricing models and Guest Data, the Supplier undertakes that neither it nor any of its Affiliates shall, during the Restricted Period, directly or indirectly, provide data analytics, artificial intelligence or revenue-management services to any Hospitality Business in the GCC.\n12.2 For the purposes of Clause 12.1, services are provided \"in the GCC\" if the Hospitality Business receiving them is headquartered in, or the services relate to properties or operations located in, any state of the GCC, irrespective of where the services are performed.\n12.3 The Supplier shall procure that each of its Affiliates complies with this Clause 12 as if it were a party to this Agreement, and any breach by an Affiliate shall be deemed a breach by the Supplier.\n12.4 The Client may, in its sole discretion, waive the restriction in Clause 12.1 in respect of a specific engagement by written consent signed by an authorised signatory of the Client. Any such waiver shall be limited to its express terms.\n12.5 During the Term and for twelve (12) months thereafter, neither Party shall solicit for employment any employee of the other Party who was directly involved in the Services, save through general advertisements not targeted at such employees.",
-          "differs": "",
+          "differs": "Adds a 24-month employee non-solicit clause.",
           "alsoIn": []
         },
         {
@@ -306,7 +662,7 @@
           "label": "untagged",
           "score": 0.877,
           "text": "6.1 In consideration of the access provided to the Client's business processes and supplier\narrangements, the Service Provider agrees that during the term of this Agreement and for a\nperiod of twelve (l2) months after its expiry or termination, it shall not develop, license or\nprovide travel-booking software to any online travel agency operating in India.\n6.2 Nothing in Clause 6.1 shall restrict the Service Provider from providing services to hotels,\nairlines or other businesses that are not online travel agencies, or from providing services\nunrelated to travel-booking software.",
-          "differs": "",
+          "differs": "Adds a 24-month employee non-solicit restriction.",
           "alsoIn": []
         },
         {
@@ -318,22 +674,19 @@
           "label": "untagged",
           "score": 0.822,
           "text": "7.1 In consideration of the Referral Fees, market development funds and other benefits under this Agreement, during the Term Partner and its Affiliates shall not act as an implementation, reseller or referral partner for any Competing Platform in India or the GCC.\n\n7.2 \"**Competing Platform**\" means any cloud data-warehouse, lakehouse or unified analytics platform offered as a service.\n\n7.3 For clarity, Clause 7.1 does not restrict Partner or its Affiliates from (a) providing services outside India and the GCC; or (b) providing services to a customer that has independently selected a platform, provided Partner does not hold a partner appointment with, or receive any fee or benefit from, the provider of that platform.\n\n7.4 In this Clause 7, \"GCC\" has the meaning given to the member states listed in the definition of Territory.",
-          "differs": "",
+          "differs": "Adds a 24-month employee non-solicitation restriction.",
           "alsoIn": []
         }
       ]
     }
   ],
   "counselPack": null,
-  "errors": [
-    "Conflict check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more infor)",
-    "NDA check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more infor)"
-  ],
+  "errors": [],
   "usage": {
-    "calls": 0,
+    "calls": 4,
     "cachedCalls": 2,
-    "inputTokens": 0,
-    "outputTokens": 0,
-    "ms": 19969
+    "inputTokens": 6804,
+    "outputTokens": 4083,
+    "ms": 14944
   }
 }

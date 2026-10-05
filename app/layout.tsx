@@ -34,7 +34,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               {user.role === "karandeep" && <Link href="/register" className="hover:underline">Register</Link>}
             </nav>
             <div className="ml-auto flex items-center gap-4">
-              <span className="text-xs text-white/70" title="APP_TODAY: fixed so the demo and evals are reproducible">
+              <span className="hidden text-xs text-white/70 sm:inline" title="APP_TODAY: fixed so the demo and evals are reproducible">
                 Demo date · {fmtDate(appToday())}
               </span>
               <RoleSwitch current={user.id} />

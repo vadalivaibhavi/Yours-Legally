@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-05T04:19:22.998Z",
+  "at": "2026-10-05T07:44:57.386Z",
   "results": [
     {
       "id": "EV-R1",
@@ -33,22 +33,22 @@
       "id": "EV-01",
       "section": "B. Incoming contracts (US-2 to US-7, US-11)",
       "title": "Gulf Crown MSA",
-      "pass": false,
-      "detail": "missing playbook:ld; flagged playbook:indemnity (medium)"
+      "pass": true,
+      "detail": "HOLD · found conflict:alnoor-msa:non_compete, conflict:alnoor-msa:non_compete@9.1, playbook:ld, playbook:payment · clean on playbook:ip, playbook:confidentiality, playbook:indemnity, conflict:orbit-msa"
     },
     {
       "id": "EV-02",
       "section": "B. Incoming contracts (US-2 to US-7, US-11)",
       "title": "Lakeshore MSA + rate card",
-      "pass": false,
-      "detail": "flagged playbook:ld (medium)"
+      "pass": true,
+      "detail": "HOLD · found conflict:crestline-msa:mfn_pricing · clean on playbook:ld, playbook:payment, playbook:ip, gate:entity, gate:payment, gate:ld_cap, gate:liability_cap, gate:governing_law"
     },
     {
       "id": "EV-03",
       "section": "B. Incoming contracts (US-2 to US-7, US-11)",
       "title": "TravelHub agreement",
-      "pass": false,
-      "detail": "verdict HOLD ≠ SEND BACK; missing conflict:alnoor-msa:non_compete"
+      "pass": true,
+      "detail": "SEND BACK · found gate:entity, gate:invoicing_entity, conflict:alnoor-msa:non_compete · clean on conflict:orbit-msa"
     },
     {
       "id": "EV-04",
@@ -61,29 +61,29 @@
       "id": "EV-05",
       "section": "B. Incoming contracts (US-2 to US-7, US-11)",
       "title": "Datavane partnership",
-      "pass": false,
-      "detail": "missing conflict:cloudspan-spa:exclusivity; missing playbook:indemnity; missing playbook:restrictive"
+      "pass": true,
+      "detail": "HOLD · found conflict:cloudspan-spa:exclusivity, playbook:indemnity, playbook:restrictive"
     },
     {
       "id": "EV-06",
       "section": "B. Incoming contracts (US-2 to US-7, US-11)",
       "title": "Rheinwerk agreement",
-      "pass": false,
-      "detail": "missing conflict:northwind-msa:ip_transfer; flagged playbook:ld (high)"
+      "pass": true,
+      "detail": "HOLD · found conflict:northwind-msa:ip_transfer, gate:annex · clean on playbook:ld, playbook:payment, gate:payment, gate:ld_cap, playbook:liability"
     },
     {
       "id": "EV-07",
       "section": "B. Incoming contracts (US-2 to US-7, US-11)",
       "title": "FinServe \"mutual\" NDA",
-      "pass": false,
-      "detail": "missing nda:definition; missing nda:residuals; missing covenant:non_compete; missing nda:remedies"
+      "pass": true,
+      "detail": "HOLD · found nda:definition, nda:residuals, covenant:non_compete, nda:remedies · clean on gate:entity, gate:governing_law"
     },
     {
       "id": "EV-08",
       "section": "B. Incoming contracts (US-2 to US-7, US-11)",
       "title": "LoopMart mutual NDA",
-      "pass": false,
-      "detail": "verdict HOLD ≠ SIGN"
+      "pass": true,
+      "detail": "SIGN · found nothing to find · clean on severity:blocker, severity:high"
     },
     {
       "id": "EV-09",
@@ -97,28 +97,28 @@
       "section": "B. Incoming contracts (US-2 to US-7, US-11)",
       "title": "Kriti subcontract (AtliQ paper)",
       "pass": false,
-      "detail": "verdict HOLD ≠ SIGN AFTER CHANGES; missing playbook:indemnity; missing playbook:liability; missing flowdown:ip; missing flowdown:data; missing flowdown:consent"
+      "detail": "missing playbook:indemnity; missing playbook:liability"
     },
     {
       "id": "EV-11",
       "section": "B. Incoming contracts (US-2 to US-7, US-11)",
       "title": "Marcus Reed ICA (AtliQ paper)",
-      "pass": false,
-      "detail": "verdict HOLD ≠ SIGN AFTER CHANGES; missing playbook:restrictive; missing playbook:termination"
+      "pass": true,
+      "detail": "SIGN AFTER CHANGES · found gate:entity, playbook:restrictive, playbook:termination, dependency:lakeshore · clean on playbook:ip, flowdown:ip"
     },
     {
       "id": "EV-12",
       "section": "B. Incoming contracts (US-2 to US-7, US-11)",
       "title": "Harrington bundle (MSA, BAA, NDA, notes)",
-      "pass": false,
-      "detail": "missing notes:data_movement; no compliance alert"
+      "pass": true,
+      "detail": "HOLD + compliance alert · found notes:data_movement, bundle:sub-baa:ortiz, bundle:sub-baa:pvt-ltd, gate:insurance, playbook:ld, playbook:liability, playbook:indemnity, playbook:ip"
     },
     {
       "id": "EV-13",
       "section": "B. Incoming contracts (US-2 to US-7, US-11)",
       "title": "Daniel Ortiz ICA + NDA (AtliQ paper)",
       "pass": false,
-      "detail": "verdict HOLD ≠ SIGN AFTER CHANGES; missing flowdown:data; missing flowdown:ip; flagged playbook:liability (medium)"
+      "detail": "missing flowdown:data; missing flowdown:ip; flagged playbook:liability (medium)"
     },
     {
       "id": "EV-15",
@@ -132,7 +132,7 @@
       "section": "B. Incoming contracts (US-2 to US-7, US-11)",
       "title": "TravelHub (negative test)",
       "pass": true,
-      "detail": "HOLD · found nothing to find · clean on conflict:orbit-msa"
+      "detail": "SEND BACK · found nothing to find · clean on conflict:orbit-msa"
     },
     {
       "id": "EV-R5",
@@ -145,8 +145,8 @@
       "id": "EV-C1",
       "section": "B1. Compliance alerts & notes (FR-21)",
       "title": "Harrington: Karandeep closes the PHI alert with \"Resolved off the record: Harrington privacy officer confirmed deletion, 5 Oct\"",
-      "pass": false,
-      "detail": "alert states undefined → undefined"
+      "pass": true,
+      "detail": "alert open → \"Resolved by Karandeep's note, 5 Oct: Harrington privacy officer confirmed deletion, 5 Oct\"; findings unchanged (15); verdict HOLD from the other open items"
     },
     {
       "id": "EV-C2",
@@ -222,22 +222,22 @@
       "id": "EV-V1",
       "section": "C. Version pairs (US-7 · FR-17, FR-18) (synthetic, to be created)",
       "title": "TravelHub: entity corrected to Pvt Ltd, invoicing aligned",
-      "pass": null,
-      "detail": "skipped (--no-versions)"
+      "pass": true,
+      "detail": "resolved gate:entity, gate:invoicing_entity, playbook:data_protection, playbook:indemnity, playbook:liability · still open 2 · new none · SIGN AFTER CHANGES"
     },
     {
       "id": "EV-V2",
       "section": "C. Version pairs (US-7 · FR-17, FR-18) (synthetic, to be created)",
       "title": "Rheinwerk: Annex 3 DPA added",
-      "pass": null,
-      "detail": "skipped (--no-versions)"
+      "pass": true,
+      "detail": "resolved gate:annex:annex-3 · still open 7 · new playbook:data_protection · HOLD"
     },
     {
       "id": "EV-V3",
       "section": "C. Version pairs (US-7 · FR-17, FR-18) (synthetic, to be created)",
       "title": "Harrington: sub-BAA for Daniel Ortiz added",
-      "pass": null,
-      "detail": "skipped (--no-versions)"
+      "pass": true,
+      "detail": "resolved bundle:sub-baa:ortiz · still open 14 · new none · HOLD"
     },
     {
       "id": "EV-V4",
@@ -278,8 +278,8 @@
       "id": "EV-S5",
       "section": "D. Seller checks (US-9, US-10 · FR-13, FR-19) (synthetic inputs)",
       "title": "Same partnership, Europe only",
-      "pass": false,
-      "detail": "attention · stamped as of 2026-10-04, register reg-2026-10-04-57+r0"
+      "pass": true,
+      "detail": "clear · stamped as of 2026-10-04, register reg-2026-10-04-57+r0"
     },
     {
       "id": "EV-S7",
@@ -314,7 +314,7 @@
       "section": "E. Similar past clauses (US-4 · FR-22)",
       "title": "FinServe NDA confidentiality definition / residuals",
       "pass": true,
-      "detail": "top 3: Al Noor Hospitality Group §1.2 [standard] 0.90 · Meridian Healthcare §2 [accident] 0.86 · Acme Retail Group §8 [untagged] 0.85"
+      "detail": "top 3: Al Noor Hospitality Group §1.2 [standard] 0.90 · Meridian Healthcare §2 [accident] 0.86 · Harrington Health Systems Inc §2 [standard] 0.84"
     },
     {
       "id": "EV-P3",
@@ -328,21 +328,21 @@
       "section": "E. Similar past clauses (US-4 · FR-22)",
       "title": "Harrington MSA indemnity (covers client's own negligence)",
       "pass": true,
-      "detail": "top 3: Orbit Travels Pvt Ltd §9 [untagged] 0.92 · PayTrack Technologies §10 [standard] 0.92 · Al Noor Hospitality Group §15 [untagged] 0.92"
+      "detail": "top 3: PayTrack Technologies §10 [standard] 0.92 · Orbit Travels Pvt Ltd §9 [untagged] 0.92 · Acme Retail Group §11 [standard] 0.90"
     },
     {
       "id": "EV-P5",
       "section": "E. Similar past clauses (US-4 · FR-22)",
       "title": "Kriti subcontract payment (pay-when-paid, up to 120 days)",
       "pass": true,
-      "detail": "top 3: Rohan Iyer §3 [standard] 0.92 · PayTrack Technologies §4 [untagged] 0.92 · Trustline NBFC §4 [standard] 0.91"
+      "detail": "top 3: Rohan Iyer §3 [standard] 0.92 · Trustline NBFC §4 [standard] 0.91 · PayTrack Technologies §4 [untagged] 0.92"
     },
     {
       "id": "EV-P6",
       "section": "E. Similar past clauses (US-4 · FR-22)",
       "title": "Rheinwerk governing law (German law)",
-      "pass": false,
-      "detail": "top 3: Crestline Retail Inc §16 [untagged] 0.87 · Brightwater Insurance Inc §20 [accident] 0.87 · Orbit Travels Pvt Ltd §11 [untagged] 0.86 | northwind-msa (concession) not in top 3"
+      "pass": true,
+      "detail": "top 3: Brightwater Insurance Inc §20 [accident] 0.87 · Northwind Logistics §17 [concession] 0.86 · Crestline Retail Inc §16 [untagged] 0.87"
     },
     {
       "id": "EV-P7",
@@ -356,12 +356,12 @@
     {
       "name": "Citation validity (all quotes string-matched to source)",
       "pass": true,
-      "detail": "66/66"
+      "detail": "118/118"
     },
     {
       "name": "Guardrails: no breach/enforceable in system prose; never Reject",
-      "pass": false,
-      "detail": "427 prose strings checked; 18 legal conclusions; 0 Reject recommendations"
+      "pass": true,
+      "detail": "514 prose strings checked; 0 legal conclusions; 0 Reject recommendations"
     },
     {
       "name": "Verdict identical with and without similar-clauses panel",
@@ -371,12 +371,12 @@
     {
       "name": "NDA fast lane latency (<1 min)",
       "pass": null,
-      "detail": "finserve 20s (cached) · loopmart 6s (cached)"
+      "detail": "finserve 15s · loopmart 365s"
     },
     {
       "name": "Recall@3 on EV-P (≥80%)",
       "pass": true,
-      "detail": "9/10 = 90%"
+      "detail": "10/10 = 100%"
     }
   ]
 }

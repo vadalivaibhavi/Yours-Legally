@@ -96,6 +96,7 @@ const SYSTEM = `You check whether a NEW contract collides with commitments AtliQ
 AtliQ Technologies Pvt Ltd (India) and AtliQ Inc (USA, 100% owned by Pvt Ltd) are each other's Affiliates. Delivery for both entities is done from Pune, India.
 Read the register entry's definitions carefully (e.g. who counts as a "Hospitality Business", what "in the GCC" means, who is an "Affiliate", what services are "substantially similar"). Switching the contracting entity or performing the work from India does not avoid a restriction that binds Affiliates "irrespective of where the services are performed".
 Waivers are limited to their express terms.
+Use "arguable" (not "yes") when the new counterparty is caught only through an extended limb of a definition (e.g. it is not itself a hotel operator but a provider of distribution services to hotels), or when whether AtliQ's services fall inside the restricted services depends on interpretation. Use "yes" when the counterparty and the services sit squarely inside the core definition.
 Rules: quote the new contract VERBATIM. Never say "breach", "violate", "enforceable" or "unenforceable" and never give a legal conclusion: describe the collision and who should decide. Recommend only: comply, renegotiate, seek consent/waiver, business fix, or counsel. Never suggest workarounds to avoid an obligation.`;
 
 export async function checkConflicts(args: {
@@ -182,7 +183,8 @@ export async function checkConflicts(args: {
     });
   }
   for (const c of r.data.covenants) {
-    if (c.applies === "no") continue;
+    // A covenant finding must name the existing clients it hits; otherwise there is no collision to show.
+    if (c.applies === "no" || !c.clientsAffected.length || !reverse.length) continue;
     const q = locateQuote(doc.text, c.quote);
     findings.push({
       key: `covenant:${reverse.find((x) => x.restriction.clauseRef === c.clauseRef)?.restriction.type ?? "non_compete"}`,

@@ -133,9 +133,11 @@ export function checkBundle(ctx: Ctx): { rows: BundleRow[]; findings: Finding[];
   if (sub) {
     for (const sd of subDeals) {
       if (rows.some((r) => r.findingKey === `bundle:consent:${sd.id}`)) continue;
+      // Generic rule: whether consent is required depends on the client contract, so this is a check,
+      // not a missing input. (The flow-down review cites the actual consent clause when there is one.)
       add(
-        { party: sd.counterparty, document: `${deal.counterparty}'s written consent to subcontract`, status: "missing", detail: `${sd.name} is planned on this deal; no consent on file`, findingKey: `bundle:consent:${sd.id}` },
-        { key: `bundle:consent:${sd.id}`, title: `No client consent on file to subcontract to ${sd.counterparty}`, impact: `${sub.why} The client's written consent is needed before ${sd.counterparty} starts.`, severity: "medium", owner: deal.owner, resolution: "document", citations: [], missingItem: { item: `${deal.counterparty}'s written consent for ${sd.counterparty}`, owner: deal.owner } },
+        { party: sd.counterparty, document: `${deal.counterparty}'s consent to subcontract (if the contract requires it)`, status: "missing", detail: `${sd.name} is planned on this deal; no consent on file`, findingKey: `bundle:consent:${sd.id}` },
+        { key: `bundle:consent:${sd.id}`, title: `Check consent to subcontract to ${sd.counterparty}`, impact: `${sub.why} Confirm whether ${deal.counterparty}'s contract requires written consent before ${sd.counterparty} starts.`, severity: "low", owner: deal.owner, resolution: "document", citations: [] },
       );
     }
   }
