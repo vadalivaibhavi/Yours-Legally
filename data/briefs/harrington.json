@@ -1,15 +1,15 @@
 {
   "dealId": "harrington",
   "version": 1,
-  "createdAt": "2026-10-05T07:08:53.768Z",
+  "createdAt": "2026-10-05T08:22:51.060Z",
   "trigger": "initial review",
-  "inputsHash": "fab9c787c1f9a011383414a349d8f6d0",
+  "inputsHash": "75526faba6ecef25bb1637b488b655dc",
   "documentIds": [
     "harrington-msa",
     "harrington-baa"
   ],
-  "registerVersion": "reg-2026-10-04-57+r1",
-  "playbookVersion": "pb-v1-2026-10-04",
+  "registerVersion": "reg-2026-10-04-57+r0",
+  "playbookVersion": "pb-v1.1-2026-10-05",
   "models": [
     "gemini-flash-lite-latest",
     "gemini-3-flash-preview",
@@ -19,8 +19,8 @@
   "promptVersion": "p1",
   "route": "full_review",
   "verdict": "HOLD",
-  "headline": "HOLD: Multiple missing agreements, client consents, and unconfirmed offshore patient data disclosure",
-  "nextAction": "Karandeep must confirm the potential patient data disclosure while consulting counsel regarding necessary remediations.",
+  "headline": "HOLD: 4 missing documents, 7 high-risk redlines, and unconfirmed data exposure",
+  "nextAction": "Karandeep must renegotiate high-risk redlines while Dhaval collects missing subcontractor BAAs and client consents.",
   "findings": [
     {
       "category": "bundle",
@@ -115,8 +115,8 @@
       "key": "gate:insurance:cyber",
       "category": "gate",
       "topic": "insurance",
-      "title": "Insurance limits exceed AtliQ's actual coverage",
-      "impact": "AtliQ would be in conflict with contract from day one unless it negotiates a lower limit or purchases additional, expensive insurance coverage.",
+      "title": "Commitment to $5M Cyber Insurance Limit",
+      "impact": "AtliQ would be in immediate non-compliance with contract upon signing unless it obtains significantly higher insurance coverage.",
       "severity": "high",
       "confidence": "medium",
       "needsJudgment": false,
@@ -142,27 +142,60 @@
           "docId": "harrington-baa",
           "docTitle": "Harrington Health BAA, Exhibit D (draft)",
           "clauseRef": "8.3",
-          "quote": "Business Associate shall maintain, throughout the term of this BAA and for three (3) years thereafter, cyber liability and network security and privacy insurance with limits of not less than Five Million U.S. Dollars ($5,000,000) per claim and in the aggregate, covering notification costs, regulatory defense and penalties, and third-party claims arising from Privacy Events, and shall name Covered Entity as an additional insured",
+          "quote": "Business Associate shall maintain a documented security risk analysis covering all systems used to access PHI in accordance with 45 C.F.R. § 164.308(a)(1)(ii)(A), and shall update it at least annually.\n\n## ARTICLE 4 — LOCATION OF PHI; SUBCONTRACTORS\n\n4.1 **Domestic Performance.** Business Associate shall not, and shall ensure that no Subcontractor shall, access, view, create, receive, maintain, transmit, store or process PHI from or at any location outside the United States, whether directly or by remote access.\n4.2 **Subcontractor Requirements.** Business Associate shall not engage any Subcontractor in connection with the Services without Covered Entity's prior written approval of such Subcontractor. Each approved Subcontractor shall be organized under the laws of a State of the United States, and all of its personnel performing Services shall be located in the United States.\n4.3 **Flow-Down.** In accordance with 45 C.F.R. §§ 164.502(e)(1)(ii) and 164.308(b)(2), Business Associate shall ensure that each Subcontractor agrees in writing, prior to any access to PHI, to the same restrictions, conditions and requirements that apply to Business Associate under this BAA. Business Associate shall provide a copy of each such agreement to Covered Entity upon request.\n4.4 Business Associate shall remain fully responsible for the acts and omissions of its Subcontractors as if they were Business Associate's own.\n\n## ARTICLE 5 — REPORTING OF PRIVACY EVENTS\n\n5.1 **Notice.** Business Associate shall notify Covered Entity's Privacy Officer by telephone and in writing of any Privacy Event within twenty-four (24) hours of discovery. A Privacy Event shall be deemed discovered on the first day on which it is known, or by exercising reasonable diligence would have been known, to any employee, officer, agent or Subcontractor of Business Associate.\n5.2 **Content.** Business Associate's notice shall include, to the extent known, the information described at 45 C.F.R. § 164.410(c), and Business Associate shall supplement such notice within five (5) days and thereafter as information becomes available.\n5.3 **Unsuccessful Attempts.** Notice is hereby deemed given for unsuccessful Security Incidents, such as pings, port scans and denied log-in attempts, that do not result in unauthorized access, use or disclosure of PHI.\n5.4 **Cooperation.** Business Associate shall cooperate fully in Covered Entity's investigation of any Privacy Event and shall not notify any Individual, regulator or media outlet of a Privacy Event without Covered Entity's prior written consent, except as Required By Law.\n5.5 **Mitigation.** Business Associate shall promptly mitigate, at its own expense, any harmful effect of a Privacy Event.\n\n## ARTICLE 6 — INDIVIDUAL RIGHTS\n\n6.1 Within five (5) business days of Covered Entity's request, Business Associate shall make PHI maintained in a Designated Record Set available to Covered Entity as necessary to satisfy 45 C.F.R. § 164.524, including in electronic form where requested.\n6.2 Within five (5) business days of Covered Entity's request, Business Associate shall incorporate any amendment to PHI in a Designated Record Set as directed by Covered Entity under 45 C.F.R. § 164.526.\n6.3 Business Associate shall document disclosures of PHI and provide to Covered Entity, within ten (10) business days of request, the information required for an accounting of disclosures under 45 C.F.R. § 164.528.\n6.4 Business Associate shall forward to Covered Entity within three (3) business days any request received directly from an Individual.\n\n## ARTICLE 7 — COMPLIANCE AND AUDIT\n\n7.1 **HHS Access.** Business Associate shall make its internal practices, books and records relating to the use and disclosure of PHI available to the Secretary for purposes of determining Covered Entity's compliance with HIPAA.\n7.2 **Covered Entity Audit.** Covered Entity or its designee may inspect and audit Business Associate's and any Subcontractor's facilities, systems, books, records, policies and procedures relating to PHI upon forty-eight (48) hours' notice, at any time during the term of this BAA and for so long as Business Associate retains any PHI. Business Associate shall promptly remediate any deficiency identified.\n7.3 **Texas Privacy Law.** Business Associate shall comply with Texas Privacy Law to the extent applicable to Business Associate, including training requirements for employees who handle PHI.\n7.4 **Litigation Support.** Business Associate shall make itself and its workforce reasonably available to Covered Entity, at no cost, to testify in any litigation or administrative proceeding against Covered Entity relating to Business Associate's use or disclosure of PHI, except where Business Associate is a named adverse party.\n\n## ARTICLE 8 — INDEMNIFICATION; INSURANCE\n\n8.1 **Indemnification.** Business Associate shall defend, indemnify and hold harmless Covered Entity, its Affiliates and their respective trustees, officers, employees and agents from and against any and all Losses arising out of or relating to (a) any Privacy Event involving Business Associate or any Subcontractor; (b) any breach of this BAA by Business Associate or any Subcontractor; or (c) any violation of HIPAA or Texas Privacy Law by Business Associate or any Subcontractor, including without limitation regulatory fines, civil monetary penalties, costs of notification of Individuals, regulators and media, call-center support, credit monitoring and identity theft protection for affected Individuals, forensic investigation, and reasonable attorneys' fees.\n8.2 **No Limitation.** The obligations of Business Associate under this Article 8 are not subject to any limitation or exclusion of liability, and shall apply notwithstanding any limitation of liability in the Master Services Agreement.\n8.3 **Insurance.** Business Associate shall maintain, throughout the term of this BAA and for three (3) years thereafter, cyber liability and network security and privacy insurance with limits of not less than Five Million U.S. Dollars ($5,000,000) per claim and in the aggregate",
           "role": "incoming"
         },
         {
           "docId": "harrington-msa",
           "docTitle": "Harrington Health MSA (draft)",
           "clauseRef": "13.1",
-          "quote": "c) cyber liability of $5,000,000 per claim",
+          "quote": "Contractor shall maintain a written information security program consistent with NIST SP 800-53 moderate baseline, including encryption of PHI at rest and in transit, multi-factor authentication, and logging and monitoring of access.\n12.3 **Security Incidents.** Contractor shall notify Client of any actual or reasonably suspected security incident affecting Client data within twenty-four (24) hours of discovery and shall bear all costs of investigation, notification, credit monitoring and remediation.\n12.4 **Offshore Restrictions.** No PHI shall be accessed, stored or processed outside the United States without Client's prior written consent. Any Contractor Personnel located outside the United States shall access only de-identified data within Client-controlled environments.\n12.5 **Audit.** Client or its designee may audit Contractor's compliance with this Article upon ten (10) days' notice, no more than once annually except following a security incident.\n\n## ARTICLE 13 — INSURANCE\n\n13.1 Contractor shall maintain, at its own expense, with carriers rated A- VII or better by A.M. Best: (a) commercial general liability of $2,000,000 per occurrence; (b) professional liability/errors and omissions of $5,000,000 per claim; (c) cyber liability of $5,000,000 per claim",
           "role": "incoming"
         }
       ],
       "standard": "Check every required insurance type and limit against what AtliQ actually holds before signing (known: cyber $1M; everything else unrecorded).",
       "precedents": [],
-      "counterPosition": "Align required limits with current cover (cyber liability limit of $1,000,000), or agree a timeline and cost to increase cover before signature."
+      "counterPosition": "Align required limits with current cover ($1M), or agree a timeline and cost to increase cover before signature."
+    },
+    {
+      "key": "playbook:data_protection",
+      "category": "playbook",
+      "topic": "data_protection",
+      "title": "Prohibition on offshore data access and personnel",
+      "impact": "This prevents AtliQ's Pune entity from supporting the project or accessing the environment, which conflicts with AtliQ's standard global delivery model.",
+      "severity": "high",
+      "confidence": "medium",
+      "needsJudgment": false,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "harrington-baa",
+      "citations": [
+        {
+          "docId": "harrington-baa",
+          "docTitle": "Harrington Health BAA, Exhibit D (draft)",
+          "clauseRef": "4.1, 4.2",
+          "quote": "Business Associate shall not, and shall ensure that no Subcontractor shall, access, view, create, receive, maintain, transmit, store or process PHI from or at any location outside the United States, whether directly or by remote access.\n4.2 **Subcontractor Requirements.** Business Associate shall not engage any Subcontractor in connection with the Services without Covered Entity's prior written approval of such Subcontractor. Each approved Subcontractor shall be organized under the laws of a State of the United States, and all of its personnel performing Services shall be located in the United States",
+          "role": "incoming"
+        }
+      ],
+      "standard": "DPA (EU) or BAA (US health) signed before any personal/regulated data moves, with a sub-DPA / sub-BAA for every party that touches the data (incl. AtliQ's own Pune entity); engagement-specific scope; offshore access only as the agreement allows.",
+      "counterPosition": "Allow remote access from AtliQ's offshore delivery centers (including India) subject to agreed security controls and flow-down BAA terms.",
+      "precedents": [
+        {
+          "docId": "carebridge-baa",
+          "counterparty": "CareBridge Clinics",
+          "clauseRef": "whole BAA",
+          "label": "standard",
+          "note": "Counsel-reviewed: capped liability, 5-day reporting, de-identified offshore route"
+        }
+      ]
     },
     {
       "key": "playbook:indemnity",
       "category": "playbook",
       "topic": "indemnity",
-      "title": "Broad unilateral indemnity covering Client's own negligence",
-      "impact": "AtliQ could be forced to pay for losses and legal defenses even when the Client's own negligence contributed to the claim.",
+      "title": "Indemnification for Client's Own Negligence",
+      "impact": "AtliQ could be forced to pay for damages and legal fees resulting from errors or negligence committed by the Client's staff.",
       "severity": "high",
       "confidence": "medium",
       "needsJudgment": false,
@@ -174,19 +207,19 @@
           "docId": "harrington-baa",
           "docTitle": "Harrington Health BAA, Exhibit D (draft)",
           "clauseRef": "8.1",
-          "quote": "Business Associate shall defend, indemnify and hold harmless Covered Entity, its Affiliates and their respective trustees, officers, employees and agents from and against any and all Losses arising out of or relating to (a) any Privacy Event involving Business Associate or any Subcontractor; (b) any breach of this BAA by Business Associate or any Subcontractor; or (c) any violation of HIPAA or Texas Privacy Law by Business Associate or any Subcontractor",
+          "quote": "Business Associate shall defend, indemnify and hold harmless Covered Entity, its Affiliates and their respective trustees, officers, employees and agents from and against any and all Losses arising out of or relating to (a) any Privacy Event involving Business Associate or any Subcontractor; (b) any breach of this BAA by Business Associate or any Subcontractor; or (c) any violation of HIPAA",
           "role": "incoming"
         },
         {
           "docId": "harrington-msa",
           "docTitle": "Harrington Health MSA (draft)",
           "clauseRef": "9.1",
-          "quote": "regardless of whether such Losses are caused in whole or in part by the negligence of any Client Indemnitee",
+          "quote": "Contractor shall defend, indemnify and hold harmless Client, its Affiliates, and their respective trustees, directors, officers, employees, medical staff, agents, successors and assigns (the \"**Client Indemnitees**\") from and against any and all Losses arising out of or relating to (a) the Services or Deliverables, (b) any breach of this Agreement or the BAA by Contractor, (c) any claim that a Deliverable infringes any third-party intellectual property right, or (d) any act or omission of Contractor Personnel, in each case regardless of whether such Losses are caused in whole or in part by the negligence of any Client Indemnitee",
           "role": "incoming"
         }
       ],
       "standard": "Mutual: each party covers its own breach and negligence; never the other side's negligence. IP-infringement indemnity for deliverables is normal.",
-      "counterPosition": "Each party indemnifies the other for third-party claims caused by its own conflict or negligence; no indemnity for losses caused by the indemnified party's own negligence; indemnities subject to the liability cap (IP infringement excepted).",
+      "counterPosition": "Each party indemnifies the other for third-party claims caused by its own conflict or negligence; no indemnity for losses caused by the indemnified party's own negligence.",
       "precedents": [
         {
           "docId": "paytrack-msa",
@@ -205,51 +238,11 @@
       ]
     },
     {
-      "key": "playbook:ip",
-      "category": "playbook",
-      "topic": "ip",
-      "title": "IP vesting from creation and assignment of pre-existing materials",
-      "impact": "AtliQ loses its proprietary background IP and tools incorporated into deliverables, and ownership of deliverables transfers before AtliQ is paid.",
-      "severity": "high",
-      "confidence": "medium",
-      "needsJudgment": false,
-      "owner": "Karandeep",
-      "resolution": "redline",
-      "docId": "harrington-msa",
-      "citations": [
-        {
-          "docId": "harrington-msa",
-          "docTitle": "Harrington Health MSA (draft)",
-          "clauseRef": "7.1",
-          "quote": "All Deliverables shall be deemed \"works made for hire\" as defined in the U.S. Copyright Act, 17 U.S.C. § 101, and shall be the sole and exclusive property of Client from creation",
-          "role": "incoming"
-        }
-      ],
-      "standard": "The client owns what AtliQ builds specifically for it (on payment); AtliQ keeps its background IP, pre-existing tools and know-how and grants a licence to use them as part of the deliverables.",
-      "counterPosition": "Client owns deliverables created specifically for it upon payment; AtliQ retains background IP and grants a non-exclusive, perpetual, royalty-free licence to use it as part of the deliverables.",
-      "precedents": [
-        {
-          "docId": "acme-msa",
-          "counterparty": "Acme Retail Group",
-          "clauseRef": "§9",
-          "label": "standard",
-          "note": "Client owns deliverables, AtliQ keeps background IP"
-        },
-        {
-          "docId": "northwind-msa",
-          "counterparty": "Northwind Logistics",
-          "clauseRef": "§9.2",
-          "label": "accident",
-          "note": "Pre-existing tools incl. PipeKit assigned to Northwind (\"I skimmed the IP\")"
-        }
-      ]
-    },
-    {
       "key": "playbook:ld",
       "category": "playbook",
       "topic": "ld",
-      "title": "Uncapped daily liquidated damages based on Total Contract Value",
-      "impact": "AtliQ could face astronomical, uncapped daily penalties calculated on the entire contract value even for minor delays, on top of being liable for actual damages.",
+      "title": "Uncapped 2% Daily Penalties on Total Contract Value",
+      "impact": "AtliQ could incur penalties exceeding the total project value for minor delays in a single milestone.",
       "severity": "high",
       "confidence": "medium",
       "needsJudgment": false,
@@ -316,14 +309,14 @@
       "key": "playbook:liability",
       "category": "playbook",
       "topic": "liability",
-      "title": "One-sided limitation of liability and unlimited Contractor liability",
-      "impact": "AtliQ would face unlimited financial liability for any conflict or data incident, while the Client's exposure remains strictly capped.",
+      "title": "Uncapped liability for BAA conflicts and data incidents",
+      "impact": "AtliQ faces unlimited financial exposure for any HIPAA non-compliance, data incident, or BAA conflict, contrary to the standard 1x fee cap.",
       "severity": "high",
       "confidence": "medium",
       "needsJudgment": false,
       "owner": "Karandeep",
       "resolution": "redline",
-      "docId": "harrington-msa",
+      "docId": "harrington-baa",
       "citations": [
         {
           "docId": "harrington-msa",
@@ -371,16 +364,16 @@
         }
       ],
       "standard": "Each party's aggregate liability capped at 1× fees (paid or payable in the prior 12 months), mutual; carve-outs only for fraud, wilful misconduct and confidentiality (plus any carve-outs that are mandatory under the governing law, e.g. German law for intent/gross negligence and injury).",
-      "counterPosition": "Mutual cap of 1× fees paid or payable in the 12 months before the claim; carve-outs limited to fraud, wilful misconduct and non-compliance with confidentiality; data-protection liability under a separate super-cap (e.g. 2× fees)."
+      "counterPosition": "All liability under the BAA, including for data incidents and indemnification, must be subject to a liability cap (ideally a 2x fees super-cap)."
     },
     {
       "key": "playbook:payment",
       "category": "playbook",
       "topic": "payment",
-      "title": "Payment: 90 days",
-      "impact": "90-day payment against AtliQ's 30-day standard (45 max).",
+      "title": "90-Day Invoice Submission Waiver",
+      "impact": "Administrative delays in billing could result in the total forfeiture of fees for work already performed and accepted.",
       "severity": "high",
-      "confidence": "high",
+      "confidence": "medium",
       "needsJudgment": false,
       "owner": "Karandeep",
       "resolution": "redline",
@@ -392,10 +385,17 @@
           "clauseRef": "4.3",
           "quote": "Client shall pay each properly submitted, undisputed invoice within ninety (90) days after Client's receipt thereof",
           "role": "incoming"
+        },
+        {
+          "docId": "harrington-msa",
+          "docTitle": "Harrington Health MSA (draft)",
+          "clauseRef": "4.2",
+          "quote": "Invoices not submitted within ninety (90) days after acceptance shall be deemed waived",
+          "role": "incoming"
         }
       ],
-      "standard": "30 days from invoice; 45 days is the negotiated maximum.",
-      "counterPosition": "Payment within 30 days of receipt of invoice (45 days maximum); no pay-when-paid.",
+      "standard": "Invoices payable within 30 days of receipt; 45 days is the negotiated maximum.",
+      "counterPosition": "Remove the waiver clause; AtliQ should be paid for all work performed and accepted.",
       "precedents": [
         {
           "docId": "trustline-msa",
@@ -417,8 +417,8 @@
       "key": "playbook:termination",
       "category": "playbook",
       "topic": "termination",
-      "title": "Short notice and no payment for WIP upon convenience termination",
-      "impact": "AtliQ could have its contract terminated with almost no warning and be left unpaid for substantial uncompleted or unaccepted work in progress.",
+      "title": "No Payment for Work in Progress",
+      "impact": "AtliQ would lose the value of all labor and costs incurred for milestones currently in development at the time of termination.",
       "severity": "high",
       "confidence": "medium",
       "needsJudgment": false,
@@ -430,12 +430,12 @@
           "docId": "harrington-msa",
           "docTitle": "Harrington Health MSA (draft)",
           "clauseRef": "5.3",
-          "quote": "upon seven (7) days' written notice to Contractor. Upon such termination, Client's sole obligation shall be to pay Fees for Deliverables accepted by Client prior to the effective date of termination; Client shall have no obligation to pay for work in progress, unaccepted Deliverables, demobilization costs or anticipated profits",
+          "quote": "Upon such termination, Client's sole obligation shall be to pay Fees for Deliverables accepted by Client prior to the effective date of termination; Client shall have no obligation to pay for work in progress, unaccepted Deliverables, demobilization costs or anticipated profits",
           "role": "incoming"
         }
       ],
-      "standard": "On any termination for convenience AtliQ is paid for all work done, including work in progress; reasonable notice (≥30 days); mutual where possible.",
-      "counterPosition": "Payment for all services performed up to termination, including work in progress and committed costs; mutual notice period of at least 30 days.",
+      "standard": "On any termination for convenience AtliQ is paid for all work done, including work in progress. Notice is mutual. Client contracts: reasonable notice (typically 30+ days). Freelancer / vendor agreements: a mutual short exit (about 15 days, as with Rohan Iyer) is AtliQ's standard and fair to both sides.",
+      "counterPosition": "Payment for all services performed up to termination, including work in progress and committed costs; mutual notice period.",
       "precedents": [
         {
           "docId": "rohan-ica",
@@ -481,44 +481,11 @@
       }
     },
     {
-      "key": "playbook:data_protection",
-      "category": "playbook",
-      "topic": "data_protection",
-      "title": "Absolute restriction on offshore access and personnel",
-      "impact": "AtliQ is prevented from utilizing its Indian affiliate or offshore resources for any part of the services involving PHI.",
-      "severity": "medium",
-      "confidence": "medium",
-      "needsJudgment": true,
-      "owner": "Karandeep",
-      "resolution": "redline",
-      "docId": "harrington-baa",
-      "citations": [
-        {
-          "docId": "harrington-baa",
-          "docTitle": "Harrington Health BAA, Exhibit D (draft)",
-          "clauseRef": "4.1 & 4.2",
-          "quote": "Business Associate shall not, and shall ensure that no Subcontractor shall, access, view, create, receive, maintain, transmit, store or process PHI from or at any location outside the United States, whether directly or by remote access",
-          "role": "incoming"
-        }
-      ],
-      "standard": "DPA (EU) or BAA (US health) signed before any personal/regulated data moves, with a sub-DPA / sub-BAA for every party that touches the data (incl. AtliQ's own Pune entity); engagement-specific scope; offshore access only as the agreement allows.",
-      "counterPosition": "Amend the BAA to allow remote access and processing from AtliQ's offshore location in India, subject to agreed security protocols and sub-agreements.",
-      "precedents": [
-        {
-          "docId": "carebridge-baa",
-          "counterparty": "CareBridge Clinics",
-          "clauseRef": "whole BAA",
-          "label": "standard",
-          "note": "Counsel-reviewed: capped liability, 5-day reporting, de-identified offshore route"
-        }
-      ]
-    },
-    {
       "key": "playbook:set_off",
       "category": "playbook",
       "topic": "set_off",
-      "title": "Broad cross-agreement set-off right for Client",
-      "impact": "The Client could withhold payments due under this contract to settle unrelated, disputed claims under other contracts, disrupting AtliQ's cash flow.",
+      "title": "Cross-Agreement Set-off Rights",
+      "impact": "The client could stop paying for current project work because of a disagreement on a different contract.",
       "severity": "medium",
       "confidence": "medium",
       "needsJudgment": false,
@@ -535,7 +502,7 @@
         }
       ],
       "standard": "Invoices payable within 30 days of receipt; 45 days is the negotiated maximum.",
-      "counterPosition": "set-off limited to undisputed amounts under this agreement.",
+      "counterPosition": "Set-off limited to undisputed amounts under this agreement.",
       "precedents": [
         {
           "docId": "trustline-msa",
@@ -552,21 +519,44 @@
           "note": "AtliQ's own paper: 60-day payment changed to 30 for a 6-person agency (Oct 2025)"
         }
       ]
+    },
+    {
+      "key": "playbook:acceptance",
+      "category": "playbook",
+      "topic": "acceptance",
+      "title": "No Deemed Acceptance Mechanism",
+      "impact": "Milestones could remain technically 'unaccepted' indefinitely, delaying final payment even if the software is in live use.",
+      "severity": "low",
+      "confidence": "medium",
+      "needsJudgment": false,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "harrington-msa",
+      "citations": [
+        {
+          "docId": "harrington-msa",
+          "docTitle": "Harrington Health MSA (draft)",
+          "clauseRef": "3.3",
+          "quote": "Acceptance shall not be deemed to occur by use in production, by payment, or by the passage of time",
+          "role": "incoming"
+        }
+      ],
+      "standard": "Prevents acceptance from occurring through use, payment, or the passage of time.",
+      "counterPosition": "Deliverables are deemed accepted if the client fails to provide a rejection notice within a defined period (e.g., 10 business days) or puts the deliverable into production use."
     }
   ],
   "fine": [
     "Correct AtliQ entity: Inc for a USA counterparty",
     "Governing law matches entity: laws of the State of Texas (Inc → US law)",
     "No live AtliQ commitment covers this healthcare work in USA",
-    "Ownership of PHI remains with the client, which is standard and does not impact AtliQ's rights to its background IP.",
-    "No set-off provisions are included in the agreement, which matches the standard.",
-    "No delay penalties or liquidated damages are specified in this agreement.",
-    "Termination for default of the BAA is standard and does not conflict with the MSA's payment-for-work-done standard on convenience termination.",
-    "Confidentiality obligations are mutual in substance and standard.",
-    "The BAA requirements and offshore restrictions are aligned with standard data protection practices.",
-    "The agreement does not contain any restrictive covenants or non-competes.",
-    "The acceptance process provides a clear 30-day testing window.",
-    "Warranties are standard for professional services and intellectual property non-infringement."
+    "Ownership of PHI and derived data by the client is standard in a healthcare context and does not misappropriate AtliQ background IP.",
+    "The 30-day data destruction window and termination for uncured breach are standard BAA provisions.",
+    "There are no liquidated damages or delay penalties included in this BAA.",
+    "No acceptance criteria are specified in this BAA, which is standard for a data protection exhibit.",
+    "Confidentiality obligations regarding PHI are appropriately defined in accordance with HIPAA regulations.",
+    "Confidentiality obligations are mutual in substance and standard in scope.",
+    "The agreement is non-exclusive and contains no non-compete or non-solicit restrictions.",
+    "Offshore restrictions and security requirements are standard for a BAA-governed healthcare contract."
   ],
   "notSeen": [
     "Insurance: general liability $2M required: AtliQ's general liability cover isn't recorded anywhere. Confirm with finance.",
@@ -1112,146 +1102,6 @@
   },
   "similar": [
     {
-      "clauseType": "data_protection",
-      "docId": "harrington-baa",
-      "clauseRef": "§1",
-      "quote": "1.1 \"**HIPAA**\" means the Health Insurance Portability and Accountability Act of 1996, the Health Information Technology for Economic and Clinical Health Act (Title XIII of the American Recovery and Reinvestment Act of 2009), and the regulations at 45 C.F.R. Parts 160, 162 and 164, each as amended.\n1.2 \"**Protected Health Information**\" or \"**PHI**\" has the meaning given at 45 C.F.R. § 160.103, limited to information created, received, maintained or transmitted by Business Associate or any Subcontractor on behalf of Covered Entity, and includes electronic PHI.\n1.3 \"**Security Incident**\" has the meaning given at 45 C.F.R. § 164.304.\n1.4 \"**Breach**\" has the meaning given at 45 C.F.R. § 164.4",
-      "hits": [
-        {
-          "docId": "carebridge-baa",
-          "counterparty": "CareBridge Clinics Inc",
-          "date": "2025-10-06",
-          "clauseNo": "1.2",
-          "heading": "DEFINITIONS",
-          "label": "standard",
-          "labelNote": "Counsel-reviewed BAA (Calloway Stern, $3.8k): capped liability, 5-day reporting, de-identified offshore route",
-          "score": 0.912,
-          "text": "1.2 \"**Protected Health Information**\" or \"**PHI**\" has the meaning given in 45 C.F.R. § 160.103, limited to information created, received, maintained or transmitted by Business Associate on behalf of Covered Entity.",
-          "differs": "NEW adds subcontractor handling and electronic PHI to definition; adds HIPAA and Security Incident definition clauses.",
-          "alsoIn": []
-        },
-        {
-          "docId": "ic-baa",
-          "counterparty": "AtliQ Technologies Pvt Ltd (intercompany)",
-          "date": "2025-10-06",
-          "clauseNo": "2",
-          "heading": "SCOPE",
-          "label": "untagged",
-          "score": 0.839,
-          "text": "2.1 This Agreement applies to the Engagement Services. Any services Subcontractor performs for Business Associate other than the Engagement Services are governed by the Intercompany Agreement.\n\n2.2 The restrictions, conditions and requirements of the Upstream BAA that apply to Business Associate apply equally to Subcontractor in performing the Engagement Services.",
-          "differs": "NEW defines statutory HIPAA terms; SIGNED defines intercompany service scope and upstream BAA flow-down obligations.",
-          "alsoIn": []
-        },
-        {
-          "docId": "brightwater-msa",
-          "counterparty": "Brightwater Insurance Inc",
-          "date": "2025-11-28",
-          "clauseNo": "13",
-          "heading": "DATA PROTECTION AND INFORMATION SECURITY",
-          "label": "untagged",
-          "score": 0.806,
-          "text": "13.1 The Supplier shall comply with all applicable data protection laws, including the Connecticut Data Privacy Act and the Gramm-Leach-Bliley Act, and the Brightwater Group Information Security Schedule.\n\n13.2 The Supplier shall notify the Customer of any security incident affecting Customer Data within twenty-four (24) hours of becoming aware of it.\n\n13.3 The Supplier shall not process Customer Data outside the United States without the Customer's prior written consent.",
-          "differs": "NEW defines HIPAA statutory terms; SIGNED specifies state/federal compliance, a 24-hour incident notice, and US processing restrictions.",
-          "alsoIn": []
-        }
-      ]
-    },
-    {
-      "clauseType": "indemnity",
-      "docId": "harrington-baa",
-      "clauseRef": "§8",
-      "quote": "8.1 **Indemnification.** Business Associate shall defend, indemnify and hold harmless Covered Entity, its Affiliates and their respective trustees, officers, employees and agents from and against any and all Losses arising out of or relating to (a) any Privacy Event involving Business Associate or any Subcontractor; (b) any breach of this BAA by Business Associate or any Subcontractor; or (c) any violation of HIPAA or Texas Privacy Law by Business Associate or any Subcontractor, including without limitation regulatory fines, civil monetary penalties, costs of notification of Individuals, regulators and media, call-center support, credit monitoring and identity theft protection for affected I",
-      "hits": [
-        {
-          "docId": "paytrack-msa",
-          "counterparty": "PayTrack Technologies",
-          "date": "2025-01-22",
-          "clauseNo": "10",
-          "heading": "INDEMNITY",
-          "label": "standard",
-          "labelNote": "Origin of the mutual-indemnity position: no indemnity for the indemnified party's own negligence",
-          "score": 0.859,
-          "text": "10.1 Each Party (the \"**Indemnifying Party**\") shall indemnify, defend and hold harmless the other Party and its directors, officers and employees (the \"**Indemnified Party**\") from and against all Losses arising out of any third-party claim to the extent caused by: (a) the Indemnifying Party's breach of Clause 7 (Confidentiality) or Clause 12 (Data Protection); (b) the gross negligence, wilful misconduct or fraud of the Indemnifying Party or its personnel; or (c) in the case of AtliQ, any claim that the Deliverables infringe a third party's intellectual property rights, and in the case of PayTrack, any claim that Client Data or materials supplied by PayTrack infringe a third party's rights.\n\n10.2 Neither Party shall be required to indemnify the other to the extent any Losses are caused by the negligence, breach or wilful misconduct of the Indemnified Party.\n\n10.3 The Indemnified Party shall give prompt written notice of any claim, permit the Indemnifying Party to control the defence and settlement, and provide reasonable cooperation at the Indemnifying Party's cost.",
-          "differs": "NEW is one-way indemnification by Business Associate for privacy/HIPAA events; SIGNED is mutual for third-party claims.",
-          "alsoIn": []
-        },
-        {
-          "docId": "acme-msa",
-          "counterparty": "Acme Retail Group",
-          "date": "2025-03-10",
-          "clauseNo": "11",
-          "heading": "INDEMNITY",
-          "label": "standard",
-          "labelNote": "Mutual indemnity",
-          "score": 0.858,
-          "text": "11.1 Each Party (\"**Indemnifying Party**\") shall indemnify the other against losses arising from third-party claims caused by the Indemnifying Party's breach of confidentiality, infringement of third-party intellectual property rights, or gross negligence or wilful misconduct.",
-          "differs": "NEW is unilateral covering privacy, HIPAA, and fines; SIGNED is mutual covering confidentiality, IP, and gross negligence.",
-          "alsoIn": []
-        },
-        {
-          "docId": "sunrise-msa",
-          "counterparty": "Sunrise Foods",
-          "date": "2025-04-18",
-          "clauseNo": "12",
-          "heading": "INDEMNITY",
-          "label": "untagged",
-          "score": 0.858,
-          "text": "12.1 Each Party shall indemnify the other against third-party claims arising out of its breach of confidentiality, infringement of intellectual property rights, or gross negligence or wilful misconduct.",
-          "differs": "NEW is unilateral covering HIPAA, Texas Privacy Law, and regulatory fines; SIGNED is mutual covering IP, confidentiality, gross negligence.",
-          "alsoIn": [
-            "Trustline NBFC (2026-08)"
-          ]
-        }
-      ]
-    },
-    {
-      "clauseType": "ip",
-      "docId": "harrington-baa",
-      "clauseRef": "§10",
-      "quote": "10.1 As between the Parties, all PHI and all data derived from PHI is and shall remain the sole property of Covered Entity. Business Associate acquires no right, title or interest in PHI by reason of this BAA or the Master Services Agreement.\n10.2 To the extent Business Associate conducts any Standard Transaction on behalf of Covered Entity, Business Associate shall comply with 45 C.F.R. Part 162 and shall require any Subcontractor to do the same.\n10.3 Business Associate shall not use PHI, or any data derived from PHI, to train, tune or evaluate any machine learning or artificial intelligence model other than models developed exclusively for Covered Entity under the Master Services Agreement",
-      "hits": [
-        {
-          "docId": "rohan-ica",
-          "counterparty": "Rohan Iyer",
-          "date": "2025-04-28",
-          "clauseNo": "5",
-          "heading": "INTELLECTUAL PROPERTY",
-          "label": "accident",
-          "labelNote": "Rohan kept the Work Product IP (\"ok\" from phone) while Acme was promised ownership",
-          "score": 0.823,
-          "text": "5.1 In this Clause, \"**Work Product**\" means all dashboards, reports, data models, DAX measures, Power Query scripts, visual templates, documentation and other materials created by the Contractor in performing the Services.\n\n5.2 The Contractor retains ownership of all intellectual property rights in the Work Product and in any pre-existing materials, components and templates of the Contractor.\n\n5.3 The Contractor grants AtliQ a non-exclusive, perpetual, irrevocable, royalty-free, worldwide licence to use, copy, modify and deploy the Work Product for the purposes of AtliQ's business, including for delivery to AtliQ's clients.\n\n5.4 The Contractor shall not incorporate into the Work Product any third-party material that AtliQ is not entitled to use under Clause 5.3.",
-          "differs": "NEW vests PHI in Covered Entity and bans AI training; SIGNED Contractor retains Work Product IP, granting licence.",
-          "alsoIn": []
-        },
-        {
-          "docId": "orbit-msa",
-          "counterparty": "Orbit Travels Pvt Ltd",
-          "date": "2022-07-01",
-          "clauseNo": "5",
-          "heading": "INTELLECTUAL PR0PERTY",
-          "label": "untagged",
-          "score": 0.804,
-          "text": "5.1 All deliverables developed specifically for the Client shall be the property of the Client\nupon full payment. The Service Provider retains its pre-existing tools and know-how.",
-          "differs": "NEW grants Covered Entity sole PHI ownership and bans AI training; SIGNED vests deliverables in Client upon payment.",
-          "alsoIn": [
-            "Acme Retail Group (2025-03)"
-          ]
-        },
-        {
-          "docId": "cloudspan-spa",
-          "counterparty": "CloudSpan Technologies",
-          "date": "2025-09-01",
-          "clauseNo": "8",
-          "heading": "INTELLECTUAL PROPERTY",
-          "label": "untagged",
-          "score": 0.802,
-          "text": "8.1 Each Party retains all rights in its own intellectual property. CloudSpan owns the CloudSpan Platform and all improvements to it.\n\n8.2 Partner retains all rights in its own methodologies, accelerators, tools, templates and know-how, whether developed before or during the Term, including those used in delivering Implementation Services.\n\n8.3 Any feedback provided by Partner concerning the CloudSpan Platform may be used by CloudSpan without restriction, provided Partner's Confidential Information is not disclosed.",
-          "differs": "NEW vests PHI in Covered Entity and restricts AI training; SIGNED allocates proprietary IP, platforms, and feedback rights.",
-          "alsoIn": []
-        }
-      ]
-    },
-    {
       "clauseType": "payment",
       "docId": "harrington-msa",
       "clauseRef": "§4",
@@ -1639,15 +1489,155 @@
           "alsoIn": []
         }
       ]
+    },
+    {
+      "clauseType": "data_protection",
+      "docId": "harrington-baa",
+      "clauseRef": "§1",
+      "quote": "1.1 \"**HIPAA**\" means the Health Insurance Portability and Accountability Act of 1996, the Health Information Technology for Economic and Clinical Health Act (Title XIII of the American Recovery and Reinvestment Act of 2009), and the regulations at 45 C.F.R. Parts 160, 162 and 164, each as amended.\n1.2 \"**Protected Health Information**\" or \"**PHI**\" has the meaning given at 45 C.F.R. § 160.103, limited to information created, received, maintained or transmitted by Business Associate or any Subcontractor on behalf of Covered Entity, and includes electronic PHI.\n1.3 \"**Security Incident**\" has the meaning given at 45 C.F.R. § 164.304.\n1.4 \"**Breach**\" has the meaning given at 45 C.F.R. § 164.4",
+      "hits": [
+        {
+          "docId": "carebridge-baa",
+          "counterparty": "CareBridge Clinics Inc",
+          "date": "2025-10-06",
+          "clauseNo": "1.2",
+          "heading": "DEFINITIONS",
+          "label": "standard",
+          "labelNote": "Counsel-reviewed BAA (Calloway Stern, $3.8k): capped liability, 5-day reporting, de-identified offshore route",
+          "score": 0.912,
+          "text": "1.2 \"**Protected Health Information**\" or \"**PHI**\" has the meaning given in 45 C.F.R. § 160.103, limited to information created, received, maintained or transmitted by Business Associate on behalf of Covered Entity.",
+          "differs": "NEW adds subcontractor handling and electronic PHI to definition; adds HIPAA and Security Incident definition clauses.",
+          "alsoIn": []
+        },
+        {
+          "docId": "ic-baa",
+          "counterparty": "AtliQ Technologies Pvt Ltd (intercompany)",
+          "date": "2025-10-06",
+          "clauseNo": "2",
+          "heading": "SCOPE",
+          "label": "untagged",
+          "score": 0.839,
+          "text": "2.1 This Agreement applies to the Engagement Services. Any services Subcontractor performs for Business Associate other than the Engagement Services are governed by the Intercompany Agreement.\n\n2.2 The restrictions, conditions and requirements of the Upstream BAA that apply to Business Associate apply equally to Subcontractor in performing the Engagement Services.",
+          "differs": "NEW defines statutory HIPAA terms; SIGNED defines intercompany service scope and upstream BAA flow-down obligations.",
+          "alsoIn": []
+        },
+        {
+          "docId": "brightwater-msa",
+          "counterparty": "Brightwater Insurance Inc",
+          "date": "2025-11-28",
+          "clauseNo": "13",
+          "heading": "DATA PROTECTION AND INFORMATION SECURITY",
+          "label": "untagged",
+          "score": 0.806,
+          "text": "13.1 The Supplier shall comply with all applicable data protection laws, including the Connecticut Data Privacy Act and the Gramm-Leach-Bliley Act, and the Brightwater Group Information Security Schedule.\n\n13.2 The Supplier shall notify the Customer of any security incident affecting Customer Data within twenty-four (24) hours of becoming aware of it.\n\n13.3 The Supplier shall not process Customer Data outside the United States without the Customer's prior written consent.",
+          "differs": "NEW defines HIPAA statutory terms; SIGNED specifies state/federal compliance, a 24-hour incident notice, and US processing restrictions.",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "indemnity",
+      "docId": "harrington-baa",
+      "clauseRef": "§8",
+      "quote": "8.1 **Indemnification.** Business Associate shall defend, indemnify and hold harmless Covered Entity, its Affiliates and their respective trustees, officers, employees and agents from and against any and all Losses arising out of or relating to (a) any Privacy Event involving Business Associate or any Subcontractor; (b) any breach of this BAA by Business Associate or any Subcontractor; or (c) any violation of HIPAA or Texas Privacy Law by Business Associate or any Subcontractor, including without limitation regulatory fines, civil monetary penalties, costs of notification of Individuals, regulators and media, call-center support, credit monitoring and identity theft protection for affected I",
+      "hits": [
+        {
+          "docId": "paytrack-msa",
+          "counterparty": "PayTrack Technologies",
+          "date": "2025-01-22",
+          "clauseNo": "10",
+          "heading": "INDEMNITY",
+          "label": "standard",
+          "labelNote": "Origin of the mutual-indemnity position: no indemnity for the indemnified party's own negligence",
+          "score": 0.859,
+          "text": "10.1 Each Party (the \"**Indemnifying Party**\") shall indemnify, defend and hold harmless the other Party and its directors, officers and employees (the \"**Indemnified Party**\") from and against all Losses arising out of any third-party claim to the extent caused by: (a) the Indemnifying Party's breach of Clause 7 (Confidentiality) or Clause 12 (Data Protection); (b) the gross negligence, wilful misconduct or fraud of the Indemnifying Party or its personnel; or (c) in the case of AtliQ, any claim that the Deliverables infringe a third party's intellectual property rights, and in the case of PayTrack, any claim that Client Data or materials supplied by PayTrack infringe a third party's rights.\n\n10.2 Neither Party shall be required to indemnify the other to the extent any Losses are caused by the negligence, breach or wilful misconduct of the Indemnified Party.\n\n10.3 The Indemnified Party shall give prompt written notice of any claim, permit the Indemnifying Party to control the defence and settlement, and provide reasonable cooperation at the Indemnifying Party's cost.",
+          "differs": "NEW is one-way indemnification by Business Associate for privacy/HIPAA events; SIGNED is mutual for third-party claims.",
+          "alsoIn": []
+        },
+        {
+          "docId": "acme-msa",
+          "counterparty": "Acme Retail Group",
+          "date": "2025-03-10",
+          "clauseNo": "11",
+          "heading": "INDEMNITY",
+          "label": "standard",
+          "labelNote": "Mutual indemnity",
+          "score": 0.858,
+          "text": "11.1 Each Party (\"**Indemnifying Party**\") shall indemnify the other against losses arising from third-party claims caused by the Indemnifying Party's breach of confidentiality, infringement of third-party intellectual property rights, or gross negligence or wilful misconduct.",
+          "differs": "NEW is unilateral covering privacy, HIPAA, and fines; SIGNED is mutual covering confidentiality, IP, and gross negligence.",
+          "alsoIn": []
+        },
+        {
+          "docId": "sunrise-msa",
+          "counterparty": "Sunrise Foods",
+          "date": "2025-04-18",
+          "clauseNo": "12",
+          "heading": "INDEMNITY",
+          "label": "untagged",
+          "score": 0.858,
+          "text": "12.1 Each Party shall indemnify the other against third-party claims arising out of its breach of confidentiality, infringement of intellectual property rights, or gross negligence or wilful misconduct.",
+          "differs": "NEW is unilateral covering HIPAA, Texas Privacy Law, and regulatory fines; SIGNED is mutual covering IP, confidentiality, gross negligence.",
+          "alsoIn": [
+            "Trustline NBFC (2026-08)"
+          ]
+        }
+      ]
+    },
+    {
+      "clauseType": "ip",
+      "docId": "harrington-baa",
+      "clauseRef": "§10",
+      "quote": "10.1 As between the Parties, all PHI and all data derived from PHI is and shall remain the sole property of Covered Entity. Business Associate acquires no right, title or interest in PHI by reason of this BAA or the Master Services Agreement.\n10.2 To the extent Business Associate conducts any Standard Transaction on behalf of Covered Entity, Business Associate shall comply with 45 C.F.R. Part 162 and shall require any Subcontractor to do the same.\n10.3 Business Associate shall not use PHI, or any data derived from PHI, to train, tune or evaluate any machine learning or artificial intelligence model other than models developed exclusively for Covered Entity under the Master Services Agreement",
+      "hits": [
+        {
+          "docId": "rohan-ica",
+          "counterparty": "Rohan Iyer",
+          "date": "2025-04-28",
+          "clauseNo": "5",
+          "heading": "INTELLECTUAL PROPERTY",
+          "label": "accident",
+          "labelNote": "Rohan kept the Work Product IP (\"ok\" from phone) while Acme was promised ownership",
+          "score": 0.823,
+          "text": "5.1 In this Clause, \"**Work Product**\" means all dashboards, reports, data models, DAX measures, Power Query scripts, visual templates, documentation and other materials created by the Contractor in performing the Services.\n\n5.2 The Contractor retains ownership of all intellectual property rights in the Work Product and in any pre-existing materials, components and templates of the Contractor.\n\n5.3 The Contractor grants AtliQ a non-exclusive, perpetual, irrevocable, royalty-free, worldwide licence to use, copy, modify and deploy the Work Product for the purposes of AtliQ's business, including for delivery to AtliQ's clients.\n\n5.4 The Contractor shall not incorporate into the Work Product any third-party material that AtliQ is not entitled to use under Clause 5.3.",
+          "differs": "NEW vests PHI in Covered Entity and bans AI training; SIGNED Contractor retains Work Product IP, granting licence.",
+          "alsoIn": []
+        },
+        {
+          "docId": "orbit-msa",
+          "counterparty": "Orbit Travels Pvt Ltd",
+          "date": "2022-07-01",
+          "clauseNo": "5",
+          "heading": "INTELLECTUAL PR0PERTY",
+          "label": "untagged",
+          "score": 0.804,
+          "text": "5.1 All deliverables developed specifically for the Client shall be the property of the Client\nupon full payment. The Service Provider retains its pre-existing tools and know-how.",
+          "differs": "NEW grants Covered Entity sole PHI ownership and bans AI training; SIGNED vests deliverables in Client upon payment.",
+          "alsoIn": [
+            "Acme Retail Group (2025-03)"
+          ]
+        },
+        {
+          "docId": "cloudspan-spa",
+          "counterparty": "CloudSpan Technologies",
+          "date": "2025-09-01",
+          "clauseNo": "8",
+          "heading": "INTELLECTUAL PROPERTY",
+          "label": "untagged",
+          "score": 0.802,
+          "text": "8.1 Each Party retains all rights in its own intellectual property. CloudSpan owns the CloudSpan Platform and all improvements to it.\n\n8.2 Partner retains all rights in its own methodologies, accelerators, tools, templates and know-how, whether developed before or during the Term, including those used in delivering Implementation Services.\n\n8.3 Any feedback provided by Partner concerning the CloudSpan Platform may be used by CloudSpan without restriction, provided Partner's Confidential Information is not disclosed.",
+          "differs": "NEW vests PHI in Covered Entity and restricts AI training; SIGNED allocates proprietary IP, platforms, and feedback rights.",
+          "alsoIn": []
+        }
+      ]
     }
   ],
   "counselPack": null,
   "errors": [],
   "usage": {
-    "calls": 6,
-    "cachedCalls": 3,
-    "inputTokens": 24403,
-    "outputTokens": 26702,
-    "ms": 391270
+    "calls": 3,
+    "cachedCalls": 6,
+    "inputTokens": 14181,
+    "outputTokens": 9968,
+    "ms": 33754
   }
 }

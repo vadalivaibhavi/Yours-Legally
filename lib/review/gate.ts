@@ -5,6 +5,7 @@
  * Payment / LD-cap / liability-cap failures are keyed under their playbook topic so the
  * deeper F4 finding on the same clause merges with them (one finding per topic).
  */
+import { splitSections } from "../chunker";
 import { canonRegion, expectedEntityFor } from "../geo";
 import type { Company, Deal, Document } from "../types";
 import type { Extraction } from "./extract";
@@ -191,7 +192,15 @@ export function runGate(ctx: GateContext): { results: GateResult[]; findings: Fi
 
   // 6. Liability capped
   const liabCite = cite(doc, x.liability.clauseRef, x.liability.quote);
+  // A carve-out that only names a section ("breach of Section 7") is judged by that section's heading.
+  const sections = splitSections(doc.text);
+  const withHeading = (u: string) => {
+    const n = u.match(/(?:section|clause|article|§)\s*(\d+)/i)?.[1];
+    const s = n ? sections.find((x) => x.no === n) : undefined;
+    return s ? `${u} (${s.heading})` : u;
+  };
   const badCarveOuts = x.liability.uncappedFor
+    .map(withHeading)
     .filter((u) => !OK_UNCAPPED.test(u))
     .map((u) => u.replace(/^(any )?(breach|violation) of /i, "").replace(/^clause \d+(\.\d+)? \((.+)\)$/i, "$2"));
   if (x.liability.atliqCapped === false) {

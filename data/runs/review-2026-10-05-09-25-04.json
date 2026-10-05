@@ -1,0 +1,36 @@
+{
+  "deals": [
+    "harrington",
+    "lakeshore",
+    "blueorchid",
+    "gulfcrown",
+    "travelhub",
+    "rheinwerk",
+    "sunrise-sow2",
+    "datavane",
+    "finserve",
+    "loopmart",
+    "ortiz",
+    "marcus",
+    "kriti"
+  ],
+  "calls": 11,
+  "cached": 52,
+  "inTok": 38349,
+  "outTok": 36108,
+  "rows": [
+    "harrington    HOLD                0B 11H 3M  34s  ",
+    "lakeshore     HOLD                1B 0H 0M  1233s  ERR Playbook check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your cu",
+    "blueorchid    SIGN AFTER CHANGES  0B 1H 1M  1572s  ",
+    "gulfcrown     HOLD                1B 3H 2M  101s  ",
+    "travelhub     HOLD                1B 2H 1M  5s  ERR Playbook check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your cu",
+    "rheinwerk     HOLD                1B 2H 2M  5s  ERR Playbook check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your cu",
+    "sunrise-sow2  HOLD                0B 0H 0M  5s  ERR Playbook check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your cu",
+    "datavane      HOLD                0B 0H 1M  5s  ERR Conflict check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your cu",
+    "finserve      HOLD                1B 4H 2M  0s  ",
+    "loopmart      SIGN                0B 0H 0M  0s  ",
+    "ortiz         HOLD                0B 1H 0M  5s  ERR Playbook check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your cu",
+    "marcus        HOLD                0B 2H 2M  5s  ERR Playbook check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your cu",
+    "kriti         HOLD                0B 3H 0M  799s  ERR Playbook check couldn't complete: review manually (gemini-flash-latest: HTTP 429: { \"error\": { \"code\": 429, \"message\": \"You exceeded your cu"
+  ]
+}

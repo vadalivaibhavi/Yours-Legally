@@ -1,30 +1,31 @@
 {
   "dealId": "kriti",
   "version": 1,
-  "createdAt": "2026-10-05T07:40:38.589Z",
+  "createdAt": "2026-10-05T08:16:56.781Z",
   "trigger": "initial review",
-  "inputsHash": "5cd900962620e79f337ec8551b33ff19",
+  "inputsHash": "9a696bf0e0f23b0e58daf823f222b357",
   "documentIds": [
     "kriti-sub"
   ],
-  "registerVersion": "reg-2026-10-04-57+r1",
+  "registerVersion": "reg-2026-10-04-57+r0",
   "playbookVersion": "pb-v1-2026-10-04",
   "models": [
     "gemini-flash-lite-latest",
-    "gemini-3.5-flash-lite"
+    "gemini-3-flash-preview",
+    "gemini-3.5-flash"
   ],
   "promptVersion": "p1",
   "route": "full_review",
   "verdict": "SIGN AFTER CHANGES",
-  "headline": "SIGN AFTER CHANGES: 6 blockers and 1 business dependency identified",
-  "nextAction": "Pranav updates the subcontract terms and resolves the missing GDPR and IP provisions.",
+  "headline": "SIGN AFTER CHANGES: 10 blockers across liability, IP, and client flowdown terms",
+  "nextAction": "Pranav must renegotiate the high-severity indemnity and liability terms while Karandeep secures the underlying Rheinwerk contract.",
   "findings": [
     {
-      "key": "flowdown:data",
+      "key": "flowdown:consent",
       "category": "flowdown",
-      "topic": "flowdown_data",
-      "title": "Missing data processing agreement and GDPR flow-down",
-      "impact": "AtliQ conflicts its data protection obligations under the client contract by engaging an offshore subcontractor to process personal data without compliant sub-processor terms.",
+      "topic": "flowdown_consent",
+      "title": "Missing requirement to obtain client's prior consent for subcontracting",
+      "impact": "AtliQ would be in non-compliance with its client commitments by engaging the subcontractor without securing prior written consent.",
       "severity": "high",
       "confidence": "medium",
       "needsJudgment": false,
@@ -35,20 +36,60 @@
         {
           "docId": "kriti-sub",
           "docTitle": "Kriti Data Labs subcontractor agreement (AtliQ draft)",
-          "clauseRef": "Engagement Schedule",
-          "quote": "Source data comprises vibration, temperature and pressure sensor streams from End Client customer plants, together with maintenance work orders and technician logs (including technician names, shift identifiers and free-text notes",
+          "clauseRef": "Section 2.4",
+          "quote": "Vendor shall not subcontract any portion of the Services without AtliQ's prior written consent",
           "role": "incoming"
         },
         {
           "docId": "rheinwerk-sa",
           "docTitle": "Rheinwerk Analytics services agreement (draft)",
-          "clauseRef": "§ 13.1",
-          "quote": "To the extent Supplier processes personal data on behalf of Client, the Parties shall conclude the Data Processing Agreement pursuant to Art. 28 GDPR attached as **Annex 3**, which forms an integral part of this Agreement",
+          "clauseRef": "§ 15.3",
+          "quote": "Supplier may subcontract parts of the services only with Client's prior written consent",
+          "role": "linked"
+        }
+      ],
+      "standard": "Apply the same standard AtliQ asks for as a supplier: capped penalties or none, 30-day pay, mutual caps, no pay-when-paid, fair termination. Pass the client's obligations down (IP, confidentiality, data protection, consent), never the client's leverage.",
+      "counterPosition": "Add a condition precedent stating that the agreement is contingent upon AtliQ obtaining prior written consent from the End Client.",
+      "precedents": [
+        {
+          "docId": "ref-negotiation-notes",
+          "counterparty": "PixelCraft Studio",
+          "clauseRef": "negotiation notes",
+          "label": "standard",
+          "note": "Deleted the 1%/day penalty, 30-day payment, liability capped for both sides (Oct 2025)"
+        }
+      ]
+    },
+    {
+      "key": "flowdown:data",
+      "category": "flowdown",
+      "topic": "flowdown_data",
+      "title": "Missing data processing agreement and personnel training flowdowns",
+      "impact": "AtliQ will be in non-compliance with its GDPR obligations under the client contract to ensure subcontractors are bound to a DPA and properly trained.",
+      "severity": "high",
+      "confidence": "medium",
+      "needsJudgment": false,
+      "owner": "Pranav (fix before sending)",
+      "resolution": "fix_before_sending",
+      "docId": "kriti-sub",
+      "citations": [
+        {
+          "docId": "kriti-sub",
+          "docTitle": "Kriti Data Labs subcontractor agreement (AtliQ draft)",
+          "clauseRef": "Engagement Schedule - Services",
+          "quote": "Source data comprises vibration, temperature and pressure sensor streams from End Client customer plants, together with maintenance work orders and technician logs (including technician names, shift identifiers and free-text notes). Vendor Personnel shall access data via AtliQ-provisioned cloud workspaces and Vendor's own labelling platform",
+          "role": "incoming"
+        },
+        {
+          "docId": "rheinwerk-sa",
+          "docTitle": "Rheinwerk Analytics services agreement (draft)",
+          "clauseRef": "§ 13.1 and § 13.3",
+          "quote": "To the extent Supplier processes personal data on behalf of Client, the Parties shall conclude the Data Processing Agreement pursuant to Art. 28 GDPR attached as **Annex 3**, which forms an integral part of this Agreement.\n13.2 Transfers of personal data to India shall be based on the EU Standard Contractual Clauses (Module 2, Controller-to-Processor) incorporated in Annex 3, supplemented by the technical and organisational measures described therein.\n13.3 Supplier shall ensure that its personnel are bound to confidentiality and data secrecy and receive appropriate data protection training",
           "role": "linked"
         }
       ],
       "standard": "DPA (EU) or BAA (US health) signed before any personal/regulated data moves, with a sub-DPA / sub-BAA for every party that touches the data (incl. AtliQ's own Pune entity); engagement-specific scope; offshore access only as the agreement allows.",
-      "counterPosition": "Execute a back-to-back DPA and EU SCCs (sub-processor terms) with Vendor before any personal data is accessed or processed.",
+      "counterPosition": "Execute a back-to-back Data Processing Agreement (DPA) incorporating EU Standard Contractual Clauses, and require the vendor to ensure all personnel receive appropriate data protection training and are bound by confidentiality.",
       "precedents": [
         {
           "docId": "carebridge-baa",
@@ -63,8 +104,8 @@
       "key": "flowdown:ip",
       "category": "flowdown",
       "topic": "flowdown_ip",
-      "title": "Failure to flow down IP rights required for client commitments",
-      "impact": "AtliQ cannot pass on the required exclusive and transferable IP rights to the End Client as promised in the client contract.",
+      "title": "Vendor retains ownership of deliverables under a non-exclusive license",
+      "impact": "AtliQ will be unable to transfer the exclusive rights promised to the client, resulting in non-compliance with the client contract.",
       "severity": "high",
       "confidence": "medium",
       "needsJudgment": false,
@@ -75,8 +116,8 @@
         {
           "docId": "kriti-sub",
           "docTitle": "Kriti Data Labs subcontractor agreement (AtliQ draft)",
-          "clauseRef": "Article 7.3",
-          "quote": "Subject to payment of the applicable Fees, Vendor grants AtliQ a non-exclusive, non-transferable, perpetual licence to use the annotation outputs and Deliverables for the purposes of the End Client project, including delivery to the End Client",
+          "clauseRef": "Section 7.2 & 7.3",
+          "quote": "Vendor shall retain all right, title and interest in and to its tools, labelling platform, scripts, ontologies, annotation guidelines developed by Vendor, and annotation outputs, including all intellectual property rights therein (collectively, \"**Vendor IP**\").\n7.3 **Licence to AtliQ.** Subject to payment of the applicable Fees, Vendor grants AtliQ a non-exclusive, non-transferable, perpetual licence to use the annotation outputs and Deliverables for the purposes of the End Client project, including delivery to the End Client",
           "role": "incoming"
         },
         {
@@ -88,7 +129,7 @@
         }
       ],
       "standard": "Every freelancer / vendor assigns the work product to AtliQ (from creation or at least on payment) so AtliQ can give clients what it promises; their pre-existing tools are licensed broadly enough for the client deal.",
-      "counterPosition": "Contractor assigns all rights in the work product and Deliverables to AtliQ, or grants rights broad enough to satisfy AtliQ's obligations to the End Client.",
+      "counterPosition": "Ensure all rights, title, and interest in specifically created deliverables and annotation outputs are assigned to AtliQ upon creation or payment, with pre-existing vendor materials licensed broadly enough to meet client requirements.",
       "precedents": [
         {
           "docId": "rohan-ica",
@@ -100,11 +141,11 @@
       ]
     },
     {
-      "key": "flowdown:sequencing",
-      "category": "flowdown",
-      "topic": "sequencing",
-      "title": "Vendor start date precedes client contract execution",
-      "impact": "AtliQ incurs vendor commitments and performance obligations before the client contract is binding.",
+      "key": "playbook:indemnity",
+      "category": "playbook",
+      "topic": "indemnity",
+      "title": "One-way indemnity covering AtliQ's own negligence",
+      "impact": "This forces the performing party to cover losses arising from the other party's own negligent acts.",
       "severity": "high",
       "confidence": "medium",
       "needsJudgment": false,
@@ -115,27 +156,27 @@
         {
           "docId": "kriti-sub",
           "docTitle": "Kriti Data Labs subcontractor agreement (AtliQ draft)",
-          "clauseRef": "Engagement Schedule",
-          "quote": "Planned start:** 2026-10-05",
+          "clauseRef": "Section 9.1",
+          "quote": "Vendor shall defend, indemnify and hold harmless AtliQ, its Affiliates, and their respective directors, officers, employees, agents, successors and assigns (the \"**AtliQ Indemnitees**\") from and against any and all Losses arising out of or relating to (a) the Services or Deliverables, (b) any breach of this Agreement by Vendor, (c) any claim by the End Client relating to the Services or Deliverables, or (d) any act or omission of Vendor Personnel, in each case regardless of whether such Losses are caused in whole or in part by the negligence of any AtliQ Indemnitee",
           "role": "incoming"
-        },
-        {
-          "docId": "rheinwerk-sa",
-          "docTitle": "Rheinwerk Analytics services agreement (draft)",
-          "clauseRef": "§ 12.1",
-          "quote": "This Agreement enters into force upon signature by both Parties and ends upon acceptance of the final Milestone and expiry of the warranty period",
-          "role": "linked"
         }
       ],
-      "standard": "Apply the same standard AtliQ asks for as a supplier: capped penalties or none, 30-day pay, mutual caps, no pay-when-paid, fair termination. Pass the client's obligations down (IP, confidentiality, data protection, consent), never the client's leverage.",
-      "counterPosition": "Condition the vendor agreement's start date and performance obligations upon the prior execution and entry into force of the End Client contract.",
+      "standard": "Mutual: each party covers its own breach and negligence; never the other side's negligence. IP-infringement indemnity for deliverables is normal.",
+      "counterPosition": "Each party indemnifies the other for third-party claims caused by its own non-performance or negligence, with no indemnity for losses caused by the indemnified party's own negligence.",
       "precedents": [
         {
-          "docId": "ref-negotiation-notes",
-          "counterparty": "PixelCraft Studio",
-          "clauseRef": "negotiation notes",
+          "docId": "paytrack-msa",
+          "counterparty": "PayTrack Technologies",
+          "clauseRef": "§10.2",
           "label": "standard",
-          "note": "Deleted the 1%/day penalty, 30-day payment, liability capped for both sides (Oct 2025)"
+          "note": "Origin: \"we can't insure against PayTrack's own negligence\" (Jan 2025)"
+        },
+        {
+          "docId": "acme-msa",
+          "counterparty": "Acme Retail Group",
+          "clauseRef": "§11",
+          "label": "standard",
+          "note": "Mutual indemnity"
         }
       ]
     },
@@ -143,10 +184,10 @@
       "key": "playbook:ld",
       "category": "playbook",
       "topic": "ld",
-      "title": "Uncapped delay penalties",
-      "impact": "Liquidated damages with no cap: open-ended exposure. Karandeep's rule: \"cap it. never open ended\". Brightwater's uncapped LDs cost $9k + $14.2k in legal fees.",
+      "title": "Uncapped per-day liquidated damages calculated on total fees",
+      "impact": "This creates severe, unlimited financial exposure for the performing party, which does not meet AtliQ's commercial standards.",
       "severity": "high",
-      "confidence": "high",
+      "confidence": "medium",
       "needsJudgment": false,
       "owner": "Pranav (fix before sending)",
       "resolution": "fix_before_sending",
@@ -160,6 +201,8 @@
           "role": "incoming"
         }
       ],
+      "standard": "0.5% of the affected milestone fee per week of delay attributable to AtliQ, capped at 5% of that milestone fee; no LDs for client-caused delay; LDs are the sole remedy for delay.",
+      "counterPosition": "0.5% of the affected milestone fee per week of delay attributable to the performing party, capped at 5% of that milestone fee, as the sole and exclusive remedy for delay.",
       "precedents": [
         {
           "docId": "acme-msa",
@@ -199,11 +242,65 @@
       ]
     },
     {
+      "key": "playbook:liability",
+      "category": "playbook",
+      "topic": "liability",
+      "title": "One-way uncapped liability structure for vendor",
+      "impact": "This leaves the performing party with unlimited liability exposure under the contract.",
+      "severity": "high",
+      "confidence": "medium",
+      "needsJudgment": false,
+      "owner": "Pranav (fix before sending)",
+      "resolution": "fix_before_sending",
+      "docId": "kriti-sub",
+      "citations": [
+        {
+          "docId": "kriti-sub",
+          "docTitle": "Kriti Data Labs subcontractor agreement (AtliQ draft)",
+          "clauseRef": "Section 10.3",
+          "quote": "NOTHING IN THIS AGREEMENT SHALL LIMIT OR EXCLUDE VENDOR'S LIABILITY FOR ANY LOSSES, WHETHER DIRECT OR INDIRECT, ARISING OUT OF OR RELATING TO THIS AGREEMENT, INCLUDING VENDOR'S INDEMNIFICATION OBLIGATIONS",
+          "role": "incoming"
+        }
+      ],
+      "standard": "Each party's aggregate liability capped at 1× fees (paid or payable in the prior 12 months), mutual; carve-outs only for fraud, wilful misconduct and confidentiality (plus any carve-outs that are mandatory under the governing law, e.g. German law for intent/gross negligence and injury).",
+      "counterPosition": "Mutual cap of 1x fees paid or payable in the 12 months preceding the claim, with standard carve-outs for fraud, wilful misconduct, and confidentiality.",
+      "precedents": [
+        {
+          "docId": "ref-negotiation-notes",
+          "counterparty": "Kessler Mobility",
+          "clauseRef": "negotiation notes",
+          "label": "standard",
+          "note": "Walked away from a €120k deal over unlimited liability (Jan 2026)"
+        },
+        {
+          "docId": "sunrise-msa",
+          "counterparty": "Sunrise Foods",
+          "clauseRef": "§13",
+          "label": "standard",
+          "note": "AtliQ-friendly master: capped liability"
+        },
+        {
+          "docId": "carebridge-baa",
+          "counterparty": "CareBridge Clinics",
+          "clauseRef": "§9",
+          "label": "standard",
+          "note": "Counsel-reviewed: BAA liability capped at 2× trailing-12-month fees"
+        },
+        {
+          "docId": "brightwater-msa",
+          "counterparty": "Brightwater Insurance",
+          "clauseRef": "§15",
+          "label": "accident",
+          "note": "LDs carved out of the 150% cap"
+        }
+      ]
+    },
+    {
       "key": "playbook:payment",
       "category": "playbook",
       "topic": "payment",
-      "title": "Pay-when-paid and 120-day payment term",
-      "impact": "Vendor payment is unfairly delayed and tied to end-client credit risk up to 120 days.",
+      "title": "Conditional pay-when-paid term with excessive payment window",
+      "impact": "This creates unpredictable payment timelines and delays payment to the performing party far beyond AtliQ's 45-day maximum standard.",
       "severity": "high",
       "confidence": "medium",
       "needsJudgment": false,
@@ -221,13 +318,13 @@
         {
           "docId": "kriti-sub",
           "docTitle": "Kriti Data Labs subcontractor agreement (AtliQ draft)",
-          "clauseRef": "Article 4.3",
+          "clauseRef": "Section 4.3",
           "quote": "AtliQ's obligation to pay any invoice is conditional upon AtliQ's receipt of payment from the End Client for the corresponding services. AtliQ shall pay each properly submitted, undisputed invoice within fifteen (15) days after AtliQ receives the corresponding payment from the End Client, and in any event not later than one hundred and twenty (120) days after AtliQ's receipt of the invoice",
           "role": "incoming"
         }
       ],
       "standard": "Invoices payable within 30 days of receipt; 45 days is the negotiated maximum.",
-      "counterPosition": "Payment within 30 days of receipt of invoice (45 days maximum); no pay-when-paid.",
+      "counterPosition": "Payment within 30 days of receipt of invoice (45 days maximum) with no pay-when-paid condition.",
       "precedents": [
         {
           "docId": "trustline-msa",
@@ -250,7 +347,7 @@
       "category": "dependency",
       "topic": "dependency",
       "title": "Depends on Rheinwerk Analytics: pipeline modernisation, which is not signed (latest verdict HOLD)",
-      "impact": "Sending this commits AtliQ to a vendor/contractor before the client contract it serves is resolved. HOLD: 1 blocker, 3 missing documents.",
+      "impact": "Sending this commits AtliQ to a vendor/contractor before the client contract it serves is resolved. HOLD: 1 blocker and 3 missing documents require resolution.",
       "severity": "high",
       "confidence": "high",
       "needsJudgment": false,
@@ -259,11 +356,11 @@
       "citations": []
     },
     {
-      "key": "flowdown:consent",
+      "key": "flowdown:sequencing",
       "category": "flowdown",
-      "topic": "flowdown_consent",
-      "title": "Missing client consent requirement for subcontractor engagement",
-      "impact": "AtliQ may conflict with its obligation to obtain client consent before engaging subcontractors.",
+      "topic": "sequencing",
+      "title": "Subcontractor start scheduled prior to client contract execution",
+      "impact": "AtliQ risks incurring costs and liabilities to the subcontractor without a signed revenue-generating agreement with the client.",
       "severity": "medium",
       "confidence": "medium",
       "needsJudgment": false,
@@ -274,20 +371,20 @@
         {
           "docId": "kriti-sub",
           "docTitle": "Kriti Data Labs subcontractor agreement (AtliQ draft)",
-          "clauseRef": "Article 2.4",
-          "quote": "Vendor shall not subcontract any portion of the Services without AtliQ's prior written consent. Vendor shall remain fully responsible for any subcontractor's performance",
+          "clauseRef": "Engagement Schedule - Planned start",
+          "quote": "Planned start:** 2026-10-05",
           "role": "incoming"
         },
         {
           "docId": "rheinwerk-sa",
           "docTitle": "Rheinwerk Analytics services agreement (draft)",
-          "clauseRef": "§ 15.3",
-          "quote": "Supplier may subcontract parts of the services only with Client's prior written consent",
+          "clauseRef": "§ 12.1",
+          "quote": "This Agreement enters into force upon signature by both Parties and ends upon acceptance of the final Milestone and expiry of the warranty period",
           "role": "linked"
         }
       ],
       "standard": "Apply the same standard AtliQ asks for as a supplier: capped penalties or none, 30-day pay, mutual caps, no pay-when-paid, fair termination. Pass the client's obligations down (IP, confidentiality, data protection, consent), never the client's leverage.",
-      "counterPosition": "Make Vendor's right to subcontract expressly conditional upon obtaining the End Client's prior written consent as required by the client contract.",
+      "counterPosition": "Align the subcontractor's start date to be contingent upon the full execution of the client contract.",
       "precedents": [
         {
           "docId": "ref-negotiation-notes",
@@ -297,15 +394,48 @@
           "note": "Deleted the 1%/day penalty, 30-day payment, liability capped for both sides (Oct 2025)"
         }
       ]
+    },
+    {
+      "key": "playbook:termination",
+      "category": "playbook",
+      "topic": "termination",
+      "title": "Short notice convenience termination without payment for work in progress",
+      "impact": "This deprives the performing party of fair compensation for services already performed prior to termination.",
+      "severity": "medium",
+      "confidence": "medium",
+      "needsJudgment": false,
+      "owner": "Pranav (fix before sending)",
+      "resolution": "fix_before_sending",
+      "docId": "kriti-sub",
+      "citations": [
+        {
+          "docId": "kriti-sub",
+          "docTitle": "Kriti Data Labs subcontractor agreement (AtliQ draft)",
+          "clauseRef": "Section 5.3",
+          "quote": "AtliQ may terminate this Agreement, in whole or in part, for any reason or no reason, upon seven (7) days' written notice to Vendor. Upon such termination, AtliQ's sole obligation shall be to pay Fees for Deliverables accepted by AtliQ prior to the effective date of termination; AtliQ shall have no obligation to pay for work in progress, unaccepted Deliverables, demobilization costs or anticipated profits",
+          "role": "incoming"
+        }
+      ],
+      "standard": "On any termination for convenience AtliQ is paid for all work done, including work in progress; reasonable notice (≥30 days); mutual where possible.",
+      "counterPosition": "Payment for all services performed up to the date of termination, including work in progress, with a mutual notice period of at least 30 days.",
+      "precedents": [
+        {
+          "docId": "rohan-ica",
+          "counterparty": "Rohan Iyer",
+          "clauseRef": "§9",
+          "label": "standard",
+          "note": "Mutual 15-day exit"
+        }
+      ]
     }
   ],
   "fine": [
     "Correct AtliQ entity: Pvt Ltd for a Germany end client",
     "Parties = invoicing entity: Pvt Ltd throughout",
     "Governing law matches entity: laws of India (Pvt Ltd → Indian law)",
-    "Liability capped: ATLIQ'S AGGREGATE LIABILITY ARISING OUT OF OR RELATING TO THIS AGREEMENT SHALL NOT EXCEED THE FEES ACTUALLY PAID BY ATLIQ TO VENDOR UNDER THIS AGREEMENT.",
-    "Governing law (Laws of India) correctly matches AtliQ Technologies Pvt Ltd.",
-    "AtliQ's aggregate liability is appropriately capped at fees paid, and vendor liability is not limited."
+    "No restrictive covenants or non-competes are imposed on the vendor.",
+    "Confidentiality obligations protect AtliQ and the End Client appropriately for a subcontract.",
+    "Representations and warranties are standard and appropriate."
   ],
   "notSeen": [
     "No meeting notes attached to this deal.",
@@ -486,23 +616,33 @@
   "notesFacts": [
     {
       "id": "kriti-fact-1",
-      "statement": "Kriti wants to start on 5 October.",
+      "statement": "The subcontractor intends to begin work on October 5.",
       "category": "deadline",
       "noteId": "tracker",
       "noteTitle": "Tracker notes",
       "quote": "Kriti wants to start 5 Oct",
       "complianceEvent": false,
-      "whyItMatters": "The contract timeline and effective date must accommodate the desired start date."
+      "whyItMatters": "Establishes the intended effective date for service commencement."
     },
     {
       "id": "kriti-fact-2",
-      "statement": "Kriti is pushing back against the 120-day pay-when-paid terms due to their small team size.",
+      "statement": "The agreement is based on the Harrington draft vendor template.",
+      "category": "other",
+      "noteId": "tracker",
+      "noteTitle": "Tracker notes",
+      "quote": "built from our vendor template (Jay made it from the Harrington draft",
+      "complianceEvent": false,
+      "whyItMatters": "Indicates the legal starting point and specific template used for the subcontract."
+    },
+    {
+      "id": "kriti-fact-3",
+      "statement": "The subcontractor is requesting a change to the 120-day pay-when-paid term.",
       "category": "commitment",
       "noteId": "tracker",
       "noteTitle": "Tracker notes",
       "quote": "Kriti pushing back on 120-day pay-when-paid - 'we're 12 people",
       "complianceEvent": false,
-      "whyItMatters": "Payment terms are under negotiation and must be resolved before final agreement execution."
+      "whyItMatters": "A critical commercial negotiation point regarding payment timing and vendor cash flow."
     }
   ],
   "complianceCandidate": null,
@@ -523,7 +663,7 @@
           "labelNote": "Fair freelancer terms: 30-day pay, mutual cap, mutual 15-day exit",
           "score": 0.923,
           "text": "3.1 AtliQ shall pay the Contractor the fees set out in the Engagement Schedule.\n\n3.2 The Contractor shall submit a monthly invoice, supported by a timesheet approved by the AtliQ project lead. AtliQ shall pay each undisputed invoice within thirty (30) days of receipt.\n\n3.3 AtliQ shall deduct tax at source under the Income Tax Act, 1961 as applicable and provide TDS certificates. The Contractor is responsible for his own GST registration (if required) and all other taxes.\n\n3.4 AtliQ shall reimburse reasonable pre-approved travel expenses incurred for client visits.",
-          "differs": "adds end-client payment condition and CGST invoicing requirements.",
+          "differs": "Requires End Client payment before paying Vendor; adds specific GST/PAN tax invoice requirements.",
           "alsoIn": []
         },
         {
@@ -536,7 +676,7 @@
           "labelNote": "45-day payment: the negotiated maximum (90 → 45)",
           "score": 0.91,
           "text": "4.1 The total fees for the Services are **USD 48,000** (United States Dollars Forty-Eight Thousand only), payable on completion of Milestones as set out in Annexure A.\n\n4.2 The Service Provider shall raise an invoice upon completion of each Milestone. The Company shall pay each undisputed invoice within forty-five (45) days of receipt of the invoice.\n\n4.3 All fees are exclusive of GST. The Company shall be entitled to deduct TDS as applicable.\n\n4.4 Any disputed amount shall be notified within ten (10) days of receipt of invoice, and the Parties shall resolve such dispute in good faith within thirty (30) days.",
-          "differs": "firm fixed fees, CGST requirements, and end-client payment condition instead of milestone USD pricing.",
+          "differs": "Conditionality on End Client payment; monthly invoicing instead of milestone-based payments.",
           "alsoIn": []
         },
         {
@@ -548,7 +688,7 @@
           "label": "untagged",
           "score": 0.919,
           "text": "4.1 The total fees under SOW-1 are **USD 71,000** (United States Dollars Seventy-One Thousand only), payable in accordance with the milestone schedule in SOW-1.\n\n4.2 AtliQ shall invoice upon completion of each milestone. PayTrack shall pay each undisputed invoice within thirty (30) days of receipt.\n\n4.3 Fees are exclusive of GST. PayTrack may deduct TDS in accordance with Applicable Law.",
-          "differs": "fixed fees, monthly CGST invoicing, and end-client payment dependency instead of USD milestone pricing.",
+          "differs": "Payment conditional on End Client receipt; monthly invoicing instead of milestone-based payments.",
           "alsoIn": [
             "Acme Retail Group (2025-03)"
           ]
@@ -570,7 +710,7 @@
           "label": "untagged",
           "score": 0.915,
           "text": "6.1 Each party shall keep confidential all non-public information of the other party, and in the case of AtliQ, of AtliQ's clients, received in connection with this Agreement, and shall use it only for the purposes of this Agreement.\n\n6.2 The Contractor shall comply with any confidentiality and data-security requirements of AtliQ's clients notified to him in writing, including restrictions on downloading client data to personal devices.\n\n6.3 This Clause 6 does not apply to information that is public, already lawfully known, independently developed, or required to be disclosed by law.\n\n6.4 The obligations in this Clause 6 survive for three (3) years after termination or expiry.",
-          "differs": "defines confidentiality specifically to include end-client data and AtliQ materials without explicit employee download rules.",
+          "differs": "Adds specific mention of End Client information and requires written agreements for Vendor personnel.",
           "alsoIn": []
         },
         {
@@ -583,7 +723,7 @@
           "labelNote": "One-way NDA signed within the hour; contradicts \"we only sign mutual\"",
           "score": 0.886,
           "text": "3.1 The Recipient shall:\n   (a) hold the Confidential Information in strict confidence and use it only for the Purpose;\n   (b) disclose it only to its employees who need to know it for the Purpose and who are bound by written confidentiality obligations;\n   (c) not copy, reverse engineer or extract the Confidential Information except as required for the Purpose;\n   (d) comply with the Digital Personal Data Protection Act, 2023 in relation to any personal data, including health data, forming part of the Confidential Information; and\n   (e) notify Meridian within twenty-four (24) hours of becoming aware of any unauthorised access or disclosure.\n\n3.2 Where disclosure is required by law, the Recipient shall give Meridian prompt written notice, where lawful, and co-operate with any effort by Meridian to obtain protective relief.",
-          "differs": "includes end-client information and general standard exceptions without specific health data regulations.",
+          "differs": "Broader definition including End Client info; removes specific health data/DPDP Act compliance language.",
           "alsoIn": []
         },
         {
@@ -596,7 +736,7 @@
           "labelNote": "Genuinely mutual NDA: the template for what mutual looks like",
           "score": 0.881,
           "text": "2.1 Each Party, as Receiving Party, shall:\n   (a) use the Disclosing Party's Confidential Information solely for the Purpose;\n   (b) not disclose it to any third party other than its Representatives who are bound by confidentiality obligations no less protective than those in this Agreement;\n   (c) protect it using at least the same degree of care it uses for its own confidential information, and no less than reasonable care; and\n   (d) promptly notify the Disclosing Party on becoming aware of any unauthorised use or disclosure.\n\n2.2 Each Party is responsible for any breach of this Agreement by its Representatives.",
-          "differs": "covers end-client information explicitly and specifies written obligations for personnel.",
+          "differs": "Unilateral obligations for Vendor rather than mutual; explicitly includes End Client information.",
           "alsoIn": [
             "Harrington Health Systems Inc (2026-08)"
           ]
@@ -619,7 +759,7 @@
           "labelNote": "Rohan kept the Work Product IP (\"ok\" from phone) while Acme was promised ownership",
           "score": 0.904,
           "text": "5.1 In this Clause, \"**Work Product**\" means all dashboards, reports, data models, DAX measures, Power Query scripts, visual templates, documentation and other materials created by the Contractor in performing the Services.\n\n5.2 The Contractor retains ownership of all intellectual property rights in the Work Product and in any pre-existing materials, components and templates of the Contractor.\n\n5.3 The Contractor grants AtliQ a non-exclusive, perpetual, irrevocable, royalty-free, worldwide licence to use, copy, modify and deploy the Work Product for the purposes of AtliQ's business, including for delivery to AtliQ's clients.\n\n5.4 The Contractor shall not incorporate into the Work Product any third-party material that AtliQ is not entitled to use under Clause 5.3.",
-          "differs": "vendor retains labelling platforms and annotation tools while granting AtliQ limited usage rights.",
+          "differs": "Vendor retains ownership of annotation outputs; grants AtliQ a licence rather than ownership of deliverables.",
           "alsoIn": []
         },
         {
@@ -631,7 +771,7 @@
           "label": "untagged",
           "score": 0.897,
           "text": "10.1 Upon payment in full, Sunrise shall own all intellectual property rights in the Deliverables developed specifically for Sunrise under an SOW.\n\n10.2 AtliQ retains ownership of its pre-existing tools, components, libraries and know-how. AtliQ grants Sunrise a perpetual, non-exclusive, royalty-free licence to use any such pre-existing materials to the extent incorporated in the Deliverables.",
-          "differs": "explicitly protects vendor tools and annotation platforms while reserving AtliQ materials.",
+          "differs": "Vendor retains all rights to annotation outputs and guidelines instead of client ownership.",
           "alsoIn": []
         },
         {
@@ -643,7 +783,7 @@
           "label": "untagged",
           "score": 0.896,
           "text": "5.1 All deliverables developed specifically for the Client shall be the property of the Client\nupon full payment. The Service Provider retains its pre-existing tools and know-how.",
-          "differs": "protects vendor annotation tools and platform specifically alongside client materials.",
+          "differs": "Vendor retains ownership of all annotation outputs and specific guidelines.",
           "alsoIn": [
             "Northwind Logistics (2025-06)",
             "Al Noor Hospitality Group (2025-03)",
@@ -669,7 +809,7 @@
           "labelNote": "Origin of the mutual-indemnity position: no indemnity for the indemnified party's own negligence",
           "score": 0.909,
           "text": "10.1 Each Party (the \"**Indemnifying Party**\") shall indemnify, defend and hold harmless the other Party and its directors, officers and employees (the \"**Indemnified Party**\") from and against all Losses arising out of any third-party claim to the extent caused by: (a) the Indemnifying Party's breach of Clause 7 (Confidentiality) or Clause 12 (Data Protection); (b) the gross negligence, wilful misconduct or fraud of the Indemnifying Party or its personnel; or (c) in the case of AtliQ, any claim that the Deliverables infringe a third party's intellectual property rights, and in the case of PayTrack, any claim that Client Data or materials supplied by PayTrack infringe a third party's rights.\n\n10.2 Neither Party shall be required to indemnify the other to the extent any Losses are caused by the negligence, breach or wilful misconduct of the Indemnified Party.\n\n10.3 The Indemnified Party shall give prompt written notice of any claim, permit the Indemnifying Party to control the defence and settlement, and provide reasonable cooperation at the Indemnifying Party's cost.",
-          "differs": "broadens vendor indemnity to include end-client claims and negligence overlap.",
+          "differs": "Unilateral Vendor indemnity; covers any claim by the End Client and negligence of AtliQ.",
           "alsoIn": []
         },
         {
@@ -682,7 +822,7 @@
           "labelNote": "Mutual indemnity",
           "score": 0.876,
           "text": "11.1 Each Party (\"**Indemnifying Party**\") shall indemnify the other against losses arising from third-party claims caused by the Indemnifying Party's breach of confidentiality, infringement of third-party intellectual property rights, or gross negligence or wilful misconduct.",
-          "differs": "adds explicit vendor indemnity for end-client claims and services regardless of AtliQ negligence.",
+          "differs": "Unilateral Vendor indemnity; explicitly includes all End Client claims and Vendor personnel acts.",
           "alsoIn": []
         },
         {
@@ -694,7 +834,7 @@
           "label": "untagged",
           "score": 0.895,
           "text": "9.1 The Service Provider shall indemnify the Client against third party claims of IP infringement\narising from the deliverables. [illegible] ... own negligence or wilful misconduct.",
-          "differs": "expands vendor indemnity to include all services and end-client claims unconditionally.",
+          "differs": "Unilateral Vendor indemnity; broader coverage including all Vendor acts, omissions, and End Client claims.",
           "alsoIn": []
         }
       ]
@@ -715,7 +855,7 @@
           "labelNote": "AtliQ-friendly master: capped liability, service credits capped at 5%",
           "score": 0.908,
           "text": "13.1 Neither Party shall be liable for indirect, consequential or special losses or loss of profits.\n\n13.2 Each Party's aggregate liability under an SOW shall not exceed the Fees paid or payable under that SOW.",
-          "differs": "caps AtliQ liability at paid fees while excluding vendor liability limits entirely.",
+          "differs": "Vendor's liability is entirely uncapped for any losses, while AtliQ's liability remains capped.",
           "alsoIn": []
         },
         {
@@ -727,7 +867,7 @@
           "label": "untagged",
           "score": 0.916,
           "text": "11.1 Neither Party shall be liable for any indirect, special, incidental or consequential damages, or loss of profits, revenue or goodwill.\n\n11.2 Each Party's total aggregate liability under or in connection with this Agreement shall not exceed the total fees paid or payable under the SOW giving rise to the claim.\n\n11.3 The limitations in this Clause 11 shall not apply to liability for fraud or wilful misconduct.",
-          "differs": "caps AtliQ liability at paid fees and removes all liability limits for the vendor.",
+          "differs": "Vendor's liability is unlimited for all losses; AtliQ's liability is capped at fees paid.",
           "alsoIn": [
             "Trustline NBFC (2026-08)",
             "Acme Retail Group (2025-03)",
@@ -746,7 +886,7 @@
           "labelNote": "Fair freelancer terms: 30-day pay, mutual cap, mutual 15-day exit",
           "score": 0.891,
           "text": "8.1 Each party's aggregate liability under this Agreement shall not exceed the total fees paid or payable to the Contractor in the twelve (12) months preceding the claim, except for breach of Clause 6 or fraud.\n\n8.2 Neither party is liable for indirect or consequential loss.",
-          "differs": "limits AtliQ liability to paid fees while leaving vendor liability completely uncapped.",
+          "differs": "Removes Vendor's liability cap entirely while capping AtliQ's liability at fees paid.",
           "alsoIn": []
         }
       ]
@@ -767,7 +907,7 @@
           "labelNote": "Signed on a phone in 4 minutes: 1%/day uncapped LDs, no client-delay exclusion, group set-off, English law on a US entity. Cost $9k + $14.2k legal",
           "score": 0.92,
           "text": "9.1 If the Supplier fails to achieve any Key Date, the Supplier shall pay to the Customer liquidated damages in the amount of one per cent (1%) of the Contract Value for each day or part day by which the relevant Key Date is missed.\n\n9.2 Liquidated damages under clause 9.1 shall be payable in addition to any other right or remedy available to the Customer under this Agreement or at law, and the Customer may deduct such liquidated damages from any sums due to the Supplier.\n\n9.3 The Supplier acknowledges that the liquidated damages set out in this clause 9 are proportionate to the Customer's legitimate interest in the timely delivery of the Services.",
-          "differs": "imposes a 2% daily fee penalty for late delivery without a percentage cap.",
+          "differs": "Increases liquidated damages to 2% daily; defines time as of the essence.",
           "alsoIn": []
         },
         {
@@ -780,7 +920,7 @@
           "labelNote": "Origin of the LD playbook: 0.5% of milestone/week, 5% cap, client delays excluded (Mar 2025)",
           "score": 0.913,
           "text": "7.1 If the Service Provider fails to complete a Milestone by the agreed date for reasons solely attributable to the Service Provider, the Service Provider shall pay liquidated damages at the rate of 0.5% (half percent) of the Milestone Fee of the delayed Milestone for each complete week of delay.\n\n7.2 The aggregate liquidated damages in respect of any Milestone shall not exceed 5% (five percent) of the Milestone Fee of that Milestone.\n\n7.3 No liquidated damages shall be payable where the delay is caused by the Client, including delayed access to data or systems, delayed review of Deliverables, or changes in scope, or by a Force Majeure event.\n\n7.4 The Parties agree that the liquidated damages are a genuine pre-estimate of loss and shall be the Client's sole and exclusive remedy for delay.",
-          "differs": "charges 2% daily of total fees without a 5% cap or client-delay carve-out.",
+          "differs": "Increases rate to 2% daily from 0.5% weekly; removes 5% cap and client-delay exclusions.",
           "alsoIn": [
             "Northwind Logistics (2025-06)",
             "Trustline NBFC (2026-08)"
@@ -796,7 +936,7 @@
           "labelNote": "One-off: \"strategic exception for Al Noor only, not our new standard\" (cap 10% of total fees)",
           "score": 0.884,
           "text": "10.1 The Supplier shall use all reasonable endeavours to achieve each Milestone by the date set out in the relevant SOW.\n\n10.2 Each Deliverable shall be subject to acceptance testing by the Client within ten (10) Business Days of delivery against the acceptance criteria in the SOW. Deliverables not rejected in writing within that period shall be deemed accepted.\n\n10.3 If the Supplier fails to achieve a Milestone by its due date for reasons attributable to the Supplier, the Supplier shall pay to the Client, as liquidated damages, one percent (1%) of the Fees payable for the affected Milestone for each complete week of delay, provided that the aggregate liquidated damages payable under this Agreement shall not exceed ten percent (10%) of the total Fees payable under this Agreement.\n\n10.4 The Parties agree that the liquidated damages in Clause 10.3 are a genuine pre-estimate of loss. No liquidated damages shall be payable for delay caused by the Client, its contractors, or a Force Majeure Event.",
-          "differs": "charges 2% daily penalty on total fees instead of 1% on affected milestone fees.",
+          "differs": "Increases rate to 2% of total fees daily; removes milestone-specific calculation and excludes acceptance period.",
           "alsoIn": []
         }
       ]
@@ -816,7 +956,7 @@
           "label": "untagged",
           "score": 0.945,
           "text": "15.1 This Agreement shall be governed by the laws of India.\n\n15.2 Disputes not resolved by negotiation between senior management within thirty (30) days shall be referred to arbitration by a sole arbitrator under the Arbitration and Conciliation Act, 1996. The seat and venue of arbitration shall be Pune, and the language shall be English.",
-          "differs": "uses court litigation in Pune instead of binding arbitration.",
+          "differs": "Moves dispute resolution from arbitration to Pune courts; reduces escalation period to 15 days.",
           "alsoIn": [
             "Acme Retail Group (2025-03)",
             "Sunrise Foods (2025-04)",
@@ -833,7 +973,7 @@
           "labelNote": "Singapore law / SIAC accepted",
           "score": 0.898,
           "text": "15.1 This Agreement is governed by the laws of the Republic of Singapore.\n\n15.2 The Parties shall first attempt to resolve any dispute through good-faith discussions between senior executives for thirty (30) days.\n\n15.3 Any dispute not so resolved shall be referred to and finally resolved by arbitration administered by the Singapore International Arbitration Centre (\"**SIAC**\") under the SIAC Rules in force at the time. The seat of arbitration shall be Singapore. The tribunal shall consist of one (1) arbitrator. The language of arbitration shall be English.",
-          "differs": "applies Indian law and Pune courts instead of Singapore law and SIAC arbitration.",
+          "differs": "Changes governing law and seat from Singapore/SIAC to India and Pune courts; shorter escalation.",
           "alsoIn": []
         },
         {
@@ -846,7 +986,7 @@
           "labelNote": "DIFC law accepted as the client's group standard",
           "score": 0.897,
           "text": "21.1 This Agreement and any non-contractual obligations arising out of it shall be governed by the laws of the Dubai International Financial Centre.\n\n21.2 The Parties shall first attempt to resolve any dispute through good-faith negotiation between senior executives for thirty (30) days.\n\n21.3 Failing resolution, the courts of the Dubai International Financial Centre shall have exclusive jurisdiction.",
-          "differs": "governed by Indian law and Pune courts instead of DIFC.",
+          "differs": "Changes governing law from DIFC to India; moves jurisdiction from Dubai to Pune.",
           "alsoIn": []
         }
       ]
@@ -857,8 +997,8 @@
   "usage": {
     "calls": 4,
     "cachedCalls": 1,
-    "inputTokens": 15442,
-    "outputTokens": 11176,
-    "ms": 37155
+    "inputTokens": 15576,
+    "outputTokens": 18472,
+    "ms": 90232
   }
 }

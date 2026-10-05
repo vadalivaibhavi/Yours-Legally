@@ -1,31 +1,31 @@
 {
   "dealId": "gulfcrown",
   "version": 1,
-  "createdAt": "2026-10-05T07:17:00.048Z",
+  "createdAt": "2026-10-05T09:11:16.705Z",
   "trigger": "initial review",
-  "inputsHash": "3dc0ae57ba0e0be02b73f73839109b0a",
+  "inputsHash": "03efdabeb721e86e798da9d90d86cb99",
   "documentIds": [
     "gulfcrown-msa"
   ],
-  "registerVersion": "reg-2026-10-04-57+r1",
-  "playbookVersion": "pb-v1-2026-10-04",
+  "registerVersion": "reg-2026-10-04-57+r0",
+  "playbookVersion": "pb-v1.1-2026-10-05",
   "models": [
     "gemini-flash-lite-latest",
     "gemini-3.5-flash",
-    "gemini-3-flash-preview"
+    "gemini-3.6-flash"
   ],
   "promptVersion": "p1",
   "route": "full_review",
   "verdict": "HOLD",
-  "headline": "HOLD: 1 non-compete blocker and 5 terms requiring renegotiation",
-  "nextAction": "Karandeep must seek a waiver from Al Noor Hospitality Group and renegotiate the commercial terms.",
+  "headline": "HOLD: 1 blocker, 5 key contract risks",
+  "nextAction": "Karandeep to seek consent/waiver regarding the Al Noor Hospitality Group non-compete.",
   "findings": [
     {
       "key": "conflict:alnoor-msa:non_compete",
       "category": "conflict",
       "topic": "non_compete",
       "title": "Collides with Al Noor Hospitality Group: GCC hospitality data analytics non-compete",
-      "impact": "Collides with the Al Noor promise, live until September 2029.",
+      "impact": "Collides with the Al Noor non-compete commitment, which is live until September 2029.",
       "severity": "blocker",
       "confidence": "high",
       "needsJudgment": false,
@@ -36,28 +36,14 @@
         {
           "docId": "gulfcrown-msa",
           "docTitle": "Gulf Crown Hotels & Resorts MSA (draft)",
-          "clauseRef": "Clause 4.1",
+          "clauseRef": "4.1",
           "quote": "The Service Provider shall design, develop, test, deploy and support a revenue management and guest analytics platform for the Company's nine (9) Properties located in the Kingdom of Saudi Arabia, as listed in Schedule 2",
           "role": "incoming"
         },
         {
           "docId": "gulfcrown-msa",
           "docTitle": "Gulf Crown Hotels & Resorts MSA (draft)",
-          "clauseRef": "Clause 4.2(a)",
-          "quote": "Revenue Management Module** — demand forecasting at room-type and night level, dynamic rate recommendations, competitor rate ingestion, pickup and pace analysis, and a length-of-stay and overbooking optimisation engine",
-          "role": "incoming"
-        },
-        {
-          "docId": "gulfcrown-msa",
-          "docTitle": "Gulf Crown Hotels & Resorts MSA (draft)",
-          "clauseRef": "Clause 4.2(b)",
-          "quote": "Guest Analytics Module** — a unified guest profile consolidating data from the Company's property management system, central reservation system, loyalty programme and point-of-sale systems; guest segmentation; lifetime value scoring; and propensity models for upsell and repeat stay",
-          "role": "incoming"
-        },
-        {
-          "docId": "gulfcrown-msa",
-          "docTitle": "Gulf Crown Hotels & Resorts MSA (draft)",
-          "clauseRef": "Clause 9.1(d)",
+          "clauseRef": "9.1(d)",
           "quote": "it is not bound by any agreement or restriction which would prevent or restrict it from performing the Services for the Company",
           "role": "incoming"
         },
@@ -90,25 +76,25 @@
           "role": "register"
         }
       ],
-      "counterPosition": "Seek a written waiver or consent from Al Noor Hospitality Group, or defer the engagement until after the restriction period ends in September 2029. The business team and legal counsel should decide on the appropriate strategy.",
+      "counterPosition": "Seek a written consent/waiver from Al Noor Hospitality Group LLC prior to executing this Agreement.",
       "registerEntryId": "alnoor-msa#1",
-      "registerVerified": true,
+      "registerVerified": false,
       "expiry": "2029-09-14",
       "waiver": {
         "docId": "alnoor-waiver",
         "covers": "AtliQ providing demand-forecasting services to Seaside Hotels LLC, Muscat, Oman, solely as described in the statement of work between the Supplier and Seaside dated February 2026",
         "applies": false,
-        "why": "The Al Noor waiver is strictly limited to the Seaside SOW for Seaside Hotels LLC in Oman and explicitly does not extend to other GCC hospitality businesses."
+        "why": "The Al Noor waiver letter dated 10 February 2026 is strictly limited to demand-forecasting services for Seaside Hotels LLC in Muscat, Oman, and expressly excludes all other GCC hospitality businesses."
       }
     },
     {
       "key": "playbook:ld",
       "category": "playbook",
       "topic": "ld",
-      "title": "Delay penalties of 1% of the whole contract value per week",
-      "impact": "Penalties run on total contract value, far above AtliQ's 0.5% of the affected milestone per week (5% cap). This is the Brightwater pattern.",
+      "title": "Liquidated damages calculated on contract value without client-delay exclusion",
+      "impact": "AtliQ faces financial penalties calculated against total contract value for delays, including those caused by client actions.",
       "severity": "high",
-      "confidence": "high",
+      "confidence": "medium",
       "needsJudgment": false,
       "owner": "Karandeep",
       "resolution": "redline",
@@ -120,9 +106,17 @@
           "clauseRef": "12.2",
           "quote": "an amount equal to one percent (1%) of the Contract Value for each week or part thereof of delay",
           "role": "incoming"
+        },
+        {
+          "docId": "gulfcrown-msa",
+          "docTitle": "Gulf Crown Hotels & Resorts MSA (draft)",
+          "clauseRef": "12.2",
+          "quote": "Should the Service Provider fail to achieve any Milestone by its scheduled completion date, the Service Provider shall pay to the Company, by way of liquidated damages and not as a penalty, an amount equal to one percent (1%) of the Contract Value for each week or part thereof of delay",
+          "role": "incoming"
         }
       ],
-      "counterPosition": "0.5% of the affected milestone fee per week, capped at 5% of that milestone fee; no LDs for client-caused delay; LDs as sole remedy for delay.",
+      "counterPosition": "Limit delay penalties to 0.5% of the affected milestone fee per week, capped at 5% of that milestone fee, explicitly exclude penalties for client-caused delay, and clarify that liquidated damages are the sole remedy for delay.",
+      "standard": "0.5% of the affected milestone fee per week of delay attributable to AtliQ, capped at 5% of that milestone fee; no LDs for client-caused delay; LDs are the sole remedy for delay.",
       "precedents": [
         {
           "docId": "acme-msa",
@@ -165,8 +159,8 @@
       "key": "playbook:liability",
       "category": "playbook",
       "topic": "liability",
-      "title": "Liability uncapped for Data Protection",
-      "impact": "The general cap is fine, but Data Protection sits outside it: unlimited exposure where AtliQ handles the client's data.",
+      "title": "Liability uncapped for Data Protection) (DATA PROTECTION",
+      "impact": "The general cap is fine, but Data Protection) (DATA PROTECTION sits outside it: unlimited exposure where AtliQ handles the client's data.",
       "severity": "high",
       "confidence": "medium",
       "needsJudgment": false,
@@ -217,8 +211,8 @@
       "key": "playbook:termination",
       "category": "playbook",
       "topic": "termination",
-      "title": "Payment limited to accepted work on convenience termination",
-      "impact": "AtliQ may not receive compensation for work-in-progress or unbilled services if the client terminates the agreement early for convenience.",
+      "title": "Convenience termination limits payment to accepted deliverables only",
+      "impact": "AtliQ risks performing work without compensation if the agreement is terminated before formal milestone acceptance.",
       "severity": "high",
       "confidence": "medium",
       "needsJudgment": false,
@@ -234,8 +228,8 @@
           "role": "incoming"
         }
       ],
-      "standard": "On any termination for convenience AtliQ is paid for all work done, including work in progress; reasonable notice (≥30 days); mutual where possible.",
-      "counterPosition": "Payment for all services performed up to termination, including work in progress and committed costs; mutual notice period.",
+      "standard": "On any termination for convenience AtliQ is paid for all work done, including work in progress. Notice is mutual. Client contracts: reasonable notice (typically 30+ days). Freelancer / vendor agreements: a mutual short exit (about 15 days, as with Rohan Iyer) is AtliQ's standard and fair to both sides.",
+      "counterPosition": "Require payment for all Services performed up to termination, including work in progress and committed costs.",
       "precedents": [
         {
           "docId": "rohan-ica",
@@ -314,14 +308,11 @@
   "fine": [
     "Correct AtliQ entity: Pvt Ltd for a Saudi Arabia counterparty",
     "Parties = invoicing entity: Pvt Ltd throughout",
-    "IP ownership and licensing terms match the approved standard: client owns deliverables upon payment, and AtliQ retains background IP with a non-exclusive license.",
-    "Confidentiality terms are mutual with standard survival obligations.",
-    "Indemnification is balanced and subject to the contract's aggregate liability cap, which is highly favorable.",
-    "The contract does not impose any non-compete or non-solicitation restrictions on AtliQ.",
-    "No onerous insurance limits or certification requirements are imposed.",
-    "Deductions are restricted only to liquidated damages under this agreement, which is acceptable.",
-    "Milestone acceptance requirements are standard and acceptable.",
-    "Data protection obligations under Clause 13 are standard; the liability exception is addressed under the liability topic."
+    "IP terms match standard: client owns custom deliverables upon payment, AtliQ retains background IP with a non-exclusive licence.",
+    "Indemnification is narrow and limited to IP infringement for deliverables and client-supplied materials, which is favorable to AtliQ.",
+    "Confidentiality obligations are mutual with a standard 5-year post-termination duration.",
+    "Service standards and 90-day warranty on deliverables meet AtliQ's standard.",
+    "No restrictive covenants or non-competes are imposed."
   ],
   "notSeen": [
     "Register built from 17 signed documents. Contracts referenced elsewhere but never collected (e.g. ShopSwift SOW, PixelCraft vendor agreement, intercompany services agreement) can't be checked."
@@ -484,7 +475,7 @@
           "rule": "liability_cap",
           "label": "Liability capped",
           "pass": false,
-          "detail": "Capped (each Party's aggregate liability under this Agreement shall not exceed the Contract Value.) but uncapped for: Data Protection",
+          "detail": "Capped (each Party's aggregate liability under this Agreement shall not exceed the Contract Value.) but uncapped for: Data Protection) (DATA PROTECTION",
           "citation": {
             "docId": "gulfcrown-msa",
             "docTitle": "Gulf Crown Hotels & Resorts MSA (draft)",
@@ -947,10 +938,10 @@
   "counselPack": null,
   "errors": [],
   "usage": {
-    "calls": 4,
-    "cachedCalls": 2,
-    "inputTokens": 12958,
-    "outputTokens": 12768,
-    "ms": 80362
+    "calls": 3,
+    "cachedCalls": 3,
+    "inputTokens": 11143,
+    "outputTokens": 11593,
+    "ms": 100659
   }
 }

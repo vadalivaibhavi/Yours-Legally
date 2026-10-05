@@ -1,177 +1,450 @@
 {
   "_source": "From karandeep_contract_checklist.md, negotiation_notes.md and docs/Obligations_Register.md §G (fairness gate → precedent filter → approval). Seeded as approved on Karandeep's behalf for the prototype (declared in README). Precedents carry intent labels; exceptions/concessions are context, accidents are lessons, never precedent.",
-  "version": "pb-v1-2026-10-04",
+  "version": "pb-v1.1-2026-10-05",
   "rules": [
     {
-      "id": "pb-ld", "topic": "Delay penalties (LDs)", "clauseType": "ld",
+      "id": "pb-ld",
+      "topic": "Delay penalties (LDs)",
+      "clauseType": "ld",
       "standard": "0.5% of the affected milestone fee per week of delay attributable to AtliQ, capped at 5% of that milestone fee; no LDs for client-caused delay; LDs are the sole remedy for delay.",
       "acceptableRange": "Weekly rate on the milestone (not total contract value) with a hard cap. Anything above 5% of the milestone is a deliberate exception only.",
-      "neverAccept": ["Uncapped LDs (checklist: \"cap it. never open ended\")", "LDs per day, or calculated on total contract value", "No exclusion for client-caused delay", "LDs on top of actual damages, or carved out of the liability cap"],
+      "neverAccept": [
+        "Uncapped LDs (checklist: \"cap it. never open ended\")",
+        "LDs per day, or calculated on total contract value",
+        "No exclusion for client-caused delay",
+        "LDs on top of actual damages, or carved out of the liability cap"
+      ],
       "counterPosition": "0.5% of the affected milestone fee per week, capped at 5% of that milestone fee; no LDs where the delay is caused by the client; LDs are the sole and exclusive remedy for delay.",
       "appliesTo": "both",
       "precedents": [
-        { "docId": "acme-msa", "counterparty": "Acme Retail Group", "clauseRef": "§7", "label": "standard", "note": "Origin of the position (Mar 2025): countered 1%/week uncapped" },
-        { "docId": "northwind-msa", "counterparty": "Northwind Logistics", "clauseRef": "§11", "label": "standard", "note": "Countered 10% of contract value (Jun 2025)" },
-        { "docId": "trustline-msa", "counterparty": "Trustline NBFC", "clauseRef": "§7", "label": "standard", "note": "Countered 2%/week, 10% cap (Aug 2026)" },
-        { "docId": "alnoor-msa", "counterparty": "Al Noor Hospitality", "clauseRef": "§10.3", "label": "exception", "note": "10% of total fees cap: \"strategic exception for Al Noor only, not our new standard\". One-off: not a precedent" },
-        { "docId": "brightwater-msa", "counterparty": "Brightwater Insurance", "clauseRef": "§9", "label": "accident", "note": "1% of contract value per day, uncapped, no client-delay exclusion. Signed on a phone; cost $9k + $14.2k legal" }
+        {
+          "docId": "acme-msa",
+          "counterparty": "Acme Retail Group",
+          "clauseRef": "§7",
+          "label": "standard",
+          "note": "Origin of the position (Mar 2025): countered 1%/week uncapped"
+        },
+        {
+          "docId": "northwind-msa",
+          "counterparty": "Northwind Logistics",
+          "clauseRef": "§11",
+          "label": "standard",
+          "note": "Countered 10% of contract value (Jun 2025)"
+        },
+        {
+          "docId": "trustline-msa",
+          "counterparty": "Trustline NBFC",
+          "clauseRef": "§7",
+          "label": "standard",
+          "note": "Countered 2%/week, 10% cap (Aug 2026)"
+        },
+        {
+          "docId": "alnoor-msa",
+          "counterparty": "Al Noor Hospitality",
+          "clauseRef": "§10.3",
+          "label": "exception",
+          "note": "10% of total fees cap: \"strategic exception for Al Noor only, not our new standard\". One-off: not a precedent"
+        },
+        {
+          "docId": "brightwater-msa",
+          "counterparty": "Brightwater Insurance",
+          "clauseRef": "§9",
+          "label": "accident",
+          "note": "1% of contract value per day, uncapped, no client-delay exclusion. Signed on a phone; cost $9k + $14.2k legal"
+        }
       ],
-      "source": "Checklist; negotiation notes (Acme, Northwind, Trustline, Al Noor); post-mortem (Brightwater)", "approved": true
+      "source": "Checklist; negotiation notes (Acme, Northwind, Trustline, Al Noor); post-mortem (Brightwater)",
+      "approved": true
     },
     {
-      "id": "pb-payment", "topic": "Payment terms", "clauseType": "payment",
+      "id": "pb-payment",
+      "topic": "Payment terms",
+      "clauseType": "payment",
       "standard": "Invoices payable within 30 days of receipt; 45 days is the negotiated maximum.",
       "acceptableRange": "31–45 days.",
-      "neverAccept": ["More than 45 days", "Pay-when-paid / pay-if-paid", "Invoices waived if not submitted within a short window", "Set-off across unrelated agreements"],
+      "neverAccept": [
+        "More than 45 days",
+        "Pay-when-paid / pay-if-paid",
+        "Invoices waived if not submitted within a short window",
+        "Set-off across unrelated agreements"
+      ],
       "counterPosition": "Payment within 30 days of receipt of invoice (45 days maximum); no pay-when-paid; set-off limited to undisputed amounts under this agreement.",
       "appliesTo": "both",
       "precedents": [
-        { "docId": "trustline-msa", "counterparty": "Trustline NBFC", "clauseRef": "§4", "label": "standard", "note": "Negotiated 90 → 45 days (the maximum)" },
-        { "docId": "ref-negotiation-notes", "counterparty": "PixelCraft Studio", "clauseRef": "negotiation notes", "label": "standard", "note": "AtliQ's own paper: 60-day payment changed to 30 for a 6-person agency (Oct 2025)" }
+        {
+          "docId": "trustline-msa",
+          "counterparty": "Trustline NBFC",
+          "clauseRef": "§4",
+          "label": "standard",
+          "note": "Negotiated 90 → 45 days (the maximum)"
+        },
+        {
+          "docId": "ref-negotiation-notes",
+          "counterparty": "PixelCraft Studio",
+          "clauseRef": "negotiation notes",
+          "label": "standard",
+          "note": "AtliQ's own paper: 60-day payment changed to 30 for a 6-person agency (Oct 2025)"
+        }
       ],
-      "source": "Checklist (\"payment → 30 days, 45 max\"); negotiation notes (Trustline, PixelCraft)", "approved": true
+      "source": "Checklist (\"payment → 30 days, 45 max\"); negotiation notes (Trustline, PixelCraft)",
+      "approved": true
     },
     {
-      "id": "pb-liability", "topic": "Limitation of liability", "clauseType": "liability",
+      "id": "pb-liability",
+      "topic": "Limitation of liability",
+      "clauseType": "liability",
       "standard": "Each party's aggregate liability capped at 1× fees (paid or payable in the prior 12 months), mutual; carve-outs only for fraud, wilful misconduct and confidentiality (plus any carve-outs that are mandatory under the governing law, e.g. German law for intent/gross negligence and injury).",
-      "neverAccept": ["Unlimited liability for AtliQ (\"1x fees. NOT unlimited\")", "A cap for one side only", "LDs or data incidents carved out of the cap without limit"],
+      "neverAccept": [
+        "Unlimited liability for AtliQ (\"1x fees. NOT unlimited\")",
+        "A cap for one side only",
+        "LDs or data incidents carved out of the cap without limit"
+      ],
       "counterPosition": "Mutual cap of 1× fees paid or payable in the 12 months before the claim; carve-outs limited to fraud, wilful misconduct and breach of confidentiality; data-protection liability under a separate super-cap (e.g. 2× fees).",
       "appliesTo": "both",
       "precedents": [
-        { "docId": "ref-negotiation-notes", "counterparty": "Kessler Mobility", "clauseRef": "negotiation notes", "label": "standard", "note": "Walked away from a €120k deal over unlimited liability (Jan 2026)" },
-        { "docId": "sunrise-msa", "counterparty": "Sunrise Foods", "clauseRef": "§13", "label": "standard", "note": "AtliQ-friendly master: capped liability" },
-        { "docId": "carebridge-baa", "counterparty": "CareBridge Clinics", "clauseRef": "§9", "label": "standard", "note": "Counsel-reviewed: BAA liability capped at 2× trailing-12-month fees" },
-        { "docId": "brightwater-msa", "counterparty": "Brightwater Insurance", "clauseRef": "§15", "label": "accident", "note": "LDs carved out of the 150% cap" }
+        {
+          "docId": "ref-negotiation-notes",
+          "counterparty": "Kessler Mobility",
+          "clauseRef": "negotiation notes",
+          "label": "standard",
+          "note": "Walked away from a €120k deal over unlimited liability (Jan 2026)"
+        },
+        {
+          "docId": "sunrise-msa",
+          "counterparty": "Sunrise Foods",
+          "clauseRef": "§13",
+          "label": "standard",
+          "note": "AtliQ-friendly master: capped liability"
+        },
+        {
+          "docId": "carebridge-baa",
+          "counterparty": "CareBridge Clinics",
+          "clauseRef": "§9",
+          "label": "standard",
+          "note": "Counsel-reviewed: BAA liability capped at 2× trailing-12-month fees"
+        },
+        {
+          "docId": "brightwater-msa",
+          "counterparty": "Brightwater Insurance",
+          "clauseRef": "§15",
+          "label": "accident",
+          "note": "LDs carved out of the 150% cap"
+        }
       ],
-      "source": "Checklist; negotiation notes (Kessler, PayTrack)", "approved": true
+      "source": "Checklist; negotiation notes (Kessler, PayTrack)",
+      "approved": true
     },
     {
-      "id": "pb-indemnity", "topic": "Indemnity", "clauseType": "indemnity",
+      "id": "pb-indemnity",
+      "topic": "Indemnity",
+      "clauseType": "indemnity",
       "standard": "Mutual: each party covers its own breach and negligence; never the other side's negligence. IP-infringement indemnity for deliverables is normal.",
-      "neverAccept": ["Indemnifying the other party for its own negligence", "One-way uncapped indemnity", "Indemnity for 'any and all losses' regardless of fault"],
+      "neverAccept": [
+        "Indemnifying the other party for its own negligence",
+        "One-way uncapped indemnity",
+        "Indemnity for 'any and all losses' regardless of fault"
+      ],
       "counterPosition": "Each party indemnifies the other for third-party claims caused by its own breach or negligence; no indemnity for losses caused by the indemnified party's own negligence; indemnities subject to the liability cap (IP infringement excepted).",
       "appliesTo": "both",
       "precedents": [
-        { "docId": "paytrack-msa", "counterparty": "PayTrack Technologies", "clauseRef": "§10.2", "label": "standard", "note": "Origin: \"we can't insure against PayTrack's own negligence\" (Jan 2025)" },
-        { "docId": "acme-msa", "counterparty": "Acme Retail Group", "clauseRef": "§11", "label": "standard", "note": "Mutual indemnity" }
+        {
+          "docId": "paytrack-msa",
+          "counterparty": "PayTrack Technologies",
+          "clauseRef": "§10.2",
+          "label": "standard",
+          "note": "Origin: \"we can't insure against PayTrack's own negligence\" (Jan 2025)"
+        },
+        {
+          "docId": "acme-msa",
+          "counterparty": "Acme Retail Group",
+          "clauseRef": "§11",
+          "label": "standard",
+          "note": "Mutual indemnity"
+        }
       ],
-      "source": "Checklist (\"indemnity → mutual. we don't cover their mistakes\"); negotiation notes (PayTrack)", "approved": true
+      "source": "Checklist (\"indemnity → mutual. we don't cover their mistakes\"); negotiation notes (PayTrack)",
+      "approved": true
     },
     {
-      "id": "pb-ip", "topic": "Intellectual property", "clauseType": "ip",
+      "id": "pb-ip",
+      "topic": "Intellectual property",
+      "clauseType": "ip",
       "standard": "The client owns what AtliQ builds specifically for it (on payment); AtliQ keeps its background IP, pre-existing tools and know-how and grants a licence to use them as part of the deliverables.",
-      "neverAccept": ["Assigning pre-existing tools / background IP (e.g. PipeKit)", "Warranting sole ownership of tools AtliQ has already assigned elsewhere", "IP vesting on creation before payment"],
+      "neverAccept": [
+        "Assigning pre-existing tools / background IP (e.g. PipeKit)",
+        "Warranting sole ownership of tools AtliQ has already assigned elsewhere",
+        "IP vesting on creation before payment"
+      ],
       "counterPosition": "Client owns deliverables created specifically for it upon payment; AtliQ retains background IP and grants a non-exclusive, perpetual, royalty-free licence to use it as part of the deliverables.",
       "appliesTo": "incoming",
       "precedents": [
-        { "docId": "acme-msa", "counterparty": "Acme Retail Group", "clauseRef": "§9", "label": "standard", "note": "Client owns deliverables, AtliQ keeps background IP" },
-        { "docId": "northwind-msa", "counterparty": "Northwind Logistics", "clauseRef": "§9.2", "label": "accident", "note": "Pre-existing tools incl. PipeKit assigned to Northwind (\"I skimmed the IP\")" }
+        {
+          "docId": "acme-msa",
+          "counterparty": "Acme Retail Group",
+          "clauseRef": "§9",
+          "label": "standard",
+          "note": "Client owns deliverables, AtliQ keeps background IP"
+        },
+        {
+          "docId": "northwind-msa",
+          "counterparty": "Northwind Logistics",
+          "clauseRef": "§9.2",
+          "label": "accident",
+          "note": "Pre-existing tools incl. PipeKit assigned to Northwind (\"I skimmed the IP\")"
+        }
       ],
-      "source": "Checklist (\"IP → client owns what we build for them, we keep our own stuff\")", "approved": true
+      "source": "Checklist (\"IP → client owns what we build for them, we keep our own stuff\")",
+      "approved": true
     },
     {
-      "id": "pb-ip-flowdown", "topic": "IP flow-down (AtliQ as buyer)", "clauseType": "ip",
+      "id": "pb-ip-flowdown",
+      "topic": "IP flow-down (AtliQ as buyer)",
+      "clauseType": "ip",
       "standard": "Every freelancer / vendor assigns the work product to AtliQ (from creation or at least on payment) so AtliQ can give clients what it promises; their pre-existing tools are licensed broadly enough for the client deal.",
-      "neverAccept": ["Vendor keeps the work product and AtliQ only gets a non-exclusive or non-transferable licence while the client was promised ownership or exclusive rights"],
+      "neverAccept": [
+        "Vendor keeps the work product and AtliQ only gets a non-exclusive or non-transferable licence while the client was promised ownership or exclusive rights"
+      ],
       "counterPosition": "Contractor assigns all rights in the work product to AtliQ; pre-existing materials are licensed on terms that let AtliQ pass to the client what the client contract requires.",
       "appliesTo": "atliq_paper",
       "precedents": [
-        { "docId": "rohan-ica", "counterparty": "Rohan Iyer", "clauseRef": "§5.2–5.3", "label": "accident", "note": "Rohan kept the Work Product while Acme was promised ownership (\"ok\" from phone)" }
+        {
+          "docId": "rohan-ica",
+          "counterparty": "Rohan Iyer",
+          "clauseRef": "§5.2–5.3",
+          "label": "accident",
+          "note": "Rohan kept the Work Product while Acme was promised ownership (\"ok\" from phone)"
+        }
       ],
-      "source": "Obligations_Register §G; Rohan Iyer → Acme gap", "approved": true
+      "source": "Obligations_Register §G; Rohan Iyer → Acme gap",
+      "approved": true
     },
     {
-      "id": "pb-nda", "topic": "NDA mutuality", "clauseType": "confidentiality",
+      "id": "pb-nda",
+      "topic": "NDA mutuality",
+      "clauseType": "confidentiality",
       "standard": "Mutual in substance, not just in title: both parties' information protected, both bound by the same obligations, residuals mutual or none, mutual remedies, fixed term, and no non-competes or non-solicits hidden inside an NDA.",
-      "neverAccept": ["Confidential Information defined as only one party's information", "One-way residuals clause", "Non-compete / exclusivity inside an NDA", "One-way uncapped indemnity", "Perpetual one-way obligations"],
+      "neverAccept": [
+        "Confidential Information defined as only one party's information",
+        "One-way residuals clause",
+        "Non-compete / exclusivity inside an NDA",
+        "One-way uncapped indemnity",
+        "Perpetual one-way obligations"
+      ],
       "counterPosition": "Make the definitions and obligations mutual, delete residuals (or make them mutual), delete restrictive covenants, mutual remedies (injunction may be sought by either party), fixed 2–3 year term.",
       "appliesTo": "both",
       "precedents": [
-        { "docId": "ref-negotiation-notes", "counterparty": "GlobalMart", "clauseRef": "negotiation notes", "label": "standard", "note": "\"We only sign mutual: we'll be sharing our architecture too\" (Mar 2026). They agreed" },
-        { "docId": "alnoor-nda", "counterparty": "Al Noor Hospitality", "clauseRef": "whole NDA", "label": "standard", "note": "Genuinely mutual" },
-        { "docId": "harrington-nda", "counterparty": "Harrington Health", "clauseRef": "whole NDA", "label": "standard", "note": "Genuinely mutual" },
-        { "docId": "meridian-nda", "counterparty": "Meridian Healthcare", "clauseRef": "whole NDA", "label": "accident", "note": "One-way, uncapped indemnity, 24-month no-hire, signed within the hour" }
+        {
+          "docId": "ref-negotiation-notes",
+          "counterparty": "GlobalMart",
+          "clauseRef": "negotiation notes",
+          "label": "standard",
+          "note": "\"We only sign mutual: we'll be sharing our architecture too\" (Mar 2026). They agreed"
+        },
+        {
+          "docId": "alnoor-nda",
+          "counterparty": "Al Noor Hospitality",
+          "clauseRef": "whole NDA",
+          "label": "standard",
+          "note": "Genuinely mutual"
+        },
+        {
+          "docId": "harrington-nda",
+          "counterparty": "Harrington Health",
+          "clauseRef": "whole NDA",
+          "label": "standard",
+          "note": "Genuinely mutual"
+        },
+        {
+          "docId": "meridian-nda",
+          "counterparty": "Meridian Healthcare",
+          "clauseRef": "whole NDA",
+          "label": "accident",
+          "note": "One-way, uncapped indemnity, 24-month no-hire, signed within the hour"
+        }
       ],
-      "source": "Checklist (\"NDAs → just sign if mutual\", strengthened); negotiation notes (GlobalMart, Meridian)", "approved": true
+      "source": "Checklist (\"NDAs → just sign if mutual\", strengthened); negotiation notes (GlobalMart, Meridian)",
+      "approved": true
     },
     {
-      "id": "pb-law", "topic": "Governing law & forum", "clauseType": "governing_law",
+      "id": "pb-law",
+      "topic": "Governing law & forum",
+      "clauseType": "governing_law",
       "standard": "Indian law for AtliQ Technologies Pvt Ltd; US (state) law for AtliQ Inc; neutral or home forum.",
       "acceptableRange": "The client's law has been accepted case by case to win a deal (DIFC, English, Singapore): a judgment call, not a blocker.",
-      "neverAccept": ["Foreign law on AtliQ Inc that nobody noticed (Brightwater)"],
+      "neverAccept": [
+        "Foreign law on AtliQ Inc that nobody noticed (Brightwater)"
+      ],
       "counterPosition": "Laws of India (Pvt Ltd) / the relevant US state (Inc); arbitration seated in India or a neutral seat.",
       "appliesTo": "both",
       "precedents": [
-        { "docId": "alnoor-msa", "counterparty": "Al Noor Hospitality", "clauseRef": "§21", "label": "concession", "note": "DIFC law: client's group standard" },
-        { "docId": "northwind-msa", "counterparty": "Northwind Logistics", "clauseRef": "§17", "label": "concession", "note": "English law + LCIA: \"not worth losing the deal over\"" },
-        { "docId": "cloudspan-spa", "counterparty": "CloudSpan Technologies", "clauseRef": "§15", "label": "concession", "note": "Singapore law / SIAC" },
-        { "docId": "brightwater-msa", "counterparty": "Brightwater Insurance", "clauseRef": "§20", "label": "accident", "note": "English law on a US entity, unnoticed" }
+        {
+          "docId": "alnoor-msa",
+          "counterparty": "Al Noor Hospitality",
+          "clauseRef": "§21",
+          "label": "concession",
+          "note": "DIFC law: client's group standard"
+        },
+        {
+          "docId": "northwind-msa",
+          "counterparty": "Northwind Logistics",
+          "clauseRef": "§17",
+          "label": "concession",
+          "note": "English law + LCIA: \"not worth losing the deal over\""
+        },
+        {
+          "docId": "cloudspan-spa",
+          "counterparty": "CloudSpan Technologies",
+          "clauseRef": "§15",
+          "label": "concession",
+          "note": "Singapore law / SIAC"
+        },
+        {
+          "docId": "brightwater-msa",
+          "counterparty": "Brightwater Insurance",
+          "clauseRef": "§20",
+          "label": "accident",
+          "note": "English law on a US entity, unnoticed"
+        }
       ],
-      "source": "Checklist (\"gov law → ours\"); entities sheet", "approved": true
+      "source": "Checklist (\"gov law → ours\"); entities sheet",
+      "approved": true
     },
     {
-      "id": "pb-entity", "topic": "Contracting entity", "clauseType": "other",
+      "id": "pb-entity",
+      "topic": "Contracting entity",
+      "clauseType": "other",
       "standard": "AtliQ Inc contracts with US clients only; AtliQ Technologies Pvt Ltd with everyone else. The contracting entity must equal the invoicing entity.",
-      "neverAccept": ["A non-US client contracting with AtliQ Inc", "Parties clause and invoicing clause naming different AtliQ entities"],
+      "neverAccept": [
+        "A non-US client contracting with AtliQ Inc",
+        "Parties clause and invoicing clause naming different AtliQ entities"
+      ],
       "counterPosition": "Name the correct AtliQ entity in the parties clause, invoicing clause and signature block.",
       "appliesTo": "both",
       "precedents": [],
-      "source": "atliq_entities.md (finance): mismatches caused two payment delays in 2025", "approved": true
+      "source": "atliq_entities.md (finance): mismatches caused two payment delays in 2025",
+      "approved": true
     },
     {
-      "id": "pb-restrictive", "topic": "Restrictive covenants AtliQ gives", "clauseType": "non_compete",
+      "id": "pb-restrictive",
+      "topic": "Restrictive covenants AtliQ gives",
+      "clauseType": "non_compete",
       "standard": "None, or narrow geography + short duration, always checked against the register; mutual exit where possible. No non-competes on freelancers/vendors beyond non-solicit of client staff.",
-      "neverAccept": ["Worldwide or open-ended non-competes", "Client-capture clauses that take AtliQ's own relationships", "Exclusivity without an exit"],
+      "neverAccept": [
+        "Worldwide or open-ended non-competes",
+        "Client-capture clauses that take AtliQ's own relationships",
+        "Exclusivity without an exit"
+      ],
       "counterPosition": "Delete, or limit to named competitors in a defined territory for the term only, with a mutual termination right.",
       "appliesTo": "both",
       "precedents": [
-        { "docId": "alnoor-msa", "counterparty": "Al Noor Hospitality", "clauseRef": "§12", "label": "concession", "note": "Negotiated worldwide 3 yrs → GCC, term + 18 months; accepted as strategic" },
-        { "docId": "cloudspan-spa", "counterparty": "CloudSpan Technologies", "clauseRef": "§7", "label": "concession", "note": "Europe removed; mutual 90-day exit" },
-        { "docId": "crestline-msa", "counterparty": "Crestline Retail", "clauseRef": "§6.4", "label": "accident", "note": "MFN accepted on a false premise (\"we never discount\")" }
+        {
+          "docId": "alnoor-msa",
+          "counterparty": "Al Noor Hospitality",
+          "clauseRef": "§12",
+          "label": "concession",
+          "note": "Negotiated worldwide 3 yrs → GCC, term + 18 months; accepted as strategic"
+        },
+        {
+          "docId": "cloudspan-spa",
+          "counterparty": "CloudSpan Technologies",
+          "clauseRef": "§7",
+          "label": "concession",
+          "note": "Europe removed; mutual 90-day exit"
+        },
+        {
+          "docId": "crestline-msa",
+          "counterparty": "Crestline Retail",
+          "clauseRef": "§6.4",
+          "label": "accident",
+          "note": "MFN accepted on a false premise (\"we never discount\")"
+        }
       ],
-      "source": "Obligations_Register §G", "approved": true
+      "source": "Obligations_Register §G",
+      "approved": true
     },
     {
-      "id": "pb-data", "topic": "Data protection & regulated data", "clauseType": "data_protection",
+      "id": "pb-data",
+      "topic": "Data protection & regulated data",
+      "clauseType": "data_protection",
       "standard": "DPA (EU) or BAA (US health) signed before any personal/regulated data moves, with a sub-DPA / sub-BAA for every party that touches the data (incl. AtliQ's own Pune entity); engagement-specific scope; offshore access only as the agreement allows.",
-      "neverAccept": ["Data moving before the agreement exists", "Subcontractors processing data without flowed-down terms and client consent", "Uncapped liability for data incidents"],
+      "neverAccept": [
+        "Data moving before the agreement exists",
+        "Subcontractors processing data without flowed-down terms and client consent",
+        "Uncapped liability for data incidents"
+      ],
       "counterPosition": "Execute the DPA/BAA and the sub-agreements first; agree a de-identified offshore route in writing; cap data-incident liability at a super-cap.",
       "appliesTo": "both",
       "precedents": [
-        { "docId": "carebridge-baa", "counterparty": "CareBridge Clinics", "clauseRef": "whole BAA", "label": "standard", "note": "Counsel-reviewed: capped liability, 5-day reporting, de-identified offshore route" }
+        {
+          "docId": "carebridge-baa",
+          "counterparty": "CareBridge Clinics",
+          "clauseRef": "whole BAA",
+          "label": "standard",
+          "note": "Counsel-reviewed: capped liability, 5-day reporting, de-identified offshore route"
+        }
       ],
-      "source": "Obligations_Register §G; CareBridge BAA", "approved": true
+      "source": "Obligations_Register §G; CareBridge BAA",
+      "approved": true
     },
     {
-      "id": "pb-termination", "topic": "Termination", "clauseType": "termination",
-      "standard": "On any termination for convenience AtliQ is paid for all work done, including work in progress; reasonable notice (≥30 days); mutual where possible.",
-      "neverAccept": ["Payment only for accepted deliverables on convenience termination", "Very short or one-sided notice periods"],
+      "id": "pb-termination",
+      "topic": "Termination",
+      "clauseType": "termination",
+      "standard": "On any termination for convenience AtliQ is paid for all work done, including work in progress. Notice is mutual. Client contracts: reasonable notice (typically 30+ days). Freelancer / vendor agreements: a mutual short exit (about 15 days, as with Rohan Iyer) is AtliQ's standard and fair to both sides.",
+      "neverAccept": [
+        "Payment only for accepted deliverables on convenience termination",
+        "One-sided notice periods (e.g. 24 hours for AtliQ vs 60 days for the other side)"
+      ],
       "counterPosition": "Payment for all services performed up to termination, including work in progress and committed costs; mutual notice period.",
       "appliesTo": "both",
       "precedents": [
-        { "docId": "rohan-ica", "counterparty": "Rohan Iyer", "clauseRef": "§9", "label": "standard", "note": "Mutual 15-day exit" }
+        {
+          "docId": "rohan-ica",
+          "counterparty": "Rohan Iyer",
+          "clauseRef": "§9",
+          "label": "standard",
+          "note": "Mutual 15-day exit"
+        }
       ],
-      "source": "Checklist (\"termination → they pay for work done\")", "approved": true
+      "source": "Checklist (\"termination → they pay for work done\")",
+      "approved": true
     },
     {
-      "id": "pb-insurance", "topic": "Insurance", "clauseType": "insurance",
+      "id": "pb-insurance",
+      "topic": "Insurance",
+      "clauseType": "insurance",
       "standard": "Check every required insurance type and limit against what AtliQ actually holds before signing (known: cyber $1M; everything else unrecorded).",
-      "neverAccept": ["Committing to limits AtliQ doesn't hold, with certificates due before work starts"],
+      "neverAccept": [
+        "Committing to limits AtliQ doesn't hold, with certificates due before work starts"
+      ],
       "counterPosition": "Align required limits with current cover, or agree a timeline and cost to increase cover before signature.",
       "appliesTo": "both",
       "precedents": [],
-      "source": "Harrington huddle; Obligations_Register §G", "approved": true
+      "source": "Harrington huddle; Obligations_Register §G",
+      "approved": true
     },
     {
-      "id": "pb-atliq-paper", "topic": "AtliQ's own paper (mirror test + flow-down)", "clauseType": "other",
+      "id": "pb-atliq-paper",
+      "topic": "AtliQ's own paper (mirror test + flow-down)",
+      "clauseType": "other",
       "standard": "Apply the same standard AtliQ asks for as a supplier: capped penalties or none, 30-day pay, mutual caps, no pay-when-paid, fair termination. Pass the client's obligations down (IP, confidentiality, data protection, consent), never the client's leverage.",
-      "neverAccept": ["Clauses AtliQ would reject from a client (\"I don't want our paper to be the thing I hate receiving\")", "Missing flow-down of obligations promised to the end client"],
+      "neverAccept": [
+        "Clauses AtliQ would reject from a client (\"I don't want our paper to be the thing I hate receiving\")",
+        "Missing flow-down of obligations promised to the end client"
+      ],
       "counterPosition": "Use the fair version of each clause and add back-to-back flow-down terms for the linked client contract.",
       "appliesTo": "atliq_paper",
       "precedents": [
-        { "docId": "ref-negotiation-notes", "counterparty": "PixelCraft Studio", "clauseRef": "negotiation notes", "label": "standard", "note": "Deleted the 1%/day penalty, 30-day payment, liability capped for both sides (Oct 2025)" }
+        {
+          "docId": "ref-negotiation-notes",
+          "counterparty": "PixelCraft Studio",
+          "clauseRef": "negotiation notes",
+          "label": "standard",
+          "note": "Deleted the 1%/day penalty, 30-day payment, liability capped for both sides (Oct 2025)"
+        }
       ],
-      "source": "Negotiation notes (PixelCraft); Karandeep's Sept 2026 note", "approved": true
+      "source": "Negotiation notes (PixelCraft); Karandeep's Sept 2026 note",
+      "approved": true
     }
   ]
 }

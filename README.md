@@ -128,22 +128,27 @@ Token counts and timings for every script run are written to `data/runs/` (input
 
 ## Eval results
 
-Full table: [`eval/results.md`](eval/results.md) (regenerate with `npm run eval`). Last run: **47 passed · 2 failed · 1 skipped of 50 cases.**
+Full table: [`eval/results.md`](eval/results.md) (regenerate with `npm run eval`). Last run: **42 passed · 4 failed · 4 skipped of 50 cases.** Skipped: EV-V1–V3 (version pairs need model calls; all three passed in the previous full run) and EV-V4 (FR-18 not built).
 
 | PRD §11 dimension | Threshold | Result |
 |---|---|---|
-| Register accuracy & coverage (EV-R1–R4) | ≥90% fields exact, 100% live restrictions | 7/7 must-have entries, 86/86 fields exact; Orbit expired + illegible §9.1 reported |
-| Verdicts on incoming contracts (EV-01–15) | expected verdict, must-find, must-not-flag | 13/15 pass; Gulf Crown, Lakeshore, TravelHub (SEND BACK), BlueOrchid, Datavane, Rheinwerk, FinServe (fast lane), LoopMart (clean), Sunrise (clean), Marcus, Harrington (+ compliance alert) |
+| Register accuracy & coverage (EV-R1–R5) | ≥90% fields exact, 100% live restrictions | 7/7 must-have entries, 86/86 fields exact; Orbit expired + illegible §9.1 reported; unverified label works |
+| Verdicts on incoming contracts (EV-01–15) | expected verdict, must-find, must-not-flag | 11/15: Gulf Crown, Lakeshore, BlueOrchid, Datavane, Rheinwerk, FinServe (fast lane), LoopMart (clean), Sunrise (clean), Kriti, EV-14, EV-15 |
 | Compliance alerts & notes (EV-C1–C2) | alert closed by note; note never clears a blocker | 2/2 |
 | Deal linking (EV-L1–L6) | auto when certain, ask when ambiguous, user choice final | 6/6 |
 | Access control (EV-A1–A3) | sellers can't see brief/register/other deals/other clients' rates | 3/3 |
-| Version handling (EV-V1–V3) | resolved → Resolved, open → Still open | 3/3 (EV-V4 late findings: FR-18 not built) |
 | Seller checks (EV-S1–S8) | expected status per item; unmatched → couldn't check; banner on change | 8/8 |
 | Similar past clauses (EV-P1–P7) | recall@3 ≥80%, labels right, verdict unchanged | recall@3 **100%** (10/10); verdict identical with and without the panel on all 13 briefs |
-| Citation validity | 100% | 118/118 quotes string-matched to source |
-| Guardrails | 0 legal conclusions, 0 Reject | 0 / 0 across 514 model-written strings |
+| Citation validity | 100% | 131/131 quotes string-matched to source |
+| Guardrails | 0 legal conclusions, 0 Reject | 0 / 0 across 529 model-written strings |
 
-**The 2 failures, honestly.** EV-10 (Kriti) and EV-13 (Ortiz) miss flow-down / indemnity findings because their playbook step ran on a **flash-lite fallback** after the free tier's strong models ran out for the day. Re-running those two deals on a flash model (`npm run review -- kriti ortiz`, then `npm run eval`) is the fix. Briefs record the models used. Marcus, TravelHub (playbook), Rheinwerk and FinServe also used a lite model for some steps and passed.
+**The 4 failures, honestly.**
+- **EV-03 TravelHub:** HOLD instead of SEND BACK. The model reads TravelHub (a hotel distribution platform; hotel-ranking AI for UAE/KSA hotels) as squarely inside Al Noor's "Hospitality Business" definition; the answer key calls it arguable, for counsel. The system errs cautious: it blocks rather than misses.
+- **EV-11 Marcus:** flags a medium flow-down gap the answer key doesn't list. Marcus assigns work product (§6.2), but nothing licenses his pre-existing tools, while Lakeshore §7.2 is promised a licence to tools incorporated in deliverables. This looks like a real gap; consider adding it to the answer key.
+- **EV-12 Harrington:** the latest run missed the background-IP assignment (MSA §7.2), which an earlier run found. That's model variance on a fresh call; the verdict (HOLD + compliance alert) is right.
+- **EV-13 Ortiz:** this brief predates the playbook fix that made a mutual ~15-day freelancer exit the standard (Rohan Iyer precedent). Re-running Ortiz clears it.
+
+The briefs were produced over several runs because Gemini's **free tier** allows 20 requests per model per day per project. A single `npm run review` on a billed key regenerates them all on the current prompts and playbook.
 
 **Cost (from `npm run cost`, Gemini flash pricing placeholders $0.30 / $2.50 per 1M tokens):** register build ≈ $0.35 one-off for 17 contracts; a review ≈ 9.6k input / 8.6k output tokens ≈ $0.02–0.07 per deal, so roughly **$0.25–0.50/month at 9–20 contracts**, model cost only. NDA fast lane ran in 15 s when the model wasn't overloaded (one run took 365 s waiting out 503 "high demand" retries on the free tier).
 

@@ -1,50 +1,57 @@
 {
   "dealId": "rheinwerk",
   "version": 1,
-  "createdAt": "2026-10-05T07:38:37.446Z",
+  "createdAt": "2026-10-05T08:09:00.840Z",
   "trigger": "initial review",
-  "inputsHash": "d0452b12f10e96491d53141ed651a65d",
+  "inputsHash": "25962779d1b5feb77e2dbb157f2da931",
   "documentIds": [
     "rheinwerk-sa"
   ],
-  "registerVersion": "reg-2026-10-04-57+r1",
+  "registerVersion": "reg-2026-10-04-57+r0",
   "playbookVersion": "pb-v1-2026-10-04",
   "models": [
     "gemini-flash-lite-latest",
     "gemini-3-flash-preview",
-    "gemini-3.5-flash-lite"
+    "gemini-flash-latest"
   ],
   "promptVersion": "p1",
   "route": "full_review",
   "verdict": "HOLD",
-  "headline": "HOLD: 1 blocker, 3 missing documents",
-  "nextAction": "Karandeep must resolve the IP assignment collision with Northwind Logistics.",
+  "headline": "HOLD: 1 blocker and 3 missing documents require resolution",
+  "nextAction": "Karandeep must consult counsel regarding the Northwind Logistics IP assignment collision.",
   "findings": [
     {
       "key": "conflict:northwind-msa:ip_transfer",
       "category": "conflict",
       "topic": "ip_transfer",
       "title": "Collides with Northwind Logistics: PipeKit and pre-existing materials IP assignment",
-      "impact": "Collides with prior commitments regarding the absolute assignment of PipeKit IP to Northwind Logistics.",
+      "impact": "Collides with the Northwind Logistics assignment of PipeKit, which is perpetual and live.",
       "severity": "blocker",
       "confidence": "high",
       "needsJudgment": false,
-      "owner": "Karandeep",
-      "resolution": "redline",
+      "owner": "counsel (via Karandeep)",
+      "resolution": "counsel",
       "docId": "rheinwerk-sa",
       "citations": [
         {
           "docId": "rheinwerk-sa",
           "docTitle": "Rheinwerk Analytics services agreement (draft)",
           "clauseRef": "§ 6.1",
-          "quote": "Supplier shall deliver the services using its proprietary data-pipeline accelerator \"**PipeKit**\", comprising reusable ingestion connectors, transformation templates, data quality rule libraries and orchestration modules",
+          "quote": "Supplier shall deliver the services using its proprietary data-pipeline accelerator \"**PipeKit**\", comprising reusable ingestion connectors, transformation templates, data quality rule libraries and orchestration modules. PipeKit shall be incorporated into the Work Results to reduce implementation time and cost",
           "role": "incoming"
         },
         {
           "docId": "rheinwerk-sa",
           "docTitle": "Rheinwerk Analytics services agreement (draft)",
           "clauseRef": "§ 6.2",
-          "quote": "Supplier hereby grants Client a perpetual, irrevocable, non-exclusive, worldwide, royalty-free right to use, reproduce, modify and operate PipeKit as incorporated in the Work Results, for the purposes of operating, maintaining and further developing the Platform, including for the benefit of Client's customers",
+          "quote": "Supplier hereby grants Client a perpetual, irrevocable, non-exclusive, worldwide, royalty-free right to use, reproduce, modify and operate PipeKit as incorporated in the Work Results, for the purposes of operating, maintaining and further developing the Platform, including for the benefit of Client's customers. Client may sub-license this right to its affiliated companies and to service providers acting on its behalf",
+          "role": "incoming"
+        },
+        {
+          "docId": "rheinwerk-sa",
+          "docTitle": "Rheinwerk Analytics services agreement (draft)",
+          "clauseRef": "§ 6.3",
+          "quote": "Supplier warrants that it is the sole owner of all intellectual property rights in PipeKit, that it is entitled to grant the rights set out in § 6.2, and that PipeKit and its use under this Agreement do not infringe any rights of third parties",
           "role": "incoming"
         },
         {
@@ -69,7 +76,7 @@
           "role": "register"
         }
       ],
-      "counterPosition": "Amend Section 6 to align with prior IP commitments regarding PipeKit.",
+      "counterPosition": "Counsel to evaluate title to PipeKit under the Northwind Logistics agreement; if title is impaired, seek consent/waiver from Northwind Logistics, or renegotiate § 6 and Annex 2 (M1) to remove PipeKit and deliver the pipeline using bespoke or open-source software.",
       "registerEntryId": "northwind-msa#1",
       "registerVerified": false,
       "expiry": null,
@@ -959,13 +966,68 @@
       ]
     }
   ],
-  "counselPack": null,
+  "counselPack": {
+    "question": "Collides with Northwind Logistics: PipeKit and pre-existing materials IP assignment: does this commitment reach the new deal, and what is needed to proceed?",
+    "documents": [
+      "Rheinwerk Analytics services agreement (draft)",
+      "Northwind Logistics MSA + SOW-1"
+    ],
+    "clauses": [
+      {
+        "docId": "rheinwerk-sa",
+        "docTitle": "Rheinwerk Analytics services agreement (draft)",
+        "clauseRef": "§ 6.1",
+        "quote": "Supplier shall deliver the services using its proprietary data-pipeline accelerator \"**PipeKit**\", comprising reusable ingestion connectors, transformation templates, data quality rule libraries and orchestration modules. PipeKit shall be incorporated into the Work Results to reduce implementation time and cost",
+        "role": "incoming"
+      },
+      {
+        "docId": "rheinwerk-sa",
+        "docTitle": "Rheinwerk Analytics services agreement (draft)",
+        "clauseRef": "§ 6.2",
+        "quote": "Supplier hereby grants Client a perpetual, irrevocable, non-exclusive, worldwide, royalty-free right to use, reproduce, modify and operate PipeKit as incorporated in the Work Results, for the purposes of operating, maintaining and further developing the Platform, including for the benefit of Client's customers. Client may sub-license this right to its affiliated companies and to service providers acting on its behalf",
+        "role": "incoming"
+      },
+      {
+        "docId": "rheinwerk-sa",
+        "docTitle": "Rheinwerk Analytics services agreement (draft)",
+        "clauseRef": "§ 6.3",
+        "quote": "Supplier warrants that it is the sole owner of all intellectual property rights in PipeKit, that it is entitled to grant the rights set out in § 6.2, and that PipeKit and its use under this Agreement do not infringe any rights of third parties",
+        "role": "incoming"
+      },
+      {
+        "docId": "northwind-msa",
+        "docTitle": "Northwind Logistics MSA + SOW-1",
+        "clauseRef": "9.2",
+        "quote": "All Intellectual Property Rights in the Deliverables, including any software, tools, frameworks, libraries and pre-existing materials incorporated into the Deliverables, shall vest in the Client absolutely upon payment of the Charges for the relevant Milestone. The Supplier hereby assigns to the Client, with full title guarantee and by way of present assignment of future rights, all such Intellectual Property Rights with effect from such payment",
+        "role": "register"
+      },
+      {
+        "docId": "northwind-msa",
+        "docTitle": "Northwind Logistics MSA + SOW-1",
+        "clauseRef": "3.5",
+        "quote": "Deliverables**\" means all work product, software, code, pipelines, configurations, documentation and other materials created, supplied or delivered by the Supplier to the Client in the course of the Services",
+        "role": "register"
+      },
+      {
+        "docId": "northwind-msa",
+        "docTitle": "Northwind Logistics MSA + SOW-1",
+        "clauseRef": "S1.2",
+        "quote": "The Supplier will build the pipeline using its proprietary pipeline accelerator, **PipeKit**, which provides pre-built ingestion connectors, orchestration templates, data-quality checks and monitoring components. PipeKit will be configured and extended for the Client and incorporated into the delivered pipeline as its ingestion and orchestration layer",
+        "role": "register"
+      }
+    ],
+    "entityFacts": [
+      "AtliQ Technologies Pvt Ltd (India): serves India, Middle East, Europe, Rest of world (outside the US)",
+      "AtliQ Inc (USA): serves USA",
+      "Delivery teams for both entities sit in Pune. AtliQ Inc sub-contracts delivery to AtliQ Technologies Pvt Ltd under an intercompany agreement (not in the dataset)."
+    ]
+  },
   "errors": [],
   "usage": {
     "calls": 2,
     "cachedCalls": 4,
-    "inputTokens": 3995,
-    "outputTokens": 2487,
-    "ms": 14047
+    "inputTokens": 4000,
+    "outputTokens": 12192,
+    "ms": 171478
   }
 }

@@ -93,7 +93,9 @@ export async function callModel<S extends z.ZodType>(args: CallArgs<S>): Promise
 
   if (!args.noCache) {
     const hit = readCache(key);
-    if (hit) {
+    // A strong-tier answer produced by a lite fallback model is not reused once a strong model is available.
+    const degraded = hit && TIER[task] === "strong" && /lite/.test(hit.model) && !modelsFor(task).every((m) => /lite/.test(m));
+    if (hit && !degraded) {
       const parsed = schema.safeParse(hit.data);
       if (parsed.success) {
         usageLog.push({ task, model: hit.model, usage: { inputTokens: 0, outputTokens: 0 }, ms: 0, cached: true });

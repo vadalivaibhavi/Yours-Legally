@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-05T07:44:57.386Z",
+  "at": "2026-10-05T09:25:20.179Z",
   "results": [
     {
       "id": "EV-R1",
@@ -47,8 +47,8 @@
       "id": "EV-03",
       "section": "B. Incoming contracts (US-2 to US-7, US-11)",
       "title": "TravelHub agreement",
-      "pass": true,
-      "detail": "SEND BACK · found gate:entity, gate:invoicing_entity, conflict:alnoor-msa:non_compete · clean on conflict:orbit-msa"
+      "pass": false,
+      "detail": "verdict HOLD ≠ SEND BACK"
     },
     {
       "id": "EV-04",
@@ -96,29 +96,29 @@
       "id": "EV-10",
       "section": "B. Incoming contracts (US-2 to US-7, US-11)",
       "title": "Kriti subcontract (AtliQ paper)",
-      "pass": false,
-      "detail": "missing playbook:indemnity; missing playbook:liability"
+      "pass": true,
+      "detail": "SIGN AFTER CHANGES · found playbook:ld, playbook:payment, playbook:indemnity, playbook:liability, flowdown:ip, flowdown:data, flowdown:consent"
     },
     {
       "id": "EV-11",
       "section": "B. Incoming contracts (US-2 to US-7, US-11)",
       "title": "Marcus Reed ICA (AtliQ paper)",
-      "pass": true,
-      "detail": "SIGN AFTER CHANGES · found gate:entity, playbook:restrictive, playbook:termination, dependency:lakeshore · clean on playbook:ip, flowdown:ip"
+      "pass": false,
+      "detail": "flagged flowdown:ip (medium)"
     },
     {
       "id": "EV-12",
       "section": "B. Incoming contracts (US-2 to US-7, US-11)",
       "title": "Harrington bundle (MSA, BAA, NDA, notes)",
-      "pass": true,
-      "detail": "HOLD + compliance alert · found notes:data_movement, bundle:sub-baa:ortiz, bundle:sub-baa:pvt-ltd, gate:insurance, playbook:ld, playbook:liability, playbook:indemnity, playbook:ip"
+      "pass": false,
+      "detail": "missing playbook:ip"
     },
     {
       "id": "EV-13",
       "section": "B. Incoming contracts (US-2 to US-7, US-11)",
       "title": "Daniel Ortiz ICA + NDA (AtliQ paper)",
       "pass": false,
-      "detail": "missing flowdown:data; missing flowdown:ip; flagged playbook:liability (medium)"
+      "detail": "flagged playbook:termination (medium)"
     },
     {
       "id": "EV-15",
@@ -132,7 +132,7 @@
       "section": "B. Incoming contracts (US-2 to US-7, US-11)",
       "title": "TravelHub (negative test)",
       "pass": true,
-      "detail": "SEND BACK · found nothing to find · clean on conflict:orbit-msa"
+      "detail": "HOLD · found nothing to find · clean on conflict:orbit-msa"
     },
     {
       "id": "EV-R5",
@@ -222,22 +222,22 @@
       "id": "EV-V1",
       "section": "C. Version pairs (US-7 · FR-17, FR-18) (synthetic, to be created)",
       "title": "TravelHub: entity corrected to Pvt Ltd, invoicing aligned",
-      "pass": true,
-      "detail": "resolved gate:entity, gate:invoicing_entity, playbook:data_protection, playbook:indemnity, playbook:liability · still open 2 · new none · SIGN AFTER CHANGES"
+      "pass": null,
+      "detail": "skipped (--no-versions)"
     },
     {
       "id": "EV-V2",
       "section": "C. Version pairs (US-7 · FR-17, FR-18) (synthetic, to be created)",
       "title": "Rheinwerk: Annex 3 DPA added",
-      "pass": true,
-      "detail": "resolved gate:annex:annex-3 · still open 7 · new playbook:data_protection · HOLD"
+      "pass": null,
+      "detail": "skipped (--no-versions)"
     },
     {
       "id": "EV-V3",
       "section": "C. Version pairs (US-7 · FR-17, FR-18) (synthetic, to be created)",
       "title": "Harrington: sub-BAA for Daniel Ortiz added",
-      "pass": true,
-      "detail": "resolved bundle:sub-baa:ortiz · still open 14 · new none · HOLD"
+      "pass": null,
+      "detail": "skipped (--no-versions)"
     },
     {
       "id": "EV-V4",
@@ -356,12 +356,12 @@
     {
       "name": "Citation validity (all quotes string-matched to source)",
       "pass": true,
-      "detail": "118/118"
+      "detail": "131/131"
     },
     {
       "name": "Guardrails: no breach/enforceable in system prose; never Reject",
       "pass": true,
-      "detail": "514 prose strings checked; 0 legal conclusions; 0 Reject recommendations"
+      "detail": "529 prose strings checked; 0 legal conclusions; 0 Reject recommendations"
     },
     {
       "name": "Verdict identical with and without similar-clauses panel",
@@ -371,7 +371,7 @@
     {
       "name": "NDA fast lane latency (<1 min)",
       "pass": null,
-      "detail": "finserve 15s · loopmart 365s"
+      "detail": "finserve 0s (cached) · loopmart 0s (cached)"
     },
     {
       "name": "Recall@3 on EV-P (≥80%)",

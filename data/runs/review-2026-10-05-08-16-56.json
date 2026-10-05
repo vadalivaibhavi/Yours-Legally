@@ -1,0 +1,22 @@
+{
+  "deals": [
+    "travelhub",
+    "rheinwerk",
+    "finserve",
+    "ortiz",
+    "marcus",
+    "kriti"
+  ],
+  "calls": 20,
+  "cached": 16,
+  "inTok": 61293,
+  "outTok": 71745,
+  "rows": [
+    "travelhub     HOLD                1B 2H 2M  329s  ",
+    "rheinwerk     HOLD                1B 2H 2M  171s  ",
+    "finserve      HOLD                1B 4H 2M  204s  ",
+    "ortiz         SIGN AFTER CHANGES  0B 2H 3M  93s  ",
+    "marcus        SIGN AFTER CHANGES  0B 3H 7M  89s  ",
+    "kriti         SIGN AFTER CHANGES  0B 8H 2M  90s  "
+  ]
+}

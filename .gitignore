@@ -16,3 +16,4 @@ data/state/
 next-env.d.ts
 node_modules/
 out/
+data/briefs/failed/
