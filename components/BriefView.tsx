@@ -1,12 +1,14 @@
 import Link from "next/link";
-import { acceptAllMedium, addMissed, answerFollowUp, closeAlert, confirmFact, recheckDeal, recordDecision } from "@/app/deal/actions";
+import { acceptAllMedium, addMissed, clearDecision, closeAlert, confirmFact, recheckDeal, recordDecision, removeMissed, undoConfirmation, undoFollowUp, undoReaction } from "@/app/deal/actions";
+import { FollowUpQuestion, ResolveAlertForm, SaveButton } from "@/components/BriefControls";
 import { FindingCard, SimilarDetails } from "@/components/FindingCard";
-import { EvidenceField, TextInput } from "@/components/Fields";
+import { TextInput } from "@/components/Fields";
 import { EVIDENCE_TYPES, LIMITS } from "@/lib/limits";
-import { Chip, DueBadge, Quote, Section, VerdictBadge } from "@/components/ui";
+import { Chip, DecisionBadge, DueBadge, Quote, Section, VerdictBadge } from "@/components/ui";
 import { briefVersion, briefVersions, getDeal } from "@/lib/deals";
-import { fmtDate } from "@/lib/format";
-import type { Finding, SimilarPanel } from "@/lib/review/types";
+import { fmtDate, fmtDateTime } from "@/lib/format";
+import type { Brief, Finding, SimilarPanel, Verdict } from "@/lib/review/types";
+import type { AuditEvent } from "@/lib/store";
 import { readState } from "@/lib/store";
 
 const PANEL_FOR: Record<string, string> = {
@@ -45,6 +47,10 @@ export async function BriefView({ dealId: id, version }: { dealId: string; versi
   const followUp = (s.followUps[id] ?? []).find((x) => x.version === b.version);
   const missed = (s.missed[id] ?? []).filter((m) => m.version === b.version);
   const dismissed = versions.find((x) => x.version === b.version)!.findings.filter((f) => reactions[f.key]?.reaction === "disagree");
+  const timeline = buildTimeline(versions, s.audit.filter((a) => a.dealId === id));
+  // Review progress: every reaction is saved as it's made, so partial work survives leaving the page.
+  const reactable = versions.find((x) => x.version === b.version)!.findings.filter((f) => f.severity !== "ok" && f.severity !== "low");
+  const reacted = reactable.filter((f) => reactions[f.key]).length;
 
   const panelFor = (f: Finding): SimilarPanel | undefined => {
     const t = PANEL_FOR[f.topic];
@@ -95,6 +101,19 @@ export async function BriefView({ dealId: id, version }: { dealId: string; versi
               register {b.registerVersion} · playbook {b.playbookVersion} · prompts {b.promptVersion} · {b.models.join(", ")}
             </span>
           </div>
+          {isLatest && (
+            <p className="flex flex-wrap items-center gap-2 rounded bg-paper px-3 py-2 text-xs">
+              <b>Your review:</b> {reacted} of {reactable.length} findings reacted ·{" "}
+              {deal.decision ? (
+                <>
+                  decision recorded <DecisionBadge decision={deal.decision} />
+                </>
+              ) : (
+                "no decision yet"
+              )}
+              <span className="ml-auto text-muted">Every choice is saved as you make it, and can be changed.</span>
+            </p>
+          )}
           {deal.stale && <p className="rounded bg-change-soft p-2 text-sm text-change">The register changed since this brief ({fmtDate(deal.stale)}). Re-check to apply it.</p>}
         </div>
       </div>
@@ -118,32 +137,32 @@ export async function BriefView({ dealId: id, version }: { dealId: string; versi
             ))}
           </div>
           {b.complianceAlert.status === "resolved" ? (
-            <p className="text-sm font-medium text-sign">
-              {b.complianceAlert.resolution}
+            <div className="flex flex-wrap items-center gap-3 text-sm">
+              <span className="font-medium text-sign">✓ {b.complianceAlert.resolution}</span>
               {b.complianceAlert.evidenceFile && (
-                <a href={`/evidence/${b.complianceAlert.evidenceFile.stored}`} target="_blank" className="ml-2 underline">
+                <a href={`/evidence/${b.complianceAlert.evidenceFile.stored}`} target="_blank" className="underline">
                   📄 Open {b.complianceAlert.evidenceFile.name}
                 </a>
               )}
-            </p>
+              {isLatest && (
+                <form action={closeAlert}>
+                  <input type="hidden" name="dealId" value={id} />
+                  <input type="hidden" name="how" value="open" />
+                  <SaveButton className="text-xs text-muted underline">Reopen</SaveButton>
+                </form>
+              )}
+            </div>
           ) : (
-            isLatest && (
-              <div className="flex flex-wrap gap-2">
-                <form action={closeAlert} className="flex flex-wrap gap-2">
-                  <input type="hidden" name="dealId" value={id} />
-                  <input type="hidden" name="how" value="evidence" />
-                  <EvidenceField maxText={LIMITS.evidence} accept={EVIDENCE_TYPES.join(",")} />
-                  <button className="btn">Resolved: attach evidence</button>
-                </form>
-                <form action={closeAlert} className="flex flex-wrap gap-2">
-                  <input type="hidden" name="dealId" value={id} />
-                  <input type="hidden" name="how" value="note" />
-                  <TextInput name="note" placeholder="Your attested note" required max={LIMITS.note} className="w-80" />
-                  <button className="btn">Resolved off the record: add note</button>
-                </form>
-              </div>
-            )
+            isLatest && <ResolveAlertForm dealId={id} accept={EVIDENCE_TYPES.join(",")} />
           )}
+          {isLatest &&
+            b.complianceAlert.factIds.map((fid) => (
+              <form key={fid} action={undoConfirmation} className="text-xs text-muted">
+                <input type="hidden" name="dealId" value={id} />
+                <input type="hidden" name="factId" value={fid} />
+                Raised because you confirmed the fact from the deal notes. <SaveButton className="underline">Change</SaveButton>
+              </form>
+            ))}
         </section>
       )}
       {!b.complianceAlert && b.complianceCandidate && isLatest && (
@@ -209,7 +228,7 @@ export async function BriefView({ dealId: id, version }: { dealId: string; versi
                 </Link>
                 <form action={recheckDeal}>
                   <input type="hidden" name="dealId" value={id} />
-                  <button className="btn btn-primary">Input added → re-check</button>
+                  <SaveButton className="btn btn-primary" savedLabel="Re-checked ✓" pendingLabel="Re-checking… (1–3 min)">Input added → re-check</SaveButton>
                 </form>
                 <span className="text-xs text-muted">Issues v{b.version + 1}: New · Still open · Resolved; your reactions carry forward.</span>
               </div>
@@ -248,7 +267,7 @@ export async function BriefView({ dealId: id, version }: { dealId: string; versi
                 <input type="hidden" name="dealId" value={id} />
                 <input type="hidden" name="version" value={b.version} />
                 <input type="hidden" name="keys" value={medium.map((f) => f.key).join(",")} />
-                <button className="text-xs text-brand underline">Accept all (medium items only)</button>
+                <SaveButton className="text-xs text-brand underline">Accept all (medium items only)</SaveButton>
               </form>
             )
           }
@@ -304,52 +323,13 @@ export async function BriefView({ dealId: id, version }: { dealId: string; versi
         </Section>
       )}
 
-      {/* ---------------------------------------------------------------- contract facts card (FR-4) */}
-      <Section title="Contract facts">
-        <div className="space-y-3">
-          {b.documents.map((d) => (
-            <details key={d.docId} className="card p-4" open={b.documents.length === 1}>
-              <summary className="font-semibold">
-                {d.title} <span className="text-xs font-normal text-muted">· {d.docType} · {d.paper === "atliq" ? "AtliQ's paper (mirror mode)" : "their paper"}</span>
-              </summary>
-              <div className="mt-3 grid gap-4 lg:grid-cols-2">
-                <table className="text-sm">
-                  <tbody>
-                    {d.facts.map((f) => (
-                      <tr key={f.field} className="align-top">
-                        <td className="w-40 py-1 pr-3 text-muted">{f.label}</td>
-                        <td className="py-1">
-                          {f.value}
-                          {f.quote && (
-                            <details>
-                              <summary className="text-xs text-brand">{f.clauseRef ?? "source"}</summary>
-                              <blockquote className="quote mt-1 text-xs">{f.quote}</blockquote>
-                            </details>
-                          )}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-                <ul className="space-y-1 text-sm">
-                  {d.gate.map((g) => (
-                    <li key={g.rule} className="flex gap-2">
-                      <span className={g.pass === true ? "text-sign" : g.pass === false ? "text-hold" : "text-muted"}>{g.pass === true ? "✓" : g.pass === false ? "✗" : "–"}</span>
-                      <span>
-                        <b>{g.label}</b>: {g.detail}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </details>
-          ))}
-        </div>
-      </Section>
-
       {/* ---------------------------------------------------------------- other key clauses vs past */}
       {otherPanels.length > 0 && (
-        <Section title="Other key clauses vs what you've signed before">
+        <Section title="Clauses with no issue: how they compare with what you've signed">
+          <p className="text-sm text-muted">
+            These clauses raised nothing, so they aren&apos;t in the findings. Each is shown next to the closest clause of the same kind AtliQ has already signed, so you can see at a glance whether it matches
+            what you&apos;ve accepted before or quietly differs. Reference only: it never changes the verdict.
+          </p>
           <div className="space-y-2">
             {otherPanels.map((p) => (
               <SimilarDetails key={p.docId + p.clauseType} panel={p} />
@@ -362,12 +342,22 @@ export async function BriefView({ dealId: id, version }: { dealId: string; versi
       {b.counselPack && (
         <Section title="Counsel pack (preview: prepared for you to send)">
           <details className="card p-4 text-sm">
-            <summary className="font-medium">The exact question · {b.counselPack.documents.length} documents · {b.counselPack.clauses.length} clauses</summary>
+            <summary className="font-medium">
+              The exact question · {b.counselPack.documents.length} documents · {b.counselPack.clauses.length} clauses
+            </summary>
             <pre className="mt-3 whitespace-pre-wrap font-sans">{b.counselPack.question}</pre>
             <div className="label mt-3">Documents</div>
-            <ul className="list-disc pl-5">{b.counselPack.documents.map((d) => <li key={d}>{d}</li>)}</ul>
+            <ul className="list-disc pl-5">
+              {b.counselPack.documents.map((d) => (
+                <li key={d}>{d}</li>
+              ))}
+            </ul>
             <div className="label mt-3">Entity facts</div>
-            <ul className="list-disc pl-5">{b.counselPack.entityFacts.map((d) => <li key={d}>{d}</li>)}</ul>
+            <ul className="list-disc pl-5">
+              {b.counselPack.entityFacts.map((d) => (
+                <li key={d}>{d}</li>
+              ))}
+            </ul>
             <p className="mt-3 text-xs text-muted">Export is a static preview in the prototype. Yours Legally never sends anything to counsel.</p>
           </details>
         </Section>
@@ -377,56 +367,83 @@ export async function BriefView({ dealId: id, version }: { dealId: string; versi
         <Section title={`Dismissed by you · ${dismissed.length}`}>
           <div className="card divide-y divide-line text-sm">
             {dismissed.map((f) => (
-              <div key={f.key} className="px-4 py-2">
-                {f.title} <span className="text-muted">· {reactions[f.key]?.reason}</span>
-              </div>
+              <form key={f.key} action={undoReaction} className="flex flex-wrap items-center gap-2 px-4 py-2">
+                <input type="hidden" name="dealId" value={id} />
+                <input type="hidden" name="key" value={f.key} />
+                <span>{f.title}</span>
+                <span className="text-muted">· {reactions[f.key]?.reason ?? "no reason given"}</span>
+                {isLatest && <SaveButton className="ml-auto text-xs text-muted underline">Change</SaveButton>}
+              </form>
             ))}
           </div>
         </Section>
       )}
 
+      {/* ---------------------------------------------------------------- decision history (versions + decisions) */}
+      <Section title="Decision history">
+        <ol className="card space-y-3 p-5 text-sm">
+          {timeline.map((t, i) => (
+            <li key={i} className="grid grid-cols-[8.5rem_1fr] gap-3">
+              <span className="text-xs text-muted">{t.when}</span>
+              <span className="flex flex-wrap items-center gap-2">
+                {t.kind === "decision" ? (
+                  <DecisionBadge decision={t.label} />
+                ) : t.kind === "verdict" ? (
+                  <VerdictBadge verdict={t.label as Verdict} />
+                ) : (
+                  <Chip tone={t.kind === "cleared" ? "gray" : "warn"}>{t.label}</Chip>
+                )}
+                <span className={t.kind === "decision" ? "font-semibold" : "text-muted"}>{t.text}</span>
+              </span>
+            </li>
+          ))}
+        </ol>
+      </Section>
+
       {/* ---------------------------------------------------------------- decision & feedback panel (FR-12) */}
       {isLatest && (
         <Section title="What's your call?">
           <div className="card space-y-4 p-5">
+            {deal.decision ? (
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="text-sm">Your decision:</span>
+                <DecisionBadge decision={deal.decision} size="lg" />
+                <span className="text-xs text-muted">recorded {fmtDateTime(deal.decidedAt)}</span>
+                <form action={clearDecision}>
+                  <input type="hidden" name="dealId" value={id} />
+                  <SaveButton className="text-xs text-muted underline">Clear decision</SaveButton>
+                </form>
+              </div>
+            ) : (
+              <p className="text-sm text-muted">No decision recorded yet. Your reactions above save as you go; recording a decision finalises this review.</p>
+            )}
             <form action={recordDecision} className="flex flex-wrap gap-2">
               <input type="hidden" name="dealId" value={id} />
               <input type="hidden" name="version" value={b.version} />
               {DECISIONS.map((d) => (
-                <button key={d} name="decision" value={d} className={`btn ${deal.decision === d ? "btn-primary" : ""}`}>
+                <SaveButton key={d} name="decision" value={d} className={`btn ${deal.decision === d ? "btn-primary" : ""}`}>
                   {d}
-                </button>
+                </SaveButton>
               ))}
             </form>
             <p className="text-sm text-muted">
-              This simply records where things stand, so {deal.owner === "Karandeep" ? "the queue" : `${deal.owner} and the queue`} stay in step with you. Nothing is sent, signed or shared on your behalf; the replies and the conversations with{" "}
+              This simply records where things stand, so the sellers and the queue stay in step with you. Nothing is sent, signed or shared on your behalf; the replies and the conversations with{" "}
               {deal.counterparty} remain yours.
             </p>
-            {deal.decision && (
-              <p className="text-sm">
-                Recorded: <b>{deal.decision}</b> ({fmtDate(deal.decidedAt)})
-              </p>
-            )}
-            {deal.decision && !followUp && (
-              <form action={answerFollowUp} className="flex flex-wrap items-center gap-2 rounded-lg bg-paper p-3 text-sm">
-                <input type="hidden" name="dealId" value={id} />
-                <input type="hidden" name="version" value={b.version} />
-                <span>Did you need to open the full contract or other documents to decide?</span>
-                <button name="answer" value="no" className="btn">
-                  No
-                </button>
-                <select name="reason" defaultValue="">
-                  <option value="">Yes, because…</option>
-                  <option>Missing context</option>
-                  <option>Didn&apos;t trust a citation</option>
-                  <option>Brief unclear</option>
-                </select>
-                <button name="answer" value="yes" className="btn">
-                  Yes
-                </button>
-              </form>
-            )}
-            {followUp && <p className="text-xs text-muted">Follow-up recorded: {followUp.answer === "no" ? "decided from the brief" : `had to dig (${followUp.reason ?? "no reason"})`}.</p>}
+            {deal.decision &&
+              (followUp ? (
+                <form action={undoFollowUp} className="text-xs text-muted">
+                  <input type="hidden" name="dealId" value={id} />
+                  <input type="hidden" name="version" value={b.version} />
+                  Follow-up:{" "}
+                  {followUp.answer === "no"
+                    ? "decided from the brief"
+                    : `had to open the documents${followUp.reason ? ` (${followUp.reason})` : ""}${followUp.note ? `: ${followUp.note}` : ""}`}
+                  . <SaveButton className="underline">Change</SaveButton>
+                </form>
+              ) : (
+                <FollowUpQuestion dealId={id} version={b.version} />
+              ))}
             <details>
               <summary className="text-sm text-brand">+ Something the brief missed</summary>
               <form action={addMissed} className="mt-2 flex flex-wrap gap-2">
@@ -434,14 +451,16 @@ export async function BriefView({ dealId: id, version }: { dealId: string; versi
                 <input type="hidden" name="version" value={b.version} />
                 <TextInput name="clauseRef" placeholder="Clause (e.g. §7.2)" max={LIMITS.clauseRef} className="w-40" />
                 <TextInput name="note" placeholder="What did it miss?" required max={LIMITS.note} className="min-w-72 flex-1" />
-                <button className="btn">Add</button>
+                <SaveButton>Add</SaveButton>
               </form>
-              {missed.map((m) => (
-                <p key={m.at} className="mt-1 text-xs text-muted">
-                  Added: {m.clauseRef} {m.note} (becomes an eval regression case)
-                </p>
-              ))}
             </details>
+            {missed.map((m) => (
+              <form key={m.at} action={removeMissed} className="text-xs text-muted">
+                <input type="hidden" name="dealId" value={id} />
+                <input type="hidden" name="at" value={m.at} />
+                Added: {m.clauseRef} {m.note} (becomes an eval regression case) <SaveButton className="underline">Remove</SaveButton>
+              </form>
+            ))}
           </div>
         </Section>
       )}
@@ -458,23 +477,44 @@ function FactRow({ fact, dealId, state }: { fact: { id: string; statement: strin
       <Quote cite={fact.noteTitle}>{fact.quote}</Quote>
       <p className="text-xs text-muted">{fact.whyItMatters}</p>
       {state ? (
-        <Chip tone={state === "not_true" ? "gray" : "warn"}>{state === "confirmed" ? "Confirmed" : state === "not_true" ? "Marked not true" : "Edited"}</Chip>
+        <form action={undoConfirmation} className="flex items-center gap-2">
+          <input type="hidden" name="dealId" value={dealId} />
+          <input type="hidden" name="factId" value={fact.id} />
+          <Chip tone={state === "not_true" ? "gray" : "warn"}>{state === "confirmed" ? "Confirmed" : state === "not_true" ? "Marked not true" : "Edited"}</Chip>
+          <SaveButton className="text-xs text-muted underline">Change</SaveButton>
+        </form>
       ) : (
         <form action={confirmFact} className="flex flex-wrap gap-2">
           <input type="hidden" name="dealId" value={dealId} />
           <input type="hidden" name="factId" value={fact.id} />
-          <button name="status" value="confirmed" className="btn">
+          <SaveButton name="status" value="confirmed">
             Confirm
-          </button>
-          <button name="status" value="not_true" className="btn">
+          </SaveButton>
+          <SaveButton name="status" value="not_true">
             Not true
-          </button>
+          </SaveButton>
           <TextInput name="edit" placeholder="Correct it…" max={LIMITS.note} className="w-64" />
-          <button name="status" value="edited" className="btn">
+          <SaveButton name="status" value="edited">
             Edit
-          </button>
+          </SaveButton>
         </form>
       )}
     </div>
   );
+}
+
+type TimelineItem = { at: string; when: string; kind: "verdict" | "decision" | "cleared" | "alert"; label: string; text: string };
+
+/** How the verdict and Karandeep's decision changed, across brief versions and over time. */
+function buildTimeline(versions: Brief[], audit: AuditEvent[]): TimelineItem[] {
+  const items: TimelineItem[] = versions.map((v) => ({ at: v.createdAt, when: fmtDateTime(v.createdAt), kind: "verdict", label: v.verdict, text: `Brief v${v.version} issued (${v.trigger}): system verdict` }));
+  for (const a of audit) {
+    const d = (a.detail ?? {}) as Record<string, string>;
+    if (a.action === "decision") items.push({ at: a.at, when: fmtDateTime(a.at), kind: "decision", label: d.decision, text: `${a.user} decided${d.version ? ` on brief v${d.version}` : ""}` });
+    else if (a.action === "decision.clear") items.push({ at: a.at, when: fmtDateTime(a.at), kind: "cleared", label: "Decision cleared", text: `by ${a.user}` });
+    else if (a.action === "fact.confirmed") items.push({ at: a.at, when: fmtDateTime(a.at), kind: "alert", label: "Compliance event confirmed", text: "from the deal notes" });
+    else if (a.action === "alert.evidence" || a.action === "alert.note") items.push({ at: a.at, when: fmtDateTime(a.at), kind: "alert", label: "Compliance alert resolved", text: [d.file, d.note].filter(Boolean).join(": ") });
+    else if (a.action === "alert.open") items.push({ at: a.at, when: fmtDateTime(a.at), kind: "alert", label: "Compliance alert reopened", text: "" });
+  }
+  return items.sort((x, y) => x.at.localeCompare(y.at));
 }

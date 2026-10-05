@@ -1,5 +1,8 @@
 import Link from "next/link";
-import { DueBadge, Chip, VerdictBadge } from "@/components/ui";
+import { Chip, DecisionBadge, DueBadge, VerdictBadge } from "@/components/ui";
+import { fmtDateTime } from "@/lib/format";
+import { readState } from "@/lib/store";
+import type { EffectiveBrief } from "@/lib/review/types";
 import { visibleDeals } from "@/lib/access";
 import { allDeals, latestBrief } from "@/lib/deals";
 import { dueLabel } from "@/lib/format";
@@ -46,13 +49,14 @@ export default async function QueuePage(props: PageProps<"/">) {
               <th className="label px-4 py-2">Deal</th>
               <th className="label px-4 py-2">Requested by</th>
               <th className="label px-4 py-2">Deadline</th>
+              <th className="label px-4 py-2">{isK ? "Decision / system verdict" : "Decision"}</th>
               <th className="label px-4 py-2">Status</th>
-              {isK && <th className="label px-4 py-2">Latest verdict</th>}
             </tr>
           </thead>
           <tbody>
             {deals.map((d) => {
               const brief = isK ? latestBrief(d.id) : null;
+              const progress = isK && brief && !d.decision ? reviewProgress(d.id, brief) : null;
               return (
                 <tr key={d.id} className="border-b border-line last:border-0 hover:bg-paper/60">
                   <td className="px-4 py-3">
@@ -69,22 +73,46 @@ export default async function QueuePage(props: PageProps<"/">) {
                     <DueBadge deadline={d.deadline} />
                   </td>
                   <td className="px-4 py-3">
-                    {d.status === "waiting_for_input" ? <Chip tone="warn">Waiting for input{d.waitingOn ? `: ${d.waitingOn}` : ""}</Chip> : <Chip>{STATUS_TEXT[d.status]}</Chip>}
-                    {d.decision && <div className="mt-1 text-xs text-muted">Decision: {d.decision}</div>}
-                  </td>
-                  {isK && (
-                    <td className="px-4 py-3">
-                      {brief ? (
+                    {/* Karandeep's decision is the headline once he has made it; the system verdict stays visible, smaller. */}
+                    {d.decision ? (
+                      <div className="space-y-1">
+                        <DecisionBadge decision={d.decision} size="lg" />
+                        <div className="text-xs text-muted">
+                          Karandeep&apos;s decision{d.decidedAt ? `, ${fmtDateTime(d.decidedAt)}` : ""}
+                          {brief && (
+                            <>
+                              {" "}· system: <b>{brief.verdict}</b> (v{brief.version})
+                            </>
+                          )}
+                        </div>
+                      </div>
+                    ) : brief ? (
+                      <div className="space-y-1">
                         <span className="flex flex-wrap items-center gap-1.5">
                           <VerdictBadge verdict={brief.verdict} />
                           {brief.complianceAlert && brief.complianceAlert.status !== "resolved" && <Chip tone="bad">Compliance alert</Chip>}
-                          <span className="text-xs text-muted">v{brief.version}</span>
                         </span>
-                      ) : (
-                        <span className="text-xs text-muted">Not reviewed yet</span>
-                      )}
-                    </td>
-                  )}
+                        <div className="text-xs text-muted">System verdict, v{brief.version} · awaiting your decision</div>
+                      </div>
+                    ) : isK ? (
+                      <span className="text-xs text-muted">Not reviewed yet</span>
+                    ) : (
+                      <span className="text-xs text-muted">No decision yet</span>
+                    )}
+                  </td>
+                  <td className="px-4 py-3">
+                    {d.decision ? (
+                      <Chip tone="brand">Decided</Chip>
+                    ) : progress && progress.reacted > 0 ? (
+                      <Chip tone="warn">
+                        Review in progress · {progress.reacted}/{progress.total}
+                      </Chip>
+                    ) : d.status === "waiting_for_input" ? (
+                      <Chip tone="warn">Waiting for input{d.waitingOn ? `: ${d.waitingOn}` : ""}</Chip>
+                    ) : (
+                      <Chip>{STATUS_TEXT[d.status]}</Chip>
+                    )}
+                  </td>
                 </tr>
               );
             })}
@@ -98,4 +126,13 @@ export default async function QueuePage(props: PageProps<"/">) {
       )}
     </div>
   );
+}
+
+/** Findings Karandeep has reacted to on the latest brief (saved as he goes). */
+function reviewProgress(dealId: string, brief: EffectiveBrief) {
+  const reactions = readState().reactions[dealId] ?? {};
+  const items = brief.findings.filter((f) => f.severity !== "ok" && f.severity !== "low");
+  // Dismissed findings drop out of the effective brief but are still reviewed items.
+  const dismissed = Object.values(reactions).filter((r) => r.reaction === "disagree").length;
+  return { reacted: items.filter((f) => reactions[f.key]).length + dismissed, total: items.length + dismissed };
 }

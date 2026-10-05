@@ -16,7 +16,8 @@
     "review": "tsx scripts/review.ts",
     "eval": "tsx scripts/eval.ts",
     "data": "npm run ingest && npm run build:register && npm run build:index && npm run build:eval",
-    "cost": "tsx scripts/cost.ts"
+    "cost": "tsx scripts/cost.ts",
+    "demo:reset": "tsx scripts/resetDemo.ts"
   },
   "dependencies": {
     "next": "^16.3.8",

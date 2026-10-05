@@ -1,6 +1,6 @@
 # Eval results
 
-Run 2026-10-05 14:05 UTC · APP_TODAY 2026-10-04 · cases from `docs/Eval_Set.md` via `eval/cases.json`.
+Run 2026-10-05 14:34 UTC · APP_TODAY 2026-10-04 · cases from `docs/Eval_Set.md` via `eval/cases.json`.
 
 **42 passed · 4 failed · 4 skipped** (of 50 cases)
 

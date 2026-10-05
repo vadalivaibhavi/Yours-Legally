@@ -65,7 +65,7 @@ export type State = {
   alerts: Record<string, { status: "open" | "resolved"; how?: "evidence" | "note"; note?: string; evidence?: string; evidenceFile?: { name: string; stored: string; bytes: number }; at: string }>;
   blockerNotes: Record<string, Record<string, { note: string; at: string }>>;
   missed: Record<string, { clauseRef: string; note: string; at: string; version: number }[]>;
-  followUps: Record<string, { version: number; answer: string; reason?: string; at: string }[]>;
+  followUps: Record<string, { version: number; answer: string; reason?: string; note?: string; at: string }[]>;
   sellerChecks: Record<string, SellerCheck[]>;
   linkChoices: Record<string, { dealId: string; reason: string; at: string }>;
   audit: AuditEvent[];
@@ -121,13 +121,39 @@ export function mutate(fn: (s: State) => void, audit?: Omit<AuditEvent, "at">): 
     return s;
   }
   const p = file();
+  backupIfDue(p);
   const tmp = p + ".tmp";
   fs.writeFileSync(tmp, JSON.stringify(s, null, 1));
   fs.renameSync(tmp, p);
   return s;
 }
 
+/** Rolling safety copy (every 10 minutes of activity, last 20 kept): reviewers' work is never lost to a bad write or reset. */
+function backupIfDue(p: string) {
+  try {
+    if (!fs.existsSync(p)) return;
+    const dir = path.join(path.dirname(p), "..", "state-backups");
+    fs.mkdirSync(dir, { recursive: true });
+    const existing = fs.readdirSync(dir).filter((f) => f.startsWith("state-")).sort();
+    const last = existing.length ? fs.statSync(path.join(dir, existing[existing.length - 1])).mtimeMs : 0;
+    if (Date.now() - last < 10 * 60_000) return;
+    fs.copyFileSync(p, path.join(dir, `state-${new Date().toISOString().replace(/[:.]/g, "-")}.json`));
+    for (const old of existing.slice(0, Math.max(0, existing.length - 19))) fs.unlinkSync(path.join(dir, old));
+  } catch {
+    /* backups are best-effort */
+  }
+}
+
+/** Explicit demo reset (npm run demo:reset): always backs up the current state first. */
 export function resetState() {
-  if (memoryState) memoryState = structuredClone(EMPTY);
-  else if (fs.existsSync(file())) fs.unlinkSync(file());
+  if (memoryState) {
+    memoryState = structuredClone(EMPTY);
+    return;
+  }
+  const p = file();
+  if (!fs.existsSync(p)) return;
+  const dir = path.join(path.dirname(p), "..", "state-backups");
+  fs.mkdirSync(dir, { recursive: true });
+  fs.copyFileSync(p, path.join(dir, `state-before-reset-${new Date().toISOString().replace(/[:.]/g, "-")}.json`));
+  fs.unlinkSync(p);
 }

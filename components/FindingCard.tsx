@@ -3,6 +3,7 @@ import { noteOnBlocker, reactToFinding, undoReaction } from "@/app/deal/actions"
 import { Chip, clean, IntentBadge, Quote, SeverityBadge } from "@/components/ui";
 import { Popover, TextArea, TextInput } from "@/components/Fields";
 import { PrecedentList, PrecedentRow } from "@/components/PrecedentRow";
+import { SaveButton } from "@/components/BriefControls";
 import { LIMITS } from "@/lib/limits";
 import { fmtDate } from "@/lib/format";
 import type { Finding, SimilarPanel } from "@/lib/review/types";
@@ -116,11 +117,13 @@ export function FindingCard({
           )}
           {f.precedents && f.precedents.length > 0 && (
             <div>
-              <div className="label mb-1">Your precedent</div>
+              <div className="label">Your position: how you decided this before</div>
+              <p className="text-xs text-muted">From your approved playbook: the deals that set (or broke) your rule on this point.</p>
               <PrecedentList>
                 {f.precedents.map((p) => (
                   <PrecedentRow key={p.docId + p.clauseRef} label={p.label} client={p.counterparty} clauseRef={p.clauseRef}>
                     <p className="text-muted">{p.note}</p>
+                    {similar?.hits.find((h) => h.docId === p.docId)?.differs && <p>{similar.hits.find((h) => h.docId === p.docId)!.differs}</p>}
                   </PrecedentRow>
                 ))}
               </PrecedentList>
@@ -129,7 +132,7 @@ export function FindingCard({
         </div>
       )}
 
-      {similar && <SimilarDetails panel={similar} />}
+      {similar && similar.hits.some((h) => !(f.precedents ?? []).some((p) => p.docId === h.docId)) && <SimilarDetails panel={similar} exclude={(f.precedents ?? []).map((p) => p.docId)} />}
 
       {!readOnly && (
         <footer className="flex flex-wrap items-center gap-2 border-t border-line pt-3">
@@ -142,14 +145,14 @@ export function FindingCard({
               <form action={undoReaction}>
                 <input type="hidden" name="dealId" value={dealId} />
                 <input type="hidden" name="key" value={f.key} />
-                <button className="text-xs text-muted underline">Change</button>
+                <SaveButton className="text-xs text-muted underline">Change</SaveButton>
               </form>
             </>
           ) : (
             <>
               <form action={reactToFinding}>
                 <Hidden dealId={dealId} f={f} version={version} reaction="agree" />
-                <button className="btn">✓ Agree</button>
+                <SaveButton>✓ Agree</SaveButton>
               </form>
               <Popover label="✗ Disagree">
                 <form action={reactToFinding} className="space-y-2">
@@ -163,7 +166,7 @@ export function FindingCard({
                     ))}
                   </select>
                   <TextInput name="note" placeholder="Note (optional)" max={LIMITS.note} />
-                  <button className="btn btn-primary w-full">Record</button>
+                  <SaveButton className="btn btn-primary w-full">Record</SaveButton>
                 </form>
               </Popover>
               <Popover label="⇅ Severity" width="w-56">
@@ -174,7 +177,7 @@ export function FindingCard({
                       <option key={s}>{s}</option>
                     ))}
                   </select>
-                  <button className="btn btn-primary w-full">Change</button>
+                  <SaveButton className="btn btn-primary w-full">Change</SaveButton>
                 </form>
               </Popover>
             </>
@@ -187,7 +190,7 @@ export function FindingCard({
                   <input type="hidden" name="key" value={f.key} />
                   <TextArea name="note" defaultValue={blockerNote?.note} placeholder="e.g. Al Noor agreed verbally to waive" rows={3} max={LIMITS.note} required />
                   <p className="text-xs text-muted">Shown as context. The blocker stays open until a written waiver or amendment is uploaded.</p>
-                  <button className="btn btn-primary w-full">Save note</button>
+                  <SaveButton className="btn btn-primary w-full">Save note</SaveButton>
                 </form>
               </Popover>
             </div>
@@ -212,18 +215,26 @@ function Hidden({ dealId, f, version, reaction }: { dealId: string; f: Finding; 
 }
 
 /** FR-22: reference only. Intent label on every hit; one-offs and accidents are marked "not a precedent". */
-export function SimilarDetails({ panel, open = false }: { panel: SimilarPanel; open?: boolean }) {
+export function SimilarDetails({ panel, open = false, exclude = [] }: { panel: SimilarPanel; open?: boolean; exclude?: string[] }) {
+  // Under a finding, contracts already listed as precedents aren't repeated: this list adds the other close wording.
+  const hits = panel.hits.filter((h) => !exclude.includes(h.docId));
+  const name = CLAUSE_NAME[panel.clauseType] ?? panel.clauseType.replace("_", " ");
   return (
     <details open={open} className="rounded-lg border border-line bg-paper/60 p-3">
       <summary className="text-sm font-medium text-brand">
-        Similar past clauses ({panel.hits.length}) · {panel.clauseType.replace("_", " ")} {panel.clauseRef}
+        {exclude.length ? `More signed clauses with similar wording (${hits.length})` : `${name} (${panel.clauseRef}): closest wording you've signed (${hits.length})`}
       </summary>
-      <p className="mt-1 text-xs text-muted">Reference only: never changes the severity or the verdict. Signed contracts only.</p>
-      {panel.hits.length === 0 ? (
-        <p className="mt-2 text-sm text-muted">No similar clause signed before.</p>
+      <p className="mt-1 text-xs text-muted">
+        {exclude.length
+          ? "Other signed clauses whose wording is closest to this one, beyond the precedents above. "
+          : "The signed clauses whose wording is closest to this one. "}
+        Reference only: never changes the severity or the verdict.
+      </p>
+      {hits.length === 0 ? (
+        <p className="mt-2 text-sm text-muted">{panel.hits.length ? "The closest signed clauses are the precedents shown above." : "No similar clause signed before."}</p>
       ) : (
         <PrecedentList>
-          {panel.hits.map((h) => (
+          {hits.map((h) => (
             <PrecedentRow key={h.docId + h.clauseNo} label={h.label} client={h.counterparty} clauseRef={`§${h.clauseNo}`} date={h.date}>
               {h.differs && <p>{h.differs}</p>}
               {h.labelNote && <p className="text-muted">{h.labelNote}</p>}
@@ -239,3 +250,16 @@ export function SimilarDetails({ panel, open = false }: { panel: SimilarPanel; o
     </details>
   );
 }
+
+const CLAUSE_NAME: Record<string, string> = {
+  ld: "Delay penalties",
+  liability: "Liability cap",
+  indemnity: "Indemnity",
+  payment: "Payment",
+  ip: "Intellectual property",
+  confidentiality: "Confidentiality",
+  non_compete: "Restrictions",
+  non_solicit: "Non-solicit",
+  governing_law: "Governing law",
+  data_protection: "Data protection",
+};

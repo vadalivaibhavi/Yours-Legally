@@ -117,12 +117,14 @@ export async function confirmFact(form: FormData) {
 export async function closeAlert(form: FormData) {
   const u = await requireKarandeep();
   const dealId = str(form, "dealId");
-  const how = str(form, "how") as "evidence" | "note" | "open";
-  const note = field(form, "note", how === "evidence" ? LIMITS.evidence : LIMITS.note, how === "evidence" ? "Evidence reference" : "Note");
-  // Evidence can be a reference, an attached file, or both (FR-21 "Resolved: attach evidence").
+  // One "Resolve" control: an attached file makes it "resolved with evidence", text alone an attested note (FR-21).
+  const requested = str(form, "how") as "resolve" | "evidence" | "note" | "open";
   const file = form.get("file");
+  const hasFile = file instanceof File && file.size > 0;
+  const how: "evidence" | "note" | "open" = requested === "open" ? "open" : requested === "resolve" ? (hasFile ? "evidence" : "note") : requested;
+  const note = field(form, "note", LIMITS.note, "Note");
   let evidenceFile: { name: string; stored: string; bytes: number } | undefined;
-  if (how === "evidence" && file instanceof File && file.size > 0) {
+  if (how === "evidence" && hasFile) {
     const ext = path.extname(file.name).toLowerCase();
     if (!EVIDENCE_TYPES.includes(ext)) throw new Error(`Evidence files can be ${EVIDENCE_TYPES.join(", ")}.`);
     if (file.size > LIMITS.evidenceBytes) throw new Error(`That file is ${Math.round(file.size / 1024)} KB; the limit is ${LIMITS.evidenceBytes / 1_000_000} MB.`);
@@ -161,11 +163,17 @@ export async function recordDecision(form: FormData) {
 export async function answerFollowUp(form: FormData) {
   const u = await requireKarandeep();
   const dealId = str(form, "dealId");
-  const entry = { version: Number(str(form, "version")), answer: str(form, "answer"), reason: str(form, "reason") || undefined, at: now() };
+  const entry = {
+    version: Number(str(form, "version")),
+    answer: str(form, "answer"),
+    reason: field(form, "reason", LIMITS.name, "Reason") || undefined,
+    note: field(form, "note", LIMITS.note, "Note") || undefined,
+    at: now(),
+  };
   mutate(
     (s) => {
-      s.followUps[dealId] ??= [];
-      s.followUps[dealId].push(entry);
+      // One answer per brief version: a new answer replaces the old one.
+      s.followUps[dealId] = [...(s.followUps[dealId] ?? []).filter((x) => x.version !== entry.version), entry];
     },
     { user: u.name, dealId, action: "brief.followup", detail: entry },
   );
@@ -274,4 +282,46 @@ export async function runDealCheck(_prev: DealCheckState, form: FormData): Promi
   );
   revalidatePath(`/deal/${dealId}`);
   return { ok: true };
+}
+
+// ---------------------------------------------------------------- undo (every choice in the brief can be changed)
+export async function undoConfirmation(form: FormData) {
+  const u = await requireKarandeep();
+  const dealId = str(form, "dealId");
+  const factId = str(form, "factId");
+  mutate((s) => void delete s.confirmations[dealId]?.[factId], { user: u.name, dealId, action: "fact.undo", detail: { factId } });
+  revalidatePath(`/deal/${dealId}`, "layout");
+}
+
+export async function undoFollowUp(form: FormData) {
+  const u = await requireKarandeep();
+  const dealId = str(form, "dealId");
+  const version = Number(str(form, "version"));
+  mutate((s) => void (s.followUps[dealId] = (s.followUps[dealId] ?? []).filter((x) => x.version !== version)), { user: u.name, dealId, action: "brief.followup.undo", detail: { version } });
+  revalidatePath(`/deal/${dealId}`, "layout");
+}
+
+export async function removeMissed(form: FormData) {
+  const u = await requireKarandeep();
+  const dealId = str(form, "dealId");
+  const at = str(form, "at");
+  mutate((s) => void (s.missed[dealId] = (s.missed[dealId] ?? []).filter((m) => m.at !== at)), { user: u.name, dealId, action: "brief.missed.remove", detail: { at } });
+  revalidatePath(`/deal/${dealId}`, "layout");
+}
+
+export async function clearDecision(form: FormData) {
+  const u = await requireKarandeep();
+  const dealId = str(form, "dealId");
+  mutate(
+    (s) => {
+      const o = s.dealOverrides[dealId];
+      if (o) {
+        o.decision = undefined;
+        o.decidedAt = undefined;
+        o.status = undefined;
+      }
+    },
+    { user: u.name, dealId, action: "decision.clear" },
+  );
+  revalidatePath("/", "layout");
 }

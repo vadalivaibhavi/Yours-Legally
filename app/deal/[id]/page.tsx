@@ -4,6 +4,8 @@ import { Chip, DueBadge, Section, VerdictBadge } from "@/components/ui";
 import { canViewBrief, canViewDeal } from "@/lib/access";
 import { briefVersion, briefVersions, dealContextDocuments, dealDocuments, dealNotes, getDeal, latestBrief } from "@/lib/deals";
 import { BriefView } from "@/components/BriefView";
+import { DocumentFacts } from "@/components/DocumentFacts";
+import { SaveButton } from "@/components/BriefControls";
 import { Collapsible } from "@/components/Fields";
 import { fmtDate, usd } from "@/lib/format";
 import { currentUser } from "@/lib/session";
@@ -33,6 +35,7 @@ export default async function DealPage(props: PageProps<"/deal/[id]">) {
   const sp = await props.searchParams;
   const shown = isK ? (sp.v ? briefVersion(deal.id, Number(sp.v)) : null) ?? latest : null;
   const openBrief = sp.open === "1" || !!sp.v;
+  const factsFor = (docId: string) => (shown ?? latest)?.documents.find((x) => x.docId === docId);
 
   return (
     <div className="space-y-6">
@@ -95,7 +98,9 @@ export default async function DealPage(props: PageProps<"/deal/[id]">) {
             {isK && (
               <form action={recheckDeal}>
                 <input type="hidden" name="dealId" value={deal.id} />
-                <button className="btn btn-primary !py-1 !text-xs">Re-check now</button>
+                <SaveButton className="btn btn-primary !py-1 !text-xs" pendingLabel="Re-checking… (1–3 min)" savedLabel="Re-checked ✓">
+                  Re-check now
+                </SaveButton>
               </form>
             )}
           </div>
@@ -103,14 +108,19 @@ export default async function DealPage(props: PageProps<"/deal/[id]">) {
       >
         <div className="space-y-2">
           {docs.map((d) => (
-            <details key={d.id} className="card p-4">
+            <details key={d.id} className="card p-4" open={isK && docs.length === 1}>
               <summary className="flex flex-wrap items-center gap-2">
                 <span className="font-semibold">{d.title}</span>
                 <Chip tone="brand">{d.docType}</Chip>
                 <Chip>{d.paper === "atliq" ? "AtliQ's paper" : "Their paper"}</Chip>
                 <span className="text-xs text-muted">received {fmtDate(d.date)}</span>
               </summary>
-              <pre className="mt-3 max-h-[28rem] overflow-auto whitespace-pre-wrap rounded bg-paper p-3 font-serif text-sm">{d.text}</pre>
+              {/* Contract facts live with their document (FR-4): what was extracted, from which clause, and the rule checks. */}
+              {isK && factsFor(d.id) && <DocumentFacts review={factsFor(d.id)!} />}
+              <details className="mt-3">
+                <summary className="text-sm font-medium text-brand">Full text</summary>
+                <pre className="mt-2 max-h-[28rem] overflow-auto whitespace-pre-wrap rounded bg-paper p-3 font-serif text-sm">{d.text}</pre>
+              </details>
             </details>
           ))}
           {context.map((d) => (

@@ -18,6 +18,13 @@ export function dueLabel(deadline?: string): { text: string; tone: "overdue" | "
   return { text: `Due in ${days} day${days === 1 ? "" : "s"}`, tone: days <= 3 ? "soon" : "ok", days };
 }
 
+/** "5 Oct, 19:42": real clock time of an action (decisions, uploads), as opposed to the fixed demo date. */
+export function fmtDateTime(iso?: string | null): string {
+  if (!iso) return "—";
+  const d = new Date(iso);
+  return d.toLocaleString("en-GB", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
+}
+
 export function usd(n?: number | null): string {
   if (n === undefined || n === null) return "—";
   return "$" + Math.round(n).toLocaleString("en-US");

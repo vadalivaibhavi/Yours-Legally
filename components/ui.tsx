@@ -17,6 +17,19 @@ export function VerdictBadge({ verdict, size = "sm" }: { verdict: Verdict; size?
   );
 }
 
+/** Karandeep's own decision: shown as strongly as (or more than) the system verdict. */
+const DECISION_STYLE: Record<string, string> = {
+  Sign: "bg-sign text-white",
+  "Sign after changes": "bg-change text-white",
+  Hold: "bg-hold text-white",
+  "Send back": "bg-sendback text-white",
+  Reject: "bg-ink text-white",
+  "Escalate to counsel": "bg-brand text-white",
+};
+export function DecisionBadge({ decision, size = "sm" }: { decision: string; size?: "sm" | "lg" }) {
+  return <span className={`chip uppercase ${DECISION_STYLE[decision] ?? "bg-brand text-white"} ${size === "lg" ? "!text-base !px-3 !py-1" : ""}`}>{decision}</span>;
+}
+
 export function DueBadge({ deadline }: { deadline?: string }) {
   const d = dueLabel(deadline);
   const cls =
