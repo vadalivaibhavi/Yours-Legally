@@ -7,10 +7,11 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { canDecide, canViewDeal } from "@/lib/access";
-import { allDeals, getDeal } from "@/lib/deals";
+import { allDeals, dealDocuments, getDeal, SIGN_DECISIONS } from "@/lib/deals";
 import { QUOTA_MESSAGE } from "@/lib/limits";
 import { isQuotaExhausted } from "@/lib/llm";
 import { registerEntry } from "@/lib/register";
+import { extractCommitments } from "@/lib/registerExtract";
 import { nextVersion, reviewDeal } from "@/lib/review/pipeline";
 import { currentUser } from "@/lib/session";
 import { runSellerCheck } from "@/lib/seller";
@@ -378,4 +379,46 @@ export async function reopenReview(form: FormData) {
   const dealId = str(form, "dealId");
   mutate((s) => void Object.assign(s.dealOverrides[dealId] ?? (s.dealOverrides[dealId] = {}), { finalised: false, finalisedAt: undefined, status: undefined }), { user: u.name, dealId, action: "review.reopened" });
   revalidatePath("/", "layout");
+}
+
+// ---------------------------------------------------------------- store a signed deal in the contract register (FR-1)
+/**
+ * Karandeep decided to sign: the deal's contract text goes into the commitments register (same extractor
+ * as the original signed set, entries unverified until he verifies them) and the deal leaves the queue.
+ * Nothing changes unless every document was read: a failed or quota-stopped call keeps the deal in the queue.
+ */
+export async function storeInRegister(form: FormData) {
+  const u = await requireKarandeep();
+  const deal = getDeal(str(form, "dealId"));
+  if (!deal || !SIGN_DECISIONS.includes(deal.decision ?? "")) throw new Error("Only a deal Karandeep decided to sign can be stored");
+  const docs = dealDocuments(deal).filter((d, i, all) => all.findIndex((x) => x.text.trim() === d.text.trim()) === i);
+  let results: { doc: (typeof docs)[number]; r: Awaited<ReturnType<typeof extractCommitments>> }[];
+  try {
+    results = [];
+    for (const doc of docs) results.push({ doc, r: await extractCommitments(doc) }); // one at a time (free tier)
+  } catch (e) {
+    if (!isQuotaExhausted(e)) throw e;
+    redirect(`/?storeFailed=${deal.id}&quota=1`);
+  }
+  if (results.some((x) => !x.r.ok)) redirect(`/?storeFailed=${deal.id}`);
+  const ok = results.flatMap((x) => (x.r.ok ? [{ doc: x.doc, ...x.r }] : []));
+  const ids = new Set(docs.map((d) => d.id));
+  const added = ok.reduce((n, x) => n + x.entries.length, 0);
+  mutate(
+    (s) => {
+      s.extraRegisterEntries = [...s.extraRegisterEntries.filter((e) => !ids.has(e.sourceDocId)), ...ok.flatMap((x) => x.entries)];
+      s.extraRegisterDocuments = [
+        ...s.extraRegisterDocuments.filter((c) => !ids.has(c.docId)),
+        ...ok.map((x) => ({ docId: x.doc.id, counterparty: x.doc.counterparty, entryCount: x.entries.length, illegible: x.ex.illegible, referencedButMissing: x.ex.referencedButMissing })),
+      ];
+      s.registerRevision += 1;
+      const o = (s.dealOverrides[deal.id] ??= {});
+      Object.assign(o, { status: "signed", signedAt: now(), staleSince: undefined });
+      // New commitments change what other open deals can promise: flag them for re-check (FR-19).
+      for (const d of allDeals()) if (d.id !== deal.id && d.status !== "signed") s.dealOverrides[d.id] = { ...(s.dealOverrides[d.id] ?? {}), staleSince: now() };
+    },
+    { user: u.name, dealId: deal.id, action: "deal.stored", detail: { documents: [...ids], entries: added } },
+  );
+  revalidatePath("/", "layout");
+  redirect(`/?stored=${deal.id}&n=${added}`);
 }

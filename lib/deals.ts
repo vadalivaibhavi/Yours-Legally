@@ -12,6 +12,9 @@ import type { Deal, Document, Note } from "./types";
 
 export type DealView = Deal & { decision?: string; decidedAt?: string; finalised?: boolean; finalisedAt?: string; stale?: string; signedAt?: string; signedDocId?: string };
 
+/** Decisions that mean "we are signing": a deal with one of these can be stored in the contract register. */
+export const SIGN_DECISIONS = ["Sign", "Sign after changes"];
+
 export function allDocuments(): Document[] {
   return [...baseDocuments(), ...readState().uploadedDocuments];
 }

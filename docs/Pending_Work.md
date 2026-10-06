@@ -45,7 +45,7 @@ The EV-V synthetic documents' header line changed with the product rename (5 Oct
 | "Re-check now" on an unchanged deal | ≈0–1 (everything cached; only missing comparison lines call the model) | |
 | Upload a completely new contract | 1 extract + a full review (≈6–8) + clause embeddings | new deal in the queue |
 | Commitments register (verify, edit, reject) | 0 | rules + state only |
-| Upload a signed copy (deal → Signed, commitments into the register) | 1 extract + 1 register extraction (strong) | the deal leaves the queue; its commitments show on the deal and in the register (unverified) |
+| Store in contract register (queue button after a Sign decision) | 1 register extraction (strong) per distinct document | the deal leaves the queue; its commitments appear in the register (unverified) |
 | Seller deal check | 0, or 1 if "Anything else" free text is filled | |
 
 On the free tier that is well within a day's quota for one round of tests. If a step hits the daily quota, the page now says so and nothing is lost: retry the next day.

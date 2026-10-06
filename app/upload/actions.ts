@@ -8,7 +8,6 @@ import { redirect } from "next/navigation";
 import { allDeals, allDocuments, dealDocuments, getDeal } from "@/lib/deals";
 import { proposeLink, type LinkProposal } from "@/lib/linking";
 import { isQuotaExhausted } from "@/lib/llm";
-import { extractCommitments } from "@/lib/registerExtract";
 import { extractReferences } from "@/lib/references";
 import { extractDocument } from "@/lib/review/extract";
 import { nextVersion, reviewDeal } from "@/lib/review/pipeline";
@@ -31,6 +30,8 @@ export async function uploadDocument(form: FormData) {
   text = text.replace(/\r\n/g, "\n").trim();
   if (text.length < 200) throw new Error("That document is too short to review.");
   if (text.length > LIMITS.contract) throw new Error(`That contract is ${text.length.toLocaleString()} characters; the limit is ${LIMITS.contract.toLocaleString()}.`);
+  const into = getDeal(String(form.get("deal") ?? ""));
+  if (into && dealDocuments(into).some((d) => d.text.trim() === text)) redirect(`/deal/${into.id}?duplicate=1`);
 
   let x;
   try {
@@ -56,12 +57,10 @@ export async function uploadDocument(form: FormData) {
     ocr: false,
     references: extractReferences(text),
   };
-  // A signed, final copy closes the deal and feeds the register instead of getting a decision brief.
-  if (form.get("signed") === "on") Object.assign(doc, { kind: "signed", title: `${x.data.counterparty}: ${x.data.docType} (signed copy, uploaded ${name})` });
   const chosen = String(form.get("deal") ?? "");
   // A new version of a document already in the chosen deal takes its place; the old one leaves the deal.
   const replaced = chosen ? dealDocuments(getDeal(chosen)!).find((d) => d.id === String(form.get("replaces") ?? "")) : undefined;
-  if (replaced) Object.assign(doc, { replaces: replaced.id, title: `${replaced.title.replace(/\s*\((draft|v\d+)[^)]*\)/i, "")} (${doc.kind === "signed" ? "signed copy" : "revised"}, uploaded ${name})` });
+  if (replaced) Object.assign(doc, { replaces: replaced.id, title: `${replaced.title.replace(/\s*\((draft|v\d+)[^)]*\)/i, "")} (revised, uploaded ${name})` });
   const proposal = proposeLink({ counterparty: doc.counterparty, docType: doc.docType, text, docId: id }, allDeals(), allDocuments(), chosen || undefined);
   mutate((s) => {
     s.uploadedDocuments.push(doc);
@@ -122,11 +121,6 @@ async function attach(doc: Document, dealId: string, proposal: LinkProposal, by:
   mutate((s) => {
     s.linkChoices[doc.id] = { dealId: target, reason: `${proposal.mode}: ${proposal.reason}${proposal.note ? ` · note: ${proposal.note.text}` : ""}`, at: new Date().toISOString() };
   });
-  if (doc.kind === "signed") {
-    await recordSigned(target, doc, by);
-    revalidatePath("/", "layout");
-    redirect(`/deal/${target}?signed=1`);
-  }
   // New input → automatic re-check: a new brief version (FR-17).
   const version = nextVersion(target);
   let brief;
@@ -144,54 +138,4 @@ async function attach(doc: Document, dealId: string, proposal: LinkProposal, by:
   revalidatePath("/", "layout");
   const u = await currentUser();
   redirect(u.role === "karandeep" ? `/deal/${target}?v=${version}&open=1#brief` : `/deal/${target}`);
-}
-
-/**
- * The signed copy is the record: the deal is Signed (whatever the brief or a draft decision said) and the
- * commitments in the signed text go into the register, so every later review and seller check uses them.
- */
-async function recordSigned(dealId: string, doc: Document, by: string) {
-  mutate(
-    (s) => {
-      const o = (s.dealOverrides[dealId] ??= {});
-      Object.assign(o, { status: "signed", signedAt: new Date().toISOString(), signedDocId: doc.id, staleSince: undefined });
-    },
-    { user: by, dealId, action: "deal.signed", detail: { docId: doc.id } },
-  );
-  await addCommitments(dealId, doc, by);
-}
-
-/** Extract the signed copy's commitments into the register. On quota or a failed call the deal stays Signed and the retry button shows. */
-async function addCommitments(dealId: string, doc: Document, by: string) {
-  const row = { docId: doc.id, counterparty: doc.counterparty, entryCount: 0, illegible: [], referencedButMissing: [] };
-  let r;
-  try {
-    r = await extractCommitments(doc);
-  } catch (e) {
-    if (!isQuotaExhausted(e)) throw e;
-    r = { ok: false as const, error: "daily AI quota reached" };
-  }
-  mutate(
-    (s) => {
-      s.extraRegisterDocuments = [...s.extraRegisterDocuments.filter((c) => c.docId !== doc.id), r.ok ? { ...row, entryCount: r.entries.length, illegible: r.ex.illegible, referencedButMissing: r.ex.referencedButMissing } : { ...row, error: r.error.slice(0, 200) }];
-      if (!r.ok) return;
-      s.extraRegisterEntries = [...s.extraRegisterEntries.filter((e) => e.sourceDocId !== doc.id), ...r.entries];
-      s.registerRevision += 1;
-      // New commitments change what open deals can promise: flag them for re-check (FR-19).
-      for (const d of allDeals()) if (d.id !== dealId && d.status !== "signed") s.dealOverrides[d.id] = { ...(s.dealOverrides[d.id] ?? {}), staleSince: new Date().toISOString() };
-    },
-    { user: by, dealId, action: r.ok ? "register.signed" : "register.signed_failed", detail: { docId: doc.id, entries: r.ok ? r.entries.length : 0 } },
-  );
-}
-
-/** Retry button on a Signed deal whose commitments couldn't be extracted (quota / model busy). */
-export async function retrySignedCommitments(form: FormData) {
-  const u = await currentUser();
-  if (u.role !== "karandeep") throw new Error("Not allowed");
-  const deal = getDeal(String(form.get("dealId")));
-  const doc = deal?.signedDocId ? allDocuments().find((d) => d.id === deal.signedDocId) : undefined;
-  if (!deal || !doc) throw new Error("No signed copy on this deal");
-  await addCommitments(deal.id, doc, u.name);
-  revalidatePath("/", "layout");
-  redirect(`/deal/${deal.id}?signed=1`);
 }

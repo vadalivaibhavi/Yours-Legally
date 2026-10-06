@@ -20,7 +20,6 @@ export default async function UploadPage(props: PageProps<"/upload">) {
   const preselect = typeof sp.deal === "string" ? sp.deal : "";
   const deals = visibleDeals(user, allDeals());
   const preselectDeal = preselect ? getDeal(preselect) : undefined;
-  const signedCopy = sp.signed === "1";
   const preDocs = preselectDeal ? dealDocuments(preselectDeal) : [];
 
   if (pendingId) {
@@ -76,16 +75,10 @@ export default async function UploadPage(props: PageProps<"/upload">) {
             <option value="new">Start a new deal</option>
           </select>
         </label>
-        <label className="flex items-start gap-2 rounded bg-paper p-3">
-          <input type="checkbox" name="signed" defaultChecked={signedCopy} className="mt-1" />
-          <span>
-            <b>This is the signed, final copy.</b> <span className="text-muted">The deal becomes Signed and its commitments go into the register for every later check. No brief is made.</span>
-          </span>
-        </label>
         {preselectDeal && preDocs.length > 0 && (
           <label className="block space-y-1">
             <span className="label">Is it a new version of a document in this deal?</span>
-            <select name="replaces" defaultValue={signedCopy && preDocs.length === 1 ? preDocs[0].id : ""} className="w-full">
+            <select name="replaces" defaultValue="" className="w-full">
               <option value="">No: an additional document</option>
               {preDocs.map((d) => (
                 <option key={d.id} value={d.id}>

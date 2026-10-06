@@ -3,13 +3,16 @@ import { Chip, DueBadge } from "@/components/ui";
 import { fmtDateTime } from "@/lib/format";
 import { reviewProgress } from "@/lib/review/progress";
 import { visibleDeals } from "@/lib/access";
-import { allDeals, latestBrief } from "@/lib/deals";
+import { allDeals, getDeal, latestBrief, SIGN_DECISIONS } from "@/lib/deals";
+import { storeInRegister } from "@/app/deal/actions";
+import { SaveButton } from "@/components/BriefControls";
+import { QUOTA_MESSAGE } from "@/lib/limits";
 import { dueLabel } from "@/lib/format";
 import { currentUser } from "@/lib/session";
 
-const STATUS_TEXT: Record<string, string> = { open: "In review", waiting_for_input: "Waiting for input", decided: "Decided", signed: "Signed" };
+const STATUS_TEXT: Record<string, string> = { open: "In review", waiting_for_input: "Waiting for input", decided: "Decided" };
 /** Status colours: green = done, orange = in progress, red = waiting for input, blue = not started. */
-const STATUS_TONE: Record<string, "good" | "warn" | "bad" | "brand"> = { open: "brand", waiting_for_input: "bad", decided: "good", signed: "good" };
+const STATUS_TONE: Record<string, "good" | "warn" | "bad" | "brand"> = { open: "brand", waiting_for_input: "bad", decided: "good" };
 
 /** A verdict or decision as plain text in a neutral chip (the verdict column has no colour). */
 function Plain({ children }: { children: string }) {
@@ -21,8 +24,7 @@ export default async function QueuePage(props: PageProps<"/">) {
   const user = await currentUser();
   const sp = await props.searchParams;
   const visible = visibleDeals(user, allDeals());
-  // A signed copy closes the deal: it leaves the active queue (its commitments are now in the register).
-  const signed = visible.filter((d) => d.status === "signed").sort((a, b) => (b.signedAt ?? "").localeCompare(a.signedAt ?? ""));
+  // Deals stored in the contract register are done: they leave the queue.
   const deals = visible.filter((d) => d.status !== "signed").sort((a, b) => {
     const da = dueLabel(a.deadline).days ?? 9999;
     const db = dueLabel(b.deadline).days ?? 9999;
@@ -32,6 +34,19 @@ export default async function QueuePage(props: PageProps<"/">) {
 
   return (
     <div className="space-y-5">
+      {typeof sp.stored === "string" && (
+        <div className="card border-sign/40 bg-sign-soft px-4 py-3 text-sm text-sign">
+          <b>{getDeal(sp.stored)?.name}</b> is stored in the contract register: {sp.n ?? 0} commitment{sp.n === "1" ? "" : "s"} added, unverified until you verify them.{" "}
+          <Link href="/register" className="underline">
+            Open the register
+          </Link>
+        </div>
+      )}
+      {typeof sp.storeFailed === "string" && (
+        <div className="card bg-change-soft px-4 py-3 text-sm text-change">
+          {sp.quota === "1" ? QUOTA_MESSAGE : <>Couldn&apos;t read <b>{getDeal(sp.storeFailed)?.name}</b> just now (the model is busy). It stays in the queue: try again in a minute.</>}
+        </div>
+      )}
       {sp.denied && (
         <div className="card border-hold/30 bg-hold-soft px-4 py-3 text-sm text-hold">
           That page is for Karandeep only. Sellers see their own deals, deal checks and re-check banners.
@@ -113,6 +128,14 @@ export default async function QueuePage(props: PageProps<"/">) {
                     ) : (
                       <Chip tone={STATUS_TONE[d.status]}>{STATUS_TEXT[d.status]}</Chip>
                     )}
+                    {isK && SIGN_DECISIONS.includes(d.decision ?? "") && (
+                      <form action={storeInRegister} className="mt-1.5">
+                        <input type="hidden" name="dealId" value={d.id} />
+                        <SaveButton className="btn !py-1 !text-xs" pendingLabel="Storing… (about 1 min)" savedLabel="Stored ✓">
+                          Store in contract register
+                        </SaveButton>
+                      </form>
+                    )}
                   </td>
                 </tr>
               );
@@ -120,30 +143,6 @@ export default async function QueuePage(props: PageProps<"/">) {
           </tbody>
         </table>
       </div>
-      {signed.length > 0 && (
-        <details className="card">
-          <summary className="px-4 py-3 text-sm font-semibold">
-            Signed · {signed.length} <span className="font-normal text-muted">· closed; their commitments are in the register</span>
-          </summary>
-          <table className="w-full border-t border-line text-sm">
-            <tbody>
-              {signed.map((d) => (
-                <tr key={d.id} className="border-b border-line last:border-0">
-                  <td className="px-4 py-2">
-                    <Link href={`/deal/${d.id}`} className="font-semibold hover:underline">
-                      {d.name}
-                    </Link>
-                  </td>
-                  <td className="px-4 py-2">{d.owner}</td>
-                  <td className="px-4 py-2">
-                    <Chip tone="good">Signed {d.signedAt ? fmtDateTime(d.signedAt) : ""}</Chip>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </details>
-      )}
       {!isK && (
         <p className="text-xs text-muted">Open a deal to check it before promising the client anything.</p>
       )}
