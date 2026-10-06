@@ -254,15 +254,19 @@ type GenErr = { ok: false; error: string };
  * Total time budget for one model call across all retries and fallback models (LLM_CALL_BUDGET_MS,
  * default 5 min). When it runs out the call fails cleanly → "couldn't complete: review manually",
  * so an overloaded provider can never hang a review (PRD §9.2 System failure).
+ * Reference-only steps (the "how it differs" lines) get a short budget (LLM_REFERENCE_BUDGET_MS, default
+ * 45 s): they never change the verdict, so they must not keep a re-check waiting for minutes.
  */
-export function callBudgetMs(): number {
+const REFERENCE_ONLY = new Set<Task>(["differs"]);
+export function callBudgetMs(task?: Task): number {
+  if (task && REFERENCE_ONLY.has(task)) return Number(process.env.LLM_REFERENCE_BUDGET_MS || 45_000);
   return Number(process.env.LLM_CALL_BUDGET_MS || 300_000);
 }
 
 async function generateWithFallback(task: Task, system: string, input: string, schema: object): Promise<GenOk | GenErr> {
   const errors: string[] = [];
-  let deadline = Date.now() + callBudgetMs();
-  const timedOut = () => ({ ok: false as const, error: `timed out after ${Math.round(callBudgetMs() / 1000)}s across retries | ${errors.join(" | ")}`.slice(0, 2000) });
+  let deadline = Date.now() + callBudgetMs(task);
+  const timedOut = () => ({ ok: false as const, error: `timed out after ${Math.round(callBudgetMs(task) / 1000)}s across retries | ${errors.join(" | ")}`.slice(0, 2000) });
   const chain = modelsFor(task);
   const exhausted = exhaustedToday();
   for (const model of chain) {

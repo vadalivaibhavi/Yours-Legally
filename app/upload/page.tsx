@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { chooseDeal, uploadDocument } from "./actions";
 import { TextArea } from "@/components/Fields";
+import { SaveButton } from "@/components/BriefControls";
 import { LIMITS, QUOTA_MESSAGE } from "@/lib/limits";
 import { visibleDeals } from "@/lib/access";
 import { allDeals, allDocuments, dealDocuments, getDeal } from "@/lib/deals";
@@ -86,7 +87,9 @@ export default async function UploadPage(props: PageProps<"/upload">) {
             </select>
           </label>
         )}
-        <button className="btn btn-primary">Upload &amp; review</button>
+        <SaveButton className="btn btn-primary" pendingLabel="Uploading and reviewing… (about 1–2 min, keep this page open)" savedLabel="Done ✓">
+          Upload &amp; review
+        </SaveButton>
         <p className="text-xs text-muted">The contract is extracted, linked and reviewed; a new brief version is issued. Takes up to a few minutes on the free model tier.</p>
       </form>
     </div>

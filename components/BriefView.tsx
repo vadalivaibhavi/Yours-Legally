@@ -206,9 +206,9 @@ export async function BriefView({ dealId: id, version }: { dealId: string; versi
             ))}
             {isLatest && (
               <div className="flex flex-wrap items-center gap-3 px-4 py-3">
-                <Link href={`/upload?deal=${id}`} className="btn">
+                <a href={`/upload?deal=${id}`} className="btn">
                   Upload it here
-                </Link>
+                </a>
                 <form action={recheckDeal}>
                   <input type="hidden" name="dealId" value={id} />
                   <SaveButton className="btn btn-primary" savedLabel="Re-checked ✓" pendingLabel="Re-checking… (1–3 min)">Input added → re-check</SaveButton>

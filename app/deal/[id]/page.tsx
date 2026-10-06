@@ -98,9 +98,9 @@ export default async function DealPage(props: PageProps<"/deal/[id]">) {
         title={`Documents in this deal · ${docs.length}`}
         aside={
           <div className="flex gap-2">
-            <Link href={`/upload?deal=${deal.id}`} className="btn !py-1 !text-xs">
+            <a href={`/upload?deal=${deal.id}`} className="btn !py-1 !text-xs">
               Upload into this deal
-            </Link>
+            </a>
             {isK && (
               <form action={recheckDeal}>
                 <input type="hidden" name="dealId" value={deal.id} />
