@@ -11,6 +11,8 @@ import { allDeals, dealDocuments, getDeal, SIGN_DECISIONS } from "@/lib/deals";
 import { QUOTA_MESSAGE } from "@/lib/limits";
 import { isQuotaExhausted } from "@/lib/llm";
 import { registerEntry } from "@/lib/register";
+import { applyRegisterChange, dealsAffectedBy, type RegisterAction } from "@/lib/registerEdit";
+import { AtliqEntity, Region, RegisterType, Sector, type RegisterEntry } from "@/lib/types";
 import { extractCommitments } from "@/lib/registerExtract";
 import { nextVersion, reviewDeal } from "@/lib/review/pipeline";
 import { currentUser } from "@/lib/session";
@@ -218,37 +220,43 @@ export async function recheckDeal(form: FormData) {
 export async function registerAction(form: FormData) {
   const u = await requireKarandeep();
   const id = str(form, "id");
-  const action = str(form, "action") as "verify" | "unverify" | "reject" | "restore" | "edit";
+  const action = str(form, "action") as RegisterAction;
   const entry = registerEntry(id);
   if (!entry) throw new Error("Unknown register entry");
-  const edits =
-    action === "edit"
-      ? {
-          title: field(form, "title", LIMITS.name, "Title") || entry.title,
-          summary: field(form, "summary", LIMITS.summary, "Summary") || entry.summary,
-          end: str(form, "end") || entry.end,
-          includesAffiliates: form.get("includesAffiliates") === "on",
-        }
-      : undefined;
-  mutate(
-    (s) => {
-      const prev = s.registerOverrides[id] ?? { at: now(), by: u.name };
-      s.registerOverrides[id] = {
-        ...prev,
-        at: now(),
-        by: u.name,
-        verified: action === "verify" || action === "edit" ? true : action === "unverify" ? false : prev.verified,
-        rejected: action === "reject" ? true : action === "restore" ? false : prev.rejected,
-        edits: edits ? { ...(prev.edits ?? {}), ...edits } : prev.edits,
-      };
-      s.registerRevision += 1;
-      // Rejected or edited entries change what open deals rely on: flag them for re-check (FR-2, FR-19).
-      if (action === "reject" || action === "edit" || action === "restore")
-        for (const d of allDeals()) if (d.status !== "signed") s.dealOverrides[d.id] = { ...(s.dealOverrides[d.id] ?? {}), staleSince: now() };
-    },
-    { user: u.name, action: `register.${action}`, detail: { id, edits } },
-  );
+  applyRegisterChange(id, action, action === "edit" ? registerEdits(form, entry) : undefined, u.name);
   revalidatePath("/", "layout");
+}
+
+/** The whole entry as edited on the Register screen (the source clause and its quote stay verbatim). */
+function registerEdits(form: FormData, e: RegisterEntry): Partial<RegisterEntry> {
+  const pick = <T extends string>(name: string, allowed: readonly T[]) => form.getAll(name).map(String).filter((x): x is T => (allowed as readonly string[]).includes(x));
+  const list = (name: string, label: string) =>
+    field(form, name, LIMITS.summary, label)
+      .split(",")
+      .map((x) => x.trim().slice(0, LIMITS.name))
+      .filter(Boolean)
+      .slice(0, 20);
+  const date = (name: string) => (/^\d{4}-\d{2}-\d{2}$/.test(str(form, name)) ? str(form, name) : null);
+  const type = str(form, "type");
+  const perpetual = form.get("perpetual") === "on";
+  return {
+    title: field(form, "title", LIMITS.name, "Title") || e.title,
+    summary: field(form, "summary", LIMITS.summary, "Summary") || e.summary,
+    type: (RegisterType.options as string[]).includes(type) ? (type as RegisterEntry["type"]) : e.type,
+    bindsEntities: pick("binds", AtliqEntity.options),
+    includesAffiliates: form.get("includesAffiliates") === "on",
+    routine: form.get("routine") === "on",
+    scope: {
+      sectors: pick("sectors", Sector.options),
+      regions: pick("regions", Region.options),
+      services: list("services", "Services"),
+      assets: list("assets", "Tools / IP"),
+      counterparties: list("counterparties", "Limited to"),
+    },
+    start: date("start") ?? e.start,
+    perpetual,
+    end: perpetual ? null : date("end"),
+  };
 }
 
 // ---------------------------------------------------------------- seller deal check (F7, FR-13)
@@ -414,8 +422,8 @@ export async function storeInRegister(form: FormData) {
       s.registerRevision += 1;
       const o = (s.dealOverrides[deal.id] ??= {});
       Object.assign(o, { status: "signed", signedAt: now(), staleSince: undefined });
-      // New commitments change what other open deals can promise: flag them for re-check (FR-19).
-      for (const d of allDeals()) if (d.id !== deal.id && d.status !== "signed") s.dealOverrides[d.id] = { ...(s.dealOverrides[d.id] ?? {}), staleSince: now() };
+      // New commitments change what other open deals can promise: flag the ones they can reach (FR-19).
+      for (const id of dealsAffectedBy(ok.flatMap((x) => x.entries))) if (id !== deal.id) s.dealOverrides[id] = { ...(s.dealOverrides[id] ?? {}), staleSince: now() };
     },
     { user: u.name, dealId: deal.id, action: "deal.stored", detail: { documents: [...ids], entries: added } },
   );

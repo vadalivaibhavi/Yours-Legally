@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Chip, Quote } from "@/components/ui";
-import { RegisterActions } from "@/components/RegisterActions";
+import { RegisterEntryCard } from "@/components/RegisterActions";
 import { AutoSubmitSelect } from "@/components/Fields";
 import { canViewRegister } from "@/lib/access";
 import { baseRegister } from "@/lib/data";
@@ -58,7 +58,6 @@ export default async function RegisterPage(props: PageProps<"/register">) {
   ];
   const deals = allDeals();
   const coverage = registerCoverage();
-  const unverified = all.filter((e) => !e.verified && !e.rejected).length;
   const reg = baseRegister();
 
   return (
@@ -66,9 +65,6 @@ export default async function RegisterPage(props: PageProps<"/register">) {
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
           <h1 className="font-serif text-2xl font-semibold">Commitments register</h1>
-          <p className="text-sm text-muted">
-            What AtliQ has already promised, from {coverage.length} signed contracts. {unverified} entries still to verify.
-          </p>
         </div>
       </div>
 
@@ -179,21 +175,20 @@ function briefCites(dealId: string, entryId: string) {
 
 function EntryCard({ e, affects }: { e: RegisterEntry; affects: { id: string; name: string }[] }) {
   const doc = documentById(e.sourceDocId);
-  return (
-    <article id={e.id} className={`card space-y-3 p-4 ${e.rejected ? "opacity-60" : ""}`}>
-      <div className="flex flex-wrap items-start justify-between gap-2">
-        <div className="space-y-1">
-          <div className="flex flex-wrap items-center gap-2">
-            <h3 className="font-semibold">{e.title}</h3>
-            <Chip tone="brand">{TYPE_LABEL[e.type]}</Chip>
-            {e.status === "expired" ? <Chip>Expired {fmtDate(e.end)}</Chip> : e.status === "unknown" ? <Chip tone="warn">End date unknown</Chip> : <Chip tone="bad">Live{e.end ? ` until ${fmtDate(e.end)}` : e.perpetual ? " (permanent)" : ""}</Chip>}
-            {e.verified ? <Chip tone="good">Verified</Chip> : !e.rejected && <Chip tone="warn">Unverified</Chip>}
-            {e.routine && <Chip>Routine</Chip>}
-          </div>
-          <p className="text-sm text-muted">{e.summary}</p>
-        </div>
-        <RegisterActions entry={e} />
+  const head = (
+    <>
+      <div className="flex flex-wrap items-center gap-2">
+        <h3 className="font-semibold">{e.title}</h3>
+        <Chip tone="brand">{TYPE_LABEL[e.type]}</Chip>
+        {e.status === "expired" ? <Chip>Expired {fmtDate(e.end)}</Chip> : e.status === "unknown" ? <Chip tone="warn">End date unknown</Chip> : <Chip tone="bad">Live{e.end ? ` until ${fmtDate(e.end)}` : e.perpetual ? " (permanent)" : ""}</Chip>}
+        {e.verified ? <Chip tone="good">Verified</Chip> : !e.rejected && <Chip tone="warn">Unverified</Chip>}
+        {e.routine && <Chip>Routine</Chip>}
       </div>
+      <p className="text-sm text-muted">{e.summary}</p>
+    </>
+  );
+  const body = (
+    <div className="space-y-3">
       <dl className="grid gap-x-6 gap-y-1 text-sm sm:grid-cols-2">
         <Row k="Source">
           {e.counterparty} · {doc?.title} · {e.clauseRef}
@@ -238,8 +233,9 @@ function EntryCard({ e, affects }: { e: RegisterEntry; affects: { id: string; na
           ))}
         </div>
       </details>
-    </article>
+    </div>
   );
+  return <RegisterEntryCard e={e} head={head} body={body} typeLabels={TYPE_LABEL} />;
 }
 
 function Row({ k, children }: { k: string; children: React.ReactNode }) {

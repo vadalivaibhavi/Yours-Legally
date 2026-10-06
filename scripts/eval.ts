@@ -35,6 +35,8 @@ import { reviewDeal } from "../lib/review/pipeline";
 import type { Brief, EffectiveBrief, Finding } from "../lib/review/types";
 import { SEVERITY_RANK } from "../lib/review/types";
 import { runSellerCheck, sellerBanner } from "../lib/seller";
+import { registerEntries } from "../lib/register";
+import { applyRegisterChange } from "../lib/registerEdit";
 import {
   mutate,
   readState,
@@ -814,6 +816,7 @@ async function main() {
       pass: independent,
       detail: `${briefs.length} briefs`,
     },
+    { name: "Register changes flag the right open deals and reach the checks (FR-2, FR-19)", ...(await registerFlagCheck()) },
     {
       name: "NDA fast lane latency (<1 min)",
       pass: null,
@@ -962,3 +965,46 @@ function sellerInput(p: Partial<SellerInput>): SellerInput {
 }
 
 main();
+
+/**
+ * Register edits (no model calls, in-memory state): verify flags nothing; a restriction edit / reject /
+ * restore flags every open deal and changes the seller check's answer; a client duty flags only that
+ * client's deals; an entry no check reads (insurance) flags none.
+ */
+async function registerFlagCheck(): Promise<{ pass: boolean; detail: string }> {
+  const open = deals.map((d) => d.id).sort();
+  const nc = () => registerEntries({ includeRejected: true }).find((e) => e.sourceDocId === "alnoor-msa" && e.type === "non_compete")!;
+  const gulf = () => runSellerCheck("gulfcrown", "eval", sellerInput({ client: "Gulf Crown", sectors: ["hospitality"], regions: ["Saudi Arabia"], services: ["revenue management"] }));
+  const same = (a: string[], b: string[]) => [...a].sort().join() === [...b].sort().join();
+  const checks: [string, boolean][] = [];
+
+  useMemoryState();
+  checks.push(["verify flags nothing", same(applyRegisterChange(nc().id, "verify", undefined, "eval").flagged, [])]);
+
+  useMemoryState();
+  const before = (await gulf()).items[0].status;
+  const edit = applyRegisterChange(nc().id, "edit", { end: "2025-01-01", perpetual: false }, "eval");
+  const afterEdit = (await gulf()).items[0].status;
+  checks.push([`restriction edit flags all ${open.length} open deals`, same(edit.flagged, open) && edit.flagged.every((id) => !!readState().dealOverrides[id]?.staleSince)]);
+  checks.push([`ending it changes the seller check (${before} → ${afterEdit})`, before === "conflict" && afterEdit !== "conflict"]);
+
+  useMemoryState();
+  const rej = applyRegisterChange(nc().id, "reject", undefined, "eval");
+  const afterReject = (await gulf()).items[0].status;
+  applyRegisterChange(nc().id, "restore", undefined, "eval");
+  const afterRestore = (await gulf()).items[0].status;
+  checks.push([`reject flags all and stops the conflict (${afterReject}); restore brings it back (${afterRestore})`, same(rej.flagged, open) && afterReject !== "conflict" && afterRestore === "conflict"]);
+
+  useMemoryState();
+  const duty = registerEntries().find((e) => e.id === "harrington-nda#1");
+  const dutyFlags = duty ? applyRegisterChange(duty.id, "edit", { summary: duty.summary + " (edited)" }, "eval").flagged : ["missing entry"];
+  checks.push([`client duty edit flags only that client's deals (${dutyFlags.join(", ")})`, same(dutyFlags, ["harrington"])]);
+
+  useMemoryState();
+  const ins = registerEntries().find((e) => e.type === "insurance")!;
+  checks.push(["insurance edit flags nothing (no check reads it)", same(applyRegisterChange(ins.id, "edit", { summary: ins.summary + " (edited)" }, "eval").flagged, [])]);
+
+  useMemoryState();
+  const failed = checks.filter(([, ok]) => !ok).map(([n]) => n);
+  return { pass: !failed.length, detail: failed.length ? `failed: ${failed.join("; ")}` : checks.map(([n]) => n).join("; ") };
+}

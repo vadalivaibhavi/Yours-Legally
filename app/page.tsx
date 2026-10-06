@@ -74,7 +74,7 @@ export default async function QueuePage(props: PageProps<"/">) {
               <th className="label px-4 py-2">Requested by</th>
               <th className="label px-4 py-2">Deadline</th>
               <th className="label px-4 py-2">{isK ? "Decision / system verdict" : "Decision"}</th>
-              <th className="label px-4 py-2">Status</th>
+              <th className="label px-4 py-2 text-center">Status</th>
             </tr>
           </thead>
           <tbody>
@@ -118,7 +118,7 @@ export default async function QueuePage(props: PageProps<"/">) {
                       <span className="text-xs text-muted">{isK ? "Not reviewed yet" : "No decision yet"}</span>
                     )}
                   </td>
-                  <td className="px-4 py-3">
+                  <td className="px-4 py-3 text-center">
                     {d.finalised ? (
                       <Chip tone="good">Decided</Chip>
                     ) : progress?.started ? (
@@ -129,7 +129,7 @@ export default async function QueuePage(props: PageProps<"/">) {
                       <Chip tone={STATUS_TONE[d.status]}>{STATUS_TEXT[d.status]}</Chip>
                     )}
                     {isK && SIGN_DECISIONS.includes(d.decision ?? "") && (
-                      <form action={storeInRegister} className="mt-1.5">
+                      <form action={storeInRegister} className="mt-1.5 flex justify-center">
                         <input type="hidden" name="dealId" value={d.id} />
                         <SaveButton className="btn !py-1 !text-xs" pendingLabel="Storing… (about 1 min)" savedLabel="Stored ✓">
                           Store in contract register
