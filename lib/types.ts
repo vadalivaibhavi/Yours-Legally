@@ -94,7 +94,7 @@ export const Document = z.object({
 });
 export type Document = z.infer<typeof Document>;
 
-export const DealStatus = z.enum(["open", "waiting_for_input", "decided"]);
+export const DealStatus = z.enum(["open", "waiting_for_input", "decided", "signed"]);
 export type DealStatus = z.infer<typeof DealStatus>;
 
 export const Deal = z.object({

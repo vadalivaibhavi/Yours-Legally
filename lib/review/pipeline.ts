@@ -190,7 +190,7 @@ async function runReview(dealId: string, opts: ReviewOptions): Promise<Brief> {
   // ---- dependency on the end-client deal (AtliQ paper staffing a client deal)
   if (endClient) {
     const eb = latestBrief(endClient.id);
-    if (eb && eb.verdict !== "SIGN")
+    if (eb && eb.verdict !== "SIGN" && endClient.status !== "signed")
       findings.push({
         key: `dependency:${endClient.id}`,
         category: "dependency",

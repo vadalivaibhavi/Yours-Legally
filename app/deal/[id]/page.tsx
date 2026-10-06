@@ -13,6 +13,8 @@ import { sellerChecksFor } from "@/lib/sellerChecks";
 import { SellerCheckPanel } from "@/components/SellerCheckPanel";
 import { QUOTA_MESSAGE } from "@/lib/limits";
 import { recheckDeal } from "@/app/deal/actions";
+import { retrySignedCommitments } from "@/app/upload/actions";
+import { registerCoverage, registerEntries } from "@/lib/register";
 
 
 /** Re-checks run the review pipeline inside server actions on this page (Vercel: up to 300s). */
@@ -47,6 +49,7 @@ export default async function DealPage(props: PageProps<"/deal/[id]">) {
         <div className="flex flex-wrap items-center gap-3">
           <h1 className="font-serif text-2xl font-semibold">{deal.name}</h1>
           <DueBadge deadline={deal.deadline} />
+          {deal.status === "signed" && <Chip tone="good">Signed {fmtDate(deal.signedAt)}</Chip>}
           {deal.status === "waiting_for_input" && <Chip tone="bad">Waiting for input</Chip>}
           {deal.decision && deal.finalised && <DecisionBadge decision={deal.decision} />}
           {deal.decision && !deal.finalised && isK && <Chip tone="warn">Draft decision: {deal.decision} · review in progress</Chip>}
@@ -59,8 +62,11 @@ export default async function DealPage(props: PageProps<"/deal/[id]">) {
 
       {sp.quota === "1" && <div className="rounded-lg bg-change-soft p-4 text-sm text-change">{QUOTA_MESSAGE}{deal.stale ? " The new document is attached; re-check the deal then." : ""}</div>}
 
+      {deal.status === "signed" && <SignedRecord dealId={deal.id} signedDocId={deal.signedDocId} isK={isK} />}
+
       {isK && (
         <section id="brief" className="scroll-mt-4">
+          {deal.status === "signed" && shown && <p className="mb-2 text-xs text-muted">The brief below is the review before signature. The signed copy above is what counts now.</p>}
           {shown ? (
             <Collapsible
               key={shown.version}
@@ -101,7 +107,12 @@ export default async function DealPage(props: PageProps<"/deal/[id]">) {
             <a href={`/upload?deal=${deal.id}`} className="btn !py-1 !text-xs">
               Upload into this deal
             </a>
-            {isK && (
+            {deal.status !== "signed" && (
+              <a href={`/upload?deal=${deal.id}&signed=1`} className="btn !py-1 !text-xs">
+                Upload signed copy
+              </a>
+            )}
+            {isK && deal.status !== "signed" && (
               <form action={recheckDeal}>
                 <input type="hidden" name="dealId" value={deal.id} />
                 <SaveButton className="btn btn-primary !py-1 !text-xs" pendingLabel="Re-checking… (1–3 min)" savedLabel="Re-checked ✓">
@@ -192,4 +203,52 @@ export default async function DealPage(props: PageProps<"/deal/[id]">) {
 /** "by 3 Oct (tracker C-026)" → "by 3 Oct": the tracker / meeting reference is for the record, not the reader. */
 function plainNote(note: string): string {
   return note.replace(/\s*\((?:tracker [^)]*|\d{1,2} \w{3} meeting)\)/g, "");
+}
+
+/** A Signed deal: the signed copy and the commitments it put in the register (Karandeep sees the entries). */
+function SignedRecord({ dealId, signedDocId, isK }: { dealId: string; signedDocId?: string; isK: boolean }) {
+  const doc = signedDocId ? dealDocuments(getDeal(dealId)!).find((d) => d.id === signedDocId) : undefined;
+  const entries = signedDocId ? registerEntries({ includeRejected: true }).filter((e) => e.sourceDocId === signedDocId) : [];
+  const failed = registerCoverage().find((c) => c.docId === signedDocId)?.error;
+  return (
+    <section className="card space-y-3 border-sign/40 p-5">
+      <div className="flex flex-wrap items-center gap-2">
+        <Chip tone="good">Signed</Chip>
+        <b>{doc?.title ?? "Signed copy on file"}</b>
+      </div>
+      {!isK ? (
+        <p className="text-sm text-muted">This deal is signed.</p>
+      ) : failed ? (
+        <form action={retrySignedCommitments} className="flex flex-wrap items-center gap-3 rounded bg-change-soft p-3 text-sm text-change">
+          <input type="hidden" name="dealId" value={dealId} />
+          <span>Its commitments aren&apos;t in the register yet ({failed}).</span>
+          <SaveButton className="btn ml-auto" pendingLabel="Reading the signed copy… (about 1 min)" savedLabel="Added ✓">
+            Add to register
+          </SaveButton>
+        </form>
+      ) : (
+        <>
+          <p className="text-sm">
+            {entries.length ? `${entries.length} commitment${entries.length === 1 ? "" : "s"} from the signed copy are in the register and used in every later check` : "No restrictions or ongoing duties found in the signed copy"}
+            {entries.length > 0 && (
+              <>
+                {" "}
+                · <Link href="/register" className="underline">verify them in the register</Link>
+              </>
+            )}
+          </p>
+          {entries.length > 0 && (
+            <ul className="space-y-1 text-sm">
+              {entries.map((e) => (
+                <li key={e.id}>
+                  <b>{e.title}</b> <span className="text-muted">({e.clauseRef}{e.end ? `, until ${fmtDate(e.end)}` : e.perpetual ? ", no end date" : ""})</span>: {e.summary}
+                  {!e.verified && <span className="text-xs text-muted"> · unverified</span>}
+                </li>
+              ))}
+            </ul>
+          )}
+        </>
+      )}
+    </section>
+  );
 }

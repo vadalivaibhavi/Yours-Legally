@@ -55,10 +55,12 @@ export type AuditEvent = { at: string; user: string; dealId?: string; action: st
 export type State = {
   registerOverrides: Record<string, { verified?: boolean; rejected?: boolean; edits?: Partial<RegisterEntry>; at: string; by: string }>;
   extraRegisterEntries: RegisterEntry[];
+  /** Coverage rows for signed copies uploaded in the app (error set = commitments not extracted yet). */
+  extraRegisterDocuments: { docId: string; counterparty: string; entryCount: number; illegible: { clauseRef: string; note: string }[]; referencedButMissing: { name: string; note: string }[]; error?: string }[];
   registerRevision: number;
   uploadedDocuments: Document[];
   newDeals: Deal[];
-  dealOverrides: Record<string, { status?: Deal["status"]; decision?: string; decidedAt?: string; finalised?: boolean; finalisedAt?: string; deadline?: string; addDocumentIds?: string[]; removeDocumentIds?: string[]; staleSince?: string }>;
+  dealOverrides: Record<string, { status?: Deal["status"]; decision?: string; decidedAt?: string; finalised?: boolean; finalisedAt?: string; deadline?: string; addDocumentIds?: string[]; removeDocumentIds?: string[]; staleSince?: string; signedAt?: string; signedDocId?: string }>;
   briefs: Record<string, Brief[]>;
   reactions: Record<string, Record<string, Reaction>>;
   confirmations: Record<string, Record<string, { status: "confirmed" | "not_true" | "edited"; edit?: string; at: string }>>;
@@ -74,6 +76,7 @@ export type State = {
 const EMPTY: State = {
   registerOverrides: {},
   extraRegisterEntries: [],
+  extraRegisterDocuments: [],
   registerRevision: 0,
   uploadedDocuments: [],
   newDeals: [],

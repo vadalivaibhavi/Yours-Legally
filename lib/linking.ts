@@ -33,7 +33,7 @@ export function proposeLink(
   docs: Document[],
   userChoice?: string,
 ): LinkProposal {
-  const open = deals;
+  const open = deals.filter((d) => d.status !== "signed"); // a signed deal is closed: new paper starts a new deal
   const refs = extractReferences(input.text);
   const refDeals = (exclude?: string) =>
     open.filter((d) => d.id !== exclude && docs.some((x) => d.documentIds.includes(x.id) && x.id !== input.docId && x.references.some((r) => refs.includes(r))));

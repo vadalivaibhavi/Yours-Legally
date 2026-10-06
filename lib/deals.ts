@@ -10,7 +10,7 @@ import type { Brief, EffectiveBrief } from "./review/types";
 import { readState } from "./store";
 import type { Deal, Document, Note } from "./types";
 
-export type DealView = Deal & { decision?: string; decidedAt?: string; finalised?: boolean; finalisedAt?: string; stale?: string };
+export type DealView = Deal & { decision?: string; decidedAt?: string; finalised?: boolean; finalisedAt?: string; stale?: string; signedAt?: string; signedDocId?: string };
 
 export function allDocuments(): Document[] {
   return [...baseDocuments(), ...readState().uploadedDocuments];
@@ -35,9 +35,11 @@ export function allDeals(): DealView[] {
       finalised: o.finalised,
       finalisedAt: o.finalisedAt,
       stale: o.staleSince,
+      signedAt: o.signedAt,
+      signedDocId: o.signedDocId,
     };
     const brief = latestBrief(d.id);
-    if (brief && !o.finalised && brief.waitingFor.length) view.status = "waiting_for_input";
+    if (brief && !o.finalised && !o.signedAt && brief.waitingFor.length) view.status = "waiting_for_input";
     return view;
   });
 }

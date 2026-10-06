@@ -25,6 +25,7 @@ export function registerEntry(id: string): RegisterEntry | undefined {
   return registerEntries({ includeRejected: true }).find((e) => e.id === id);
 }
 
+/** Every signed document the register was built from: the original set plus signed copies uploaded in the app. */
 export function registerCoverage() {
-  return baseRegister().documents;
+  return [...baseRegister().documents, ...readState().extraRegisterDocuments];
 }

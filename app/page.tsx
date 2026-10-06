@@ -7,9 +7,9 @@ import { allDeals, latestBrief } from "@/lib/deals";
 import { dueLabel } from "@/lib/format";
 import { currentUser } from "@/lib/session";
 
-const STATUS_TEXT: Record<string, string> = { open: "In review", waiting_for_input: "Waiting for input", decided: "Decided" };
+const STATUS_TEXT: Record<string, string> = { open: "In review", waiting_for_input: "Waiting for input", decided: "Decided", signed: "Signed" };
 /** Status colours: green = done, orange = in progress, red = waiting for input, blue = not started. */
-const STATUS_TONE: Record<string, "good" | "warn" | "bad" | "brand"> = { open: "brand", waiting_for_input: "bad", decided: "good" };
+const STATUS_TONE: Record<string, "good" | "warn" | "bad" | "brand"> = { open: "brand", waiting_for_input: "bad", decided: "good", signed: "good" };
 
 /** A verdict or decision as plain text in a neutral chip (the verdict column has no colour). */
 function Plain({ children }: { children: string }) {
@@ -20,7 +20,10 @@ function Plain({ children }: { children: string }) {
 export default async function QueuePage(props: PageProps<"/">) {
   const user = await currentUser();
   const sp = await props.searchParams;
-  const deals = visibleDeals(user, allDeals()).sort((a, b) => {
+  const visible = visibleDeals(user, allDeals());
+  // A signed copy closes the deal: it leaves the active queue (its commitments are now in the register).
+  const signed = visible.filter((d) => d.status === "signed").sort((a, b) => (b.signedAt ?? "").localeCompare(a.signedAt ?? ""));
+  const deals = visible.filter((d) => d.status !== "signed").sort((a, b) => {
     const da = dueLabel(a.deadline).days ?? 9999;
     const db = dueLabel(b.deadline).days ?? 9999;
     return da - db || a.name.localeCompare(b.name);
@@ -117,6 +120,30 @@ export default async function QueuePage(props: PageProps<"/">) {
           </tbody>
         </table>
       </div>
+      {signed.length > 0 && (
+        <details className="card">
+          <summary className="px-4 py-3 text-sm font-semibold">
+            Signed · {signed.length} <span className="font-normal text-muted">· closed; their commitments are in the register</span>
+          </summary>
+          <table className="w-full border-t border-line text-sm">
+            <tbody>
+              {signed.map((d) => (
+                <tr key={d.id} className="border-b border-line last:border-0">
+                  <td className="px-4 py-2">
+                    <Link href={`/deal/${d.id}`} className="font-semibold hover:underline">
+                      {d.name}
+                    </Link>
+                  </td>
+                  <td className="px-4 py-2">{d.owner}</td>
+                  <td className="px-4 py-2">
+                    <Chip tone="good">Signed {d.signedAt ? fmtDateTime(d.signedAt) : ""}</Chip>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </details>
+      )}
       {!isK && (
         <p className="text-xs text-muted">Open a deal to check it before promising the client anything.</p>
       )}
