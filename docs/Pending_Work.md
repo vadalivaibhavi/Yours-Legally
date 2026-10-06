@@ -40,6 +40,7 @@ The EV-V synthetic documents' header line changed with the product rename (5 Oct
 
 | Flow | Model calls | Notes |
 |---|---|---|
+| **FinServe fix test:** on the FinServe deal, *Upload into this deal* → `test-uploads/FinServe_NDA_v2_mutual.md` → "Yes: replaces FinServe Capital \"mutual\" NDA (draft)" | ≈4–5 (extract, NDA check, conflict check, brief) | expected: brief v2, all 7 findings under "Resolved since previous", verdict SIGN |
 | Upload a file into a deal → automatic re-check (v2 draft) | 1 extract + a re-review (≈4–7; unchanged documents come from cache) | creates brief v2 with "Since v1" changes |
 | "Re-check now" on an unchanged deal | ≈0–1 (everything cached; only missing comparison lines call the model) | |
 | Upload a completely new contract | 1 extract + a full review (≈6–8) + clause embeddings | new deal in the queue |

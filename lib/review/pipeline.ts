@@ -18,7 +18,7 @@ import { checkBundle } from "./bundle";
 import { checkConflicts, filterRegister, reverseScan } from "./conflict";
 import { extractDocument, type Extraction } from "./extract";
 import { runGate } from "./gate";
-import { hasLegalConclusion, sanitize, sanitizeFinding } from "./guardrails";
+import { coverageNote, hasLegalConclusion, sanitize, sanitizeFinding } from "./guardrails";
 import { scanNotes } from "./notes";
 import { checkNda, checkPlaybook, ruleFor } from "./playbook";
 import { similarPanels } from "./similar";
@@ -190,7 +190,7 @@ async function runReview(dealId: string, opts: ReviewOptions): Promise<Brief> {
   // ---- dependency on the end-client deal (AtliQ paper staffing a client deal)
   if (endClient) {
     const eb = latestBrief(endClient.id);
-    if (eb && eb.verdict !== "SIGN" && endClient.status !== "signed")
+    if (eb && eb.verdict !== "SIGN")
       findings.push({
         key: `dependency:${endClient.id}`,
         category: "dependency",
@@ -259,7 +259,7 @@ async function runReview(dealId: string, opts: ReviewOptions): Promise<Brief> {
     }
   }
   const cov = registerCoverage();
-  notSeen.push(`Register built from ${cov.length} signed documents. Contracts referenced elsewhere but never collected (e.g. ShopSwift SOW, PixelCraft vendor agreement, intercompany services agreement) can't be checked.`);
+  notSeen.push(coverageNote(cov.length));
   for (const e of errors) notSeen.push(e);
 
   // ---- counsel pack (tier 4)

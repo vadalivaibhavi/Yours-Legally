@@ -243,7 +243,7 @@ export async function registerAction(form: FormData) {
       s.registerRevision += 1;
       // Rejected or edited entries change what open deals rely on: flag them for re-check (FR-2, FR-19).
       if (action === "reject" || action === "edit" || action === "restore")
-        for (const d of allDeals()) if (d.status !== "signed") s.dealOverrides[d.id] = { ...(s.dealOverrides[d.id] ?? {}), staleSince: now() };
+        for (const d of allDeals()) s.dealOverrides[d.id] = { ...(s.dealOverrides[d.id] ?? {}), staleSince: now() };
     },
     { user: u.name, action: `register.${action}`, detail: { id, edits } },
   );

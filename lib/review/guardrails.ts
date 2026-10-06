@@ -31,6 +31,11 @@ export function sanitize(text: string): string {
   return t;
 }
 
+/** "What wasn't seen": the register's reach, in plain words and without examples from other deals. */
+export function coverageNote(signedDocs: number): string {
+  return `Commitments were checked against all ${signedDocs} signed contracts on file. Contracts AtliQ hasn't uploaded can't be checked.`;
+}
+
 export function hasLegalConclusion(text: string): boolean {
   return /\bbreach(es|ed|ing)?\b|\benforceable\b|\bunenforceable\b|\bviolat/i.test(text);
 }

@@ -47,7 +47,7 @@ export default async function DealPage(props: PageProps<"/deal/[id]">) {
         <div className="flex flex-wrap items-center gap-3">
           <h1 className="font-serif text-2xl font-semibold">{deal.name}</h1>
           <DueBadge deadline={deal.deadline} />
-          {deal.status === "waiting_for_input" && <Chip tone="warn">Waiting for input: {deal.waitingOn}</Chip>}
+          {deal.status === "waiting_for_input" && <Chip tone="bad">Waiting for input</Chip>}
           {deal.decision && deal.finalised && <DecisionBadge decision={deal.decision} />}
           {deal.decision && !deal.finalised && isK && <Chip tone="warn">Draft decision: {deal.decision} · review in progress</Chip>}
         </div>
@@ -119,6 +119,7 @@ export default async function DealPage(props: PageProps<"/deal/[id]">) {
                 <span className="font-semibold">{d.title}</span>
                 <Chip tone="brand">{d.docType}</Chip>
                 <Chip>{d.paper === "atliq" ? "AtliQ's paper" : "Their paper"}</Chip>
+                {d.replaces && <Chip tone="warn">New version</Chip>}
                 <span className="text-xs text-muted">received {fmtDate(d.date)}</span>
               </summary>
               {/* Contract facts live with their document (FR-4): what was extracted, from which clause, and the rule checks. */}

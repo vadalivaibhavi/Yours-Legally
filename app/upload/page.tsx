@@ -3,7 +3,7 @@ import { chooseDeal, uploadDocument } from "./actions";
 import { TextArea } from "@/components/Fields";
 import { LIMITS, QUOTA_MESSAGE } from "@/lib/limits";
 import { visibleDeals } from "@/lib/access";
-import { allDeals, allDocuments } from "@/lib/deals";
+import { allDeals, allDocuments, dealDocuments, getDeal } from "@/lib/deals";
 import { proposeLink } from "@/lib/linking";
 import { currentUser } from "@/lib/session";
 import { readState } from "@/lib/store";
@@ -18,6 +18,7 @@ export default async function UploadPage(props: PageProps<"/upload">) {
   const pendingId = typeof sp.pending === "string" ? sp.pending : null;
   const preselect = typeof sp.deal === "string" ? sp.deal : "";
   const deals = visibleDeals(user, allDeals());
+  const preselectDeal = preselect ? getDeal(preselect) : undefined;
 
   if (pendingId) {
     const doc = readState().uploadedDocuments.find((d) => d.id === pendingId);
@@ -72,6 +73,19 @@ export default async function UploadPage(props: PageProps<"/upload">) {
             <option value="new">Start a new deal</option>
           </select>
         </label>
+        {preselectDeal && dealDocuments(preselectDeal).length > 0 && (
+          <label className="block space-y-1">
+            <span className="label">Is it a new version of a document in this deal?</span>
+            <select name="replaces" defaultValue="" className="w-full">
+              <option value="">No: an additional document</option>
+              {dealDocuments(preselectDeal).map((d) => (
+                <option key={d.id} value={d.id}>
+                  Yes: replaces {d.title}
+                </option>
+              ))}
+            </select>
+          </label>
+        )}
         <button className="btn btn-primary">Upload &amp; review</button>
         <p className="text-xs text-muted">The contract is extracted, linked and reviewed; a new brief version is issued. Takes up to a few minutes on the free model tier.</p>
       </form>

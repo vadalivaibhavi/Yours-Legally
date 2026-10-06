@@ -170,7 +170,7 @@ export default async function RegisterPage(props: PageProps<"/register">) {
 
 function affectedDeals(e: RegisterEntry, deals: ReturnType<typeof allDeals>) {
   // Impact (PRD §9.1 Register screen): open deals whose latest brief cites this entry.
-  return deals.filter((d) => d.status !== "signed").filter((d) => briefCites(d.id, e.id));
+  return deals.filter((d) => briefCites(d.id, e.id));
 }
 
 function briefCites(dealId: string, entryId: string) {

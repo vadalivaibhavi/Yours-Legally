@@ -87,12 +87,14 @@ export const Document = z.object({
   ocr: z.boolean(),
   dealId: z.string().optional(),
   trackerId: z.string().optional(),
+  /** Upload that is a new version of a document already in the deal: it takes that document's place (FR-17). */
+  replaces: z.string().optional(),
   /** Contract numbers / references printed on the document (used for deal linking, FR-3). */
   references: z.array(z.string()).default([]),
 });
 export type Document = z.infer<typeof Document>;
 
-export const DealStatus = z.enum(["open", "waiting_for_input", "decided", "signed"]);
+export const DealStatus = z.enum(["open", "waiting_for_input", "decided"]);
 export type DealStatus = z.infer<typeof DealStatus>;
 
 export const Deal = z.object({

@@ -5,7 +5,7 @@
  */
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { allDeals, allDocuments, getDeal } from "@/lib/deals";
+import { allDeals, allDocuments, dealDocuments, getDeal } from "@/lib/deals";
 import { proposeLink, type LinkProposal } from "@/lib/linking";
 import { isQuotaExhausted } from "@/lib/llm";
 import { extractReferences } from "@/lib/references";
@@ -56,6 +56,9 @@ export async function uploadDocument(form: FormData) {
     references: extractReferences(text),
   };
   const chosen = String(form.get("deal") ?? "");
+  // A new version of a document already in the chosen deal takes its place; the old one leaves the deal.
+  const replaced = chosen ? dealDocuments(getDeal(chosen)!).find((d) => d.id === String(form.get("replaces") ?? "")) : undefined;
+  if (replaced) Object.assign(doc, { replaces: replaced.id, title: `${replaced.title.replace(/\s*\((draft|v\d+)[^)]*\)/i, "")} (revised, uploaded ${name})` });
   const proposal = proposeLink({ counterparty: doc.counterparty, docType: doc.docType, text, docId: id }, allDeals(), allDocuments(), chosen || undefined);
   mutate((s) => {
     s.uploadedDocuments.push(doc);
@@ -108,8 +111,9 @@ async function attach(doc: Document, dealId: string, proposal: LinkProposal, by:
       (s) => {
         const o = (s.dealOverrides[dealId] ??= {});
         o.addDocumentIds = [...new Set([...(o.addDocumentIds ?? []), doc.id])];
+        if (doc.replaces) o.removeDocumentIds = [...new Set([...(o.removeDocumentIds ?? []), doc.replaces])];
       },
-      { user: by, dealId, action: "deal.link", detail: { docId: doc.id, mode: proposal.mode, reason: proposal.reason } },
+      { user: by, dealId, action: "deal.link", detail: { docId: doc.id, mode: proposal.mode, reason: proposal.reason, replaces: doc.replaces } },
     );
   }
   mutate((s) => {

@@ -7,9 +7,9 @@ import { allDeals, latestBrief } from "@/lib/deals";
 import { dueLabel } from "@/lib/format";
 import { currentUser } from "@/lib/session";
 
-const STATUS_TEXT: Record<string, string> = { open: "In review", waiting_for_input: "Waiting for input", decided: "Decided", signed: "Signed" };
-/** Status colours: green = done, orange = in progress, red = blocked on someone, blue = not started. */
-const STATUS_TONE: Record<string, "good" | "warn" | "bad" | "brand"> = { open: "brand", waiting_for_input: "bad", decided: "good", signed: "good" };
+const STATUS_TEXT: Record<string, string> = { open: "In review", waiting_for_input: "Waiting for input", decided: "Decided" };
+/** Status colours: green = done, orange = in progress, red = waiting for input, blue = not started. */
+const STATUS_TONE: Record<string, "good" | "warn" | "bad" | "brand"> = { open: "brand", waiting_for_input: "bad", decided: "good" };
 
 /** A verdict or decision as plain text in a neutral chip (the verdict column has no colour). */
 function Plain({ children }: { children: string }) {
@@ -106,7 +106,7 @@ export default async function QueuePage(props: PageProps<"/">) {
                     ) : progress?.started ? (
                       <Chip tone="warn">{progress.complete ? "Ready to finalise" : `Review in progress · ${progress.reacted}/${progress.total}`}</Chip>
                     ) : d.status === "waiting_for_input" ? (
-                      <Chip tone="bad">Waiting for input{d.waitingOn ? `: ${d.waitingOn}` : ""}</Chip>
+                      <Chip tone="bad">Waiting for input</Chip>
                     ) : (
                       <Chip tone={STATUS_TONE[d.status]}>{STATUS_TEXT[d.status]}</Chip>
                     )}

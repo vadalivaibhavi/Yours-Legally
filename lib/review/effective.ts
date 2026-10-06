@@ -6,7 +6,7 @@
  */
 import { registerEntries } from "../register";
 import { readState } from "../store";
-import { sanitize, sanitizeFinding } from "./guardrails";
+import { coverageNote, sanitize, sanitizeFinding } from "./guardrails";
 import type { Brief, EffectiveBrief, Finding, Severity } from "./types";
 import { computeVerdict, sortFindings, templateHeadline } from "./verdict";
 
@@ -83,6 +83,12 @@ export function effectiveBrief(brief: Brief, prev: Brief | null): EffectiveBrief
     verdict,
     headline: verdict === brief.verdict ? sanitize(brief.headline) : templateHeadline(verdict, sorted, waitingFor, alertOpen),
     nextAction: sanitize(brief.nextAction),
+    notSeen: brief.notSeen.map((x) =>
+      x
+        .replace(/^Register built from (\d+) signed documents\..*$/, (_m, n) => coverageNote(Number(n)))
+        // Raw model errors are for the logs; the reader gets what it means.
+        .replace(/^Similar past clauses for (.+?): comparison lines couldn't be written \(.*$/, "Comparisons with similar past clauses in $1 couldn't be written this time (model busy); the matching clauses are still shown."),
+    ),
     similar: brief.similar.map((p) => ({ ...p, hits: p.hits.map((h) => ({ ...h, differs: sanitize(h.differs) })) })),
     complianceAlert,
     changes,

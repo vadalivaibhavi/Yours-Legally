@@ -155,9 +155,9 @@ export async function BriefView({ dealId: id, version }: { dealId: string; versi
           {b.notesFacts
             .filter((f) => f.complianceEvent)
             .map((f) => (
-              <FactRow key={f.id} fact={f} dealId={id} state={confirmations[f.id]?.status} />
+              <FactRow key={f.id} fact={f} dealId={id} answer={confirmations[f.id]} />
             ))}
-          <p className="text-xs text-muted">Confirming raises a compliance alert.</p>
+          <p className="text-xs text-muted">&ldquo;Yes&rdquo; or a correction raises a compliance alert; &ldquo;No&rdquo; closes the question.</p>
         </section>
       )}
 
@@ -202,7 +202,6 @@ export async function BriefView({ dealId: id, version }: { dealId: string; versi
             {b.waitingFor.map((w) => (
               <div key={w.item} className="flex flex-wrap items-center gap-3 px-4 py-2 text-sm">
                 <span>📎 {w.item}</span>
-                <span className="ml-auto text-muted">owner: {w.owner}</span>
               </div>
             ))}
             {isLatest && (
@@ -229,12 +228,12 @@ export async function BriefView({ dealId: id, version }: { dealId: string; versi
 
       {/* ---------------------------------------------------------------- please confirm (notes) */}
       {b.notesFacts.filter((f) => !f.complianceEvent && f.category !== "deadline" && f.category !== "other").length > 0 && (
-        <Section title="Please confirm (from deal notes)">
+        <Section title="Please confirm (from deal notes)" aside={<span className="text-xs text-muted">Kept with the deal for the record; doesn&apos;t change the verdict</span>}>
           <div className="card divide-y divide-line">
             {b.notesFacts
               .filter((f) => !f.complianceEvent && f.category !== "deadline" && f.category !== "other")
               .map((f) => (
-                <FactRow key={f.id} fact={f} dealId={id} state={confirmations[f.id]?.status} />
+                <FactRow key={f.id} fact={f} dealId={id} answer={confirmations[f.id]} />
               ))}
           </div>
         </Section>
@@ -453,7 +452,14 @@ export async function BriefView({ dealId: id, version }: { dealId: string; versi
   );
 }
 
-function FactRow({ fact, dealId, state }: { fact: { id: string; statement: string; quote: string; noteTitle: string; whyItMatters: string }; dealId: string; state?: string }) {
+/** A fact the deal notes state, and Karandeep's answer: right, not right, or right with a correction (shown as written). */
+function FactRow({ fact, dealId, answer }: { fact: { id: string; statement: string; quote: string; noteTitle: string; whyItMatters: string }; dealId: string; answer?: { status: string; edit?: string } }) {
+  const hidden = (
+    <>
+      <input type="hidden" name="dealId" value={dealId} />
+      <input type="hidden" name="factId" value={fact.id} />
+    </>
+  );
   return (
     <div className="space-y-2 p-4 text-sm">
       <p>
@@ -461,28 +467,35 @@ function FactRow({ fact, dealId, state }: { fact: { id: string; statement: strin
       </p>
       <Quote cite={fact.noteTitle}>{fact.quote}</Quote>
       <p className="text-xs text-muted">{fact.whyItMatters}</p>
-      {state ? (
-        <form action={undoConfirmation} className="flex items-center gap-2">
-          <input type="hidden" name="dealId" value={dealId} />
-          <input type="hidden" name="factId" value={fact.id} />
-          <Chip tone={state === "not_true" ? "gray" : "warn"}>{state === "confirmed" ? "Confirmed" : state === "not_true" ? "Marked not true" : "Edited"}</Chip>
+      {answer ? (
+        <form action={undoConfirmation} className="flex flex-wrap items-center gap-2">
+          {hidden}
+          <Chip tone={answer.status === "not_true" ? "gray" : "good"}>{answer.status === "confirmed" ? "✓ You said this is right" : answer.status === "not_true" ? "✗ You said this isn't right" : "✎ You corrected it"}</Chip>
+          {answer.status === "edited" && answer.edit && <span>&ldquo;{answer.edit}&rdquo;</span>}
           <SaveButton className="text-xs text-muted underline">Change</SaveButton>
         </form>
       ) : (
-        <form action={confirmFact} className="flex flex-wrap gap-2">
-          <input type="hidden" name="dealId" value={dealId} />
-          <input type="hidden" name="factId" value={fact.id} />
-          <SaveButton name="status" value="confirmed">
-            Confirm
-          </SaveButton>
-          <SaveButton name="status" value="not_true">
-            Not true
-          </SaveButton>
-          <TextInput name="edit" placeholder="Correct it…" max={LIMITS.note} className="w-64" />
-          <SaveButton name="status" value="edited">
-            Edit
-          </SaveButton>
-        </form>
+        <div className="space-y-2">
+          <form action={confirmFact} className="flex flex-wrap items-center gap-2">
+            {hidden}
+            <span className="text-xs font-semibold">Is this right?</span>
+            <SaveButton name="status" value="confirmed">
+              Yes
+            </SaveButton>
+            <SaveButton name="status" value="not_true">
+              No
+            </SaveButton>
+          </form>
+          <details>
+            <summary className="text-xs text-brand">Partly: correct it</summary>
+            <form action={confirmFact} className="mt-2 flex flex-wrap gap-2">
+              {hidden}
+              <input type="hidden" name="status" value="edited" />
+              <TextInput name="edit" required placeholder="What actually happened" max={LIMITS.note} className="min-w-64 flex-1" />
+              <SaveButton>Save correction</SaveButton>
+            </form>
+          </details>
+        </div>
       )}
     </div>
   );
