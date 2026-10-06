@@ -256,6 +256,9 @@ function registerEdits(form: FormData, e: RegisterEntry): Partial<RegisterEntry>
     start: date("start") ?? e.start,
     perpetual,
     end: perpetual ? null : date("end"),
+    // The extracted end rule ("Term + 18 months") describes the old dates: drop it once the dates are edited,
+    // so the checks, the model prompt and the card all use the corrected end.
+    endRule: perpetual === e.perpetual && (perpetual ? null : date("end")) === e.end ? e.endRule : null,
   };
 }
 
