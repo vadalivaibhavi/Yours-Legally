@@ -269,35 +269,39 @@ async function generateWithFallback(task: Task, system: string, input: string, s
   const timedOut = () => ({ ok: false as const, error: `timed out after ${Math.round(callBudgetMs(task) / 1000)}s across retries | ${errors.join(" | ")}`.slice(0, 2000) });
   const chain = modelsFor(task);
   const exhausted = exhaustedToday();
-  for (const model of chain) {
-    if (exhausted.has(model)) continue; // known to be out of daily quota until the reset
-    for (let attempt = 0; attempt < 4; attempt++) {
-      if (Date.now() >= deadline) return timedOut();
-      await throttle();
-      const r = await generateOnce(model, thinkingFor(task), system, input, schema, deadline);
-      if (r.ok) return r;
-      errors.push(`${model}: ${r.error.slice(0, 120)}`);
-      if (r.daily) {
-        exhausted.add(model);
-        markExhausted(model);
-        break; // next model in the chain
-      }
-      if (r.retry === "same" && attempt < 3) {
-        if (r.rateLimited) {
-          // Per-minute limit: wait exactly what Google asks, then retry. Rate-limit waits don't eat the call budget.
+  const unusable = new Set<string>(); // not found / rejected the request: skip for the rest of this call
+  // Passes over the chain: an overloaded (503) or timed-out model hands over to the next one at once;
+  // only when every model failed in a pass do we back off (15 s, 30 s, 60 s) and try the chain again.
+  for (let pass = 0; ; pass++) {
+    let tried = 0;
+    for (const model of chain) {
+      if (exhausted.has(model) || unusable.has(model)) continue;
+      tried++;
+      for (;;) {
+        if (Date.now() >= deadline) return timedOut();
+        await throttle();
+        const r = await generateOnce(model, thinkingFor(task), system, input, schema, deadline);
+        if (r.ok) return r;
+        errors.push(`${model}: ${r.error.slice(0, 120)}`);
+        if (r.daily) {
+          exhausted.add(model); // out of daily quota until the reset
+          markExhausted(model);
+        } else if (r.rateLimited) {
+          // Per-minute limit: wait exactly what the provider asks, then retry this model. Doesn't eat the budget.
           const wait = r.waitMs ?? 30_000;
           deadline += wait;
           await sleep(wait);
           continue;
+        } else if (r.retry !== "same") {
+          unusable.add(model);
         }
-        // Overloaded (503) models recover in tens of seconds: back off 15s, 30s, 60s (never past the deadline).
-        const wait = r.waitMs ?? 15_000 * 2 ** attempt;
-        if (Date.now() + wait >= deadline) return timedOut();
-        await sleep(wait);
-        continue;
+        break; // next model in the chain
       }
-      break; // not found / fatal → next model in the chain
     }
+    if (!tried) break;
+    const wait = 15_000 * 2 ** Math.min(pass, 2);
+    if (Date.now() + wait >= deadline) return timedOut();
+    await sleep(wait);
   }
   // Every model in the chain is out of daily quota: stop the run cleanly instead of "review manually".
   if (chain.every((m) => exhausted.has(m))) throw new QuotaExhaustedError(chain);
@@ -307,8 +311,8 @@ async function generateWithFallback(task: Task, system: string, input: string, s
 type Once = GenOk | (GenErr & { retry?: "same" | "next"; waitMs?: number; daily?: boolean; rateLimited?: boolean });
 
 async function generateOnce(model: string, thinking: "low" | "high", system: string, input: string, schema: object, deadline: number): Promise<Once> {
-  // Each request is cut off at the call deadline (and never waits more than 4 min on its own).
-  const ms = Math.max(1_000, Math.min(240_000, deadline - Date.now()));
+  // Each request is cut off at the call deadline, and never waits more than LLM_REQUEST_TIMEOUT_MS (2 min) on its own.
+  const ms = Math.max(1_000, Math.min(Number(process.env.LLM_REQUEST_TIMEOUT_MS || 120_000), deadline - Date.now()));
   const p = provider();
   const key = apiKey();
   if (!key) return { ok: false, error: `${p === "groq" ? "GROQ_API_KEY" : "LLM_API_KEY"} is not set`, retry: "next" };
