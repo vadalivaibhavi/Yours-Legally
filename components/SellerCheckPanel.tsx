@@ -1,6 +1,6 @@
 import { SellerCheckForm } from "@/components/SellerCheckForm";
 import { Chip } from "@/components/ui";
-import { fmtDate } from "@/lib/format";
+import { fmtDate, fmtDateTime } from "@/lib/format";
 import { sellerBanner } from "@/lib/seller";
 import type { SellerCheck } from "@/lib/store";
 import type { DealView } from "@/lib/deals";
@@ -29,11 +29,12 @@ export function SellerCheckPanel({ deal, checks }: { deal: DealView; checks: Sel
       )}
       {latest && (
         <div className="card space-y-3 p-4">
-          <div className="flex flex-wrap items-center gap-2">
+          {/* The answer is dated at the top: it holds for the deal details as entered on that day. */}
+          <div className="space-y-1">
             <h3 className="font-semibold">Heads-up for {latest.input.client}</h3>
-            <span className="text-xs text-muted">
-              by {latest.by} · {new Date(latest.at).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" })}
-            </span>
+            <p className="rounded bg-paper px-3 py-2 text-sm">
+              <b>Checked on {fmtDateTime(latest.at)}</b> by {latest.by}. With the deal details entered then, this is where AtliQ stands. Karandeep&apos;s contract review has the final say.
+            </p>
           </div>
           <ul className="space-y-3">
             {latest.items.map((i) => (
@@ -49,16 +50,13 @@ export function SellerCheckPanel({ deal, checks }: { deal: DealView; checks: Sel
               </li>
             ))}
           </ul>
-          <p className="rounded bg-paper p-2 text-xs text-muted">
-            As of {fmtDate(latest.asOf)}, based on what you entered. Karandeep&apos;s contract review is the final word.
-          </p>
           {checks.length > 1 && (
             <details className="text-xs text-muted">
               <summary>Earlier answers ({checks.length - 1}) are kept with their dates</summary>
               <ul className="mt-1 space-y-1">
                 {checks.slice(0, -1).map((c) => (
                   <li key={c.id}>
-                    {fmtDate(c.asOf)} by {c.by}: {c.items.map((i) => `${i.item.split(":")[0]} ${STATUS[i.status].label}`).join(" · ")}
+                    {fmtDateTime(c.at)} by {c.by}: {c.items.map((i) => `${i.item.split(":")[0]} ${STATUS[i.status].label}`).join(" · ")}
                   </li>
                 ))}
               </ul>
