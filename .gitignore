@@ -18,3 +18,6 @@ node_modules/
 out/
 data/briefs/failed/
 data/state-backups/
+# local testing (Ollama) outputs: never committed, never shipped
+data/briefs-*/
+data/clause_index.*.json

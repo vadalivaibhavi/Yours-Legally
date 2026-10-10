@@ -12,3 +12,6 @@
 {"at":"2026-10-10T18:37:39.750Z","provider":"gemini","script":"eval","caseId":"EV-S6","task":"classify","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
 {"at":"2026-10-10T18:42:44.715Z","provider":"gemini","script":"eval","caseId":"EV-S6","task":"classify","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
 {"at":"2026-10-10T18:48:45.003Z","provider":"gemini","script":"eval","caseId":"EV-S6","task":"classify","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-10T19:02:53.925Z","provider":"ollama","task":"nda","model":"llama3.2","inputTokens":60,"outputTokens":101,"ms":24924,"cached":false,"ok":true}
+{"at":"2026-10-10T19:04:34.868Z","provider":"gemini","script":"eval","caseId":"EV-S6","task":"classify","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-10T19:04:54.018Z","provider":"ollama","task":"classify","model":"llama3.2","inputTokens":96,"outputTokens":31,"ms":4780,"cached":false,"ok":true}

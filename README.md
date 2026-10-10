@@ -126,8 +126,8 @@ Every model call (input/output tokens, task, model, deal, eval case, cache hit o
 
 | Variable | Example | Notes |
 |---|---|---|
-| `LLM_PROVIDER` | `gemini` | `gemini` (development) · `groq` (demo) · `anthropic` · `openai` · `mock` |
-| `GROQ_API_KEY` / `GROQ_MODEL_FAST` / `GROQ_MODEL_STRONG` | — / `openai/gpt-oss-20b` / `openai/gpt-oss-120b` | used only when `LLM_PROVIDER=groq`; `LLM_API_KEY` stays the Gemini key |
+| `LLM_PROVIDER` | `gemini` | `gemini` (the final, deployed build) · `ollama` (local testing and evals) · `anthropic` · `openai` · `mock` |
+| `OLLAMA_MODEL_FAST` / `OLLAMA_MODEL_STRONG` / `OLLAMA_EMBED_MODEL` / `OLLAMA_BASE_URL` | `llama3.2` / `llama3.2` / `nomic-embed-text` / `http://localhost:11434` | local profile only; no key, no quota |
 | `LLM_API_KEY` | | server-only; never in client code |
 | `LLM_MODEL_FAST` | `gemini-flash-lite-latest,gemini-3.5-flash-lite` | comma = fallback chain |
 | `LLM_MODEL_STRONG` | `gemini-flash-latest,gemini-3.5-flash,…` | comma = fallback chain |
@@ -137,15 +137,27 @@ Every model call (input/output tokens, task, model, deal, eval case, cache hit o
 | `REVIEW_CONCURRENCY` | `1` | deals reviewed at once by `npm run review` (dependants wait for their client deal); raise it on a billed key |
 | `APP_TODAY` | `2026-10-04` | fixed "today" so expiry, due-in and evals are reproducible |
 
-### Switching to Groq (demo provider)
+### Local testing (Ollama) vs the final build (Gemini on Vercel)
 
-Gemini is for development only; the demo, the final eval numbers and the cost estimate come from Groq. The Groq adapter (`lib/llm.ts`, OpenAI-compatible API) is built and **off** until the review engine and screens are done on Gemini. Embeddings stay on Gemini: Groq has no embedding model, and the clause index is built once.
+Two profiles, switched in `.env.local` (`.env.example` has both):
 
-1. In the Groq console, **set a spending limit first**, then create a paid API key.
-2. In `.env.local`: `LLM_PROVIDER=groq` and `GROQ_API_KEY=…` (models default to `openai/gpt-oss-20b` fast and `openai/gpt-oss-120b` strong). On the paid tier, also set `LLM_MIN_INTERVAL_MS=0` and `REVIEW_CONCURRENCY=3`.
-3. `npm run eval` once. Every step re-runs: the cache and the brief hashes are per provider, so no Gemini answer is reused. Expect some prompt fixes, because a different model behaves differently.
-4. Pre-warm: `npm run review -- --force`, so every committed brief is regenerated on Groq. `npm run eval` warns about any brief still made on Gemini.
-5. Record the final numbers: `npm run eval` (the report header names the provider and models) and `npm run cost -- --provider groq` (Groq list prices per model, from the per-call log).
+| | **Final build** (committed, deployed on Vercel) | **Local testing and evals** (this machine only) |
+|---|---|---|
+| Model | `LLM_PROVIDER=gemini` | `LLM_PROVIDER=ollama` (`llama3.2`; no key, no quota, no cost) |
+| Embeddings | `EMBED_PROVIDER=gemini` (`gemini-embedding-001`) | `EMBED_PROVIDER=ollama` (`nomic-embed-text`) |
+| Briefs | `data/briefs/` (committed) | `data/briefs-ollama/` (gitignored) |
+| Clause index | `data/clause_index.json` (committed) | `data/clause_index.ollama.json` (gitignored; build once) |
+| Model cache | untagged | tagged `ollama` |
+
+Rules that keep them apart:
+- **Vercel can only use Gemini.** A deployed app can't reach an Ollama running on a laptop, so the final build is Gemini for both the model and the embeddings.
+- **Embeddings must match their index.** Vectors from different models can't be compared, so each embedding provider has its own clause index, and the app stops with a clear error if the index and `EMBED_MODEL` don't match. It never returns nonsense matches.
+- **Local runs never overwrite final outputs.** Briefs go to their own folder and cache entries are tagged, so nothing from Ollama can leak into the committed briefs.
+- **Ollama has its own time limits.** Locally there is no rate limit and calls get up to 20 minutes, independent of the Gemini settings.
+
+**Switch to local:** in `.env.local` set `LLM_PROVIDER=ollama` and `EMBED_PROVIDER=ollama` (Ollama running, with `llama3.2` and `nomic-embed-text` pulled), then once `npm run build:index`. After that, `npm run review`, `npm run eval` and the app all run locally.
+
+**Switch back to final** (after local testing): set both back to `gemini`, then `npm run review` (fills or refreshes `data/briefs`) and `npm run eval` for the numbers you report. The eval report header names the provider and warns if any brief came from another one. `npm run cost -- --provider gemini` gives the cost. Local runs are free.
 
 ### Deploy (GitHub → Vercel)
 

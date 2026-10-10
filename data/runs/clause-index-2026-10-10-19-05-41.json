@@ -1,0 +1,12 @@
+{
+  "script": "buildClauseIndex",
+  "at": "2026-10-10T19:05:41.391Z",
+  "chunks": 231,
+  "embedProvider": "ollama",
+  "embedModel": "nomic-embed-text",
+  "embedTokensApprox": 0,
+  "llmCalls": 1,
+  "llmInputTokens": 96,
+  "llmOutputTokens": 31,
+  "seconds": 52
+}

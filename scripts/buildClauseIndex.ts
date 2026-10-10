@@ -5,7 +5,7 @@
 import "./_env";
 import { z } from "zod";
 import { chunkDocument, typeFromHeading } from "../lib/chunker";
-import { readJson, writeJson } from "../lib/config";
+import { clauseIndexFile, readJson, writeJson } from "../lib/config";
 import { drainEmbedTokens, embed, EMBED_DIM, embedModel, embedProvider } from "../lib/embed";
 import { callModel, drainUsage } from "../lib/llm";
 import { ClauseType, type ClauseChunk, type Document, type IntentLabel } from "../lib/types";
@@ -67,7 +67,7 @@ async function main() {
   const vectors = await embed(drafts.map((c) => `${c.heading}\n${c.text}`.slice(0, 3000)));
   const chunks: ClauseChunk[] = drafts.map((c, i) => ({ ...c, clauseType: c.clauseType ?? "other", embedding: vectors[i] }));
 
-  writeJson("clause_index.json", { builtAt: new Date().toISOString(), embedProvider: embedProvider(), embedModel: embedModel(), dim: EMBED_DIM, chunks });
+  writeJson(clauseIndexFile(), { builtAt: new Date().toISOString(), embedProvider: embedProvider(), embedModel: embedModel(), dim: EMBED_DIM, chunks });
 
   const usage = drainUsage();
   const run = {

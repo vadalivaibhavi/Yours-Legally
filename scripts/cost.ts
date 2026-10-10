@@ -1,25 +1,21 @@
 /**
  * npm run cost: what the model calls cost, from the per-call log (data/runs/calls-<date>.jsonl: provider,
  * model, task, deal, input/output tokens) and, for runs before that log existed, the committed briefs.
- * The cost estimate for the demo must come from the demo provider (Groq):
- *   npm run cost                      → the current LLM_PROVIDER
- *   npm run cost -- --provider groq   → one provider's calls (log lines without a provider are Gemini)
+ * The cost estimate comes from the final provider (Gemini); local Ollama runs cost nothing.
+ *   npm run cost                        → the current LLM_PROVIDER
+ *   npm run cost -- --provider gemini   → one provider's calls (log lines without a provider are Gemini)
  *   npm run cost -- --since 2026-10-06
  *   npm run cost -- --deal kriti
- * Prices: $/1M tokens per model below (Groq list prices, Oct 2026; Gemini placeholders). Unknown models
- * use PRICE_IN_PER_M / PRICE_OUT_PER_M.
+ * Prices: $/1M tokens, PRICE_IN_PER_M / PRICE_OUT_PER_M (Gemini flash placeholders by default).
  */
 import "./_env";
 import fs from "node:fs";
 import path from "node:path";
 import { parseArgs } from "./_args";
 
-const PRICES: Record<string, { in: number; out: number }> = {
-  "openai/gpt-oss-120b": { in: 0.15, out: 0.6 },
-  "openai/gpt-oss-20b": { in: 0.075, out: 0.3 },
-};
 const FALLBACK = { in: Number(process.env.PRICE_IN_PER_M ?? 0.3), out: Number(process.env.PRICE_OUT_PER_M ?? 2.5) };
-const price = (model: string) => PRICES[model] ?? FALLBACK;
+const LOCAL = { in: 0, out: 0 }; // Ollama runs on this machine
+const price = (model: string) => (/^(llama|qwen|mistral|phi|gemma(?!-)|nomic)/i.test(model) ? LOCAL : FALLBACK);
 const usd = (model: string, i: number, o: number) => (i / 1e6) * price(model).in + (o / 1e6) * price(model).out;
 
 const args = parseArgs();
@@ -70,12 +66,12 @@ if (calls.length) {
   }
 } else if (prov === "gemini") {
   // Before the call log existed: fall back to the token counts stored in the committed briefs.
-  const briefs = fs.readdirSync("data/briefs").filter((f) => f.endsWith(".json")).map((f) => JSON.parse(fs.readFileSync(path.join("data/briefs", f), "utf8")));
+  const briefs = fs.readdirSync("data/briefs").filter((f) => f.endsWith(".json")).map((f) => JSON.parse(fs.readFileSync(path.join("data/briefs", f), "utf8"))); // the final (Gemini) briefs
   const measured = briefs.filter((b) => b.usage.inputTokens > 0 && (!deals.length || deals.includes(b.dealId)));
   console.log("From the committed briefs (the run that produced each brief; Gemini placeholder prices):");
   for (const b of measured) console.log(`  ${b.dealId.padEnd(13)} ${b.usage.inputTokens} in / ${b.usage.outputTokens} out ≈ $${usd("", b.usage.inputTokens, b.usage.outputTokens).toFixed(4)}`);
 } else {
-  console.log(`No billed ${prov} calls logged yet. Run the evals / pre-warm the briefs on ${prov} first (see README "Switching to Groq").`);
+  console.log(`No billed ${prov} calls logged yet. Run the reviews / evals on ${prov} first.`);
 }
 
 // One-off register build (Gemini, before the call log): from its run summary.

@@ -13,6 +13,24 @@ export function writableDir(sub: string): string {
   return dir;
 }
 
+/**
+ * Two run profiles (README "Local testing vs the final build"):
+ *  - final (deployed on Vercel): LLM_PROVIDER=gemini + EMBED_PROVIDER=gemini; briefs in data/briefs, clause
+ *    index data/clause_index.json. These are committed and shipped.
+ *  - local testing: LLM_PROVIDER=ollama (and EMBED_PROVIDER=ollama to test offline); briefs in
+ *    data/briefs-ollama, index data/clause_index.ollama.json. Never committed, never shipped, and they never
+ *    overwrite the final ones. The model cache is tagged by provider as well (lib/llm.ts providerTag).
+ */
+export function briefsDir(): string {
+  const p = (process.env.LLM_PROVIDER || "gemini").toLowerCase();
+  return p === "gemini" ? "briefs" : `briefs-${p}`;
+}
+/** Clause index for the current embedding model: vectors from different models can't be compared. */
+export function clauseIndexFile(): string {
+  const e = (process.env.EMBED_PROVIDER || "gemini").toLowerCase();
+  return e === "gemini" ? "clause_index.json" : `clause_index.${e}.json`;
+}
+
 /** "Today" is fixed for reproducible demos and evals (Phase 1 spec §0). */
 export function appToday(): string {
   return process.env.APP_TODAY || "2026-10-04";

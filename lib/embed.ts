@@ -1,7 +1,7 @@
 /**
  * The one embedding wrapper (Build Plan §2). Changing the embedding model means re-running
  * `npm run build:index` once. Vectors are L2-normalised so cosine = dot product.
- * Providers: gemini | openai | voyage | local (hashed bag-of-words, no key) | mock.
+ * Providers: gemini | openai | voyage | ollama (local server, no key) | local (hashed bag-of-words, no key) | mock.
  * Server-only.
  */
 import fs from "node:fs";
@@ -15,7 +15,10 @@ export function embedProvider(): string {
   return (process.env.EMBED_PROVIDER || "local").toLowerCase();
 }
 export function embedModel(): string {
-  return process.env.EMBED_MODEL || (embedProvider() === "local" ? "local-hash-768" : "gemini-embedding-001");
+  const p = embedProvider();
+  // Switching only EMBED_PROVIDER to ollama must not send it the Gemini model name.
+  if (p === "ollama") return process.env.OLLAMA_EMBED_MODEL || (/^gemini/i.test(process.env.EMBED_MODEL ?? "") ? "" : process.env.EMBED_MODEL) || "nomic-embed-text";
+  return process.env.EMBED_MODEL || (p === "local" ? "local-hash-768" : "gemini-embedding-001");
 }
 
 let tokensUsed = 0;
@@ -42,6 +45,20 @@ export async function embed(texts: string[]): Promise<number[][]> {
 async function embedBatch(texts: string[]): Promise<number[][]> {
   const p = embedProvider();
   if (p === "local" || p === "mock") return texts.map(localEmbed);
+  if (p === "ollama") {
+    // Local Ollama server (no key). nomic-embed-text returns 768 dims = EMBED_DIM. Its vectors live in their
+    // own index (data/clause_index.ollama.json): they can't be compared with the final Gemini index.
+    const base = process.env.OLLAMA_BASE_URL || "http://localhost:11434";
+    const res = await withRetry(() =>
+      fetch(`${base}/api/embed`, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ model: embedModel(), input: texts.map((t) => t.slice(0, 8000)) }),
+      }),
+    );
+    const j = await res.json();
+    return j.embeddings;
+  }
   const key = process.env.EMBED_API_KEY || process.env.LLM_API_KEY;
   if (!key) throw new Error("EMBED_API_KEY is not set");
   const approxTokens = texts.reduce((n, t) => n + Math.ceil(t.length / 4), 0);

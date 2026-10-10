@@ -54,22 +54,24 @@ The EV-V synthetic documents' header line changed with the product rename (5 Oct
 
 On the free tier that is well within a day's quota for one round of tests. If a step hits the daily quota, the page now says so and nothing is lost: retry the next day.
 
-## 2b. Switch to Groq for the demo (after the foundations are done on Gemini)
+## 2b. Local testing on Ollama, then back to Gemini for the final build
 
-Final eval results and cost numbers must come from Groq, because that is what will be demoed; the Gemini runs are for development. The adapter is built and switched off. Steps are in the README ("Switching to Groq").
+Testing and evals run locally on Ollama (no quota). The deployed app and the final numbers are Gemini: Vercel can't reach a local Ollama, and the committed clause index is built with Gemini embeddings. Steps are in the README ("Local testing vs the final build").
 
 | # | What | Status | How |
 |---|---|---|---|
-| G1 | Set a spending limit in the Groq console, then add a paid key | Not started (user action) | Groq console → billing limits; `GROQ_API_KEY` in `.env.local` |
-| G2 | Switch `LLM_PROVIDER=groq` and run the full evals once; fix prompts where the new model behaves differently | Not started | `npm run eval` |
-| G3 | Pre-warm all briefs on Groq, demo, and record the final eval numbers and cost on Groq | Not started | `npm run review -- --force` → `npm run eval` → `npm run cost -- --provider groq` |
+| L1 | Build the local clause index once | Not started | `LLM_PROVIDER=ollama EMBED_PROVIDER=ollama`, then `npm run build:index` |
+| L2 | Local reviews and evals | Not started | `npm run review`, `npm run eval` (briefs go to data/briefs-ollama; nothing final is touched) |
+| F1 | Switch back to Gemini (model and embeddings) | After local testing | `LLM_PROVIDER=gemini`, `EMBED_PROVIDER=gemini` in `.env.local` |
+| F2 | Final reviews, evals and cost on Gemini | After F1 | `npm run review` → `npm run eval` → `npm run cost -- --provider gemini`; the batch in 2a |
+| F3 | Deploy on Vercel with the Gemini settings | After F2 | README → Deploy (GitHub → Vercel) |
 
 ## 3. Tooling limits (not quota)
 
 | # | What | Why | How to clear it |
 |---|---|---|---|
 | T1 | **GitHub repo + Vercel deploy** (Build Plan Phase 0/5: public live URL) | GitHub/Vercel CLIs aren't installed and both need your accounts | README → *Deploy (GitHub → Vercel)*; or install the Vercel CLI, log in, and ask me to deploy |
-| T2 | **Anthropic and OpenAI adapters** in `lib/llm.ts` / `lib/embed.ts` | Written but never called: no keys for those providers | set `LLM_PROVIDER` + key, run `npm run review -- loopmart` as a smoke test |
+| T2 | **Anthropic and OpenAI adapters** (Groq removed 11 Oct; Ollama is the local provider) in `lib/llm.ts` / `lib/embed.ts` | Written but never called: no keys for those providers | set `LLM_PROVIDER` + key, run `npm run review -- loopmart` as a smoke test |
 | T3 | **Paid-tier behaviour** (rate limits, latency, cost per review) | All four keys provided were free-tier projects | enable billing on the key's project, then `npm run cost` after a full run |
 
 ## 4. Not built, by design (declared in the README)

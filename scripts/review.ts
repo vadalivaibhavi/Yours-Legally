@@ -1,5 +1,6 @@
 /**
  * Phase 2: run the review pipeline and write the v1 brief per deal to data/briefs/<deal>.json
+ * (data/briefs-ollama/ with LLM_PROVIDER=ollama: local runs never overwrite the final Gemini briefs)
  * (committed, so the deployed app is instant and Vercel never runs the heavy jobs).
  *
  *   npm run review                         → every deal that isn't already complete and current
@@ -17,7 +18,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { checkIds, parseArgs } from "./_args";
 import { baseDeals } from "../lib/data";
-import { writeJson } from "../lib/config";
+import { briefsDir, writeJson } from "../lib/config";
 import { isQuotaExhausted, withRunContext } from "../lib/llm";
 import { currentInputsHash, reviewDeal } from "../lib/review/pipeline";
 import type { Brief } from "../lib/review/types";
@@ -28,7 +29,7 @@ const CONCURRENCY = Math.max(1, Number(process.env.REVIEW_CONCURRENCY || 1));
 type Totals = { calls: number; cached: number; inTok: number; outTok: number };
 
 function existingBrief(id: string): Brief | null {
-  const p = `data/briefs/${id}.json`;
+  const p = `data/${briefsDir()}/${id}.json`;
   return fs.existsSync(p) ? (JSON.parse(fs.readFileSync(p, "utf8")) as Brief) : null;
 }
 
@@ -53,11 +54,11 @@ async function reviewOne(d: Deal, totals: Totals): Promise<{ line?: string; quot
     // Never replace a complete brief with an incomplete one.
     const existing = existingBrief(d.id);
     if (!isComplete(brief) && existing && isComplete(existing)) {
-      writeJson(`briefs/failed/${d.id}.json`, brief);
-      console.log(`  [${d.id}] ! kept the existing complete brief; incomplete run saved to data/briefs/failed/${d.id}.json`);
+      writeJson(`${briefsDir()}/failed/${d.id}.json`, brief);
+      console.log(`  [${d.id}] ! kept the existing complete brief; incomplete run saved to data/${briefsDir()}/failed/${d.id}.json`);
     } else {
-      writeJson(`briefs/${d.id}.json`, brief);
-      if (isComplete(brief)) fs.rmSync(`data/briefs/failed/${d.id}.json`, { force: true }); // superseded
+      writeJson(`${briefsDir()}/${d.id}.json`, brief);
+      if (isComplete(brief)) fs.rmSync(`data/${briefsDir()}/failed/${d.id}.json`, { force: true }); // superseded
     }
     totals.calls += brief.usage.calls;
     totals.cached += brief.usage.cachedCalls;

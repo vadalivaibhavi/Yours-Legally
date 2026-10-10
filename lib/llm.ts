@@ -6,7 +6,9 @@
  *   "couldn't complete: review manually" (CLAUDE.md rule; PRD §9.2 System failure).
  * - Results are cached by a hash of the full request in data/cache/llm, so re-runs of unchanged
  *   documents are instant and free.
- * Providers: gemini · groq (OpenAI-compatible API) · anthropic · openai · mock. Embeddings are separate
+ * Providers: gemini (the final, deployed build) · ollama (local testing and evals, no key, no quota) ·
+ * anthropic · openai · mock. Local runs never mix with the final ones: the cache is tagged by provider and
+ * briefs go to their own folder (lib/config.ts briefsDir). Embeddings are separate
  * (lib/embed.ts) and stay on Gemini whatever LLM_PROVIDER says.
  * Server-only: reads API keys from the environment.
  */
@@ -76,7 +78,7 @@ export function logCall(rec: { task: string; model: string; inputTokens: number;
 /** Free tiers cap requests per minute: space out model requests (LLM_MIN_INTERVAL_MS, default 4 s ≈ 15/min). */
 let nextSlot = 0;
 async function throttle() {
-  const gap = Number(process.env.LLM_MIN_INTERVAL_MS ?? 4000);
+  const gap = provider() === "ollama" ? 0 : Number(process.env.LLM_MIN_INTERVAL_MS ?? 4000); // a local model has no rate limit
   if (gap <= 0) return;
   const now = Date.now();
   const wait = Math.max(0, nextSlot - now);
@@ -138,19 +140,19 @@ export function providerTag(): string[] {
   return p === "gemini" ? [] : [p];
 }
 
-/** The key for the current provider: GROQ_API_KEY for groq (so LLM_API_KEY can stay the Gemini key), else LLM_API_KEY. */
+/** The key for the current provider (a local Ollama needs none). */
 function apiKey(): string | undefined {
-  return (provider() === "groq" ? process.env.GROQ_API_KEY : undefined) || process.env.LLM_API_KEY;
+  return provider() === "ollama" ? "local" : process.env.LLM_API_KEY;
 }
 
 export function modelsFor(task: Task): string[] {
   const tier = TIER[task];
-  // Groq has its own model settings, so switching provider is one line (LLM_PROVIDER=groq).
+  // Ollama has its own model settings, so switching to local testing is one line (LLM_PROVIDER=ollama).
   const raw =
-    provider() === "groq"
+    provider() === "ollama"
       ? tier === "fast"
-        ? process.env.GROQ_MODEL_FAST || "openai/gpt-oss-20b"
-        : process.env.GROQ_MODEL_STRONG || "openai/gpt-oss-120b"
+        ? process.env.OLLAMA_MODEL_FAST || "llama3.2"
+        : process.env.OLLAMA_MODEL_STRONG || "llama3.2"
       : tier === "fast"
         ? process.env.LLM_MODEL_FAST
         : process.env.LLM_MODEL_STRONG;
@@ -259,6 +261,9 @@ type GenErr = { ok: false; error: string };
  */
 const REFERENCE_ONLY = new Set<Task>(["differs"]);
 export function callBudgetMs(task?: Task): number {
+  // A local model on a laptop is slow but never rate-limited: give it time instead of failing the step.
+  // Its own settings, so the Gemini ones in .env.local never cap a local run.
+  if (provider() === "ollama") return Number(process.env.OLLAMA_CALL_BUDGET_MS || 1_200_000);
   if (task && REFERENCE_ONLY.has(task)) return Number(process.env.LLM_REFERENCE_BUDGET_MS || 45_000);
   return Number(process.env.LLM_CALL_BUDGET_MS || 300_000);
 }
@@ -311,14 +316,14 @@ async function generateWithFallback(task: Task, system: string, input: string, s
 type Once = GenOk | (GenErr & { retry?: "same" | "next"; waitMs?: number; daily?: boolean; rateLimited?: boolean });
 
 async function generateOnce(model: string, thinking: "low" | "high", system: string, input: string, schema: object, deadline: number): Promise<Once> {
-  // Each request is cut off at the call deadline, and never waits more than LLM_REQUEST_TIMEOUT_MS (2 min) on its own.
-  const ms = Math.max(1_000, Math.min(Number(process.env.LLM_REQUEST_TIMEOUT_MS || 120_000), deadline - Date.now()));
+  // Each request is cut off at the call deadline, and never waits more than LLM_REQUEST_TIMEOUT_MS (2 min; 15 min locally) on its own.
+  const ms = Math.max(1_000, Math.min(provider() === "ollama" ? 900_000 : Number(process.env.LLM_REQUEST_TIMEOUT_MS || 120_000), deadline - Date.now()));
   const p = provider();
   const key = apiKey();
-  if (!key) return { ok: false, error: `${p === "groq" ? "GROQ_API_KEY" : "LLM_API_KEY"} is not set`, retry: "next" };
+  if (!key) return { ok: false, error: "LLM_API_KEY is not set", retry: "next" };
   try {
     if (p === "gemini") return await gemini(model, thinking, key, system, input, schema, ms);
-    if (p === "groq") return await groq(model, thinking, key, system, input, schema, ms);
+    if (p === "ollama") return await ollama(model, system, input, schema, ms);
     if (p === "anthropic") return await anthropic(model, key, system, input, schema, ms);
     if (p === "openai") return await openai(model, key, system, input, schema, ms);
     return { ok: false, error: `unknown LLM_PROVIDER ${p}` };
@@ -406,42 +411,39 @@ async function openai(model: string, key: string, system: string, input: string,
 }
 
 /**
- * Groq: OpenAI-compatible chat completions. JSON schema in best-effort mode (strict mode would need every
- * property required and additionalProperties:false; zod validates the answer anyway). Models that don't
- * take a schema fall back to JSON-object mode with the schema in the prompt. gpt-oss models get a
- * reasoning effort; their reasoning tokens are billed inside completion_tokens.
+ * Ollama (local testing): its own /api/chat with the JSON schema as "format", so the model can only answer
+ * in that shape (zod still validates it). The context window is raised from Ollama's 2,048-token default,
+ * which would silently cut a contract off (OLLAMA_NUM_CTX, default 32k). No key, no quota, no cost.
  */
-async function groq(model: string, thinking: "low" | "high", key: string, system: string, input: string, schema: object, ms: number): Promise<Once> {
-  const reasoning = /gpt-oss/.test(model) ? { reasoning_effort: thinking === "high" ? "high" : "low", include_reasoning: false } : {};
-  const send = (withSchema: boolean) =>
-    fetch("https://api.groq.com/openai/v1/chat/completions", {
+async function ollama(model: string, system: string, input: string, schema: object, ms: number): Promise<Once> {
+  const base = (process.env.OLLAMA_BASE_URL || "http://localhost:11434").replace(/\/$/, "");
+  let res: Response;
+  try {
+    res = await fetch(`${base}/api/chat`, {
       method: "POST",
       signal: AbortSignal.timeout(ms),
-      headers: { "content-type": "application/json", authorization: `Bearer ${key}` },
+      headers: { "content-type": "application/json" },
       body: JSON.stringify({
         model,
+        stream: false,
+        format: schema,
         messages: [
-          { role: "system", content: withSchema ? system : system + "\n\nReturn ONLY a JSON object matching this JSON Schema, no prose:\n" + JSON.stringify(schema) },
+          { role: "system", content: system },
           { role: "user", content: input },
         ],
-        response_format: withSchema ? { type: "json_schema", json_schema: { name: "result", strict: false, schema } } : { type: "json_object" },
-        max_completion_tokens: 32_768,
-        temperature: 0.2,
-        ...reasoning,
+        options: { temperature: 0.2, num_ctx: Number(process.env.OLLAMA_NUM_CTX || 32_768) },
       }),
     });
-  let res = await send(true);
-  if (res.status === 400) {
-    const body = await res.clone().text();
-    // Model without schema support (or a schema it can't take): plain JSON mode. Other 400s are real errors.
-    if (/response_format|json_schema|schema/i.test(body)) res = await send(false);
+  } catch (e) {
+    if (/ECONNREFUSED|fetch failed/i.test(String(e))) return { ok: false, error: `Ollama isn't running at ${base} (start the Ollama app)`, retry: "next" };
+    throw e;
   }
   const txt = await res.text();
-  if (!res.ok) return classifyHttpError(res.status, txt, res.headers.get("retry-after"));
+  if (!res.ok) return /not found|pull/i.test(txt) ? { ok: false, error: `Ollama model ${model} isn't installed (ollama pull ${model})`, retry: "next" } : classifyHttpError(res.status, txt);
   const j = JSON.parse(txt);
-  const text = j.choices?.[0]?.message?.content ?? "";
-  if (!text) return { ok: false, error: `empty response (${j.choices?.[0]?.finish_reason ?? "no choice"})`, retry: "same" };
-  return { ok: true, text, model, usage: { inputTokens: j.usage?.prompt_tokens ?? 0, outputTokens: j.usage?.completion_tokens ?? 0 } };
+  const text = j.message?.content ?? "";
+  if (!text) return { ok: false, error: `empty response (${j.done_reason ?? "no message"})`, retry: "same" };
+  return { ok: true, text, model, usage: { inputTokens: j.prompt_eval_count ?? 0, outputTokens: j.eval_count ?? 0 } };
 }
 
 /** Reasoning depth per task: deep where judgment matters, shallow where latency matters. */
@@ -453,16 +455,14 @@ export function thinkingFor(task: Task): "low" | "high" {
 function classifyHttpError(status: number, body: string, retryAfter?: string | null): GenErr & { retry?: "same" | "next"; waitMs?: number; daily?: boolean; rateLimited?: boolean } {
   const msg = `HTTP ${status}: ${body.replace(/\s+/g, " ").slice(0, 240)}`;
   if (status === 429) {
-    // Daily (or zero) quota → this model is done for today (Gemini: "PerDay"; Groq: "per day (TPD/RPD)").
-    if (/PerDay|limit: 0\b|per day|\((?:TPD|RPD)\)/i.test(body)) return { ok: false, error: msg, retry: "next", daily: true };
-    // Per-minute → wait the delay the provider returns and retry (Gemini retryDelay; Groq retry-after / "try again in 1m2.5s").
+    // Daily (or zero) quota → this model is done for today (Gemini: "PerDay").
+    if (/PerDay|limit: 0\b|per day/i.test(body)) return { ok: false, error: msg, retry: "next", daily: true };
+    // Per-minute → wait the delay the provider returns and retry (Gemini retryDelay, or a retry-after header).
     const g = body.match(/"retryDelay":\s*"([\d.]+)s"/) ?? body.match(/retry in ([\d.]+)s/i);
-    const q = body.match(/try again in (?:(\d+)m)?([\d.]+)s/i);
-    const secs = g ? Number(g[1]) : q ? Number(q[1] ?? 0) * 60 + Number(q[2]) : retryAfter ? Number(retryAfter) : NaN;
+    const secs = g ? Number(g[1]) : retryAfter ? Number(retryAfter) : NaN;
     const wait = Number.isFinite(secs) ? Math.min(secs * 1000 + 1000, 180_000) : 30_000;
     return { ok: false, error: msg, retry: "same", waitMs: wait, rateLimited: true };
   }
-  if (status === 498) return { ok: false, error: msg, retry: "same", waitMs: 15_000 }; // Groq: capacity exceeded
   if (status >= 500) return { ok: false, error: msg, retry: "same" };
   return { ok: false, error: msg, retry: "next" };
 }

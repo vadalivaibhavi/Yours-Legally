@@ -4,6 +4,7 @@
  */
 import fs from "node:fs";
 import path from "node:path";
+import { briefsDir } from "./config";
 import { baseDeals, baseDocuments, notes } from "./data";
 import { effectiveBrief } from "./review/effective";
 import type { Brief, EffectiveBrief } from "./review/types";
@@ -72,9 +73,9 @@ export function dealNotes(deal: Deal): Note[] {
   return allNotes().filter((n) => deal.noteIds.includes(n.id));
 }
 
-/** v1 = committed precomputed brief (data/briefs/<deal>.json); later versions come from the store. */
+/** v1 = precomputed brief (data/briefs/<deal>.json; data/briefs-ollama/ when testing locally); later versions come from the store. */
 export function briefVersions(dealId: string): Brief[] {
-  const p = path.join(process.cwd(), "data", "briefs", `${dealId}.json`);
+  const p = path.join(process.cwd(), "data", briefsDir(), `${dealId}.json`);
   const base: Brief[] = fs.existsSync(p) ? [JSON.parse(fs.readFileSync(p, "utf8")) as Brief] : [];
   const extra = readState().briefs[dealId] ?? [];
   return [...base, ...extra].sort((a, b) => a.version - b.version);

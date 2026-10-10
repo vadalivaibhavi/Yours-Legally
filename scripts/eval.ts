@@ -14,6 +14,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { checkIds, parseArgs } from "./_args";
 import { checkRegister } from "./checkRegister";
+import { briefsDir } from "../lib/config";
 import {
   canDecide,
   canViewBrief,
@@ -141,7 +142,7 @@ async function guarded(c: Case, fn: () => Promise<void>) {
 }
 
 function v1(dealId: string): Brief | null {
-  const p = path.join("data", "briefs", `${dealId}.json`);
+  const p = path.join("data", briefsDir(), `${dealId}.json`);
   return fs.existsSync(p)
     ? (JSON.parse(fs.readFileSync(p, "utf8")) as Brief)
     : null;

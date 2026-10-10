@@ -8,7 +8,8 @@
  */
 import fs from "node:fs";
 import path from "node:path";
-import { cosine, embed } from "./embed";
+import { clauseIndexFile } from "./config";
+import { cosine, embed, embedModel } from "./embed";
 import type { ClauseChunk, ClauseChunkMeta, ClauseType } from "./types";
 
 /** Tuned on EV-P1–P7 (see eval/results.md). Below this: "No similar clause signed before." */
@@ -20,9 +21,12 @@ let index: ClauseChunk[] | null = null;
 
 export function loadIndex(): ClauseChunk[] {
   if (index) return index;
-  const p = path.join(process.cwd(), "data", "clause_index.json");
-  index = fs.existsSync(p) ? (JSON.parse(fs.readFileSync(p, "utf8")).chunks as ClauseChunk[]) : [];
-  return index;
+  const p = path.join(process.cwd(), "data", clauseIndexFile());
+  if (!fs.existsSync(p)) return (index = []);
+  const file = JSON.parse(fs.readFileSync(p, "utf8")) as { embedModel?: string; chunks: ClauseChunk[] };
+  // Vectors from different embedding models can't be compared: a mismatch would return nonsense, so stop.
+  if (file.embedModel && file.embedModel !== embedModel()) throw new Error(`The clause index (data/${clauseIndexFile()}) was built with ${file.embedModel}, but EMBED_MODEL is ${embedModel()}. Rebuild it with npm run build:index, or switch EMBED_PROVIDER back.`);
+  return (index = file.chunks);
 }
 
 export function indexMeta(): ClauseChunkMeta[] {
