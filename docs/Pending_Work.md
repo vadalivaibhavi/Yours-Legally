@@ -5,7 +5,7 @@ Tracks everything blocked by **model quota** (Gemini free tier: ~20 requests per
 ## 1. Auto-detected from the briefs (model quota)
 
 <!-- AUTO:START -->
-_Regenerated 2026-10-05 20:05 UTC by `npm run pending` from data/briefs and eval/results.json._
+_Regenerated 2026-10-10 17:17 UTC by `npm run pending` from data/briefs and eval/results.json._
 
 | What | Where | Why it's pending | How to clear it |
 |---|---|---|---|
@@ -40,7 +40,7 @@ The EV-V synthetic documents' header line changed with the product rename (5 Oct
 
 | Flow | Model calls | Notes |
 |---|---|---|
-| **FinServe fix test:** on the FinServe deal, *Upload into this deal* → `test-uploads/FinServe_NDA_v2_mutual.md` → "Yes: replaces FinServe Capital \"mutual\" NDA (draft)" | ≈4–5 (extract, NDA check, conflict check, brief) | expected: brief v2, all 7 findings under "Resolved since previous", verdict SIGN |
+| **FinServe fix test:** on the FinServe deal, *Upload into this deal* → `test-uploads/FinServe_NDA_v2_mutual.md` → "Yes: replaces FinServe Capital \"mutual\" NDA (draft)" | ≈4–5 (extract, NDA check, conflict check, brief) | **Done 6 Oct:** all 7 findings resolved, verdict SIGN (v5). The same file was also uploaded a second time as an extra document, so the deal holds two identical copies |
 | Upload a file into a deal → automatic re-check (v2 draft) | 1 extract + a re-review (≈4–7; unchanged documents come from cache) | creates brief v2 with "Since v1" changes |
 | "Re-check now" on an unchanged deal | ≈0–1 (everything cached; only missing comparison lines call the model) | |
 | Upload a completely new contract | 1 extract + a full review (≈6–8) + clause embeddings | new deal in the queue |
@@ -77,4 +77,5 @@ Real sign-in (role switch instead) · counsel-pack export (static preview) · pl
 
 | Date | Change |
 |---|---|
+| 10 Oct 2026 | All 13 open deals flagged for re-check since 6 Oct (register changes: 1 restriction rejected, 1 entry edited). FinServe fix test done (SIGN, v5). |
 | 5 Oct 2026 | Tracker created. All 13 briefs complete on playbook v1.1, every judgment step on a full flash model; comparison lines missing on 11 deals (quota ran out mid-regeneration). |
