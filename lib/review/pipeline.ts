@@ -9,10 +9,8 @@ import { z } from "zod";
 import { appToday } from "../config";
 import { company as loadCompany, playbook as loadPlaybook, requiredDocs } from "../data";
 import { allDeals, allDocuments, allNotes, briefVersions, getDeal, latestBrief } from "../deals";
-import { expandRegions } from "../geo";
 import { callModel, currentUsage, hash, modelsFor, PROMPT_VERSION, providerTag, withUsage } from "../llm";
 import { registerCoverage, registerEntries, registerVersion } from "../register";
-import { latestSellerCheck } from "../sellerChecks";
 import { OWNER } from "./owners";
 import type { Deal, Document } from "../types";
 import { checkBundle } from "./bundle";
@@ -207,27 +205,7 @@ async function runReview(dealId: string, opts: ReviewOptions): Promise<Brief> {
       });
   }
 
-  // ---- FR-20 deal-facts mismatch vs the seller's own deal check
-  const sc = latestSellerCheck(deal.id);
-  if (sc) {
-    const declared = expandRegions(sc.input.regions);
-    const inContract = new Set([...extractions.values()].flatMap((x) => [...expandRegions(x.regions)]));
-    const extra = [...inContract].filter((r) => !declared.has(r) && r !== "Worldwide" && r !== "Other");
-    if (extra.length)
-      findings.push({
-        key: "mismatch:regions",
-        category: "mismatch",
-        topic: "regions",
-        title: `Contract covers ${extra.join(", ")}: not in ${sc.by}'s deal check (declared: ${sc.input.regions.join(", ")})`,
-        impact: `${sc.by}'s check on ${sc.asOf} was answered for ${sc.input.regions.join(", ")} only, so the commitments covering ${extra.join(", ")} were never checked for the seller.`,
-        severity: "medium",
-        confidence: "high",
-        needsJudgment: false,
-        owner: OWNER.seller,
-        resolution: "confirm",
-        citations: [],
-      });
-  }
+  // FR-20 deal-facts mismatch vs the seller's deal check: computed live in lib/review/effective.ts.
 
   // ---- merge, guardrails, AtliQ-paper cap, precedents
   findings = mergeFindings(findings).map((f) => {

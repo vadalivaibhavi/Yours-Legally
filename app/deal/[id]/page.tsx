@@ -12,7 +12,6 @@ import { currentUser } from "@/lib/session";
 import { sellerChecksFor } from "@/lib/sellerChecks";
 import { SellerCheckPanel } from "@/components/SellerCheckPanel";
 import { QUOTA_MESSAGE } from "@/lib/limits";
-import { latestSellerCheck } from "@/lib/sellerChecks";
 import type { DealView } from "@/lib/deals";
 import type { EffectiveBrief } from "@/lib/review/types";
 import { recheckDeal } from "@/app/deal/actions";
@@ -206,13 +205,11 @@ function plainNote(note: string): string {
 
 /**
  * Why the latest brief is out of date for reasons other than its documents (uploads re-check on their own):
- * the register changed, the seller re-ran the deal check, or a step couldn't complete last time.
+ * the register changed, or a step couldn't complete last time. (The seller-check mismatch is computed live.)
  */
 function syncReasons(deal: DealView, latest: EffectiveBrief): string[] {
-  const check = latestSellerCheck(deal.id);
   return [
     deal.stale && deal.stale > latest.createdAt ? `the register changed (${fmtDate(deal.stale)})` : "",
-    check && check.at > latest.createdAt ? `the seller updated the deal check (${fmtDate(check.at)})` : "",
     latest.errors.length ? "a step couldn't complete last time" : "",
   ].filter(Boolean);
 }

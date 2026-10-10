@@ -9,7 +9,9 @@ import { readState } from "../store";
 import { baseDeals } from "../data";
 import { coverageNote, sanitize, sanitizeFinding } from "./guardrails";
 import { adjustForDealSize } from "./materiality";
-import { ownerRole, rolesInText } from "./owners";
+import { ownerRole, rolesInText, OWNER } from "./owners";
+import { expandRegions } from "../geo";
+import { latestSellerCheck } from "../sellerChecks";
 import type { Brief, EffectiveBrief, Finding, Severity } from "./types";
 import { computeVerdict, sortFindings, templateHeadline } from "./verdict";
 
@@ -22,7 +24,7 @@ export function effectiveBrief(brief: Brief, prev: Brief | null): EffectiveBrief
   const value = [...baseDeals(), ...s.newDeals].find((d) => d.id === brief.dealId)?.valueUsd;
 
   const findings: Finding[] = [];
-  for (const f0 of brief.findings) {
+  for (const f0 of withLiveMismatch(brief)) {
     const f: Finding = adjustForDealSize(sanitizeFinding({ ...f0 }), value); // plain wording; small-deal deviations count lower
     f.owner = ownerRole(f.owner, f); // roles, not names (briefs stored with names)
     if (f.missingItem) f.missingItem = { ...f.missingItem, owner: ownerRole(f.missingItem.owner, f) };
@@ -106,4 +108,42 @@ export function effectiveBrief(brief: Brief, prev: Brief | null): EffectiveBrief
 
 function fmt(iso: string) {
   return new Date(iso).toLocaleDateString("en-GB", { day: "numeric", month: "short" });
+}
+
+/**
+ * FR-20, live: the contract reaches regions the seller's latest deal check didn't declare, so AtliQ's
+ * commitments there were never checked for the seller. Plain comparison, recomputed on every view, so a
+ * new seller check never makes a brief out of date. Contract regions come from each document's fact card
+ * ("sectors · regions"); a mismatch stored by older briefs is replaced by the live one.
+ */
+function withLiveMismatch(brief: Brief): Finding[] {
+  const rest = brief.findings.filter((f) => f.category !== "mismatch");
+  const sc = latestSellerCheck(brief.dealId);
+  if (!sc) return rest;
+  const deal = [...baseDeals(), ...readState().newDeals].find((d) => d.id === brief.dealId);
+  const regionsOf = (v: string) => (v.split(" · ")[1] ?? "").split(",").map((r) => r.trim()).filter(Boolean);
+  // As in the register check: AtliQ delivers from Pune, so "India" in a non-Indian client's contract is the delivery location, not a market.
+  const inContract = [...new Set(brief.documents.flatMap((d) => regionsOf(d.facts.find((x) => x.field === "scope")?.value ?? "")))].filter(
+    (r) => !(r === "India" && deal?.clientCountry && deal.clientCountry !== "India"),
+  );
+  const declared = expandRegions(sc.input.regions);
+  // Named as in the contract (one name per region), flagged if any part of it lies outside what the seller declared.
+  const extra = inContract.filter((r) => [...expandRegions([r])].some((x) => !declared.has(x) && x !== "Worldwide" && x !== "Other"));
+  if (!extra.length) return rest;
+  return [
+    ...rest,
+    {
+      key: "mismatch:regions",
+      category: "mismatch",
+      topic: "regions",
+      title: `Contract covers ${extra.join(", ")}: not in the seller's deal check (declared: ${sc.input.regions.join(", ") || "none"})`,
+      impact: `The seller's check on ${sc.at.slice(0, 10)} was answered for ${sc.input.regions.join(", ") || "no regions"} only, so AtliQ's commitments covering ${extra.join(", ")} were never checked for the seller.`,
+      severity: "medium",
+      confidence: "high",
+      needsJudgment: false,
+      owner: OWNER.seller,
+      resolution: "confirm",
+      citations: [],
+    },
+  ];
 }
