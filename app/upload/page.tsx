@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { chooseDeal, confirmUpload, uploadDocument } from "./actions";
+import { chooseDeal, confirmUpload, moveStaged, uploadDocument } from "./actions";
 import { TextArea } from "@/components/Fields";
 import { SaveButton } from "@/components/BriefControls";
 import { LIMITS, QUOTA_MESSAGE } from "@/lib/limits";
@@ -38,6 +38,18 @@ export default async function UploadPage(props: PageProps<"/upload">) {
           ← {preselectDeal.name}
         </Link>
         <h1 className="font-serif text-2xl font-semibold">Upload into {preselectDeal.name}</h1>
+        {staged.guess.elsewhere && (
+          <form action={moveStaged} className="card flex flex-wrap items-center gap-3 border-change bg-change-soft p-4 text-sm text-change">
+            <input type="hidden" name="staged" value={staged.id} />
+            <input type="hidden" name="to" value={staged.guess.elsewhere.dealId} />
+            <span>
+              ⚠ This may belong to <b>{staged.guess.elsewhere.name}</b>: {staged.guess.elsewhere.why}.
+            </span>
+            <SaveButton className="btn ml-auto !py-1 !text-xs" pendingLabel="Moving…" savedLabel="Moved ✓">
+              Move it to {staged.guess.elsewhere.name}
+            </SaveButton>
+          </form>
+        )}
         <form action={confirmUpload} className="card space-y-4 p-5 text-sm">
           <input type="hidden" name="staged" value={staged.id} />
           <p className="text-muted">
@@ -61,7 +73,7 @@ export default async function UploadPage(props: PageProps<"/upload">) {
           </fieldset>
           <div className="flex items-center gap-3">
             <SaveButton className="btn btn-primary" pendingLabel="Reviewing… (about 1–2 min, keep this page open)" savedLabel="Done ✓">
-              Confirm &amp; review
+              {staged.guess.elsewhere ? `Keep it in ${preselectDeal.name} & review` : "Confirm & review"}
             </SaveButton>
             <Link href={`/upload?deal=${preselectDeal.id}`} className="text-xs text-muted underline">
               Choose a different file

@@ -5,7 +5,7 @@
  */
 import fs from "node:fs";
 import path from "node:path";
-import { findPriorVersion, guessDocType, looksLikeNotes } from "../lib/uploadDetect";
+import { belongsElsewhere, findPriorVersion, guessDocType, looksLikeNotes } from "../lib/uploadDetect";
 import type { Document } from "../lib/types";
 
 const all = JSON.parse(fs.readFileSync("data/documents.json", "utf8")) as Document[];
@@ -45,6 +45,30 @@ for (const [name, text, ids, expect] of versionCases) {
   const ok = (got?.doc.id ?? null) === expect;
   if (!ok) failed++;
   console.log(`${ok ? "ok  " : "FAIL"} ${name}: ${got ? `new version of ${got.doc.id} (${got.why})` : "additional document"}`);
+}
+// Uploaded into the wrong deal? (linked deals are exempt; naming this deal's client clears it)
+const deals = JSON.parse(fs.readFileSync("data/deals.json", "utf8")) as { id: string; name: string; counterparty: string; counterpartyAliases: string[]; documentIds: string[]; linkedDealIds: string[] }[];
+const sketch = (id: string) => {
+  const d = deals.find((x) => x.id === id)!;
+  return { id: d.id, name: d.name, names: [d.counterparty, ...d.counterpartyAliases], docs: d.documentIds.map(by).filter(Boolean), linked: d.linkedDealIds };
+};
+const sketches = deals.map((d) => sketch(d.id));
+const note = (f: string) => file(path.join(notesDir, f));
+const elsewhereCases: [string, string, string, string | null][] = [
+  ["Gulf Crown MSA uploaded into Harrington", by("gulfcrown-msa").text, "harrington", "gulfcrown"],
+  ["Lakeshore MSA uploaded into BlueOrchid", by("lakeshore-msa").text, "blueorchid", "lakeshore"],
+  ["Marcus's contractor agreement uploaded into Ortiz (same AtliQ template)", by("marcus-ica").text, "ortiz", "marcus"],
+  ["Gulf Crown counsel-call notes uploaded into Harrington", note("2026-09-25_call_with_counsel_gulf_crown.md"), "harrington", "gulfcrown"],
+  ["Harrington huddle notes into Harrington", note("2026-09-27_harrington_huddle.md"), "harrington", null],
+  ["Ortiz contractor agreement into Harrington (linked deal)", by("ortiz-ica").text, "harrington", null],
+  ["Rheinwerk Annex 3 into Kriti (linked deal)", file("data/synthetic/rheinwerk_annex3_dpa.md"), "kriti", null],
+  ["FinServe revised NDA into FinServe", file("test-uploads/FinServe_NDA_v2_mutual.md"), "finserve", null],
+];
+for (const [name, text, into, expect] of elsewhereCases) {
+  const got = belongsElsewhere(text, sketch(into), sketches);
+  const ok = (got?.dealId ?? null) === expect;
+  if (!ok) failed++;
+  console.log(`${ok ? "ok  " : "FAIL"} ${name}: ${got ? `belongs to ${got.dealId}? (${got.why})` : "fine here"}`);
 }
 console.log(failed ? `\n${failed} wrong` : "\nall correct");
 process.exitCode = failed ? 1 : 0;

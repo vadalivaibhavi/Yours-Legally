@@ -13,7 +13,7 @@ import { redirect } from "next/navigation";
 import { allDeals, allDocuments, dealDocuments, dealNotes, getDeal, type DealView } from "@/lib/deals";
 import { proposeLink, type LinkProposal } from "@/lib/linking";
 import { isQuotaExhausted } from "@/lib/llm";
-import { findPriorVersion, guessDocType, looksLikeNotes } from "@/lib/uploadDetect";
+import { belongsElsewhere, findPriorVersion, guessDocType, looksLikeNotes, type DealSketch } from "@/lib/uploadDetect";
 import { extractReferences } from "@/lib/references";
 import { extractDocument } from "@/lib/review/extract";
 import { nextVersion, reviewDeal } from "@/lib/review/pipeline";
@@ -39,13 +39,29 @@ async function readUpload(form: FormData): Promise<{ name: string; text: string 
   return { name, text };
 }
 
-/** What the file most likely is, with the reason shown to the uploader. */
-function detect(text: string, deal: DealView): { what: string; why: string } {
+const sketch = (d: DealView): DealSketch => ({ id: d.id, name: d.name, names: [d.counterparty, ...d.counterpartyAliases], docs: dealDocuments(d) });
+
+/** What the file most likely is, with the reason shown to the uploader, and whether it looks like another deal's file. */
+function detect(text: string, deal: DealView): { what: string; why: string; elsewhere: { dealId: string; name: string; why: string } | null } {
+  const elsewhere = belongsElsewhere(text, { ...sketch(deal), linked: [...deal.linkedDealIds, ...(deal.endClientDealId ? [deal.endClientDealId] : [])] }, allDeals().filter((d) => d.status !== "signed").map(sketch));
   const n = looksLikeNotes(text);
-  if (n.notes) return { what: "note", why: n.why };
+  if (n.notes) return { what: "note", why: n.why, elsewhere };
   const v = findPriorVersion({ text, docType: guessDocType(text) }, dealDocuments(deal));
-  if (v) return { what: `replace:${v.doc.id}`, why: v.why };
-  return { what: "contract", why: `${n.why || "reads as a contract"}; it doesn't match a document already in this deal` };
+  if (v) return { what: `replace:${v.doc.id}`, why: v.why, elsewhere };
+  return { what: "contract", why: `${n.why || "reads as a contract"}; it doesn't match a document already in this deal`, elsewhere };
+}
+
+/** On the confirm screen: the file looks like another deal's, and the uploader moves it there (still unprocessed). */
+export async function moveStaged(form: FormData) {
+  const user = await currentUser();
+  const staged = readState().stagedUploads.find((x) => x.id === String(form.get("staged")));
+  const to = getDeal(String(form.get("to") ?? ""));
+  if (!staged || !to) throw new Error("That upload has expired: upload the file again.");
+  mutate(
+    (s) => void (s.stagedUploads = [...s.stagedUploads.filter((x) => x.id !== staged.id && x.dealId !== to.id), { ...staged, dealId: to.id, guess: detect(staged.text, to) }]),
+    { user: user.name, dealId: to.id, action: "upload.move", detail: { name: staged.name, from: staged.dealId } },
+  );
+  redirect(`/upload?deal=${to.id}&staged=${staged.id}`);
 }
 
 export async function uploadDocument(form: FormData) {

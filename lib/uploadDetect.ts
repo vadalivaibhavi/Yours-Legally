@@ -79,6 +79,40 @@ export function guessDocType(text: string): string | null {
   return rules.find(([re]) => re.test(title))?.[1] ?? null;
 }
 
+export type DealSketch = { id: string; name: string; names: string[]; docs: Document[] };
+
+const mentions = (text: string, names: string[]) =>
+  names.reduce((n, name) => n + (text.match(new RegExp(`\\b${name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`, "gi")) ?? []).length, 0);
+
+/**
+ * A file that probably belongs to another deal (deals linked to this one are exempt: a contractor's
+ * agreement names its client). A file that names this deal's client is never flagged. Otherwise, strongest
+ * first: it is (a version of) another deal's document, it carries a reference printed on another deal's
+ * document, or it names another deal's client at least twice.
+ * Only a warning: notes can mention other clients in passing.
+ */
+export function belongsElsewhere(text: string, here: DealSketch & { linked: string[] }, others: DealSketch[]): { dealId: string; name: string; why: string } | null {
+  // Naming this deal's client settles it (two contracts on AtliQ's own template share most of their text).
+  if (mentions(text, here.names) > 0) return null;
+  const candidates = others.filter((o) => o.id !== here.id && !here.linked.includes(o.id));
+  const sh = shingles(text);
+  for (const o of candidates) {
+    const copy = o.docs.find((d) => overlap(sh, shingles(d.text)) >= 0.25);
+    if (copy) return { dealId: o.id, name: o.name, why: `${Math.round(overlap(sh, shingles(copy.text)) * 100)}% of the text matches ${copy.title}` };
+  }
+  const refs = extractReferences(header(text).top);
+  const hereRefs = new Set(here.docs.flatMap((d) => d.references));
+  if (!refs.some((r) => hereRefs.has(r)))
+    for (const o of candidates) {
+      const r = refs.find((x) => o.docs.some((d) => extractReferences(header(d.text).top).includes(x)));
+      if (r) return { dealId: o.id, name: o.name, why: `reference ${r} is on ${o.name}'s documents` };
+    }
+  const best = candidates.map((o) => ({ o, n: mentions(text, o.names) })).sort((a, b) => b.n - a.n)[0];
+  if (!best || best.n < 2) return null;
+  const said = [...best.o.names].sort((a, b) => mentions(text, [b]) - mentions(text, [a]))[0]; // the name as the file writes it
+  return { dealId: best.o.id, name: best.o.name, why: `it names ${said} ${best.n} times and never ${here.names[here.names.length > 1 ? 1 : 0]}` };
+}
+
 export function findPriorVersion(upload: { text: string; docType?: string | null; counterparty?: string }, dealDocs: Document[]): { doc: Document; why: string } | null {
   // Only a reference printed in both documents' own headers counts: a body citation of the parent agreement doesn't.
   const refs = extractReferences(header(upload.text).top);
