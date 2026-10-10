@@ -7,6 +7,7 @@
  * Precedents are attached in code from the playbook (labelled standard / exception / concession / accident).
  */
 import { z } from "zod";
+import { OWNER } from "./owners";
 import { callModel } from "../llm";
 import { locateQuote } from "../quotes";
 import type { Deal, Document, PlaybookRule } from "../types";
@@ -127,7 +128,7 @@ ${args.linkedClient ? `FLOW-DOWN: the work is for the client contract below. Che
       severity: f.severity as Severity,
       confidence: "medium",
       needsJudgment: f.needsJudgment,
-      owner: mirror ? `${deal.owner} (fix before sending)` : f.needsJudgment ? "Karandeep" : "Karandeep",
+      owner: mirror ? OWNER.fixBeforeSending : f.needsJudgment ? "Karandeep" : "Karandeep",
       resolution: mirror ? "fix_before_sending" : "redline",
       docId: doc.id,
       citations,
@@ -210,7 +211,7 @@ export async function checkNda(args: { doc: Document; deal: Deal; rules: Playboo
       severity: it.severity as Severity,
       confidence: "high",
       needsJudgment: false,
-      owner: doc.paper === "atliq" ? `${deal.owner} (fix before sending)` : "Karandeep",
+      owner: doc.paper === "atliq" ? OWNER.fixBeforeSending : "Karandeep",
       resolution: doc.paper === "atliq" ? "fix_before_sending" : "redline",
       docId: doc.id,
       citations: [{ docId: doc.id, docTitle: doc.title, clauseRef: it.clauseRef, quote: q, role: "incoming" }],

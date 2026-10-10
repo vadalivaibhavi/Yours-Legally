@@ -9,6 +9,7 @@ import { readState } from "../store";
 import { baseDeals } from "../data";
 import { coverageNote, sanitize, sanitizeFinding } from "./guardrails";
 import { adjustForDealSize } from "./materiality";
+import { ownerRole, rolesInText } from "./owners";
 import type { Brief, EffectiveBrief, Finding, Severity } from "./types";
 import { computeVerdict, sortFindings, templateHeadline } from "./verdict";
 
@@ -23,6 +24,8 @@ export function effectiveBrief(brief: Brief, prev: Brief | null): EffectiveBrief
   const findings: Finding[] = [];
   for (const f0 of brief.findings) {
     const f: Finding = adjustForDealSize(sanitizeFinding({ ...f0 }), value); // plain wording; small-deal deviations count lower
+    f.owner = ownerRole(f.owner, f); // roles, not names (briefs stored with names)
+    if (f.missingItem) f.missingItem = { ...f.missingItem, owner: ownerRole(f.missingItem.owner, f) };
     const r = reactions[f.key];
     if (r?.reaction === "disagree") continue; // dismissed by Karandeep (reason logged): shown separately, not in the verdict
     if (r?.reaction === "severity" && r.severity) f.severity = r.severity as Severity;
@@ -51,6 +54,8 @@ export function effectiveBrief(brief: Brief, prev: Brief | null): EffectiveBrief
       const closure = s.alerts[brief.dealId];
       complianceAlert = {
         ...cand,
+
+        owner: ownerRole(cand.owner),
         status: closure?.status === "resolved" ? "resolved" : "open",
         resolution:
           closure?.status === "resolved"
@@ -85,7 +90,7 @@ export function effectiveBrief(brief: Brief, prev: Brief | null): EffectiveBrief
     findings: sorted,
     verdict,
     headline: verdict === brief.verdict ? sanitize(brief.headline) : templateHeadline(verdict, sorted, waitingFor, alertOpen),
-    nextAction: sanitize(brief.nextAction),
+    nextAction: rolesInText(sanitize(brief.nextAction)),
     notSeen: brief.notSeen.map((x) =>
       x
         .replace(/^Register built from (\d+) signed documents\..*$/, (_m, n) => coverageNote(Number(n)))

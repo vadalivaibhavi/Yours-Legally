@@ -6,6 +6,7 @@
  * deeper F4 finding on the same clause merges with them (one finding per topic).
  */
 import { splitSections } from "../chunker";
+import { OWNER } from "./owners";
 import { canonRegion, expectedEntityFor } from "../geo";
 import type { Company, Deal, Document } from "../types";
 import type { Extraction } from "./extract";
@@ -34,7 +35,7 @@ export function runGate(ctx: GateContext): { results: GateResult[]; findings: Fi
   const results: GateResult[] = [];
   const findings: Finding[] = [];
   const notSeen: string[] = [];
-  const fixOwner = atliqPaper ? `${deal.owner} (fix before sending)` : "the other side";
+  const fixOwner = atliqPaper ? OWNER.fixBeforeSending : "the other side";
   const fixResolution = atliqPaper ? ("fix_before_sending" as const) : ("document" as const);
 
   // 1. Entity ↔ client country (finance fact sheet: Inc = US clients only)
@@ -143,7 +144,7 @@ export function runGate(ctx: GateContext): { results: GateResult[]; findings: Fi
       severity: sev,
       confidence: "high",
       needsJudgment: false,
-      owner: atliqPaper ? `${deal.owner} (fix before sending)` : "Karandeep",
+      owner: atliqPaper ? OWNER.fixBeforeSending : "Karandeep",
       resolution: atliqPaper ? "fix_before_sending" : "redline",
       docId: doc.id,
       citations: payCite ? [payCite] : [],
@@ -165,7 +166,7 @@ export function runGate(ctx: GateContext): { results: GateResult[]; findings: Fi
       severity: "high",
       confidence: "high",
       needsJudgment: false,
-      owner: atliqPaper ? `${deal.owner} (fix before sending)` : "Karandeep",
+      owner: atliqPaper ? OWNER.fixBeforeSending : "Karandeep",
       resolution: atliqPaper ? "fix_before_sending" : "redline",
       docId: doc.id,
       citations: ldCite ? [ldCite] : [],
@@ -182,7 +183,7 @@ export function runGate(ctx: GateContext): { results: GateResult[]; findings: Fi
       severity: "high",
       confidence: "high",
       needsJudgment: false,
-      owner: atliqPaper ? `${deal.owner} (fix before sending)` : "Karandeep",
+      owner: atliqPaper ? OWNER.fixBeforeSending : "Karandeep",
       resolution: atliqPaper ? "fix_before_sending" : "redline",
       docId: doc.id,
       citations: ldCite ? [ldCite] : [],
@@ -214,7 +215,7 @@ export function runGate(ctx: GateContext): { results: GateResult[]; findings: Fi
       severity: "high",
       confidence: "high",
       needsJudgment: false,
-      owner: atliqPaper ? `${deal.owner} (fix before sending)` : "Karandeep",
+      owner: atliqPaper ? OWNER.fixBeforeSending : "Karandeep",
       resolution: atliqPaper ? "fix_before_sending" : "redline",
       docId: doc.id,
       citations: liabCite ? [liabCite] : [],
@@ -230,7 +231,7 @@ export function runGate(ctx: GateContext): { results: GateResult[]; findings: Fi
       severity: "medium",
       confidence: "medium",
       needsJudgment: false,
-      owner: atliqPaper ? `${deal.owner} (fix before sending)` : "Karandeep",
+      owner: atliqPaper ? OWNER.fixBeforeSending : "Karandeep",
       resolution: atliqPaper ? "fix_before_sending" : "redline",
       docId: doc.id,
       citations: liabCite ? [liabCite] : [],
@@ -290,11 +291,11 @@ export function runGate(ctx: GateContext): { results: GateResult[]; findings: Fi
         severity: "high",
         confidence: "high",
         needsJudgment: false,
-        owner: deal.owner,
+        owner: OWNER.dealTeam,
         resolution: "document",
         docId: doc.id,
         citations: aCite ? [aCite] : [],
-        missingItem: { item: `${a.name}: ${a.description}`, owner: deal.owner },
+        missingItem: { item: `${a.name}: ${a.description}`, owner: OWNER.dealTeam },
       });
     }
   }

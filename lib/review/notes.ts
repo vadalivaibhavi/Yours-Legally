@@ -5,6 +5,7 @@
  * pinned compliance alert (FR-21). The system never handles it itself or notifies anyone.
  */
 import { z } from "zod";
+import { OWNER } from "./owners";
 import { callModel } from "../llm";
 import { locateQuote } from "../quotes";
 import type { Deal, Note } from "../types";
@@ -91,7 +92,7 @@ export async function scanNotes(args: { deal: Deal; notes: Note[]; bundle: Bundl
     ? {
         title: events[0].statement,
         detail: events.map((e) => e.whyItMatters).join(" "),
-        owner: "Karandeep, with a named compliance owner (Pranav, CTO)",
+        owner: OWNER.compliance,
         factIds: events.map((e) => e.id),
         citations: events.map((e) => ({ docId: e.noteId, docTitle: e.noteTitle, clauseRef: "note", quote: e.quote, role: "note" as const })),
       }

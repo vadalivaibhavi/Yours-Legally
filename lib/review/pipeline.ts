@@ -13,6 +13,7 @@ import { expandRegions } from "../geo";
 import { callModel, currentUsage, hash, modelsFor, PROMPT_VERSION, providerTag, withUsage } from "../llm";
 import { registerCoverage, registerEntries, registerVersion } from "../register";
 import { latestSellerCheck } from "../sellerChecks";
+import { OWNER } from "./owners";
 import type { Deal, Document } from "../types";
 import { checkBundle } from "./bundle";
 import { checkConflicts, filterRegister, reverseScan } from "./conflict";
@@ -222,7 +223,7 @@ async function runReview(dealId: string, opts: ReviewOptions): Promise<Brief> {
         severity: "medium",
         confidence: "high",
         needsJudgment: false,
-        owner: sc.by,
+        owner: OWNER.seller,
         resolution: "confirm",
         citations: [],
       });

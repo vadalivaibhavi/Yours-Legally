@@ -4,6 +4,7 @@
  * are missing: each missing item becomes a "waiting for input" entry with an owner.
  */
 import { regionsOverlap } from "../geo";
+import { OWNER } from "./owners";
 import type { Company, Deal, Document, RegisterEntry, RequiredDocRule } from "../types";
 import type { Extraction } from "./extract";
 import type { BundleRow, Citation, Finding, GateResult } from "./types";
@@ -58,7 +59,7 @@ export function checkBundle(ctx: Ctx): { rows: BundleRow[]; findings: Finding[];
       add(
         { party: deal.counterparty, document: t, status: st, detail: st === "signed" ? "Signed" : st === "in_review" ? "In this deal, under review" : "Not in the deal" },
         st === "missing"
-          ? { key: `bundle:${t.toLowerCase()}:client`, title: `Missing ${t} with ${deal.counterparty}`, impact: `US healthcare work needs NDA + MSA + BAA before any patient data moves (${phi.why})`, severity: "high", owner: deal.owner, resolution: "document", citations: [], missingItem: { item: `${t} with ${deal.counterparty}`, owner: deal.owner } }
+          ? { key: `bundle:${t.toLowerCase()}:client`, title: `Missing ${t} with ${deal.counterparty}`, impact: `US healthcare work needs NDA + MSA + BAA before any patient data moves (${phi.why})`, severity: "high", owner: OWNER.dealTeam, resolution: "document", citations: [], missingItem: { item: `${t} with ${deal.counterparty}`, owner: OWNER.dealTeam } }
           : undefined,
       );
     }
@@ -67,7 +68,7 @@ export function checkBundle(ctx: Ctx): { rows: BundleRow[]; findings: Finding[];
       // The subcontractor's own deal, plus anything filed on this deal under the subcontractor's name.
       const last = norm(sd.counterparty.split(" ").pop() ?? sd.counterparty);
       const sdDocs = [...ctx.allDocs.filter((d) => sd.documentIds.includes(d.id)), ...ctx.docs.filter((d) => norm(d.counterparty).includes(last))];
-      return { id: sd.id, name: sd.counterparty, owner: sd.owner, hasBaa: sdDocs.some((d) => d.docType === "BAA"), why: `${sd.counterparty} is an independent contractor on this deal (${sd.name}); ${sdDocs.map((d) => d.docType).join(" + ")} on file, no BAA` };
+      return { id: sd.id, name: sd.counterparty, owner: OWNER.dealTeam, hasBaa: sdDocs.some((d) => d.docType === "BAA"), why: `${sd.counterparty} is an independent contractor on this deal (${sd.name}); ${sdDocs.map((d) => d.docType).join(" + ")} on file, no BAA` };
     });
     if (entity === "Inc") {
       // Delivery model: AtliQ Inc subcontracts delivery to Pvt Ltd (Pune). Is there an intercompany BAA that covers THIS client?
@@ -78,7 +79,7 @@ export function checkBundle(ctx: Ctx): { rows: BundleRow[]; findings: Finding[];
       parties.push({
         id: "pvt-ltd",
         name: "AtliQ Technologies Pvt Ltd (Pune delivery)",
-        owner: "Pranav",
+        owner: OWNER.techLead,
         hasBaa: covers,
         why: icDocs.length
           ? `The intercompany BAA (${icDocs[0].title}) is limited to ${scoped?.scope.counterparties.join(", ") ?? "another engagement"}; it does not cover ${deal.counterparty}.`
@@ -105,7 +106,7 @@ export function checkBundle(ctx: Ctx): { rows: BundleRow[]; findings: Finding[];
       );
       add(
         { party: p.name, document: `${deal.counterparty}'s prior written consent to subcontract`, status: "missing", detail: "No written consent on file", findingKey: `bundle:consent:${slug}` },
-        { key: `bundle:consent:${slug}`, title: `No client consent on file to subcontract to ${p.name}`, impact: `The client's prior written approval is required before ${p.name} works on the engagement.`, severity: "medium", owner: deal.owner, resolution: "document", citations: [], missingItem: { item: `${deal.counterparty}'s written consent for ${p.name}`, owner: deal.owner } },
+        { key: `bundle:consent:${slug}`, title: `No client consent on file to subcontract to ${p.name}`, impact: `The client's prior written approval is required before ${p.name} works on the engagement.`, severity: "medium", owner: OWNER.dealTeam, resolution: "document", citations: [], missingItem: { item: `${deal.counterparty}'s written consent for ${p.name}`, owner: OWNER.dealTeam } },
       );
     }
   }
@@ -118,13 +119,13 @@ export function checkBundle(ctx: Ctx): { rows: BundleRow[]; findings: Finding[];
     add(
       { party: deal.counterparty, document: "DPA (GDPR Art. 28) incl. SCCs", status: st, detail: missingDpaAnnex ? `Referenced as ${missingDpaAnnex.label.replace(" attached", "")} but not attached` : st === "missing" ? "Not in the deal" : "On file", findingKey: missingDpaAnnex ? `gate:${missingDpaAnnex.rule}` : st === "missing" ? "bundle:dpa:client" : undefined },
       st === "missing" && !missingDpaAnnex
-        ? { key: "bundle:dpa:client", title: `Missing DPA with ${deal.counterparty}`, impact: eu.why, severity: "high", owner: deal.owner, resolution: "document", citations: [], missingItem: { item: `DPA + SCCs with ${deal.counterparty}`, owner: deal.owner } }
+        ? { key: "bundle:dpa:client", title: `Missing DPA with ${deal.counterparty}`, impact: eu.why, severity: "high", owner: OWNER.dealTeam, resolution: "document", citations: [], missingItem: { item: `DPA + SCCs with ${deal.counterparty}`, owner: OWNER.dealTeam } }
         : undefined,
     );
     for (const sd of subDeals) {
       add(
         { party: sd.counterparty, document: "Sub-processor terms (flow-down of the DPA)", status: "missing", detail: `${sd.name}: no data-protection terms on file`, findingKey: `bundle:sub-processor:${sd.id}` },
-        { key: `bundle:sub-processor:${sd.id}`, title: `No sub-processor terms for ${sd.counterparty}`, impact: `${sd.counterparty} would process personal data from this client; GDPR needs flowed-down processor terms before any data reaches them.`, severity: "medium", owner: sd.owner, resolution: "document", citations: [], missingItem: { item: `Sub-processor terms with ${sd.counterparty}`, owner: sd.owner } },
+        { key: `bundle:sub-processor:${sd.id}`, title: `No sub-processor terms for ${sd.counterparty}`, impact: `${sd.counterparty} would process personal data from this client; GDPR needs flowed-down processor terms before any data reaches them.`, severity: "medium", owner: OWNER.dealTeam, resolution: "document", citations: [], missingItem: { item: `Sub-processor terms with ${sd.counterparty}`, owner: OWNER.dealTeam } },
       );
     }
   }
@@ -137,7 +138,7 @@ export function checkBundle(ctx: Ctx): { rows: BundleRow[]; findings: Finding[];
       // not a missing input. (The flow-down review cites the actual consent clause when there is one.)
       add(
         { party: sd.counterparty, document: `${deal.counterparty}'s consent to subcontract (if the contract requires it)`, status: "missing", detail: `${sd.name} is planned on this deal; no consent on file`, findingKey: `bundle:consent:${sd.id}` },
-        { key: `bundle:consent:${sd.id}`, title: `Check consent to subcontract to ${sd.counterparty}`, impact: `${sub.why} Confirm whether ${deal.counterparty}'s contract requires written consent before ${sd.counterparty} starts.`, severity: "low", owner: deal.owner, resolution: "document", citations: [] },
+        { key: `bundle:consent:${sd.id}`, title: `Check consent to subcontract to ${sd.counterparty}`, impact: `${sub.why} Confirm whether ${deal.counterparty}'s contract requires written consent before ${sd.counterparty} starts.`, severity: "low", owner: OWNER.dealTeam, resolution: "document", citations: [] },
       );
     }
   }
