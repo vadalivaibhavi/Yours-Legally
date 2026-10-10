@@ -31,6 +31,7 @@ export function allDeals(): DealView[] {
     const view: DealView = {
       ...d,
       documentIds: [...new Set(docIds)],
+      noteIds: [...new Set([...d.noteIds, ...(o.addNoteIds ?? [])])],
       status: o.status ?? d.status,
       deadline: o.deadline ?? d.deadline,
       decision: o.decision,
@@ -61,8 +62,13 @@ export function dealContextDocuments(deal: Deal): Document[] {
   return deal.contextDocumentIds.map((id) => docs.find((d) => d.id === id)).filter((d): d is Document => !!d);
 }
 
+/** The dataset's notes plus notes uploaded into deals. */
+export function allNotes(): Note[] {
+  return [...notes(), ...readState().uploadedNotes];
+}
+
 export function dealNotes(deal: Deal): Note[] {
-  return notes().filter((n) => deal.noteIds.includes(n.id));
+  return allNotes().filter((n) => deal.noteIds.includes(n.id));
 }
 
 /** v1 = committed precomputed brief (data/briefs/<deal>.json); later versions come from the store. */

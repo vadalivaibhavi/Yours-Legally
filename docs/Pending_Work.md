@@ -48,6 +48,7 @@ The EV-V synthetic documents' header line changed with the product rename (5 Oct
 | Re-check deals flagged by a register change (edit / reject / restore; verify flags none). Restriction changes flag every open deal; a client duty flags that client's deals; insurance / non-solicit / other flag none | ≈1–3 per flagged deal (conflict + brief; the rest is cached) | each flagged deal shows "The register changed since this brief"; batch the re-checks once you finish editing |
 | Store in contract register (queue button after a Sign decision) | 1 register extraction (strong) per distinct document | the deal leaves the queue; its commitments appear in the register (unverified) |
 | Seller deal check | 0, or 1 if "Anything else" free text is filled | |
+| Upload meeting notes / an update into a deal ("What is it?" → notes) | ≈2 (notes scan + brief; the contract steps are cached) | the note appears under Meeting notes and the new brief version reflects it |
 
 On the free tier that is well within a day's quota for one round of tests. If a step hits the daily quota, the page now says so and nothing is lost: retry the next day.
 
@@ -77,5 +78,6 @@ Real sign-in (role switch instead) · counsel-pack export (static preview) · pl
 
 | Date | Change |
 |---|---|
+| 10 Oct 2026 | Built without model calls: queue sections by side of the table; deal-size rule (data/deal_size.json, $50k: Kriti's 7 playbook deviations count one step lower, verdict unchanged); upload from a deal locked to that deal with "What is it?" (new version / additional contract document / notes). Evals unchanged: 42 pass, same 4 variance cases. |
 | 10 Oct 2026 | All 13 open deals flagged for re-check since 6 Oct (register changes: 1 restriction rejected, 1 entry edited). FinServe fix test done (SIGN, v5). |
 | 5 Oct 2026 | Tracker created. All 13 briefs complete on playbook v1.1, every judgment step on a full flash model; comparison lines missing on 11 deals (quota ran out mid-regeneration). |

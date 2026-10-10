@@ -7,8 +7,8 @@
  */
 import { z } from "zod";
 import { appToday } from "../config";
-import { company as loadCompany, notes as allNotes, playbook as loadPlaybook, requiredDocs } from "../data";
-import { allDeals, allDocuments, briefVersions, getDeal, latestBrief } from "../deals";
+import { company as loadCompany, playbook as loadPlaybook, requiredDocs } from "../data";
+import { allDeals, allDocuments, allNotes, briefVersions, getDeal, latestBrief } from "../deals";
 import { expandRegions } from "../geo";
 import { callModel, currentUsage, hash, modelsFor, PROMPT_VERSION, providerTag, withUsage } from "../llm";
 import { registerCoverage, registerEntries, registerVersion } from "../register";

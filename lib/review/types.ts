@@ -64,6 +64,8 @@ export type Finding = {
   missingItem?: { item: string; owner: string };
   /** Pending written document (EV-C2): a note never clears a contractual blocker. */
   pendingDocument?: string;
+  /** Deal-size effect (lib/review/materiality.ts): why the severity was lowered, or that size doesn't change it. */
+  sizeNote?: string;
 };
 
 export type GateResult = {

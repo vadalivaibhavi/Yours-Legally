@@ -9,7 +9,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { writableDir } from "./config";
 import type { Brief } from "./review/types";
-import type { Deal, Document, RegisterEntry } from "./types";
+import type { Deal, Document, RegisterEntry, Note } from "./types";
 
 export type Reaction = {
   reaction: "agree" | "disagree" | "severity";
@@ -59,8 +59,10 @@ export type State = {
   extraRegisterDocuments: { docId: string; counterparty: string; entryCount: number; illegible: { clauseRef: string; note: string }[]; referencedButMissing: { name: string; note: string }[]; error?: string }[];
   registerRevision: number;
   uploadedDocuments: Document[];
+  /** Meeting notes, emails or updates uploaded into a deal (scanned like the dataset's notes). */
+  uploadedNotes: Note[];
   newDeals: Deal[];
-  dealOverrides: Record<string, { status?: Deal["status"]; decision?: string; decidedAt?: string; finalised?: boolean; finalisedAt?: string; deadline?: string; addDocumentIds?: string[]; removeDocumentIds?: string[]; staleSince?: string; signedAt?: string; signedDocId?: string }>;
+  dealOverrides: Record<string, { status?: Deal["status"]; decision?: string; decidedAt?: string; finalised?: boolean; finalisedAt?: string; deadline?: string; addDocumentIds?: string[]; removeDocumentIds?: string[]; addNoteIds?: string[]; staleSince?: string; signedAt?: string; signedDocId?: string }>;
   briefs: Record<string, Brief[]>;
   reactions: Record<string, Record<string, Reaction>>;
   confirmations: Record<string, Record<string, { status: "confirmed" | "not_true" | "edited"; edit?: string; at: string }>>;
@@ -79,6 +81,7 @@ const EMPTY: State = {
   extraRegisterDocuments: [],
   registerRevision: 0,
   uploadedDocuments: [],
+  uploadedNotes: [],
   newDeals: [],
   dealOverrides: {},
   briefs: {},

@@ -5,7 +5,7 @@
  */
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { allDeals, allDocuments, dealDocuments, getDeal } from "@/lib/deals";
+import { allDeals, allDocuments, dealDocuments, dealNotes, getDeal } from "@/lib/deals";
 import { proposeLink, type LinkProposal } from "@/lib/linking";
 import { isQuotaExhausted } from "@/lib/llm";
 import { extractReferences } from "@/lib/references";
@@ -28,6 +28,9 @@ export async function uploadDocument(form: FormData) {
     text = await (file as File).text();
   }
   text = text.replace(/\r\n/g, "\n").trim();
+  // Uploading from a deal page: the deal is fixed, and the uploader says what the file is.
+  const what = String(form.get("what") ?? "contract");
+  if (what === "note") return addNote(String(form.get("deal") ?? ""), name, text, user.name);
   if (text.length < 200) throw new Error("That document is too short to review.");
   if (text.length > LIMITS.contract) throw new Error(`That contract is ${text.length.toLocaleString()} characters; the limit is ${LIMITS.contract.toLocaleString()}.`);
   const into = getDeal(String(form.get("deal") ?? ""));
@@ -59,7 +62,7 @@ export async function uploadDocument(form: FormData) {
   };
   const chosen = String(form.get("deal") ?? "");
   // A new version of a document already in the chosen deal takes its place; the old one leaves the deal.
-  const replaced = chosen ? dealDocuments(getDeal(chosen)!).find((d) => d.id === String(form.get("replaces") ?? "")) : undefined;
+  const replaced = chosen && what.startsWith("replace:") ? dealDocuments(getDeal(chosen)!).find((d) => d.id === what.slice(8)) : undefined;
   if (replaced) Object.assign(doc, { replaces: replaced.id, title: `${replaced.title.replace(/\s*\((draft|v\d+)[^)]*\)/i, "")} (revised, uploaded ${name})` });
   const proposal = proposeLink({ counterparty: doc.counterparty, docType: doc.docType, text, docId: id }, allDeals(), allDocuments(), chosen || undefined);
   mutate((s) => {
@@ -121,11 +124,15 @@ async function attach(doc: Document, dealId: string, proposal: LinkProposal, by:
   mutate((s) => {
     s.linkChoices[doc.id] = { dealId: target, reason: `${proposal.mode}: ${proposal.reason}${proposal.note ? ` · note: ${proposal.note.text}` : ""}`, at: new Date().toISOString() };
   });
-  // New input → automatic re-check: a new brief version (FR-17).
+  await recheckAfterUpload(target, `uploaded ${doc.file}`, by, proposal.note?.text);
+}
+
+/** New input → automatic re-check: a new brief version (FR-17), then open it. */
+async function recheckAfterUpload(target: string, trigger: string, by: string, notSeen?: string) {
   const version = nextVersion(target);
   let brief;
   try {
-    brief = await reviewDeal(target, { trigger: `uploaded ${doc.file}`, version });
+    brief = await reviewDeal(target, { trigger, version });
   } catch (e) {
     if (!isQuotaExhausted(e)) throw e;
     // The document stays attached; the deal is marked as needing a re-check once the quota resets.
@@ -133,9 +140,27 @@ async function attach(doc: Document, dealId: string, proposal: LinkProposal, by:
     revalidatePath("/", "layout");
     redirect(`/deal/${target}?quota=1`);
   }
-  if (proposal.note) brief.notSeen.unshift(proposal.note.text);
+  if (notSeen) brief.notSeen.unshift(notSeen);
   mutate((s) => void (s.briefs[target] = [...(s.briefs[target] ?? []), brief]), { user: by, dealId: target, action: "brief.recheck", detail: { version } });
   revalidatePath("/", "layout");
   const u = await currentUser();
   redirect(u.role === "karandeep" ? `/deal/${target}?v=${version}&open=1#brief` : `/deal/${target}`);
+}
+
+/** Meeting notes, an email or an update: added to the deal's notes (no contract extraction), then the deal is re-checked so the notes scan reads it. */
+async function addNote(dealId: string, name: string, text: string, by: string) {
+  if (!getDeal(dealId)) throw new Error("Notes can only be uploaded from a deal's page.");
+  if (text.length < 20) throw new Error("That note is too short.");
+  if (dealNotes(getDeal(dealId)!).some((n) => n.text.trim() === text)) redirect(`/deal/${dealId}?duplicate=1`);
+  const id = `note-up-${Date.now().toString(36)}`;
+  const title = (text.split("\n").find((l) => l.trim())?.replace(/^[#*\s]+/, "").slice(0, 80) || name) + " (uploaded)";
+  mutate(
+    (s) => {
+      s.uploadedNotes.push({ id, file: name, date: new Date().toISOString().slice(0, 10), title, text, dealIds: [dealId] });
+      const o = (s.dealOverrides[dealId] ??= {});
+      o.addNoteIds = [...new Set([...(o.addNoteIds ?? []), id])];
+    },
+    { user: by, dealId, action: "note.upload", detail: { id, name } },
+  );
+  await recheckAfterUpload(dealId, `notes uploaded: ${name}`, by);
 }

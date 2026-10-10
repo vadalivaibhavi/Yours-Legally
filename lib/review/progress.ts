@@ -5,7 +5,9 @@
  * be finalised (status "Decided") only when nothing is left; partial work stays "Review in progress".
  */
 import { briefVersions } from "../deals";
+import { baseDeals } from "../data";
 import { readState } from "../store";
+import { adjustForDealSize } from "./materiality";
 
 export type ReviewProgress = {
   total: number;
@@ -32,7 +34,8 @@ export function reviewProgress(dealId: string): ReviewProgress | null {
   const confirmations = s.confirmations[dealId] ?? {};
   const o = s.dealOverrides[dealId] ?? {};
   // Findings that must be answered before finalising: blocker and high, including ones Karandeep dismissed.
-  const items = brief.findings.filter((f) => REQUIRED.has(f.severity));
+  const value = [...baseDeals(), ...s.newDeals].find((d) => d.id === dealId)?.valueUsd;
+  const items = brief.findings.filter((f) => REQUIRED.has(adjustForDealSize(f, value).severity));
   const reacted = items.filter((f) => reactions[f.key]).length;
   const facts = brief.complianceCandidate?.factIds ?? [];
   const factsAnswered = facts.filter((id) => confirmations[id]).length;

@@ -1,0 +1,4 @@
+{
+  "smallDealUsd": 50000,
+  "note": "Karandeep accepts deviations from the standard terms on deals below this value: they count one severity step lower. Blockers, conflicts with existing commitments, compliance and paperwork are never adjusted. Change the number to move the line."
+}

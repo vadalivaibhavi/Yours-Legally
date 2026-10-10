@@ -6,7 +6,9 @@
  */
 import { registerEntries } from "../register";
 import { readState } from "../store";
+import { baseDeals } from "../data";
 import { coverageNote, sanitize, sanitizeFinding } from "./guardrails";
+import { adjustForDealSize } from "./materiality";
 import type { Brief, EffectiveBrief, Finding, Severity } from "./types";
 import { computeVerdict, sortFindings, templateHeadline } from "./verdict";
 
@@ -16,10 +18,11 @@ export function effectiveBrief(brief: Brief, prev: Brief | null): EffectiveBrief
   const notesOnBlockers = s.blockerNotes[brief.dealId] ?? {};
   const confirmations = s.confirmations[brief.dealId] ?? {};
   const register = new Map(registerEntries({ includeRejected: true }).map((e) => [e.id, e]));
+  const value = [...baseDeals(), ...s.newDeals].find((d) => d.id === brief.dealId)?.valueUsd;
 
   const findings: Finding[] = [];
   for (const f0 of brief.findings) {
-    const f: Finding = sanitizeFinding({ ...f0 }); // briefs stored before a wording rule still read plainly
+    const f: Finding = adjustForDealSize(sanitizeFinding({ ...f0 }), value); // plain wording; small-deal deviations count lower
     const r = reactions[f.key];
     if (r?.reaction === "disagree") continue; // dismissed by Karandeep (reason logged): shown separately, not in the verdict
     if (r?.reaction === "severity" && r.severity) f.severity = r.severity as Severity;

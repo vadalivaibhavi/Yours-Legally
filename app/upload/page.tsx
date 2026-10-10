@@ -52,46 +52,51 @@ export default async function UploadPage(props: PageProps<"/upload">) {
       <Link href="/" className="text-sm text-muted hover:underline">
         ← Queue
       </Link>
-      <h1 className="font-serif text-2xl font-semibold">Upload a contract</h1>
+      <h1 className="font-serif text-2xl font-semibold">{preselectDeal ? `Upload into ${preselectDeal.name}` : "Upload a contract"}</h1>
       {sp.quota === "1" && <div className="rounded-lg bg-change-soft p-4 text-sm text-change">{QUOTA_MESSAGE}</div>}
       <form action={uploadDocument} className="card space-y-4 p-5 text-sm">
         <label className="block space-y-1">
-          <span className="label">Contract file (.md / .txt, up to 1 MB)</span>
+          <span className="label">File (.md / .txt, up to 1 MB)</span>
           <input type="file" name="file" accept=".md,.txt,.markdown" className="w-full" />
         </label>
         <label className="block space-y-1">
           <span className="label">…or paste the text</span>
-          <TextArea name="text" rows={6} className="font-serif" placeholder="Paste the contract text" max={LIMITS.contract} />
+          <TextArea name="text" rows={6} className="font-serif" placeholder="Paste the text" max={LIMITS.contract} />
         </label>
-        <label className="block space-y-1">
-          <span className="label">Deal</span>
-          <select name="deal" defaultValue={preselect} className="w-full">
-            <option value="">Let Yours Legally, propose (auto when certain, asks when ambiguous)</option>
-            {deals.map((d) => (
-              <option key={d.id} value={d.id}>
-                Put it in: {d.name}
-              </option>
-            ))}
-            <option value="new">Start a new deal</option>
-          </select>
-        </label>
-        {preselectDeal && preDocs.length > 0 && (
+        {preselectDeal ? (
+          <>
+            <input type="hidden" name="deal" value={preselectDeal.id} />
+            <label className="block space-y-1">
+              <span className="label">What is it?</span>
+              <select name="what" defaultValue="contract" className="w-full">
+                {preDocs.map((d) => (
+                  <option key={d.id} value={`replace:${d.id}`}>
+                    A new version of: {d.title}
+                  </option>
+                ))}
+                <option value="contract">An additional contract document (SOW, annex, amendment, side letter…)</option>
+                <option value="note">Meeting notes, an email or an update about the deal</option>
+              </select>
+            </label>
+          </>
+        ) : (
           <label className="block space-y-1">
-            <span className="label">Is it a new version of a document in this deal?</span>
-            <select name="replaces" defaultValue="" className="w-full">
-              <option value="">No: an additional document</option>
-              {preDocs.map((d) => (
+            <span className="label">Deal</span>
+            <select name="deal" defaultValue="" className="w-full">
+              <option value="">Let Yours Legally, propose (auto when certain, asks when ambiguous)</option>
+              {deals.map((d) => (
                 <option key={d.id} value={d.id}>
-                  Yes: replaces {d.title}
+                  Put it in: {d.name}
                 </option>
               ))}
+              <option value="new">Start a new deal</option>
             </select>
           </label>
         )}
         <SaveButton className="btn btn-primary" pendingLabel="Uploading and reviewing… (about 1–2 min, keep this page open)" savedLabel="Done ✓">
           Upload &amp; review
         </SaveButton>
-        <p className="text-xs text-muted">The contract is extracted, linked and reviewed; a new brief version is issued. Takes up to a few minutes on the free model tier.</p>
+        <p className="text-xs text-muted">A contract is read and reviewed; notes are added to the deal's notes and scanned. Either way the deal is re-checked and a new brief version is issued (up to a few minutes on the free model tier).</p>
       </form>
     </div>
   );
