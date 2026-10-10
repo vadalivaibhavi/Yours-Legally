@@ -67,8 +67,9 @@ export default async function UploadPage(props: PageProps<"/upload">) {
           <>
             <input type="hidden" name="deal" value={preselectDeal.id} />
             <label className="block space-y-1">
-              <span className="label">What is it?</span>
-              <select name="what" defaultValue="contract" className="w-full">
+              <span className="label">What is it? (optional)</span>
+              <select name="what" defaultValue="auto" className="w-full">
+                <option value="auto">Detect it automatically</option>
                 {preDocs.map((d) => (
                   <option key={d.id} value={`replace:${d.id}`}>
                     A new version of: {d.title}

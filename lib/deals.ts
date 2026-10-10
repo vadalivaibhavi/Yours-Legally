@@ -10,7 +10,7 @@ import type { Brief, EffectiveBrief } from "./review/types";
 import { readState } from "./store";
 import type { Deal, Document, Note } from "./types";
 
-export type DealView = Deal & { decision?: string; decidedAt?: string; finalised?: boolean; finalisedAt?: string; stale?: string; signedAt?: string; signedDocId?: string };
+export type DealView = Deal & { decision?: string; decidedAt?: string; finalised?: boolean; finalisedAt?: string; stale?: string; staleReason?: string; signedAt?: string; signedDocId?: string };
 
 /** Decisions that mean "we are signing": a deal with one of these can be stored in the contract register. */
 export const SIGN_DECISIONS = ["Sign", "Sign after changes"];
@@ -39,6 +39,7 @@ export function allDeals(): DealView[] {
       finalised: o.finalised,
       finalisedAt: o.finalisedAt,
       stale: o.staleSince,
+      staleReason: o.staleReason,
       signedAt: o.signedAt,
       signedDocId: o.signedDocId,
     };

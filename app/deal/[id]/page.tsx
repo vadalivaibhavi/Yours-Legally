@@ -15,6 +15,7 @@ import { QUOTA_MESSAGE } from "@/lib/limits";
 import type { DealView } from "@/lib/deals";
 import type { EffectiveBrief } from "@/lib/review/types";
 import { recheckDeal } from "@/app/deal/actions";
+import { undoUpload } from "@/app/upload/actions";
 
 
 /** Re-checks run the review pipeline inside server actions on this page (Vercel: up to 300s). */
@@ -60,6 +61,16 @@ export default async function DealPage(props: PageProps<"/deal/[id]">) {
         </p>
       </div>
 
+      {typeof sp.added === "string" && (
+        <form action={undoUpload} className="flex flex-wrap items-center gap-3 rounded-lg bg-brand-soft p-3 text-sm text-brand">
+          <input type="hidden" name="dealId" value={deal.id} />
+          <input type="hidden" name="undo" value={typeof sp.undo === "string" ? sp.undo : ""} />
+          <span>{sp.added}.</span>
+          <SaveButton className="btn ml-auto !py-1 !text-xs" pendingLabel="Undoing…" savedLabel="Undone ✓">
+            Wrong? Undo and choose
+          </SaveButton>
+        </form>
+      )}
       {sp.duplicate === "1" && <div className="rounded-lg bg-change-soft p-4 text-sm text-change">That file is already in this deal, so nothing was added.</div>}
       {sp.quota === "1" && <div className="rounded-lg bg-change-soft p-4 text-sm text-change">{QUOTA_MESSAGE}{deal.stale ? " The new document is attached; re-check the deal then." : ""}</div>}
 
@@ -209,7 +220,7 @@ function plainNote(note: string): string {
  */
 function syncReasons(deal: DealView, latest: EffectiveBrief): string[] {
   return [
-    deal.stale && deal.stale > latest.createdAt ? `the register changed (${fmtDate(deal.stale)})` : "",
+    deal.stale && deal.stale > latest.createdAt ? `${deal.staleReason ?? "the register changed"} (${fmtDate(deal.stale)})` : "",
     latest.errors.length ? "a step couldn't complete last time" : "",
   ].filter(Boolean);
 }

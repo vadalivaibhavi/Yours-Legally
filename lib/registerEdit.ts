@@ -43,7 +43,7 @@ export function applyRegisterChange(id: string, action: RegisterAction, edits: P
         edits: edits ? { ...(prev.edits ?? {}), ...edits } : prev.edits,
       };
       s.registerRevision += 1;
-      for (const d of flagged) s.dealOverrides[d] = { ...(s.dealOverrides[d] ?? {}), staleSince: at };
+      for (const d of flagged) s.dealOverrides[d] = { ...(s.dealOverrides[d] ?? {}), staleSince: at, staleReason: "the register changed" };
     },
     { user: by, action: `register.${action}`, detail: { id, edits, flagged } },
   );

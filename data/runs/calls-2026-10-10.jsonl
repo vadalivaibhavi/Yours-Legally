@@ -3,3 +3,9 @@
 {"at":"2026-10-10T17:56:28.551Z","provider":"gemini","script":"eval","caseId":"EV-S6","task":"classify","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
 {"at":"2026-10-10T18:12:57.103Z","provider":"gemini","script":"eval","caseId":"EV-S6","task":"classify","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
 {"at":"2026-10-10T18:13:41.370Z","provider":"gemini","script":"eval","caseId":"EV-S6","task":"classify","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-10T18:16:44.275Z","provider":"gemini","task":"extract","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-10T18:16:44.301Z","provider":"gemini","task":"playbook","model":"gemini-3-flash-preview","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-10T18:17:29.428Z","provider":"gemini","task":"differs","model":"gemini-3.6-flash,gemini-flash-latest,gemini-3.8-flash,gemini-3.7-flash,gemini-3-flash-preview,gemini-3.5-flash","inputTokens":0,"outputTokens":0,"ms":45010,"cached":false,"ok":false,"error":"timed out after 45s across retries | gemini-3.6-flash: HTTP 503: { \"error\": { \"code\": 503, \"message\": \"This model is currently experiencing high demand. Spikes in demand are u | gemini-flash-latest: A"}
+{"at":"2026-10-10T18:17:29.452Z","provider":"gemini","task":"notes","model":"gemini-3.5-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-10T18:17:33.315Z","provider":"gemini","task":"brief","model":"gemini-3.6-flash","inputTokens":544,"outputTokens":49,"ms":3796,"cached":false,"ok":true}
+{"at":"2026-10-10T18:28:34.945Z","provider":"gemini","script":"eval","caseId":"EV-S6","task":"classify","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}

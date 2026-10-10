@@ -208,7 +208,7 @@ export async function recheckDeal(form: FormData) {
   mutate(
     (s) => {
       s.briefs[dealId] = [...(s.briefs[dealId] ?? []), brief];
-      if (s.dealOverrides[dealId]) s.dealOverrides[dealId].staleSince = undefined;
+      if (s.dealOverrides[dealId]) Object.assign(s.dealOverrides[dealId], { staleSince: undefined, staleReason: undefined });
     },
     { user: u.name, dealId, action: "brief.recheck", detail: { version } },
   );
@@ -426,7 +426,7 @@ export async function storeInRegister(form: FormData) {
       const o = (s.dealOverrides[deal.id] ??= {});
       Object.assign(o, { status: "signed", signedAt: now(), staleSince: undefined });
       // New commitments change what other open deals can promise: flag the ones they can reach (FR-19).
-      for (const id of dealsAffectedBy(ok.flatMap((x) => x.entries))) if (id !== deal.id) s.dealOverrides[id] = { ...(s.dealOverrides[id] ?? {}), staleSince: now() };
+      for (const id of dealsAffectedBy(ok.flatMap((x) => x.entries))) if (id !== deal.id) s.dealOverrides[id] = { ...(s.dealOverrides[id] ?? {}), staleSince: now(), staleReason: "the register changed" };
     },
     { user: u.name, dealId: deal.id, action: "deal.stored", detail: { documents: [...ids], entries: added } },
   );
