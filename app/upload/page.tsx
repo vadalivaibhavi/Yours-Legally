@@ -29,6 +29,7 @@ export default async function UploadPage(props: PageProps<"/upload">) {
       ...preDocs.map((d): [string, string] => [`replace:${d.id}`, `A new version of: ${d.title}`]),
       ["contract", "An additional contract document (SOW, annex, amendment, side letter…)"],
       ["note", "Meeting notes, an email or an update about the deal"],
+      ["template", "A blank template: don't add it (it would be reviewed as if it were the deal's terms)"],
     ];
     const label = (w: string) => options.find(([v]) => v === w)?.[1] ?? w;
     const ordered = [...options.filter(([v]) => v === staged.guess.what), ...options.filter(([v]) => v !== staged.guess.what)];
@@ -73,7 +74,7 @@ export default async function UploadPage(props: PageProps<"/upload">) {
           </fieldset>
           <div className="flex items-center gap-3">
             <SaveButton className="btn btn-primary" pendingLabel="Reviewing… (about 1–2 min, keep this page open)" savedLabel="Done ✓">
-              {staged.guess.elsewhere ? `Keep it in ${preselectDeal.name} & review` : "Confirm & review"}
+              {staged.guess.what === "template" ? "Confirm" : staged.guess.elsewhere ? `Keep it in ${preselectDeal.name} & review` : "Confirm & review"}
             </SaveButton>
             <Link href={`/upload?deal=${preselectDeal.id}`} className="text-xs text-muted underline">
               Choose a different file
@@ -116,6 +117,7 @@ export default async function UploadPage(props: PageProps<"/upload">) {
       </Link>
       <h1 className="font-serif text-2xl font-semibold">{preselectDeal ? `Upload into ${preselectDeal.name}` : "Upload a contract"}</h1>
       {sp.quota === "1" && <div className="rounded-lg bg-change-soft p-4 text-sm text-change">{QUOTA_MESSAGE}</div>}
+      {sp.template === "1" && <div className="rounded-lg bg-change-soft p-4 text-sm text-change">It looks like a blank template, so it wasn't added: a template's clauses are nobody's terms, and reviewing them would flag things that don't apply. Upload the filled-in contract instead.</div>}
       <form action={uploadDocument} className="card space-y-4 p-5 text-sm">
         <label className="block space-y-1">
           <span className="label">File (.md / .txt, up to 1 MB)</span>

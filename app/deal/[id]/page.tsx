@@ -60,6 +60,7 @@ export default async function DealPage(props: PageProps<"/deal/[id]">) {
         </p>
       </div>
 
+      {sp.template === "1" && <div className="rounded-lg bg-change-soft p-4 text-sm text-change">It looks like a blank template, so it wasn't added: a template's clauses are nobody's terms, and reviewing them would flag things that don't apply. Upload the filled-in contract instead.</div>}
       {sp.duplicate === "1" && <div className="rounded-lg bg-change-soft p-4 text-sm text-change">That file is already in this deal, so nothing was added.</div>}
       {sp.quota === "1" && <div className="rounded-lg bg-change-soft p-4 text-sm text-change">{QUOTA_MESSAGE}{deal.stale ? " The new document is attached; re-check the deal then." : ""}</div>}
 

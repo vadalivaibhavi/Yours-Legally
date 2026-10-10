@@ -5,7 +5,7 @@
  */
 import fs from "node:fs";
 import path from "node:path";
-import { belongsElsewhere, findPriorVersion, guessDocType, looksLikeNotes } from "../lib/uploadDetect";
+import { belongsElsewhere, findPriorVersion, guessDocType, looksLikeNotes, looksLikeTemplate } from "../lib/uploadDetect";
 import type { Document } from "../lib/types";
 
 const all = JSON.parse(fs.readFileSync("data/documents.json", "utf8")) as Document[];
@@ -69,6 +69,23 @@ for (const [name, text, into, expect] of elsewhereCases) {
   const ok = (got?.dealId ?? null) === expect;
   if (!ok) failed++;
   console.log(`${ok ? "ok  " : "FAIL"} ${name}: ${got ? `belongs to ${got.dealId}? (${got.why})` : "fine here"}`);
+}
+// Blank templates: never reviewed. No real document may be flagged (drafts have "____" blanks too).
+const realDocs: [string, string][] = [
+  ...all.map((d): [string, string] => [d.id, d.text]),
+  ...["data/synthetic/harrington_ortiz_sub_baa.md", "data/synthetic/rheinwerk_annex3_dpa.md", "test-uploads/FinServe_NDA_v2_mutual.md"].map((p): [string, string] => [p, file(p)]),
+];
+const falseTemplates = realDocs.filter(([, t]) => looksLikeTemplate(t).template).map(([n]) => n);
+console.log(`real documents taken for templates: ${falseTemplates.length}${falseTemplates.length ? ` · ${falseTemplates.join(", ")}` : ""}`);
+failed += falseTemplates.length;
+const templateCases: [string, string][] = [
+  ["Blank mutual NDA template (test-uploads)", file("test-uploads/Blank_Mutual_NDA_template.md")],
+  ["Blank MSA with an empty party and {{fee}} fields", `# MASTER SERVICES AGREEMENT\n\nThis Agreement is made between ______________ (the "Client") and AtliQ Technologies Private Limited (the "Supplier").\n\n1. Services. The Supplier shall provide the services in the SOW.\n2. Fees. The Client shall pay {{fee}} within {{days}} days.\n3. Term. This Agreement runs for one year.\n`],
+];
+for (const [name, text] of templateCases) {
+  const got = looksLikeTemplate(text);
+  if (!got.template) failed++;
+  console.log(`${got.template ? "ok  " : "FAIL"} ${name}: ${got.template ? `template (${got.why})` : "not flagged"}`);
 }
 console.log(failed ? `\n${failed} wrong` : "\nall correct");
 process.exitCode = failed ? 1 : 0;

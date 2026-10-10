@@ -32,6 +32,25 @@ export function looksLikeNotes(text: string): { notes: boolean; why: string } {
     : { notes: false, why: [numbered && `${numbered} numbered clauses`, signature && "signature block", binding && "countersigned", printedRef && "printed reference number"].filter(Boolean).join(", ") };
 }
 
+/**
+ * A blank template: placeholders where the deal's facts should be. Reviewing one would flag clauses that
+ * aren't anyone's terms, so it is never reviewed or used as context. Real drafts have blanks too (an
+ * effective date, the signature lines), so only the body counts (the signature block is cut off) and it
+ * takes a blank party or at least 3 named placeholders ("[Client Name]", "{{fee}}", "<insert date>", "[●]");
+ * "____" blanks alone (a date, a tax ID, bank details) are a draft still being filled in, not a template.
+ */
+export function looksLikeTemplate(text: string): { template: boolean; why: string } {
+  const sig = text.search(/^\W*(signatures?|execution|in witness whereof|signed for and on behalf|for and on behalf of)\b/im);
+  const body = sig > text.length * 0.4 ? text.slice(0, sig) : text.slice(0, Math.floor(text.length * 0.88));
+  // Named placeholders only: "____" blanks for a date, a tax ID or bank details are normal in a real draft.
+  const found = body.match(/\[(?!signed\])[^\]\n()]{2,40}\](?!\()|\{\{[^}\n]+\}\}|<\s*(insert|name|date|amount|client|company)[^>\n]{0,30}>|\[[●•]\]|\binsert (name|date|amount)\b/gi) ?? [];
+  const blankParty = /\bbetween\s*:?\s*\**\s*(_{3,}|\[[^\]]+\]|\{\{)|(_{3,}|\[[^\]]*(name|company|client|party|counterparty)[^\]]*\])\**\s*,?\s*(a company|having its|\(the\s*["“]?\**(client|company|supplier|recipient))/i.test(body);
+  const examples = [...new Set(found)].slice(0, 3).map((f) => `"${f}"`).join(", ");
+  return blankParty || found.length >= 3
+    ? { template: true, why: [blankParty && "the parties are left blank", found.length && `${found.length} placeholder${found.length === 1 ? "" : "s"} in the body (${examples})`].filter(Boolean).join("; ") }
+    : { template: false, why: "" };
+}
+
 const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9 ]/g, " ").split(/\s+/).filter((w) => w.length > 2);
 function shingles(text: string): Set<string> {
   const w = norm(text);

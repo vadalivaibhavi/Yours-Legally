@@ -13,7 +13,7 @@ import { redirect } from "next/navigation";
 import { allDeals, allDocuments, dealDocuments, dealNotes, getDeal, type DealView } from "@/lib/deals";
 import { proposeLink, type LinkProposal } from "@/lib/linking";
 import { isQuotaExhausted } from "@/lib/llm";
-import { belongsElsewhere, findPriorVersion, guessDocType, looksLikeNotes, type DealSketch } from "@/lib/uploadDetect";
+import { belongsElsewhere, findPriorVersion, guessDocType, looksLikeNotes, looksLikeTemplate, type DealSketch } from "@/lib/uploadDetect";
 import { extractReferences } from "@/lib/references";
 import { extractDocument } from "@/lib/review/extract";
 import { nextVersion, reviewDeal } from "@/lib/review/pipeline";
@@ -44,6 +44,8 @@ const sketch = (d: DealView): DealSketch => ({ id: d.id, name: d.name, names: [d
 /** What the file most likely is, with the reason shown to the uploader, and whether it looks like another deal's file. */
 function detect(text: string, deal: DealView): { what: string; why: string; elsewhere: { dealId: string; name: string; why: string } | null } {
   const elsewhere = belongsElsewhere(text, { ...sketch(deal), linked: [...deal.linkedDealIds, ...(deal.endClientDealId ? [deal.endClientDealId] : [])] }, allDeals().filter((d) => d.status !== "signed").map(sketch));
+  const t = looksLikeTemplate(text);
+  if (t.template) return { what: "template", why: t.why, elsewhere: null };
   const n = looksLikeNotes(text);
   if (n.notes) return { what: "note", why: n.why, elsewhere };
   const v = findPriorVersion({ text, docType: guessDocType(text) }, dealDocuments(deal));
@@ -76,6 +78,8 @@ export async function uploadDocument(form: FormData) {
     mutate((s) => void (s.stagedUploads = [...s.stagedUploads.filter((x) => x.dealId !== deal.id), { id, dealId: deal.id, name, text, at: new Date().toISOString(), guess }]));
     redirect(`/upload?deal=${deal.id}&staged=${id}`);
   }
+  // General upload: a blank template is turned away before any model call.
+  if (looksLikeTemplate(text).template) redirect("/upload?template=1");
   await processContract({ name, text, chosen: String(form.get("deal") ?? ""), what: "contract", by: user.name });
 }
 
@@ -91,6 +95,8 @@ export async function confirmUpload(form: FormData) {
     action: "upload.confirm",
     detail: { name: staged.name, detected: staged.guess.what, chosen: what },
   });
+  // A blank template is never reviewed or kept as context: its clauses are nobody's terms.
+  if (what === "template") redirect(`/deal/${staged.dealId}?template=1`);
   if (what === "note") return addNote(staged.dealId, staged.name, staged.text, user.name);
   await processContract({ name: staged.name, text: staged.text, chosen: staged.dealId, what, by: user.name });
 }
