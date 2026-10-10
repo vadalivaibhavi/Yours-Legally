@@ -12,6 +12,9 @@ import { currentUser } from "@/lib/session";
 import { sellerChecksFor } from "@/lib/sellerChecks";
 import { SellerCheckPanel } from "@/components/SellerCheckPanel";
 import { QUOTA_MESSAGE } from "@/lib/limits";
+import { latestSellerCheck } from "@/lib/sellerChecks";
+import type { DealView } from "@/lib/deals";
+import type { EffectiveBrief } from "@/lib/review/types";
 import { recheckDeal } from "@/app/deal/actions";
 
 
@@ -61,6 +64,19 @@ export default async function DealPage(props: PageProps<"/deal/[id]">) {
       {sp.duplicate === "1" && <div className="rounded-lg bg-change-soft p-4 text-sm text-change">That file is already in this deal, so nothing was added.</div>}
       {sp.quota === "1" && <div className="rounded-lg bg-change-soft p-4 text-sm text-change">{QUOTA_MESSAGE}{deal.stale ? " The new document is attached; re-check the deal then." : ""}</div>}
 
+      {isK && latest && deal.status !== "signed" && syncReasons(deal, latest).length > 0 && (
+        <form action={recheckDeal} className="card flex flex-wrap items-center gap-3 border-change bg-change-soft p-4 text-sm text-change">
+          <input type="hidden" name="dealId" value={deal.id} />
+          <input type="hidden" name="trigger" value={`sync: ${syncReasons(deal, latest).join("; ")}`} />
+          <span>
+            <b>Out of date:</b> {syncReasons(deal, latest).join("; ")} since brief v{latest.version}.
+          </span>
+          <SaveButton className="btn btn-primary ml-auto" pendingLabel="Syncing… (about 1 min)" savedLabel="Synced ✓">
+            Sync
+          </SaveButton>
+        </form>
+      )}
+
       {isK && (
         <section id="brief" className="scroll-mt-4">
           {shown ? (
@@ -103,14 +119,6 @@ export default async function DealPage(props: PageProps<"/deal/[id]">) {
             <a href={`/upload?deal=${deal.id}`} className="btn !py-1 !text-xs">
               Upload into this deal
             </a>
-            {isK && deal.status !== "signed" && (
-              <form action={recheckDeal}>
-                <input type="hidden" name="dealId" value={deal.id} />
-                <SaveButton className="btn btn-primary !py-1 !text-xs" pendingLabel="Re-checking… (1–3 min)" savedLabel="Re-checked ✓">
-                  Re-check now
-                </SaveButton>
-              </form>
-            )}
           </div>
         }
       >
@@ -194,4 +202,17 @@ export default async function DealPage(props: PageProps<"/deal/[id]">) {
 /** "by 3 Oct (tracker C-026)" → "by 3 Oct": the tracker / meeting reference is for the record, not the reader. */
 function plainNote(note: string): string {
   return note.replace(/\s*\((?:tracker [^)]*|\d{1,2} \w{3} meeting)\)/g, "");
+}
+
+/**
+ * Why the latest brief is out of date for reasons other than its documents (uploads re-check on their own):
+ * the register changed, the seller re-ran the deal check, or a step couldn't complete last time.
+ */
+function syncReasons(deal: DealView, latest: EffectiveBrief): string[] {
+  const check = latestSellerCheck(deal.id);
+  return [
+    deal.stale && deal.stale > latest.createdAt ? `the register changed (${fmtDate(deal.stale)})` : "",
+    check && check.at > latest.createdAt ? `the seller updated the deal check (${fmtDate(check.at)})` : "",
+    latest.errors.length ? "a step couldn't complete last time" : "",
+  ].filter(Boolean);
 }

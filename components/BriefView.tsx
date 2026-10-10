@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { acceptAllMedium, addMissed, clearDecision, closeAlert, confirmFact, finaliseReview, recheckDeal, recordDecision, removeMissed, reopenReview, undoConfirmation, undoFollowUp, undoReaction } from "@/app/deal/actions";
+import { acceptAllMedium, addMissed, clearDecision, closeAlert, confirmFact, finaliseReview, recordDecision, removeMissed, reopenReview, undoConfirmation, undoFollowUp, undoReaction } from "@/app/deal/actions";
 import { reviewProgress } from "@/lib/review/progress";
 import { FollowUpQuestion, ResolveAlertForm, SaveButton } from "@/components/BriefControls";
 import { FindingCard, SimilarDetails } from "@/components/FindingCard";
@@ -99,7 +99,6 @@ export async function BriefView({ dealId: id, version }: { dealId: string; versi
             <span className="ml-auto text-muted">Saved automatically</span>
           </p>
         )}
-        {deal.stale && <p className="rounded bg-change-soft p-2 text-sm text-change">The register changed since this brief ({fmtDate(deal.stale)}). Re-check to apply it.</p>}
       </div>
 
       {/* ---------------------------------------------------------------- pinned compliance alert (FR-21) */}
@@ -209,10 +208,7 @@ export async function BriefView({ dealId: id, version }: { dealId: string; versi
                 <a href={`/upload?deal=${id}`} className="btn">
                   Upload it here
                 </a>
-                <form action={recheckDeal}>
-                  <input type="hidden" name="dealId" value={id} />
-                  <SaveButton className="btn btn-primary" savedLabel="Re-checked ✓" pendingLabel="Re-checking… (1–3 min)">Input added → re-check</SaveButton>
-                </form>
+                <span className="text-xs text-muted">Uploading re-checks the deal.</span>
               </div>
             )}
           </div>

@@ -45,6 +45,7 @@ The EV-V synthetic documents' header line changed with the product rename (5 Oct
 | "Re-check now" on an unchanged deal | ≈0–1 (everything cached; only missing comparison lines call the model) | |
 | Upload a completely new contract | 1 extract + a full review (≈6–8) + clause embeddings | new deal in the queue |
 | Commitments register (verify, edit, reject) | 0 | rules + state only |
+| **Sync** (deal page banner: register changed / seller updated the check / a step failed). Today all 13 deals show it (6 Oct register changes) | ≈1–3 per deal | the batch run below does the same for every deal at once |
 | Re-check deals flagged by a register change (edit / reject / restore; verify flags none). Restriction changes flag every open deal; a client duty flags that client's deals; insurance / non-solicit / other flag none | ≈1–3 per flagged deal (conflict + brief; the rest is cached) | each flagged deal shows "The register changed since this brief"; batch the re-checks once you finish editing |
 | Store in contract register (queue button after a Sign decision) | 1 register extraction (strong) per distinct document | the deal leaves the queue; its commitments appear in the register (unverified) |
 | Seller deal check | 0, or 1 if "Anything else" free text is filled | |
