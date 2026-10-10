@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { chooseDeal, uploadDocument } from "./actions";
+import { chooseDeal, confirmUpload, uploadDocument } from "./actions";
 import { TextArea } from "@/components/Fields";
 import { SaveButton } from "@/components/BriefControls";
 import { LIMITS, QUOTA_MESSAGE } from "@/lib/limits";
@@ -21,6 +21,56 @@ export default async function UploadPage(props: PageProps<"/upload">) {
   const deals = visibleDeals(user, allDeals());
   const preselectDeal = preselect ? getDeal(preselect) : undefined;
   const preDocs = preselectDeal ? dealDocuments(preselectDeal) : [];
+
+  // Step 2 of an upload into a deal: what it was detected as, and every other thing it could be.
+  const staged = typeof sp.staged === "string" ? readState().stagedUploads.find((x) => x.id === sp.staged) : undefined;
+  if (staged && preselectDeal) {
+    const options: [string, string][] = [
+      ...preDocs.map((d): [string, string] => [`replace:${d.id}`, `A new version of: ${d.title}`]),
+      ["contract", "An additional contract document (SOW, annex, amendment, side letter…)"],
+      ["note", "Meeting notes, an email or an update about the deal"],
+    ];
+    const label = (w: string) => options.find(([v]) => v === w)?.[1] ?? w;
+    const ordered = [...options.filter(([v]) => v === staged.guess.what), ...options.filter(([v]) => v !== staged.guess.what)];
+    return (
+      <div className="mx-auto max-w-2xl space-y-4">
+        <Link href={`/deal/${preselectDeal.id}`} className="text-sm text-muted hover:underline">
+          ← {preselectDeal.name}
+        </Link>
+        <h1 className="font-serif text-2xl font-semibold">Upload into {preselectDeal.name}</h1>
+        <form action={confirmUpload} className="card space-y-4 p-5 text-sm">
+          <input type="hidden" name="staged" value={staged.id} />
+          <p className="text-muted">
+            📄 {staged.name} · {staged.text.split(/\s+/).length.toLocaleString()} words
+          </p>
+          <div className="rounded-lg bg-brand-soft p-3">
+            This looks like <b>{label(staged.guess.what)}</b>
+            <div className="text-xs text-muted">Why: {staged.guess.why}</div>
+          </div>
+          <fieldset className="space-y-2">
+            <legend className="label mb-1">Not right? Choose what it is</legend>
+            {ordered.map(([v, l]) => (
+              <label key={v} className="flex items-start gap-2">
+                <input type="radio" name="what" value={v} defaultChecked={v === staged.guess.what} className="mt-1" />
+                <span>
+                  {l}
+                  {v === staged.guess.what && <span className="ml-1 text-xs text-muted">(detected)</span>}
+                </span>
+              </label>
+            ))}
+          </fieldset>
+          <div className="flex items-center gap-3">
+            <SaveButton className="btn btn-primary" pendingLabel="Reviewing… (about 1–2 min, keep this page open)" savedLabel="Done ✓">
+              Confirm &amp; review
+            </SaveButton>
+            <Link href={`/upload?deal=${preselectDeal.id}`} className="text-xs text-muted underline">
+              Choose a different file
+            </Link>
+          </div>
+        </form>
+      </div>
+    );
+  }
 
   if (pendingId) {
     const doc = readState().uploadedDocuments.find((d) => d.id === pendingId);
@@ -66,19 +116,7 @@ export default async function UploadPage(props: PageProps<"/upload">) {
         {preselectDeal ? (
           <>
             <input type="hidden" name="deal" value={preselectDeal.id} />
-            <label className="block space-y-1">
-              <span className="label">What is it? (optional)</span>
-              <select name="what" defaultValue="auto" className="w-full">
-                <option value="auto">Detect it automatically</option>
-                {preDocs.map((d) => (
-                  <option key={d.id} value={`replace:${d.id}`}>
-                    A new version of: {d.title}
-                  </option>
-                ))}
-                <option value="contract">An additional contract document (SOW, annex, amendment, side letter…)</option>
-                <option value="note">Meeting notes, an email or an update about the deal</option>
-              </select>
-            </label>
+            <input type="hidden" name="inDeal" value="1" />
           </>
         ) : (
           <label className="block space-y-1">
@@ -94,10 +132,21 @@ export default async function UploadPage(props: PageProps<"/upload">) {
             </select>
           </label>
         )}
-        <SaveButton className="btn btn-primary" pendingLabel="Uploading and reviewing… (about 1–2 min, keep this page open)" savedLabel="Done ✓">
-          Upload &amp; review
-        </SaveButton>
-        <p className="text-xs text-muted">A contract is read and reviewed; notes are added to the deal's notes and scanned. Either way the deal is re-checked and a new brief version is issued (up to a few minutes on the free model tier).</p>
+        {preselectDeal ? (
+          <>
+            <SaveButton className="btn btn-primary" pendingLabel="Reading the file…" savedLabel="Read ✓">
+              Upload
+            </SaveButton>
+            <p className="text-xs text-muted">Next you&apos;ll see what the file looks like (notes, a new version, or an additional document) and can change it before anything is reviewed.</p>
+          </>
+        ) : (
+          <>
+            <SaveButton className="btn btn-primary" pendingLabel="Uploading and reviewing… (about 1–2 min, keep this page open)" savedLabel="Done ✓">
+              Upload &amp; review
+            </SaveButton>
+            <p className="text-xs text-muted">The contract is read, linked to a deal and reviewed; a new brief version is issued (up to a few minutes on the free model tier).</p>
+          </>
+        )}
       </form>
     </div>
   );

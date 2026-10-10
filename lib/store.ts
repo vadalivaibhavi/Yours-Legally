@@ -61,6 +61,8 @@ export type State = {
   uploadedDocuments: Document[];
   /** Meeting notes, emails or updates uploaded into a deal (scanned like the dataset's notes). */
   uploadedNotes: Note[];
+  /** Uploads into a deal, detected and waiting for the uploader to confirm what they are (one per deal). */
+  stagedUploads: { id: string; dealId: string; name: string; text: string; at: string; guess: { what: string; why: string } }[];
   newDeals: Deal[];
   dealOverrides: Record<string, { status?: Deal["status"]; decision?: string; decidedAt?: string; finalised?: boolean; finalisedAt?: string; deadline?: string; addDocumentIds?: string[]; removeDocumentIds?: string[]; addNoteIds?: string[]; staleReason?: string; staleSince?: string; signedAt?: string; signedDocId?: string }>;
   briefs: Record<string, Brief[]>;
@@ -82,6 +84,7 @@ const EMPTY: State = {
   registerRevision: 0,
   uploadedDocuments: [],
   uploadedNotes: [],
+  stagedUploads: [],
   newDeals: [],
   dealOverrides: {},
   briefs: {},

@@ -49,7 +49,7 @@ The EV-V synthetic documents' header line changed with the product rename (5 Oct
 | Re-check deals flagged by a register change (edit / reject / restore; verify flags none). Restriction changes flag every open deal; a client duty flags that client's deals; insurance / non-solicit / other flag none | ≈1–3 per flagged deal (conflict + brief; the rest is cached) | each flagged deal shows "The register changed since this brief"; batch the re-checks once you finish editing |
 | Store in contract register (queue button after a Sign decision) | 1 register extraction (strong) per distinct document | the deal leaves the queue; its commitments appear in the register (unverified) |
 | Seller deal check | 0, or 1 if "Anything else" free text is filled | |
-| Upload notes / an update into a deal (detected automatically; check the "Added as…" banner) | ≈2 (notes scan + brief; the contract steps are cached) | the note appears under Meeting notes and the new brief version reflects it |
+| Upload notes / an update into a deal (detected on the confirm screen; change it if wrong) | ≈2 (notes scan + brief; the contract steps are cached) | the note appears under Meeting notes and the new brief version reflects it |
 
 On the free tier that is well within a day's quota for one round of tests. If a step hits the daily quota, the page now says so and nothing is lost: retry the next day.
 
