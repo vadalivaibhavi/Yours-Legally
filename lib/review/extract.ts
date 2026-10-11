@@ -71,10 +71,21 @@ export async function extractDocument(doc: Document) {
 /** Citation guardrail for facts: replace each snippet with the exact source span, or null if it doesn't match. */
 function verifySnippets(doc: Document, x: Extraction): Extraction {
   const fix = <T extends { quote: string | null }>(o: T): T => ({ ...o, quote: o.quote ? locateQuote(doc.text, o.quote) : null });
+  // The AtliQ entity decides high-severity rule findings, so it must be in the text: a value the document
+  // never names (no quote, and only the other entity appears) is replaced by the one it does name.
+  const named = { "Pvt Ltd": /atliq technologies (private limited|pvt\.? ?ltd)/i.test(doc.text), Inc: /atliq,? inc\b|atliq technologies,? inc\b/i.test(doc.text) };
+  const entity = <T extends { value: "Pvt Ltd" | "Inc" | null; quote: string | null }>(o: T): T => {
+    const f = fix(o);
+    if (f.value && !f.quote && !named[f.value]) {
+      const other = f.value === "Inc" ? "Pvt Ltd" : "Inc";
+      if (named[other]) return { ...f, value: other };
+    }
+    return f;
+  };
   return {
     ...x,
-    atliqEntityNamed: fix(x.atliqEntityNamed),
-    invoicingEntity: fix(x.invoicingEntity),
+    atliqEntityNamed: entity(x.atliqEntityNamed),
+    invoicingEntity: entity(x.invoicingEntity),
     governingLaw: fix(x.governingLaw),
     forum: fix(x.forum),
     payment: fix(x.payment),

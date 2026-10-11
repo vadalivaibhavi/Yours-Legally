@@ -18,3 +18,14 @@
 {"at":"2026-10-11T13:39:52.482Z","provider":"ollama","script":"review","dealId":"loopmart","task":"differs","model":"llama3.2","inputTokens":868,"outputTokens":207,"ms":417466,"cached":false,"ok":true}
 {"at":"2026-10-11T13:40:05.641Z","provider":"ollama","script":"review","dealId":"loopmart","task":"notes","model":"llama3.2","inputTokens":166,"outputTokens":89,"ms":13146,"cached":false,"ok":true}
 {"at":"2026-10-11T13:40:18.074Z","provider":"ollama","script":"review","dealId":"loopmart","task":"brief","model":"llama3.2","inputTokens":347,"outputTokens":25,"ms":12421,"cached":false,"ok":true}
+{"at":"2026-10-11T14:03:36.020Z","provider":"ollama","script":"review","dealId":"loopmart","task":"extract","model":"qwen2.5:7b","inputTokens":1346,"outputTokens":614,"ms":266119,"cached":false,"ok":true}
+{"at":"2026-10-11T14:09:18.039Z","provider":"ollama","script":"review","dealId":"loopmart","task":"nda","model":"qwen2.5:7b","inputTokens":1358,"outputTokens":1117,"ms":341990,"cached":false,"ok":true}
+{"at":"2026-10-11T14:10:13.367Z","provider":"ollama","script":"review","dealId":"loopmart","task":"differs","model":"qwen2.5:7b","inputTokens":875,"outputTokens":12,"ms":397231,"cached":false,"ok":true}
+{"at":"2026-10-11T14:10:41.824Z","provider":"ollama","script":"review","dealId":"loopmart","task":"notes","model":"qwen2.5:7b","inputTokens":156,"outputTokens":99,"ms":28450,"cached":false,"ok":true}
+{"at":"2026-10-11T14:11:00.841Z","provider":"ollama","script":"review","dealId":"loopmart","task":"brief","model":"qwen2.5:7b","inputTokens":208,"outputTokens":30,"ms":19006,"cached":false,"ok":true}
+{"at":"2026-10-11T14:12:15.955Z","provider":"ollama","script":"review","dealId":"loopmart","task":"extract","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-11T14:12:15.962Z","provider":"ollama","script":"review","dealId":"loopmart","task":"nda","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-11T14:12:15.994Z","provider":"ollama","script":"review","dealId":"loopmart","task":"differs","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-11T14:12:15.998Z","provider":"ollama","script":"review","dealId":"loopmart","task":"notes","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-11T14:12:20.982Z","provider":"ollama","script":"review","dealId":"loopmart","task":"brief","model":"qwen2.5:7b","inputTokens":136,"outputTokens":25,"ms":4981,"cached":false,"ok":true}
+{"at":"2026-10-11T14:12:36.213Z","provider":"gemini","script":"eval","caseId":"EV-S6","task":"classify","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}

@@ -1,0 +1,64 @@
+{
+  "deals": [
+    "loopmart"
+  ],
+  "skipped": [],
+  "concurrency": 1,
+  "minIntervalMs": 4000,
+  "seconds": 711,
+  "quotaStop": null,
+  "calls": 5,
+  "cached": 0,
+  "inTok": 3943,
+  "outTok": 1872,
+  "byTaskAndModel": [
+    {
+      "task": "brief",
+      "model": "qwen2.5:7b",
+      "calls": 1,
+      "cached": 0,
+      "failed": 0,
+      "inTok": 208,
+      "outTok": 30
+    },
+    {
+      "task": "differs",
+      "model": "qwen2.5:7b",
+      "calls": 1,
+      "cached": 0,
+      "failed": 0,
+      "inTok": 875,
+      "outTok": 12
+    },
+    {
+      "task": "extract",
+      "model": "qwen2.5:7b",
+      "calls": 1,
+      "cached": 0,
+      "failed": 0,
+      "inTok": 1346,
+      "outTok": 614
+    },
+    {
+      "task": "nda",
+      "model": "qwen2.5:7b",
+      "calls": 1,
+      "cached": 0,
+      "failed": 0,
+      "inTok": 1358,
+      "outTok": 1117
+    },
+    {
+      "task": "notes",
+      "model": "qwen2.5:7b",
+      "calls": 1,
+      "cached": 0,
+      "failed": 0,
+      "inTok": 156,
+      "outTok": 99
+    }
+  ],
+  "rows": [
+    "loopmart      SEND BACK           0B 2H 0M  711s  INCOMPLETE "
+  ]
+}

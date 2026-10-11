@@ -138,6 +138,8 @@ export function provider(): string {
  */
 export function providerTag(): string[] {
   const p = provider();
+  // Local models are swapped while testing (llama3.2 → qwen2.5:7b): each keeps its own answers and briefs.
+  if (p === "ollama") return [p, ...new Set([...modelsFor("extract"), ...modelsFor("conflict")])];
   return p === "gemini" ? [] : [p];
 }
 
@@ -152,8 +154,8 @@ export function modelsFor(task: Task): string[] {
   const raw =
     provider() === "ollama"
       ? tier === "fast"
-        ? process.env.OLLAMA_MODEL_FAST || "llama3.2"
-        : process.env.OLLAMA_MODEL_STRONG || "llama3.2"
+        ? process.env.OLLAMA_MODEL_FAST || "qwen2.5:7b"
+        : process.env.OLLAMA_MODEL_STRONG || "qwen2.5:7b"
       : tier === "fast"
         ? process.env.LLM_MODEL_FAST
         : process.env.LLM_MODEL_STRONG;

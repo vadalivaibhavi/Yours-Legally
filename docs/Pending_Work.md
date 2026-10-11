@@ -61,7 +61,7 @@ Testing and evals run locally on Ollama (no quota). The deployed app and the fin
 | # | What | Status | How |
 |---|---|---|---|
 | L1 | Build the local clause index once | Not started | `LLM_PROVIDER=ollama EMBED_PROVIDER=ollama`, then `npm run build:index` |
-| L2 | Local reviews and evals | **Tried 11 Oct on LoopMart:** runs end to end (6 calls, 823 s for the smallest deal; CPU only, ~36 tok/s in, ~7 tok/s out), but llama3.2 (3B) invents findings: HOLD with a made-up non-compete, wrong entity and unlimited liability, where Gemini gives the correct SIGN (EV-08 fails locally, passes on Gemini). Fine for plumbing and UI tests; not for eval numbers. A larger local model would be slower still on this CPU | `npm run review`, `npm run eval` (briefs go to data/briefs-ollama; nothing final is touched) |
+| L2 | Local reviews and evals | **LoopMart tried 11 Oct.** llama3.2 (3B): HOLD with invented findings (non-compete, wrong entity, unlimited liability). qwen2.5:7b: correct on everything except the AtliQ entity, which it named with no support in the text; a new rule (an entity the text never names gives way to the one it does) fixed that, and qwen now gives SIGN like Gemini (EV-08 passes locally). ~12 min for the smallest deal on this CPU; the other 12 deals are longer (est. 30–60 min each). qwen2.5:7b is now the local default |
 | F1 | Switch back to Gemini (model and embeddings) | After local testing | `LLM_PROVIDER=gemini`, `EMBED_PROVIDER=gemini` in `.env.local` |
 | F2 | Final reviews, evals and cost on Gemini | After F1 | `npm run review` → `npm run eval` → `npm run cost -- --provider gemini`; the batch in 2a |
 | F3 | Deploy on Vercel with the Gemini settings | After F2 | README → Deploy (GitHub → Vercel) |

@@ -127,7 +127,7 @@ Every model call (input/output tokens, task, model, deal, eval case, cache hit o
 | Variable | Example | Notes |
 |---|---|---|
 | `LLM_PROVIDER` | `gemini` | `gemini` (the final, deployed build) · `ollama` (local testing and evals) · `anthropic` · `openai` · `mock` |
-| `OLLAMA_MODEL_FAST` / `OLLAMA_MODEL_STRONG` / `OLLAMA_EMBED_MODEL` / `OLLAMA_BASE_URL` | `llama3.2` / `llama3.2` / `nomic-embed-text` / `http://localhost:11434` | local profile only; no key, no quota |
+| `OLLAMA_MODEL_FAST` / `OLLAMA_MODEL_STRONG` / `OLLAMA_EMBED_MODEL` / `OLLAMA_BASE_URL` | `qwen2.5:7b` / `qwen2.5:7b` / `nomic-embed-text` / `http://localhost:11434` | local profile only; no key, no quota |
 | `LLM_API_KEY` | | server-only; never in client code |
 | `LLM_MODEL_FAST` | `gemini-flash-lite-latest,gemini-3.5-flash-lite` | comma = fallback chain |
 | `LLM_MODEL_STRONG` | `gemini-flash-latest,gemini-3.5-flash,…` | comma = fallback chain |
@@ -143,7 +143,7 @@ Two profiles, switched in `.env.local` (`.env.example` has both):
 
 | | **Final build** (committed, deployed on Vercel) | **Local testing and evals** (this machine only) |
 |---|---|---|
-| Model | `LLM_PROVIDER=gemini` | `LLM_PROVIDER=ollama` (`llama3.2`; no key, no quota, no cost) |
+| Model | `LLM_PROVIDER=gemini` | `LLM_PROVIDER=ollama` (`qwen2.5:7b`; no key, no quota, no cost) |
 | Embeddings | `EMBED_PROVIDER=gemini` (`gemini-embedding-001`) | `EMBED_PROVIDER=ollama` (`nomic-embed-text`) |
 | Briefs | `data/briefs/` (committed) | `data/briefs-ollama/` (gitignored) |
 | Clause index | `data/clause_index.json` (committed) | `data/clause_index.ollama.json` (gitignored; build once) |
@@ -155,7 +155,7 @@ Rules that keep them apart:
 - **Local runs never overwrite final outputs.** Briefs go to their own folder and cache entries are tagged, so nothing from Ollama can leak into the committed briefs.
 - **Ollama has its own time limits.** Locally there is no rate limit and calls get up to 20 minutes, independent of the Gemini settings.
 
-**Switch to local:** in `.env.local` set `LLM_PROVIDER=ollama` and `EMBED_PROVIDER=ollama` (Ollama running, with `llama3.2` and `nomic-embed-text` pulled), then once `npm run build:index`. After that, `npm run review`, `npm run eval` and the app all run locally.
+**Switch to local:** in `.env.local` set `LLM_PROVIDER=ollama` and `EMBED_PROVIDER=ollama` (Ollama running, with `qwen2.5:7b` and `nomic-embed-text` pulled; llama3.2 (3B) proved too weak: it invented findings), then once `npm run build:index`. After that, `npm run review`, `npm run eval` and the app all run locally.
 
 **Switch back to final** (after local testing): set both back to `gemini`, then `npm run review` (fills or refreshes `data/briefs`) and `npm run eval` for the numbers you report. The eval report header names the provider and warns if any brief came from another one. `npm run cost -- --provider gemini` gives the cost. Local runs are free.
 
