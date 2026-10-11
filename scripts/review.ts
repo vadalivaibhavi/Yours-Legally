@@ -127,7 +127,8 @@ async function main() {
   const ready = (d: Deal) => !d.endClientDealId || !inRun.has(d.endClientDealId) || settled.has(d.endClientDealId);
   const queue = [...deals].sort((a, b) => Number(!!a.endClientDealId) - Number(!!b.endClientDealId));
   let quotaStop: string | null = null;
-  console.log(`reviewing ${deals.length} deal(s), ${CONCURRENCY} at a time, model calls spaced ${Number(process.env.LLM_MIN_INTERVAL_MS ?? 4000) / 1000}s apart`);
+  const local = (process.env.LLM_PROVIDER || "").toLowerCase() === "ollama";
+  console.log(`reviewing ${deals.length} deal(s), ${CONCURRENCY} at a time, ${local ? "on the local model (no call spacing)" : `model calls spaced ${Number(process.env.LLM_MIN_INTERVAL_MS ?? 4000) / 1000}s apart`}`);
 
   await new Promise<void>((resolveAll) => {
     let running = 0;

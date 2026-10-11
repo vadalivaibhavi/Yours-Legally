@@ -1,0 +1,73 @@
+{
+  "deals": [
+    "loopmart"
+  ],
+  "skipped": [],
+  "concurrency": 1,
+  "minIntervalMs": 4000,
+  "seconds": 823,
+  "quotaStop": null,
+  "calls": 6,
+  "cached": 0,
+  "inTok": 5639,
+  "outTok": 2610,
+  "byTaskAndModel": [
+    {
+      "task": "brief",
+      "model": "llama3.2",
+      "calls": 1,
+      "cached": 0,
+      "failed": 0,
+      "inTok": 347,
+      "outTok": 25
+    },
+    {
+      "task": "conflict",
+      "model": "llama3.2",
+      "calls": 1,
+      "cached": 0,
+      "failed": 0,
+      "inTok": 1622,
+      "outTok": 299
+    },
+    {
+      "task": "differs",
+      "model": "llama3.2",
+      "calls": 1,
+      "cached": 0,
+      "failed": 0,
+      "inTok": 868,
+      "outTok": 207
+    },
+    {
+      "task": "extract",
+      "model": "llama3.2",
+      "calls": 1,
+      "cached": 0,
+      "failed": 1,
+      "inTok": 1308,
+      "outTok": 911
+    },
+    {
+      "task": "nda",
+      "model": "llama3.2",
+      "calls": 1,
+      "cached": 0,
+      "failed": 0,
+      "inTok": 1328,
+      "outTok": 1079
+    },
+    {
+      "task": "notes",
+      "model": "llama3.2",
+      "calls": 1,
+      "cached": 0,
+      "failed": 1,
+      "inTok": 166,
+      "outTok": 89
+    }
+  ],
+  "rows": [
+    "loopmart      HOLD                1B 4H 0M  823s  "
+  ]
+}

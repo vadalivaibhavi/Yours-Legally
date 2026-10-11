@@ -15,3 +15,5 @@
 {"at":"2026-10-10T19:02:53.925Z","provider":"ollama","task":"nda","model":"llama3.2","inputTokens":60,"outputTokens":101,"ms":24924,"cached":false,"ok":true}
 {"at":"2026-10-10T19:04:34.868Z","provider":"gemini","script":"eval","caseId":"EV-S6","task":"classify","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
 {"at":"2026-10-10T19:04:54.018Z","provider":"ollama","task":"classify","model":"llama3.2","inputTokens":96,"outputTokens":31,"ms":4780,"cached":false,"ok":true}
+{"at":"2026-10-10T20:09:00.487Z","provider":"ollama","script":"review","dealId":"harrington","task":"extract","model":"llama3.2","inputTokens":0,"outputTokens":0,"ms":3373368,"cached":false,"ok":false,"error":"timed out after 1200s across retries | llama3.2: TimeoutError: The operation was aborted due to timeout"}
+{"at":"2026-10-10T20:09:00.894Z","provider":"ollama","script":"review","dealId":"harrington","task":"extract","model":"llama3.2","inputTokens":0,"outputTokens":0,"ms":3373759,"cached":false,"ok":false,"error":"timed out after 1200s across retries | llama3.2: TimeoutError: The operation was aborted due to timeout"}

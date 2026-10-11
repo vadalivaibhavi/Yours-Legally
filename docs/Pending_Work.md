@@ -61,7 +61,7 @@ Testing and evals run locally on Ollama (no quota). The deployed app and the fin
 | # | What | Status | How |
 |---|---|---|---|
 | L1 | Build the local clause index once | Not started | `LLM_PROVIDER=ollama EMBED_PROVIDER=ollama`, then `npm run build:index` |
-| L2 | Local reviews and evals | Not started | `npm run review`, `npm run eval` (briefs go to data/briefs-ollama; nothing final is touched) |
+| L2 | Local reviews and evals | **Tried 11 Oct on LoopMart:** runs end to end (6 calls, 823 s for the smallest deal; CPU only, ~36 tok/s in, ~7 tok/s out), but llama3.2 (3B) invents findings: HOLD with a made-up non-compete, wrong entity and unlimited liability, where Gemini gives the correct SIGN (EV-08 fails locally, passes on Gemini). Fine for plumbing and UI tests; not for eval numbers. A larger local model would be slower still on this CPU | `npm run review`, `npm run eval` (briefs go to data/briefs-ollama; nothing final is touched) |
 | F1 | Switch back to Gemini (model and embeddings) | After local testing | `LLM_PROVIDER=gemini`, `EMBED_PROVIDER=gemini` in `.env.local` |
 | F2 | Final reviews, evals and cost on Gemini | After F1 | `npm run review` → `npm run eval` → `npm run cost -- --provider gemini`; the batch in 2a |
 | F3 | Deploy on Vercel with the Gemini settings | After F2 | README → Deploy (GitHub → Vercel) |
@@ -82,6 +82,7 @@ Real sign-in (role switch instead) · counsel-pack export (static preview) · pl
 
 | Date | Change |
 |---|---|
+| 11 Oct 2026 | Ollama local profile added, Groq removed. Fixed two local-run bugs: no cap on answer length (runaway generation) and fetch's 300 s header limit (Ollama calls now use node:http). On Windows, stopping a background run left its node processes running: check for and stop leftovers. |
 | 10 Oct 2026 | Built without model calls: queue sections by side of the table; deal-size rule (data/deal_size.json, $50k: Kriti's 7 playbook deviations count one step lower, verdict unchanged); upload from a deal locked to that deal with "What is it?" (new version / additional contract document / notes). Evals unchanged: 42 pass, same 4 variance cases. |
 | 10 Oct 2026 | All 13 open deals flagged for re-check since 6 Oct (register changes: 1 restriction rejected, 1 entry edited). FinServe fix test done (SIGN, v5). |
 | 5 Oct 2026 | Tracker created. All 13 briefs complete on playbook v1.1, every judgment step on a full flash model; comparison lines missing on 11 deals (quota ran out mid-regeneration). |

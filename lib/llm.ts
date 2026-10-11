@@ -15,6 +15,7 @@
 import { AsyncLocalStorage } from "node:async_hooks";
 import crypto from "node:crypto";
 import fs from "node:fs";
+import http from "node:http";
 import path from "node:path";
 import { z } from "zod";
 import { writableDir } from "./config";
@@ -417,33 +418,49 @@ async function openai(model: string, key: string, system: string, input: string,
  */
 async function ollama(model: string, system: string, input: string, schema: object, ms: number): Promise<Once> {
   const base = (process.env.OLLAMA_BASE_URL || "http://localhost:11434").replace(/\/$/, "");
-  let res: Response;
+  const body = JSON.stringify({
+    model,
+    stream: false,
+    format: schema,
+    messages: [
+      { role: "system", content: system },
+      { role: "user", content: input },
+    ],
+    // num_predict caps the answer: Ollama's default is unlimited, and a small model filling a big schema can
+    // run on until its context is full (an hour per call on a CPU). OLLAMA_NUM_PREDICT, default 4096.
+    options: { temperature: 0.2, num_ctx: Number(process.env.OLLAMA_NUM_CTX || 32_768), num_predict: Number(process.env.OLLAMA_NUM_PREDICT || 4096) },
+  });
+  let res: { status: number; text: string };
   try {
-    res = await fetch(`${base}/api/chat`, {
-      method: "POST",
-      signal: AbortSignal.timeout(ms),
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        model,
-        stream: false,
-        format: schema,
-        messages: [
-          { role: "system", content: system },
-          { role: "user", content: input },
-        ],
-        options: { temperature: 0.2, num_ctx: Number(process.env.OLLAMA_NUM_CTX || 32_768) },
-      }),
-    });
+    res = await postLocal(`${base}/api/chat`, body, ms);
   } catch (e) {
-    if (/ECONNREFUSED|fetch failed/i.test(String(e))) return { ok: false, error: `Ollama isn't running at ${base} (start the Ollama app)`, retry: "next" };
-    throw e;
+    if (/ECONNREFUSED/i.test(String(e))) return { ok: false, error: `Ollama isn't running at ${base} (start the Ollama app)`, retry: "next" };
+    return { ok: false, error: `Ollama call failed: ${String(e).slice(0, 160)}`, retry: "same" };
   }
-  const txt = await res.text();
-  if (!res.ok) return /not found|pull/i.test(txt) ? { ok: false, error: `Ollama model ${model} isn't installed (ollama pull ${model})`, retry: "next" } : classifyHttpError(res.status, txt);
+  const txt = res.text;
+  if (res.status !== 200) return /not found|pull/i.test(txt) ? { ok: false, error: `Ollama model ${model} isn't installed (ollama pull ${model})`, retry: "next" } : classifyHttpError(res.status, txt);
   const j = JSON.parse(txt);
   const text = j.message?.content ?? "";
   if (!text) return { ok: false, error: `empty response (${j.done_reason ?? "no message"})`, retry: "same" };
   return { ok: true, text, model, usage: { inputTokens: j.prompt_eval_count ?? 0, outputTokens: j.eval_count ?? 0 } };
+}
+
+/**
+ * POST to a local server with Node's http client, not fetch: fetch gives up when no response headers arrive
+ * within 300 s, and a CPU-only model reading a long contract takes longer than that before it answers.
+ * Only our own deadline (ms) applies here.
+ */
+function postLocal(url: string, body: string, ms: number): Promise<{ status: number; text: string }> {
+  return new Promise((resolve, reject) => {
+    const req = http.request(url, { method: "POST", headers: { "content-type": "application/json", "content-length": Buffer.byteLength(body) }, signal: AbortSignal.timeout(ms) }, (res) => {
+      const chunks: Buffer[] = [];
+      res.on("data", (c: Buffer) => chunks.push(c));
+      res.on("end", () => resolve({ status: res.statusCode ?? 0, text: Buffer.concat(chunks).toString("utf8") }));
+      res.on("error", reject);
+    });
+    req.on("error", reject);
+    req.end(body);
+  });
 }
 
 /** Reasoning depth per task: deep where judgment matters, shallow where latency matters. */
