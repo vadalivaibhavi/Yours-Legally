@@ -17,6 +17,7 @@ import "./_env";
 import fs from "node:fs";
 import path from "node:path";
 import { checkIds, parseArgs } from "./_args";
+import { useMemoryState } from "../lib/store";
 import { baseDeals } from "../lib/data";
 import { briefsDir, writeJson } from "../lib/config";
 import { isQuotaExhausted, withRunContext } from "../lib/llm";
@@ -99,6 +100,9 @@ function usageByTaskAndModel(since: string) {
 }
 
 async function main() {
+  // Precomputed briefs come from the dataset alone: the app's live state (register edits, uploads, seller
+  // checks) belongs to later brief versions (Sync / uploads), never to the committed v1. Same as the evals.
+  useMemoryState();
   const t0 = Date.now();
   const since = new Date().toISOString();
   const args = parseArgs();
