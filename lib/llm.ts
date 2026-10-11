@@ -266,12 +266,32 @@ const REFERENCE_ONLY = new Set<Task>(["differs"]);
 export function callBudgetMs(task?: Task): number {
   // A local model on a laptop is slow but never rate-limited: give it time instead of failing the step.
   // Its own settings, so the Gemini ones in .env.local never cap a local run.
-  if (provider() === "ollama") return Number(process.env.OLLAMA_CALL_BUDGET_MS || 1_200_000);
+  if (provider() === "ollama") return Number(process.env.OLLAMA_CALL_BUDGET_MS || 1_800_000);
   if (task && REFERENCE_ONLY.has(task)) return Number(process.env.LLM_REFERENCE_BUDGET_MS || 45_000);
   return Number(process.env.LLM_CALL_BUDGET_MS || 300_000);
 }
 
+/**
+ * A local Ollama answers one request at a time: steps the pipeline runs in parallel would only queue inside
+ * Ollama, with their time budgets running while they wait. So local calls take turns here, and each
+ * budget starts when its turn comes.
+ */
+let localTurn: Promise<void> = Promise.resolve();
 async function generateWithFallback(task: Task, system: string, input: string, schema: object): Promise<GenOk | GenErr> {
+  if (provider() !== "ollama") return generateNow(task, system, input, schema);
+  let release!: () => void;
+  const mine = new Promise<void>((r) => (release = r));
+  const wait = localTurn;
+  localTurn = wait.then(() => mine);
+  await wait;
+  try {
+    return await generateNow(task, system, input, schema);
+  } finally {
+    release();
+  }
+}
+
+async function generateNow(task: Task, system: string, input: string, schema: object): Promise<GenOk | GenErr> {
   const errors: string[] = [];
   let deadline = Date.now() + callBudgetMs(task);
   const timedOut = () => ({ ok: false as const, error: `timed out after ${Math.round(callBudgetMs(task) / 1000)}s across retries | ${errors.join(" | ")}`.slice(0, 2000) });

@@ -29,3 +29,8 @@
 {"at":"2026-10-11T14:12:15.998Z","provider":"ollama","script":"review","dealId":"loopmart","task":"notes","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
 {"at":"2026-10-11T14:12:20.982Z","provider":"ollama","script":"review","dealId":"loopmart","task":"brief","model":"qwen2.5:7b","inputTokens":136,"outputTokens":25,"ms":4981,"cached":false,"ok":true}
 {"at":"2026-10-11T14:12:36.213Z","provider":"gemini","script":"eval","caseId":"EV-S6","task":"classify","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-11T17:46:05.749Z","provider":"ollama","script":"review","dealId":"harrington","task":"extract","model":"qwen2.5:7b","inputTokens":4238,"outputTokens":1190,"ms":526387,"cached":false,"ok":true}
+{"at":"2026-10-11T17:57:19.350Z","provider":"ollama","script":"review","dealId":"harrington","task":"extract","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":1200002,"cached":false,"ok":false,"error":"timed out after 1200s across retries | qwen2.5:7b: Ollama call failed: AbortError: The operation was aborted | qwen2.5:7b: Ollama call failed: AbortError: The operation was aborted"}
+{"at":"2026-10-11T17:58:29.171Z","provider":"ollama","task":"extract","model":"qwen2.5:7b","inputTokens":41,"outputTokens":9,"ms":20280,"cached":false,"ok":true}
+{"at":"2026-10-11T17:58:32.486Z","provider":"ollama","task":"extract","model":"qwen2.5:7b","inputTokens":41,"outputTokens":9,"ms":23595,"cached":false,"ok":true}
+{"at":"2026-10-11T17:58:35.768Z","provider":"ollama","task":"extract","model":"qwen2.5:7b","inputTokens":41,"outputTokens":9,"ms":26876,"cached":false,"ok":true}
