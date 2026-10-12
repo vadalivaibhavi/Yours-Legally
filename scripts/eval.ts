@@ -16,7 +16,7 @@ import { checkIds, parseArgs } from "./_args";
 import { checkRegister } from "./checkRegister";
 import { filterRegister, unconfirmed } from "../lib/review/conflict";
 import { oneWayNda } from "../lib/review/playbook";
-import { injectionAttempts } from "../lib/review/guardrails";
+import { injectionAttempts, sanitize } from "../lib/review/guardrails";
 import { briefsDir } from "../lib/config";
 import {
   canDecide,
@@ -827,6 +827,7 @@ async function main() {
     { name: "A2 a clear register match is never dropped silently (strong-match rules)", ...strongMatchCheck() },
     { name: "A3 one-way NDA caught by rules, whatever the title says", ...oneWayNdaCheck() },
     { name: "A4 instructions to an AI reviewer are caught and block a clean verdict", ...injectionCheck(briefs) },
+    { name: "A6 plain wording: \"redline\" reads right as a verb and as a noun", ...wordingCheck() },
     ...(noVersions ? [] : [{ name: "A4 end to end: LoopMart NDA with an injected instruction is reviewed (model)", ...(await injectionEndToEnd()) }]),
     {
       name: "NDA fast lane latency (<1 min)",
@@ -1123,4 +1124,20 @@ async function injectionEndToEnd(): Promise<{ pass: boolean | null; detail: stri
     if (isQuotaExhausted(err)) return { pass: null, detail: `not run (quota): ${(err as Error).message}` };
     throw err;
   }
+}
+
+/** A6 (lib/review/guardrails.ts RULES): "redline" is jargon; the plain rewrite must fit the grammar it sits in. */
+const WORDING: [string, string][] = [
+  ["Redline Exhibit A hourly rates to at least $85/hour.", "Ask for changes to Exhibit A hourly rates to at least $85/hour."],
+  ["Karandeep will redline the NDA.", "Karandeep will ask for changes to the NDA."],
+  ["Payment Terms Redline by Karandeep.", "Payment Terms change request by Karandeep."],
+  ["SIGN AFTER CHANGES: 1 redline and 1 confirmation pending.", "SIGN AFTER CHANGES: 1 change request and 1 confirmation pending."],
+  ["The redline is with the client.", "The change request is with the client."],
+  ["Next step: Redline.", "Next step: Change request."],
+  ["Negotiate contract redlines.", "Negotiate contract changes."],
+  ["Clause 4 was redlined.", "Clause 4 was changed."],
+];
+function wordingCheck(): { pass: boolean; detail: string } {
+  const wrong = WORDING.filter(([a, want]) => sanitize(a) !== want).map(([a]) => `"${a}" → "${sanitize(a)}"`);
+  return { pass: !wrong.length, detail: wrong.length ? wrong.join(" · ") : `${WORDING.length}/${WORDING.length} sentences read right` };
 }

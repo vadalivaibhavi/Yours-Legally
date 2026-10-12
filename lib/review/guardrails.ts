@@ -19,8 +19,15 @@ const RULES: Rule[] = [
   [/\breject (the|this) (contract|agreement|deal)\b/gi, "send the $2 back"],
   // "Redline" is lawyer jargon (marking up the contract with proposed edits): say what it means.
   [/\bredlines\b/gi, "changes"],
-  [/\b(\d+|a|one) redline\b/gi, "$1 change to request"],
   [/\bredlined\b/gi, "changed"],
+  // A6: "redline" as a noun ("1 redline", "the Payment Terms redline by Karandeep", "Redline:") is a change
+  // request; only the verb ("Redline Exhibit A to ...") becomes "ask for changes to".
+  [/\b(\d+|a|one|the|this|that|each|any|its|their|our) redline\b/gi, "$1 change request"],
+  [/\bredline(?=\s+(by|and|or|for|of|on|in|is|was|will|pending|needed|required|from|with|at)\b|\s*[.,;:)]|\s*$)/gi, (m: string, ..._r: unknown[]) => {
+    const [offset, str] = _r.slice(-2) as [number, string];
+    const start = offset === 0 || /[.:!?]\s*$/.test(str.slice(0, offset));
+    return start ? "Change request" : "change request";
+  }],
   [/\bRedline\b/g, "Ask for changes to"],
   [/\bredline\b/gi, "ask for changes to"],
 ];
