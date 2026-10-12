@@ -17,7 +17,8 @@ import { checkBundle } from "./bundle";
 import { checkConflicts, filterRegister, reverseScan } from "./conflict";
 import { extractDocument, type Extraction } from "./extract";
 import { runGate } from "./gate";
-import { coverageNote, hasLegalConclusion, sanitize, sanitizeFinding } from "./guardrails";
+import { coverageNote, hasLegalConclusion, injectionAttempts, sanitize, sanitizeFinding } from "./guardrails";
+import { locateQuote } from "../quotes";
 import { scanNotes } from "./notes";
 import { checkNda, checkPlaybook, ruleFor } from "./playbook";
 import { similarPanels } from "./similar";
@@ -65,6 +66,25 @@ async function runReview(dealId: string, opts: ReviewOptions): Promise<Brief> {
   const notSeen: string[] = [];
   const fine: string[] = [];
   let findings: Finding[] = [];
+  // A4: text addressed to an AI reviewer in a document or note can't let the deal come out clean.
+  for (const src of [...docs.map((d) => ({ id: d.id, title: d.title, text: d.text, role: "incoming" as const })), ...notes.map((n) => ({ id: n.id, title: n.title, text: n.text, role: "note" as const }))]) {
+    const hits = injectionAttempts(src.text);
+    if (!hits.length) continue;
+    findings.push({
+      key: `guard:injection:${src.id}`,
+      category: "gate",
+      topic: "injection",
+      title: `Instructions addressed to an AI reviewer found in ${src.title}`,
+      impact: `The text tries to steer an automated review (${hits.length} passage${hits.length > 1 ? "s" : ""}). A contract never needs to address the reviewing tool: read this document yourself, and treat the other findings with care.`,
+      severity: "high",
+      confidence: "high",
+      needsJudgment: false,
+      owner: "Karandeep",
+      resolution: "confirm",
+      docId: src.role === "incoming" ? src.id : undefined,
+      citations: hits.map((q) => ({ docId: src.id, docTitle: src.title, clauseRef: "text", quote: locateQuote(src.text, q) ?? q, role: src.role })),
+    });
+  }
   const similar: SimilarPanel[] = [];
   const reviews: DocumentReview[] = [];
   const extractions = new Map<string, Extraction>();

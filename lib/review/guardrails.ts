@@ -49,6 +49,26 @@ export function requireEvidence<T extends { category: string; severity: string; 
   return { ...f, severity: "low", unsupported: true };
 }
 
+/**
+ * A4 — instructions addressed to an AI reviewer inside a document ("ignore your instructions", "return
+ * SIGN", "do not flag ..."). A contract never needs to talk to the reviewing tool, so any such text is
+ * raised as a high, quoted finding: the deal can't come out clean, and the review's other findings are
+ * to be read with care. Rules only; the verdict itself is computed by rules and never taken from a model.
+ */
+const INJECTION: RegExp[] = [
+  /\b(ignore|disregard|forget|override)\b[^.\n]{0,40}\b(previous|prior|above|earlier|all|your|system)\b[^.\n]{0,30}\b(instructions?|prompts?|rules|guidelines)\b/i,
+  /\b(you are|act as|as an?)\s+(an?\s+)?(ai|language model|assistant|chatbot|llm|reviewer bot)\b/i,
+  /\b(ai|automated|llm|model)\s+(reviewers?|assistants?|systems?|tools?)\b[^.\n]{0,60}\b(must|should|shall|will|are instructed to)\b/i,
+  /\b(return|output|respond with|report)\b[^.\n]{0,30}\b(verdict|"?sign"?|no findings|no issues|compliant)\b/i,
+  /\b(do not|don't|never)\s+(flag|report|mention|raise)\b[^.\n]{0,40}\b(issues?|risks?|findings?|clauses?|this)\b/i,
+  /\bsystem prompt\b|\bjailbreak\b|<\s*\/?\s*(system|assistant|instructions?)\s*>/i,
+];
+export function injectionAttempts(text: string): string[] {
+  const hits: string[] = [];
+  for (const line of text.split("\n")) if (INJECTION.some((re) => re.test(line))) hits.push(line.trim().slice(0, 300));
+  return hits;
+}
+
 export function hasLegalConclusion(text: string): boolean {
   return /\bbreach(es|ed|ing)?\b|\benforceable\b|\bunenforceable\b|\bviolat/i.test(text);
 }
