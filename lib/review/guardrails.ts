@@ -36,6 +36,19 @@ export function coverageNote(signedDocs: number): string {
   return `Commitments were checked against all ${signedDocs} signed contracts on file. Contracts AtliQ hasn't uploaded can't be checked.`;
 }
 
+/**
+ * A1 — no evidence, no finding. A finding about the contract's terms (rule checks on extracted facts,
+ * playbook, conflicts, NDA mutuality, flow-downs, notes) must point at a verified clause or note. Without
+ * one it is shown as unsupported, lowered to low and never counts toward the verdict: a model can't make a
+ * term up. Structural findings (a missing document, a dependency on another deal, the seller mismatch) come
+ * from the deal's own records, so they need no clause.
+ */
+const STRUCTURAL = new Set(["bundle", "dependency", "mismatch"]);
+export function requireEvidence<T extends { category: string; severity: string; citations: unknown[]; unsupported?: boolean }>(f: T): T {
+  if (STRUCTURAL.has(f.category) || f.citations.length > 0) return f;
+  return { ...f, severity: "low", unsupported: true };
+}
+
 export function hasLegalConclusion(text: string): boolean {
   return /\bbreach(es|ed|ing)?\b|\benforceable\b|\bunenforceable\b|\bviolat/i.test(text);
 }

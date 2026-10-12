@@ -47,6 +47,7 @@ export function FindingCard({
       </header>
       <p className="text-sm">{f.impact}</p>
       {f.sizeNote && <p className="text-xs text-muted">⚖ {f.sizeNote}</p>}
+      {f.unsupported && <p className="text-xs text-hold">⚠ No clause in the contract supports this, so it doesn&apos;t count toward the verdict. Check it against the document.</p>}
       {f.readings && f.readings.length > 0 && (
         <div className="rounded-lg bg-paper p-3 text-sm">
           <div className="label mb-1">Two readings</div>

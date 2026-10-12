@@ -89,8 +89,10 @@ async function throttle() {
 
 /** Models whose daily quota is used up, remembered until Google's reset (midnight Pacific) so runs skip them. */
 const quotaDay = () => new Date().toLocaleDateString("en-CA", { timeZone: "America/Los_Angeles" });
+/** Quota belongs to an API key (a new key, or billing enabled, starts fresh), so the record is kept per key. */
 function exhaustedFile() {
-  return path.join(writableDir("cache"), "quota-exhausted.json");
+  const keyId = crypto.createHash("sha256").update(apiKey() ?? "none").digest("hex").slice(0, 10);
+  return path.join(writableDir("cache"), `quota-exhausted-${keyId}.json`);
 }
 function exhaustedToday(): Set<string> {
   try {

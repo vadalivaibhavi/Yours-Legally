@@ -7,7 +7,7 @@
 import { registerEntries } from "../register";
 import { readState } from "../store";
 import { baseDeals } from "../data";
-import { coverageNote, sanitize, sanitizeFinding } from "./guardrails";
+import { coverageNote, requireEvidence, sanitize, sanitizeFinding } from "./guardrails";
 import { adjustForDealSize } from "./materiality";
 import { ownerRole, rolesInText, OWNER } from "./owners";
 import { expandRegions } from "../geo";
@@ -25,7 +25,7 @@ export function effectiveBrief(brief: Brief, prev: Brief | null): EffectiveBrief
 
   const findings: Finding[] = [];
   for (const f0 of withLiveMismatch(brief)) {
-    const f: Finding = adjustForDealSize(sanitizeFinding({ ...f0 }), value); // plain wording; small-deal deviations count lower
+    const f: Finding = adjustForDealSize(requireEvidence(sanitizeFinding({ ...f0 })), value); // A1 evidence; plain wording; small-deal deviations count lower
     f.owner = ownerRole(f.owner, f); // roles, not names (briefs stored with names)
     if (f.missingItem) f.missingItem = { ...f.missingItem, owner: ownerRole(f.missingItem.owner, f) };
     const r = reactions[f.key];

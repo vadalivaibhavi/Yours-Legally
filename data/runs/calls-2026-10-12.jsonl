@@ -61,3 +61,10 @@
 {"at":"2026-10-12T07:21:29.360Z","provider":"ollama","script":"review","dealId":"kriti","task":"notes","model":"qwen2.5:7b","inputTokens":211,"outputTokens":267,"ms":53959,"cached":false,"ok":true}
 {"at":"2026-10-12T07:21:54.847Z","provider":"ollama","script":"review","dealId":"kriti","task":"brief","model":"qwen2.5:7b","inputTokens":319,"outputTokens":52,"ms":25427,"cached":false,"ok":true}
 {"at":"2026-10-12T07:23:14.347Z","provider":"ollama","script":"eval","caseId":"EV-S6","task":"classify","model":"qwen2.5:7b","inputTokens":63,"outputTokens":55,"ms":13751,"cached":false,"ok":true}
+{"at":"2026-10-12T09:58:29.053Z","provider":"gemini","script":"eval","caseId":"EV-S6","task":"classify","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T09:58:32.552Z","provider":"ollama","script":"eval","caseId":"EV-S6","task":"classify","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T09:59:18.288Z","provider":"gemini","script":"eval","caseId":"EV-S6","task":"classify","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T09:59:21.922Z","provider":"ollama","script":"eval","caseId":"EV-S6","task":"classify","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T09:59:29.347Z","provider":"gemini","script":"eval","caseId":"EV-S6","task":"classify","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T09:59:44.435Z","provider":"gemini","script":"eval","caseId":"EV-S6","task":"classify","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T09:59:47.931Z","provider":"ollama","script":"eval","caseId":"EV-S6","task":"classify","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}

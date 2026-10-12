@@ -7,6 +7,7 @@
 import { briefVersions } from "../deals";
 import { baseDeals } from "../data";
 import { readState } from "../store";
+import { requireEvidence } from "./guardrails";
 import { adjustForDealSize } from "./materiality";
 
 export type ReviewProgress = {
@@ -35,7 +36,7 @@ export function reviewProgress(dealId: string): ReviewProgress | null {
   const o = s.dealOverrides[dealId] ?? {};
   // Findings that must be answered before finalising: blocker and high, including ones Karandeep dismissed.
   const value = [...baseDeals(), ...s.newDeals].find((d) => d.id === dealId)?.valueUsd;
-  const items = brief.findings.filter((f) => REQUIRED.has(adjustForDealSize(f, value).severity));
+  const items = brief.findings.filter((f) => REQUIRED.has(adjustForDealSize(requireEvidence(f), value).severity));
   const reacted = items.filter((f) => reactions[f.key]).length;
   const facts = brief.complianceCandidate?.factIds ?? [];
   const factsAnswered = facts.filter((id) => confirmations[id]).length;

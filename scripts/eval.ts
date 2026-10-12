@@ -820,6 +820,7 @@ async function main() {
       detail: `${briefs.length} briefs`,
     },
     { name: "Register changes flag the right open deals and reach the checks (FR-2, FR-19)", ...(await registerFlagCheck()) },
+    { name: "A1 no evidence, no finding: claims about the terms need a verified clause", ...evidenceCheck(briefs) },
     {
       name: "NDA fast lane latency (<1 min)",
       pass: null,
@@ -1010,4 +1011,26 @@ async function registerFlagCheck(): Promise<{ pass: boolean; detail: string }> {
   useMemoryState();
   const failed = checks.filter(([, ok]) => !ok).map(([n]) => n);
   return { pass: !failed.length, detail: failed.length ? `failed: ${failed.join("; ")}` : checks.map(([n]) => n).join("; ") };
+}
+
+/**
+ * A1 (lib/review/guardrails.ts requireEvidence): across every brief, no counted finding about the contract's
+ * terms lacks a verified citation; and a made-up finding injected into a real brief is shown as unsupported
+ * but can't change the verdict.
+ */
+function evidenceCheck(briefs: Brief[]): { pass: boolean; detail: string } {
+  useMemoryState();
+  const structural = new Set(["bundle", "dependency", "mismatch"]);
+  const counted = briefs.flatMap((b) => effectiveBrief(b, null).findings.filter((x) => !structural.has(x.category) && !x.citations.length && x.severity !== "low").map((x) => `${b.dealId}/${x.key}`));
+  const shown = briefs.reduce((n, b) => n + effectiveBrief(b, null).findings.filter((x) => x.unsupported).length, 0);
+  const base = briefs.find((b) => b.dealId === "loopmart") ?? briefs[0];
+  const before = effectiveBrief(base, null).verdict;
+  const fake = { key: "playbook:liability", category: "playbook", topic: "liability", title: "Unlimited liability for AtliQ", impact: "AtliQ has unlimited liability.", severity: "high", confidence: "high", needsJudgment: false, owner: "Karandeep", citations: [] } as unknown as Finding;
+  const after = effectiveBrief({ ...base, findings: [...base.findings, fake] }, null);
+  const injected = after.findings.find((x) => x.key === "playbook:liability" && x.title === fake.title);
+  const ok = !counted.length && after.verdict === before && !!injected?.unsupported && injected.severity === "low";
+  return {
+    pass: ok,
+    detail: `${counted.length ? `counted without evidence: ${counted.join(", ")}` : "no counted finding lacks a clause"} · ${shown} shown as unsupported · injected "unlimited liability" on ${base.dealId}: verdict ${before} → ${after.verdict}, ${injected?.unsupported ? "marked unsupported (low)" : "NOT caught"}`,
+  };
 }

@@ -66,6 +66,8 @@ export type Finding = {
   pendingDocument?: string;
   /** Deal-size effect (lib/review/materiality.ts): why the severity was lowered, or that size doesn't change it. */
   sizeNote?: string;
+  /** A1 guardrail: a claim about the contract's terms with no verified clause behind it (shown, never counted). */
+  unsupported?: boolean;
 };
 
 export type GateResult = {
