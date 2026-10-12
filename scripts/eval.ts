@@ -14,6 +14,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { checkIds, parseArgs } from "./_args";
 import { checkRegister } from "./checkRegister";
+import { filterRegister, unconfirmed } from "../lib/review/conflict";
 import { briefsDir } from "../lib/config";
 import {
   canDecide,
@@ -821,6 +822,7 @@ async function main() {
     },
     { name: "Register changes flag the right open deals and reach the checks (FR-2, FR-19)", ...(await registerFlagCheck()) },
     { name: "A1 no evidence, no finding: claims about the terms need a verified clause", ...evidenceCheck(briefs) },
+    { name: "A2 a clear register match is never dropped silently (strong-match rules)", ...strongMatchCheck() },
     {
       name: "NDA fast lane latency (<1 min)",
       pass: null,
@@ -1032,5 +1034,32 @@ function evidenceCheck(briefs: Brief[]): { pass: boolean; detail: string } {
   return {
     pass: ok,
     detail: `${counted.length ? `counted without evidence: ${counted.join(", ")}` : "no counted finding lacks a clause"} · ${shown} shown as unsupported · injected "unlimited liability" on ${base.dealId}: verdict ${before} → ${after.verdict}, ${injected?.unsupported ? "marked unsupported (low)" : "NOT caught"}`,
+  };
+}
+
+/**
+ * A2 (lib/review/conflict.ts): which register matches count as "strong" (a dismissal by the model is kept as
+ * "possible collision: confirm", and an unassessed one too). Pure rules, no model call.
+ */
+function strongMatchCheck(): { pass: boolean; detail: string } {
+  useMemoryState();
+  const reg = registerEntries();
+  const src = new Map(docs.filter((d) => d.kind === "signed").map((d) => [d.id, d.text]));
+  const base = { entities: ["Pvt Ltd", "Inc"], sectors: [] as string[], regions: [] as string[], assets: [] as string[], hasRates: false, services: [] as string[], rateRoles: [] as string[] };
+  const strongOf = (facts: typeof base, id: string) => filterRegister(reg, facts, src).find((c) => c.entry.id === id)?.strong ?? null;
+  const cases: [string, boolean | null, boolean | null][] = [
+    ["Al Noor non-compete vs hospitality in Saudi Arabia (specific scope, both overlap)", strongOf({ ...base, sectors: ["hospitality"], regions: ["Saudi Arabia"] }, "alnoor-msa#1"), true],
+    ["Crestline pricing promise vs a deal pricing a Senior Data Engineer (same role)", strongOf({ ...base, hasRates: true, rateRoles: ["Senior Data Engineer"] }, "crestline-msa#1"), true],
+    ["Crestline pricing promise vs rates for other roles (worldwide scope alone isn't explicit)", strongOf({ ...base, hasRates: true, rateRoles: ["Revenue Manager"] }, "crestline-msa#1"), false],
+    ["Northwind IP assignment vs a deal reusing PipeKit (named tool)", strongOf({ ...base, assets: ["PipeKit"] }, "northwind-msa#1"), true],
+    ["Northwind IP assignment vs generic 'tools' (not a named tool)", strongOf({ ...base, assets: ["tools"] }, "northwind-msa#1"), false],
+  ];
+  const cand = filterRegister(reg, { ...base, sectors: ["hospitality"], regions: ["Saudi Arabia"] }, src).find((c) => c.entry.id === "alnoor-msa#1")!;
+  const flag = unconfirmed(cand, docs.find((d) => d.id === "gulfcrown-msa")!, new Map(docs.map((d) => [d.id, d])), "test");
+  const flagOk = flag.severity === "high" && flag.needsJudgment && flag.citations.length > 0;
+  const wrong = cases.filter(([, got, want]) => got !== want).map(([n, got]) => `${n}: got ${got}`);
+  return {
+    pass: !wrong.length && flagOk,
+    detail: wrong.length ? `wrong: ${wrong.join("; ")}` : `${cases.length} strong-match rules right · a dismissed / unassessed strong match becomes "${flag.title}" (high, confirm, cites the register clause)`,
   };
 }

@@ -68,3 +68,148 @@
 {"at":"2026-10-12T09:59:29.347Z","provider":"gemini","script":"eval","caseId":"EV-S6","task":"classify","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
 {"at":"2026-10-12T09:59:44.435Z","provider":"gemini","script":"eval","caseId":"EV-S6","task":"classify","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
 {"at":"2026-10-12T09:59:47.931Z","provider":"ollama","script":"eval","caseId":"EV-S6","task":"classify","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:01:45.898Z","provider":"gemini","script":"a2-offline","task":"extract","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:01:45.914Z","provider":"gemini","script":"a2-offline","task":"conflict","model":"gemini-3.6-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:01:45.921Z","provider":"gemini","script":"a2-offline","task":"playbook","model":"gemini-3.6-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:01:45.933Z","provider":"gemini","script":"a2-offline","task":"notes","model":"gemini-3.5-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:01:45.941Z","provider":"gemini","script":"a2-offline","task":"brief","model":"gemini-3.6-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:01:46.140Z","provider":"gemini","script":"a2-offline","task":"extract","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:01:46.145Z","provider":"gemini","script":"a2-offline","task":"conflict","model":"gemini-3.6-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:01:46.147Z","provider":"gemini","script":"a2-offline","task":"playbook","model":"gemini-3.5-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:01:46.150Z","provider":"gemini","script":"a2-offline","task":"notes","model":"gemini-3.5-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:02:01.164Z","provider":"gemini","script":"a2-offline","task":"brief","model":"gemini-3.6-flash,gemini-flash-latest,gemini-3.8-flash,gemini-3.7-flash,gemini-3-flash-preview,gemini-3.5-flash","inputTokens":0,"outputTokens":0,"ms":15012,"cached":false,"ok":false,"error":"gemini-3.6-flash: LLM_API_KEY is not set | gemini-flash-latest: LLM_API_KEY is not set | gemini-3.8-flash: LLM_API_KEY is not set | gemini-3.7-flash: LLM_API_KEY is not set | gemini-3-flash-preview: L"}
+{"at":"2026-10-12T10:02:01.491Z","provider":"gemini","script":"a2-offline","task":"extract","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:02:01.500Z","provider":"gemini","script":"a2-offline","task":"conflict","model":"gemini-3-flash-preview","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:02:01.504Z","provider":"gemini","script":"a2-offline","task":"playbook","model":"gemini-3.5-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:02:01.508Z","provider":"gemini","script":"a2-offline","task":"notes","model":"gemini-3-flash-preview","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:02:01.512Z","provider":"gemini","script":"a2-offline","task":"brief","model":"gemini-3.5-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:02:01.692Z","provider":"gemini","script":"a2-offline","task":"extract","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:02:01.697Z","provider":"gemini","script":"a2-offline","task":"conflict","model":"gemini-3.6-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:02:01.700Z","provider":"gemini","script":"a2-offline","task":"playbook","model":"gemini-3.6-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:02:01.704Z","provider":"gemini","script":"a2-offline","task":"notes","model":"gemini-3.5-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:02:16.715Z","provider":"gemini","script":"a2-offline","task":"brief","model":"gemini-3.6-flash,gemini-flash-latest,gemini-3.8-flash,gemini-3.7-flash,gemini-3-flash-preview,gemini-3.5-flash","inputTokens":0,"outputTokens":0,"ms":15010,"cached":false,"ok":false,"error":"gemini-3.6-flash: LLM_API_KEY is not set | gemini-flash-latest: LLM_API_KEY is not set | gemini-3.8-flash: LLM_API_KEY is not set | gemini-3.7-flash: LLM_API_KEY is not set | gemini-3-flash-preview: L"}
+{"at":"2026-10-12T10:02:16.963Z","provider":"gemini","script":"a2-offline","task":"extract","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:02:16.973Z","provider":"gemini","script":"a2-offline","task":"conflict","model":"gemini-flash-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:02:16.976Z","provider":"gemini","script":"a2-offline","task":"playbook","model":"gemini-3-flash-preview","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:02:16.980Z","provider":"gemini","script":"a2-offline","task":"notes","model":"gemini-3-flash-preview","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:02:31.990Z","provider":"gemini","script":"a2-offline","task":"brief","model":"gemini-3.6-flash,gemini-flash-latest,gemini-3.8-flash,gemini-3.7-flash,gemini-3-flash-preview,gemini-3.5-flash","inputTokens":0,"outputTokens":0,"ms":15008,"cached":false,"ok":false,"error":"gemini-3.6-flash: LLM_API_KEY is not set | gemini-flash-latest: LLM_API_KEY is not set | gemini-3.8-flash: LLM_API_KEY is not set | gemini-3.7-flash: LLM_API_KEY is not set | gemini-3-flash-preview: L"}
+{"at":"2026-10-12T10:02:32.210Z","provider":"gemini","script":"a2-offline","task":"extract","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:02:32.220Z","provider":"gemini","script":"a2-offline","task":"conflict","model":"gemini-3.5-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:02:32.223Z","provider":"gemini","script":"a2-offline","task":"playbook","model":"gemini-3.5-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:02:32.226Z","provider":"gemini","script":"a2-offline","task":"notes","model":"gemini-3-flash-preview","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:02:32.229Z","provider":"gemini","script":"a2-offline","task":"brief","model":"gemini-3-flash-preview","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:02:32.417Z","provider":"gemini","script":"a2-offline","task":"extract","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:02:32.422Z","provider":"gemini","script":"a2-offline","task":"extract","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:02:32.432Z","provider":"gemini","script":"a2-offline","task":"playbook","model":"gemini-3-flash-preview","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:02:32.437Z","provider":"gemini","script":"a2-offline","task":"conflict","model":"gemini-3-flash-preview","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:02:32.439Z","provider":"gemini","script":"a2-offline","task":"playbook","model":"gemini-3-flash-preview","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:02:32.443Z","provider":"gemini","script":"a2-offline","task":"notes","model":"gemini-3.5-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:02:47.464Z","provider":"gemini","script":"a2-offline","task":"brief","model":"gemini-3.6-flash,gemini-flash-latest,gemini-3.8-flash,gemini-3.7-flash,gemini-3-flash-preview,gemini-3.5-flash","inputTokens":0,"outputTokens":0,"ms":15017,"cached":false,"ok":false,"error":"gemini-3.6-flash: LLM_API_KEY is not set | gemini-flash-latest: LLM_API_KEY is not set | gemini-3.8-flash: LLM_API_KEY is not set | gemini-3.7-flash: LLM_API_KEY is not set | gemini-3-flash-preview: L"}
+{"at":"2026-10-12T10:02:47.686Z","provider":"gemini","script":"a2-offline","task":"extract","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:02:47.691Z","provider":"gemini","script":"a2-offline","task":"playbook","model":"gemini-3-flash-preview","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:02:47.694Z","provider":"gemini","script":"a2-offline","task":"notes","model":"gemini-3-flash-preview","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:02:47.696Z","provider":"gemini","script":"a2-offline","task":"brief","model":"gemini-3.6-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:02:47.882Z","provider":"gemini","script":"a2-offline","task":"extract","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:02:47.886Z","provider":"gemini","script":"a2-offline","task":"conflict","model":"gemini-3.5-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:02:47.889Z","provider":"gemini","script":"a2-offline","task":"nda","model":"gemini-3.5-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:02:47.894Z","provider":"gemini","script":"a2-offline","task":"notes","model":"gemini-3.6-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:02:47.897Z","provider":"gemini","script":"a2-offline","task":"brief","model":"gemini-3.5-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:02:48.089Z","provider":"gemini","script":"a2-offline","task":"extract","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:02:48.094Z","provider":"gemini","script":"a2-offline","task":"nda","model":"gemini-3.6-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:02:48.096Z","provider":"gemini","script":"a2-offline","task":"notes","model":"gemini-3.6-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:02:48.098Z","provider":"gemini","script":"a2-offline","task":"brief","model":"gemini-3.6-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:03:02.207Z","provider":"ollama","task":"extract","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:03:02.221Z","provider":"ollama","task":"conflict","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:03:02.226Z","provider":"ollama","task":"playbook","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:03:02.238Z","provider":"ollama","task":"notes","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:03:02.260Z","provider":"ollama","task":"brief","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":17,"cached":false,"ok":false,"error":"timed out after 5s across retries | qwen2.5:7b: Ollama isn't running at http://127.0.0.1:9 (start the Ollama app)"}
+{"at":"2026-10-12T10:03:02.453Z","provider":"ollama","task":"extract","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:03:02.459Z","provider":"ollama","task":"conflict","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:03:02.462Z","provider":"ollama","task":"playbook","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:03:02.472Z","provider":"ollama","task":"notes","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:03:02.482Z","provider":"ollama","task":"brief","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":6,"cached":false,"ok":false,"error":"timed out after 5s across retries | qwen2.5:7b: Ollama isn't running at http://127.0.0.1:9 (start the Ollama app)"}
+{"at":"2026-10-12T10:03:02.668Z","provider":"ollama","task":"extract","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:03:02.673Z","provider":"ollama","task":"conflict","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:03:02.676Z","provider":"ollama","task":"playbook","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:03:02.679Z","provider":"ollama","task":"notes","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:03:02.684Z","provider":"ollama","task":"brief","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":3,"cached":false,"ok":false,"error":"timed out after 5s across retries | qwen2.5:7b: Ollama isn't running at http://127.0.0.1:9 (start the Ollama app)"}
+{"at":"2026-10-12T10:03:02.851Z","provider":"ollama","task":"extract","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:03:02.855Z","provider":"ollama","task":"conflict","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:03:02.859Z","provider":"ollama","task":"playbook","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":3,"cached":false,"ok":false,"error":"timed out after 5s across retries | qwen2.5:7b: Ollama isn't running at http://127.0.0.1:9 (start the Ollama app)"}
+{"at":"2026-10-12T10:03:02.861Z","provider":"ollama","task":"notes","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:03:02.869Z","provider":"ollama","task":"brief","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":3,"cached":false,"ok":false,"error":"timed out after 5s across retries | qwen2.5:7b: Ollama isn't running at http://127.0.0.1:9 (start the Ollama app)"}
+{"at":"2026-10-12T10:03:03.051Z","provider":"ollama","task":"extract","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:03:03.056Z","provider":"ollama","task":"conflict","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:03:03.059Z","provider":"ollama","task":"playbook","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:03:03.065Z","provider":"ollama","task":"notes","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:03:03.070Z","provider":"ollama","task":"brief","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":1,"cached":false,"ok":false,"error":"timed out after 5s across retries | qwen2.5:7b: Ollama isn't running at http://127.0.0.1:9 (start the Ollama app)"}
+{"at":"2026-10-12T10:03:03.239Z","provider":"ollama","task":"extract","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:03:03.248Z","provider":"ollama","task":"conflict","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:03:03.252Z","provider":"ollama","task":"playbook","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:03:03.255Z","provider":"ollama","task":"notes","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:03:03.259Z","provider":"ollama","task":"brief","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":3,"cached":false,"ok":false,"error":"timed out after 5s across retries | qwen2.5:7b: Ollama isn't running at http://127.0.0.1:9 (start the Ollama app)"}
+{"at":"2026-10-12T10:03:24.744Z","provider":"ollama","task":"extract","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:03:24.939Z","provider":"ollama","task":"extract","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:03:25.076Z","provider":"ollama","task":"extract","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:03:25.253Z","provider":"ollama","task":"extract","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:19.311Z","provider":"ollama","task":"extract","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:19.340Z","provider":"ollama","task":"conflict","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:19.351Z","provider":"ollama","task":"playbook","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:19.376Z","provider":"ollama","task":"notes","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:19.404Z","provider":"ollama","task":"brief","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:19.710Z","provider":"ollama","task":"extract","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:19.719Z","provider":"ollama","task":"conflict","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:19.725Z","provider":"ollama","task":"playbook","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:19.731Z","provider":"ollama","task":"notes","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:19.765Z","provider":"ollama","task":"brief","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":31,"cached":false,"ok":false,"error":"timed out after 3s across retries | qwen2.5:7b: Ollama isn't running at http://127.0.0.1:9 (start the Ollama app)"}
+{"at":"2026-10-12T10:04:20.036Z","provider":"ollama","task":"extract","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:20.049Z","provider":"ollama","task":"conflict","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:20.053Z","provider":"ollama","task":"playbook","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:20.061Z","provider":"ollama","task":"notes","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:20.067Z","provider":"ollama","task":"brief","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:20.339Z","provider":"ollama","task":"extract","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:20.345Z","provider":"ollama","task":"conflict","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:20.361Z","provider":"ollama","task":"playbook","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":14,"cached":false,"ok":false,"error":"timed out after 3s across retries | qwen2.5:7b: Ollama isn't running at http://127.0.0.1:9 (start the Ollama app)"}
+{"at":"2026-10-12T10:04:20.366Z","provider":"ollama","task":"notes","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:20.380Z","provider":"ollama","task":"brief","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:20.652Z","provider":"ollama","task":"extract","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:20.662Z","provider":"ollama","task":"conflict","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:20.666Z","provider":"ollama","task":"playbook","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:20.672Z","provider":"ollama","task":"notes","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:20.683Z","provider":"ollama","task":"brief","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":5,"cached":false,"ok":false,"error":"timed out after 3s across retries | qwen2.5:7b: Ollama isn't running at http://127.0.0.1:9 (start the Ollama app)"}
+{"at":"2026-10-12T10:04:20.942Z","provider":"ollama","task":"extract","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:20.957Z","provider":"ollama","task":"conflict","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:20.961Z","provider":"ollama","task":"playbook","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:20.965Z","provider":"ollama","task":"notes","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:20.970Z","provider":"ollama","task":"brief","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:25.366Z","provider":"gemini","task":"extract","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:25.397Z","provider":"gemini","task":"conflict","model":"gemini-3.6-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:25.406Z","provider":"gemini","task":"playbook","model":"gemini-3.6-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:25.419Z","provider":"gemini","task":"notes","model":"gemini-3.5-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:25.437Z","provider":"gemini","task":"brief","model":"gemini-3.6-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:25.739Z","provider":"gemini","task":"extract","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:25.750Z","provider":"gemini","task":"conflict","model":"gemini-3.6-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:25.755Z","provider":"gemini","task":"playbook","model":"gemini-3.5-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:25.761Z","provider":"gemini","task":"notes","model":"gemini-3.5-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:40.777Z","provider":"gemini","task":"brief","model":"gemini-3.6-flash,gemini-flash-latest,gemini-3.8-flash,gemini-3.7-flash,gemini-3-flash-preview,gemini-3.5-flash","inputTokens":0,"outputTokens":0,"ms":15013,"cached":false,"ok":false,"error":"gemini-3.6-flash: LLM_API_KEY is not set | gemini-flash-latest: LLM_API_KEY is not set | gemini-3.8-flash: LLM_API_KEY is not set | gemini-3.7-flash: LLM_API_KEY is not set | gemini-3-flash-preview: L"}
+{"at":"2026-10-12T10:04:41.135Z","provider":"gemini","task":"extract","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:41.148Z","provider":"gemini","task":"conflict","model":"gemini-3-flash-preview","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:41.152Z","provider":"gemini","task":"playbook","model":"gemini-3.5-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:41.157Z","provider":"gemini","task":"notes","model":"gemini-3-flash-preview","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:41.163Z","provider":"gemini","task":"brief","model":"gemini-3.5-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:41.445Z","provider":"gemini","task":"extract","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:41.454Z","provider":"gemini","task":"conflict","model":"gemini-3.6-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:41.458Z","provider":"gemini","task":"playbook","model":"gemini-3.6-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:41.462Z","provider":"gemini","task":"notes","model":"gemini-3.5-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:56.471Z","provider":"gemini","task":"brief","model":"gemini-3.6-flash,gemini-flash-latest,gemini-3.8-flash,gemini-3.7-flash,gemini-3-flash-preview,gemini-3.5-flash","inputTokens":0,"outputTokens":0,"ms":15006,"cached":false,"ok":false,"error":"gemini-3.6-flash: LLM_API_KEY is not set | gemini-flash-latest: LLM_API_KEY is not set | gemini-3.8-flash: LLM_API_KEY is not set | gemini-3.7-flash: LLM_API_KEY is not set | gemini-3-flash-preview: L"}
+{"at":"2026-10-12T10:04:56.786Z","provider":"gemini","task":"extract","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:56.800Z","provider":"gemini","task":"conflict","model":"gemini-flash-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:56.804Z","provider":"gemini","task":"playbook","model":"gemini-3-flash-preview","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:04:56.810Z","provider":"gemini","task":"notes","model":"gemini-3-flash-preview","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:05:11.821Z","provider":"gemini","task":"brief","model":"gemini-3.6-flash,gemini-flash-latest,gemini-3.8-flash,gemini-3.7-flash,gemini-3-flash-preview,gemini-3.5-flash","inputTokens":0,"outputTokens":0,"ms":15005,"cached":false,"ok":false,"error":"gemini-3.6-flash: LLM_API_KEY is not set | gemini-flash-latest: LLM_API_KEY is not set | gemini-3.8-flash: LLM_API_KEY is not set | gemini-3.7-flash: LLM_API_KEY is not set | gemini-3-flash-preview: L"}
+{"at":"2026-10-12T10:05:12.147Z","provider":"gemini","task":"extract","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:05:12.159Z","provider":"gemini","task":"conflict","model":"gemini-3.5-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:05:12.164Z","provider":"gemini","task":"playbook","model":"gemini-3.5-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:05:12.169Z","provider":"gemini","task":"notes","model":"gemini-3-flash-preview","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:05:12.172Z","provider":"gemini","task":"brief","model":"gemini-3-flash-preview","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:05:51.383Z","provider":"gemini","script":"eval","caseId":"EV-S6","task":"classify","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}

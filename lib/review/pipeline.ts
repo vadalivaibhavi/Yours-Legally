@@ -118,6 +118,7 @@ async function runReview(dealId: string, opts: ReviewOptions): Promise<Brief> {
         regions: [...x.regions.filter((r) => !(r === "India" && doc.docType !== "Partnership" && deal.clientCountry && deal.clientCountry !== "India")), ...(deal.clientCountry ? [deal.clientCountry] : [])],
         assets: x.assets,
         hasRates: x.rates.length > 0 && doc.sideOfTable === "supplier",
+        rateRoles: doc.sideOfTable === "supplier" ? x.rates.map((r) => r.role) : [],
         services: x.services,
         partnership: doc.docType === "Partnership",
       };

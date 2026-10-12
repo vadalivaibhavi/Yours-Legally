@@ -19,12 +19,13 @@ import type { Citation, Finding } from "./types";
 
 const RESTRICTIVE = new Set(["non_compete", "exclusivity", "mfn_pricing", "ip_transfer", "ip_retention"]);
 
-export type Candidate = { entry: RegisterEntry; why: string };
+/** strong = the overlap is explicit (named sectors and regions both overlap, or a named tool / IP appears): A2 never lets that be dropped silently. */
+export type Candidate = { entry: RegisterEntry; why: string; strong: boolean };
 
 /** Step 1: exact, explainable field filter. Exported for evals and the seller check. */
 export function filterRegister(
   entries: RegisterEntry[],
-  facts: { entities: string[]; sectors: string[]; regions: string[]; assets: string[]; hasRates: boolean; services: string[]; partnership?: boolean },
+  facts: { entities: string[]; sectors: string[]; regions: string[]; assets: string[]; hasRates: boolean; services: string[]; partnership?: boolean; rateRoles?: string[] },
   sourceTexts: Map<string, string>,
 ): Candidate[] {
   const out: Candidate[] = [];
@@ -33,16 +34,22 @@ export function filterRegister(
     if (!e.bindsEntities.some((b) => facts.entities.includes(b))) continue;
     const sectorHit = e.scope.sectors.length === 0 || e.scope.sectors.some((s) => facts.sectors.includes(s));
     const regionHit = e.scope.regions.length === 0 || regionsOverlap(e.scope.regions, facts.regions);
+    // Explicit overlap (A2 "strong"): a SPECIFIC scope (not every sector, not worldwide) that overlaps this deal on both counts.
+    const specific = e.scope.sectors.length > 0 && e.scope.sectors.length < 8 && e.scope.regions.length > 0 && !e.scope.regions.some((r) => /worldwide|global|other/i.test(r));
+    const explicit = specific && e.scope.sectors.some((s) => facts.sectors.includes(s)) && regionsOverlap(e.scope.regions, facts.regions);
     if (e.type === "non_compete" && sectorHit && regionHit) {
-      out.push({ entry: e, why: `sector ${e.scope.sectors.filter((s) => facts.sectors.includes(s)).join("/") || "any"} · region ${intersectRegions(e.scope.regions, facts.regions).join(", ") || "any"}` });
+      out.push({ strong: explicit, entry: e, why: `sector ${e.scope.sectors.filter((s) => facts.sectors.includes(s)).join("/") || "any"} · region ${intersectRegions(e.scope.regions, facts.regions).join(", ") || "any"}` });
     } else if (e.type === "exclusivity" && regionHit && facts.partnership) {
-      out.push({ entry: e, why: `partnership/exclusivity scope · region ${intersectRegions(e.scope.regions, facts.regions).join(", ")}` });
+      out.push({ strong: explicit, entry: e, why: `partnership/exclusivity scope · region ${intersectRegions(e.scope.regions, facts.regions).join(", ")}` });
     } else if (e.type === "mfn_pricing" && facts.hasRates) {
-      out.push({ entry: e, why: "rates offered while a most-favoured pricing promise is live (any customer, any region)" });
+      // Strong only when this deal prices a role that is on the promised rate card.
+      const sameRole = (facts.rateRoles ?? []).some((r) => (e.terms.rateFloor ?? []).some((f) => sameWords(r, f.role)));
+      out.push({ strong: sameRole, entry: e, why: "rates offered while a most-favoured pricing promise is live (any customer, any region)" });
     } else if (e.type === "ip_transfer" || e.type === "ip_retention") {
       const src = (sourceTexts.get(e.sourceDocId) ?? "").toLowerCase();
       const hit = facts.assets.find((a) => a.length > 2 && (src.includes(a.toLowerCase()) || e.scope.assets.some((x) => x.toLowerCase().includes(a.toLowerCase()))));
-      if (hit) out.push({ entry: e, why: `asset "${hit}" appears in ${e.counterparty}'s signed contract` });
+      // Strong only for a named tool ("PipeKit"), never a generic word ("dashboards", "tools").
+      if (hit) out.push({ strong: namedAsset(hit), entry: e, why: `asset "${hit}" appears in ${e.counterparty}'s signed contract` });
     }
   }
   return out;
@@ -149,7 +156,9 @@ export async function checkConflicts(args: {
     if (!cand) continue;
     const e = cand.entry;
     if (a.applies === "no") {
-      checked.push(`${e.title} (${e.counterparty}): checked, doesn't reach this deal${a.waiverApplies ? " (covered by waiver)" : ""}`);
+      // A2: an explicit overlap the model judged out of scope is kept for a person to confirm (unless a waiver covers it).
+      if (cand.strong && !a.waiverApplies) findings.push(unconfirmed(cand, doc, args.documents, `The register entry plainly overlaps this deal (${cand.why}), but the review judged it out of scope: ${a.impact || "no reason given"}`));
+      else checked.push(`${e.title} (${e.counterparty}): checked, doesn't reach this deal${a.waiverApplies ? " (covered by waiver)" : ""}`);
       continue;
     }
     const incoming: Citation[] = a.incomingClauses
@@ -182,6 +191,9 @@ export async function checkConflicts(args: {
       waiver: w ? { docId: w.docId, covers: w.covers, applies: !!a.waiverApplies, why: a.waiverWhy ?? "" } : null,
     });
   }
+  // A2: a candidate the model never assessed is never treated as clear.
+  for (const cand of candidates.filter((c) => !r.data.entries.some((a) => a.entryId === c.entry.id)))
+    findings.push(unconfirmed(cand, doc, args.documents, `The review didn't assess this register entry (${cand.why}).`));
   for (const c of r.data.covenants) {
     // A covenant finding must name the existing clients it hits; otherwise there is no collision to show.
     if (c.applies === "no" || !c.clientsAffected.length || !reverse.length) continue;
@@ -203,4 +215,39 @@ export async function checkConflicts(args: {
     });
   }
   return { findings, checked };
+}
+
+/** A2: a possible collision with an existing commitment that the model didn't confirm: high, for a person to judge. */
+export function unconfirmed(cand: Candidate, doc: Document, documents: Map<string, Document>, impact: string): Finding {
+  const e = cand.entry;
+  const title = documents.get(e.sourceDocId)?.title ?? e.counterparty;
+  return {
+    key: `conflict:${e.sourceDocId}:${e.type}`,
+    category: "conflict",
+    topic: e.type,
+    title: `Possible collision with ${e.counterparty}: ${e.title} (confirm)`,
+    impact,
+    severity: "high",
+    confidence: "low",
+    needsJudgment: true,
+    owner: "Karandeep",
+    resolution: "counsel",
+    docId: doc.id,
+    citations: [{ docId: e.sourceDocId, docTitle: title, clauseRef: e.clauseRef, quote: e.quote, role: "register" }],
+    registerEntryId: e.id,
+    registerVerified: e.verified,
+    expiry: e.end,
+  };
+}
+
+const GENERIC_ASSET = /^(software|tools?|librar(y|ies)|frameworks?|methodolog(y|ies)|know-how|dashboards?|reports?|data models?|documentation|integrations?|analytics|pipelines?|platform|templates?|scripts?|code|models?|work product|deliverables?)$/i;
+/** A named tool or product ("PipeKit", "Itinerary Personalization Engine"), not a generic word. */
+function namedAsset(a: string): boolean {
+  return /[A-Z]/.test(a) && !GENERIC_ASSET.test(a.trim());
+}
+/** Roles match when one's words are all in the other ("Senior Data Engineer" ~ "Data Engineer (Senior)"). */
+function sameWords(a: string, b: string): boolean {
+  const w = (s: string) => s.toLowerCase().replace(/[^a-z ]/g, " ").split(/\s+/).filter((x) => x.length > 2);
+  const [x, y] = [w(a), w(b)];
+  return x.length > 0 && y.length > 0 && (x.every((t) => y.includes(t)) || y.every((t) => x.includes(t)));
 }
