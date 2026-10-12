@@ -35,12 +35,15 @@ import { isQuotaExhausted, modelsFor, provider, withRunContext } from "../lib/ll
 import { locateQuote } from "../lib/quotes";
 import { effectiveBrief } from "../lib/review/effective";
 import { hasLegalConclusion } from "../lib/review/guardrails";
-import { reviewDeal } from "../lib/review/pipeline";
+import { currentInputsHash, reviewDeal } from "../lib/review/pipeline";
+import { adjustForDealSize } from "../lib/review/materiality";
+import { allDeals } from "../lib/deals";
+import { spawnSync } from "node:child_process";
 import type { Brief, EffectiveBrief, Finding } from "../lib/review/types";
 import { SEVERITY_RANK } from "../lib/review/types";
 import { runSellerCheck, sellerBanner } from "../lib/seller";
 import { registerEntries } from "../lib/register";
-import { applyRegisterChange } from "../lib/registerEdit";
+import { applyRegisterChange, storeSignedDeal } from "../lib/registerEdit";
 import {
   mutate,
   readState,
@@ -828,6 +831,12 @@ async function main() {
     { name: "A3 one-way NDA caught by rules, whatever the title says", ...oneWayNdaCheck() },
     { name: "A4 instructions to an AI reviewer are caught and block a clean verdict", ...injectionCheck(briefs) },
     { name: "A6 plain wording: \"redline\" reads right as a verb and as a noun", ...wordingCheck() },
+    { name: "A5 upload detection: notes vs contract, version vs additional, wrong deal, blank template", ...uploadDetectCheck() },
+    { name: "A5 deal size: small-deal deviations count one step lower; promises to other clients never change", ...dealSizeCheck(briefs) },
+    { name: "A5 owners are roles, never people's names", ...rolesCheck(briefs) },
+    { name: "A5 seller mismatch is computed live from the latest deal check", ...liveMismatchCheck(briefs) },
+    { name: "A5 store in contract register: deal leaves the queue, commitments reach the checks, the right deals are flagged", ...storeCheck() },
+    { name: "A5 review runs read the dataset only, never the app's live state", ...isolationCheck(briefs) },
     ...(noVersions ? [] : [{ name: "A4 end to end: LoopMart NDA with an injected instruction is reviewed (model)", ...(await injectionEndToEnd()) }]),
     {
       name: "NDA fast lane latency (<1 min)",
@@ -1140,4 +1149,149 @@ const WORDING: [string, string][] = [
 function wordingCheck(): { pass: boolean; detail: string } {
   const wrong = WORDING.filter(([a, want]) => sanitize(a) !== want).map(([a]) => `"${a}" → "${sanitize(a)}"`);
   return { pass: !wrong.length, detail: wrong.length ? wrong.join(" · ") : `${WORDING.length}/${WORDING.length} sentences read right` };
+}
+
+/** A5: npm run check:upload-detect (lib/uploadDetect.ts on the dataset, no model calls), folded into the eval. */
+function uploadDetectCheck(): { pass: boolean; detail: string } {
+  const r = spawnSync(process.execPath, [path.join("node_modules", "tsx", "dist", "cli.mjs"), "scripts/checkUploadDetect.ts"], { encoding: "utf8" });
+  const out = (r.stdout ?? "").trim().split("\n");
+  const summary = out.filter((l) => /^(notes vs contract|document type|real documents taken)/.test(l)).map((l) => l.trim());
+  const cases = out.filter((l) => /^(ok  |FAIL)/.test(l));
+  const failed = cases.filter((l) => l.startsWith("FAIL")).map((l) => l.slice(5, 70));
+  return { pass: r.status === 0, detail: [...summary, `${cases.length - failed.length}/${cases.length} version, wrong-deal and template cases right`, ...failed.map((x) => `FAIL ${x}`)].join(" · ") };
+}
+
+/** A5 (lib/review/materiality.ts): the rule on synthetic findings, then on the real small deals' briefs. */
+function dealSizeCheck(briefs: Brief[]): { pass: boolean; detail: string } {
+  useMemoryState();
+  const f = (category: string, topic: string, severity: string) => ({ key: `${category}:${topic}`, category, topic, severity, title: "t", impact: "i", confidence: "high", needsJudgment: false, owner: "Karandeep", citations: [] }) as unknown as Finding;
+  const cases: [string, Finding, number | undefined, string, boolean][] = [
+    ["playbook high, small deal", f("playbook", "payment", "high"), 38_000, "medium", false],
+    ["playbook medium, small deal", f("playbook", "ip", "medium"), 38_000, "low", false],
+    ["LD rule high, small deal", f("gate", "ld", "high"), 10_100, "medium", false],
+    ["entity check high, small deal", f("gate", "entity", "high"), 10_100, "high", false],
+    ["conflict high, small deal (context only)", f("conflict", "non_compete", "high"), 38_000, "high", true],
+    ["playbook blocker, small deal", f("playbook", "ld", "blocker"), 38_000, "blocker", false],
+    ["playbook high, large deal", f("playbook", "payment", "high"), 210_000, "high", false],
+    ["playbook high, no value on file", f("playbook", "payment", "high"), undefined, "high", false],
+  ];
+  const wrong = cases.filter(([, x, v, want, note]) => { const y = adjustForDealSize(x, v); return y.severity !== want || !!y.sizeNote !== (note || want !== x.severity); }).map(([n]) => n);
+  // Real briefs: what moved on small deals, and that no promise to another client, blocker or compliance item moved.
+  let lowered = 0;
+  const protectedMoved: string[] = [];
+  const small = briefs.filter((b) => { const v = deals.find((d) => d.id === b.dealId)?.valueUsd; return !!v && v < 50_000; });
+  for (const b of small) {
+    const v = deals.find((d) => d.id === b.dealId)?.valueUsd;
+    for (const x of b.findings) {
+      const y = adjustForDealSize(x, v);
+      if (y.severity !== x.severity) lowered++;
+      if (y.severity !== x.severity && (["conflict", "covenant", "compliance", "bundle", "dependency"].includes(x.category) || x.severity === "blocker")) protectedMoved.push(`${b.dealId}:${x.key}`);
+    }
+  }
+  return {
+    pass: !wrong.length && !protectedMoved.length,
+    detail: `rule cases: ${cases.length - wrong.length}/${cases.length}${wrong.length ? ` (wrong: ${wrong.join(", ")})` : ""} · small deals: ${small.map((b) => b.dealId).join(", ") || "none"} · ${lowered} findings counted lower · protected findings moved: ${protectedMoved.length ? protectedMoved.join(", ") : "none"}`,
+  };
+}
+
+/** A5 (lib/review/owners.ts): no owner, missing-item owner or next action names a person (Karandeep is the decision role). */
+function rolesCheck(briefs: Brief[]): { pass: boolean; detail: string } {
+  useMemoryState();
+  const people = [...new Set([...deals.map((d) => d.owner), ...USERS.map((u) => u.name), "Pranav"])].filter((n) => n && n !== "Karandeep");
+  const named = (t: string) => people.some((n) => new RegExp(`^${n}\\b|\\b${n} (must|will|should|needs to|to)\\b|${n} \\(fix before sending\\)`).test(t));
+  const bad: string[] = [];
+  let checked = 0;
+  for (const b of briefs) {
+    const e = effectiveBrief(b, null);
+    const owners = [...e.findings.map((x) => x.owner), ...e.findings.flatMap((x) => (x.missingItem ? [x.missingItem.owner] : [])), ...e.waitingFor.map((w) => w.owner)];
+    checked += owners.length + 1;
+    for (const o of owners) if (named(o)) bad.push(`${b.dealId}: ${o}`);
+    if (named(e.nextAction)) bad.push(`${b.dealId} next action`);
+  }
+  const storedNamed = briefs.flatMap((b) => b.findings.filter((x) => named(x.owner)).map(() => b.dealId)).length;
+  return { pass: !bad.length, detail: `${checked} owners and next actions checked · named a person: ${bad.length ? bad.slice(0, 5).join("; ") : "none"} · ${storedNamed} stored owners with names mapped to roles at display` };
+}
+
+/** A5 (lib/review/effective.ts withLiveMismatch): the mismatch follows the latest deal check, never the stored brief. */
+function liveMismatchCheck(briefs: Brief[]): { pass: boolean; detail: string } {
+  const regionsOf = (b: Brief) => [...new Set(b.documents.flatMap((d) => ((d.facts.find((x) => x.field === "scope")?.value ?? "").split(" · ")[1] ?? "").split(",").map((r) => r.trim()).filter((r) => r && r !== "Worldwide" && r !== "Other" && r !== "India")))];
+  const b = briefs.find((x) => regionsOf(x).length >= 1);
+  if (!b) return { pass: false, detail: "no brief with contract regions to test" };
+  const regions = regionsOf(b);
+  const deal = deals.find((d) => d.id === b.dealId)!;
+  const check = (declared: string[]) => ({ id: `eval-${declared.join("-")}`, dealId: b.dealId, by: "Seller", at: "2026-12-31T00:00:00.000Z", asOf: "2026-12-31", registerVersion: "eval", briefVersionAtCheck: 1, input: { client: deal.counterparty, sectors: [], regions: declared, services: [], rates: [], assets: [], dataHandling: "", partnership: false, freeText: "" } as SellerInput, items: [] });
+  const has = (bb: Brief) => effectiveBrief(bb, null).findings.some((x) => x.key === "mismatch:regions");
+  useMemoryState({ sellerChecks: { [b.dealId]: [check([])] } });
+  const none = has(b);
+  useMemoryState({ sellerChecks: { [b.dealId]: [check(regions)] } });
+  const all = has(b);
+  // A mismatch stored in an older brief is replaced by the live one: declaring every region clears it.
+  const stale = { ...b, findings: [...b.findings, { key: "mismatch:regions", category: "mismatch", topic: "regions", title: "stale", impact: "stale", severity: "medium", confidence: "high", needsJudgment: false, owner: "the seller", citations: [] } as unknown as Finding] };
+  const staleGone = !has(stale);
+  useMemoryState();
+  return {
+    pass: none && !all && staleGone,
+    detail: `${b.dealId} (contract regions: ${regions.join(", ")}) · declared none: ${none ? "mismatch" : "NO mismatch"} · declared all: ${all ? "STILL mismatch" : "clear"} · stored mismatch with a matching check: ${staleGone ? "dropped" : "KEPT"}`,
+  };
+}
+
+/** A5 (lib/registerEdit.ts storeSignedDeal): the state side of "Store in contract register", with a known non-compete. */
+function storeCheck(): { pass: boolean; detail: string } {
+  const template = registerEntries().find((e) => e.type === "non_compete" && !e.routine);
+  if (!template) return { pass: false, detail: "no non-compete in the register to copy" };
+  const target = deals.find((d) => d.status !== "signed")!;
+  useMemoryState({ dealOverrides: { [target.id]: { decision: "SIGN" } } });
+  const docId = target.documentIds[0];
+  const entry = { ...template, id: `eval-${docId}-1`, sourceDocId: docId, counterparty: target.counterparty, verified: false };
+  const before = registerEntries().length;
+  const r = storeSignedDeal(target.id, [docId], [{ docId, counterparty: target.counterparty, entries: [entry], illegible: [], referencedButMissing: [] }], "eval");
+  const after = registerEntries();
+  const st = readState();
+  const signed = allDeals().find((d) => d.id === target.id)?.status === "signed";
+  const inRegister = after.some((e) => e.id === entry.id) && after.length === before + 1;
+  const othersOpen = allDeals().filter((d) => d.status !== "signed").map((d) => d.id);
+  const flaggedRight = r.flagged.length === othersOpen.length && othersOpen.every((id) => st.dealOverrides[id]?.staleReason === "the register changed") && !st.dealOverrides[target.id]?.staleSince;
+  // Storing again replaces, never duplicates.
+  storeSignedDeal(target.id, [docId], [{ docId, counterparty: target.counterparty, entries: [entry], illegible: [], referencedButMissing: [] }], "eval");
+  const noDup = registerEntries().filter((e) => e.id === entry.id).length === 1;
+  useMemoryState();
+  return {
+    pass: signed && inRegister && flaggedRight && noDup,
+    detail: `${target.id}: ${signed ? "signed, out of the queue" : "STILL in the queue"} · non-compete ${inRegister ? "in the register" : "MISSING from the register"} · ${r.flagged.length} open deals flagged for re-check${flaggedRight ? "" : " (WRONG set)"} · stored twice: ${noDup ? "no duplicate" : "DUPLICATED"}`,
+  };
+}
+
+/**
+ * A5 (scripts/review.ts useMemoryState): every stored brief's input hash equals the dataset-only hash, so no
+ * live upload, note or register edit went into it; and the hash does move when live state would leak in.
+ */
+function isolationCheck(briefs: Brief[]): { pass: boolean; detail: string } {
+  useMemoryState();
+  const legacy: string[] = [];
+  const leaked = briefs.filter((b) => {
+    if (b.inputsHash === currentInputsHash(b.dealId)) return false;
+    // Briefs hashed before the end client's verdict was part of the hash (Phase B regenerates them).
+    const d = deals.find((x) => x.id === b.dealId)!;
+    const ec = d.endClientDealId;
+    if (!ec) return true;
+    d.endClientDealId = undefined;
+    const old = currentInputsHash(b.dealId);
+    d.endClientDealId = ec;
+    if (old === b.inputsHash) { legacy.push(b.dealId); return false; }
+    return true;
+  });
+  const probe = briefs[0];
+  const base = currentInputsHash(probe.dealId);
+  const note = { id: "eval-live-note", title: "live note", text: "Call with the client: they want exclusivity.", dealId: probe.dealId } as never;
+  useMemoryState({ uploadedNotes: [note], dealOverrides: { [probe.dealId]: { addNoteIds: ["eval-live-note"] } } });
+  const withNote = currentInputsHash(probe.dealId);
+  useMemoryState({ registerRevision: 1 });
+  const withEdit = currentInputsHash(probe.dealId);
+  useMemoryState();
+  const reviewIsolated = /async function main\(\)[\s\S]{0,400}useMemoryState\(\)/.test(fs.readFileSync("scripts/review.ts", "utf8"));
+  const sensitive = withNote !== base && withEdit !== base;
+  return {
+    pass: !leaked.length && sensitive && reviewIsolated,
+    detail: `${briefs.length - leaked.length}/${briefs.length} briefs built from the dataset only${legacy.length ? ` (${legacy.join(", ")} hashed before the end-client verdict counted)` : ""}${leaked.length ? ` · NOT: ${leaked.map((b) => b.dealId).join(", ")}` : ""} · a live note or register edit changes the hash: ${sensitive ? "yes" : "NO"} · npm run review starts on an empty state: ${reviewIsolated ? "yes" : "NO"}`,
+  };
 }

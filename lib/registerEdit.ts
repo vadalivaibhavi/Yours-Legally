@@ -49,3 +49,35 @@ export function applyRegisterChange(id: string, action: RegisterAction, edits: P
   );
   return { flagged };
 }
+
+/**
+ * "Store in contract register" (a deal Karandeep decided to sign): its documents' commitments replace any
+ * stored earlier for those documents, the deal leaves the queue as signed, and the open deals the new
+ * commitments can reach are flagged for re-check (FR-2, FR-19). The extraction (model) happens before this.
+ */
+export function storeSignedDeal(
+  dealId: string,
+  docIds: string[],
+  stored: { docId: string; counterparty: string; entries: RegisterEntry[]; illegible: { clauseRef: string; note: string }[]; referencedButMissing: { name: string; note: string }[] }[],
+  by: string,
+): { entries: number; flagged: string[] } {
+  const ids = new Set(docIds);
+  const all = stored.flatMap((x) => x.entries);
+  const flagged = dealsAffectedBy(all).filter((id) => id !== dealId);
+  const at = new Date().toISOString();
+  mutate(
+    (s) => {
+      s.extraRegisterEntries = [...s.extraRegisterEntries.filter((e) => !ids.has(e.sourceDocId)), ...all];
+      s.extraRegisterDocuments = [
+        ...s.extraRegisterDocuments.filter((c) => !ids.has(c.docId)),
+        ...stored.map((x) => ({ docId: x.docId, counterparty: x.counterparty, entryCount: x.entries.length, illegible: x.illegible, referencedButMissing: x.referencedButMissing })),
+      ];
+      s.registerRevision += 1;
+      const o = (s.dealOverrides[dealId] ??= {});
+      Object.assign(o, { status: "signed", signedAt: at, staleSince: undefined });
+      for (const id of flagged) s.dealOverrides[id] = { ...(s.dealOverrides[id] ?? {}), staleSince: at, staleReason: "the register changed" };
+    },
+    { user: by, dealId, action: "deal.stored", detail: { documents: docIds, entries: all.length } },
+  );
+  return { entries: all.length, flagged };
+}

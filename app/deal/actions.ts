@@ -11,7 +11,7 @@ import { allDeals, dealDocuments, getDeal, SIGN_DECISIONS } from "@/lib/deals";
 import { QUOTA_MESSAGE } from "@/lib/limits";
 import { isQuotaExhausted } from "@/lib/llm";
 import { registerEntry } from "@/lib/register";
-import { applyRegisterChange, dealsAffectedBy, type RegisterAction } from "@/lib/registerEdit";
+import { applyRegisterChange, dealsAffectedBy, storeSignedDeal, type RegisterAction } from "@/lib/registerEdit";
 import { AtliqEntity, Region, RegisterType, Sector, type RegisterEntry } from "@/lib/types";
 import { extractCommitments } from "@/lib/registerExtract";
 import { nextVersion, reviewDeal } from "@/lib/review/pipeline";
@@ -413,22 +413,11 @@ export async function storeInRegister(form: FormData) {
   }
   if (results.some((x) => !x.r.ok)) redirect(`/?storeFailed=${deal.id}`);
   const ok = results.flatMap((x) => (x.r.ok ? [{ doc: x.doc, ...x.r }] : []));
-  const ids = new Set(docs.map((d) => d.id));
-  const added = ok.reduce((n, x) => n + x.entries.length, 0);
-  mutate(
-    (s) => {
-      s.extraRegisterEntries = [...s.extraRegisterEntries.filter((e) => !ids.has(e.sourceDocId)), ...ok.flatMap((x) => x.entries)];
-      s.extraRegisterDocuments = [
-        ...s.extraRegisterDocuments.filter((c) => !ids.has(c.docId)),
-        ...ok.map((x) => ({ docId: x.doc.id, counterparty: x.doc.counterparty, entryCount: x.entries.length, illegible: x.ex.illegible, referencedButMissing: x.ex.referencedButMissing })),
-      ];
-      s.registerRevision += 1;
-      const o = (s.dealOverrides[deal.id] ??= {});
-      Object.assign(o, { status: "signed", signedAt: now(), staleSince: undefined });
-      // New commitments change what other open deals can promise: flag the ones they can reach (FR-19).
-      for (const id of dealsAffectedBy(ok.flatMap((x) => x.entries))) if (id !== deal.id) s.dealOverrides[id] = { ...(s.dealOverrides[id] ?? {}), staleSince: now(), staleReason: "the register changed" };
-    },
-    { user: u.name, dealId: deal.id, action: "deal.stored", detail: { documents: [...ids], entries: added } },
+  const { entries: added } = storeSignedDeal(
+    deal.id,
+    docs.map((d) => d.id),
+    ok.map((x) => ({ docId: x.doc.id, counterparty: x.doc.counterparty, entries: x.entries, illegible: x.ex.illegible, referencedButMissing: x.ex.referencedButMissing })),
+    u.name,
   );
   revalidatePath("/", "layout");
   redirect(`/?stored=${deal.id}&n=${added}`);
