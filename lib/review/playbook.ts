@@ -191,7 +191,7 @@ export async function checkNda(args: { doc: Document; deal: Deal; rules: Playboo
   const { doc, deal } = args;
   const input = [`NDA: ${doc.title} (${doc.paper === "atliq" ? "AtliQ's own template" : "counterparty's paper"})`, doc.text].join("\n\n");
   const r = await callModel({ task: "nda", system: NDA_SYSTEM, input, schema: NdaResult });
-  if (!r.ok) return { findings: [], fine: [], error: `NDA check ${r.message} (${r.error.slice(0, 160)})` };
+  if (!r.ok) return withOneWayRules(doc, deal, { findings: [], fine: [], error: `NDA check ${r.message} (${r.error.slice(0, 160)})` });
   const rule = args.rules.find((x) => x.id === "pb-nda");
   const findings: Finding[] = [];
   const fine: string[] = [];
@@ -220,5 +220,51 @@ export async function checkNda(args: { doc: Document; deal: Deal; rules: Playboo
       precedents: rule?.precedents,
     });
   }
-  return { findings, fine };
+  return withOneWayRules(doc, deal, { findings, fine });
+}
+
+/**
+ * A3: one-way NDA, by rules (a backstop to the model's mutuality check, which can take a "mutual" title at
+ * face value). Two tell-tale patterns, each quoted verbatim:
+ *  - definition: "Confidential Information" is what ONE named party discloses "to the Recipient" (never "a
+ *    Party", "one Party", "either Party");
+ *  - obligations: "the Recipient shall" at least twice, and never "Receiving Party shall" / "each Party shall".
+ * A rule finding is added when the model passed that item (or failed); the model's "fine" note for it goes.
+ */
+export function oneWayNda(text: string): { item: "definition" | "obligations"; quote: string; why: string }[] {
+  const out: { item: "definition" | "obligations"; quote: string; why: string }[] = [];
+  const def = text.match(/confidential information[*"”]*\s*(?:means|shall mean)[^.]{0,400}/i)?.[0] ?? "";
+  if (/\bto the recipient\b/i.test(def) && !/\b(a|one|either|each) party\b/i.test(def)) {
+    const q = locateQuote(text, def.slice(0, 220));
+    if (q) out.push({ item: "definition", quote: q, why: "Confidential Information covers only what one party discloses to the Recipient, so AtliQ's own information is not protected." });
+  }
+  const recipientShall = text.match(/^[^\n]*\bthe recipient shall\b[^\n]*/gim) ?? [];
+  if (recipientShall.length >= 2 && !/\b(receiving party|each party|either party) shall\b/i.test(text)) {
+    const q = locateQuote(text, (recipientShall[0] ?? "").trim().slice(0, 220));
+    if (q) out.push({ item: "obligations", quote: q, why: `The obligations bind only the Recipient ("the Recipient shall" ${recipientShall.length} times, never "each Party").` });
+  }
+  return out;
+}
+
+function withOneWayRules(doc: Document, deal: Deal, res: { findings: Finding[]; fine: string[]; error?: string }) {
+  for (const hit of oneWayNda(doc.text)) {
+    if (res.findings.some((x) => x.key === `nda:${hit.item}`)) continue; // the model already caught it
+    res.fine = res.fine.filter((x) => !x.startsWith(`NDA ${hit.item}:`));
+    res.findings.push({
+      key: `nda:${hit.item}`,
+      category: "nda",
+      topic: hit.item,
+      title: `Not mutual: ${hit.item} (rule check)`,
+      impact: hit.why,
+      severity: "high",
+      confidence: "high",
+      needsJudgment: false,
+      owner: doc.paper === "atliq" ? OWNER.fixBeforeSending : "Karandeep",
+      resolution: doc.paper === "atliq" ? "fix_before_sending" : "redline",
+      docId: doc.id,
+      citations: [{ docId: doc.id, docTitle: doc.title, clauseRef: hit.item === "definition" ? "definition" : "obligations", quote: hit.quote, role: "incoming" }],
+      counterPosition: hit.item === "definition" ? "Make it mutual: information disclosed by either Party to the other." : "Make the obligations bind each Receiving Party, not only AtliQ.",
+    });
+  }
+  return res;
 }

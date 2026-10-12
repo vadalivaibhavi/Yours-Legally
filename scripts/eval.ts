@@ -15,6 +15,7 @@ import path from "node:path";
 import { checkIds, parseArgs } from "./_args";
 import { checkRegister } from "./checkRegister";
 import { filterRegister, unconfirmed } from "../lib/review/conflict";
+import { oneWayNda } from "../lib/review/playbook";
 import { briefsDir } from "../lib/config";
 import {
   canDecide,
@@ -823,6 +824,7 @@ async function main() {
     { name: "Register changes flag the right open deals and reach the checks (FR-2, FR-19)", ...(await registerFlagCheck()) },
     { name: "A1 no evidence, no finding: claims about the terms need a verified clause", ...evidenceCheck(briefs) },
     { name: "A2 a clear register match is never dropped silently (strong-match rules)", ...strongMatchCheck() },
+    { name: "A3 one-way NDA caught by rules, whatever the title says", ...oneWayNdaCheck() },
     {
       name: "NDA fast lane latency (<1 min)",
       pass: null,
@@ -1061,5 +1063,19 @@ function strongMatchCheck(): { pass: boolean; detail: string } {
   return {
     pass: !wrong.length && flagOk,
     detail: wrong.length ? `wrong: ${wrong.join("; ")}` : `${cases.length} strong-match rules right · a dismissed / unassessed strong match becomes "${flag.title}" (high, confirm, cites the register clause)`,
+  };
+}
+
+/** A3 (lib/review/playbook.ts oneWayNda): fires on the one-way NDAs, never on a mutual one. Pure rules. */
+function oneWayNdaCheck(): { pass: boolean; detail: string } {
+  const text = (id: string) => docs.find((d) => d.id === id)!.text;
+  const oneWay = ["finserve-nda", "meridian-nda"];
+  const mutual = ["alnoor-nda", "harrington-nda", "ortiz-nda", "loopmart-nda"];
+  const v2 = fs.readFileSync("test-uploads/FinServe_NDA_v2_mutual.md", "utf8");
+  const missed = oneWay.filter((id) => oneWayNda(text(id)).length < 2);
+  const falseHits = [...mutual.filter((id) => oneWayNda(text(id)).length), ...(oneWayNda(v2).length ? ["finserve-v2"] : [])];
+  return {
+    pass: !missed.length && !falseHits.length,
+    detail: `one-way caught (definition + obligations): ${oneWay.filter((id) => !missed.includes(id)).join(", ")}${missed.length ? ` · missed: ${missed.join(", ")}` : ""} · mutual left alone: ${mutual.length + 1 - falseHits.length}/${mutual.length + 1}${falseHits.length ? ` · false hits: ${falseHits.join(", ")}` : ""}`,
   };
 }

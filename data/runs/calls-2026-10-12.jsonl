@@ -213,3 +213,22 @@
 {"at":"2026-10-12T10:05:12.169Z","provider":"gemini","task":"notes","model":"gemini-3-flash-preview","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
 {"at":"2026-10-12T10:05:12.172Z","provider":"gemini","task":"brief","model":"gemini-3-flash-preview","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
 {"at":"2026-10-12T10:05:51.383Z","provider":"gemini","script":"eval","caseId":"EV-S6","task":"classify","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:08:01.394Z","provider":"ollama","task":"extract","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:08:01.420Z","provider":"ollama","task":"conflict","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:08:01.430Z","provider":"ollama","task":"nda","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:08:01.445Z","provider":"ollama","task":"notes","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:08:01.491Z","provider":"ollama","task":"brief","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":38,"cached":false,"ok":false,"error":"timed out after 3s across retries | qwen2.5:7b: Ollama isn't running at http://127.0.0.1:9 (start the Ollama app)"}
+{"at":"2026-10-12T10:08:01.806Z","provider":"ollama","task":"extract","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:08:01.813Z","provider":"ollama","task":"nda","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:08:01.819Z","provider":"ollama","task":"notes","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:08:01.826Z","provider":"ollama","task":"brief","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:08:06.284Z","provider":"gemini","task":"extract","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:08:06.307Z","provider":"gemini","task":"conflict","model":"gemini-3.5-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:08:06.316Z","provider":"gemini","task":"nda","model":"gemini-3.5-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:08:06.334Z","provider":"gemini","task":"notes","model":"gemini-3.6-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:08:06.345Z","provider":"gemini","task":"brief","model":"gemini-3.5-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:08:06.672Z","provider":"gemini","task":"extract","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:08:06.681Z","provider":"gemini","task":"nda","model":"gemini-3.6-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:08:06.686Z","provider":"gemini","task":"notes","model":"gemini-3.6-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:08:06.690Z","provider":"gemini","task":"brief","model":"gemini-3.6-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-12T10:08:32.149Z","provider":"gemini","script":"eval","caseId":"EV-S6","task":"classify","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
