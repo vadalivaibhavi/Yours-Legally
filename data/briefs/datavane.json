@@ -1,7 +1,7 @@
 {
   "dealId": "datavane",
   "version": 1,
-  "createdAt": "2026-10-05T14:03:24.861Z",
+  "createdAt": "2026-10-12T10:24:47.000Z",
   "trigger": "initial review",
   "inputsHash": "f7d3dd7a1af6965e38d88b9b600b5a8d",
   "documentIds": [
@@ -225,8 +225,9 @@
     "The agreement does not contain any formal acceptance or cure procedures."
   ],
   "notSeen": [
+    "Similar past clauses for Datavane strategic partnership (draft): comparison lines couldn't be written (timed out after 45s across retries | gemini-3.6-flash: HTTP 503: { \"error\": { \"c); the matching clauses are still shown",
     "No meeting notes attached to this deal.",
-    "Register built from 17 signed documents. Contracts referenced elsewhere but never collected (e.g. ShopSwift SOW, PixelCraft vendor agreement, intercompany services agreement) can't be checked."
+    "Commitments were checked against all 17 signed contracts on file. Contracts AtliQ hasn't uploaded can't be checked."
   ],
   "documents": [
     {
@@ -710,6 +711,6 @@
     "cachedCalls": 5,
     "inputTokens": 0,
     "outputTokens": 0,
-    "ms": 2764
+    "ms": 45129
   }
 }

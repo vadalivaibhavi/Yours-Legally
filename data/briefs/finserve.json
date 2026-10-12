@@ -1,7 +1,7 @@
 {
   "dealId": "finserve",
   "version": 1,
-  "createdAt": "2026-10-05T14:03:27.314Z",
+  "createdAt": "2026-10-12T10:25:32.122Z",
   "trigger": "initial review",
   "inputsHash": "2eca0cecf948c9c9af56ace390a5beb6",
   "documentIds": [
@@ -18,7 +18,7 @@
   "route": "nda_fast_lane",
   "verdict": "HOLD",
   "headline": "HOLD: 1 blocker and 6 non-mutuality issues require us to renegotiate.",
-  "nextAction": "Karandeep will redline the NDA to resolve the client restriction blocker and non-mutuality issues.",
+  "nextAction": "Karandeep will ask for changes to the NDA to resolve the client restriction blocker and non-mutuality issues.",
   "findings": [
     {
       "key": "covenant:non_compete",
@@ -374,8 +374,9 @@
     "Governing law matches entity: laws of India (Pvt Ltd → Indian law)"
   ],
   "notSeen": [
+    "Similar past clauses for FinServe Capital \"mutual\" NDA (draft): comparison lines couldn't be written (timed out after 45s across retries | gemini-3.6-flash: HTTP 503: { \"error\": { \"c); the matching clauses are still shown",
     "No meeting notes attached to this deal.",
-    "Register built from 17 signed documents. Contracts referenced elsewhere but never collected (e.g. ShopSwift SOW, PixelCraft vendor agreement, intercompany services agreement) can't be checked."
+    "Commitments were checked against all 17 signed contracts on file. Contracts AtliQ hasn't uploaded can't be checked."
   ],
   "documents": [
     {
@@ -687,6 +688,6 @@
     "cachedCalls": 5,
     "inputTokens": 0,
     "outputTokens": 0,
-    "ms": 2449
+    "ms": 45118
   }
 }

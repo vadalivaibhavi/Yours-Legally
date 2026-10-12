@@ -1,7 +1,7 @@
 {
   "dealId": "sunrise-sow2",
   "version": 1,
-  "createdAt": "2026-10-05T14:04:00.343Z",
+  "createdAt": "2026-10-12T10:24:01.871Z",
   "trigger": "initial review",
   "inputsHash": "3322fd9fec81ca0bab6b6479544b3796",
   "documentIds": [
@@ -37,7 +37,8 @@
     "The 7-day review period and deemed acceptance upon production use are in line with standard practice."
   ],
   "notSeen": [
-    "Register built from 17 signed documents. Contracts referenced elsewhere but never collected (e.g. ShopSwift SOW, PixelCraft vendor agreement, intercompany services agreement) can't be checked."
+    "Similar past clauses for Sunrise Foods SOW-2 (draft, AtliQ template): comparison lines couldn't be written (timed out after 45s across retries | gemini-3.6-flash: HTTP 503: { \"error\": { \"c); the matching clauses are still shown",
+    "Commitments were checked against all 17 signed contracts on file. Contracts AtliQ hasn't uploaded can't be checked."
   ],
   "documents": [
     {
@@ -350,6 +351,6 @@
     "cachedCalls": 4,
     "inputTokens": 0,
     "outputTokens": 0,
-    "ms": 41754
+    "ms": 45118
   }
 }

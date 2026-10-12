@@ -1,9 +1,9 @@
 {
   "dealId": "ortiz",
   "version": 1,
-  "createdAt": "2026-10-05T14:03:32.650Z",
+  "createdAt": "2026-10-12T10:27:17.389Z",
   "trigger": "initial review",
-  "inputsHash": "6af3476fd8cb3a79f77213398a17bd84",
+  "inputsHash": "80ea9f0ff69bff7a83122cbb5b12942b",
   "documentIds": [
     "ortiz-ica",
     "ortiz-nda"
@@ -13,13 +13,14 @@
   "models": [
     "gemini-flash-lite-latest",
     "gemini-3-flash-preview",
-    "gemini-3.5-flash"
+    "gemini-3.5-flash",
+    "gemini-3.6-flash"
   ],
   "promptVersion": "p1",
   "route": "full_review",
   "verdict": "SIGN AFTER CHANGES",
-  "headline": "SIGN AFTER CHANGES: 2 high-severity blockers including missing BAA flow-down and unsigned MSA",
-  "nextAction": "Dhaval must add the HIPAA flow-down and IP assignment terms before sending to Ortiz.",
+  "headline": "SIGN AFTER CHANGES: 8 items to resolve before execution",
+  "nextAction": "Karandeep will update the draft to incorporate the required BAA flow-down and client consent provisions.",
   "findings": [
     {
       "key": "flowdown:data",
@@ -30,7 +31,7 @@
       "severity": "high",
       "confidence": "medium",
       "needsJudgment": false,
-      "owner": "Dhaval (fix before sending)",
+      "owner": "AtliQ (fix before sending)",
       "resolution": "fix_before_sending",
       "docId": "ortiz-ica",
       "citations": [
@@ -66,7 +67,7 @@
       "category": "dependency",
       "topic": "dependency",
       "title": "Depends on Harrington Health: MSA + BAA, which is not signed (latest verdict HOLD)",
-      "impact": "Sending this commits AtliQ to a vendor/contractor before the client contract it serves is resolved. HOLD: 12 open issues including missing BAAs and offshore data access restrictions.",
+      "impact": "Sending this commits AtliQ to a vendor/contractor before the client contract it serves is resolved. HOLD: 6 high changes, 3 missing documents, and 1 compliance event to confirm.",
       "severity": "high",
       "confidence": "high",
       "needsJudgment": false,
@@ -83,7 +84,7 @@
       "severity": "medium",
       "confidence": "medium",
       "needsJudgment": false,
-      "owner": "Dhaval (fix before sending)",
+      "owner": "AtliQ (fix before sending)",
       "resolution": "fix_before_sending",
       "docId": "ortiz-ica",
       "citations": [
@@ -123,7 +124,7 @@
       "severity": "medium",
       "confidence": "medium",
       "needsJudgment": false,
-      "owner": "Dhaval (fix before sending)",
+      "owner": "AtliQ (fix before sending)",
       "resolution": "fix_before_sending",
       "docId": "ortiz-ica",
       "citations": [
@@ -163,7 +164,7 @@
       "severity": "medium",
       "confidence": "medium",
       "needsJudgment": false,
-      "owner": "Dhaval (fix before sending)",
+      "owner": "AtliQ (fix before sending)",
       "resolution": "fix_before_sending",
       "docId": "ortiz-ica",
       "citations": [
@@ -203,7 +204,7 @@
       "severity": "medium",
       "confidence": "medium",
       "needsJudgment": true,
-      "owner": "Dhaval (fix before sending)",
+      "owner": "AtliQ (fix before sending)",
       "resolution": "fix_before_sending",
       "docId": "ortiz-ica",
       "citations": [
@@ -236,7 +237,7 @@
       "severity": "medium",
       "confidence": "medium",
       "needsJudgment": false,
-      "owner": "Dhaval (fix before sending)",
+      "owner": "AtliQ (fix before sending)",
       "resolution": "fix_before_sending",
       "docId": "ortiz-ica",
       "citations": [
@@ -276,7 +277,7 @@
       "severity": "low",
       "confidence": "high",
       "needsJudgment": false,
-      "owner": "Dhaval (fix before sending)",
+      "owner": "AtliQ (fix before sending)",
       "resolution": "fix_before_sending",
       "docId": "ortiz-nda",
       "citations": [
@@ -339,7 +340,8 @@
     "NDA residuals: The agreement does not contain a residuals clause, which protects both parties from unauthorized retention of mental impressions."
   ],
   "notSeen": [
-    "Register built from 17 signed documents. Contracts referenced elsewhere but never collected (e.g. ShopSwift SOW, PixelCraft vendor agreement, intercompany services agreement) can't be checked."
+    "Similar past clauses for Daniel Ortiz contractor agreement (AtliQ draft): comparison lines couldn't be written (timed out after 45s across retries | gemini-3.6-flash: HTTP 503: { \"error\": { \"c); the matching clauses are still shown",
+    "Commitments were checked against all 17 signed contracts on file. Contracts AtliQ hasn't uploaded can't be checked."
   ],
   "documents": [
     {
@@ -686,6 +688,53 @@
   "complianceCandidate": null,
   "similar": [
     {
+      "clauseType": "confidentiality",
+      "docId": "ortiz-nda",
+      "clauseRef": "§1",
+      "quote": "1.1 The Parties wish to exchange information in connection with a proposed and ongoing engagement of Mr. Ortiz as an independent contractor providing data engineering services to AtliQ (the \"**Purpose**\").",
+      "hits": [
+        {
+          "docId": "harrington-nda",
+          "counterparty": "Harrington Health Systems Inc",
+          "date": "2026-08-20",
+          "clauseNo": "1",
+          "heading": "PURPOSE",
+          "label": "standard",
+          "labelNote": "Genuinely mutual NDA",
+          "score": 0.898,
+          "text": "1.1 The Parties wish to evaluate a potential engagement under which AtliQ would design and implement an enterprise clinical and operational analytics platform for Harrington (the \"**Purpose**\"), and each Party expects to disclose Confidential Information to the other in connection with the Purpose.",
+          "differs": "Better for AtliQ than Harrington Health Systems Inc: the Purpose covers ongoing engagement rather than being limited to evaluating a potential engagement.",
+          "alsoIn": []
+        },
+        {
+          "docId": "meridian-nda",
+          "counterparty": "Meridian Healthcare",
+          "date": "2026-07-16",
+          "clauseNo": "1",
+          "heading": "PURPOSE",
+          "label": "accident",
+          "labelNote": "One-way NDA signed within the hour; contradicts \"we only sign mutual\"",
+          "score": 0.869,
+          "text": "1.1 Meridian intends to disclose certain information to the Recipient for the purpose of evaluating a potential engagement relating to clinical operations analytics and hospital performance dashboards (the \"**Purpose**\"), including a walkthrough of Meridian's data environment.",
+          "differs": "Better for AtliQ than Meridian Healthcare: information exchange is mutual rather than one-way, and covers ongoing engagement instead of only evaluation.",
+          "alsoIn": []
+        },
+        {
+          "docId": "alnoor-nda",
+          "counterparty": "Al Noor Hospitality Group",
+          "date": "2025-01-22",
+          "clauseNo": "1.1",
+          "heading": "DEFINITIONS",
+          "label": "standard",
+          "labelNote": "Genuinely mutual NDA: the template for what mutual looks like",
+          "score": 0.829,
+          "text": "1.1 \"**Confidential Information**\" means any information disclosed by one Party (the \"**Disclosing Party**\") to the other Party (the \"**Receiving Party**\") in connection with the Purpose, whether before or after the date of this Agreement, in any form, that is marked or identified as confidential or that a reasonable person would understand to be confidential, including guest and occupancy data, pricing, commercial proposals, solution architecture, source code, methodologies and business plans.",
+          "differs": "Worse for AtliQ than Al Noor Hospitality Group: it defines only the Purpose and fails to define Confidential Information or specify protected categories.",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
       "clauseType": "payment",
       "docId": "ortiz-ica",
       "clauseRef": "§3",
@@ -913,62 +962,15 @@
           "alsoIn": []
         }
       ]
-    },
-    {
-      "clauseType": "confidentiality",
-      "docId": "ortiz-nda",
-      "clauseRef": "§1",
-      "quote": "1.1 The Parties wish to exchange information in connection with a proposed and ongoing engagement of Mr. Ortiz as an independent contractor providing data engineering services to AtliQ (the \"**Purpose**\").",
-      "hits": [
-        {
-          "docId": "harrington-nda",
-          "counterparty": "Harrington Health Systems Inc",
-          "date": "2026-08-20",
-          "clauseNo": "1",
-          "heading": "PURPOSE",
-          "label": "standard",
-          "labelNote": "Genuinely mutual NDA",
-          "score": 0.898,
-          "text": "1.1 The Parties wish to evaluate a potential engagement under which AtliQ would design and implement an enterprise clinical and operational analytics platform for Harrington (the \"**Purpose**\"), and each Party expects to disclose Confidential Information to the other in connection with the Purpose.",
-          "differs": "",
-          "alsoIn": []
-        },
-        {
-          "docId": "meridian-nda",
-          "counterparty": "Meridian Healthcare",
-          "date": "2026-07-16",
-          "clauseNo": "1",
-          "heading": "PURPOSE",
-          "label": "accident",
-          "labelNote": "One-way NDA signed within the hour; contradicts \"we only sign mutual\"",
-          "score": 0.869,
-          "text": "1.1 Meridian intends to disclose certain information to the Recipient for the purpose of evaluating a potential engagement relating to clinical operations analytics and hospital performance dashboards (the \"**Purpose**\"), including a walkthrough of Meridian's data environment.",
-          "differs": "",
-          "alsoIn": []
-        },
-        {
-          "docId": "alnoor-nda",
-          "counterparty": "Al Noor Hospitality Group",
-          "date": "2025-01-22",
-          "clauseNo": "1.1",
-          "heading": "DEFINITIONS",
-          "label": "standard",
-          "labelNote": "Genuinely mutual NDA: the template for what mutual looks like",
-          "score": 0.829,
-          "text": "1.1 \"**Confidential Information**\" means any information disclosed by one Party (the \"**Disclosing Party**\") to the other Party (the \"**Receiving Party**\") in connection with the Purpose, whether before or after the date of this Agreement, in any form, that is marked or identified as confidential or that a reasonable person would understand to be confidential, including guest and occupancy data, pricing, commercial proposals, solution architecture, source code, methodologies and business plans.",
-          "differs": "",
-          "alsoIn": []
-        }
-      ]
     }
   ],
   "counselPack": null,
   "errors": [],
   "usage": {
-    "calls": 0,
-    "cachedCalls": 6,
-    "inputTokens": 0,
-    "outputTokens": 0,
-    "ms": 2672
+    "calls": 2,
+    "cachedCalls": 5,
+    "inputTokens": 1147,
+    "outputTokens": 3298,
+    "ms": 60165
   }
 }

@@ -1,7 +1,7 @@
 {
   "dealId": "rheinwerk",
   "version": 1,
-  "createdAt": "2026-10-05T14:03:46.875Z",
+  "createdAt": "2026-10-12T10:23:16.750Z",
   "trigger": "initial review",
   "inputsHash": "bc21afffaf8fa4d5194eed89660db95c",
   "documentIds": [
@@ -13,13 +13,13 @@
     "gemini-flash-lite-latest",
     "gemini-flash-latest",
     "gemini-3-flash-preview",
-    "gemini-3.5-flash"
+    "gemini-3.6-flash"
   ],
   "promptVersion": "p1",
   "route": "full_review",
   "verdict": "HOLD",
-  "headline": "HOLD: 1 IP blocker and 3 missing documents",
-  "nextAction": "Karandeep must instruct counsel to resolve the Northwind Logistics IP assignment conflict.",
+  "headline": "HOLD: 1 blocker and 3 missing documents",
+  "nextAction": "Karandeep must consult counsel regarding the Northwind Logistics IP assignment conflict.",
   "findings": [
     {
       "key": "conflict:northwind-msa:ip_transfer",
@@ -92,7 +92,7 @@
       "severity": "high",
       "confidence": "high",
       "needsJudgment": false,
-      "owner": "Bhavin",
+      "owner": "AtliQ's deal team",
       "resolution": "document",
       "docId": "rheinwerk-sa",
       "citations": [
@@ -106,7 +106,7 @@
       ],
       "missingItem": {
         "item": "Annex 1: Leistungsbeschreibung / Statement of Work",
-        "owner": "Bhavin"
+        "owner": "AtliQ's deal team"
       }
     },
     {
@@ -118,7 +118,7 @@
       "severity": "high",
       "confidence": "high",
       "needsJudgment": false,
-      "owner": "Bhavin",
+      "owner": "AtliQ's deal team",
       "resolution": "document",
       "docId": "rheinwerk-sa",
       "citations": [
@@ -132,7 +132,7 @@
       ],
       "missingItem": {
         "item": "Annex 3: Data Processing Agreement incl. SCCs",
-        "owner": "Bhavin"
+        "owner": "AtliQ's deal team"
       }
     },
     {
@@ -144,12 +144,12 @@
       "title": "No sub-processor terms for Kriti Data Labs",
       "impact": "Kriti Data Labs would process personal data from this client; GDPR needs flowed-down processor terms before any data reaches them.",
       "severity": "medium",
-      "owner": "Pranav",
+      "owner": "AtliQ's deal team",
       "resolution": "document",
       "citations": [],
       "missingItem": {
         "item": "Sub-processor terms with Kriti Data Labs",
-        "owner": "Pranav"
+        "owner": "AtliQ's deal team"
       }
     },
     {
@@ -185,7 +185,7 @@
       "title": "Check consent to subcontract to Kriti Data Labs",
       "impact": "AtliQ can only give the client what its subcontractors give AtliQ. Confirm whether Rheinwerk Analytics GmbH's contract requires written consent before Kriti Data Labs starts.",
       "severity": "low",
-      "owner": "Bhavin",
+      "owner": "AtliQ's deal team",
       "resolution": "document",
       "citations": []
     },
@@ -320,7 +320,8 @@
     "Requirement for written consent to subcontract is a standard operational control rather than a non-compete."
   ],
   "notSeen": [
-    "Register built from 17 signed documents. Contracts referenced elsewhere but never collected (e.g. ShopSwift SOW, PixelCraft vendor agreement, intercompany services agreement) can't be checked."
+    "Similar past clauses for Rheinwerk Analytics services agreement (draft): comparison lines couldn't be written (timed out after 45s across retries | gemini-3.6-flash: HTTP 503: { \"error\": { \"c); the matching clauses are still shown",
+    "Commitments were checked against all 17 signed contracts on file. Contracts AtliQ hasn't uploaded can't be checked."
   ],
   "documents": [
     {
@@ -1023,10 +1024,10 @@
   },
   "errors": [],
   "usage": {
-    "calls": 0,
-    "cachedCalls": 5,
-    "inputTokens": 0,
-    "outputTokens": 0,
-    "ms": 39668
+    "calls": 1,
+    "cachedCalls": 4,
+    "inputTokens": 481,
+    "outputTokens": 41,
+    "ms": 47045
   }
 }

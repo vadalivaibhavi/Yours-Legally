@@ -1,7 +1,7 @@
 {
   "dealId": "gulfcrown",
   "version": 1,
-  "createdAt": "2026-10-05T14:03:18.584Z",
+  "createdAt": "2026-10-12T10:21:44.597Z",
   "trigger": "initial review",
   "inputsHash": "03efdabeb721e86e798da9d90d86cb99",
   "documentIds": [
@@ -308,7 +308,7 @@
     "No restrictive covenants or non-competes are imposed."
   ],
   "notSeen": [
-    "Register built from 17 signed documents. Contracts referenced elsewhere but never collected (e.g. ShopSwift SOW, PixelCraft vendor agreement, intercompany services agreement) can't be checked."
+    "Commitments were checked against all 17 signed contracts on file. Contracts AtliQ hasn't uploaded can't be checked."
   ],
   "documents": [
     {
@@ -931,10 +931,10 @@
   "counselPack": null,
   "errors": [],
   "usage": {
-    "calls": 1,
-    "cachedCalls": 5,
-    "inputTokens": 6382,
-    "outputTokens": 6408,
-    "ms": 70846
+    "calls": 0,
+    "cachedCalls": 6,
+    "inputTokens": 0,
+    "outputTokens": 0,
+    "ms": 95
   }
 }

@@ -1,9 +1,9 @@
 {
   "dealId": "kriti",
   "version": 1,
-  "createdAt": "2026-10-05T14:03:49.864Z",
+  "createdAt": "2026-10-12T10:28:49.799Z",
   "trigger": "initial review",
-  "inputsHash": "9a15872150bf4e6d7ac04f5ad9a5d10d",
+  "inputsHash": "7fc66e4bca9afc364a99f8bc8b4ae508",
   "documentIds": [
     "kriti-sub"
   ],
@@ -11,13 +11,14 @@
   "playbookVersion": "pb-v1.1-2026-10-05",
   "models": [
     "gemini-flash-lite-latest",
-    "gemini-3-flash-preview"
+    "gemini-3-flash-preview",
+    "gemini-3.6-flash"
   ],
   "promptVersion": "p1",
   "route": "full_review",
   "verdict": "SIGN AFTER CHANGES",
-  "headline": "SIGN AFTER CHANGES: 6 high-severity risks and 1 critical business dependency",
-  "nextAction": "Pranav must renegotiate the high-risk terms while Karandeep resolves the Rheinwerk contract dependency.",
+  "headline": "SIGN AFTER CHANGES: 10 critical issues must be resolved before signing",
+  "nextAction": "AtliQ counsel must revise the draft terms and Karandeep must resolve the dependency on Rheinwerk.",
   "findings": [
     {
       "key": "flowdown:data",
@@ -28,7 +29,7 @@
       "severity": "high",
       "confidence": "medium",
       "needsJudgment": false,
-      "owner": "Pranav (fix before sending)",
+      "owner": "AtliQ (fix before sending)",
       "resolution": "fix_before_sending",
       "docId": "kriti-sub",
       "citations": [
@@ -68,7 +69,7 @@
       "severity": "high",
       "confidence": "medium",
       "needsJudgment": false,
-      "owner": "Pranav (fix before sending)",
+      "owner": "AtliQ (fix before sending)",
       "resolution": "fix_before_sending",
       "docId": "kriti-sub",
       "citations": [
@@ -115,7 +116,7 @@
       "severity": "high",
       "confidence": "medium",
       "needsJudgment": false,
-      "owner": "Pranav (fix before sending)",
+      "owner": "AtliQ (fix before sending)",
       "resolution": "fix_before_sending",
       "docId": "kriti-sub",
       "citations": [
@@ -183,7 +184,7 @@
       "severity": "high",
       "confidence": "medium",
       "needsJudgment": false,
-      "owner": "Pranav (fix before sending)",
+      "owner": "AtliQ (fix before sending)",
       "resolution": "fix_before_sending",
       "docId": "kriti-sub",
       "citations": [
@@ -244,7 +245,7 @@
       "severity": "high",
       "confidence": "high",
       "needsJudgment": false,
-      "owner": "Pranav (fix before sending)",
+      "owner": "AtliQ (fix before sending)",
       "resolution": "fix_before_sending",
       "docId": "kriti-sub",
       "citations": [
@@ -284,7 +285,7 @@
       "severity": "high",
       "confidence": "medium",
       "needsJudgment": false,
-      "owner": "Pranav (fix before sending)",
+      "owner": "AtliQ (fix before sending)",
       "resolution": "fix_before_sending",
       "docId": "kriti-sub",
       "citations": [
@@ -320,7 +321,7 @@
       "category": "dependency",
       "topic": "dependency",
       "title": "Depends on Rheinwerk Analytics: pipeline modernisation, which is not signed (latest verdict HOLD)",
-      "impact": "Sending this commits AtliQ to a vendor/contractor before the client contract it serves is resolved. HOLD: 1 IP blocker and 3 missing documents.",
+      "impact": "Sending this commits AtliQ to a vendor/contractor before the client contract it serves is resolved. HOLD: 1 blocker and 3 missing documents.",
       "severity": "high",
       "confidence": "high",
       "needsJudgment": false,
@@ -337,7 +338,7 @@
       "severity": "medium",
       "confidence": "medium",
       "needsJudgment": true,
-      "owner": "Pranav (fix before sending)",
+      "owner": "AtliQ (fix before sending)",
       "resolution": "fix_before_sending",
       "docId": "kriti-sub",
       "citations": [
@@ -377,7 +378,7 @@
       "severity": "medium",
       "confidence": "medium",
       "needsJudgment": false,
-      "owner": "Pranav (fix before sending)",
+      "owner": "AtliQ (fix before sending)",
       "resolution": "fix_before_sending",
       "docId": "kriti-sub",
       "citations": [
@@ -408,7 +409,7 @@
       "severity": "medium",
       "confidence": "medium",
       "needsJudgment": false,
-      "owner": "Pranav (fix before sending)",
+      "owner": "AtliQ (fix before sending)",
       "resolution": "fix_before_sending",
       "docId": "kriti-sub",
       "citations": [
@@ -469,8 +470,9 @@
     "Standard professional services and IP warranties provided."
   ],
   "notSeen": [
+    "Similar past clauses for Kriti Data Labs subcontractor agreement (AtliQ draft): comparison lines couldn't be written (timed out after 45s across retries | gemini-3.6-flash: HTTP 503: { \"error\": { \"c); the matching clauses are still shown",
     "No meeting notes attached to this deal.",
-    "Register built from 17 signed documents. Contracts referenced elsewhere but never collected (e.g. ShopSwift SOW, PixelCraft vendor agreement, intercompany services agreement) can't be checked."
+    "Commitments were checked against all 17 signed contracts on file. Contracts AtliQ hasn't uploaded can't be checked."
   ],
   "documents": [
     {
@@ -1026,10 +1028,10 @@
   "counselPack": null,
   "errors": [],
   "usage": {
-    "calls": 0,
-    "cachedCalls": 4,
-    "inputTokens": 0,
-    "outputTokens": 0,
-    "ms": 2985
+    "calls": 1,
+    "cachedCalls": 3,
+    "inputTokens": 523,
+    "outputTokens": 51,
+    "ms": 47226
   }
 }

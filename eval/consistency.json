@@ -1,0 +1,44 @@
+{
+  "travelhub": [
+    {
+      "at": "2026-10-12T10:47:38.925Z",
+      "verdict": "SEND BACK",
+      "counted": [
+        "conflict:alnoor-msa:non_compete",
+        "gate:entity",
+        "gate:invoicing_entity"
+      ],
+      "casePass": true,
+      "problems": [],
+      "errors": [],
+      "ms": 196412
+    },
+    {
+      "at": "2026-10-12T10:51:49.251Z",
+      "verdict": "SEND BACK",
+      "counted": [
+        "conflict:alnoor-msa:non_compete",
+        "gate:entity",
+        "gate:invoicing_entity",
+        "playbook:termination"
+      ],
+      "casePass": true,
+      "problems": [],
+      "errors": [],
+      "ms": 250324
+    },
+    {
+      "at": "2026-10-12T10:53:46.440Z",
+      "verdict": "SEND BACK",
+      "counted": [
+        "conflict:alnoor-msa:non_compete",
+        "gate:entity",
+        "gate:invoicing_entity"
+      ],
+      "casePass": true,
+      "problems": [],
+      "errors": [],
+      "ms": 117188
+    }
+  ]
+}

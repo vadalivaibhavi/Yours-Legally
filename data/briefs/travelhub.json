@@ -1,7 +1,7 @@
 {
   "dealId": "travelhub",
   "version": 1,
-  "createdAt": "2026-10-05T14:03:22.093Z",
+  "createdAt": "2026-10-12T10:22:29.702Z",
   "trigger": "initial review",
   "inputsHash": "bae9c86203b694533267663dcfc09a8b",
   "documentIds": [
@@ -292,7 +292,8 @@
     "Standard warranty of professional services and a reasonable sixty-day conformity period are provided."
   ],
   "notSeen": [
-    "Register built from 17 signed documents. Contracts referenced elsewhere but never collected (e.g. ShopSwift SOW, PixelCraft vendor agreement, intercompany services agreement) can't be checked."
+    "Similar past clauses for TravelHub software development & services agreement (draft): comparison lines couldn't be written (timed out after 45s across retries | gemini-3.6-flash: HTTP 503: { \"error\": { \"c); the matching clauses are still shown",
+    "Commitments were checked against all 17 signed contracts on file. Contracts AtliQ hasn't uploaded can't be checked."
   ],
   "documents": [
     {
@@ -861,6 +862,6 @@
     "cachedCalls": 5,
     "inputTokens": 0,
     "outputTokens": 0,
-    "ms": 22523
+    "ms": 45102
   }
 }

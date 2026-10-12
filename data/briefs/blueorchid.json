@@ -1,7 +1,7 @@
 {
   "dealId": "blueorchid",
   "version": 1,
-  "createdAt": "2026-10-05T14:02:07.728Z",
+  "createdAt": "2026-10-12T10:21:44.500Z",
   "trigger": "initial review",
   "inputsHash": "fd05aad9f1610a111881ab4e88c87ef3",
   "documentIds": [
@@ -18,8 +18,8 @@
   "promptVersion": "p1",
   "route": "full_review",
   "verdict": "SIGN AFTER CHANGES",
-  "headline": "SIGN AFTER CHANGES: 1 redline and 1 territorial scope confirmation pending",
-  "nextAction": "Karandeep must redline the non-compete clause to resolve the GCC exclusivity collision.",
+  "headline": "SIGN AFTER CHANGES: 1 high-severity non-compete conflict requires change request",
+  "nextAction": "Karandeep will ask for changes to the contract to resolve the GCC hospitality data analytics non-compete collision.",
   "findings": [
     {
       "key": "conflict:alnoor-msa:non_compete",
@@ -77,7 +77,7 @@
           "role": "register"
         }
       ],
-      "counterPosition": "Redline Annexure B and Clause 4.1 to exclude the three GCC properties (Properties 10, 11, and 12) from the pilot scope, limiting the agreement exclusively to the nine Indian properties, or seek consent from Al Noor Hospitality Group.",
+      "counterPosition": "Ask for changes to Annexure B and Clause 4.1 to exclude the three GCC properties (Properties 10, 11, and 12) from the pilot scope, limiting the agreement exclusively to the nine Indian properties, or seek consent from Al Noor Hospitality Group.",
       "registerEntryId": "alnoor-msa#1",
       "registerVerified": false,
       "expiry": "2029-09-14",
@@ -87,19 +87,6 @@
         "applies": false,
         "why": "The waiver letter dated 10 February 2026 is strictly limited to demand-forecasting services for Seaside Hotels LLC in Muscat under a specific February 2026 SOW, and explicitly excludes any other hospitality business or GCC property."
       }
-    },
-    {
-      "key": "mismatch:regions",
-      "category": "mismatch",
-      "topic": "regions",
-      "title": "Contract covers UAE, Oman: not in Jay's deal check (declared: India)",
-      "impact": "Jay's check on 2026-09-21 was answered for India only, so the commitments covering UAE, Oman were never checked for the seller.",
-      "severity": "medium",
-      "confidence": "high",
-      "needsJudgment": false,
-      "owner": "Jay",
-      "resolution": "confirm",
-      "citations": []
     }
   ],
   "fine": [
@@ -119,7 +106,7 @@
     "Data protection provisions comply with applicable data protection laws without imposing uncapped liability or missing sub-processor consent requirements."
   ],
   "notSeen": [
-    "Register built from 17 signed documents. Contracts referenced elsewhere but never collected (e.g. ShopSwift SOW, PixelCraft vendor agreement, intercompany services agreement) can't be checked."
+    "Commitments were checked against all 17 signed contracts on file. Contracts AtliQ hasn't uploaded can't be checked."
   ],
   "documents": [
     {
@@ -762,8 +749,8 @@
   "usage": {
     "calls": 1,
     "cachedCalls": 5,
-    "inputTokens": 6274,
-    "outputTokens": 8204,
-    "ms": 104116
+    "inputTokens": 170,
+    "outputTokens": 54,
+    "ms": 2137
   }
 }
