@@ -1,0 +1,106 @@
+{
+  "deals": [
+    "harrington",
+    "ortiz",
+    "lakeshore",
+    "marcus",
+    "blueorchid",
+    "gulfcrown",
+    "travelhub",
+    "rheinwerk",
+    "kriti",
+    "sunrise-sow2",
+    "datavane",
+    "finserve",
+    "loopmart"
+  ],
+  "skipped": [],
+  "concurrency": 1,
+  "minIntervalMs": 4000,
+  "seconds": 29953,
+  "quotaStop": null,
+  "calls": 50,
+  "cached": 29,
+  "inTok": 129114,
+  "outTok": 32097,
+  "byTaskAndModel": [
+    {
+      "task": "brief",
+      "model": "qwen2.5:7b",
+      "calls": 10,
+      "cached": 3,
+      "failed": 0,
+      "inTok": 3666,
+      "outTok": 440
+    },
+    {
+      "task": "conflict",
+      "model": "qwen2.5:7b",
+      "calls": 7,
+      "cached": 3,
+      "failed": 0,
+      "inTok": 29058,
+      "outTok": 7922
+    },
+    {
+      "task": "differs",
+      "model": "qwen2.5:7b",
+      "calls": 9,
+      "cached": 6,
+      "failed": 0,
+      "inTok": 33074,
+      "outTok": 129
+    },
+    {
+      "task": "extract",
+      "model": "qwen2.5:7b",
+      "calls": 8,
+      "cached": 7,
+      "failed": 0,
+      "inTok": 19665,
+      "outTok": 8384
+    },
+    {
+      "task": "nda",
+      "model": "qwen2.5:7b",
+      "calls": 2,
+      "cached": 1,
+      "failed": 0,
+      "inTok": 3011,
+      "outTok": 2468
+    },
+    {
+      "task": "notes",
+      "model": "qwen2.5:7b",
+      "calls": 8,
+      "cached": 5,
+      "failed": 0,
+      "inTok": 3742,
+      "outTok": 3508
+    },
+    {
+      "task": "playbook",
+      "model": "qwen2.5:7b",
+      "calls": 6,
+      "cached": 4,
+      "failed": 2,
+      "inTok": 36898,
+      "outTok": 9246
+    }
+  ],
+  "rows": [
+    "harrington    HOLD                0B 11H 4M  0s  INCOMPLETE ",
+    "lakeshore     HOLD                0B 2H 1M  0s  INCOMPLETE ",
+    "blueorchid    HOLD                0B 2H 0M  5059s  INCOMPLETE Playbook check couldn't complete: review manually (timed out after 3600s across retries | qwen2.5:7b: Ollama call failed",
+    "gulfcrown     HOLD                1B 2H 2M  1692s  INCOMPLETE ",
+    "travelhub     SEND BACK           0B 4H 3M  1942s  INCOMPLETE ",
+    "rheinwerk     HOLD                0B 7H 4M  2928s  INCOMPLETE ",
+    "sunrise-sow2  SIGN AFTER CHANGES  0B 1H 0M  1153s  INCOMPLETE ",
+    "datavane      SIGN AFTER CHANGES  0B 3H 3M  4613s  INCOMPLETE ",
+    "finserve      SIGN AFTER CHANGES  0B 2H 1M  1293s  INCOMPLETE ",
+    "loopmart      SIGN                0B 0H 0M  0s  INCOMPLETE ",
+    "ortiz         HOLD                0B 3H 0M  5947s  INCOMPLETE Playbook check couldn't complete: review manually (timed out after 3600s across retries | qwen2.5:7b: Ollama call failed",
+    "marcus        SIGN AFTER CHANGES  0B 4H 3M  2602s  INCOMPLETE ",
+    "kriti         SIGN AFTER CHANGES  0B 3H 1M  2722s  INCOMPLETE "
+  ]
+}

@@ -65,3 +65,22 @@
 {"at":"2026-10-11T22:23:19.895Z","provider":"ollama","script":"review","dealId":"travelhub","task":"extract","model":"qwen2.5:7b","inputTokens":2622,"outputTokens":1352,"ms":559706,"cached":false,"ok":true}
 {"at":"2026-10-11T22:31:04.272Z","provider":"ollama","script":"review","dealId":"travelhub","task":"conflict","model":"qwen2.5:7b","inputTokens":3120,"outputTokens":837,"ms":464347,"cached":false,"ok":true}
 {"at":"2026-10-11T23:01:04.263Z","provider":"ollama","script":"review","dealId":"travelhub","task":"playbook","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":2264338,"cached":false,"ok":false,"error":"timed out after 1800s across retries | qwen2.5:7b: Ollama call failed: AbortError: The operation was aborted | qwen2.5:7b: Ollama call failed: AbortError: The operation was aborted"}
+{"at":"2026-10-11T23:02:41.571Z","provider":"ollama","script":"review","dealId":"harrington","task":"extract","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-11T23:02:41.574Z","provider":"ollama","script":"review","dealId":"harrington","task":"extract","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-11T23:02:41.586Z","provider":"ollama","script":"review","dealId":"harrington","task":"conflict","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-11T23:02:41.590Z","provider":"ollama","script":"review","dealId":"harrington","task":"playbook","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-11T23:02:41.610Z","provider":"ollama","script":"review","dealId":"harrington","task":"conflict","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-11T23:02:41.612Z","provider":"ollama","script":"review","dealId":"harrington","task":"playbook","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-11T23:02:41.653Z","provider":"ollama","script":"review","dealId":"harrington","task":"differs","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-11T23:02:41.654Z","provider":"ollama","script":"review","dealId":"harrington","task":"differs","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-11T23:02:41.659Z","provider":"ollama","script":"review","dealId":"harrington","task":"notes","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-11T23:02:41.665Z","provider":"ollama","script":"review","dealId":"harrington","task":"brief","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-11T23:02:41.735Z","provider":"ollama","script":"review","dealId":"lakeshore","task":"extract","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-11T23:02:41.742Z","provider":"ollama","script":"review","dealId":"lakeshore","task":"conflict","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-11T23:02:41.746Z","provider":"ollama","script":"review","dealId":"lakeshore","task":"playbook","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-11T23:02:41.771Z","provider":"ollama","script":"review","dealId":"lakeshore","task":"differs","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-11T23:02:41.775Z","provider":"ollama","script":"review","dealId":"lakeshore","task":"notes","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-11T23:02:41.778Z","provider":"ollama","script":"review","dealId":"lakeshore","task":"brief","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-11T23:02:41.863Z","provider":"ollama","script":"review","dealId":"blueorchid","task":"extract","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-11T23:02:41.933Z","provider":"ollama","script":"review","dealId":"blueorchid","task":"differs","model":"qwen2.5:7b","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-11T23:26:31.072Z","provider":"ollama","script":"review","dealId":"blueorchid","task":"conflict","model":"qwen2.5:7b","inputTokens":5090,"outputTokens":1446,"ms":1429201,"cached":false,"ok":true}

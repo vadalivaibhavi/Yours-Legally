@@ -61,7 +61,7 @@ Testing and evals run locally on Ollama (no quota). The deployed app and the fin
 | # | What | Status | How |
 |---|---|---|---|
 | L1 | Build the local clause index once | Not started | `LLM_PROVIDER=ollama EMBED_PROVIDER=ollama`, then `npm run build:index` |
-| L2 | Local reviews and evals | **LoopMart tried 11 Oct.** llama3.2 (3B): HOLD with invented findings (non-compete, wrong entity, unlimited liability). qwen2.5:7b: correct on everything except the AtliQ entity, which it named with no support in the text; a new rule (an entity the text never names gives way to the one it does) fixed that, and qwen now gives SIGN like Gemini (EV-08 passes locally). ~12 min for the smallest deal on this CPU; the other 12 deals are longer (est. 30–60 min each). qwen2.5:7b is now the local default |
+| L2 | Local reviews and evals | **Done 12 Oct on qwen2.5:7b** (13 briefs, 50 calls, ~8.3 h on this CPU): **32 pass / 14 fail** vs Gemini 42 / 4 (eval/results-ollama.md). qwen passes EV-03 where Gemini fails; fails on its own: missed register conflicts (Crestline, Northwind IP), the one-sided "mutual" NDA (FinServe), finer playbook / flow-down points, 2 similar-clause cases (nomic embeddings). The long playbook step timed out on Blue Orchid and Ortiz (answer cap 4096). Conclusion: local is fine for flow and UI testing, not for the reported numbers |
 | F1 | Switch back to Gemini (model and embeddings) | After local testing | `LLM_PROVIDER=gemini`, `EMBED_PROVIDER=gemini` in `.env.local` |
 | F2 | Final reviews, evals and cost on Gemini | After F1 | `npm run review` → `npm run eval` → `npm run cost -- --provider gemini`; the batch in 2a |
 | F3 | Deploy on Vercel with the Gemini settings | After F2 | README → Deploy (GitHub → Vercel) |
@@ -82,6 +82,7 @@ Real sign-in (role switch instead) · counsel-pack export (static preview) · pl
 
 | Date | Change |
 |---|---|
+| 12 Oct 2026 | Local run on qwen2.5:7b: 32/50 pass. Fixed on the way: Ollama calls take turns (budgets ran while queued); review runs use the dataset alone, not the app's live state (a rejected Al Noor entry and FinServe uploads were leaking into v1 briefs); local eval report kept separate (eval/results-ollama.*). Open: "Redline" as a noun is rewritten to "Ask for changes to" mid-sentence (wording only). |
 | 11 Oct 2026 | Ollama local profile added, Groq removed. Fixed two local-run bugs: no cap on answer length (runaway generation) and fetch's 300 s header limit (Ollama calls now use node:http). On Windows, stopping a background run left its node processes running: check for and stop leftovers. |
 | 10 Oct 2026 | Built without model calls: queue sections by side of the table; deal-size rule (data/deal_size.json, $50k: Kriti's 7 playbook deviations count one step lower, verdict unchanged); upload from a deal locked to that deal with "What is it?" (new version / additional contract document / notes). Evals unchanged: 42 pass, same 4 variance cases. |
 | 10 Oct 2026 | All 13 open deals flagged for re-check since 6 Oct (register changes: 1 restriction rejected, 1 entry edited). FinServe fix test done (SIGN, v5). |

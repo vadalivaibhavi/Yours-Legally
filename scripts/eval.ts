@@ -70,6 +70,8 @@ const docs = baseDocuments();
 const deals = baseDeals();
 const args = parseArgs();
 const noVersions = args.flags.has("no-versions");
+// The final (Gemini) report is eval/results.*; a local run writes its own (eval/results-ollama.*) so it never overwrites it.
+const RESULTS = (process.env.LLM_PROVIDER || "gemini").toLowerCase() === "gemini" ? "results" : `results-${(process.env.LLM_PROVIDER || "").toLowerCase()}`;
 checkIds(
   "case",
   args.cases,
@@ -849,8 +851,8 @@ async function main() {
 
   // A filtered run (--case / --deal) updates its cases inside the last full report instead of replacing it.
   const prev =
-    filtered && fs.existsSync("eval/results.json")
-      ? (JSON.parse(fs.readFileSync("eval/results.json", "utf8")) as {
+    filtered && fs.existsSync(`eval/${RESULTS}.json`)
+      ? (JSON.parse(fs.readFileSync(`eval/${RESULTS}.json`, "utf8")) as {
           results: Result[];
           crossCutting: typeof crossCutting;
         })
@@ -934,9 +936,9 @@ async function main() {
       ``,
     ]),
   ].join("\n");
-  fs.writeFileSync("eval/results.md", md + "\n");
+  fs.writeFileSync(`eval/${RESULTS}.md`, md + "\n");
   fs.writeFileSync(
-    "eval/results.json",
+    `eval/${RESULTS}.json`,
     JSON.stringify(
       { at: new Date().toISOString(), provider: provider(), models: modelLine, results, crossCutting },
       null,
