@@ -205,7 +205,9 @@ export async function callModel<S extends z.ZodType>(args: CallArgs<S>): Promise
       : fail("mock value does not match schema: " + parsed.error.message);
   }
 
-  if (!args.noCache) {
+  // LLM_CACHE=off (npm run consistency): fresh answers every call, and the cache the briefs rely on is left as it is.
+  const cacheOff = process.env.LLM_CACHE === "off";
+  if (!args.noCache && !cacheOff) {
     const hit = readCache(key);
     // A strong-tier answer produced by a lite fallback model is not reused once a strong model is available.
     const degraded = hit && TIER[task] === "strong" && /lite/.test(hit.model) && !modelsFor(task).every((m) => /lite/.test(m));
@@ -233,7 +235,7 @@ export async function callModel<S extends z.ZodType>(args: CallArgs<S>): Promise
     const parsed = json === undefined ? null : schema.safeParse(json);
     if (parsed && parsed.success) {
       const ms = Date.now() - started;
-      writeCache(key, { model: res.model, usage: res.usage, data: parsed.data });
+      if (!cacheOff) writeCache(key, { model: res.model, usage: res.usage, data: parsed.data });
       usageLog.push({ task, model: res.model, usage: res.usage, ms, cached: false });
       logCall({ task, model: res.model, inputTokens: res.usage.inputTokens, outputTokens: res.usage.outputTokens, ms, cached: false, ok: true });
       return { ok: true, data: parsed.data, model: res.model, usage: res.usage, cached: false, ms };
