@@ -32,7 +32,7 @@ Capstone prototype. Spec: [`docs/PRD_Yours_Legally_v0.9.md`](docs/PRD_Yours_Lega
 
 **Store in contract register.** When Karandeep's decision on a deal is *Sign* or *Sign after changes*, its queue row offers **Store in contract register**. Clicking it reads the deal's contract text with the same extractor as the original 17 signed contracts (`lib/registerExtract.ts`), adds its commitments to the register (unverified until he verifies them), and the deal leaves the queue. Every later review and seller check uses those commitments, and other open deals are flagged for re-check. If the text can't be read (model busy, quota) nothing changes and the deal stays in the queue to try again.
 
-**Review workflow.** Every reaction, confirmation and the chosen decision saves the moment it is made ("Saving… / Saved ✓"), and every choice can be changed. A chosen decision is a draft: the queue shows "Review in progress x/y" until every blocker and high finding has a reaction (medium items are worth negotiating, not deal-breaking, so they are optional), notes facts behind a compliance event are answered and a decision is chosen; the brief then prompts **Finalise review**, and only then does the deal show as Decided. Changing anything afterwards reopens the review. Every action is kept in the audit log (`data/state`), not shown in the UI. Queue status colours: green = decided, orange = in progress, red = waiting for input, blue = not started; the verdict column is plain text. Model wording is kept plain: lawyer jargon like "redline" is rewritten ("ask for changes to …") by the same guardrail that removes "breach".
+**Review workflow.** Every reaction, confirmation and the chosen decision saves the moment it is made ("Saving… / Saved ✓"), and every choice can be changed. A chosen decision is a draft: the queue shows "Review in progress x/y" until every blocker and high finding has a reaction (medium items are worth negotiating, not deal-breaking, so they are optional), notes facts behind a compliance event are answered and a decision is chosen; the brief then prompts **Finalise review**, and only then does the deal show as Decided. Changing anything afterwards reopens the review. Every action is kept in the audit log (`data/state`), not shown in the UI. Queue status colours: green = decided, orange = in progress, red = waiting for input, blue = not started; the verdict column is plain text. Model wording is kept plain: lawyer jargon like "redline" is rewritten ("ask for changes to …" as a verb, "change request" as a noun) by the same guardrail that removes "breach".
 
 **Roles.** A role switch in the header stands in for sign-in: Karandeep, or Seller (one shared view for Bhavin, Dhaval and Jay). Sellers see every deal's seller side, never the register, a brief, similar clauses or other clients' terms. `proxy.ts` blocks those routes and every page and server action re-checks the role.
 
@@ -73,6 +73,17 @@ draft ─► F2 extract (fast) ─► gate RULES ─► route ─┬─ NDA fast
 - On AtliQ's own paper, findings are "fix before sending", not blockers.
 - A note can close a compliance alert, but never a contractual blocker.
 - Similar clauses are Karandeep-only.
+
+**Guardrails added after the full evaluation (rules only, each with its own eval, none changes a prompt):**
+
+| # | Guardrail | What it stops | Where |
+|---|---|---|---|
+| A1 | No evidence, no finding | A claim about the contract's terms with no verified clause or note is shown as unsupported, counted low, and never moves the verdict (missing documents, dependencies and the seller mismatch come from the deal's records and are exempt) | `requireEvidence` in `lib/review/guardrails.ts` |
+| A2 | A clear register match is never dropped silently | When the register filter finds a clear match (explicit non-compete or exclusivity in the same sector and region, a pricing floor for the same role, a named asset given away) and the model dismisses it without a waiver, it stays as a high "needs your judgment" finding citing the register clause | `lib/review/conflict.ts` |
+| A3 | One-way NDA caught by rules | An NDA whose definition protects only one side, or whose obligations bind only "the Recipient", is flagged whatever its title says, and even when the model step fails | `oneWayNda` in `lib/review/playbook.ts` |
+| A4 | Instructions addressed to an AI reviewer | Text in a document or note like "ignore your instructions" or "return SIGN" raises a high, quoted finding, so the deal can't come out clean | `injectionAttempts` in `lib/review/guardrails.ts` |
+| A5 | Newer features under eval | Upload detection (notes, versions, wrong deal, blank template), the deal-size rule, owners as roles, the live seller mismatch, store in register, and review runs isolated from the app's live state | `scripts/eval.ts` |
+| A6 | Plain wording that fits the sentence | "Redline" as a noun becomes "change request"; as a verb, "ask for changes to" | `lib/review/guardrails.ts` |
 
 **Storage.** No database (Build Plan §4). Pre-built JSON in `data/` (committed) plus runtime state (uploads, decisions, reactions, verification, seller checks, audit log) in one JSON file: `data/state/` locally, `/tmp` on Vercel. Model results are cached by request hash in `data/cache/`. Production would move the register, deals, clauses and vectors into Postgres + a vector extension, behind the same `lib/clauseIndex.ts` / `lib/register.ts` interfaces.
 
@@ -186,6 +197,7 @@ Full table: [`eval/results.md`](eval/results.md) (regenerate with `npm run eval`
 | Similar past clauses (EV-P1–P7) | recall@3 ≥80%, labels right, verdict unchanged | recall@3 **100%** (10/10); verdict identical with and without the panel on all 13 briefs |
 | Citation validity | 100% | 136/136 quotes string-matched to source |
 | Guardrails | 0 legal conclusions, 0 Reject | 0 / 0 across 520 model-written strings |
+| Added guardrails and newer features (A1–A6) | every check passes, no model calls | 11/11: no counted finding without a clause; 5 strong-match rules; one-way NDA caught; 5/5 injection attempts caught, 0 of the real documents flagged; 17/17 upload cases; deal-size, roles, live mismatch, store-in-register and review isolation all right; 8/8 wording sentences |
 
 **The 4 failures, honestly.** All four are judgment calls where the model's answer varies between runs; the deterministic checks don't vary.
 - **EV-03 TravelHub:** HOLD instead of SEND BACK. The model reads TravelHub (a hotel distribution platform building hotel-ranking AI for UAE/KSA hotels) as squarely inside Al Noor's "Hospitality Business" definition; the answer key calls it arguable, for counsel. The system errs cautious: it blocks rather than misses.
