@@ -4,16 +4,14 @@
  * Server-only.
  */
 import fs from "node:fs";
-import path from "node:path";
-import { appToday } from "./config";
+import { appToday, dataPath } from "./config";
 import { computeStatus } from "./dates";
 import type { Company, Deal, Document, Note, PlaybookRule, RegisterEntry, RequiredDocRule } from "./types";
 
-const DATA = path.join(process.cwd(), "data");
 const memo = new Map<string, { mtime: number; value: unknown }>();
 
 function load<T>(file: string, fallback: T): T {
-  const p = path.join(DATA, file);
+  const p = dataPath(file);
   if (!fs.existsSync(p)) return fallback;
   const mtime = fs.statSync(p).mtimeMs;
   const hit = memo.get(file);

@@ -1,0 +1,291 @@
+[
+  {
+    "id": "pillarstone",
+    "name": "Pillarstone Pharma Logistics: MSA",
+    "counterparty": "Pillarstone Pharma Logistics Pvt Ltd",
+    "counterpartyAliases": [
+      "Pillarstone"
+    ],
+    "owner": "Bhavin",
+    "deadline": "2026-10-09",
+    "deadlineNote": "by 9 Oct. INR 65L. Bhavin: 'we did this for Kestrel, easy'",
+    "valueUsd": 78000,
+    "status": "open",
+    "documentIds": [
+      "syn-pillarstone-msa"
+    ],
+    "contextDocumentIds": [],
+    "noteIds": [
+      "note-2026-09-26-pipeline_review_new_queu"
+    ],
+    "linkedDealIds": [],
+    "trackerIds": [
+      "SYN-112"
+    ],
+    "trackerNotes": [
+      "SYN-112 (MSA): by 9 Oct. INR 65L. Bhavin: 'we did this for Kestrel, easy'"
+    ],
+    "clientCountry": "India"
+  },
+  {
+    "id": "cobalt",
+    "name": "Cobalt Outfitters: MSA + rate card",
+    "counterparty": "Cobalt Outfitters Inc",
+    "counterpartyAliases": [
+      "Cobalt"
+    ],
+    "owner": "Jay",
+    "deadline": "2026-10-02",
+    "deadlineNote": "by 2 Oct. $68/hr senior DE - Dhaval ok'd on WhatsApp",
+    "valueUsd": 58000,
+    "status": "open",
+    "documentIds": [
+      "syn-cobalt-msa"
+    ],
+    "contextDocumentIds": [],
+    "noteIds": [
+      "note-2026-09-25-vendor_capacity_review",
+      "note-2026-09-26-pipeline_review_new_queu"
+    ],
+    "linkedDealIds": [],
+    "trackerIds": [
+      "SYN-113"
+    ],
+    "trackerNotes": [
+      "SYN-113 (MSA + rate card): by 2 Oct. $68/hr senior DE - Dhaval ok'd on WhatsApp"
+    ],
+    "clientCountry": "USA"
+  },
+  {
+    "id": "aldergrove",
+    "name": "Aldergrove Water Services: MSA + SOW-1",
+    "counterparty": "Aldergrove Water Services plc",
+    "counterpartyAliases": [
+      "Aldergrove"
+    ],
+    "owner": "Bhavin",
+    "deadline": "2026-10-14",
+    "deadlineNote": "GBP 82k. by 14 Oct. Pranav: IngestIQ makes it 30% cheaper",
+    "valueUsd": 104000,
+    "status": "open",
+    "documentIds": [
+      "syn-aldergrove-msa"
+    ],
+    "contextDocumentIds": [],
+    "noteIds": [
+      "note-2026-09-26-pipeline_review_new_queu"
+    ],
+    "linkedDealIds": [],
+    "trackerIds": [
+      "SYN-114"
+    ],
+    "trackerNotes": [
+      "SYN-114 (MSA + SOW-1): GBP 82k. by 14 Oct. Pranav: IngestIQ makes it 30% cheaper"
+    ],
+    "clientCountry": "UK"
+  },
+  {
+    "id": "quanta",
+    "name": "Quanta Lake: implementation partner agreement",
+    "counterparty": "Quanta Lake Data Inc",
+    "counterpartyAliases": [
+      "Quanta Lake",
+      "Quanta"
+    ],
+    "owner": "Bhavin",
+    "deadline": "2026-10-12",
+    "deadlineNote": "by 12 Oct. Q4 APAC/ME launch campaign + MDF",
+    "status": "open",
+    "documentIds": [
+      "syn-quanta-spa"
+    ],
+    "contextDocumentIds": [],
+    "noteIds": [
+      "note-2026-01-14-zephyr_partner_qbr",
+      "note-2026-09-26-pipeline_review_new_queu"
+    ],
+    "linkedDealIds": [],
+    "trackerIds": [
+      "SYN-115"
+    ],
+    "trackerNotes": [
+      "SYN-115 (Partnership Agreement): by 12 Oct. Q4 APAC/ME launch campaign + MDF"
+    ],
+    "clientCountry": "USA"
+  },
+  {
+    "id": "ashwood",
+    "name": "Ashwood Senior Living: SOW-3",
+    "counterparty": "Ashwood Senior Living Inc",
+    "counterpartyAliases": [
+      "Ashwood"
+    ],
+    "owner": "Dhaval",
+    "deadline": "2026-09-30",
+    "deadlineNote": "by 30 Sep. James added staffing section (Pune team)",
+    "valueUsd": 67000,
+    "status": "open",
+    "documentIds": [
+      "syn-ashwood-sow3"
+    ],
+    "contextDocumentIds": [
+      "syn-ashwood-baa"
+    ],
+    "noteIds": [
+      "note-2026-09-21-ashwood_weekly_checkin",
+      "note-2026-09-26-pipeline_review_new_queu"
+    ],
+    "linkedDealIds": [],
+    "trackerIds": [
+      "SYN-116"
+    ],
+    "trackerNotes": [
+      "SYN-116 (SOW-3): by 30 Sep. James added staffing section (Pune team)"
+    ],
+    "clientCountry": "USA"
+  },
+  {
+    "id": "cargoline",
+    "name": "Cargoline Shipping: MSA",
+    "counterparty": "Cargoline Shipping WLL",
+    "counterpartyAliases": [
+      "Cargoline"
+    ],
+    "owner": "Bhavin",
+    "deadlineNote": "ASAP. Bhavin: Falconridge is Qatar so fine",
+    "valueUsd": 92000,
+    "status": "open",
+    "documentIds": [
+      "syn-cargoline-msa"
+    ],
+    "contextDocumentIds": [],
+    "noteIds": [
+      "note-2026-09-25-vendor_capacity_review",
+      "note-2026-09-26-pipeline_review_new_queu"
+    ],
+    "linkedDealIds": [],
+    "trackerIds": [
+      "SYN-117"
+    ],
+    "trackerNotes": [
+      "SYN-117 (MSA): ASAP. Bhavin: Falconridge is Qatar so fine"
+    ],
+    "clientCountry": "Bahrain"
+  },
+  {
+    "id": "monsoon",
+    "name": "Monsoon Data Studio: vendor agreement",
+    "counterparty": "Monsoon Data Studio",
+    "counterpartyAliases": [
+      "Monsoon"
+    ],
+    "owner": "Pranav",
+    "deadline": "2026-10-05",
+    "deadlineNote": "start 5 Oct. our template. 900 hrs overflow",
+    "valueUsd": 21500,
+    "status": "open",
+    "documentIds": [
+      "syn-monsoon-vsa"
+    ],
+    "contextDocumentIds": [],
+    "noteIds": [
+      "note-2026-09-25-vendor_capacity_review",
+      "note-2026-09-26-pipeline_review_new_queu"
+    ],
+    "linkedDealIds": [],
+    "trackerIds": [
+      "SYN-118"
+    ],
+    "trackerNotes": [
+      "SYN-118 (Vendor Agreement): start 5 Oct. our template. 900 hrs overflow"
+    ],
+    "clientCountry": "India"
+  },
+  {
+    "id": "indus",
+    "name": "Indus Valley Co-operative Bank: services agreement",
+    "counterparty": "Indus Valley Co-operative Bank Ltd",
+    "counterpartyAliases": [
+      "Indus Valley",
+      "Indus Valley Bank"
+    ],
+    "owner": "Dhaval",
+    "deadline": "2026-10-06",
+    "deadlineNote": "INR 98.5L. by 6 Oct. RFP won - 'same approach as Lumen'",
+    "valueUsd": 118000,
+    "status": "open",
+    "documentIds": [
+      "syn-indus-sa"
+    ],
+    "contextDocumentIds": [],
+    "noteIds": [
+      "note-2026-08-12-lumen_final_acceptance",
+      "note-2026-09-26-pipeline_review_new_queu"
+    ],
+    "linkedDealIds": [],
+    "trackerIds": [
+      "SYN-119"
+    ],
+    "trackerNotes": [
+      "SYN-119 (Services Agreement): INR 98.5L. by 6 Oct. RFP won - 'same approach as Lumen'"
+    ],
+    "clientCountry": "India"
+  },
+  {
+    "id": "corvina",
+    "name": "Corvina Foods: SOW-2 + sub-processor notice",
+    "counterparty": "Corvina Foods GmbH",
+    "counterpartyAliases": [
+      "Corvina"
+    ],
+    "owner": "Bhavin",
+    "deadline": "2026-10-12",
+    "deadlineNote": "EUR 74k. start 12 Oct. adds Kriti + SyncRiver",
+    "valueUsd": 87000,
+    "status": "open",
+    "documentIds": [
+      "syn-corvina-sow2"
+    ],
+    "contextDocumentIds": [
+      "syn-corvina-msa"
+    ],
+    "noteIds": [
+      "note-2026-09-26-pipeline_review_new_queu"
+    ],
+    "linkedDealIds": [],
+    "trackerIds": [
+      "SYN-120"
+    ],
+    "trackerNotes": [
+      "SYN-120 (SOW-2 + sub-processor notice): EUR 74k. start 12 Oct. adds Kriti + SyncRiver"
+    ],
+    "clientCountry": "Germany"
+  },
+  {
+    "id": "greystone",
+    "name": "Greystone Claims Solutions: MSA",
+    "counterparty": "Greystone Claims Solutions Inc",
+    "counterpartyAliases": [
+      "Greystone"
+    ],
+    "owner": "Dhaval",
+    "deadlineNote": "claims triage. K: 'Halvorsen lock-in?'",
+    "valueUsd": 86000,
+    "status": "open",
+    "documentIds": [
+      "syn-greystone-msa"
+    ],
+    "contextDocumentIds": [],
+    "noteIds": [
+      "note-2026-09-26-pipeline_review_new_queu"
+    ],
+    "linkedDealIds": [],
+    "trackerIds": [
+      "SYN-121"
+    ],
+    "trackerNotes": [
+      "SYN-121 (MSA): claims triage. K: 'Halvorsen lock-in?'"
+    ],
+    "clientCountry": "USA"
+  }
+]

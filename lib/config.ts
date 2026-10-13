@@ -23,7 +23,23 @@ export function writableDir(sub: string): string {
  */
 export function briefsDir(): string {
   const p = (process.env.LLM_PROVIDER || "gemini").toLowerCase();
-  return p === "gemini" ? "briefs" : `briefs-${p}`;
+  const dir = p === "gemini" ? "briefs" : `briefs-${p}`;
+  return dataProfile() ? `${dataProfile()}/${dir}` : dir;
+}
+
+/**
+ * Data profile (DATA_PROFILE): "" = the app's dataset; "holdout" = the held-out evaluation set
+ * (scripts/ingestHoldout.ts): the synthetic SYN_ drafts, signed contracts and notes that were never used
+ * to build or tune anything. A profile has its own documents, deals, notes, tracker and register in
+ * data/<profile>/ and its own briefs; the playbook, company facts and model cache are shared.
+ */
+export function dataProfile(): string {
+  return (process.env.DATA_PROFILE || "").toLowerCase();
+}
+const PROFILE_FILES = new Set(["documents.json", "deals.json", "notes.json", "tracker.json", "register.json"]);
+/** data/<profile>/<file> for the profile's own files, else data/<file>. */
+export function dataPath(rel: string): string {
+  return dataProfile() && PROFILE_FILES.has(rel) ? path.join(DATA_DIR, dataProfile(), rel) : path.join(DATA_DIR, rel);
 }
 /** Clause index for the current embedding model: vectors from different models can't be compared. */
 export function clauseIndexFile(): string {
@@ -33,7 +49,8 @@ export function clauseIndexFile(): string {
 
 /** "Today" is fixed for reproducible demos and evals (Phase 1 spec §0). */
 export function appToday(): string {
-  return process.env.APP_TODAY || "2026-10-04";
+  // The held-out set's own "today" (its answer key is written as of 28 Sep 2026).
+  return process.env.APP_TODAY || (dataProfile() === "holdout" ? "2026-09-28" : "2026-10-04");
 }
 
 export function todayDate(): Date {
@@ -47,7 +64,7 @@ export function daysBetween(fromIso: string, toIso: string): number {
 }
 
 export function readJson<T>(rel: string, fallback?: T): T {
-  const p = path.join(DATA_DIR, rel);
+  const p = dataPath(rel);
   if (!fs.existsSync(p)) {
     if (fallback !== undefined) return fallback;
     throw new Error(`Missing data file: data/${rel}. Run the Phase 1 scripts first.`);
@@ -56,7 +73,7 @@ export function readJson<T>(rel: string, fallback?: T): T {
 }
 
 export function writeJson(rel: string, value: unknown): void {
-  const p = path.join(DATA_DIR, rel);
+  const p = dataPath(rel);
   fs.mkdirSync(path.dirname(p), { recursive: true });
   fs.writeFileSync(p, JSON.stringify(value, null, 2) + "\n");
 }

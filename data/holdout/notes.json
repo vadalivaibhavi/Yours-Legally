@@ -1,0 +1,116 @@
+[
+  {
+    "id": "note-2026-04-14",
+    "file": "meeting_notes/2026-04-14_brightwater_postmortem.md",
+    "date": "2026-04-14",
+    "title": "Brightwater post-mortem",
+    "text": "# Brightwater — what happened (post-mortem)\n**Date:** 2026-04-14 · **Attendees:** Karandeep, Bhavin, Dhaval, Pranav\n\n- Agreed settlement with Brightwater last week (letter to be signed). $9,000 credit against future invoices. Mark Delaney \"happy to move on\".\n- Timeline (Pranav): milestone 2 slipped ~3 weeks. Root cause = Brightwater gave us warehouse access 19 days late (their security review). We have the emails showing we asked 4 times.\n- Didn't matter. Contract had no exclusion for client-caused delay. Their UK lawyers claimed LD of $18,400 under the delay clause.\n- Calloway Stern bill for the back-and-forth: $14,200. Their advice was basically \"settle, English courts, you signed it\".\n- Karandeep: \"I signed it at the airport. English law, uncapped LD — I didn't even see it.\" Contract was with AtliQ Inc.\n- Dhaval: he checked scope vs proposal before sending it over, nothing else. \"I assumed you'd read the legal bits.\"\n- Bhavin asked whether any other contracts have the same problem. Nobody knew. Karandeep: \"I think the rest are ok.\"\n- Pranav: team lost ~2 weeks of senior time to the dispute paperwork.\n- Agreed: no more signing on the phone.\n\n*(No other action items were recorded. No review of other signed contracts took place after this meeting.)*\n",
+    "dealIds": []
+  },
+  {
+    "id": "note-2026-09-22",
+    "file": "meeting_notes/2026-09-22_internal_contract_queue.md",
+    "date": "2026-09-22",
+    "title": "Internal contract queue meeting",
+    "text": "# Internal — contract queue (ad-hoc, 22 Sep)\nPresent: Karandeep, Bhavin, Dhaval, Jay\n\nCalled because three people chased Karandeep on the same morning.\n\nQueue as of today (from Jay's list on the whiteboard):\n- Harrington (Dhaval) — $210k, US, their paper — by **1 Oct**\n- Lakeshore (Jay) — $64k, US — by **3 Oct**\n- BlueOrchid pilot (Jay) — $38k — by **5 Oct**\n- Gulf Crown (Bhavin) — $140k, Saudi — by **10 Oct**\n- TravelHub (Karandeep) — $52k, Dubai — no date\n- Rheinwerk (Bhavin) — €88k, Munich — draft arriving tomorrow, by **15 Oct**\n- Sunrise SOW-2 (Dhaval) — $45k — Meera sending this week, wants by **8 Oct**\n\nDiscussion:\n- Karandeep: reviewing late at night after calls, 10pm onwards. A client-paper MSA takes him 3–4 hrs properly. \"Harrington alone is a whole evening and I haven't started.\"\n- Dhaval raised ShopSwift — SOW sat 9 days in July waiting for review, Elena's budget slipped a quarter. \"We lost that one to our own queue.\"\n- Volume: Bhavin reckons last year was ~5 contracts/month, this year ~9 (MSAs, SOWs, NDAs, DPAs, amendments). Only Karandeep signs.\n- Went through Gulf Crown headline terms. Midway Karandeep stopped: \"didn't we sign something with the Dubai hotel people that stops us doing hotels in the Gulf?\"\n- Nobody could find the Al Noor contract quickly — Dhaval searched the shared drive, not there. Karandeep thinks it's in his email \"somewhere\".\n- Bhavin: \"I think that expired, no? It was a 2025 thing.\" Karandeep not sure.\n- Jay: \"is there a list of what we've agreed to not do?\" — silence.\n- Dhaval asked if we should send Harrington to counsel. Karandeep: \"it's $210k, but Mehta Rao takes a week.\" Not decided.\n- Bhavin: Gulf Crown can't slip, Faisal has a summit on the 14th.\n\nKarandeep will go through them this weekend.\n\n*(No owner, order of review, or deadline per contract was agreed. The Al Noor contract was not located during the meeting.)*\n",
+    "dealIds": [
+      "harrington",
+      "lakeshore",
+      "blueorchid",
+      "gulfcrown",
+      "travelhub",
+      "rheinwerk",
+      "sunrise-sow2"
+    ]
+  },
+  {
+    "id": "note-2026-09-25",
+    "file": "meeting_notes/2026-09-25_call_with_counsel_gulf_crown.md",
+    "date": "2026-09-25",
+    "title": "Call with counsel (Mehta Rao): Gulf Crown / Al Noor",
+    "text": "# call w/ Priya Menon (Mehta Rao) — Gulf Crown / Al Noor — 25/9\nmy notes, rough\n\n- walked her thru Gulf Crown — KSA hotels, rev mgmt + guest analytics\n- told her abt Al Noor non-compete (from memory — GCC? 18 months after?). she asked for the actual doc. found it in email after 20 min, sent while on call\n- she wants EVERY signed contract w/ restrictive covenants, exclusivity, MFN — \"I can't advise on one in isolation\"\n- me: I don't have a list. would have to open each one\n- she: then that's the first job\n- also asked: which entity signed Al Noor? and does their affiliate definition catch AtliQ Inc? — didn't know offhand. said I'd check\n- asked about Oman waiver — does it help? she said \"depends what it says, send it\"\n- fee: ₹1,20,000 for Gulf Crown + Al Noor review\n- turnaround 5–7 working days FROM when she has all docs\n- 2 Oct holiday. if I send everything by Thu 1st → 9 Oct best case, 13 Oct worst. Faisal wants signed 10th\n- she said don't tell client anything firm till she's read it\n\nTODO: dig out contracts — which ones though??\n\n*(Engagement letter not yet signed as of 2026-09-28. Only the Al Noor agreement was sent to counsel during the call.)*\n",
+    "dealIds": [
+      "gulfcrown"
+    ]
+  },
+  {
+    "id": "note-2026-09-27",
+    "file": "meeting_notes/2026-09-27_harrington_huddle.md",
+    "date": "2026-09-27",
+    "title": "Harrington huddle",
+    "text": "# Harrington — quick huddle (Sun 27 Sep, call)\nPresent: Karandeep, Dhaval, Pranav\n\n- Harrington now = 3 docs: NDA (signed Aug), MSA (their paper, in review), BAA (arrived 16 Sep — Rebecca wants it signed together with the MSA). Dhaval: \"one more doc for Harrington.\"\n- Pranav: scoping is going well. Kevin Brooks (their data eng manager) emailed a \"sample extract\" on 12 Sep so we could size the pipeline. Pranav opened it here and forwarded to Sneha and Vikram in Pune to start profiling. \"It's real data I think — names, DOBs, some diagnosis codes.\"\n- Dhaval: the BAA says nobody outside the US touches patient data, so he's bringing in Daniel Ortiz, freelance data engineer in Austin. Contractor agreement + NDA drafted on our US template. \"US-based, so the offshore thing is solved.\"\n- Karandeep: \"Our cyber policy is $1M btw, Harrington BAA wants 5.\"\n- Pranav asked if the CareBridge setup (the intercompany thing) covers this too — Karandeep: \"should do, same kind of work.\" Nobody checked.\n- Dhaval: Rebecca needs MSA + BAA by 1 Oct.\n\nLet's talk Monday.\n\n*(No decisions were made. As of 2026-09-28 no Business Associate Agreement had been signed with Harrington; the sample extract remained with the two Pune engineers; no subcontractor BAA had been drafted for Daniel Ortiz; the insurance gap was not raised with Harrington.)*\n",
+    "dealIds": [
+      "harrington",
+      "ortiz"
+    ]
+  },
+  {
+    "id": "note-2025-10-17-novaterra_handover_call",
+    "file": "meeting_notes/SYN_2025-10-17_novaterra_handover_call.md",
+    "date": "2025-10-17",
+    "title": "Novaterra — M4 handover call (17 Oct 2025)",
+    "text": "# Novaterra — M4 handover call (17 Oct 2025)\nPresent: Pranav, Karandeep, (Novaterra) Gareth Holloway, Sam Patel\n\n- M4 accepted on the call. Gareth happy. Final invoice incl. rest of the \"framework transfer\" fee goes out Monday.\n- Gareth asked for the full IngestIQ repo + version history \"as per clause 6.5\". Pranav to push a copy to their Azure DevOps by Friday.\n- After Novaterra dropped off — Pranav: \"We've basically sold them IngestIQ for £12k. Fine for this deal, but we use it everywhere.\" Karandeep: \"It was v1.4. We'll just keep building — call the next version something else.\"\n- Pranav: the 140-rule DQ engine is the bit everyone likes. Will \"refactor and rebrand\" for the next UK client.\n- Karandeep: \"Make sure nobody sends Novaterra code to another client.\" Pranav: ok.\n",
+    "dealIds": []
+  },
+  {
+    "id": "note-2026-01-14-zephyr_partner_qbr",
+    "file": "meeting_notes/SYN_2026-01-14_zephyr_partner_qbr.md",
+    "date": "2026-01-14",
+    "title": "Zephyr — quarterly partner review (14 Jan 2026, video call)",
+    "text": "# Zephyr — quarterly partner review (14 Jan 2026, video call)\nPresent: Bhavin, Pranav, (Zephyr) Tan Wei Ling, Arvind Rao\n\n- Zephyr: 2 registered opps closed in Q4 — referral fee ~$11k due in Feb.\n- Certified engineers: we have 3 (Sneha, Vikram, Aditya). Wei Ling reminded: \"minimum is three at all times — if anyone leaves, tell us.\"\n- Wei Ling flagged BFSI: \"We hear you're about to sign a bank in Mumbai (Lumen?). Under clause 8 that should have come to us first — it's over 50k.\" Bhavin: \"That one started before we knew it was BFSI-sized, won't happen again.\"\n- Wei Ling: \"Please keep the BFSI log we discussed. We'll ask for it at the annual review in June.\"\n- Arvind: Zephyr hearing that Quanta Lake is \"signing partners aggressively in India.\" Asked us to \"stay loyal\". Bhavin laughed it off.\n- Pranav: our renewal is 2028, nothing to worry about yet.\n",
+    "dealIds": [
+      "quanta"
+    ]
+  },
+  {
+    "id": "note-2026-08-12-lumen_final_acceptance",
+    "file": "meeting_notes/SYN_2026-08-12_lumen_final_acceptance.md",
+    "date": "2026-08-12",
+    "title": "Lumen SFB — final acceptance meeting (12 Aug 2026, BKC office)",
+    "text": "# Lumen SFB — final acceptance meeting (12 Aug 2026, BKC office)\nPresent: Dhaval, Pranav, (Lumen) Anand Kulkarni (CRO), Shweta Iyer (Head, Credit Monitoring)\n\n- M4 signed off today — Final Acceptance letter signed by Anand (2 weeks late vs 31 Jul target — delay was their UAT, no LDs).\n- Anand very happy: EWS caught 3 MSME accounts going SMA-1 a month early in parallel run.\n- Anand, half joking: \"Remember, for two years you don't build this for anyone else in India. We paid for the head start.\"\n- Dhaval: \"Of course — your model is very Lumen-specific anyway.\" Pranav (after, in the cab): \"The features are 80% generic though. Bureau + repayment behaviour. Any bank would want it.\"\n- Dhaval: \"Indus Valley Co-op is going to put out an RFP for EWS, their GM told me at the IBA event. We should be ready.\"\n- Pranav to write a \"generic EWS accelerator\" deck for sales.\n",
+    "dealIds": [
+      "indus"
+    ]
+  },
+  {
+    "id": "note-2026-09-21-ashwood_weekly_checkin",
+    "file": "meeting_notes/SYN_2026-09-21_ashwood_weekly_checkin.md",
+    "date": "2026-09-21",
+    "title": "Ashwood — weekly check-in (21 Sep 2026, Zoom)",
+    "text": "# Ashwood — weekly check-in (21 Sep 2026, Zoom)\nPresent: Dhaval, (Ashwood) James Coleman (VP Ops), Lisa Tran (Data Manager)\n\n- SOW-2 dashboards stable. Lisa: two communities still entering falls late in the EHR.\n- James wants SOW-3 (fall-risk) live before the January state survey season. \"Can you throw more people at it? You have that big team in India.\"\n- Dhaval: our US team is 2 people + Daniel (freelancer, shared with Harrington). Could add 4 from Pune.\n- Lisa: \"Pune can't see PHI, compliance will kill it.\" James: \"Give them a limited data set — no names, no SSNs. That's not really PHI. I'll put it in the SOW.\"\n- Dhaval: \"Works for us.\" Will send our SOW template; James to add the staffing section.\n- Dhaval asked whether Monica (Privacy Officer) needs to see it. James: \"I'll loop her in later, she's swamped with the audit.\"\n",
+    "dealIds": [
+      "ashwood"
+    ]
+  },
+  {
+    "id": "note-2026-09-25-vendor_capacity_review",
+    "file": "meeting_notes/SYN_2026-09-25_vendor_capacity_review.md",
+    "date": "2026-09-25",
+    "title": "Vendor & capacity review (25 Sep 2026, Pune office)",
+    "text": "# Vendor & capacity review (25 Sep 2026, Pune office)\nPresent: Karandeep, Pranav, Dhaval\n\n- Pranav: Q4 overflow is ~900 hrs of pipeline work (Lakeshore, Cobalt if it lands, Cargoline if it lands).\n- Pranav wants Monsoon Data Studio (Kochi, 6 people, Anjali — ex-colleague). \"Tessellate is slow to staff and their seniors are always on someone else's project.\"\n- Dhaval: how many Tessellate hours have we used? Pranav checked invoices: **~640 hrs** since Nov.\n- Karandeep: \"Isn't there a minimum on Tessellate? Ravi pushed for something.\" Pranav: \"I think it's a soft target.\" Nobody had the agreement open.\n- Karandeep: OK to start Monsoon on 5 Oct. \"Use our standard vendor template.\" Pranav to draft.\n- Karandeep: \"And make sure it's fair — remember PixelCraft.\" Pranav: \"It's the template, it should be fine.\"\n",
+    "dealIds": [
+      "cobalt",
+      "cargoline",
+      "monsoon"
+    ]
+  },
+  {
+    "id": "note-2026-09-26-pipeline_review_new_queu",
+    "file": "meeting_notes/SYN_2026-09-26_pipeline_review_new_queue.md",
+    "date": "2026-09-26",
+    "title": "Pipeline review — \"the second queue\" (Sat 26 Sep, call)",
+    "text": "# Pipeline review — \"the second queue\" (Sat 26 Sep, call)\nPresent: Karandeep, Bhavin, Dhaval, Jay, Pranav\n\nCalled because the 22 Sep queue didn't include the deals that came in the same fortnight.\n\nSecond queue (Jay's list, on top of the 22 Sep one):\n- Ashwood SOW-3 (Dhaval) — $67k — by **30 Sep** (James wants to start 1 Oct)\n- Cobalt Outfitters (Jay) — $58k, US — by **2 Oct**\n- Indus Valley Co-op Bank (Dhaval) — ₹98.5L (~$118k) — by **6 Oct**\n- Pillarstone Pharma (Bhavin) — ₹65L (~$78k) — by **9 Oct**\n- Corvina SOW-2 (Bhavin) — €74k — start **12 Oct**\n- Quanta Lake partnership (Bhavin) — no value, \"strategic\" — by **12 Oct** (their Q4 launch campaign)\n- Aldergrove Water (Bhavin) — £82k, UK — by **14 Oct**\n- Cargoline (Bhavin) — ~$92k, Bahrain — \"ASAP\"\n- Greystone Claims (Dhaval) — $86k, US — no date\n- Monsoon vendor agreement (Pranav) — ~₹18L — start **5 Oct**\n\nDiscussion:\n- Jay: Cobalt rate card is $68 senior DE. \"Dhaval ok'd on WhatsApp. They have a clause saying they get our best US rate, but we're giving them the best rate, so it's fine.\"\n- Bhavin on Quanta Lake: \"This is huge — Middle East launch campaign, MDF money. They want our US company to sign.\" Pranav: \"Don't we have something with Zephyr?\" Bhavin: \"That's referrals. Different thing.\"\n- Bhavin on Cargoline: \"Falconridge restriction is Qatar — Cargoline is Bahrain, so we're fine.\" Karandeep: \"Are you sure?\" Bhavin: \"Pretty sure.\"\n- Pranav on Aldergrove: IngestIQ makes it 30% cheaper, \"that's why we won it\".\n- Dhaval on Indus Valley: \"Same approach as Lumen, fast win.\" Karandeep: \"Is there anything in Lumen about that?\" Dhaval: \"Their model is theirs, we're building a new one.\"\n- Pillarstone: Bhavin says \"pharma distribution, we've done this before — Kestrel.\" Nobody remembered what Kestrel restricts.\n- Greystone: Karandeep: \"Didn't we sign something with Halvorsen about claims? Insurance NDA?\" Dhaval: \"That was early 2025, I think it had some lock-in.\" Not resolved.\n- Corvina: Bhavin \"just sending the SOW + a heads-up email about Kriti and SyncRiver\".\n- Karandeep: \"That's 10 more on top of the other 7. I'll start with the ones with dates.\"\n",
+    "dealIds": [
+      "pillarstone",
+      "cobalt",
+      "aldergrove",
+      "quanta",
+      "ashwood",
+      "cargoline",
+      "monsoon",
+      "indus",
+      "corvina",
+      "greystone"
+    ]
+  }
+]
