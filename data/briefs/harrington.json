@@ -1,9 +1,9 @@
 {
   "dealId": "harrington",
   "version": 1,
-  "createdAt": "2026-10-12T10:20:45.599Z",
+  "createdAt": "2026-10-13T18:02:34.167Z",
   "trigger": "initial review",
-  "inputsHash": "75526faba6ecef25bb1637b488b655dc",
+  "inputsHash": "3d44f3acf2ab10ff171616594207f46f",
   "documentIds": [
     "harrington-msa",
     "harrington-baa"
@@ -14,14 +14,14 @@
     "gemini-flash-lite-latest",
     "gemini-3-flash-preview",
     "gemini-3.6-flash",
-    "gemini-3.5-flash",
+    "gemini-3.8-flash",
     "gemini-flash-latest"
   ],
   "promptVersion": "p1",
   "route": "full_review",
   "verdict": "HOLD",
-  "headline": "HOLD: 6 high changes, 3 missing documents, and 1 compliance event to confirm",
-  "nextAction": "Karandeep must consult legal counsel to confirm the offshore patient data event and renegotiate terms.",
+  "headline": "HOLD: 11 high-severity blockers including missing BAAs, consent, and key terms",
+  "nextAction": "Karandeep must renegotiate the uncapped liability, insurance, and offshore restrictions with Harrington Health while confirming the September 12 patient data incident.",
   "findings": [
     {
       "category": "bundle",
@@ -69,8 +69,8 @@
       "key": "notes:data_movement",
       "category": "notes",
       "topic": "data_movement",
-      "title": "From deal notes (please confirm): Real patient data containing names, DOBs, and diagnosis codes has already been shared by the client and forwarded to offshore engineers in Pune before any BAA was signed.",
-      "impact": "Protected Health Information (PHI) was shared with offshore engineers and handled by the firm without an executed BAA with either the client or the offshore entity, which constitutes a regulatory issue under HIPAA and conflict with the proposed BAA terms prohibiting offshore access.",
+      "title": "From deal notes (please confirm): Harrington Health provided a sample extract containing real patient names, dates of birth, and diagnosis codes on September 12, 2026.",
+      "impact": "Regulated patient data (PHI) was received before the Business Associate Agreement (BAA) has been signed.",
       "severity": "high",
       "confidence": "medium",
       "needsJudgment": false,
@@ -81,7 +81,14 @@
           "docId": "note-2026-09-27",
           "docTitle": "Harrington huddle",
           "clauseRef": "note",
-          "quote": "Kevin Brooks (their data eng manager) emailed a \"sample extract\" on 12 Sep so we could size the pipeline. Pranav opened it here and forwarded to Sneha and Vikram in Pune to start profiling. \"It's real data I think — names, DOBs, some diagnosis codes",
+          "quote": "It's real data I think — names, DOBs, some diagnosis codes",
+          "role": "note"
+        },
+        {
+          "docId": "note-2026-09-27",
+          "docTitle": "Harrington huddle",
+          "clauseRef": "note",
+          "quote": "Pranav opened it here and forwarded to Sneha and Vikram in Pune to start profiling",
           "role": "note"
         }
       ]
@@ -543,7 +550,6 @@
     "Insurance: professional indemnity $5M required: AtliQ's professional indemnity cover isn't recorded anywhere. Confirm with finance.",
     "Insurance: umbrella $5M required: AtliQ's umbrella cover isn't recorded anywhere. Confirm with finance.",
     "Exhibit C (Vendor Travel Policy) is referenced but not attached: not reviewed.",
-    "Similar past clauses for Harrington Health BAA, Exhibit D (draft): comparison lines couldn't be written (timed out after 45s across retries | gemini-3.6-flash: AbortError: This operatio); the matching clauses are still shown",
     "Commitments were checked against all 17 signed contracts on file. Contracts AtliQ hasn't uploaded can't be checked."
   ],
   "documents": [
@@ -1018,58 +1024,76 @@
   "notesFacts": [
     {
       "id": "harrington-fact-1",
-      "statement": "Real patient data containing names, DOBs, and diagnosis codes has already been shared by the client and forwarded to offshore engineers in Pune before any BAA was signed.",
+      "statement": "Harrington Health provided a sample extract containing real patient names, dates of birth, and diagnosis codes on September 12, 2026.",
       "category": "data_movement",
       "noteId": "note-2026-09-27",
       "noteTitle": "Harrington huddle",
-      "quote": "Kevin Brooks (their data eng manager) emailed a \"sample extract\" on 12 Sep so we could size the pipeline. Pranav opened it here and forwarded to Sneha and Vikram in Pune to start profiling. \"It's real data I think — names, DOBs, some diagnosis codes",
+      "quote": "It's real data I think — names, DOBs, some diagnosis codes",
       "complianceEvent": true,
-      "whyItMatters": "Protected Health Information (PHI) was shared with offshore engineers and handled by the firm without an executed BAA with either the client or the offshore entity, which constitutes a regulatory issue under HIPAA and violates the proposed BAA terms prohibiting offshore access."
+      "whyItMatters": "Regulated patient data (PHI) was received before the Business Associate Agreement (BAA) has been signed."
     },
     {
       "id": "harrington-fact-2",
-      "statement": "The pending BAA requires $5M in cyber insurance, but our existing corporate policy is only $1M.",
+      "statement": "The Harrington Health patient data was forwarded to team members in Pune, India for profiling.",
+      "category": "data_movement",
+      "noteId": "note-2026-09-27",
+      "noteTitle": "Harrington huddle",
+      "quote": "Pranav opened it here and forwarded to Sneha and Vikram in Pune to start profiling",
+      "complianceEvent": true,
+      "whyItMatters": "PHI was transferred to an offshore location while the BAA (still in review) reportedly restricts data access to the US."
+    },
+    {
+      "id": "harrington-fact-3",
+      "statement": "Daniel Ortiz, a US-based freelance data engineer, is being staffed to handle patient data to satisfy US-only requirements in the BAA.",
+      "category": "staffing",
+      "noteId": "note-2026-09-27",
+      "noteTitle": "Harrington huddle",
+      "quote": "the BAA says nobody outside the US touches patient data, so he's bringing in Daniel Ortiz, freelance data engineer in Austin",
+      "complianceEvent": false,
+      "whyItMatters": "Contractor status and BAA coverage for Daniel Ortiz must be verified to ensure compliance with the client's US-only data requirements."
+    },
+    {
+      "id": "harrington-fact-4",
+      "statement": "The Harrington Health MSA and BAA are required to be signed by October 1, 2026.",
+      "category": "deadline",
+      "noteId": "note-2026-09-22",
+      "noteTitle": "Internal contract queue meeting",
+      "quote": "Harrington (Dhaval) — $210k, US, their paper — by **1 Oct",
+      "complianceEvent": false,
+      "whyItMatters": "This is a critical deadline for closing the $210k deal on the counterparty's paper."
+    },
+    {
+      "id": "harrington-fact-5",
+      "statement": "The Harrington BAA requires $5M in cyber insurance coverage, exceeding the company's current $1M policy.",
       "category": "commitment",
       "noteId": "note-2026-09-27",
       "noteTitle": "Harrington huddle",
       "quote": "Our cyber policy is $1M btw, Harrington BAA wants 5",
       "complianceEvent": false,
-      "whyItMatters": "The company's current insurance policy is insufficient to meet the $5M coverage commitment mandated by the counterparty's BAA."
-    },
-    {
-      "id": "harrington-fact-3",
-      "statement": "Independent contractor Daniel Ortiz is planned to be staffed to comply with US-only data restrictions, but currently lacks both a subcontractor BAA and the client's prior written consent.",
-      "category": "staffing",
-      "noteId": "note-2026-09-27",
-      "noteTitle": "Harrington huddle",
-      "quote": "Dhaval: the BAA says nobody outside the US touches patient data, so he's bringing in Daniel Ortiz, freelance data engineer in Austin",
-      "complianceEvent": false,
-      "whyItMatters": "Using a subcontractor without a signed subcontractor BAA and prior written consent from Harrington violates standard compliance protocols and the draft agreement requirements."
-    },
-    {
-      "id": "harrington-fact-4",
-      "statement": "The counterparty requires both the MSA and BAA to be executed together by October 1.",
-      "category": "deadline",
-      "noteId": "note-2026-09-27",
-      "noteTitle": "Harrington huddle",
-      "quote": "Rebecca needs MSA + BAA by 1 Oct",
-      "complianceEvent": false,
-      "whyItMatters": "This sets a strict timeline constraint for concluding negotiations, signing the contracts, and resolving the insurance and subcontracting gaps."
+      "whyItMatters": "The agreement creates a financial commitment for higher insurance coverage that is not currently met."
     }
   ],
   "complianceCandidate": {
-    "title": "Real patient data containing names, DOBs, and diagnosis codes has already been shared by the client and forwarded to offshore engineers in Pune before any BAA was signed.",
-    "detail": "Protected Health Information (PHI) was shared with offshore engineers and handled by the firm without an executed BAA with either the client or the offshore entity, which constitutes a regulatory issue under HIPAA and violates the proposed BAA terms prohibiting offshore access.",
+    "title": "Harrington Health provided a sample extract containing real patient names, dates of birth, and diagnosis codes on September 12, 2026.",
+    "detail": "Regulated patient data (PHI) was received before the Business Associate Agreement (BAA) has been signed. PHI was transferred to an offshore location while the BAA (still in review) reportedly restricts data access to the US.",
     "owner": "Karandeep, with AtliQ's compliance owner",
     "factIds": [
-      "harrington-fact-1"
+      "harrington-fact-1",
+      "harrington-fact-2"
     ],
     "citations": [
       {
         "docId": "note-2026-09-27",
         "docTitle": "Harrington huddle",
         "clauseRef": "note",
-        "quote": "Kevin Brooks (their data eng manager) emailed a \"sample extract\" on 12 Sep so we could size the pipeline. Pranav opened it here and forwarded to Sneha and Vikram in Pune to start profiling. \"It's real data I think — names, DOBs, some diagnosis codes",
+        "quote": "It's real data I think — names, DOBs, some diagnosis codes",
+        "role": "note"
+      },
+      {
+        "docId": "note-2026-09-27",
+        "docTitle": "Harrington huddle",
+        "clauseRef": "note",
+        "quote": "Pranav opened it here and forwarded to Sneha and Vikram in Pune to start profiling",
         "role": "note"
       },
       {
@@ -1487,7 +1511,7 @@
           "labelNote": "Counsel-reviewed BAA (Calloway Stern, $3.8k): capped liability, 5-day reporting, de-identified offshore route",
           "score": 0.912,
           "text": "1.2 \"**Protected Health Information**\" or \"**PHI**\" has the meaning given in 45 C.F.R. § 160.103, limited to information created, received, maintained or transmitted by Business Associate on behalf of Covered Entity.",
-          "differs": "",
+          "differs": "Worse for AtliQ than CareBridge Clinics Inc: Expands protected health information scope to cover subcontractor data and electronic records, widening AtliQ's compliance burden.",
           "alsoIn": []
         },
         {
@@ -1499,7 +1523,7 @@
           "label": "untagged",
           "score": 0.839,
           "text": "2.1 This Agreement applies to the Engagement Services. Any services Subcontractor performs for Business Associate other than the Engagement Services are governed by the Intercompany Agreement.\n\n2.2 The restrictions, conditions and requirements of the Upstream BAA that apply to Business Associate apply equally to Subcontractor in performing the Engagement Services.",
-          "differs": "",
+          "differs": "Worse for AtliQ than AtliQ Technologies Pvt Ltd: Imposes direct regulatory definitions and subcontractor oversight instead of an internal intercompany flow-down arrangement.",
           "alsoIn": []
         },
         {
@@ -1511,7 +1535,7 @@
           "label": "untagged",
           "score": 0.806,
           "text": "13.1 The Supplier shall comply with all applicable data protection laws, including the Connecticut Data Privacy Act and the Gramm-Leach-Bliley Act, and the Brightwater Group Information Security Schedule.\n\n13.2 The Supplier shall notify the Customer of any security incident affecting Customer Data within twenty-four (24) hours of becoming aware of it.\n\n13.3 The Supplier shall not process Customer Data outside the United States without the Customer's prior written consent.",
-          "differs": "",
+          "differs": "Better for AtliQ than Brightwater Insurance Inc: Brightwater imposed a twenty-four-hour incident notification deadline and offshore processing ban, while this text only defines terms.",
           "alsoIn": []
         }
       ]
@@ -1532,7 +1556,7 @@
           "labelNote": "Origin of the mutual-indemnity position: no indemnity for the indemnified party's own negligence",
           "score": 0.859,
           "text": "10.1 Each Party (the \"**Indemnifying Party**\") shall indemnify, defend and hold harmless the other Party and its directors, officers and employees (the \"**Indemnified Party**\") from and against all Losses arising out of any third-party claim to the extent caused by: (a) the Indemnifying Party's breach of Clause 7 (Confidentiality) or Clause 12 (Data Protection); (b) the gross negligence, wilful misconduct or fraud of the Indemnifying Party or its personnel; or (c) in the case of AtliQ, any claim that the Deliverables infringe a third party's intellectual property rights, and in the case of PayTrack, any claim that Client Data or materials supplied by PayTrack infringe a third party's rights.\n\n10.2 Neither Party shall be required to indemnify the other to the extent any Losses are caused by the negligence, breach or wilful misconduct of the Indemnified Party.\n\n10.3 The Indemnified Party shall give prompt written notice of any claim, permit the Indemnifying Party to control the defence and settlement, and provide reasonable cooperation at the Indemnifying Party's cost.",
-          "differs": "",
+          "differs": "Worse for AtliQ than PayTrack Technologies: Unilateral indemnity covering regulatory fines and notification costs, whereas PayTrack provided mutual indemnity limited to third-party claims.",
           "alsoIn": []
         },
         {
@@ -1545,7 +1569,7 @@
           "labelNote": "Mutual indemnity",
           "score": 0.858,
           "text": "11.1 Each Party (\"**Indemnifying Party**\") shall indemnify the other against losses arising from third-party claims caused by the Indemnifying Party's breach of confidentiality, infringement of third-party intellectual property rights, or gross negligence or wilful misconduct.",
-          "differs": "",
+          "differs": "Worse for AtliQ than Acme Retail Group: Unilateral indemnity covering regulatory fines, notification costs, and subcontractor events, rather than mutual indemnity limited to third-party claims.",
           "alsoIn": []
         },
         {
@@ -1557,7 +1581,7 @@
           "label": "untagged",
           "score": 0.858,
           "text": "12.1 Each Party shall indemnify the other against third-party claims arising out of its breach of confidentiality, infringement of intellectual property rights, or gross negligence or wilful misconduct.",
-          "differs": "",
+          "differs": "Worse for AtliQ than Sunrise Foods: Unilateral indemnity covering regulatory fines, penalties, and notification costs, whereas Sunrise Foods was mutual and restricted to third-party claims.",
           "alsoIn": [
             "Trustline NBFC (2026-08)"
           ]
@@ -1580,7 +1604,7 @@
           "labelNote": "Rohan kept the Work Product IP (\"ok\" from phone) while Acme was promised ownership",
           "score": 0.823,
           "text": "5.1 In this Clause, \"**Work Product**\" means all dashboards, reports, data models, DAX measures, Power Query scripts, visual templates, documentation and other materials created by the Contractor in performing the Services.\n\n5.2 The Contractor retains ownership of all intellectual property rights in the Work Product and in any pre-existing materials, components and templates of the Contractor.\n\n5.3 The Contractor grants AtliQ a non-exclusive, perpetual, irrevocable, royalty-free, worldwide licence to use, copy, modify and deploy the Work Product for the purposes of AtliQ's business, including for delivery to AtliQ's clients.\n\n5.4 The Contractor shall not incorporate into the Work Product any third-party material that AtliQ is not entitled to use under Clause 5.3.",
-          "differs": "",
+          "differs": "Worse for AtliQ than Rohan Iyer: Prohibits using data to train artificial intelligence models and grants no license rights, whereas Rohan granted a perpetual license.",
           "alsoIn": []
         },
         {
@@ -1592,7 +1616,7 @@
           "label": "untagged",
           "score": 0.804,
           "text": "5.1 All deliverables developed specifically for the Client shall be the property of the Client\nupon full payment. The Service Provider retains its pre-existing tools and know-how.",
-          "differs": "",
+          "differs": "Worse for AtliQ than Orbit Travels Pvt Ltd: Expressly forbids using data for artificial intelligence model training, and client ownership is not conditioned on full payment.",
           "alsoIn": [
             "Acme Retail Group (2025-03)"
           ]
@@ -1606,7 +1630,7 @@
           "label": "untagged",
           "score": 0.802,
           "text": "8.1 Each Party retains all rights in its own intellectual property. CloudSpan owns the CloudSpan Platform and all improvements to it.\n\n8.2 Partner retains all rights in its own methodologies, accelerators, tools, templates and know-how, whether developed before or during the Term, including those used in delivering Implementation Services.\n\n8.3 Any feedback provided by Partner concerning the CloudSpan Platform may be used by CloudSpan without restriction, provided Partner's Confidential Information is not disclosed.",
-          "differs": "",
+          "differs": "Worse for AtliQ than CloudSpan Technologies: Expressly bans using data to train artificial intelligence models, without explicitly recognizing AtliQ's rights in pre-existing tools and know-how.",
           "alsoIn": []
         }
       ]
@@ -1615,10 +1639,10 @@
   "counselPack": null,
   "errors": [],
   "usage": {
-    "calls": 2,
+    "calls": 3,
     "cachedCalls": 6,
-    "inputTokens": 7688,
-    "outputTokens": 10586,
-    "ms": 85611
+    "inputTokens": 4741,
+    "outputTokens": 6501,
+    "ms": 235441
   }
 }

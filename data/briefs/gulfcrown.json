@@ -1,9 +1,9 @@
 {
   "dealId": "gulfcrown",
   "version": 1,
-  "createdAt": "2026-10-12T10:21:44.597Z",
+  "createdAt": "2026-10-13T18:13:29.179Z",
   "trigger": "initial review",
-  "inputsHash": "03efdabeb721e86e798da9d90d86cb99",
+  "inputsHash": "d5e8a33e742b19801a0746e2e6956d82",
   "documentIds": [
     "gulfcrown-msa"
   ],
@@ -12,13 +12,15 @@
   "models": [
     "gemini-flash-lite-latest",
     "gemini-3.6-flash",
-    "gemini-3.5-flash"
+    "gemini-3.5-flash",
+    "gemini-3.8-flash",
+    "gemini-3-flash-preview"
   ],
   "promptVersion": "p1",
   "route": "full_review",
   "verdict": "HOLD",
-  "headline": "HOLD: 1 blocker, 5 key contract risks",
-  "nextAction": "Karandeep to seek consent/waiver regarding the Al Noor Hospitality Group non-compete.",
+  "headline": "HOLD: 1 non-compete blocker and 6 high or medium risk terms",
+  "nextAction": "Karandeep must seek a waiver for the non-compete and renegotiate the high-risk liability terms.",
   "findings": [
     {
       "key": "conflict:alnoor-msa:non_compete",
@@ -91,8 +93,8 @@
       "key": "playbook:ld",
       "category": "playbook",
       "topic": "ld",
-      "title": "Liquidated damages calculated on contract value without client-delay exclusion",
-      "impact": "AtliQ faces financial penalties calculated against total contract value for delays, including those caused by client actions.",
+      "title": "Delay penalties calculated on total contract value without client-delay relief",
+      "impact": "A delay on a minor milestone would penalise AtliQ based on the full contract fee even if caused by client dependencies.",
       "severity": "high",
       "confidence": "medium",
       "needsJudgment": false,
@@ -103,12 +105,12 @@
         {
           "docId": "gulfcrown-msa",
           "docTitle": "Gulf Crown Hotels & Resorts MSA (draft)",
-          "clauseRef": "12.2",
+          "clauseRef": "Clause 12.2",
           "quote": "Should the Service Provider fail to achieve any Milestone by its scheduled completion date, the Service Provider shall pay to the Company, by way of liquidated damages and not as a penalty, an amount equal to one percent (1%) of the Contract Value for each week or part thereof of delay",
           "role": "incoming"
         }
       ],
-      "counterPosition": "Limit delay penalties to 0.5% of the affected milestone fee per week, capped at 5% of that milestone fee, explicitly exclude penalties for client-caused delay, and clarify that liquidated damages are the sole remedy for delay.",
+      "counterPosition": "0.5% of the affected milestone fee per week of delay attributable to AtliQ, capped at 5% of that milestone fee; no delay penalties where delay is caused by the client; delay penalties are the sole and exclusive remedy for delay.",
       "standard": "0.5% of the affected milestone fee per week of delay attributable to AtliQ, capped at 5% of that milestone fee; no LDs for client-caused delay; LDs are the sole remedy for delay.",
       "precedents": [
         {
@@ -152,8 +154,8 @@
       "key": "playbook:liability",
       "category": "playbook",
       "topic": "liability",
-      "title": "Liability uncapped for Data Protection) (DATA PROTECTION",
-      "impact": "The general cap is fine, but Data Protection) (DATA PROTECTION sits outside it: unlimited exposure where AtliQ handles the client's data.",
+      "title": "Uncapped liability for data protection claims",
+      "impact": "AtliQ faces unlimited financial exposure in the event of any data protection claim or regulatory incident.",
       "severity": "high",
       "confidence": "medium",
       "needsJudgment": false,
@@ -169,6 +171,8 @@
           "role": "incoming"
         }
       ],
+      "standard": "Each party's aggregate liability capped at 1× fees (paid or payable in the prior 12 months), mutual; carve-outs only for fraud, wilful misconduct and confidentiality (plus any carve-outs that are mandatory under the governing law, e.g. German law for intent/gross negligence and injury).",
+      "counterPosition": "Mutual cap of 1x fees paid or payable in the prior 12 months; carve-outs limited to fraud, wilful misconduct, and confidentiality; data protection liability subject to an agreed super-cap such as 2x fees.",
       "precedents": [
         {
           "docId": "ref-negotiation-notes",
@@ -204,8 +208,8 @@
       "key": "playbook:termination",
       "category": "playbook",
       "topic": "termination",
-      "title": "Convenience termination limits payment to accepted deliverables only",
-      "impact": "AtliQ risks performing work without compensation if the agreement is terminated before formal milestone acceptance.",
+      "title": "Convenience termination excludes payment for work in progress",
+      "impact": "AtliQ would not be compensated for ongoing work in progress delivered prior to formal milestone acceptance if the Company terminates early.",
       "severity": "high",
       "confidence": "medium",
       "needsJudgment": false,
@@ -216,13 +220,13 @@
         {
           "docId": "gulfcrown-msa",
           "docTitle": "Gulf Crown Hotels & Resorts MSA (draft)",
-          "clauseRef": "6.3",
+          "clauseRef": "Clause 6.3",
           "quote": "The Company may terminate this Agreement for convenience upon sixty (60) days' written notice, in which event the Company shall pay for all Services performed and accepted up to the date of termination",
           "role": "incoming"
         }
       ],
       "standard": "On any termination for convenience AtliQ is paid for all work done, including work in progress. Notice is mutual. Client contracts: reasonable notice (typically 30+ days). Freelancer / vendor agreements: a mutual short exit (about 15 days, as with Rohan Iyer) is AtliQ's standard and fair to both sides.",
-      "counterPosition": "Require payment for all Services performed up to termination, including work in progress and committed costs.",
+      "counterPosition": "Payment for all services performed up to termination, including work in progress and non-cancellable committed costs, with mutual termination notice rights.",
       "precedents": [
         {
           "docId": "rohan-ica",
@@ -256,6 +260,39 @@
       ],
       "standard": "Indian law for Pvt Ltd; US law for Inc.",
       "counterPosition": "Laws of India; arbitration seated in India or a neutral seat."
+    },
+    {
+      "key": "playbook:data_protection",
+      "category": "playbook",
+      "topic": "data_protection",
+      "title": "Cross-border data access requires prior written approval",
+      "impact": "AtliQ's Pune team cannot access or handle project data remotely from India without advance written permission from the client.",
+      "severity": "medium",
+      "confidence": "medium",
+      "needsJudgment": true,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "gulfcrown-msa",
+      "citations": [
+        {
+          "docId": "gulfcrown-msa",
+          "docTitle": "Gulf Crown Hotels & Resorts MSA (draft)",
+          "clauseRef": "Clause 13.2",
+          "quote": "Guest Data shall be hosted within the Kingdom of Saudi Arabia unless the Company provides prior written approval for any transfer outside the Kingdom",
+          "role": "incoming"
+        }
+      ],
+      "standard": "DPA (EU) or BAA (US health) signed before any personal/regulated data moves, with a sub-DPA / sub-BAA for every party that touches the data (incl. AtliQ's own Pune entity); engagement-specific scope; offshore access only as the agreement allows.",
+      "counterPosition": "Agree in writing to cross-border data transfer permissions and approved offshore access for AtliQ's delivery team in India prior to project commencement.",
+      "precedents": [
+        {
+          "docId": "carebridge-baa",
+          "counterparty": "CareBridge Clinics",
+          "clauseRef": "whole BAA",
+          "label": "standard",
+          "note": "Counsel-reviewed: capped liability, 5-day reporting, de-identified offshore route"
+        }
+      ]
     },
     {
       "key": "playbook:payment",
@@ -301,11 +338,14 @@
   "fine": [
     "Correct AtliQ entity: Pvt Ltd for a Saudi Arabia counterparty",
     "Parties = invoicing entity: Pvt Ltd throughout",
-    "IP terms match standard: client owns custom deliverables upon payment, AtliQ retains background IP with a non-exclusive licence.",
-    "Indemnification is narrow and limited to IP infringement for deliverables and client-supplied materials, which is favorable to AtliQ.",
-    "Confidentiality obligations are mutual with a standard 5-year post-termination duration.",
-    "Service standards and 90-day warranty on deliverables meet AtliQ's standard.",
-    "No restrictive covenants or non-competes are imposed."
+    "Intellectual property terms match standard: client owns custom deliverables upon full payment, and AtliQ retains Background IP with a licence for client use.",
+    "Indemnity is mutual and limited to third-party IP infringement, which is narrower than standard and acceptable.",
+    "Confidentiality terms are mutual, include standard exceptions, and have a fixed five-year survival period.",
+    "No non-compete, exclusivity, or client-capture restrictions are imposed on AtliQ.",
+    "No insurance covenants or minimum policy limits are stipulated in the agreement.",
+    "Warranties align with standard industry practice and include a reasonable 90-day defect remedy period.",
+    "Deductions are restricted to amounts under this agreement rather than unrelated contracts.",
+    "Milestone acceptance links directly to invoicing schedules without unilateral deemed-rejection terms."
   ],
   "notSeen": [
     "Commitments were checked against all 17 signed contracts on file. Contracts AtliQ hasn't uploaded can't be checked."
@@ -468,7 +508,7 @@
           "rule": "liability_cap",
           "label": "Liability capped",
           "pass": false,
-          "detail": "Capped (each Party's aggregate liability under this Agreement shall not exceed the Contract Value.) but uncapped for: Data Protection) (DATA PROTECTION",
+          "detail": "Capped (each Party's aggregate liability under this Agreement shall not exceed the Contract Value.) but uncapped for: Data Protection",
           "citation": {
             "docId": "gulfcrown-msa",
             "docTitle": "Gulf Crown Hotels & Resorts MSA (draft)",
@@ -510,33 +550,53 @@
   "notesFacts": [
     {
       "id": "gulfcrown-fact-1",
-      "statement": "The Gulf Crown MSA must be signed by October 10th due to a client summit on the 14th.",
+      "statement": "The agreement must be signed by October 10th to accommodate the client's upcoming event.",
       "category": "deadline",
       "noteId": "tracker",
       "noteTitle": "Tracker notes",
-      "quote": "C-025 (MSA): sign by 10 Oct!! Faisal has a summit on the 14th. biggest deal of the year (Bhavin",
+      "quote": "sign by 10 Oct!!",
       "complianceEvent": false,
-      "whyItMatters": "The client has a hard deadline, requiring rapid turnaround to secure our biggest deal of the year."
+      "whyItMatters": "The signing date is critical as the client representative has an event shortly after."
     },
     {
       "id": "gulfcrown-fact-2",
-      "statement": "A potential non-compete restriction from the Al Noor contract may conflict with the Gulf Crown deal.",
+      "statement": "The client is holding a summit on October 14th that is driving the signing urgency.",
       "category": "commitment",
       "noteId": "note-2026-09-22",
       "noteTitle": "Internal contract queue meeting",
-      "quote": "didn't we sign something with the Dubai hotel people that stops us doing hotels in the Gulf?",
+      "quote": "Faisal has a summit on the 14th",
       "complianceEvent": false,
-      "whyItMatters": "The contract reviewer must verify whether the prior Al Noor agreement prevents us from servicing Gulf Crown in Saudi Arabia."
+      "whyItMatters": "Establishes the hard deadline for the contract execution to ensure the client is ready for their event."
     },
     {
       "id": "gulfcrown-fact-3",
-      "statement": "Legal counsel requires 5 to 7 working days for review from the time they receive all documents.",
-      "category": "deadline",
+      "statement": "The project scope involves revenue management and guest analytics for hotels in the Kingdom of Saudi Arabia.",
+      "category": "commitment",
+      "noteId": "note-2026-09-25",
+      "noteTitle": "Call with counsel (Mehta Rao): Gulf Crown / Al Noor",
+      "quote": "KSA hotels, rev mgmt + guest analytics",
+      "complianceEvent": false,
+      "whyItMatters": "Defines the services being contracted for which the MSA must account."
+    },
+    {
+      "id": "gulfcrown-fact-4",
+      "statement": "External counsel requires 5–7 working days for review once all necessary documents are provided.",
+      "category": "staffing",
       "noteId": "note-2026-09-25",
       "noteTitle": "Call with counsel (Mehta Rao): Gulf Crown / Al Noor",
       "quote": "turnaround 5–7 working days FROM when she has all docs",
       "complianceEvent": false,
-      "whyItMatters": "With a holiday on October 2nd, counsel's timeline may push the final signed contract past the client's target date of October 10th."
+      "whyItMatters": "This timeline directly conflicts with the October 10th signing goal if document collection is delayed."
+    },
+    {
+      "id": "gulfcrown-fact-5",
+      "statement": "There is a potential restrictive covenant from a previous deal (Al Noor) that may prohibit hotel work in the GCC region.",
+      "category": "commitment",
+      "noteId": "note-2026-09-25",
+      "noteTitle": "Call with counsel (Mehta Rao): Gulf Crown / Al Noor",
+      "quote": "Al Noor non-compete (from memory — GCC? 18 months after?",
+      "complianceEvent": false,
+      "whyItMatters": "The company may be legally barred from entering this agreement if the non-compete is active and applicable."
     }
   ],
   "complianceCandidate": null,
@@ -931,10 +991,10 @@
   "counselPack": null,
   "errors": [],
   "usage": {
-    "calls": 0,
-    "cachedCalls": 6,
-    "inputTokens": 0,
-    "outputTokens": 0,
-    "ms": 95
+    "calls": 3,
+    "cachedCalls": 3,
+    "inputTokens": 7032,
+    "outputTokens": 18883,
+    "ms": 337051
   }
 }

@@ -1,9 +1,9 @@
 {
   "dealId": "ortiz",
   "version": 1,
-  "createdAt": "2026-10-12T10:27:17.389Z",
+  "createdAt": "2026-10-13T18:20:01.455Z",
   "trigger": "initial review",
-  "inputsHash": "80ea9f0ff69bff7a83122cbb5b12942b",
+  "inputsHash": "99e3e068b82bb897cbe4cc3175f0ed56",
   "documentIds": [
     "ortiz-ica",
     "ortiz-nda"
@@ -67,7 +67,7 @@
       "category": "dependency",
       "topic": "dependency",
       "title": "Depends on Harrington Health: MSA + BAA, which is not signed (latest verdict HOLD)",
-      "impact": "Sending this commits AtliQ to a vendor/contractor before the client contract it serves is resolved. HOLD: 6 high changes, 3 missing documents, and 1 compliance event to confirm.",
+      "impact": "Sending this commits AtliQ to a vendor/contractor before the client contract it serves is resolved. HOLD: 11 high-severity blockers including missing BAAs, consent, and key terms.",
       "severity": "high",
       "confidence": "high",
       "needsJudgment": false,
@@ -340,7 +340,7 @@
     "NDA residuals: The agreement does not contain a residuals clause, which protects both parties from unauthorized retention of mental impressions."
   ],
   "notSeen": [
-    "Similar past clauses for Daniel Ortiz contractor agreement (AtliQ draft): comparison lines couldn't be written (timed out after 45s across retries | gemini-3.6-flash: HTTP 503: { \"error\": { \"c); the matching clauses are still shown",
+    "Similar past clauses for Daniel Ortiz contractor agreement (AtliQ draft): comparison lines couldn't be written (timed out after 45s across retries | gemini-3.7-flash: AbortError: This operatio); the matching clauses are still shown",
     "Commitments were checked against all 17 signed contracts on file. Contracts AtliQ hasn't uploaded can't be checked."
   ],
   "documents": [
@@ -646,43 +646,63 @@
   "notesFacts": [
     {
       "id": "ortiz-fact-1",
-      "statement": "Real patient data containing names, DOBs, and diagnosis codes was shared with offshore engineers in Pune, India, before the Business Associate Agreement (BAA) was signed.",
+      "statement": "Patient data including names, dates of birth, and diagnosis codes was shared and forwarded to offshore staff in Pune prior to the execution of the governing BAA.",
       "category": "data_movement",
       "noteId": "note-2026-09-27",
       "noteTitle": "Harrington huddle",
       "quote": "Kevin Brooks (their data eng manager) emailed a \"sample extract\" on 12 Sep so we could size the pipeline. Pranav opened it here and forwarded to Sneha and Vikram in Pune to start profiling. \"It's real data I think — names, DOBs, some diagnosis codes",
       "complianceEvent": false,
-      "whyItMatters": "Protected Health Information (PHI) was shared and accessed by offshore personnel before a BAA was executed, violating both standard regulatory requirements and the proposed BAA term restricting data access to the US. Tracked as a compliance alert on Harrington Health: MSA + BAA."
+      "whyItMatters": "Regulated patient data (PHI) has been transferred to offshore personnel while the BAA (which reportedly prohibits offshore access) is still in review and unsigned. Tracked as a compliance alert on Harrington Health: MSA + BAA."
     },
     {
       "id": "ortiz-fact-2",
-      "statement": "A US-based freelance data engineer is being staffed to handle the Harrington work to comply with BAA restrictions against offshore data access.",
-      "category": "staffing",
-      "noteId": "note-2026-09-27",
-      "noteTitle": "Harrington huddle",
-      "quote": "the BAA says nobody outside the US touches patient data, so he's bringing in Daniel Ortiz, freelance data engineer in Austin. Contractor agreement + NDA drafted on our US template",
-      "complianceEvent": false,
-      "whyItMatters": "The reviewer must ensure the contractor agreement and a subcontractor BAA are in place for Daniel Ortiz before he accesses any data, especially given the US-only restriction."
-    },
-    {
-      "id": "ortiz-fact-3",
-      "statement": "Harrington's proposed BAA requires a $5M cyber insurance policy, whereas the current corporate policy is only $1M.",
+      "statement": "The Harrington BAA contains a restrictive clause prohibiting the handling of patient data by personnel outside the United States.",
       "category": "commitment",
       "noteId": "note-2026-09-27",
       "noteTitle": "Harrington huddle",
-      "quote": "Our cyber policy is $1M btw, Harrington BAA wants 5",
+      "quote": "the BAA says nobody outside the US touches patient data",
       "complianceEvent": false,
-      "whyItMatters": "There is an active liability/insurance gap of $4M that needs to be addressed or negotiated before executing the BAA."
+      "whyItMatters": "This requirement necessitates the hire of Daniel Ortiz and contradicts the recent data sharing with the team in Pune."
+    },
+    {
+      "id": "ortiz-fact-3",
+      "statement": "Daniel Ortiz is being hired as a US-based freelancer specifically to address Harrington's data residency requirements.",
+      "category": "staffing",
+      "noteId": "note-2026-09-27",
+      "noteTitle": "Harrington huddle",
+      "quote": "US-based, so the offshore thing is solved",
+      "complianceEvent": false,
+      "whyItMatters": "The contractor's location is a material condition for compliance with the Harrington project's data security requirements."
     },
     {
       "id": "ortiz-fact-4",
-      "statement": "The Harrington MSA and BAA must be finalized and signed by October 1, 2026.",
+      "statement": "The Harrington MSA and BAA must be finalized and signed by the start of October.",
       "category": "deadline",
       "noteId": "note-2026-09-27",
       "noteTitle": "Harrington huddle",
       "quote": "Rebecca needs MSA + BAA by 1 Oct",
       "complianceEvent": false,
-      "whyItMatters": "This represents a critical deadline to complete the agreements, resolve the insurance gap, and formalize the contractor's status."
+      "whyItMatters": "Sets the deadline for the primary agreements that the contractor's engagement supports."
+    },
+    {
+      "id": "ortiz-fact-5",
+      "statement": "The Harrington BAA requires a cyber insurance policy limit that is significantly higher than the current coverage.",
+      "category": "commitment",
+      "noteId": "note-2026-09-27",
+      "noteTitle": "Harrington huddle",
+      "quote": "Our cyber policy is $1M btw, Harrington BAA wants 5",
+      "complianceEvent": false,
+      "whyItMatters": "A $4M gap exists between current coverage and the client's contractual requirements."
+    },
+    {
+      "id": "ortiz-fact-6",
+      "statement": "It is unconfirmed whether the existing CareBridge intercompany setup covers the scope of work for this project.",
+      "category": "other",
+      "noteId": "note-2026-09-27",
+      "noteTitle": "Harrington huddle",
+      "quote": "Pranav asked if the CareBridge setup (the intercompany thing) covers this too — Karandeep: \"should do, same kind of work.\" Nobody checked",
+      "complianceEvent": false,
+      "whyItMatters": "Internal legal structures for staffing and cross-entity work need verification to ensure proper coverage."
     }
   ],
   "complianceCandidate": null,
@@ -967,10 +987,10 @@
   "counselPack": null,
   "errors": [],
   "usage": {
-    "calls": 2,
-    "cachedCalls": 5,
-    "inputTokens": 1147,
-    "outputTokens": 3298,
-    "ms": 60165
+    "calls": 1,
+    "cachedCalls": 6,
+    "inputTokens": 487,
+    "outputTokens": 2310,
+    "ms": 60620
   }
 }

@@ -1,7 +1,7 @@
 {
   "dealId": "loopmart",
   "version": 1,
-  "createdAt": "2026-10-12T10:26:17.237Z",
+  "createdAt": "2026-10-13T18:19:00.847Z",
   "trigger": "initial review",
   "inputsHash": "a66bc0be4f5194838195790376a35569",
   "documentIds": [
@@ -31,7 +31,7 @@
     "NDA term: The agreement has a fixed term of 2 years, with confidentiality obligations surviving for a reasonable, fixed period of 3 years post-termination."
   ],
   "notSeen": [
-    "Similar past clauses for LoopMart mutual NDA (draft): comparison lines couldn't be written (timed out after 45s across retries | gemini-3.6-flash: HTTP 503: { \"error\": { \"c); the matching clauses are still shown",
+    "Similar past clauses for LoopMart mutual NDA (draft): comparison lines couldn't be written (timed out after 45s across retries | gemini-3.7-flash: HTTP 503: { \"error\": { \"c); the matching clauses are still shown",
     "No meeting notes attached to this deal.",
     "Commitments were checked against all 17 signed contracts on file. Contracts AtliQ hasn't uploaded can't be checked."
   ],
@@ -336,6 +336,6 @@
     "cachedCalls": 4,
     "inputTokens": 0,
     "outputTokens": 0,
-    "ms": 45113
+    "ms": 45161
   }
 }

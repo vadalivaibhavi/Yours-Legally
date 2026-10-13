@@ -27,7 +27,8 @@
       "playbook:liability": { "label": "partly", "severity": "too_high", "note": "the general 1x cap is acceptable per the key; the data-protection carve-out is a fair negotiation point at medium, not high. Title was garbled ('Data Protection) (DATA PROTECTION'): fixed in lib/review/gate.ts carveOutName" },
       "playbook:termination": { "label": "correct", "severity": "ok", "note": "convenience termination pays accepted deliverables only" },
       "gate:governing_law": { "label": "correct", "severity": "ok", "note": "KSA law: judgment item" },
-      "playbook:payment": { "label": "correct", "severity": "ok", "note": "60-day payment" }
+      "playbook:payment": { "label": "correct", "severity": "ok", "note": "60-day payment" },
+      "playbook:data_protection": { "label": "correct", "severity": "ok", "note": "§13.2 keeps Guest Data in KSA unless the client approves a transfer: the Pune delivery team needs that approval (new in the 13 Oct regeneration)" }
     },
     "harrington": {
       "bundle:sub-baa:ortiz": { "label": "correct", "severity": "ok", "note": "no sub-BAA for Ortiz" },

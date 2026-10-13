@@ -1,9 +1,9 @@
 {
   "dealId": "lakeshore",
   "version": 1,
-  "createdAt": "2026-10-12T10:21:42.358Z",
+  "createdAt": "2026-10-13T18:04:23.035Z",
   "trigger": "initial review",
-  "inputsHash": "f32ab3e751b6bb03cce0d26c1239501b",
+  "inputsHash": "e4aa573afb2ce00d9ef3417c7570b413",
   "documentIds": [
     "lakeshore-msa"
   ],
@@ -12,7 +12,8 @@
   "models": [
     "gemini-flash-lite-latest",
     "gemini-3.6-flash",
-    "gemini-3.5-flash"
+    "gemini-3.5-flash",
+    "gemini-3-flash-preview"
   ],
   "promptVersion": "p1",
   "route": "full_review",
@@ -484,34 +485,24 @@
   ],
   "notesFacts": [
     {
-      "id": "lakeshore-fact-2",
-      "statement": "The contract queue list schedules the Lakeshore Grocers agreement for completion by October 3.",
+      "id": "lakeshore-fact-1",
+      "statement": "The agreement is expected by October 3.",
       "category": "deadline",
       "noteId": "note-2026-09-22",
       "noteTitle": "Internal contract queue meeting",
       "quote": "Lakeshore (Jay) — $64k, US — by **3 Oct",
       "complianceEvent": false,
-      "whyItMatters": "Establishes the timeline expectations for the review queue."
+      "whyItMatters": "Establishes the timeline for contract finalization to meet internal queue expectations."
     },
     {
       "id": "lakeshore-fact-3",
-      "statement": "Jay committed to a discounted rate of $72/hr for a senior Data Engineer to win the deal.",
+      "statement": "A specific rate for a senior Data Engineer was approved to secure the deal.",
       "category": "commitment",
       "noteId": "tracker",
       "noteTitle": "Tracker notes",
       "quote": "Jay gave sharper rate to win it - $72/hr senior DE, Dhaval ok'd on a call",
       "complianceEvent": false,
-      "whyItMatters": "The reviewer must verify that the SOW and rate card accurately reflect this specific negotiated rate."
-    },
-    {
-      "id": "lakeshore-fact-4",
-      "statement": "The SOW and rate card deadline is recorded as October 3 in the tracker.",
-      "category": "deadline",
-      "noteId": "tracker",
-      "noteTitle": "Tracker notes",
-      "quote": "C-026 (SOW + rate card): by 3 Oct",
-      "complianceEvent": false,
-      "whyItMatters": "Confirms the deadline for delivering the SOW and rate card matches the overall deal queue target."
+      "whyItMatters": "The rate card in the agreement must match this specific commercial commitment of $72/hr."
     }
   ],
   "complianceCandidate": null,
@@ -904,8 +895,8 @@
   "usage": {
     "calls": 1,
     "cachedCalls": 4,
-    "inputTokens": 273,
-    "outputTokens": 39,
-    "ms": 56752
+    "inputTokens": 807,
+    "outputTokens": 1472,
+    "ms": 108861
   }
 }

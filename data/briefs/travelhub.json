@@ -1,9 +1,9 @@
 {
   "dealId": "travelhub",
   "version": 1,
-  "createdAt": "2026-10-12T10:22:29.702Z",
+  "createdAt": "2026-10-13T18:14:35.633Z",
   "trigger": "initial review",
-  "inputsHash": "bae9c86203b694533267663dcfc09a8b",
+  "inputsHash": "4057e1490ef6a782b92c72980b6223b8",
   "documentIds": [
     "travelhub-sa"
   ],
@@ -480,43 +480,33 @@
   "notesFacts": [
     {
       "id": "travelhub-fact-1",
-      "statement": "The deal is valued at $52k and is based in Dubai.",
-      "category": "other",
-      "noteId": "note-2026-09-22",
-      "noteTitle": "Internal contract queue meeting",
-      "quote": "TravelHub (Karandeep) — $52k, Dubai — no date",
-      "complianceEvent": false,
-      "whyItMatters": "Establishes the deal value and jurisdictional scope for the contract."
-    },
-    {
-      "id": "travelhub-fact-2",
-      "statement": "The MSA draft (C-024) identifies the US company as the contracting party based on LinkedIn information.",
-      "category": "other",
+      "statement": "The TravelHub agreement is currently drafted against the company's US entity because the LinkedIn profile indicates the company is US-listed.",
+      "category": "commitment",
       "noteId": "tracker",
       "noteTitle": "Tracker notes",
       "quote": "we put your US company since you're US-listed on LinkedIn",
       "complianceEvent": false,
-      "whyItMatters": "The legal entity must be verified against the corporate structure before signing."
+      "whyItMatters": "The legal entity name and jurisdiction must be correct for the contract to be valid and to manage tax implications."
     },
     {
-      "id": "travelhub-fact-3",
-      "statement": "Potential exclusivity or non-compete conflict regarding hotel-related services in the Gulf region.",
+      "id": "travelhub-fact-2",
+      "statement": "There is a potential non-compete or regional exclusivity conflict involving a prior contract with 'the Dubai hotel people' (Al Noor) that may prohibit this project.",
       "category": "commitment",
       "noteId": "note-2026-09-22",
       "noteTitle": "Internal contract queue meeting",
       "quote": "didn't we sign something with the Dubai hotel people that stops us doing hotels in the Gulf?",
       "complianceEvent": false,
-      "whyItMatters": "Reviewer must check the Al Noor contract to ensure this deal does not violate existing non-compete commitments."
+      "whyItMatters": "If an active non-compete exists, signing this deal could result in a breach of the prior agreement."
     },
     {
-      "id": "travelhub-fact-4",
-      "statement": "The contract review is planned for the upcoming weekend.",
-      "category": "deadline",
+      "id": "travelhub-fact-3",
+      "statement": "The TravelHub deal for software development and services is valued at $52,000 for a client in Dubai, with no specific deadline currently set.",
+      "category": "other",
       "noteId": "note-2026-09-22",
       "noteTitle": "Internal contract queue meeting",
-      "quote": "Karandeep will go through them this weekend",
+      "quote": "TravelHub (Karandeep) — $52k, Dubai — no date",
       "complianceEvent": false,
-      "whyItMatters": "Internal timeline for clearing the review queue."
+      "whyItMatters": "Establishes the core commercial terms and lack of immediate time pressure compared to other deals in the queue."
     }
   ],
   "complianceCandidate": null,
@@ -858,10 +848,10 @@
   "counselPack": null,
   "errors": [],
   "usage": {
-    "calls": 0,
-    "cachedCalls": 5,
-    "inputTokens": 0,
-    "outputTokens": 0,
-    "ms": 45102
+    "calls": 1,
+    "cachedCalls": 4,
+    "inputTokens": 735,
+    "outputTokens": 2727,
+    "ms": 66448
   }
 }

@@ -1,9 +1,9 @@
 {
   "dealId": "sunrise-sow2",
   "version": 1,
-  "createdAt": "2026-10-12T10:24:01.871Z",
+  "createdAt": "2026-10-13T18:16:46.494Z",
   "trigger": "initial review",
-  "inputsHash": "3322fd9fec81ca0bab6b6479544b3796",
+  "inputsHash": "4b20712b8e78b47eab78fe3548984979",
   "documentIds": [
     "sunrise-sow2"
   ],
@@ -12,6 +12,7 @@
   "models": [
     "gemini-flash-lite-latest",
     "gemini-3-flash-preview",
+    "gemini-3.7-flash",
     "gemini-3.6-flash"
   ],
   "promptVersion": "p1",
@@ -37,7 +38,6 @@
     "The 7-day review period and deemed acceptance upon production use are in line with standard practice."
   ],
   "notSeen": [
-    "Similar past clauses for Sunrise Foods SOW-2 (draft, AtliQ template): comparison lines couldn't be written (timed out after 45s across retries | gemini-3.6-flash: HTTP 503: { \"error\": { \"c); the matching clauses are still shown",
     "Commitments were checked against all 17 signed contracts on file. Contracts AtliQ hasn't uploaded can't be checked."
   ],
   "documents": [
@@ -215,33 +215,23 @@
   "notesFacts": [
     {
       "id": "sunrise-sow2-fact-1",
-      "statement": "The client expects the SOW-2 agreement to be finalized by October 8th.",
+      "statement": "Sunrise Foods (Meera) is sending the $45k SOW-2 draft this week with a target turnaround date of 8 October.",
       "category": "deadline",
       "noteId": "note-2026-09-22",
       "noteTitle": "Internal contract queue meeting",
       "quote": "Sunrise SOW-2 (Dhaval) — $45k — Meera sending this week, wants by **8 Oct",
       "complianceEvent": false,
-      "whyItMatters": "This establishes the required turnaround time for the legal review process."
+      "whyItMatters": "Establishes the contract value ($45k) and the client's expected turnaround deadline of 8 October."
     },
     {
       "id": "sunrise-sow2-fact-2",
-      "statement": "The project scope includes the development of a version 2 portal and dashboard.",
-      "category": "commitment",
+      "statement": "SOW-2 (C-029) covers the v2 portal and dashboard scope, with review completion requested by 8 October.",
+      "category": "deadline",
       "noteId": "tracker",
       "noteTitle": "Tracker notes",
-      "quote": "v2 portal + dashboard",
+      "quote": "C-029 (SOW-2): by 8 Oct. v2 portal + dashboard. Dhaval: 'same as last time, should be quick",
       "complianceEvent": false,
-      "whyItMatters": "The contract reviewer must ensure the SOW accurately reflects this specific technical scope."
-    },
-    {
-      "id": "sunrise-sow2-fact-3",
-      "statement": "There is an internal expectation that the terms will be identical to the previous engagement.",
-      "category": "other",
-      "noteId": "tracker",
-      "noteTitle": "Tracker notes",
-      "quote": "Dhaval: 'same as last time, should be quick",
-      "complianceEvent": false,
-      "whyItMatters": "The reviewer needs to verify if the new portal/dashboard scope introduces any new risks not covered by the previous SOW terms."
+      "whyItMatters": "Confirms the scope of work (v2 portal and dashboard) and tracker deadline for contract review execution."
     }
   ],
   "complianceCandidate": null,
@@ -262,7 +252,7 @@
           "labelNote": "45-day payment: the negotiated maximum (90 → 45)",
           "score": 0.909,
           "text": "4.1 The total fees for the Services are **USD 48,000** (United States Dollars Forty-Eight Thousand only), payable on completion of Milestones as set out in Annexure A.\n\n4.2 The Service Provider shall raise an invoice upon completion of each Milestone. The Company shall pay each undisputed invoice within forty-five (45) days of receipt of the invoice.\n\n4.3 All fees are exclusive of GST. The Company shall be entitled to deduct TDS as applicable.\n\n4.4 Any disputed amount shall be notified within ten (10) days of receipt of invoice, and the Parties shall resolve such dispute in good faith within thirty (30) days.",
-          "differs": "",
+          "differs": "Better for AtliQ than Trustline NBFC: 30-day payment term instead of 45 days.",
           "alsoIn": []
         },
         {
@@ -274,7 +264,7 @@
           "label": "untagged",
           "score": 0.916,
           "text": "4.1 The total fees under SOW-1 are **USD 71,000** (United States Dollars Seventy-One Thousand only), payable in accordance with the milestone schedule in SOW-1.\n\n4.2 AtliQ shall invoice upon completion of each milestone. PayTrack shall pay each undisputed invoice within thirty (30) days of receipt.\n\n4.3 Fees are exclusive of GST. PayTrack may deduct TDS in accordance with Applicable Law.",
-          "differs": "",
+          "differs": "Same as PayTrack Technologies: 30-day payment term and invoicing upon milestone completion or acceptance.",
           "alsoIn": [
             "Acme Retail Group (2025-03)"
           ]
@@ -288,7 +278,7 @@
           "label": "untagged",
           "score": 0.907,
           "text": "5.1 The total Fees under SOW-1 are **USD 33,000** (United States Dollars Thirty-Three Thousand only), comprising build fees payable on Milestones and a Monthly Support Fee for the support period, as detailed in SOW-1.\n\n5.2 AtliQ shall invoice build fees upon completion of each Milestone and the Monthly Support Fee monthly in arrears. Sunrise shall pay each undisputed invoice within thirty (30) days of the invoice date.\n\n5.3 All amounts are exclusive of GST, which shall be charged additionally at the applicable rate. Sunrise may deduct TDS as required by law.\n\n5.4 Delayed payments shall attract interest at twelve percent (12%) per annum.",
-          "differs": "",
+          "differs": "Same as Sunrise Foods: 30-day payment term and invoicing upon milestone completion or acceptance.",
           "alsoIn": []
         }
       ]
@@ -309,7 +299,7 @@
           "labelNote": "Origin of the LD playbook: 0.5% of milestone/week, 5% cap, client delays excluded (Mar 2025)",
           "score": 0.922,
           "text": "7.1 If the Service Provider fails to complete a Milestone by the agreed date for reasons solely attributable to the Service Provider, the Service Provider shall pay liquidated damages at the rate of 0.5% (half percent) of the Milestone Fee of the delayed Milestone for each complete week of delay.\n\n7.2 The aggregate liquidated damages in respect of any Milestone shall not exceed 5% (five percent) of the Milestone Fee of that Milestone.\n\n7.3 No liquidated damages shall be payable where the delay is caused by the Client, including delayed access to data or systems, delayed review of Deliverables, or changes in scope, or by a Force Majeure event.\n\n7.4 The Parties agree that the liquidated damages are a genuine pre-estimate of loss and shall be the Client's sole and exclusive remedy for delay.",
-          "differs": "",
+          "differs": "Worse for AtliQ than Acme Retail Group: penalty triggers for any attributable delay instead of only for delays solely attributable to AtliQ.",
           "alsoIn": [
             "Trustline NBFC (2026-08)",
             "Northwind Logistics (2025-06)"
@@ -325,7 +315,7 @@
           "labelNote": "AtliQ-friendly master: capped liability, service credits capped at 5%",
           "score": 0.9,
           "text": "8.1 During the support period under any SOW, AtliQ shall meet the Service Levels set out in Schedule A.\n\n8.2 If AtliQ fails to meet a Service Level in any calendar month for reasons attributable to AtliQ, Sunrise shall be entitled to Service Credits as set out in Schedule A.\n\n8.3 The total Service Credits in any calendar month shall not exceed five percent (5%) of the Monthly Support Fee for that month.\n\n8.4 Service Credits shall be applied against the next invoice and shall be Sunrise's sole monetary remedy for failure to meet the Service Levels. Service Credits are a price adjustment reflecting the reduced value of the Services and are not a penalty.\n\n8.5 No Service Credit shall accrue for failures caused by Sunrise, its third-party vendors, scheduled maintenance notified in advance, or Force Majeure.",
-          "differs": "",
+          "differs": "Worse for AtliQ than Sunrise Foods: penalties apply to project milestones at 0.5% per week, whereas the past clause only penalized monthly support service levels.",
           "alsoIn": []
         },
         {
@@ -338,7 +328,7 @@
           "labelNote": "Signed on a phone in 4 minutes: 1%/day uncapped LDs, no client-delay exclusion, group set-off, English law on a US entity. Cost $9k + $14.2k legal",
           "score": 0.872,
           "text": "9.1 If the Supplier fails to achieve any Key Date, the Supplier shall pay to the Customer liquidated damages in the amount of one per cent (1%) of the Contract Value for each day or part day by which the relevant Key Date is missed.\n\n9.2 Liquidated damages under clause 9.1 shall be payable in addition to any other right or remedy available to the Customer under this Agreement or at law, and the Customer may deduct such liquidated damages from any sums due to the Supplier.\n\n9.3 The Supplier acknowledges that the liquidated damages set out in this clause 9 are proportionate to the Customer's legitimate interest in the timely delivery of the Services.",
-          "differs": "",
+          "differs": "Better for AtliQ than Brightwater Insurance Inc: 0.5% of the milestone fee per week capped at 5%, against 1% of total contract value per day.",
           "alsoIn": []
         }
       ]
@@ -347,10 +337,10 @@
   "counselPack": null,
   "errors": [],
   "usage": {
-    "calls": 0,
-    "cachedCalls": 4,
-    "inputTokens": 0,
-    "outputTokens": 0,
-    "ms": 45118
+    "calls": 2,
+    "cachedCalls": 3,
+    "inputTokens": 3081,
+    "outputTokens": 4076,
+    "ms": 55581
   }
 }

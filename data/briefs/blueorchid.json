@@ -1,9 +1,9 @@
 {
   "dealId": "blueorchid",
   "version": 1,
-  "createdAt": "2026-10-12T10:21:44.500Z",
+  "createdAt": "2026-10-13T18:07:52.124Z",
   "trigger": "initial review",
-  "inputsHash": "fd05aad9f1610a111881ab4e88c87ef3",
+  "inputsHash": "7ae26878b32ab77ce0597cdb1ed9b3a5",
   "documentIds": [
     "blueorchid-pilot"
   ],
@@ -13,7 +13,7 @@
     "gemini-flash-lite-latest",
     "gemini-3.6-flash",
     "gemini-3-flash-preview",
-    "gemini-3.5-flash"
+    "gemini-3.7-flash"
   ],
   "promptVersion": "p1",
   "route": "full_review",
@@ -322,33 +322,33 @@
   "notesFacts": [
     {
       "id": "blueorchid-fact-1",
-      "statement": "The contract review and execution deadline for the BlueOrchid pilot is October 5, 2026.",
+      "statement": "The contract review deadline for the $38k BlueOrchid pilot is 5 October 2026.",
       "category": "deadline",
       "noteId": "note-2026-09-22",
       "noteTitle": "Internal contract queue meeting",
       "quote": "BlueOrchid pilot (Jay) — $38k — by **5 Oct",
       "complianceEvent": false,
-      "whyItMatters": "The reviewer must prioritize this agreement to meet the targeted October 5 deadline to avoid deal delays."
+      "whyItMatters": "Confirms the review deadline and pilot contract value of $38k."
     },
     {
       "id": "blueorchid-fact-2",
-      "statement": "The geographical scope of the pilot is expected to be limited to hotels in India.",
-      "category": "commitment",
+      "statement": "The pilot agreement needs to be completed by 5 October to accommodate the target of starting before Diwali.",
+      "category": "deadline",
+      "noteId": "tracker",
+      "noteTitle": "Tracker notes",
+      "quote": "by 5 Oct - want to start before Diwali",
+      "complianceEvent": false,
+      "whyItMatters": "Establishes the target operational timeline expected by the client."
+    },
+    {
+      "id": "blueorchid-fact-3",
+      "statement": "The geographic scope of the pilot agreement is intended to cover only India hotels.",
+      "category": "other",
       "noteId": "tracker",
       "noteTitle": "Tracker notes",
       "quote": "Jay: 'just India hotels I think",
       "complianceEvent": false,
-      "whyItMatters": "The reviewer needs to verify that the contract restricts the pilot's territory to India as assumed by the team."
-    },
-    {
-      "id": "blueorchid-fact-3",
-      "statement": "The client intends to launch the pilot prior to the Diwali festival.",
-      "category": "deadline",
-      "noteId": "tracker",
-      "noteTitle": "Tracker notes",
-      "quote": "want to start before Diwali",
-      "complianceEvent": false,
-      "whyItMatters": "Contract timelines and sign-off must align with this seasonal business target of the client."
+      "whyItMatters": "The reviewer must verify that the property and territorial scope in the pilot agreement is accurately restricted to India."
     }
   ],
   "complianceCandidate": null,
@@ -749,8 +749,8 @@
   "usage": {
     "calls": 1,
     "cachedCalls": 5,
-    "inputTokens": 170,
-    "outputTokens": 54,
-    "ms": 2137
+    "inputTokens": 736,
+    "outputTokens": 3711,
+    "ms": 209086
   }
 }

@@ -1,7 +1,7 @@
 {
   "dealId": "finserve",
   "version": 1,
-  "createdAt": "2026-10-12T10:25:32.122Z",
+  "createdAt": "2026-10-13T18:18:15.684Z",
   "trigger": "initial review",
   "inputsHash": "2eca0cecf948c9c9af56ace390a5beb6",
   "documentIds": [
@@ -12,6 +12,7 @@
   "models": [
     "gemini-flash-lite-latest",
     "gemini-3.5-flash",
+    "gemini-3-flash-preview",
     "gemini-3.6-flash"
   ],
   "promptVersion": "p1",
@@ -374,7 +375,6 @@
     "Governing law matches entity: laws of India (Pvt Ltd → Indian law)"
   ],
   "notSeen": [
-    "Similar past clauses for FinServe Capital \"mutual\" NDA (draft): comparison lines couldn't be written (timed out after 45s across retries | gemini-3.6-flash: HTTP 503: { \"error\": { \"c); the matching clauses are still shown",
     "No meeting notes attached to this deal.",
     "Commitments were checked against all 17 signed contracts on file. Contracts AtliQ hasn't uploaded can't be checked."
   ],
@@ -561,7 +561,7 @@
           "labelNote": "Genuinely mutual NDA: the template for what mutual looks like",
           "score": 0.898,
           "text": "1.2 \"**Representatives**\" means a Party's directors, officers, employees, professional advisers and subcontractors who need to know the Confidential Information for the Purpose.",
-          "differs": "",
+          "differs": "Worse for AtliQ than Al Noor: lacks a defined list of Representatives, whereas Al Noor allows sharing with employees, professional advisers, and subcontractors.",
           "alsoIn": []
         },
         {
@@ -574,7 +574,7 @@
           "labelNote": "One-way NDA signed within the hour; contradicts \"we only sign mutual\"",
           "score": 0.857,
           "text": "2.1 \"**Confidential Information**\" means all information disclosed by or on behalf of Meridian to the Recipient, whether in writing, orally, electronically or by inspection, including patient and operational data, hospital performance metrics, financial information, vendor arrangements, technology systems, strategies and the existence and terms of the discussions between the parties.\n\n2.2 Confidential Information does not include information that the Recipient can show by written records:\n   (a) is or becomes public through no fault of the Recipient;\n   (b) was known to the Recipient before disclosure without restriction;\n   (c) is received from a third party lawfully and without restriction; or\n   (d) is independently developed by the Recipient without use of the Confidential Information.",
-          "differs": "",
+          "differs": "Worse for AtliQ than Meridian: expands the definition of Confidential Information to include all analyses and notes prepared by AtliQ.",
           "alsoIn": []
         },
         {
@@ -587,7 +587,7 @@
           "labelNote": "Genuinely mutual NDA",
           "score": 0.843,
           "text": "2.1 \"**Confidential Information**\" means all non-public information disclosed by a Party (the \"**Disclosing Party**\") to the other Party (the \"**Receiving Party**\") in connection with the Purpose, in any form, that is marked or identified as confidential or that a reasonable person would understand to be confidential, including system architecture, security documentation, pricing, proposals, methodologies, source code and business plans.\n\n2.2 Confidential Information does not include information that the Receiving Party can demonstrate (a) is or becomes publicly available through no fault of the Receiving Party; (b) was lawfully known to it before disclosure; (c) is lawfully received from a third party without a duty of confidentiality; or (d) is independently developed without use of the Disclosing Party's Confidential Information.\n\n2.3 **Protected Health Information.** Protected Health Information, as defined at 45 C.F.R. § 160.103, is excluded from this Agreement and shall be disclosed only after execution of a Business Associate Agreement between the Parties. Harrington shall not disclose, and AtliQ shall not request, Protected Health Information under this Agreement.",
-          "differs": "",
+          "differs": "Worse for AtliQ than Harrington: defines protected information as one-way from the Company instead of being mutual for both parties.",
           "alsoIn": []
         }
       ]
@@ -607,7 +607,7 @@
           "label": "untagged",
           "score": 0.902,
           "text": "13.1 The Service Provider shall comply with the Digital Personal Data Protection Act, 2023, the Information Technology Act, 2000 and applicable RBI directions in processing Company Data, and shall store Company Data only in India.\n\n13.2 The Service Provider shall report any security incident to the Company within six (6) hours of detection.\n\n13.3 The Company, its auditors and the Reserve Bank of India shall have the right to inspect and audit the Service Provider's records and facilities relating to the Services.",
-          "differs": "",
+          "differs": "Better for AtliQ than Trustline: removes the restriction to store data only in India while keeping the same six-hour incident reporting timeframe.",
           "alsoIn": []
         },
         {
@@ -619,7 +619,7 @@
           "label": "untagged",
           "score": 0.902,
           "text": "12.1 AtliQ shall process personal data comprised in Client Data only on PayTrack's documented instructions and in compliance with the Digital Personal Data Protection Act, 2023, the Information Technology Act, 2000 and applicable RBI directions.\n\n12.2 AtliQ shall notify PayTrack of any data breach within twenty-four (24) hours of becoming aware of it, and shall cooperate with PayTrack in any reporting to CERT-In or the RBI.\n\n12.3 AtliQ shall permit PayTrack and its regulators to audit its compliance with this Clause 12 on reasonable notice.",
-          "differs": "",
+          "differs": "Worse for AtliQ than PayTrack: requires reporting of a personal data incident within six hours rather than twenty-four hours.",
           "alsoIn": []
         },
         {
@@ -631,7 +631,7 @@
           "label": "untagged",
           "score": 0.873,
           "text": "4.1 Where Confidential Information includes personal data of guests or employees, the Receiving Party shall process it only as necessary for the Purpose and in accordance with applicable data protection law, including the UAE Federal Decree-Law No. 45 of 2021 and the Indian Digital Personal Data Protection Act, 2023, as applicable.",
-          "differs": "",
+          "differs": "Worse for AtliQ than Al Noor: imposes a strict six-hour deadline for reporting data incidents which was not previously required.",
           "alsoIn": []
         }
       ]
@@ -651,7 +651,7 @@
           "label": "untagged",
           "score": 0.899,
           "text": "12.1 In consideration of the Client disclosing to the Supplier its Confidential Information, including its revenue strategies, pricing models and Guest Data, the Supplier undertakes that neither it nor any of its Affiliates shall, during the Restricted Period, directly or indirectly, provide data analytics, artificial intelligence or revenue-management services to any Hospitality Business in the GCC.\n12.2 For the purposes of Clause 12.1, services are provided \"in the GCC\" if the Hospitality Business receiving them is headquartered in, or the services relate to properties or operations located in, any state of the GCC, irrespective of where the services are performed.\n12.3 The Supplier shall procure that each of its Affiliates complies with this Clause 12 as if it were a party to this Agreement, and any breach by an Affiliate shall be deemed a breach by the Supplier.\n12.4 The Client may, in its sole discretion, waive the restriction in Clause 12.1 in respect of a specific engagement by written consent signed by an authorised signatory of the Client. Any such waiver shall be limited to its express terms.\n12.5 During the Term and for twelve (12) months thereafter, neither Party shall solicit for employment any employee of the other Party who was directly involved in the Services, save through general advertisements not targeted at such employees.",
-          "differs": "",
+          "differs": "Worse for AtliQ than Al Noor: adds a 24-month non-solicitation restriction and removes the geographic limitation to the GCC region.",
           "alsoIn": []
         },
         {
@@ -663,7 +663,7 @@
           "label": "untagged",
           "score": 0.877,
           "text": "6.1 In consideration of the access provided to the Client's business processes and supplier\narrangements, the Service Provider agrees that during the term of this Agreement and for a\nperiod of twelve (l2) months after its expiry or termination, it shall not develop, license or\nprovide travel-booking software to any online travel agency operating in India.\n6.2 Nothing in Clause 6.1 shall restrict the Service Provider from providing services to hotels,\nairlines or other businesses that are not online travel agencies, or from providing services\nunrelated to travel-booking software.",
-          "differs": "",
+          "differs": "Worse for AtliQ than Orbit: adds a 24-month non-solicitation restriction and removes the geographic limitation to India.",
           "alsoIn": []
         },
         {
@@ -675,7 +675,7 @@
           "label": "untagged",
           "score": 0.822,
           "text": "7.1 In consideration of the Referral Fees, market development funds and other benefits under this Agreement, during the Term Partner and its Affiliates shall not act as an implementation, reseller or referral partner for any Competing Platform in India or the GCC.\n\n7.2 \"**Competing Platform**\" means any cloud data-warehouse, lakehouse or unified analytics platform offered as a service.\n\n7.3 For clarity, Clause 7.1 does not restrict Partner or its Affiliates from (a) providing services outside India and the GCC; or (b) providing services to a customer that has independently selected a platform, provided Partner does not hold a partner appointment with, or receive any fee or benefit from, the provider of that platform.\n\n7.4 In this Clause 7, \"GCC\" has the meaning given to the member states listed in the definition of Territory.",
-          "differs": "",
+          "differs": "Worse for AtliQ than CloudSpan: extends the non-compete 12 months post-termination and adds a 24-month non-solicitation clause.",
           "alsoIn": []
         }
       ]
@@ -684,10 +684,10 @@
   "counselPack": null,
   "errors": [],
   "usage": {
-    "calls": 0,
+    "calls": 1,
     "cachedCalls": 5,
-    "inputTokens": 0,
-    "outputTokens": 0,
-    "ms": 45118
+    "inputTokens": 2630,
+    "outputTokens": 8048,
+    "ms": 43964
   }
 }

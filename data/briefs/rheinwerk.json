@@ -1,9 +1,9 @@
 {
   "dealId": "rheinwerk",
   "version": 1,
-  "createdAt": "2026-10-12T10:23:16.750Z",
+  "createdAt": "2026-10-13T18:15:50.908Z",
   "trigger": "initial review",
-  "inputsHash": "bc21afffaf8fa4d5194eed89660db95c",
+  "inputsHash": "870838797e7426bce89c35facab6894d",
   "documentIds": [
     "rheinwerk-sa"
   ],
@@ -320,7 +320,6 @@
     "Requirement for written consent to subcontract is a standard operational control rather than a non-compete."
   ],
   "notSeen": [
-    "Similar past clauses for Rheinwerk Analytics services agreement (draft): comparison lines couldn't be written (timed out after 45s across retries | gemini-3.6-flash: HTTP 503: { \"error\": { \"c); the matching clauses are still shown",
     "Commitments were checked against all 17 signed contracts on file. Contracts AtliQ hasn't uploaded can't be checked."
   ],
   "documents": [
@@ -555,23 +554,33 @@
   "notesFacts": [
     {
       "id": "rheinwerk-fact-1",
-      "statement": "The contract review for Rheinwerk must be completed by October 15.",
+      "statement": "The contract for Rheinwerk Analytics is expected to be completed by October 15, 2026.",
       "category": "deadline",
       "noteId": "note-2026-09-22",
       "noteTitle": "Internal contract queue meeting",
       "quote": "Rheinwerk (Bhavin) — €88k, Munich — draft arriving tomorrow, by **15 Oct",
       "complianceEvent": false,
-      "whyItMatters": "The deal team has established a target date of October 15 for contract finalization within a backlogged review queue."
+      "whyItMatters": "Sets the timeline for legal review and execution to meet business requirements."
     },
     {
       "id": "rheinwerk-fact-2",
-      "statement": "The project intends to reuse PipeKit tooling as was done for the Northwind project.",
-      "category": "other",
+      "statement": "The PipeKit software component is slated for reuse on the project.",
+      "category": "staffing",
       "noteId": "tracker",
       "noteTitle": "Tracker notes",
       "quote": "Pranav: PipeKit can be reused 'like we did for Northwind",
       "complianceEvent": false,
-      "whyItMatters": "The reviewer must verify that the contract allows for the reuse of existing IP and whether specific licensing terms apply to PipeKit."
+      "whyItMatters": "Intellectual property clauses must permit the reuse of internal components and define ownership correctly."
+    },
+    {
+      "id": "rheinwerk-fact-4",
+      "statement": "The total deal value for the MSA and SOW is EUR 88,000.",
+      "category": "other",
+      "noteId": "tracker",
+      "noteTitle": "Tracker notes",
+      "quote": "C-028 (MSA + SOW): EUR 88k",
+      "complianceEvent": false,
+      "whyItMatters": "The contract value is a primary factor in determining liability limits and financial risk thresholds."
     }
   ],
   "complianceCandidate": null,
@@ -592,7 +601,7 @@
           "labelNote": "45-day payment: the negotiated maximum (90 → 45)",
           "score": 0.912,
           "text": "4.1 The total fees for the Services are **USD 48,000** (United States Dollars Forty-Eight Thousand only), payable on completion of Milestones as set out in Annexure A.\n\n4.2 The Service Provider shall raise an invoice upon completion of each Milestone. The Company shall pay each undisputed invoice within forty-five (45) days of receipt of the invoice.\n\n4.3 All fees are exclusive of GST. The Company shall be entitled to deduct TDS as applicable.\n\n4.4 Any disputed amount shall be notified within ten (10) days of receipt of invoice, and the Parties shall resolve such dispute in good faith within thirty (30) days.",
-          "differs": "",
+          "differs": "Better for AtliQ than Trustline NBFC: Payment is due within 30 days of invoice receipt, compared to 45 days in the previous contract.",
           "alsoIn": []
         },
         {
@@ -604,7 +613,7 @@
           "label": "untagged",
           "score": 0.911,
           "text": "4.1 The total fees under SOW-1 are **USD 71,000** (United States Dollars Seventy-One Thousand only), payable in accordance with the milestone schedule in SOW-1.\n\n4.2 AtliQ shall invoice upon completion of each milestone. PayTrack shall pay each undisputed invoice within thirty (30) days of receipt.\n\n4.3 Fees are exclusive of GST. PayTrack may deduct TDS in accordance with Applicable Law.",
-          "differs": "",
+          "differs": "Same as PayTrack Technologies: Both contracts require payment of undisputed invoices within thirty days of receipt.",
           "alsoIn": [
             "Acme Retail Group (2025-03)"
           ]
@@ -619,7 +628,7 @@
           "labelNote": "Fair freelancer terms: 30-day pay, mutual cap, mutual 15-day exit",
           "score": 0.885,
           "text": "3.1 AtliQ shall pay the Contractor the fees set out in the Engagement Schedule.\n\n3.2 The Contractor shall submit a monthly invoice, supported by a timesheet approved by the AtliQ project lead. AtliQ shall pay each undisputed invoice within thirty (30) days of receipt.\n\n3.3 AtliQ shall deduct tax at source under the Income Tax Act, 1961 as applicable and provide TDS certificates. The Contractor is responsible for his own GST registration (if required) and all other taxes.\n\n3.4 AtliQ shall reimburse reasonable pre-approved travel expenses incurred for client visits.",
-          "differs": "",
+          "differs": "Same as Rohan Iyer: Both agreements establish a thirty-day payment term from the receipt of an invoice.",
           "alsoIn": []
         }
       ]
@@ -640,7 +649,7 @@
           "labelNote": "Rohan kept the Work Product IP (\"ok\" from phone) while Acme was promised ownership",
           "score": 0.88,
           "text": "5.1 In this Clause, \"**Work Product**\" means all dashboards, reports, data models, DAX measures, Power Query scripts, visual templates, documentation and other materials created by the Contractor in performing the Services.\n\n5.2 The Contractor retains ownership of all intellectual property rights in the Work Product and in any pre-existing materials, components and templates of the Contractor.\n\n5.3 The Contractor grants AtliQ a non-exclusive, perpetual, irrevocable, royalty-free, worldwide licence to use, copy, modify and deploy the Work Product for the purposes of AtliQ's business, including for delivery to AtliQ's clients.\n\n5.4 The Contractor shall not incorporate into the Work Product any third-party material that AtliQ is not entitled to use under Clause 5.3.",
-          "differs": "",
+          "differs": "Worse for AtliQ than Rohan Iyer: AtliQ grants a license to its proprietary accelerator PipeKit, whereas it previously received licenses from contractors.",
           "alsoIn": []
         },
         {
@@ -652,7 +661,7 @@
           "label": "untagged",
           "score": 0.889,
           "text": "5.1 All deliverables developed specifically for the Client shall be the property of the Client\nupon full payment. The Service Provider retains its pre-existing tools and know-how.",
-          "differs": "",
+          "differs": "Worse for AtliQ than Orbit Travels Pvt Ltd: Grants a broad perpetual license to the PipeKit accelerator instead of simply retaining pre-existing tools.",
           "alsoIn": [
             "Northwind Logistics (2025-06)",
             "Al Noor Hospitality Group (2025-03)",
@@ -669,7 +678,7 @@
           "label": "untagged",
           "score": 0.878,
           "text": "8.1 Upon payment, Crestline shall own all right, title and interest in the Deliverables.\n\n8.2 Supplier retains all rights in its pre-existing materials, tools and know-how (\"**Supplier Materials**\"). To the extent Supplier Materials are incorporated in a Deliverable, Supplier grants Crestline a non-exclusive, perpetual, royalty-free license to use them as part of such Deliverable.",
-          "differs": "",
+          "differs": "Same as Crestline Retail Inc: Both contracts grant the client a non-exclusive, perpetual, royalty-free license to pre-existing tools incorporated into the deliverables.",
           "alsoIn": []
         }
       ]
@@ -690,7 +699,7 @@
           "labelNote": "Origin of the LD playbook: 0.5% of milestone/week, 5% cap, client delays excluded (Mar 2025)",
           "score": 0.933,
           "text": "7.1 If the Service Provider fails to complete a Milestone by the agreed date for reasons solely attributable to the Service Provider, the Service Provider shall pay liquidated damages at the rate of 0.5% (half percent) of the Milestone Fee of the delayed Milestone for each complete week of delay.\n\n7.2 The aggregate liquidated damages in respect of any Milestone shall not exceed 5% (five percent) of the Milestone Fee of that Milestone.\n\n7.3 No liquidated damages shall be payable where the delay is caused by the Client, including delayed access to data or systems, delayed review of Deliverables, or changes in scope, or by a Force Majeure event.\n\n7.4 The Parties agree that the liquidated damages are a genuine pre-estimate of loss and shall be the Client's sole and exclusive remedy for delay.",
-          "differs": "",
+          "differs": "Same as Acme Retail Group: Both specify a penalty of 0.5% of the milestone fee per week of delay, capped at 5%.",
           "alsoIn": [
             "Trustline NBFC (2026-08)",
             "Northwind Logistics (2025-06)"
@@ -706,7 +715,7 @@
           "labelNote": "Signed on a phone in 4 minutes: 1%/day uncapped LDs, no client-delay exclusion, group set-off, English law on a US entity. Cost $9k + $14.2k legal",
           "score": 0.895,
           "text": "9.1 If the Supplier fails to achieve any Key Date, the Supplier shall pay to the Customer liquidated damages in the amount of one per cent (1%) of the Contract Value for each day or part day by which the relevant Key Date is missed.\n\n9.2 Liquidated damages under clause 9.1 shall be payable in addition to any other right or remedy available to the Customer under this Agreement or at law, and the Customer may deduct such liquidated damages from any sums due to the Supplier.\n\n9.3 The Supplier acknowledges that the liquidated damages set out in this clause 9 are proportionate to the Customer's legitimate interest in the timely delivery of the Services.",
-          "differs": "",
+          "differs": "Better for AtliQ than Brightwater Insurance Inc: Penalty is 0.5% per week capped at 5% of the milestone, versus 1% of contract value per day.",
           "alsoIn": []
         },
         {
@@ -719,7 +728,7 @@
           "labelNote": "One-off: \"strategic exception for Al Noor only, not our new standard\" (cap 10% of total fees)",
           "score": 0.893,
           "text": "10.1 The Supplier shall use all reasonable endeavours to achieve each Milestone by the date set out in the relevant SOW.\n\n10.2 Each Deliverable shall be subject to acceptance testing by the Client within ten (10) Business Days of delivery against the acceptance criteria in the SOW. Deliverables not rejected in writing within that period shall be deemed accepted.\n\n10.3 If the Supplier fails to achieve a Milestone by its due date for reasons attributable to the Supplier, the Supplier shall pay to the Client, as liquidated damages, one percent (1%) of the Fees payable for the affected Milestone for each complete week of delay, provided that the aggregate liquidated damages payable under this Agreement shall not exceed ten percent (10%) of the total Fees payable under this Agreement.\n\n10.4 The Parties agree that the liquidated damages in Clause 10.3 are a genuine pre-estimate of loss. No liquidated damages shall be payable for delay caused by the Client, its contractors, or a Force Majeure Event.",
-          "differs": "",
+          "differs": "Better for AtliQ than Al Noor Hospitality Group: The penalty rate is 0.5% per week of delay instead of 1% of milestone fees.",
           "alsoIn": []
         }
       ]
@@ -740,7 +749,7 @@
           "labelNote": "Counsel-reviewed BAA (Calloway Stern, $3.8k): capped liability, 5-day reporting, de-identified offshore route",
           "score": 0.87,
           "text": "9.1 Each Party's liability arising out of or relating to this BAA, including any Breach, is subject to the limitations and exclusions of liability in the Master Services Agreement, under which aggregate liability for claims relating to a Breach or a violation of this BAA shall not exceed two (2) times the Fees paid or payable under the Master Services Agreement in the twelve (12) months preceding the event giving rise to the claim.",
-          "differs": "",
+          "differs": "Better for AtliQ than CareBridge Clinics Inc: Aggregate liability is capped at the total contract remuneration instead of two times the annual fees.",
           "alsoIn": []
         },
         {
@@ -753,7 +762,7 @@
           "labelNote": "Fair freelancer terms: 30-day pay, mutual cap, mutual 15-day exit",
           "score": 0.865,
           "text": "8.1 Each party's aggregate liability under this Agreement shall not exceed the total fees paid or payable to the Contractor in the twelve (12) months preceding the claim, except for breach of Clause 6 or fraud.\n\n8.2 Neither party is liable for indirect or consequential loss.",
-          "differs": "",
+          "differs": "Worse for AtliQ than Rohan Iyer: The liability cap is based on the total contract value rather than the fees paid in the preceding twelve months.",
           "alsoIn": []
         },
         {
@@ -765,7 +774,7 @@
           "label": "untagged",
           "score": 0.88,
           "text": "11.1 Neither Party shall be liable for any indirect, special, incidental or consequential damages, or loss of profits, revenue or goodwill.\n\n11.2 Each Party's total aggregate liability under or in connection with this Agreement shall not exceed the total fees paid or payable under the SOW giving rise to the claim.\n\n11.3 The limitations in this Clause 11 shall not apply to liability for fraud or wilful misconduct.",
-          "differs": "",
+          "differs": "Same as PayTrack Technologies: Both limit aggregate liability to the total fees under the agreement or relevant statement of work.",
           "alsoIn": [
             "Northwind Logistics (2025-06)",
             "Al Noor Hospitality Group (2025-03)",
@@ -792,7 +801,7 @@
           "labelNote": "Origin of the mutual-indemnity position: no indemnity for the indemnified party's own negligence",
           "score": 0.939,
           "text": "10.1 Each Party (the \"**Indemnifying Party**\") shall indemnify, defend and hold harmless the other Party and its directors, officers and employees (the \"**Indemnified Party**\") from and against all Losses arising out of any third-party claim to the extent caused by: (a) the Indemnifying Party's breach of Clause 7 (Confidentiality) or Clause 12 (Data Protection); (b) the gross negligence, wilful misconduct or fraud of the Indemnifying Party or its personnel; or (c) in the case of AtliQ, any claim that the Deliverables infringe a third party's intellectual property rights, and in the case of PayTrack, any claim that Client Data or materials supplied by PayTrack infringe a third party's rights.\n\n10.2 Neither Party shall be required to indemnify the other to the extent any Losses are caused by the negligence, breach or wilful misconduct of the Indemnified Party.\n\n10.3 The Indemnified Party shall give prompt written notice of any claim, permit the Indemnifying Party to control the defence and settlement, and provide reasonable cooperation at the Indemnifying Party's cost.",
-          "differs": "",
+          "differs": "Worse for AtliQ than PayTrack Technologies: Mutual indemnity is triggered by any culpable conflict, rather than limited to specific categories like IP infringement.",
           "alsoIn": []
         },
         {
@@ -805,7 +814,7 @@
           "labelNote": "Mutual indemnity",
           "score": 0.925,
           "text": "11.1 Each Party (\"**Indemnifying Party**\") shall indemnify the other against losses arising from third-party claims caused by the Indemnifying Party's breach of confidentiality, infringement of third-party intellectual property rights, or gross negligence or wilful misconduct.",
-          "differs": "",
+          "differs": "Worse for AtliQ than Acme Retail Group: Broad mutual indemnity for any culpable conflict, compared to specific triggers like IP infringement and gross negligence.",
           "alsoIn": []
         },
         {
@@ -817,7 +826,7 @@
           "label": "untagged",
           "score": 0.929,
           "text": "15.1 The Supplier shall indemnify the Client against losses arising from any third-party claim that the Deliverables (excluding Client materials) infringe that third party's intellectual property rights.\n\n15.2 The Client shall indemnify the Supplier against losses arising from any third-party claim that Client Data or Client materials infringe that third party's rights.\n\n15.3 The indemnified Party shall promptly notify the indemnifying Party, allow it conduct of the defence, and provide reasonable assistance.",
-          "differs": "",
+          "differs": "Worse for AtliQ than Al Noor Hospitality Group: Mutual indemnity covers any culpable conflict rather than being limited to intellectual property infringement claims.",
           "alsoIn": [
             "CloudSpan Technologies (2025-09)",
             "Northwind Logistics (2025-06)"
@@ -840,7 +849,7 @@
           "label": "untagged",
           "score": 0.94,
           "text": "7.1 Each Party shall hold the other Party's Confidential Information in confidence, use it only to perform or receive the Services, and disclose it only to its personnel and advisors with a need to know who are bound by obligations at least as protective.\n\n7.2 The obligations in Section 7.1 do not apply to information that is or becomes publicly available without breach, was known to the recipient prior to disclosure, is independently developed, or is rightfully received from a third party.\n\n7.3 These obligations survive for three (3) years following termination, and indefinitely for trade secrets.",
-          "differs": "",
+          "differs": "Worse for AtliQ than Crestline Retail Inc: Confidentiality obligations survive for five years after termination, compared to only three years.",
           "alsoIn": [
             "Northwind Logistics (2025-06)",
             "CloudSpan Technologies (2025-09)",
@@ -856,7 +865,7 @@
           "label": "untagged",
           "score": 0.932,
           "text": "8.1 \"**Confidential Information**\" means all information disclosed by one Party to the other, whether before or after the Effective Date, that is marked confidential or would reasonably be regarded as confidential, including Client Data, pricing strategies, rate plans, occupancy forecasts and business plans.\n\n8.2 Each Party shall keep the other's Confidential Information confidential, use it only for the purposes of this Agreement, and disclose it only to its employees and advisers who need to know it and are bound by equivalent obligations.\n\n8.3 These obligations do not apply to information that is public other than through breach, was lawfully known before disclosure, is independently developed, or is required to be disclosed by law.\n\n8.4 The obligations in this Clause 8 continue for five (5) years after expiry or termination.",
-          "differs": "",
+          "differs": "Better for AtliQ than Al Noor Hospitality Group: Confidentiality is limited to business and trade secrets rather than all information marked or regarded as confidential.",
           "alsoIn": []
         },
         {
@@ -868,7 +877,7 @@
           "label": "untagged",
           "score": 0.926,
           "text": "4.1 Each party shall keep confidential all information received from the other party including\nfare data, supplier contracts, customer data and source code, and shall not disclose the same\nto any third party. This obligation shall survive for two (2) years after termination.",
-          "differs": "",
+          "differs": "Worse for AtliQ than Orbit Travels Pvt Ltd: Confidentiality obligations survive for five years after termination instead of only two years.",
           "alsoIn": [
             "Sunrise Foods (2025-04)"
           ]
@@ -890,7 +899,7 @@
           "label": "untagged",
           "score": 0.935,
           "text": "14.1 Each party shall comply with the UK GDPR and the Data Protection Act 2018. To the extent the Supplier processes personal data on behalf of the Client, it shall do so only on the Client's documented instructions and in accordance with the data processing terms in Schedule 3.\n\n14.2 Any transfer of personal data to India shall be made subject to the UK International Data Transfer Addendum to the EU Standard Contractual Clauses.",
-          "differs": "",
+          "differs": "Same as Northwind Logistics: Both require standard data processing terms and contractual clauses for international data transfers to India.",
           "alsoIn": []
         },
         {
@@ -902,7 +911,7 @@
           "label": "untagged",
           "score": 0.909,
           "text": "13.1 The Service Provider shall process personal data received from the Client only for the purpose of the Services and in compliance with the Digital Personal Data Protection Act, 2023 and the rules made thereunder, as and when in force, and shall implement reasonable security practices.",
-          "differs": "",
+          "differs": "Worse for AtliQ than Acme Retail Group: Requires compliance with the more rigorous EU GDPR standards instead of the Indian Digital Personal Data Protection Act.",
           "alsoIn": []
         },
         {
@@ -914,7 +923,7 @@
           "label": "untagged",
           "score": 0.895,
           "text": "16.1 Each Party shall comply with applicable data protection laws, including the DIFC Data Protection Law No. 5 of 2020 and the UAE Federal Decree-Law No. 45 of 2021, to the extent applicable.\n\n16.2 The Supplier shall process Guest Data only on the documented instructions of the Client, implement appropriate technical and organisational measures, and notify the Client without undue delay (and in any event within forty-eight (48) hours) of any personal data breach.\n\n16.3 The Supplier shall not transfer Guest Data outside the UAE without the Client's prior written consent. Any Guest Data accessed from India shall be accessed remotely from UAE-hosted environments only.",
-          "differs": "",
+          "differs": "Better for AtliQ than Al Noor Hospitality Group: Provides a clear mechanism for data transfers to India via SCCs instead of requiring prior written consent.",
           "alsoIn": []
         }
       ]
@@ -935,7 +944,7 @@
           "labelNote": "Signed on a phone in 4 minutes: 1%/day uncapped LDs, no client-delay exclusion, group set-off, English law on a US entity. Cost $9k + $14.2k legal",
           "score": 0.872,
           "text": "20.1 This Agreement and any dispute or claim (including non-contractual disputes or claims) arising out of or in connection with it or its subject matter shall be governed by and construed in accordance with the law of England and Wales.\n\n20.2 Each party irrevocably agrees that the courts of London, England shall have exclusive jurisdiction to settle any dispute or claim arising out of or in connection with this Agreement.\n\n---",
-          "differs": "",
+          "differs": "Worse for AtliQ than Brightwater Insurance Inc: Disputes are subject to German law and Munich courts instead of English law and London courts.",
           "alsoIn": []
         },
         {
@@ -948,7 +957,7 @@
           "labelNote": "English law + LCIA: \"not worth losing the deal over\"",
           "score": 0.859,
           "text": "17.1 This Agreement and any dispute or claim (including non-contractual disputes or claims) arising out of or in connection with it shall be governed by the law of England and Wales.\n\n17.2 Any dispute arising out of or in connection with this Agreement shall be referred to and finally resolved by arbitration under the LCIA Rules. The number of arbitrators shall be one. The seat of arbitration shall be London. The language of the arbitration shall be English.",
-          "differs": "",
+          "differs": "Worse for AtliQ than Northwind Logistics: Requires litigation in German courts instead of private international arbitration under LCIA rules.",
           "alsoIn": []
         },
         {
@@ -960,7 +969,7 @@
           "label": "untagged",
           "score": 0.873,
           "text": "16.1 This Agreement shall be governed by the laws of the State of Ohio, without regard to its conflict-of-laws principles.\n\n16.2 The Parties consent to the exclusive jurisdiction of the state and federal courts located in Franklin County, Ohio.",
-          "differs": "",
+          "differs": "Same as Crestline Retail Inc: Both contracts specify the client's local law and jurisdiction for resolving disputes.",
           "alsoIn": []
         }
       ]
@@ -1024,10 +1033,10 @@
   },
   "errors": [],
   "usage": {
-    "calls": 1,
+    "calls": 2,
     "cachedCalls": 4,
-    "inputTokens": 481,
-    "outputTokens": 41,
-    "ms": 47045
+    "inputTokens": 7212,
+    "outputTokens": 11979,
+    "ms": 75270
   }
 }
