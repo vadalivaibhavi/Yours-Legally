@@ -8,6 +8,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { z } from "zod";
 import { RAW_DIR, writeJson } from "../lib/config";
+import { stripNarrator } from "../lib/editorial";
 import { extractReferences } from "../lib/references";
 import { Company, Deal, Document, Note, type AtliqEntity, type DocType, type Side } from "../lib/types";
 
@@ -143,7 +144,8 @@ function main() {
       file: "meeting_notes/" + file,
       date: file.slice(0, 10),
       title,
-      text: fs.readFileSync(path.join(RAW_DIR, "meeting_notes", file), "utf8").replace(/\r\n/g, "\n"),
+      // The dataset's narrator line states what happened afterwards (the answer): not part of the note (lib/editorial.ts).
+      text: stripNarrator(fs.readFileSync(path.join(RAW_DIR, "meeting_notes", file), "utf8")).text,
       dealIds, // Brightwater post-mortem: no open deal, reference only
     });
   });
