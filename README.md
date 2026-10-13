@@ -15,7 +15,7 @@ Capstone prototype. Spec: [`docs/PRD_Yours_Legally_v0.9.md`](docs/PRD_Yours_Lega
 | Karandeep | **Queue** `/` | Every open deal with "due in X days" / "overdue" (from a fixed demo date), status incl. *waiting for input (owner)*, latest verdict. Deadline orders the list; it never changes risk. | F8 · FR-14 |
 | Karandeep | **Brief** (opens in place on the deal page) | Verdict + next action → pinned compliance alert → ≤3 blockers with both clauses side by side → waiting for input (upload slot, re-check) → must fix → please confirm (from notes) → worth negotiating → what's fine / what wasn't seen → deal bundle → contract facts card → counsel pack → decision & feedback panel. Every key clause has an expandable **similar past clauses** panel. | F6 · FR-11, FR-12, FR-17, FR-21, FR-22 |
 | Karandeep | **Commitments register** `/register` | All commitments AI-extracted from the 17 signed documents, in two lists: *Restrictions* (can block a new deal: non-competes, exclusivity, pricing promises, IP given away) and *Duties* (must keep performing: data location, breach-notice windows, insurance, audits). Live / expired / unknown, filters that apply instantly, source clause + definitions, Verify / Edit / Reject, the open deals each entry affects, coverage gaps. | F1 · FR-1, FR-2 |
-| Anyone | **Upload** `/upload` | Upload a draft; it's extracted, linked to its deal (auto when certain, asks once when ambiguous, new deal otherwise), and a new brief version is issued. | FR-3, FR-17 |
+| Anyone | **Upload** `/upload` | Upload a draft as **PDF, Word (.docx) or text**; scanned PDFs are read by OCR (Gemini) and marked so. It's extracted, linked to its deal (auto when certain, asks once when ambiguous, new deal otherwise), and a new brief version is issued. | FR-3, FR-17 |
 | Seller (one shared role) | **Deal** `/deal/[id]` | Every deal is visible to sellers. Deal check (client, sector, regions and services required, otherwise "not evaluated"): client, sector, regions/sites, services, rates by role, tools to reuse, data handling, free text → per item clear / needs attention / conflict / couldn't check, stamped "as of [date]", never revealing another client's name or rates. Re-check banner when Karandeep re-checks the deal or the register changes. | F7 · FR-13, FR-19 |
 
 **Queue sections.** The queue is split by AtliQ's side of the table, from each deal's main document: AtliQ selling (client deals), AtliQ buying (vendors and contractors), partnerships, mutual NDAs.
@@ -128,6 +128,11 @@ The committed `data/` already holds the register, clause index and one brief per
 | `npm run review` (or `-- --deal gulfcrown`) | 2 | Review pipeline → `data/briefs/<deal>.json` (v1 per deal). Resumable: skips deals whose brief is complete and built from the current inputs (`--force` to redo) |
 | `npm run eval` (or `-- --case EV-10`, `-- --deal kriti`) | 2 | EV cases → `eval/results.md`; a filtered run updates its cases inside the last full report |
 | `npm run pending` (or `-- --deal kriti`) | – | Regenerates the auto part of `docs/Pending_Work.md` (with `--deal`: prints that deal's pending items) |
+| **`npm run check`** | eval | Every check that needs no review-model call, in ~10 s: typecheck, upload detection, PDF/Word/scan reading, the eval on the stored briefs (guardrails, every finding graded, register flagging…), held-out grading. CI runs it on every push (`.github/workflows/check.yml`) |
+| **`npm run eval:all`** | eval | The model batch, in order and resumable across days: stale briefs → full eval (version pairs) → consistency → held-out register → held-out reviews → held-out grading → cost |
+| `npm run consistency` | eval | 4 deals × 3 complete runs with fresh answers (cache untouched) → `eval/consistency.md` |
+| `npm run check:file-read` / `fixtures:formats` | eval | Reads back the 10 held-out drafts saved by Word as .docx / .pdf and as image-only scans (fixtures made with Word + Edge on Windows) |
+| `npm run holdout:ingest` / `holdout:register` / `holdout:review` / `holdout:eval` | eval | The held-out set (`DATA_PROFILE=holdout`, below) |
 
 **Free tier.** Everything runs one deal and one case at a time, with model calls spaced `LLM_MIN_INTERVAL_MS` apart. A per-minute 429 waits the delay Google returns and retries. When a model's daily quota is used up, the next model in its chain is tried. When the whole chain is out, the run stops with "daily quota reached, resume tomorrow": nothing incomplete is written, and the same command resumes after the reset (midnight Pacific), because finished calls are cached and complete briefs are skipped. Eval cases stopped by quota are reported as "not run (quota)", never as failures. In the app, a re-check, upload or seller check that hits the daily quota shows a message instead of an error.
 
@@ -184,7 +189,9 @@ Rules that keep them apart:
 
 ## Eval results
 
-Full table: [`eval/results.md`](eval/results.md) (regenerate with `npm run eval`). Last run: **42 passed · 4 failed · 4 skipped of 50 cases** (best single run so far: 47). Skipped: EV-V1–V3 (version pairs need model calls; all three passed in the previous full run) and EV-V4 (FR-18 not built).
+Full table: [`eval/results.md`](eval/results.md) (regenerate with `npm run eval`). Last full run (12 Oct, Gemini): **45 passed · 4 failed · 1 skipped of 50 cases**; EV-V1–V3 pass; skipped: EV-V4 (FR-18 not built).
+
+> **Eval integrity fix (13 Oct).** Each dataset meeting note ends with an italic narrator line that the dataset calls ground truth ("no BAA had been signed; the extract remained with the two Pune engineers"). It was reaching the notes step as if it had been said in the meeting, i.e. part of the answer was in the input. It is now removed at ingest (`lib/editorial.ts`). The 8 briefs of deals with notes are being regenerated (`npm run eval:all`); until then the A5 isolation check correctly reports them as built from old inputs, and the numbers above are pre-fix.
 
 | PRD §11 dimension | Threshold | Result |
 |---|---|---|
@@ -197,6 +204,10 @@ Full table: [`eval/results.md`](eval/results.md) (regenerate with `npm run eval`
 | Similar past clauses (EV-P1–P7) | recall@3 ≥80%, labels right, verdict unchanged | recall@3 **100%** (10/10); verdict identical with and without the panel on all 13 briefs |
 | Citation validity | 100% | 136/136 quotes string-matched to source |
 | Guardrails | 0 legal conclusions, 0 Reject | 0 / 0 across 520 model-written strings |
+| **Every finding graded** (`eval/finding_labels.json`) | all findings labelled, ≤5% wrong | 82/82 graded: **84% correct**, 5% partly right, 9% noise, 1 duplicate, 1 wrong (a quote that doesn't support its claim); 4 with the wrong severity. Two output bugs found this way were fixed (garbled carve-out names; "pay-when-paid, up to N days") |
+| Reading real files | text formats ≥98% of words + every clause number; scans ≥95% | 10/10: Word 100%, Word with auto-numbered headings 100%, PDF 98.4–99.4%, scanned PDF via OCR 99.5–99.6%; every clause number recovered |
+| Consistency (PRD §11, 3 runs) | same verdict on fresh answers | TravelHub 3/3 SEND BACK (EV-03 passes on every fresh run; the stored brief is an unlucky HOLD); Datavane 2/3 SIGN AFTER CHANGES (the CloudSpan collision is found every time, its severity varies); Kriti and LoopMart pending. Runs where the provider returned 503 are reported as reliability and retried, never counted as disagreement (`eval/consistency.md`) |
+| **Held-out set** (never used for tuning) | answer-key verdicts, conflicts, false alarms | Pending the model batch: cases pre-registered in `eval/holdout_cases.json` before any run (below) |
 | Added guardrails and newer features (A1–A6) | every check passes, no model calls | 11/11: no counted finding without a clause; 5 strong-match rules; one-way NDA caught; 5/5 injection attempts caught, 0 of the real documents flagged; 17/17 upload cases; deal-size, roles, live mismatch, store-in-register and review isolation all right; 8/8 wording sentences |
 
 **The 4 failures, honestly.** All four are judgment calls where the model's answer varies between runs; the deterministic checks don't vary.
@@ -208,6 +219,16 @@ Full table: [`eval/results.md`](eval/results.md) (regenerate with `npm run eval`
 The briefs were produced over several runs because Gemini's **free tier** allows 20 requests per model per day per project. On the free tier, run `npm run review` once a day until it finishes without the quota message: each run picks up where the last one stopped. On a billed key (`LLM_MIN_INTERVAL_MS=0`, `REVIEW_CONCURRENCY=3`) one run regenerates everything.
 
 **Cost (from `npm run cost`, Gemini flash pricing placeholders $0.30 / $2.50 per 1M tokens):** register build ≈ $0.35 one-off for 17 contracts; a review ≈ 9.6k input / 8.6k output tokens ≈ $0.02–0.07 per deal, so roughly **$0.25–0.50/month at 9–20 contracts**, model cost only. NDA fast lane ran in 15 s when the model wasn't overloaded (one run took 365 s waiting out 503 "high demand" retries on the free tier).
+
+### Held-out evaluation
+
+The 13 deals above were used while building and tuning, so their score says the system works on what it was built for, not how it generalises. The dataset's **SYN_ extension** was never used: 10 signed contracts, 10 incoming drafts and 6 notes, with its own answer key. `DATA_PROFILE=holdout` runs the same app on it with its own data in `data/holdout/`:
+- the 10 drafts come in as the files clients send (Word, auto-numbered Word, PDF, scanned PDF) through the upload reader, not as clean Markdown;
+- the 10 signed contracts go through the same register extraction and join the existing 17;
+- notes lose their narrator lines; "today" is the set's own date (28 Sep 2026);
+- `eval/holdout_cases.json` was written from the answer key and **committed before the first held-out run**; any later edit must be logged in it. Grading is per item: verdicts, conflicts found (the right signed contract cited at blocker/high), playbook/entity points, false alarms on the clean draft (Greystone), and the register key (type, end date, expiry, affiliates).
+
+Results: [`eval/holdout-results.md`](eval/holdout-results.md) (after `npm run eval:all`).
 
 ---
 
@@ -237,7 +258,7 @@ The briefs were produced over several runs because Gemini's **free tier** allows
 - **Playbook proposals (FR-16):** not built. "+ Something the brief missed" and reactions are recorded in the audit log for that loop.
 - **Late-finding detection (FR-18):** not built (EV-V4 is reported as skipped).
 - **Email, Drive or calendar intake:** not built. Upload only, with a one-time tracker import.
-- **PDF / OCR upload:** the prototype reads `.md` / `.txt` (the dataset is already text; the scanned Orbit file keeps its OCR errors and illegible clause).
+- **Old Word (.doc):** not read; the upload asks for .docx or PDF. Scans need the Gemini provider (the model reads the file).
 
 ## Pending work
 
@@ -247,7 +268,7 @@ Everything that couldn't be run or checked yet because of model quota or tooling
 
 - **Free model tier.** Gemini's free tier allows about 20 requests per model per day, so the review uses fallback chains and caches every call. A full review of all 13 deals is about 60 strong-model calls. A real deployment needs a paid key; the cost estimate uses `data/runs/`.
 - **Fallback models.** On the free tier you can append flash-lite models to `LLM_MODEL_STRONG` so a review completes when the flash quota is gone (that's how the last 5 deals were produced). Quality drops on mirror / flow-down reasoning (EV-10, EV-13). Without them, a quota failure gives "couldn't complete: review manually" and HOLD, never a clean verdict.
-- **Model variance.** In EV-V1, low-severity playbook notes on *unchanged* text differed between v1 and v2 (lite model). That's exactly what late-finding detection (FR-18, not built) is meant to catch. Severity on interpretive points can move between runs; deterministic rules pin the critical ones (entity, LD base/cap, payment, liability, insurance, required documents, expiry), and the verdict is computed by rule. The 3-run consistency eval (PRD §11) is not automated: results are cached by input hash, so re-runs of unchanged documents are identical by construction.
+- **Model variance.** In EV-V1, low-severity playbook notes on *unchanged* text differed between v1 and v2 (lite model). That's exactly what late-finding detection (FR-18, not built) is meant to catch. Severity on interpretive points can move between runs; deterministic rules pin the critical ones (entity, LD base/cap, payment, liability, insurance, required documents, expiry), and the verdict is computed by rule. Stored briefs replay cached answers, so the main eval grades one sample per deal; `npm run consistency` measures the spread on fresh answers.
 - **State on Vercel is ephemeral** (`/tmp`): uploads, decisions and verifications reset when the function instance is recycled. The committed briefs always load.
 - **The register is only as complete as the documents collected:** ~10 referenced contracts are not in the dataset (ShopSwift SOW, PixelCraft, the intercompany services agreement…). Every brief says so under "what wasn't seen".
 - The demo date (`APP_TODAY`) is fixed at 4 Oct 2026; event timestamps (decisions, uploads) use the real clock.

@@ -54,7 +54,19 @@ The EV-V synthetic documents' header line changed with the product rename (5 Oct
 
 On the free tier that is well within a day's quota for one round of tests. If a step hits the daily quota, the page now says so and nothing is lost: retry the next day.
 
-## 2b. Local testing on Ollama, then back to Gemini for the final build
+## 2c. The evaluation batch (needs Gemini quota): `npm run eval:all`
+
+One command, resumable: on the free tier it stops at the daily quota (resets ~12:30 IST) and the same command carries on the next day. About 120 strong-model calls ≈ 3–4 free-tier days, or roughly $1–2 on a billed key in one run.
+
+| Step | Why | Strong calls (approx.) |
+|---|---|---|
+| Regenerate 8 stale briefs (harrington, ortiz, lakeshore, blueorchid, gulfcrown, travelhub, rheinwerk, sunrise-sow2) | the notes lost their narrator lines (eval leak fix, 13 Oct); notes + brief steps re-run, the rest is cached. New findings then need a label in eval/finding_labels.json | ~16–20 |
+| Full eval with version pairs + injection end-to-end | final main numbers on the leak-free briefs | ~10 |
+| Consistency: Datavane 1 more complete run, Kriti 3 (all 3 so far hit provider 503s), LoopMart 3 | PRD §11 3-run consistency | ~30 |
+| Held-out register (10 SYN signed contracts) | the held-out conflicts depend on it | 10 |
+| Held-out reviews (10 deals) | the generalisation number | ~60 |
+
+
 
 Testing and evals run locally on Ollama (no quota). The deployed app and the final numbers are Gemini: Vercel can't reach a local Ollama, and the committed clause index is built with Gemini embeddings. Steps are in the README ("Local testing vs the final build").
 
@@ -82,6 +94,7 @@ Real sign-in (role switch instead) · counsel-pack export (static preview) · pl
 
 | Date | Change |
 |---|---|
+| 13 Oct 2026 | Built without model calls: PDF / Word / scanned-PDF upload (lib/fileText.ts; 10/10 real files read back, 98.4–100% of words, every clause number; OCR via Gemini); eval leak fixed (dataset narrator lines removed from notes); held-out set (DATA_PROFILE=holdout, 10 SYN deals from Word/PDF/scan files, cases pre-registered from the answer key); every finding graded (82: 84% correct, 5% partly, 9% noise, 1 duplicate, 1 wrong; 2 output bugs fixed); npm run check (model-free, CI) and npm run eval:all (model batch). Consistency so far: TravelHub 3/3 SEND BACK, Datavane 2/3 SIGN AFTER CHANGES, Kriti 3 runs lost to provider 503s (now retried, reported as reliability). |
 | 12 Oct 2026 | Phase A done (rules only, no model calls; Gemini evals unchanged at 42 pass, same 4 variance cases): A1 no evidence, no finding; A2 clear register matches never dropped silently; A3 one-way NDA by rules; A4 instructions to an AI reviewer flagged (an end-to-end case on an injected LoopMart NDA runs with the version pairs in Phase B); A5 newer features under eval (upload detection, deal size, roles, live mismatch, store in register via lib/registerEdit.ts storeSignedDeal, review isolation); A6 the "Redline" noun wording, fixed. Measured on the qwen briefs: A1 lowers 21 unquoted findings, A2 recovers Crestline/Lakeshore and Northwind/Rheinwerk, A3 adds FinServe's two one-way findings. Next: Phase B on Gemini (F1, F2). |
 | 12 Oct 2026 | Local run on qwen2.5:7b: 32/50 pass. Fixed on the way: Ollama calls take turns (budgets ran while queued); review runs use the dataset alone, not the app's live state (a rejected Al Noor entry and FinServe uploads were leaking into v1 briefs); local eval report kept separate (eval/results-ollama.*). Open: "Redline" as a noun is rewritten to "Ask for changes to" mid-sentence (wording only). |
 | 11 Oct 2026 | Ollama local profile added, Groq removed. Fixed two local-run bugs: no cap on answer length (runaway generation) and fetch's 300 s header limit (Ollama calls now use node:http). On Windows, stopping a background run left its node processes running: check for and stop leftovers. |

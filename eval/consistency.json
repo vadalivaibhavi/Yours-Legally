@@ -40,5 +40,120 @@
       "errors": [],
       "ms": 117188
     }
+  ],
+  "datavane": [
+    {
+      "at": "2026-10-13T17:09:08.354Z",
+      "verdict": "SIGN AFTER CHANGES",
+      "counted": [
+        "conflict:cloudspan-spa:exclusivity",
+        "playbook:indemnity",
+        "playbook:liability",
+        "playbook:payment",
+        "playbook:restrictive",
+        "playbook:termination"
+      ],
+      "casePass": false,
+      "problems": [
+        "verdict SIGN AFTER CHANGES ≠ HOLD"
+      ],
+      "errors": [],
+      "ms": 209989
+    },
+    {
+      "at": "2026-10-13T17:15:16.867Z",
+      "verdict": "HOLD",
+      "counted": [
+        "playbook:indemnity",
+        "playbook:liability",
+        "playbook:payment",
+        "playbook:restrictive"
+      ],
+      "casePass": false,
+      "problems": [
+        "missing conflict:cloudspan-spa:exclusivity"
+      ],
+      "errors": [
+        "Conflict check couldn't complete: review manually (timed out after 300s across retries | gemini-3.6-flash: HTTP 503: { \"error\": { \"code\": 503, \"message\": \"This model is currently experiencing high demand. Spikes)"
+      ],
+      "ms": 368512
+    },
+    {
+      "at": "2026-10-13T17:19:23.923Z",
+      "verdict": "SIGN AFTER CHANGES",
+      "counted": [
+        "conflict:cloudspan-spa:exclusivity",
+        "playbook:indemnity",
+        "playbook:liability",
+        "playbook:payment",
+        "playbook:restrictive",
+        "playbook:termination"
+      ],
+      "casePass": false,
+      "problems": [
+        "verdict SIGN AFTER CHANGES ≠ HOLD"
+      ],
+      "errors": [],
+      "ms": 247054
+    }
+  ],
+  "kriti": [
+    {
+      "at": "2026-10-13T17:27:16.826Z",
+      "verdict": "HOLD",
+      "counted": [
+        "dependency:rheinwerk",
+        "flowdown:ip"
+      ],
+      "casePass": false,
+      "problems": [
+        "verdict HOLD ≠ SIGN AFTER CHANGES",
+        "missing flowdown:consent"
+      ],
+      "errors": [
+        "Notes scan couldn't complete: review manually"
+      ],
+      "ms": 472901
+    },
+    {
+      "at": "2026-10-13T17:34:36.930Z",
+      "verdict": "HOLD",
+      "counted": [
+        "dependency:rheinwerk"
+      ],
+      "casePass": false,
+      "problems": [
+        "verdict HOLD ≠ SIGN AFTER CHANGES",
+        "missing playbook:indemnity",
+        "missing playbook:liability",
+        "missing flowdown:ip",
+        "missing flowdown:data",
+        "missing flowdown:consent"
+      ],
+      "errors": [
+        "Playbook check couldn't complete: review manually (timed out after 300s across retries | gemini-3.7-flash: HTTP 503: { \"error\": { \"code\": 503, \"message\": \"This model is currently experiencing high demand. Spikes)"
+      ],
+      "ms": 440103
+    },
+    {
+      "at": "2026-10-13T17:40:53.833Z",
+      "verdict": "HOLD",
+      "counted": [
+        "dependency:rheinwerk"
+      ],
+      "casePass": false,
+      "problems": [
+        "verdict HOLD ≠ SIGN AFTER CHANGES",
+        "missing playbook:indemnity",
+        "missing playbook:liability",
+        "missing flowdown:ip",
+        "missing flowdown:data",
+        "missing flowdown:consent"
+      ],
+      "errors": [
+        "Playbook check couldn't complete: review manually (timed out after 300s across retries | gemini-3.7-flash: HTTP 503: { \"error\": { \"code\": 503, \"message\": \"This model is currently experiencing high demand. Spikes)"
+      ],
+      "ms": 376893
+    }
   ]
 }

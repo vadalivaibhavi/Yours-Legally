@@ -1,6 +1,22 @@
 {
   "version": "0.0.1",
   "configurations": [
-    { "name": "yours-legally", "runtimeExecutable": "npm", "runtimeArgs": ["run", "dev"], "port": 3000 }
+    {
+      "name": "yours-legally",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
+      "port": 3000
+    },
+    {
+      "name": "yours-legally-isolated",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "scripts/serveIsolated.mjs"
+      ],
+      "port": 3100
+    }
   ]
 }
