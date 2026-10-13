@@ -6,6 +6,7 @@
  *   npm run eval -- --case EV-10      → one case (repeatable / comma list); results merge into the last full run
  *   npm run eval -- --deal kriti      → the cases about one deal
  *   npm run eval -- --no-versions     → skip EV-V (no model calls at all)
+ *   npm run eval -- --no-write        → print only; keep the committed eval/results.* (npm run check)
  * Cases run one at a time. A case stopped by the daily quota, or graded on a brief whose steps hit a rate
  * limit, is reported "not run (quota)", never "failed": quota is not a logic failure. Re-run tomorrow.
  */
@@ -800,6 +801,7 @@ async function main() {
     { name: "A3 one-way NDA caught by rules, whatever the title says", ...oneWayNdaCheck() },
     { name: "A4 instructions to an AI reviewer are caught and block a clean verdict", ...injectionCheck(briefs) },
     { name: "A6 plain wording: \"redline\" reads right as a verb and as a noun", ...wordingCheck() },
+    { name: "Every finding graded (eval/finding_labels.json): precision, noise, wrong", ...labelsCheck(briefs) },
     { name: "A5 upload detection: notes vs contract, version vs additional, wrong deal, blank template", ...uploadDetectCheck() },
     { name: "A5 deal size: small-deal deviations count one step lower; promises to other clients never change", ...dealSizeCheck(briefs) },
     { name: "A5 owners are roles, never people's names", ...rolesCheck(briefs) },
@@ -923,6 +925,10 @@ async function main() {
       ``,
     ]),
   ].join("\n");
+  if (args.flags.has("no-write")) {
+    console.log("\n(--no-write: eval/results.* left as they are)");
+    return;
+  }
   fs.writeFileSync(`eval/${RESULTS}.md`, md + "\n");
   fs.writeFileSync(
     `eval/${RESULTS}.json`,
@@ -1262,5 +1268,37 @@ function isolationCheck(briefs: Brief[]): { pass: boolean; detail: string } {
   return {
     pass: !leaked.length && sensitive && reviewIsolated,
     detail: `${briefs.length - leaked.length}/${briefs.length} briefs built from the dataset only${legacy.length ? ` (${legacy.join(", ")} hashed before the end-client verdict counted)` : ""}${leaked.length ? ` · NOT: ${leaked.map((b) => b.dealId).join(", ")}` : ""} · a live note or register edit changes the hash: ${sensitive ? "yes" : "NO"} · npm run review starts on an empty state: ${reviewIsolated ? "yes" : "NO"}`,
+  };
+}
+
+/**
+ * Every finding in every brief is graded (eval/finding_labels.json), not only the ones the cases ask for:
+ * precision = correct / graded; partly = real but severity/wording off; duplicate, noise (true but not worth
+ * Karandeep's time), wrong (not supported by its own evidence). Fails on any ungraded finding (label it) or
+ * when more than 5% are wrong.
+ */
+function labelsCheck(briefs: Brief[]): { pass: boolean; detail: string } {
+  useMemoryState();
+  type L = { label: "correct" | "partly" | "duplicate" | "noise" | "wrong"; severity: "ok" | "too_high" | "too_low"; note: string };
+  const labels = readJson<{ labels: Record<string, Record<string, L>> }>("../eval/finding_labels.json").labels;
+  const tally: Record<string, number> = { correct: 0, partly: 0, duplicate: 0, noise: 0, wrong: 0 };
+  let sevOff = 0;
+  const ungraded: string[] = [];
+  for (const b of briefs) {
+    for (const f of effectiveBrief(b, null).findings) {
+      const l = labels[b.dealId]?.[f.key];
+      if (!l) {
+        ungraded.push(`${b.dealId}:${f.key}`);
+        continue;
+      }
+      tally[l.label]++;
+      if (l.severity !== "ok") sevOff++;
+    }
+  }
+  const graded = Object.values(tally).reduce((a, x) => a + x, 0);
+  const pct = (n: number) => (graded ? Math.round((100 * n) / graded) : 0);
+  return {
+    pass: !ungraded.length && tally.wrong <= graded * 0.05,
+    detail: `${graded} findings graded · precision ${pct(tally.correct)}% correct (+${pct(tally.partly)}% partly) · noise ${pct(tally.noise)}% · duplicates ${tally.duplicate} · wrong ${tally.wrong} · severity off ${sevOff}${ungraded.length ? ` · UNGRADED ${ungraded.length}: ${ungraded.slice(0, 8).join(", ")}${ungraded.length > 8 ? " …" : ""}` : " · none ungraded"}`,
   };
 }

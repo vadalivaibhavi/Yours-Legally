@@ -7,6 +7,9 @@
  *   npm run consistency -- --force                   → redo runs already recorded
  * Resumable: each finished run is saved to eval/consistency[-ollama].json at once; a run stopped by the daily
  * quota is simply not recorded, so the next day's command carries on from there.
+ * A run where a step failed (e.g. the provider's 503 "high demand") comes out HOLD by design and measures
+ * reliability, not consistency: it is kept and reported apart, and the deal gets another run (up to 3 extra)
+ * so the agreement numbers rest on complete runs.
  */
 import "./_env";
 import fs from "node:fs";
@@ -41,7 +44,8 @@ async function main() {
   console.log(`${provider()}: ${dealIds.join(", ")} × ${runs} (fresh answers, cache untouched)`);
   outer: for (const id of dealIds) {
     const c = cases.find((x) => x.spec.dealId === id);
-    for (let i = (store[id] ?? []).length; i < runs; i++) {
+    const complete = () => (store[id] ?? []).filter((r) => !r.errors.length).length;
+    for (let i = (store[id] ?? []).length; complete() < runs && i < runs + 3; i++) {
       const t0 = Date.now();
       try {
         const b = await withRunContext({ script: "consistency", dealId: id, caseId: `run${i + 1}` }, () => reviewDeal(id, { trigger: "consistency", version: i + 1, withoutSimilar: true }));
@@ -71,9 +75,13 @@ function jaccard(a: string[], b: string[]): number {
 
 function report(store: Record<string, Run[]>) {
   const rows: string[] = [];
-  let verdictSame = 0, total = 0;
+  let verdictSame = 0, total = 0, failed = 0, failedSafe = 0, attempts = 0;
   for (const id of dealIds) {
-    const rs = store[id] ?? [];
+    const all = store[id] ?? [];
+    const rs = all.filter((r) => !r.errors.length); // complete runs only: a failed step is reliability, not judgment
+    failed += all.length - rs.length;
+    failedSafe += all.filter((r) => r.errors.length && r.verdict === "HOLD").length;
+    attempts += all.length;
     if (!rs.length) continue;
     const c = cases.find((x) => x.spec.dealId === id);
     const tally = new Map<string, number>();
@@ -87,7 +95,7 @@ function report(store: Record<string, Run[]>) {
     verdictSame += n;
     total += rs.length;
     rows.push(
-      `| ${id} | ${c?.id ?? "–"} | ${rs.length}${rs.some((r) => r.errors.length) ? ` (${rs.filter((r) => r.errors.length).length} with step errors)` : ""} | ${rs.map((r) => r.verdict).join(" · ")} | ${n}/${rs.length} ${mode} | ${Math.round(overlap * 100)}% | ${sometimes.length ? sometimes.join(", ") : "none"} | ${c ? `${rs.filter((r) => r.casePass).length}/${rs.length}` : "–"} |`,
+      `| ${id} | ${c?.id ?? "–"} | ${rs.length}${all.length > rs.length ? ` (+${all.length - rs.length} with a failed step)` : ""} | ${rs.map((r) => r.verdict).join(" · ")} | ${n}/${rs.length} ${mode} | ${Math.round(overlap * 100)}% | ${sometimes.length ? sometimes.join(", ") : "none"} | ${c ? `${rs.filter((r) => r.casePass).length}/${rs.length}` : "–"} |`,
     );
   }
   const md = [
@@ -95,7 +103,9 @@ function report(store: Record<string, Run[]>) {
     "",
     `Same deals, fresh model answers each run (\`npm run consistency\`). Written ${new Date().toISOString().slice(0, 16).replace("T", " ")} UTC.`,
     "",
-    `**Verdict agreement: ${verdictSame}/${total} runs give their deal's most common verdict.** Counted findings = blocker and high (what moves the verdict); overlap = average Jaccard between runs.`,
+    `**Verdict agreement: ${verdictSame}/${total} complete runs give their deal's most common verdict.** Counted findings = blocker and high (what moves the verdict); overlap = average Jaccard between runs.`,
+    "",
+    `**Reliability:** ${failed} of ${attempts} runs had a step fail (the provider's overload / timeouts); ${failedSafe} of those came out HOLD, i.e. never a clean verdict on a partial review. They are left out of the agreement numbers.`,
     "",
     "| Deal | Case | Runs | Verdicts | Agreement | Counted-findings overlap | Found only in some runs | Case passes |",
     "|---|---|---|---|---|---|---|---|",

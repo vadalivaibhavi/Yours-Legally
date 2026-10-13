@@ -1,0 +1,26 @@
+# npm run check on every push and pull request: typecheck, upload detection, PDF/Word/scan reading, the
+# eval on the committed briefs (guardrails, finding grades, register flagging, …) and held-out grading.
+# No review-model calls. The Gemini key (repository secret GEMINI_API_KEY) is used only for query
+# embeddings (similar clauses) and the 2 OCR scans; without it those cases fail with a key error.
+# The model batch (npm run eval:all) stays manual: it needs the daily quota and takes hours on the free tier.
+name: check
+on:
+  push:
+  pull_request:
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      LLM_PROVIDER: gemini
+      EMBED_PROVIDER: gemini
+      LLM_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      EMBED_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check

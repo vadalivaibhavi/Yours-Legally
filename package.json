@@ -22,7 +22,13 @@
     "check:upload-detect": "tsx scripts/checkUploadDetect.ts",
     "consistency": "tsx scripts/consistency.ts",
     "fixtures:formats": "tsx scripts/makeFormatFixtures.ts && powershell -NoProfile -ExecutionPolicy Bypass -File scripts/makeFormatFixtures.ps1",
-    "check:file-read": "tsx scripts/checkFileRead.ts"
+    "check:file-read": "tsx scripts/checkFileRead.ts",
+    "holdout:ingest": "tsx scripts/ingestHoldout.ts",
+    "holdout:register": "tsx scripts/holdout.ts buildRegister",
+    "holdout:review": "tsx scripts/holdout.ts review",
+    "holdout:eval": "tsx scripts/evalHoldout.ts",
+    "check": "tsx scripts/evalAll.ts check",
+    "eval:all": "tsx scripts/evalAll.ts all"
   },
   "dependencies": {
     "mammoth": "^1.13.0",

@@ -131,7 +131,8 @@ export function runGate(ctx: GateContext): { results: GateResult[]; findings: Fi
   const days = x.payment.days;
   if (x.payment.payWhenPaid || (days !== null && days > 45)) {
     const sev = x.payment.payWhenPaid || (days ?? 0) >= 90 ? "high" : "medium";
-    const what = x.payment.payWhenPaid ? `pay-when-paid${days ? `, up to ${days} days` : ""}` : `${days} days`;
+    // Pay-when-paid: the days run only after the end client pays, so they are not a maximum.
+    const what = x.payment.payWhenPaid ? `pay-when-paid${days ? ` (then ${days} days)` : ""}` : `${days} days`;
     results.push({ rule: "payment", label: "Payment ≤ 45 days", pass: false, detail: what, citation: payCite });
     findings.push({
       key: "playbook:payment",
@@ -203,7 +204,9 @@ export function runGate(ctx: GateContext): { results: GateResult[]; findings: Fi
   const badCarveOuts = x.liability.uncappedFor
     .map(withHeading)
     .filter((u) => !OK_UNCAPPED.test(u))
-    .map((u) => u.replace(/^(any )?(breach|violation) of /i, "").replace(/^clause \d+(\.\d+)? \((.+)\)$/i, "$2"));
+    .map((u) => u.replace(/^(any )?(breach|violation) of /i, "").replace(/^clause \d+(\.\d+)? \((.+)\)$/i, "$2"))
+    .map(carveOutName)
+    .filter((u, i, all) => u && all.findIndex((v) => v.toLowerCase() === u.toLowerCase()) === i);
   if (x.liability.atliqCapped === false) {
     results.push({ rule: "liability_cap", label: "Liability capped", pass: false, detail: "AtliQ's liability is unlimited", citation: liabCite });
     findings.push({
@@ -320,4 +323,15 @@ function annexPresent(name: string, doc: Document, others: { id: string; title: 
 
 function escapeRe(s: string) {
   return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+/**
+ * A carve-out as a plain name: extraction can return fragments like "Data Protection) (DATA PROTECTION"
+ * (from "Clause 8 (Data Protection)"). Drops clause numbers and stray brackets and a repeated phrase.
+ */
+export function carveOutName(raw: string): string {
+  const t = raw.replace(/\bclause\s+\d+(\.\d+)*\b/gi, " ").replace(/[()]/g, " ").replace(/\s+/g, " ").trim();
+  const w = t.split(" ");
+  if (w.length % 2 === 0 && w.slice(0, w.length / 2).join(" ").toLowerCase() === w.slice(w.length / 2).join(" ").toLowerCase()) return w.slice(0, w.length / 2).join(" ");
+  return t;
 }
