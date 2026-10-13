@@ -30,7 +30,8 @@ export type Task =
   | "playbook" // F4 playbook / mirror / flow-down (strong)
   | "nda" // F2 fast lane: NDA mutuality checklist (strong model, low thinking: <1 min target)
   | "differs" // FR-22 "how it differs" lines (strong)
-  | "brief"; // F6 headline + next action from findings (strong)
+  | "brief" // F6 headline + next action from findings (strong)
+  | "ocr"; // scanned PDF upload → text (the model reads the file itself; Gemini only)
 
 const TIER: Record<Task, "fast" | "strong"> = {
   extract: "fast",
@@ -43,6 +44,7 @@ const TIER: Record<Task, "fast" | "strong"> = {
   nda: "strong",
   differs: "strong",
   brief: "strong",
+  ocr: "fast",
 };
 
 export const MANUAL_REVIEW = "couldn't complete: review manually";
@@ -127,7 +129,10 @@ export type CallArgs<S extends z.ZodType> = {
   mock?: z.infer<S>;
   /** Bypass the cache (e.g. forced re-check). */
   noCache?: boolean;
+  /** A file the model reads alongside the prompt (scanned PDF → OCR). Gemini only. */
+  file?: FilePart;
 };
+export type FilePart = { mimeType: string; base64: string };
 
 export function provider(): string {
   return (process.env.LLM_PROVIDER || "mock").toLowerCase();
@@ -193,9 +198,9 @@ export function drainUsage() {
 
 // ---------------------------------------------------------------- main entry
 export async function callModel<S extends z.ZodType>(args: CallArgs<S>): Promise<LlmResult<z.infer<S>>> {
-  const { task, system, input, schema } = args;
+  const { task, system, input, schema, file } = args;
   const jsonSchema = toJsonSchema(schema);
-  const key = hash([PROMPT_VERSION, ...providerTag(), task, TIER[task], system, input, JSON.stringify(jsonSchema)].join("\u0000"));
+  const key = hash([PROMPT_VERSION, ...providerTag(), task, TIER[task], system, input, JSON.stringify(jsonSchema), ...(file ? [hash(file.base64)] : [])].join("\u0000"));
 
   if (provider() === "mock") {
     if (args.mock === undefined) return fail("LLM_PROVIDER=mock and no mock value for task " + task);
@@ -226,7 +231,7 @@ export async function callModel<S extends z.ZodType>(args: CallArgs<S>): Promise
   let prompt = input;
   // Attempt 1 + one retry on invalid JSON / schema mismatch (CLAUDE.md).
   for (let attempt = 0; attempt < 2; attempt++) {
-    const res = await generateWithFallback(task, system, prompt, jsonSchema); // throws QuotaExhaustedError when the chain is out of daily quota
+    const res = await generateWithFallback(task, system, prompt, jsonSchema, file); // throws QuotaExhaustedError when the chain is out of daily quota
     if (!res.ok) {
       logCall({ task, model: modelsFor(task).join(","), inputTokens: 0, outputTokens: 0, ms: Date.now() - started, cached: false, ok: false, error: res.error });
       return fail(res.error);
@@ -281,21 +286,22 @@ export function callBudgetMs(task?: Task): number {
  * budget starts when its turn comes.
  */
 let localTurn: Promise<void> = Promise.resolve();
-async function generateWithFallback(task: Task, system: string, input: string, schema: object): Promise<GenOk | GenErr> {
-  if (provider() !== "ollama") return generateNow(task, system, input, schema);
+async function generateWithFallback(task: Task, system: string, input: string, schema: object, file?: FilePart): Promise<GenOk | GenErr> {
+  if (file && provider() !== "gemini") return { ok: false, error: `reading a scanned file needs LLM_PROVIDER=gemini (now ${provider()})` };
+  if (provider() !== "ollama") return generateNow(task, system, input, schema, file);
   let release!: () => void;
   const mine = new Promise<void>((r) => (release = r));
   const wait = localTurn;
   localTurn = wait.then(() => mine);
   await wait;
   try {
-    return await generateNow(task, system, input, schema);
+    return await generateNow(task, system, input, schema, file);
   } finally {
     release();
   }
 }
 
-async function generateNow(task: Task, system: string, input: string, schema: object): Promise<GenOk | GenErr> {
+async function generateNow(task: Task, system: string, input: string, schema: object, file?: FilePart): Promise<GenOk | GenErr> {
   const errors: string[] = [];
   let deadline = Date.now() + callBudgetMs(task);
   const timedOut = () => ({ ok: false as const, error: `timed out after ${Math.round(callBudgetMs(task) / 1000)}s across retries | ${errors.join(" | ")}`.slice(0, 2000) });
@@ -312,7 +318,7 @@ async function generateNow(task: Task, system: string, input: string, schema: ob
       for (;;) {
         if (Date.now() >= deadline) return timedOut();
         await throttle();
-        const r = await generateOnce(model, thinkingFor(task), system, input, schema, deadline);
+        const r = await generateOnce(model, thinkingFor(task), system, input, schema, deadline, file);
         if (r.ok) return r;
         errors.push(`${model}: ${r.error.slice(0, 120)}`);
         if (r.daily) {
@@ -342,14 +348,14 @@ async function generateNow(task: Task, system: string, input: string, schema: ob
 
 type Once = GenOk | (GenErr & { retry?: "same" | "next"; waitMs?: number; daily?: boolean; rateLimited?: boolean });
 
-async function generateOnce(model: string, thinking: "low" | "high", system: string, input: string, schema: object, deadline: number): Promise<Once> {
+async function generateOnce(model: string, thinking: "low" | "high", system: string, input: string, schema: object, deadline: number, file?: FilePart): Promise<Once> {
   // Each request is cut off at the call deadline, and never waits more than LLM_REQUEST_TIMEOUT_MS (2 min; 15 min locally) on its own.
   const ms = Math.max(1_000, Math.min(provider() === "ollama" ? 900_000 : Number(process.env.LLM_REQUEST_TIMEOUT_MS || 120_000), deadline - Date.now()));
   const p = provider();
   const key = apiKey();
   if (!key) return { ok: false, error: "LLM_API_KEY is not set", retry: "next" };
   try {
-    if (p === "gemini") return await gemini(model, thinking, key, system, input, schema, ms);
+    if (p === "gemini") return await gemini(model, thinking, key, system, input, schema, ms, file);
     if (p === "ollama") return await ollama(model, system, input, schema, ms);
     if (p === "anthropic") return await anthropic(model, key, system, input, schema, ms);
     if (p === "openai") return await openai(model, key, system, input, schema, ms);
@@ -359,11 +365,12 @@ async function generateOnce(model: string, thinking: "low" | "high", system: str
   }
 }
 
-async function gemini(model: string, thinking: "low" | "high", key: string, system: string, input: string, schema: object, ms: number): Promise<Once> {
+async function gemini(model: string, thinking: "low" | "high", key: string, system: string, input: string, schema: object, ms: number, file?: FilePart): Promise<Once> {
+  const filePart = file ? [{ inlineData: { mimeType: file.mimeType, data: file.base64 } }] : [];
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
   const body = (withSchema: boolean) => ({
     systemInstruction: { parts: [{ text: system }] },
-    contents: [{ role: "user", parts: [{ text: input }] }],
+    contents: [{ role: "user", parts: [...filePart, { text: input }] }],
     generationConfig: {
       responseMimeType: "application/json",
       ...(withSchema ? { responseJsonSchema: schema } : {}),
@@ -375,7 +382,7 @@ async function gemini(model: string, thinking: "low" | "high", key: string, syst
     // Some models reject parts of the schema or the thinking config: retry plain JSON mode.
     const plain = body(false) as Record<string, unknown>;
     (plain.generationConfig as Record<string, unknown>).thinkingConfig = undefined;
-    plain.contents = [{ role: "user", parts: [{ text: input + "\n\nReturn JSON matching this JSON Schema:\n" + JSON.stringify(schema) }] }];
+    plain.contents = [{ role: "user", parts: [...filePart, { text: input + "\n\nReturn JSON matching this JSON Schema:\n" + JSON.stringify(schema) }] }];
     res = await fetchWithTimeout(url, key, plain, ms);
   }
   const txt = await res.text();

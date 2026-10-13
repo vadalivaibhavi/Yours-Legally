@@ -13,7 +13,7 @@ export const LIMITS = {
   rates: 500, // rates by role, one per line
   summary: 1000, // register summary
   contract: 200_000, // pasted contract text
-  fileBytes: 1_000_000, // uploaded contract file
+  fileBytes: 4_000_000, // uploaded contract file (PDF / Word / text); Vercel caps a request at 4.5 MB
   evidenceBytes: 5_000_000, // evidence attached to close a compliance alert
 } as const;
 

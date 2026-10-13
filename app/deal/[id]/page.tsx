@@ -130,6 +130,7 @@ export default async function DealPage(props: PageProps<"/deal/[id]">) {
                 <Chip tone="brand">{d.docType}</Chip>
                 <Chip>{d.paper === "atliq" ? "AtliQ's paper" : "Their paper"}</Chip>
                 {d.replaces && <Chip tone="warn">New version</Chip>}
+                {d.ocr && <Chip tone="warn">Read from a scan (OCR)</Chip>}
                 <span className="text-xs text-muted">received {fmtDate(d.date)}</span>
               </summary>
               {/* Contract facts live with their document (FR-4): what was extracted, from which clause, and the rule checks. */}

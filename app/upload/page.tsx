@@ -55,6 +55,7 @@ export default async function UploadPage(props: PageProps<"/upload">) {
           <input type="hidden" name="staged" value={staged.id} />
           <p className="text-muted">
             📄 {staged.name} · {staged.text.split(/\s+/).length.toLocaleString()} words
+            {staged.readNote && <span className="text-change"> · {staged.readNote}: quotes are checked against the transcription, so compare key clauses with the original</span>}
           </p>
           <div className="rounded-lg bg-brand-soft p-3">
             This looks like <b>{label(staged.guess.what)}</b>
@@ -117,11 +118,12 @@ export default async function UploadPage(props: PageProps<"/upload">) {
       </Link>
       <h1 className="font-serif text-2xl font-semibold">{preselectDeal ? `Upload into ${preselectDeal.name}` : "Upload a contract"}</h1>
       {sp.quota === "1" && <div className="rounded-lg bg-change-soft p-4 text-sm text-change">{QUOTA_MESSAGE}</div>}
+      {sp.unreadable && <div className="rounded-lg bg-change-soft p-4 text-sm text-change">{String(sp.unreadable).slice(0, 300)}</div>}
       {sp.template === "1" && <div className="rounded-lg bg-change-soft p-4 text-sm text-change">It looks like a blank template, so it wasn't added: a template's clauses are nobody's terms, and reviewing them would flag things that don't apply. Upload the filled-in contract instead.</div>}
       <form action={uploadDocument} className="card space-y-4 p-5 text-sm">
         <label className="block space-y-1">
-          <span className="label">File (.md / .txt, up to 1 MB)</span>
-          <input type="file" name="file" accept=".md,.txt,.markdown" className="w-full" />
+          <span className="label">File (PDF, Word .docx, .md or .txt, up to 4 MB; scanned PDFs are read by OCR)</span>
+          <input type="file" name="file" accept=".pdf,.docx,.md,.txt,.markdown" className="w-full" />
         </label>
         <label className="block space-y-1">
           <span className="label">…or paste the text</span>

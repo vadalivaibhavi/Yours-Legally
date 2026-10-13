@@ -13,6 +13,7 @@ import { redirect } from "next/navigation";
 import { allDeals, allDocuments, dealDocuments, dealNotes, getDeal, type DealView } from "@/lib/deals";
 import { proposeLink, type LinkProposal } from "@/lib/linking";
 import { isQuotaExhausted } from "@/lib/llm";
+import { readContractFile, UnreadableFile } from "@/lib/fileText";
 import { belongsElsewhere, findPriorVersion, guessDocType, looksLikeNotes, looksLikeTemplate, type DealSketch } from "@/lib/uploadDetect";
 import { extractReferences } from "@/lib/references";
 import { extractDocument } from "@/lib/review/extract";
@@ -22,21 +23,36 @@ import { mutate, readState } from "@/lib/store";
 import { LIMITS } from "@/lib/limits";
 import type { Deal, Document } from "@/lib/types";
 
-/** The uploaded file or pasted text, checked for type and size. */
-async function readUpload(form: FormData): Promise<{ name: string; text: string }> {
+type Upload = { name: string; text: string; ocr: boolean; readNote?: string };
+
+/**
+ * The uploaded file (PDF, Word .docx, .md / .txt; scans are read by OCR, lib/fileText.ts) or pasted text,
+ * checked for type and size. A file that can't be read goes back to the upload page with the reason.
+ */
+async function readUpload(form: FormData): Promise<Upload> {
   const file = form.get("file");
+  const back = (q: string) => redirect(`/upload?${q}${form.get("deal") ? `&deal=${encodeURIComponent(String(form.get("deal")))}` : ""}`);
   let text = String(form.get("text") ?? "");
   let name = "pasted-text.md";
-  if (file && typeof file === "object" && "text" in file && (file as File).size > 0) {
+  let ocr = false;
+  let readNote: string | undefined;
+  if (file && typeof file === "object" && "arrayBuffer" in file && (file as File).size > 0) {
     name = (file as File).name;
-    if (!/\.(md|txt|markdown)$/i.test(name)) throw new Error("The prototype reads text (.md / .txt) files; PDF/OCR intake is declared out of scope.");
-    if ((file as File).size > LIMITS.fileBytes) throw new Error(`That file is ${Math.round((file as File).size / 1024)} KB; the limit is ${LIMITS.fileBytes / 1_000_000} MB.`);
-    text = await (file as File).text();
+    if ((file as File).size > LIMITS.fileBytes) back(`unreadable=${encodeURIComponent(`That file is ${(((file as File).size) / 1_000_000).toFixed(1)} MB; the limit is ${LIMITS.fileBytes / 1_000_000} MB.`)}`);
+    try {
+      const r = await readContractFile(name, new Uint8Array(await (file as File).arrayBuffer()));
+      ({ text, ocr } = r);
+      readNote = r.note;
+    } catch (e) {
+      if (isQuotaExhausted(e)) back("quota=1");
+      if (e instanceof UnreadableFile) back(`unreadable=${encodeURIComponent(e.message)}`);
+      throw e;
+    }
   }
   text = text.replace(/\r\n/g, "\n").trim();
-  if (text.length < 20) throw new Error("That file is empty or too short.");
-  if (text.length > LIMITS.contract) throw new Error(`That file is ${text.length.toLocaleString()} characters; the limit is ${LIMITS.contract.toLocaleString()}.`);
-  return { name, text };
+  if (text.length < 20) back(`unreadable=${encodeURIComponent("That file is empty or has no readable text.")}`);
+  if (text.length > LIMITS.contract) back(`unreadable=${encodeURIComponent(`That file is ${text.length.toLocaleString()} characters; the limit is ${LIMITS.contract.toLocaleString()}.`)}`);
+  return { name, text, ocr, readNote };
 }
 
 const sketch = (d: DealView): DealSketch => ({ id: d.id, name: d.name, names: [d.counterparty, ...d.counterpartyAliases], docs: dealDocuments(d) });
@@ -68,19 +84,19 @@ export async function moveStaged(form: FormData) {
 
 export async function uploadDocument(form: FormData) {
   const user = await currentUser();
-  const { name, text } = await readUpload(form);
+  const { name, text, ocr, readNote } = await readUpload(form);
   const deal = getDeal(String(form.get("deal") ?? ""));
   if (form.get("inDeal") === "1" && deal) {
     // Step 1 of 2: detect and hold it; nothing is processed until the uploader confirms what it is.
     if (dealDocuments(deal).some((d) => d.text.trim() === text) || dealNotes(deal).some((n) => n.text.trim() === text)) redirect(`/deal/${deal.id}?duplicate=1`);
     const id = `stage-${Date.now().toString(36)}`;
     const guess = detect(text, deal);
-    mutate((s) => void (s.stagedUploads = [...s.stagedUploads.filter((x) => x.dealId !== deal.id), { id, dealId: deal.id, name, text, at: new Date().toISOString(), guess }]));
+    mutate((s) => void (s.stagedUploads = [...s.stagedUploads.filter((x) => x.dealId !== deal.id), { id, dealId: deal.id, name, text, ocr, readNote, at: new Date().toISOString(), guess }]));
     redirect(`/upload?deal=${deal.id}&staged=${id}`);
   }
   // General upload: a blank template is turned away before any model call.
   if (looksLikeTemplate(text).template) redirect("/upload?template=1");
-  await processContract({ name, text, chosen: String(form.get("deal") ?? ""), what: "contract", by: user.name });
+  await processContract({ name, text, ocr, chosen: String(form.get("deal") ?? ""), what: "contract", by: user.name });
 }
 
 /** Step 2 of 2: the uploader confirmed (or changed) what the file is. */
@@ -98,18 +114,18 @@ export async function confirmUpload(form: FormData) {
   // A blank template is never reviewed or kept as context: its clauses are nobody's terms.
   if (what === "template") redirect(`/deal/${staged.dealId}?template=1`);
   if (what === "note") return addNote(staged.dealId, staged.name, staged.text, user.name);
-  await processContract({ name: staged.name, text: staged.text, chosen: staged.dealId, what, by: user.name });
+  await processContract({ name: staged.name, text: staged.text, ocr: !!staged.ocr, chosen: staged.dealId, what, by: user.name });
 }
 
 /** A contract document: extract, link (or keep the chosen deal), replace the revised document if any, re-check. */
-async function processContract(a: { name: string; text: string; chosen: string; what: string; by: string }) {
-  const { name, text, chosen, what, by } = a;
+async function processContract(a: { name: string; text: string; ocr: boolean; chosen: string; what: string; by: string }) {
+  const { name, text, ocr, chosen, what, by } = a;
   if (text.length < 200) throw new Error("That document is too short to review.");
   const into = getDeal(chosen);
   if (into && dealDocuments(into).some((d) => d.text.trim() === text)) redirect(`/deal/${into.id}?duplicate=1`);
   let x;
   try {
-    x = await extractDocument({ id: "upload", file: name, kind: "uploaded", docType: "Other", title: name, counterparty: "", date: "", sideOfTable: "supplier", paper: "client", text, ocr: false, references: [] } as Document);
+    x = await extractDocument({ id: "upload", file: name, kind: "uploaded", docType: "Other", title: name, counterparty: "", date: "", sideOfTable: "supplier", paper: "client", text, ocr, references: [] } as Document);
   } catch (e) {
     if (!isQuotaExhausted(e)) throw e;
     redirect(`/upload?quota=1${chosen ? `&deal=${encodeURIComponent(chosen)}` : ""}`); // nothing saved yet: upload again tomorrow
@@ -128,7 +144,7 @@ async function processContract(a: { name: string; text: string; chosen: string; 
     sideOfTable: x.data.sideOfTable,
     paper: x.data.paper,
     text,
-    ocr: false,
+    ocr, // read from a scan: the review reads through OCR noise and quotes are matched to the transcription
     references: extractReferences(text),
   };
   // A new version of a document already in the deal takes its place; the old one leaves the deal.
