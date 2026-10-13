@@ -1,0 +1,52 @@
+{
+  "_source": "Written from Dataset/SYN_README_answer_key.md on 13 Oct 2026, BEFORE any held-out review ran. Not to be edited after seeing results (that would turn the held-out set into a tuning set); any later change must be logged in 'changes' with the reason.",
+  "_grading": "Verdict: the answer key's red rows (do not sign / conflict / breach) map to HOLD, like EV-01/02/05/06; amber (own paper unfair, AtliQ fixes it before sending) maps to SIGN AFTER CHANGES, like EV-10/13; green to SIGN. mustCite: a blocker/high finding must cite (or be keyed on) that signed contract: the register conflict, graded by evidence rather than by the model's choice of clause type. mustFind: finding-key prefixes as in eval/cases.json ('a|b' = either). mustNotCite / mustNotFlag: no medium-or-higher finding citing / matching it.",
+  "changes": [],
+  "cases": [
+    { "id": "HO-01", "answerKey": "I01", "dealId": "pillarstone", "expectedVerdict": "HOLD",
+      "why": "Pillarstone is a pharma C&F agent / super-stockist: a Competing Business under Kestrel §12 (live to 2028-11-03, binds affiliates). Draft also one-sided: LD 1%/wk to 15%, 60-day payment, uncapped vendor liability, 15-day termination paying accepted milestones only.",
+      "mustCite": ["syn-kestrel-msa"], "mustFind": ["playbook:ld", "playbook:payment", "playbook:liability", "playbook:termination"] },
+    { "id": "HO-02", "answerKey": "I02", "dealId": "cobalt", "expectedVerdict": "HOLD",
+      "why": "$68 Sr DE is below Meridale's $80 MFN (S02 §6.3, worldwide, affiliates: retroactive refund) and below the Crestline MFN ($85, original register). Cobalt adds its own MFN, a third constraint.",
+      "mustCite": ["syn-meridale-msa", "crestline-msa"], "mustFind": ["covenant:mfn_pricing"] },
+    { "id": "HO-03", "answerKey": "I03", "dealId": "aldergrove", "expectedVerdict": "HOLD",
+      "why": "SOW deploys IngestIQ, assigned to Novaterra (S03 §6.1-6.2); draft §4.3 warrants AtliQ owns it, uncapped.",
+      "mustCite": ["syn-novaterra-msa"], "mustFind": [] },
+    { "id": "HO-04", "answerKey": "I04", "dealId": "quanta", "expectedVerdict": "HOLD",
+      "why": "Quanta Lake is named in Zephyr Sch 1; Zephyr §7 binds affiliates (Inc signing doesn't help); India + Singapore overlap the Zephyr Territory. Entity question: Inc for an India/ME territory.",
+      "mustCite": ["syn-zephyr-spa"], "mustFind": ["gate:entity"] },
+    { "id": "HO-05", "answerKey": "I05", "dealId": "ashwood", "expectedVerdict": "HOLD",
+      "why": "§6 puts a Limited Data Set in front of the Pune team; BAA §4.3 bans offshore access including LDS, §4.2 treats affiliates as subcontractors needing approval + own BAA; only the Privacy Officer can approve (§10.3). Insurance: $3M required, AtliQ holds $1M.",
+      "mustCite": ["syn-ashwood-baa"], "mustFind": ["gate:insurance|playbook:insurance"] },
+    { "id": "HO-06", "answerKey": "I06", "dealId": "cargoline", "expectedVerdict": "HOLD",
+      "why": "Cargoline is #1 on Falconridge Sch 4 (customer non-solicit across the GCC to 2029-09-14, LD $56k; draft §8.1 rep false). Entity mismatch: AtliQ Inc for a Bahrain client, payment to a US account.",
+      "mustCite": ["syn-falconridge-msa"], "mustFind": ["gate:entity|gate:invoicing_entity"] },
+    { "id": "HO-07", "answerKey": "I07", "dealId": "monsoon", "expectedVerdict": "SIGN AFTER CHANGES",
+      "why": "AtliQ's own vendor template still has the clauses removed for PixelCraft: 1%/day uncapped penalty, 60-day / pay-when-paid, uncapped vendor liability vs AtliQ's 1-month cap, 24-month non-compete on a 6-person firm, one-way 7-day termination. Separately the Tessellate take-or-pay minimum (S07): hours sent to Monsoon don't count; ~$15k shortfall due Nov 2026.",
+      "mustCite": ["syn-tessellate-vsa"], "mustFind": ["playbook:ld", "playbook:payment", "playbook:liability", "playbook:restrictive", "playbook:termination"] },
+    { "id": "HO-08", "answerKey": "I08", "dealId": "indus", "expectedVerdict": "HOLD",
+      "why": "(1) Lumen cooling-off (S08 §10.2): no EWS for an RBI-regulated lender until 2028-08-12; waiver window already blown. (2) Zephyr ROFR (S04 §8) on India BFSI deals > $50k, not notified.",
+      "mustCite": ["syn-lumen-msa", "syn-zephyr-spa"], "mustFind": [] },
+    { "id": "HO-09", "answerKey": "I09", "dealId": "corvina", "expectedVerdict": "HOLD",
+      "why": "Notice gives < 30 days (DPA A2.4); SyncRiver moves data to the US (A2.3 needs consent); Kriti not under contract; rates +8% against the initial-term rate freeze (MSA §3.2); §6.1 'SOW prevails' tries to override the MSA.",
+      "mustCite": ["syn-corvina-msa"], "mustFind": [] },
+    { "id": "HO-10", "answerKey": "I10", "dealId": "greystone", "expectedVerdict": "SIGN",
+      "why": "False-positive test: looks like a Halvorsen conflict but the §8 standstill expired 2026-08-10 and Greystone is a TPA, not a P&C insurer. Terms balanced.",
+      "mustCite": [], "mustFind": [], "mustNotCite": ["syn-halvorsen-nda"], "mustNotFlag": ["severity:blocker", "severity:high"] }
+  ],
+  "register": {
+    "_why": "Answer key 'Obligation register' table: what each signed SYN contract commits AtliQ to. types = acceptable register types for the main commitment; end = live-until date where the key gives one; expired = must be expired on 2026-09-28; affiliates = binds both AtliQ entities.",
+    "entries": [
+      { "id": "S01", "docId": "syn-kestrel-msa", "types": ["non_compete"], "end": "2028-11-03", "affiliates": true },
+      { "id": "S02", "docId": "syn-meridale-msa", "types": ["mfn_pricing"], "end": "2028-02-02", "affiliates": true },
+      { "id": "S03", "docId": "syn-novaterra-msa", "types": ["ip_transfer"], "perpetual": true, "affiliates": true },
+      { "id": "S04", "docId": "syn-zephyr-spa", "types": ["exclusivity"], "affiliates": true },
+      { "id": "S05", "docId": "syn-ashwood-baa", "types": ["data_location", "compliance"], "affiliates": true },
+      { "id": "S06", "docId": "syn-falconridge-msa", "types": ["non_solicit", "non_compete"], "end": "2029-09-14", "affiliates": true },
+      { "id": "S07", "docId": "syn-tessellate-vsa", "types": ["other"] },
+      { "id": "S08", "docId": "syn-lumen-msa", "types": ["non_compete"], "end": "2028-08-12", "affiliates": true },
+      { "id": "S09", "docId": "syn-corvina-msa", "types": ["mfn_pricing", "other", "data_location"] },
+      { "id": "S10", "docId": "syn-halvorsen-nda", "types": ["non_compete"], "end": "2026-08-10", "expired": true }
+    ]
+  }
+}
