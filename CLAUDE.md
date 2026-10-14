@@ -22,7 +22,7 @@ Next.js App Router + TypeScript + Tailwind. No auth library (role switch), no da
 ## Project notes (Next.js 16)
 - `proxy.ts` replaces middleware; `cookies()`, `headers()`, `params`, `searchParams` are async.
 - Two profiles (README "Local testing vs the final build"): FINAL = Gemini model + Gemini embeddings (committed data/briefs, data/clause_index.json; the only thing Vercel can run). LOCAL = Ollama (qwen2.5:7b + nomic-embed-text; llama3.2 invents findings) for testing and evals; writes data/briefs-ollama and data/clause_index.ollama.json (gitignored). Switch with LLM_PROVIDER / EMBED_PROVIDER; switch back to Gemini before final runs and the deploy. Groq is no longer part of the build.
-- `APP_TODAY` (default 2026-10-04) fixes "today" for expiry, due-in and live/expired.
+- `APP_TODAY` (default 2026-09-28, the dataset's "today") fixes "today" for expiry, due-in and live/expired.
 - Scripts: `npm run ingest`, `build:register`, `check:register`, `build:index`, `search`, `build:eval`, `review`, `eval`.
 
 <!-- BEGIN:nextjs-agent-rules -->

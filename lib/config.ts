@@ -51,8 +51,8 @@ export function clauseIndexFile(): string {
 
 /** "Today" is fixed for reproducible demos and evals (Phase 1 spec §0). */
 export function appToday(): string {
-  // The held-out set's own "today" (its answer key is written as of 28 Sep 2026).
-  return process.env.APP_TODAY || (dataProfile() === "holdout" ? "2026-09-28" : "2026-10-04");
+  // The dataset's "today" (capstone brief: treat today as 28 September 2026); the held-out set uses the same date.
+  return process.env.APP_TODAY || "2026-09-28";
 }
 
 export function todayDate(): Date {

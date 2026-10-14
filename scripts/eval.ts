@@ -20,7 +20,7 @@ import { filterRegister, unconfirmed } from "../lib/review/conflict";
 import { oneWayNda } from "../lib/review/playbook";
 import { containsDpa } from "../lib/review/bundle";
 import { injectionAttempts, sanitize } from "../lib/review/guardrails";
-import { briefsDir } from "../lib/config";
+import { appToday, briefsDir } from "../lib/config";
 import {
   canDecide,
   canViewBrief,
@@ -183,7 +183,7 @@ function syntheticDoc(
   return {
     kind: "uploaded",
     title: meta.title ?? meta.id,
-    date: "2026-10-04",
+    date: appToday(),
     ocr: false,
     references: [],
     ...meta,
@@ -908,7 +908,7 @@ async function main() {
   const md = [
     `# Eval results`,
     ``,
-    `Run ${new Date().toISOString().slice(0, 16).replace("T", " ")} UTC · APP_TODAY ${process.env.APP_TODAY ?? "2026-10-04"} · cases from \`docs/Eval_Set.md\` via \`eval/cases.json\`.`,
+    `Run ${new Date().toISOString().slice(0, 16).replace("T", " ")} UTC · APP_TODAY ${appToday()} · cases from \`docs/Eval_Set.md\` via \`eval/cases.json\`.`,
     ``,
     `Models: ${modelLine}.${mixed.length ? ` **Warning: ${mixed.join(", ")} were reviewed on another provider; regenerate them before quoting these numbers.**` : ""}`,
     ``,
