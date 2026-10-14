@@ -460,3 +460,34 @@ export async function storeInRegister(form: FormData) {
   redirect(`/?stored=${deal.id}&n=${added}`);
   });
 }
+
+/**
+ * Undo an upload (Karandeep): the uploaded document leaves the deal, the brief versions that included it are
+ * removed (the deal goes back to its brief from before the upload), and a version it replaced is restored.
+ * Only uploaded documents can be removed; the dataset's own documents stay. Logged in the audit trail.
+ */
+export async function removeUpload(form: FormData) {
+  return withState(async () => {
+    const u = await requireKarandeep();
+    const dealId = str(form, "dealId");
+    const docId = str(form, "docId");
+    const doc = readState().uploadedDocuments.find((d) => d.id === docId);
+    if (!doc) throw new Error("Only an uploaded document can be removed.");
+    mutate(
+      (s) => {
+        s.uploadedDocuments = s.uploadedDocuments.filter((d) => d.id !== docId);
+        const o = s.dealOverrides[dealId];
+        if (o) {
+          o.addDocumentIds = (o.addDocumentIds ?? []).filter((x) => x !== docId);
+          if (doc.replaces) o.removeDocumentIds = (o.removeDocumentIds ?? []).filter((x) => x !== doc.replaces);
+          o.staleSince = undefined;
+          o.staleReason = undefined;
+        }
+        s.briefs[dealId] = (s.briefs[dealId] ?? []).filter((b) => !b.documentIds.includes(docId));
+      },
+      { user: u.name, dealId, action: "upload.remove", detail: { docId, title: doc.title, restored: doc.replaces ?? null } },
+    );
+    revalidatePath("/", "layout");
+    redirect(`/deal/${dealId}?removed=1`);
+  });
+}

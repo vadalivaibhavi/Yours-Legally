@@ -15,7 +15,7 @@ import { SellerCheckPanel } from "@/components/SellerCheckPanel";
 import { QUOTA_MESSAGE } from "@/lib/limits";
 import type { DealView } from "@/lib/deals";
 import type { EffectiveBrief } from "@/lib/review/types";
-import { recheckDeal } from "@/app/deal/actions";
+import { recheckDeal, removeUpload } from "@/app/deal/actions";
 
 
 /** Re-checks run the review pipeline inside server actions on this page (Vercel: up to 300s). */
@@ -64,6 +64,7 @@ export default async function DealPage(props: PageProps<"/deal/[id]">) {
 
       {sp.template === "1" && <div className="rounded-lg bg-change-soft p-4 text-sm text-change">It looks like a blank template, so it wasn't added: a template's clauses are nobody's terms, and reviewing them would flag things that don't apply. Upload the filled-in contract instead.</div>}
       {sp.duplicate === "1" && <div className="rounded-lg bg-change-soft p-4 text-sm text-change">That file is already in this deal, so nothing was added.</div>}
+      {sp.removed === "1" && <div className="rounded-lg bg-brand-soft p-4 text-sm">The upload was removed: the deal is back to its brief from before it. Upload the file again when ready.</div>}
       {sp.quota === "1" && <div className="rounded-lg bg-change-soft p-4 text-sm text-change">{QUOTA_MESSAGE}{deal.stale ? " The new document is attached; re-check the deal then." : ""}</div>}
 
       {isK && latest && deal.status !== "signed" && syncReasons(deal, latest).length > 0 && (
@@ -147,6 +148,17 @@ export default async function DealPage(props: PageProps<"/deal/[id]">) {
                 <summary className="text-sm font-medium text-brand">Full text</summary>
                 <pre className="mt-2 max-h-[28rem] overflow-auto whitespace-pre-wrap rounded bg-paper p-3 font-serif text-sm">{d.text}</pre>
               </details>
+              {isK && d.kind === "uploaded" && (
+                <details className="mt-3">
+                  <summary className="text-sm text-muted">Remove this upload</summary>
+                  <form action={removeUpload} className="mt-2 flex flex-wrap items-center gap-2 text-sm">
+                    <input type="hidden" name="dealId" value={deal.id} />
+                    <input type="hidden" name="docId" value={d.id} />
+                    <span className="text-muted">Takes it out of the deal and removes the brief versions made with it{d.replaces ? "; the version it replaced comes back" : ""}.</span>
+                    <SaveButton>Remove upload</SaveButton>
+                  </form>
+                </details>
+              )}
             </details>
           ))}
           {context.map((d) => (
