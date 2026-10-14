@@ -23,7 +23,9 @@ export function writableDir(sub: string): string {
  */
 export function briefsDir(): string {
   const p = (process.env.LLM_PROVIDER || "gemini").toLowerCase();
-  const dir = p === "gemini" ? "briefs" : `briefs-${p}`;
+  const base = p === "gemini" ? "briefs" : `briefs-${p}`;
+  // Masked runs (FR-26, MASKING=on) never replace the committed unmasked briefs.
+  const dir = (process.env.MASKING || "off").toLowerCase() === "on" ? `${base}-masked` : base;
   return dataProfile() ? `${dataProfile()}/${dir}` : dir;
 }
 

@@ -145,6 +145,8 @@ export type Brief = {
   counselPack: { question: string; documents: string[]; clauses: Citation[]; entityFacts: string[] } | null;
   errors: string[];
   usage: { calls: number; cachedCalls: number; inputTokens: number; outputTokens: number; ms: number };
+  /** FR-26: what was masked in the text sent to the AI for this review (MASKING=on runs only). */
+  masking?: { calls: number; client: number; person: number; amount: number; atliq: number; email: number; phone: number; bank: number; id: number };
 };
 
 /** Brief + Karandeep's inputs (confirmations, alert closure, reactions) → what the screen shows. */

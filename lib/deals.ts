@@ -75,7 +75,9 @@ export function dealNotes(deal: Deal): Note[] {
 
 /** v1 = precomputed brief (data/briefs/<deal>.json; data/briefs-ollama/ when testing locally); later versions come from the store. */
 export function briefVersions(dealId: string): Brief[] {
-  const p = path.join(process.cwd(), "data", briefsDir(), `${dealId}.json`);
+  // With MASKING=on, a masked review (data/briefs-masked) is shown where one exists; other deals keep their brief.
+  const masked = path.join(process.cwd(), "data", briefsDir(), `${dealId}.json`);
+  const p = fs.existsSync(masked) ? masked : path.join(process.cwd(), "data", briefsDir().replace(/-masked$/, ""), `${dealId}.json`);
   const base: Brief[] = fs.existsSync(p) ? [JSON.parse(fs.readFileSync(p, "utf8")) as Brief] : [];
   const extra = readState().briefs[dealId] ?? [];
   return [...base, ...extra].sort((a, b) => a.version - b.version);

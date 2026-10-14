@@ -311,6 +311,19 @@ async function runReview(dealId: string, opts: ReviewOptions): Promise<Brief> {
       outputTokens: usage.reduce((s, u) => s + u.usage.outputTokens, 0),
       ms: Date.now() - t0,
     },
+    ...(usage.some((u) => u.mask)
+      ? {
+          masking: usage.reduce(
+            (m, u) => {
+              if (!u.mask) return m;
+              m.calls++;
+              for (const k of ["client", "person", "amount", "atliq", "email", "phone", "bank", "id"] as const) m[k] += u.mask[k];
+              return m;
+            },
+            { calls: 0, client: 0, person: 0, amount: 0, atliq: 0, email: 0, phone: 0, bank: 0, id: 0 },
+          ),
+        }
+      : {}),
   };
 }
 

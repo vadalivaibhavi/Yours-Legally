@@ -28,7 +28,11 @@
     "holdout:review": "tsx scripts/holdout.ts review",
     "holdout:eval": "tsx scripts/evalHoldout.ts",
     "check": "tsx scripts/evalAll.ts check",
-    "eval:all": "tsx scripts/evalAll.ts all"
+    "eval:all": "tsx scripts/evalAll.ts all",
+    "check:mask": "tsx scripts/checkMask.ts",
+    "masked:review": "tsx scripts/masked.ts review",
+    "masked:eval": "tsx scripts/masked.ts eval",
+    "eval:masked": "tsx scripts/evalAll.ts masked"
   },
   "dependencies": {
     "mammoth": "^1.13.0",

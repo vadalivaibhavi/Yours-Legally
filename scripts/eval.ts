@@ -80,7 +80,7 @@ const deals = baseDeals();
 const args = parseArgs();
 const noVersions = args.flags.has("no-versions");
 // The final (Gemini) report is eval/results.*; a local run writes its own (eval/results-ollama.*) so it never overwrites it.
-const RESULTS = (process.env.LLM_PROVIDER || "gemini").toLowerCase() === "gemini" ? "results" : `results-${(process.env.LLM_PROVIDER || "").toLowerCase()}`;
+const RESULTS = ((process.env.LLM_PROVIDER || "gemini").toLowerCase() === "gemini" ? "results" : `results-${(process.env.LLM_PROVIDER || "").toLowerCase()}`) + ((process.env.MASKING || "off").toLowerCase() === "on" ? "-masked" : "");
 checkIds(
   "case",
   args.cases,
@@ -807,6 +807,7 @@ async function main() {
     { name: "Every finding graded (eval/finding_labels.json): precision, noise, wrong", ...labelsCheck(briefs) },
     { name: "A DPA annexed to another contract counts as a DPA (held-out finding)", ...dpaAnnexCheck() },
     ...(await fileReadChecks()),
+    ...maskingChecks(),
     { name: "EV-G5 (A5) upload detection: notes vs contract, version vs additional, wrong deal, blank template", ...uploadDetectCheck() },
     { name: "EV-G6 (A5) deal size: small-deal deviations count one step lower; promises to other clients never change", ...dealSizeCheck(briefs) },
     { name: "EV-G7 (A5) owners are roles, never people's names", ...rolesCheck(briefs) },
@@ -1350,4 +1351,55 @@ async function fileReadChecks(): Promise<{ name: string; pass: boolean | null; d
     group("EV-F3", "scanned PDF read by OCR: ≥95% of words, every clause number", (f) => f.startsWith("scanned")),
     group("EV-F4", "old Word (.doc) refused with instructions", (f) => f.startsWith("old Word")),
   ];
+}
+
+/**
+ * Eval_Set §G1 (FR-26 masking).
+ *  EV-M1: no known name, person, contact, number or amount in what is sent: the dataset check (scripts/checkMask.ts)
+ *         plus the leak counts logged for every masked call (data/runs/mask-*.jsonl), when masked runs exist.
+ *  EV-M3: the masked eval run (eval/results-masked.json, MASKING=on) within 2 cases of the unmasked one, and no
+ *         compliance-alert case lost.
+ *  EV-M4: the Lakeshore masked brief (data/briefs-masked): no label left anywhere, every quote matches the contract.
+ * EV-M2 (names on no list) is declared out of the lite version.
+ */
+function maskingChecks(): { name: string; pass: boolean | null; detail: string }[] {
+  const out: { name: string; pass: boolean | null; detail: string }[] = [];
+  // EV-M1
+  const { checkMask } = require("./checkMask") as typeof import("./checkMask");
+  const m = checkMask();
+  let logged = 0, loggedLeaks = 0;
+  const runs = path.join("data", "runs");
+  for (const f of fs.existsSync(runs) ? fs.readdirSync(runs).filter((x) => x.startsWith("mask-")) : []) {
+    for (const line of fs.readFileSync(path.join(runs, f), "utf8").split("\n").filter(Boolean)) {
+      logged++;
+      loggedLeaks += (JSON.parse(line).leaks ?? []).length;
+    }
+  }
+  out.push({
+    name: "EV-M1 masking: 0 leaks in what goes to the AI",
+    pass: m.leaks === 0 && loggedLeaks === 0 && !m.roundTripFails.length && !m.unitFails.length,
+    detail: `dataset: ${m.items} texts masked, ${m.leaks} leaks, round trip ${m.items - m.roundTripFails.length}/${m.items}, unit cases ${m.unitFails.length ? "FAIL" : "right"} · masked AI calls logged: ${logged}, leaks ${loggedLeaks}`,
+  });
+  // EV-M3
+  const masked = "eval/results-masked.json";
+  if (fs.existsSync(masked) && fs.existsSync("eval/results.json")) {
+    type R = { id: string; status?: string; pass?: boolean | null };
+    const st = (r: R) => r.status ?? (r.pass === null ? "skip" : r.pass ? "pass" : "fail");
+    const a = (JSON.parse(fs.readFileSync("eval/results.json", "utf8")).results as R[]).filter((r) => /^EV-(\d|C|R|S|L|A|P|V)/.test(r.id));
+    const b = new Map((JSON.parse(fs.readFileSync(masked, "utf8")).results as R[]).map((r) => [r.id, st(r)]));
+    const lost = a.filter((r) => st(r) === "pass" && b.get(r.id) === "fail").map((r) => r.id);
+    const gained = a.filter((r) => st(r) === "fail" && b.get(r.id) === "pass").map((r) => r.id);
+    const alertLost = lost.filter((id) => ["EV-12", "EV-C1", "EV-C2"].includes(id));
+    out.push({ name: "EV-M3 masked eval within 2 cases of unmasked", pass: lost.length - gained.length <= 2 && !alertLost.length, detail: `lost with masking: ${lost.join(", ") || "none"} · gained: ${gained.join(", ") || "none"}${alertLost.length ? ` · compliance-alert cases lost: ${alertLost.join(", ")}` : ""}` });
+  }
+  // EV-M4
+  const lk = path.join("data", "briefs-masked", "lakeshore.json");
+  if (fs.existsSync(lk)) {
+    const b = JSON.parse(fs.readFileSync(lk, "utf8")) as Brief;
+    const labelLeft = /\[(?:CLIENT|PERSON|AMOUNT|EMAIL|PHONE|BANK|ID)_\d+\]|\[ATLIQ_(?:PVT_LTD|INC)\]/.test(JSON.stringify({ f: b.findings, h: b.headline, n: b.nextAction, d: b.documents }));
+    const quotes = b.findings.flatMap((f) => f.citations.filter((c) => c.quote));
+    const bad = quotes.filter((c) => { const src = docs.find((d) => d.id === c.docId)?.text ?? ""; return !locateQuote(src, c.quote); });
+    out.push({ name: "EV-M4 Lakeshore masked brief: real names back, every quote matches", pass: !labelLeft && !bad.length && !!b.masking, detail: `${b.masking ? `${b.masking.calls} masked calls (${b.masking.client} client names, ${b.masking.person} people, ${b.masking.amount} amounts)` : "no masking record"} · labels left: ${labelLeft ? "YES" : "none"} · quotes matching the contract: ${quotes.length - bad.length}/${quotes.length} · verdict ${b.verdict}` });
+  }
+  return out;
 }

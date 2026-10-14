@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { mask, MaskTable } from "@/lib/mask";
 import { acceptAllMedium, addMissed, clearDecision, closeAlert, confirmFact, finaliseReview, recordDecision, removeMissed, reopenReview, undoConfirmation, undoFollowUp, undoReaction } from "@/app/deal/actions";
 import { reviewProgress } from "@/lib/review/progress";
 import { FollowUpQuestion, ResolveAlertForm, SaveButton } from "@/components/BriefControls";
@@ -64,6 +65,13 @@ export async function BriefView({ dealId: id, version }: { dealId: string; versi
     <FindingCard key={f.key} f={f} dealId={id} version={b.version} reaction={reactions[f.key]} blockerNote={notesOnBlockers[f.key]} similar={panelFor(f)} compact={compact} readOnly={!isLatest} />
   );
   const changeTag = (key: string) => (b.changes ? (b.changes.new.includes(key) ? "New in this version" : "Still open since previous") : null);
+  // FR-26 demo: one cited clause as the AI received it (masked) next to the real text. Masked reviews only.
+  const aiView = (() => {
+    if (!b.masking) return null;
+    const quotes = b.findings.flatMap((f) => f.citations.filter((c) => c.role === "incoming" && c.quote).map((c) => c.quote));
+    const real = quotes.find((q) => mask(q, new MaskTable()) !== q) ?? quotes[0];
+    return real ? { real, masked: mask(real, new MaskTable()) } : null;
+  })();
 
   return (
     <div className="space-y-6">
@@ -460,6 +468,28 @@ export async function BriefView({ dealId: id, version }: { dealId: string; versi
             ))}
           </div>
         </Section>
+      )}
+      {b.masking && (
+        <div className="card p-4 text-sm">
+          <p className="text-muted">
+            🔒 Sent to AI with {b.masking.client} client names, {b.masking.person} people and {b.masking.amount} amounts masked ({b.masking.calls} AI calls; the AI saw clause wording, not who the contract is with or what it is worth).
+          </p>
+          {aiView && (
+            <details className="mt-2">
+              <summary className="text-brand">What the AI saw (one clause)</summary>
+              <div className="mt-2 grid gap-3 md:grid-cols-2">
+                <div>
+                  <p className="label">Sent to the AI</p>
+                  <pre className="mt-1 whitespace-pre-wrap rounded bg-paper p-3 font-serif text-xs">{aiView.masked}</pre>
+                </div>
+                <div>
+                  <p className="label">The contract</p>
+                  <pre className="mt-1 whitespace-pre-wrap rounded bg-paper p-3 font-serif text-xs">{aiView.real}</pre>
+                </div>
+              </div>
+            </details>
+          )}
+        </div>
       )}
     </div>
   );

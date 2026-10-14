@@ -20,4 +20,6 @@ data/briefs/failed/
 data/state-backups/
 # local testing (Ollama) outputs: never committed, never shipped
 data/briefs-*/
+# masked reviews (FR-26 demo, Gemini) are committed: the app shows them with MASKING=on
+!data/briefs-masked/
 data/clause_index.*.json

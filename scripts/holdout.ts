@@ -8,3 +8,5 @@ const [script, ...rest] = process.argv.slice(2);
 if (!/^[a-zA-Z]+$/.test(script ?? "")) throw new Error("usage: tsx scripts/holdout.ts <script> [args]");
 process.argv = [process.argv[0], `scripts/${script}.ts`, ...rest];
 import(`./${script}.ts`);
+
+export {}; // a module, so its names stay local

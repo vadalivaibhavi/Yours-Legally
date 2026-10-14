@@ -19,6 +19,7 @@ import http from "node:http";
 import path from "node:path";
 import { z } from "zod";
 import { writableDir } from "./config";
+import { leaks, mask, maskAmounts, maskingOn, MaskTable, unmaskDeep, type Counts } from "./mask";
 
 export type Task =
   | "extract" // F2 intake extraction (fast)
@@ -145,9 +146,21 @@ export function provider(): string {
  */
 export function providerTag(): string[] {
   const p = provider();
+  // Masked runs (FR-26) keep their own answers and brief hashes: they never mix with unmasked ones.
+  const m = maskingOn() ? [maskAmounts() ? "masked" : "masked-amounts-visible"] : [];
   // Local models are swapped while testing (llama3.2 → qwen2.5:7b): each keeps its own answers and briefs.
-  if (p === "ollama") return [p, ...new Set([...modelsFor("extract"), ...modelsFor("conflict")])];
-  return p === "gemini" ? [] : [p];
+  if (p === "ollama") return [p, ...new Set([...modelsFor("extract"), ...modelsFor("conflict")]), ...m];
+  return p === "gemini" ? m : [p, ...m];
+}
+
+/** One line per masked call in data/runs/mask-<date>.jsonl: counts by type and leak types (never values). */
+function logMask(rec: { task: string; counts: Counts; unmaskedFile: boolean; leaks: string[] }) {
+  try {
+    const line = JSON.stringify({ at: new Date().toISOString(), ...(runContext.getStore() ?? {}), amounts: maskAmounts(), ...rec });
+    fs.appendFileSync(path.join(writableDir("runs"), `mask-${new Date().toISOString().slice(0, 10)}.jsonl`), line + "\n");
+  } catch {
+    /* logging is best-effort */
+  }
 }
 
 /** The key for the current provider (a local Ollama needs none). */
@@ -174,7 +187,7 @@ export function modelsFor(task: Task): string[] {
 export const PROMPT_VERSION = "p1";
 
 // ---------------------------------------------------------------- usage log (feeds cost estimate)
-type UsageRecord = { task: Task; model: string; usage: Usage; ms: number; cached: boolean };
+type UsageRecord = { task: Task; model: string; usage: Usage; ms: number; cached: boolean; mask?: Counts };
 const globalUsage: UsageRecord[] = [];
 /** Per-review usage, so deals reviewed in parallel don't mix their token counts. */
 const usageScope = new AsyncLocalStorage<UsageRecord[]>();
@@ -228,10 +241,16 @@ export async function callModel<S extends z.ZodType>(args: CallArgs<S>): Promise
 
   const started = Date.now();
   let lastError = "";
-  let prompt = input;
+  // FR-26: with MASKING=on, names, people, contacts, numbers and amounts are replaced with labels before the
+  // text leaves the server (one label table per call); the answer is unmasked before it is cached or used.
+  const table = maskingOn() ? new MaskTable() : null;
+  const sendSystem = table ? mask(system, table) : system;
+  const sendInput = table ? mask(input, table) : input;
+  if (table) logMask({ task, counts: { ...table.counts }, unmaskedFile: !!file, leaks: leaks(sendSystem + "\n" + sendInput) });
+  let prompt = sendInput;
   // Attempt 1 + one retry on invalid JSON / schema mismatch (CLAUDE.md).
   for (let attempt = 0; attempt < 2; attempt++) {
-    const res = await generateWithFallback(task, system, prompt, jsonSchema, file); // throws QuotaExhaustedError when the chain is out of daily quota
+    const res = await generateWithFallback(task, sendSystem, prompt, jsonSchema, file); // throws QuotaExhaustedError when the chain is out of daily quota
     if (!res.ok) {
       logCall({ task, model: modelsFor(task).join(","), inputTokens: 0, outputTokens: 0, ms: Date.now() - started, cached: false, ok: false, error: res.error });
       return fail(res.error);
@@ -240,16 +259,17 @@ export async function callModel<S extends z.ZodType>(args: CallArgs<S>): Promise
     const parsed = json === undefined ? null : schema.safeParse(json);
     if (parsed && parsed.success) {
       const ms = Date.now() - started;
-      if (!cacheOff) writeCache(key, { model: res.model, usage: res.usage, data: parsed.data });
-      usageLog.push({ task, model: res.model, usage: res.usage, ms, cached: false });
+      const data = table ? unmaskDeep(parsed.data, table) : parsed.data; // real values back before anything uses the answer
+      if (!cacheOff) writeCache(key, { model: res.model, usage: res.usage, data });
+      usageLog.push({ task, model: res.model, usage: res.usage, ms, cached: false, ...(table ? { mask: { ...table.counts } } : {}) });
       logCall({ task, model: res.model, inputTokens: res.usage.inputTokens, outputTokens: res.usage.outputTokens, ms, cached: false, ok: true });
-      return { ok: true, data: parsed.data, model: res.model, usage: res.usage, cached: false, ms };
+      return { ok: true, data, model: res.model, usage: res.usage, cached: false, ms };
     }
     // Invalid JSON still cost tokens: log the attempt before retrying.
     logCall({ task, model: res.model, inputTokens: res.usage.inputTokens, outputTokens: res.usage.outputTokens, ms: Date.now() - started, cached: false, ok: false, error: "invalid JSON / schema" });
     lastError = json === undefined ? "invalid JSON" : `schema mismatch: ${parsed?.error.message.slice(0, 1500)}`;
     prompt =
-      input +
+      sendInput +
       `\n\n---\nYour previous answer was rejected (${lastError}). Return ONLY valid JSON matching this JSON Schema:\n` +
       JSON.stringify(jsonSchema);
   }
