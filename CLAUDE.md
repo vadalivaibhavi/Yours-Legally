@@ -1,5 +1,5 @@
 # Yours Legally, (prototype)
-Contract-review assistant for AtliQ (capstone). Spec: docs/PRD_Yours_Legally_v0.9.md (FR-IDs), tests: docs/Eval_Set.md (EV-IDs).
+Contract-review assistant for AtliQ (capstone). Spec: docs/PRD_Yours_Legally_v1.1.md (FR-IDs; masking: docs/Masking_Lite_Spec.md), tests: docs/Eval_Set.md (EV-IDs), traceability: docs/Traceability_Matrix.md.
 
 ## Stack
 Next.js App Router + TypeScript + Tailwind. No auth library (role switch), no database (JSON files in /data + file cache). Deployed on Vercel.

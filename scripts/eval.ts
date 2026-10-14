@@ -254,6 +254,8 @@ async function main() {
       problems.unshift(`verdict ${e.verdict} ≠ ${c.spec.expectedVerdict}`);
     if (c.spec.expectComplianceAlert && e.complianceAlert?.status !== "open")
       problems.push("no compliance alert");
+    for (const d of (c.spec.expiredContext ?? []) as string[])
+      if (!e.expired.some((x) => x.sourceDocId === d)) problems.push(`${d} not listed under "Checked, expired" (FR-25)`);
     if (problems.length && hitQuota(b)) {
       record(
         c,
@@ -268,7 +270,7 @@ async function main() {
       !problems.length,
       problems.length
         ? problems.join("; ")
-        : `${e.verdict}${e.complianceAlert ? " + compliance alert" : ""} · found ${(c.spec.mustFind ?? []).join(", ") || "nothing to find"}${c.spec.mustNotFlag?.length ? " · clean on " + c.spec.mustNotFlag.join(", ") : ""}`,
+        : `${e.verdict}${e.complianceAlert ? " + compliance alert" : ""} · found ${(c.spec.mustFind ?? []).join(", ") || "nothing to find"}${c.spec.mustNotFlag?.length ? " · clean on " + c.spec.mustNotFlag.join(", ") : ""}${c.spec.expiredContext?.length ? ` · listed as checked-expired: ${c.spec.expiredContext.join(", ")}` : ""}`,
     );
   }
   for (const c of cases.filter((c) => c.spec.kind === "unverified")) {
@@ -797,20 +799,21 @@ async function main() {
       detail: `${briefs.length} briefs`,
     },
     { name: "Register changes flag the right open deals and reach the checks (FR-2, FR-19)", ...(await registerFlagCheck()) },
-    { name: "A1 no evidence, no finding: claims about the terms need a verified clause", ...evidenceCheck(briefs) },
-    { name: "A2 a clear register match is never dropped silently (strong-match rules)", ...strongMatchCheck() },
-    { name: "A3 one-way NDA caught by rules, whatever the title says", ...oneWayNdaCheck() },
-    { name: "A4 instructions to an AI reviewer are caught and block a clean verdict", ...injectionCheck(briefs) },
-    { name: "A6 plain wording: \"redline\" reads right as a verb and as a noun", ...wordingCheck() },
+    { name: "EV-G1 (A1) no evidence, no finding: claims about the terms need a verified clause", ...evidenceCheck(briefs) },
+    { name: "EV-G2 (A2) a clear register match is never dropped silently (strong-match rules)", ...strongMatchCheck() },
+    { name: "EV-G3 (A3) one-way NDA caught by rules, whatever the title says", ...oneWayNdaCheck() },
+    { name: "EV-G4 (A4) instructions to an AI reviewer are caught and block a clean verdict", ...injectionCheck(briefs) },
+    { name: "EV-G9 (A6) plain wording: \"redline\" reads right as a verb and as a noun", ...wordingCheck() },
     { name: "Every finding graded (eval/finding_labels.json): precision, noise, wrong", ...labelsCheck(briefs) },
     { name: "A DPA annexed to another contract counts as a DPA (held-out finding)", ...dpaAnnexCheck() },
-    { name: "A5 upload detection: notes vs contract, version vs additional, wrong deal, blank template", ...uploadDetectCheck() },
-    { name: "A5 deal size: small-deal deviations count one step lower; promises to other clients never change", ...dealSizeCheck(briefs) },
-    { name: "A5 owners are roles, never people's names", ...rolesCheck(briefs) },
+    ...(await fileReadChecks()),
+    { name: "EV-G5 (A5) upload detection: notes vs contract, version vs additional, wrong deal, blank template", ...uploadDetectCheck() },
+    { name: "EV-G6 (A5) deal size: small-deal deviations count one step lower; promises to other clients never change", ...dealSizeCheck(briefs) },
+    { name: "EV-G7 (A5) owners are roles, never people's names", ...rolesCheck(briefs) },
     { name: "A5 seller mismatch is computed live from the latest deal check", ...liveMismatchCheck(briefs) },
-    { name: "A5 store in contract register: deal leaves the queue, commitments reach the checks, the right deals are flagged", ...storeCheck() },
+    { name: "EV-G8 (A5) store in contract register: deal leaves the queue, commitments reach the checks, the right deals are flagged", ...storeCheck() },
     { name: "A5 review runs read the dataset only, never the app's live state", ...isolationCheck(briefs) },
-    ...(noVersions ? [] : [{ name: "A4 end to end: LoopMart NDA with an injected instruction is reviewed (model)", ...(await injectionEndToEnd()) }]),
+    ...(noVersions ? [] : [{ name: "EV-G4 (A4) end to end: LoopMart NDA with an injected instruction is reviewed (model)", ...(await injectionEndToEnd()) }]),
     {
       name: "NDA fast lane latency (<1 min)",
       pass: null,
@@ -822,6 +825,18 @@ async function main() {
       detail: `${found}/${expected} = ${expected ? Math.round((100 * found) / expected) : 0}%`,
     },
   ];
+  // Eval_Set §F, §G, §G1 (EV-G, EV-F, EV-M): each case is graded by the check(s) above whose name starts with its
+  // ID (case_keys kind "check"). A case whose check didn't run in this mode (e.g. --no-versions) is skipped.
+  for (const c of cases.filter((c) => c.spec.kind === "check")) {
+    const ids: string[] = c.spec.checks ?? [c.id];
+    const hits = crossCutting.filter((x) => ids.some((p) => x.name.startsWith(p + " ")));
+    if (!hits.length) {
+      record(c, null, c.spec.notRun ?? "not run in this mode");
+      continue;
+    }
+    const pass = hits.some((x) => x.pass === null) ? null : hits.every((x) => x.pass === true);
+    record(c, pass, hits.map((x) => x.detail).join(" · ").slice(0, 600));
+  }
 
   // ---------------------------------------------------------------- report
   const n = (st: Status) => results.filter((r) => r.status === st).length;
@@ -1318,4 +1333,21 @@ function dpaAnnexCheck(): { pass: boolean; detail: string } {
   ];
   const wrong = cases.filter(([t, want]) => containsDpa(t) !== want).map(([t]) => t.slice(0, 50));
   return { pass: !wrong.length, detail: `${cases.length - wrong.length}/${cases.length} headings and sentences classified right${wrong.length ? ` · wrong: ${wrong.join(" | ")}` : ""}` };
+}
+
+/** Eval_Set §G (EV-F1–F4): the held-out drafts as Word / PDF / scans read back (scripts/checkFileRead.ts), and a .doc refused. */
+async function fileReadChecks(): Promise<{ name: string; pass: boolean | null; detail: string }[]> {
+  const { checkFileRead } = await import("./checkFileRead");
+  const rs = await checkFileRead();
+  const group = (id: string, label: string, pick: (f: string) => boolean) => {
+    const g = rs.filter((r) => pick(r.format));
+    const pass = g.some((r) => r.ok === null) ? null : g.length > 0 && g.every((r) => r.ok === true);
+    return { name: `${id} ${label}`, pass, detail: g.map((r) => (r.key === "old-doc" ? `refused: "${r.note}"` : `${r.key} ${(r.words * 100).toFixed(1)}% · clauses ${r.clauses}`)).join(", ") || "no files" };
+  };
+  return [
+    group("EV-F1", "Word (.docx), incl. automatic numbering: ≥98% of words, every clause number", (f) => f.startsWith("Word")),
+    group("EV-F2", "text-layer PDF: ≥98% of words, every clause number", (f) => f === "PDF"),
+    group("EV-F3", "scanned PDF read by OCR: ≥95% of words, every clause number", (f) => f.startsWith("scanned")),
+    group("EV-F4", "old Word (.doc) refused with instructions", (f) => f.startsWith("old Word")),
+  ];
 }

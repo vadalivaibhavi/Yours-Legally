@@ -1,91 +1,772 @@
 {
   "_about": "Machine-checkable expectations for each case in docs/Eval_Set.md. Finding keys: gate:<rule>, conflict:<registerSourceDoc>:<type>, covenant:<type>, playbook:<topic>, flowdown:<ip|data|consent>, nda:<item>, bundle:<doc>:<party>, notes:<category>, dependency:<dealId>, mismatch:<field>. A pattern matches a finding key by prefix; 'key@9.1' also requires a citation whose clause contains 9.1. 'severity:<level>' matches any finding at that level. mustNotFlag patterns must not appear at medium severity or above.",
   "cases": {
-    "EV-R1": { "kind": "register", "registerKeys": ["R1", "R2", "R3", "R4"] },
-    "EV-R2": { "kind": "register", "registerKeys": ["I1", "I2"], "registerTypes": { "I1": "ip_transfer", "I2": "ip_retention" } },
-    "EV-R3": { "kind": "register", "registerKeys": ["R6"], "illegible": ["orbit-msa:9"] },
-    "EV-R4": { "kind": "labels", "expectedPrecedents": [
-      { "docId": "brightwater-msa", "label": "accident" }, { "docId": "alnoor-msa", "label": "exception" },
-      { "docId": "northwind-msa", "label": "concession" }, { "docId": "meridian-nda", "label": "accident" } ] },
-    "EV-R5": { "kind": "unverified", "dealId": "lakeshore", "mustFind": ["conflict:crestline-msa:mfn_pricing"] },
-
-    "EV-01": { "kind": "review", "dealId": "gulfcrown", "expectedVerdict": "HOLD",
-      "mustFind": ["conflict:alnoor-msa:non_compete", "conflict:alnoor-msa:non_compete@9.1", "playbook:ld", "playbook:payment"],
-      "mustNotFlag": ["playbook:ip", "playbook:confidentiality", "playbook:indemnity", "conflict:orbit-msa"] },
-    "EV-02": { "kind": "review", "dealId": "lakeshore", "expectedVerdict": "HOLD",
-      "mustFind": ["conflict:crestline-msa:mfn_pricing"],
-      "mustNotFlag": ["playbook:ld", "playbook:payment", "playbook:ip", "gate:entity", "gate:payment", "gate:ld_cap", "gate:liability_cap", "gate:governing_law"] },
-    "EV-03": { "kind": "review", "dealId": "travelhub", "expectedVerdict": "SEND BACK",
-      "mustFind": ["gate:entity", "gate:invoicing_entity", "conflict:alnoor-msa:non_compete"],
-      "mustNotFlag": ["conflict:orbit-msa"] },
-    "EV-04": { "kind": "review", "dealId": "blueorchid", "expectedVerdict": "SIGN AFTER CHANGES",
-      "mustFind": ["conflict:alnoor-msa:non_compete"],
-      "mustNotFlag": ["playbook:ld", "playbook:payment", "playbook:liability", "playbook:ip", "gate:governing_law"] },
-    "EV-05": { "kind": "review", "dealId": "datavane", "expectedVerdict": "HOLD",
-      "mustFind": ["conflict:cloudspan-spa:exclusivity", "playbook:indemnity", "playbook:restrictive"],
-      "mustNotFlag": [] },
-    "EV-06": { "kind": "review", "dealId": "rheinwerk", "expectedVerdict": "HOLD",
-      "mustFind": ["conflict:northwind-msa:ip_transfer", "gate:annex"],
-      "mustNotFlag": ["playbook:ld", "playbook:payment", "gate:payment", "gate:ld_cap", "playbook:liability"] },
-    "EV-07": { "kind": "review", "dealId": "finserve", "expectedVerdict": "HOLD", "expectRoute": "nda_fast_lane",
-      "mustFind": ["nda:definition", "nda:residuals", "covenant:non_compete", "nda:remedies"],
-      "mustNotFlag": ["gate:entity", "gate:governing_law"] },
-    "EV-08": { "kind": "review", "dealId": "loopmart", "expectedVerdict": "SIGN", "expectRoute": "nda_fast_lane", "maxMedium": 1,
-      "mustFind": [], "mustNotFlag": ["severity:blocker", "severity:high"] },
-    "EV-09": { "kind": "review", "dealId": "sunrise-sow2", "expectedVerdict": "SIGN", "maxMedium": 1,
-      "mustFind": [], "mustNotFlag": ["playbook:ld", "severity:blocker", "severity:high"] },
-    "EV-10": { "kind": "review", "dealId": "kriti", "expectedVerdict": "SIGN AFTER CHANGES",
-      "mustFind": ["playbook:ld", "playbook:payment", "playbook:indemnity", "playbook:liability", "flowdown:ip", "flowdown:data", "flowdown:consent"],
-      "mustNotFlag": [] },
-    "EV-11": { "kind": "review", "dealId": "marcus", "expectedVerdict": "SIGN AFTER CHANGES",
-      "mustFind": ["gate:entity", "playbook:restrictive", "playbook:termination", "dependency:lakeshore"],
-      "mustNotFlag": ["playbook:ip", "flowdown:ip"] },
-    "EV-12": { "kind": "review", "dealId": "harrington", "expectedVerdict": "HOLD", "expectComplianceAlert": true,
-      "mustFind": ["notes:data_movement", "bundle:sub-baa:ortiz", "bundle:sub-baa:pvt-ltd", "gate:insurance", "playbook:ld", "playbook:liability", "playbook:indemnity", "playbook:ip"],
-      "mustNotFlag": [] },
-    "EV-13": { "kind": "review", "dealId": "ortiz", "expectedVerdict": "SIGN AFTER CHANGES",
-      "mustFind": ["flowdown:data", "flowdown:ip"],
-      "mustNotFlag": ["nda:", "playbook:payment", "playbook:termination", "playbook:liability"] },
-    "EV-14": { "kind": "review", "dealId": "travelhub", "mustFind": [], "mustNotFlag": ["conflict:orbit-msa"] },
-    "EV-15": { "kind": "review", "dealId": "blueorchid", "mustFind": ["mismatch:regions"], "mustNotFlag": [] },
-
-    "EV-C1": { "kind": "compliance", "dealId": "harrington" },
-    "EV-C2": { "kind": "compliance", "dealId": "gulfcrown" },
-
-    "EV-L1": { "kind": "linking", "docId": "harrington-baa", "expect": { "mode": "auto", "dealId": "harrington" } },
-    "EV-L2": { "kind": "linking", "docId": "kriti-sub", "expect": { "mode": "auto", "dealId": "kriti", "endClientDealId": "rheinwerk" } },
-    "EV-L3": { "kind": "linking", "synthetic": { "counterparty": "Gulf Crown Hospitality Holdings", "docType": "NDA", "text": "MUTUAL NON-DISCLOSURE AGREEMENT between Gulf Crown Hospitality Holdings W.L.L. (Bahrain) and AtliQ Technologies Pvt Ltd." }, "expect": { "mode": "ask" } },
-    "EV-L4": { "kind": "linking", "synthetic": { "counterparty": "Northwind Logistics", "docType": "SOW", "text": "STATEMENT OF WORK No. 2 (Dashboards) under the Master Services Agreement between Northwind Logistics Ltd and AtliQ Technologies Pvt Ltd." }, "expect": { "mode": "ask", "notVersionOf": ["northwind-msa"] } },
-    "EV-L5": { "kind": "linking", "docId": "harrington-baa", "userChoice": "new", "expect": { "mode": "user", "note": "harrington" } },
-    "EV-L6": { "kind": "linking", "docId": "rheinwerk-sa", "expect": { "mode": "auto", "dealId": "rheinwerk" } },
-
-    "EV-A1": { "kind": "access" }, "EV-A2": { "kind": "access" }, "EV-A3": { "kind": "access" },
-
-    "EV-V1": { "kind": "version", "dealId": "travelhub", "replace": { "travelhub-sa": "synthetic/travelhub_v2_entity_fixed.md" },
-      "resolved": ["gate:entity", "gate:invoicing_entity"], "stillOpen": ["conflict:alnoor-msa:non_compete"] },
-    "EV-V2": { "kind": "version", "dealId": "rheinwerk", "add": ["synthetic/rheinwerk_annex3_dpa.md"],
-      "resolved": ["gate:annex:annex-3"], "stillOpen": ["conflict:northwind-msa:ip_transfer"] },
-    "EV-V3": { "kind": "version", "dealId": "harrington", "add": ["synthetic/harrington_ortiz_sub_baa.md"],
-      "resolved": ["bundle:sub-baa:ortiz"], "stillOpen": ["bundle:sub-baa:pvt-ltd", "gate:insurance"], "expectedVerdict": "HOLD", "expectComplianceAlert": true },
-    "EV-V4": { "kind": "skip", "reason": "Late-finding detection (FR-18) is not built in the prototype (Build Plan §5, declared in README)." },
-
-    "EV-S1": { "kind": "seller", "input": { "client": "Desert Pearl Hotels", "sectors": ["hospitality"], "regions": ["Saudi Arabia"], "services": ["revenue management analytics"] }, "expect": { "status": "conflict", "source": "alnoor-msa" } },
-    "EV-S2": { "kind": "seller", "input": { "client": "US retail client", "sectors": ["retail"], "regions": ["USA"], "services": ["data engineering"], "rates": [{ "role": "Senior Data Engineer", "ratePerHourUsd": 72 }] },
-      "expect": { "status": "conflict", "mustNotReveal": ["Crestline", "$85", "85/hr"] },
-      "recheck": { "rates": [{ "role": "Senior Data Engineer", "ratePerHourUsd": 88 }], "status": "clear" } },
-    "EV-S3": { "kind": "seller", "input": { "client": "European manufacturer", "sectors": ["manufacturing"], "regions": ["Germany"], "services": ["data pipelines"], "assets": ["PipeKit"] }, "expect": { "status": "attention", "source": "northwind-msa" } },
-    "EV-S4": { "kind": "seller", "input": { "client": "Lakehouse platform vendor", "sectors": ["data_platform"], "regions": ["India"], "services": ["implementation partner for a lakehouse platform"], "partnership": true }, "expect": { "status": "conflict", "source": "cloudspan-spa" } },
-    "EV-S5": { "kind": "seller", "input": { "client": "Lakehouse platform vendor", "sectors": ["data_platform"], "regions": ["Europe"], "services": ["implementation partner for a lakehouse platform"], "partnership": true }, "expect": { "status": "clear" } },
-    "EV-S6": { "kind": "seller", "input": { "client": "Any client", "sectors": ["retail"], "regions": ["India"], "services": ["analytics"], "freeText": "promise the client a named engineer full-time for 12 months" }, "expect": { "freeTextStatus": "couldnt_check" } },
-    "EV-S7": { "kind": "seller-banner", "dealId": "gulfcrown" },
-    "EV-S8": { "kind": "seller-waiver", "input": { "client": "Desert Pearl Hotels", "sectors": ["hospitality"], "regions": ["Saudi Arabia"], "services": ["revenue management analytics"] }, "waiverFor": "Desert Pearl Hotels" },
-
-    "EV-P1": { "kind": "similar", "query": { "docId": "gulfcrown-msa", "section": "12", "clauseType": "ld" }, "expect": [{ "docId": "acme-msa", "label": "standard" }, { "docId": "alnoor-msa", "label": "exception" }, { "docId": "brightwater-msa", "label": "accident" }] },
-    "EV-P2": { "kind": "similar", "query": { "docId": "finserve-nda", "section": "1", "clauseType": "confidentiality" }, "expect": [{ "anyOf": ["alnoor-nda", "harrington-nda"], "label": "standard" }, { "docId": "meridian-nda", "label": "accident" }] },
-    "EV-P3": { "kind": "similar", "query": { "docId": "harrington-baa", "section": "4", "clauseType": "data_protection" }, "expect": [{ "docId": "carebridge-baa", "label": "standard" }] },
-    "EV-P4": { "kind": "similar", "query": { "docId": "harrington-msa", "section": "9", "clauseType": "indemnity" }, "expect": [{ "docId": "paytrack-msa", "label": "standard" }] },
-    "EV-P5": { "kind": "similar", "query": { "docId": "kriti-sub", "section": "4", "clauseType": "payment" }, "expect": [{ "docId": "trustline-msa", "label": "standard" }] },
-    "EV-P6": { "kind": "similar", "query": { "docId": "rheinwerk-sa", "section": "14", "clauseType": "governing_law" }, "expect": [{ "docId": "northwind-msa", "label": "concession" }] },
-    "EV-P7": { "kind": "similar", "query": { "docId": "sunrise-sow2", "section": "8", "clauseType": "ld" }, "expect": [{ "docId": "acme-msa", "label": "standard" }], "dealId": "sunrise-sow2", "expectedVerdict": "SIGN" }
+    "EV-R1": {
+      "kind": "register",
+      "registerKeys": [
+        "R1",
+        "R2",
+        "R3",
+        "R4"
+      ]
+    },
+    "EV-R2": {
+      "kind": "register",
+      "registerKeys": [
+        "I1",
+        "I2"
+      ],
+      "registerTypes": {
+        "I1": "ip_transfer",
+        "I2": "ip_retention"
+      }
+    },
+    "EV-R3": {
+      "kind": "register",
+      "registerKeys": [
+        "R6"
+      ],
+      "illegible": [
+        "orbit-msa:9"
+      ]
+    },
+    "EV-R4": {
+      "kind": "labels",
+      "expectedPrecedents": [
+        {
+          "docId": "brightwater-msa",
+          "label": "accident"
+        },
+        {
+          "docId": "alnoor-msa",
+          "label": "exception"
+        },
+        {
+          "docId": "northwind-msa",
+          "label": "concession"
+        },
+        {
+          "docId": "meridian-nda",
+          "label": "accident"
+        }
+      ]
+    },
+    "EV-R5": {
+      "kind": "unverified",
+      "dealId": "lakeshore",
+      "mustFind": [
+        "conflict:crestline-msa:mfn_pricing"
+      ]
+    },
+    "EV-01": {
+      "kind": "review",
+      "dealId": "gulfcrown",
+      "expectedVerdict": "HOLD",
+      "mustFind": [
+        "conflict:alnoor-msa:non_compete",
+        "conflict:alnoor-msa:non_compete@9.1",
+        "playbook:ld",
+        "playbook:payment"
+      ],
+      "mustNotFlag": [
+        "playbook:ip",
+        "playbook:confidentiality",
+        "playbook:indemnity",
+        "conflict:orbit-msa"
+      ]
+    },
+    "EV-02": {
+      "kind": "review",
+      "dealId": "lakeshore",
+      "expectedVerdict": "HOLD",
+      "mustFind": [
+        "conflict:crestline-msa:mfn_pricing"
+      ],
+      "mustNotFlag": [
+        "playbook:ld",
+        "playbook:payment",
+        "playbook:ip",
+        "gate:entity",
+        "gate:payment",
+        "gate:ld_cap",
+        "gate:liability_cap",
+        "gate:governing_law"
+      ]
+    },
+    "EV-03": {
+      "kind": "review",
+      "dealId": "travelhub",
+      "expectedVerdict": "SEND BACK",
+      "mustFind": [
+        "gate:entity",
+        "gate:invoicing_entity",
+        "conflict:alnoor-msa:non_compete"
+      ],
+      "mustNotFlag": [
+        "conflict:orbit-msa"
+      ]
+    },
+    "EV-04": {
+      "kind": "review",
+      "dealId": "blueorchid",
+      "expectedVerdict": "SIGN AFTER CHANGES",
+      "mustFind": [
+        "conflict:alnoor-msa:non_compete"
+      ],
+      "mustNotFlag": [
+        "playbook:ld",
+        "playbook:payment",
+        "playbook:liability",
+        "playbook:ip",
+        "gate:governing_law"
+      ]
+    },
+    "EV-05": {
+      "kind": "review",
+      "dealId": "datavane",
+      "expectedVerdict": "HOLD",
+      "mustFind": [
+        "conflict:cloudspan-spa:exclusivity",
+        "playbook:indemnity",
+        "playbook:restrictive"
+      ],
+      "mustNotFlag": []
+    },
+    "EV-06": {
+      "kind": "review",
+      "dealId": "rheinwerk",
+      "expectedVerdict": "HOLD",
+      "mustFind": [
+        "conflict:northwind-msa:ip_transfer",
+        "gate:annex"
+      ],
+      "mustNotFlag": [
+        "playbook:ld",
+        "playbook:payment",
+        "gate:payment",
+        "gate:ld_cap",
+        "playbook:liability"
+      ]
+    },
+    "EV-07": {
+      "kind": "review",
+      "dealId": "finserve",
+      "expectedVerdict": "HOLD",
+      "expectRoute": "nda_fast_lane",
+      "mustFind": [
+        "nda:definition",
+        "nda:residuals",
+        "covenant:non_compete",
+        "nda:remedies"
+      ],
+      "mustNotFlag": [
+        "gate:entity",
+        "gate:governing_law"
+      ]
+    },
+    "EV-08": {
+      "kind": "review",
+      "dealId": "loopmart",
+      "expectedVerdict": "SIGN",
+      "expectRoute": "nda_fast_lane",
+      "maxMedium": 1,
+      "mustFind": [],
+      "mustNotFlag": [
+        "severity:blocker",
+        "severity:high"
+      ]
+    },
+    "EV-09": {
+      "kind": "review",
+      "dealId": "sunrise-sow2",
+      "expectedVerdict": "SIGN",
+      "maxMedium": 1,
+      "mustFind": [],
+      "mustNotFlag": [
+        "playbook:ld",
+        "severity:blocker",
+        "severity:high"
+      ]
+    },
+    "EV-10": {
+      "kind": "review",
+      "dealId": "kriti",
+      "expectedVerdict": "SIGN AFTER CHANGES",
+      "mustFind": [
+        "playbook:ld",
+        "playbook:payment",
+        "playbook:indemnity",
+        "playbook:liability",
+        "flowdown:ip",
+        "flowdown:data",
+        "flowdown:consent"
+      ],
+      "mustNotFlag": []
+    },
+    "EV-11": {
+      "kind": "review",
+      "dealId": "marcus",
+      "expectedVerdict": "SIGN AFTER CHANGES",
+      "mustFind": [
+        "gate:entity",
+        "playbook:restrictive",
+        "playbook:termination",
+        "dependency:lakeshore"
+      ],
+      "mustNotFlag": [
+        "playbook:ip",
+        "flowdown:ip"
+      ]
+    },
+    "EV-12": {
+      "kind": "review",
+      "dealId": "harrington",
+      "expectedVerdict": "HOLD",
+      "expectComplianceAlert": true,
+      "mustFind": [
+        "notes:data_movement",
+        "bundle:sub-baa:ortiz",
+        "bundle:sub-baa:pvt-ltd",
+        "gate:insurance",
+        "playbook:ld",
+        "playbook:liability",
+        "playbook:indemnity",
+        "playbook:ip"
+      ],
+      "mustNotFlag": []
+    },
+    "EV-13": {
+      "kind": "review",
+      "dealId": "ortiz",
+      "expectedVerdict": "SIGN AFTER CHANGES",
+      "mustFind": [
+        "flowdown:data",
+        "flowdown:ip"
+      ],
+      "mustNotFlag": [
+        "nda:",
+        "playbook:payment",
+        "playbook:termination",
+        "playbook:liability"
+      ]
+    },
+    "EV-14": {
+      "kind": "review",
+      "dealId": "travelhub",
+      "mustFind": [],
+      "mustNotFlag": [
+        "conflict:orbit-msa"
+      ],
+      "expiredContext": [
+        "orbit-msa"
+      ]
+    },
+    "EV-15": {
+      "kind": "review",
+      "dealId": "blueorchid",
+      "mustFind": [
+        "mismatch:regions"
+      ],
+      "mustNotFlag": []
+    },
+    "EV-C1": {
+      "kind": "compliance",
+      "dealId": "harrington"
+    },
+    "EV-C2": {
+      "kind": "compliance",
+      "dealId": "gulfcrown"
+    },
+    "EV-L1": {
+      "kind": "linking",
+      "docId": "harrington-baa",
+      "expect": {
+        "mode": "auto",
+        "dealId": "harrington"
+      }
+    },
+    "EV-L2": {
+      "kind": "linking",
+      "docId": "kriti-sub",
+      "expect": {
+        "mode": "auto",
+        "dealId": "kriti",
+        "endClientDealId": "rheinwerk"
+      }
+    },
+    "EV-L3": {
+      "kind": "linking",
+      "synthetic": {
+        "counterparty": "Gulf Crown Hospitality Holdings",
+        "docType": "NDA",
+        "text": "MUTUAL NON-DISCLOSURE AGREEMENT between Gulf Crown Hospitality Holdings W.L.L. (Bahrain) and AtliQ Technologies Pvt Ltd."
+      },
+      "expect": {
+        "mode": "ask"
+      }
+    },
+    "EV-L4": {
+      "kind": "linking",
+      "synthetic": {
+        "counterparty": "Northwind Logistics",
+        "docType": "SOW",
+        "text": "STATEMENT OF WORK No. 2 (Dashboards) under the Master Services Agreement between Northwind Logistics Ltd and AtliQ Technologies Pvt Ltd."
+      },
+      "expect": {
+        "mode": "ask",
+        "notVersionOf": [
+          "northwind-msa"
+        ]
+      }
+    },
+    "EV-L5": {
+      "kind": "linking",
+      "docId": "harrington-baa",
+      "userChoice": "new",
+      "expect": {
+        "mode": "user",
+        "note": "harrington"
+      }
+    },
+    "EV-L6": {
+      "kind": "linking",
+      "docId": "rheinwerk-sa",
+      "expect": {
+        "mode": "auto",
+        "dealId": "rheinwerk"
+      }
+    },
+    "EV-A1": {
+      "kind": "access"
+    },
+    "EV-A2": {
+      "kind": "access"
+    },
+    "EV-A3": {
+      "kind": "access"
+    },
+    "EV-V1": {
+      "kind": "version",
+      "dealId": "travelhub",
+      "replace": {
+        "travelhub-sa": "synthetic/travelhub_v2_entity_fixed.md"
+      },
+      "resolved": [
+        "gate:entity",
+        "gate:invoicing_entity"
+      ],
+      "stillOpen": [
+        "conflict:alnoor-msa:non_compete"
+      ]
+    },
+    "EV-V2": {
+      "kind": "version",
+      "dealId": "rheinwerk",
+      "add": [
+        "synthetic/rheinwerk_annex3_dpa.md"
+      ],
+      "resolved": [
+        "gate:annex:annex-3"
+      ],
+      "stillOpen": [
+        "conflict:northwind-msa:ip_transfer"
+      ]
+    },
+    "EV-V3": {
+      "kind": "version",
+      "dealId": "harrington",
+      "add": [
+        "synthetic/harrington_ortiz_sub_baa.md"
+      ],
+      "resolved": [
+        "bundle:sub-baa:ortiz"
+      ],
+      "stillOpen": [
+        "bundle:sub-baa:pvt-ltd",
+        "gate:insurance"
+      ],
+      "expectedVerdict": "HOLD",
+      "expectComplianceAlert": true
+    },
+    "EV-V4": {
+      "kind": "skip",
+      "reason": "Late-finding detection (FR-18) is not built in the prototype (Build Plan §5, declared in README)."
+    },
+    "EV-S1": {
+      "kind": "seller",
+      "input": {
+        "client": "Desert Pearl Hotels",
+        "sectors": [
+          "hospitality"
+        ],
+        "regions": [
+          "Saudi Arabia"
+        ],
+        "services": [
+          "revenue management analytics"
+        ]
+      },
+      "expect": {
+        "status": "conflict",
+        "source": "alnoor-msa"
+      }
+    },
+    "EV-S2": {
+      "kind": "seller",
+      "input": {
+        "client": "US retail client",
+        "sectors": [
+          "retail"
+        ],
+        "regions": [
+          "USA"
+        ],
+        "services": [
+          "data engineering"
+        ],
+        "rates": [
+          {
+            "role": "Senior Data Engineer",
+            "ratePerHourUsd": 72
+          }
+        ]
+      },
+      "expect": {
+        "status": "conflict",
+        "mustNotReveal": [
+          "Crestline",
+          "$85",
+          "85/hr"
+        ]
+      },
+      "recheck": {
+        "rates": [
+          {
+            "role": "Senior Data Engineer",
+            "ratePerHourUsd": 88
+          }
+        ],
+        "status": "clear"
+      }
+    },
+    "EV-S3": {
+      "kind": "seller",
+      "input": {
+        "client": "European manufacturer",
+        "sectors": [
+          "manufacturing"
+        ],
+        "regions": [
+          "Germany"
+        ],
+        "services": [
+          "data pipelines"
+        ],
+        "assets": [
+          "PipeKit"
+        ]
+      },
+      "expect": {
+        "status": "attention",
+        "source": "northwind-msa"
+      }
+    },
+    "EV-S4": {
+      "kind": "seller",
+      "input": {
+        "client": "Lakehouse platform vendor",
+        "sectors": [
+          "data_platform"
+        ],
+        "regions": [
+          "India"
+        ],
+        "services": [
+          "implementation partner for a lakehouse platform"
+        ],
+        "partnership": true
+      },
+      "expect": {
+        "status": "conflict",
+        "source": "cloudspan-spa"
+      }
+    },
+    "EV-S5": {
+      "kind": "seller",
+      "input": {
+        "client": "Lakehouse platform vendor",
+        "sectors": [
+          "data_platform"
+        ],
+        "regions": [
+          "Europe"
+        ],
+        "services": [
+          "implementation partner for a lakehouse platform"
+        ],
+        "partnership": true
+      },
+      "expect": {
+        "status": "clear"
+      }
+    },
+    "EV-S6": {
+      "kind": "seller",
+      "input": {
+        "client": "Any client",
+        "sectors": [
+          "retail"
+        ],
+        "regions": [
+          "India"
+        ],
+        "services": [
+          "analytics"
+        ],
+        "freeText": "promise the client a named engineer full-time for 12 months"
+      },
+      "expect": {
+        "freeTextStatus": "couldnt_check"
+      }
+    },
+    "EV-S7": {
+      "kind": "seller-banner",
+      "dealId": "gulfcrown"
+    },
+    "EV-S8": {
+      "kind": "seller-waiver",
+      "input": {
+        "client": "Desert Pearl Hotels",
+        "sectors": [
+          "hospitality"
+        ],
+        "regions": [
+          "Saudi Arabia"
+        ],
+        "services": [
+          "revenue management analytics"
+        ]
+      },
+      "waiverFor": "Desert Pearl Hotels"
+    },
+    "EV-P1": {
+      "kind": "similar",
+      "query": {
+        "docId": "gulfcrown-msa",
+        "section": "12",
+        "clauseType": "ld"
+      },
+      "expect": [
+        {
+          "docId": "acme-msa",
+          "label": "standard"
+        },
+        {
+          "docId": "alnoor-msa",
+          "label": "exception"
+        },
+        {
+          "docId": "brightwater-msa",
+          "label": "accident"
+        }
+      ]
+    },
+    "EV-P2": {
+      "kind": "similar",
+      "query": {
+        "docId": "finserve-nda",
+        "section": "1",
+        "clauseType": "confidentiality"
+      },
+      "expect": [
+        {
+          "anyOf": [
+            "alnoor-nda",
+            "harrington-nda"
+          ],
+          "label": "standard"
+        },
+        {
+          "docId": "meridian-nda",
+          "label": "accident"
+        }
+      ]
+    },
+    "EV-P3": {
+      "kind": "similar",
+      "query": {
+        "docId": "harrington-baa",
+        "section": "4",
+        "clauseType": "data_protection"
+      },
+      "expect": [
+        {
+          "docId": "carebridge-baa",
+          "label": "standard"
+        }
+      ]
+    },
+    "EV-P4": {
+      "kind": "similar",
+      "query": {
+        "docId": "harrington-msa",
+        "section": "9",
+        "clauseType": "indemnity"
+      },
+      "expect": [
+        {
+          "docId": "paytrack-msa",
+          "label": "standard"
+        }
+      ]
+    },
+    "EV-P5": {
+      "kind": "similar",
+      "query": {
+        "docId": "kriti-sub",
+        "section": "4",
+        "clauseType": "payment"
+      },
+      "expect": [
+        {
+          "docId": "trustline-msa",
+          "label": "standard"
+        }
+      ]
+    },
+    "EV-P6": {
+      "kind": "similar",
+      "query": {
+        "docId": "rheinwerk-sa",
+        "section": "14",
+        "clauseType": "governing_law"
+      },
+      "expect": [
+        {
+          "docId": "northwind-msa",
+          "label": "concession"
+        }
+      ]
+    },
+    "EV-P7": {
+      "kind": "similar",
+      "query": {
+        "docId": "sunrise-sow2",
+        "section": "8",
+        "clauseType": "ld"
+      },
+      "expect": [
+        {
+          "docId": "acme-msa",
+          "label": "standard"
+        }
+      ],
+      "dealId": "sunrise-sow2",
+      "expectedVerdict": "SIGN"
+    },
+    "EV-G1": {
+      "kind": "check",
+      "checks": [
+        "EV-G1"
+      ]
+    },
+    "EV-G2": {
+      "kind": "check",
+      "checks": [
+        "EV-G2"
+      ]
+    },
+    "EV-G3": {
+      "kind": "check",
+      "checks": [
+        "EV-G3"
+      ]
+    },
+    "EV-G4": {
+      "kind": "check",
+      "checks": [
+        "EV-G4"
+      ]
+    },
+    "EV-G5": {
+      "kind": "check",
+      "checks": [
+        "EV-G5"
+      ]
+    },
+    "EV-G6": {
+      "kind": "check",
+      "checks": [
+        "EV-G6"
+      ]
+    },
+    "EV-G7": {
+      "kind": "check",
+      "checks": [
+        "EV-G7"
+      ]
+    },
+    "EV-G8": {
+      "kind": "check",
+      "checks": [
+        "EV-G8"
+      ]
+    },
+    "EV-G9": {
+      "kind": "check",
+      "checks": [
+        "EV-G9",
+        "Guardrails:"
+      ]
+    },
+    "EV-F1": {
+      "kind": "check",
+      "checks": [
+        "EV-F1"
+      ]
+    },
+    "EV-F2": {
+      "kind": "check",
+      "checks": [
+        "EV-F2"
+      ]
+    },
+    "EV-F3": {
+      "kind": "check",
+      "checks": [
+        "EV-F3"
+      ]
+    },
+    "EV-F4": {
+      "kind": "check",
+      "checks": [
+        "EV-F4"
+      ]
+    },
+    "EV-M1": {
+      "kind": "check",
+      "checks": [
+        "EV-M1"
+      ],
+      "notRun": "masking eval not run in this mode (npm run check:mask / the masked eval run)"
+    },
+    "EV-M3": {
+      "kind": "check",
+      "checks": [
+        "EV-M3"
+      ],
+      "notRun": "masking eval not run in this mode (npm run check:mask / the masked eval run)"
+    },
+    "EV-M4": {
+      "kind": "check",
+      "checks": [
+        "EV-M4"
+      ],
+      "notRun": "masking eval not run in this mode (npm run check:mask / the masked eval run)"
+    },
+    "EV-M2": {
+      "kind": "skip",
+      "reason": "Lite masking has no local name detection (Masking_Lite_Spec §6): names on no list are not caught; expected to fail in the prototype, declared in the README"
+    }
   }
 }

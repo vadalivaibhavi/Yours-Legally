@@ -274,6 +274,11 @@ export async function BriefView({ dealId: id, version }: { dealId: string; versi
               {b.notSeen.map((x) => (
                 <li key={x}>◌ {x}</li>
               ))}
+              {b.expired.map((x) => (
+                <li key={x.entryId} className="text-muted">
+                  ✓ {x.text} <span className="text-xs">(context only: not a finding, doesn't change the verdict)</span>
+                </li>
+              ))}
             </ul>
             {b.unchecked.items.length > 0 && (
               <div className="mt-3 border-t border-line pt-3">

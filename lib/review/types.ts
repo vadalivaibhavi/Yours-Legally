@@ -154,4 +154,6 @@ export type EffectiveBrief = Brief & {
   waitingFor: { item: string; owner: string }[];
   /** Register commitments of kinds the conflict check doesn't compare, listed for a manual check (lib/review/unchecked.ts). */
   unchecked: { items: { entryId: string; sourceDocId: string; text: string; why: string }[]; more: number };
+  /** FR-25: expired restrictions that would otherwise match the deal, shown as context only (lib/review/expiredContext.ts). */
+  expired: { entryId: string; sourceDocId: string; text: string; matchedOn: string }[];
 };

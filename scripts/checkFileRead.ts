@@ -68,6 +68,14 @@ export async function checkFileRead(): Promise<FileReadResult[]> {
       else throw e;
     }
   }
+  // EV-F4: an old Word (.doc) file is refused with what to do instead.
+  try {
+    await readContractFile("old_contract.doc", new Uint8Array([0xd0, 0xcf, 0x11, 0xe0, 0xa1, 0xb1, 0x1a, 0xe1]));
+    out.push({ key: "old-doc", format: "old Word (.doc)", words: 0, clauses: "–", missing: [], ok: false, note: "was read instead of refused" });
+  } catch (e) {
+    const ok = e instanceof UnreadableFile && /\.docx or PDF/.test((e as Error).message);
+    out.push({ key: "old-doc", format: "old Word (.doc)", words: 0, clauses: "–", missing: [], ok, note: (e as Error).message });
+  }
   return out;
 }
 

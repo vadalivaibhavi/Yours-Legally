@@ -13,6 +13,7 @@ import { ownerRole, rolesInText, OWNER } from "./owners";
 import { expandRegions } from "../geo";
 import { latestSellerCheck } from "../sellerChecks";
 import { uncheckedCommitments } from "./unchecked";
+import { expiredContext } from "./expiredContext";
 import type { Brief, EffectiveBrief, Finding, Severity } from "./types";
 import { computeVerdict, sortFindings, templateHeadline } from "./verdict";
 
@@ -102,6 +103,7 @@ export function effectiveBrief(brief: Brief, prev: Brief | null): EffectiveBrief
     ),
     similar: brief.similar.map((p) => ({ ...p, hits: p.hits.map((h) => ({ ...h, differs: sanitize(h.differs) })) })),
     unchecked: uncheckedCommitments(brief), // never a finding, never in the verdict
+    expired: expiredContext(brief), // FR-25: context only, never a finding, never in the verdict
     complianceAlert,
     changes,
     waitingFor,

@@ -45,10 +45,12 @@ export function uncheckedCommitments(brief: Brief): { items: Unchecked[]; more: 
   const split = (v: string | undefined) => (v ?? "").split(",").map((x) => x.trim()).filter((x) => x && x !== "Other");
   const sectors = new Set(scope.flatMap((p) => split(p[0])));
   const regions = [...new Set(scope.flatMap((p) => split(p[1])))].filter((r) => !(r === "India" && deal.clientCountry && deal.clientCountry !== "India"));
-  const names = [deal.counterparty, ...deal.counterpartyAliases].map((n) => n.toLowerCase().split(/[\s,]+/)[0]).filter((n) => n.length > 2);
+  // Whole names only: a first word ("Travel" from "Travel Hub") would match unrelated companies ("Orbit Travels").
+  const names = [deal.counterparty, ...deal.counterpartyAliases].map((n) => n.toLowerCase().replace(/[.,]/g, "").trim()).filter((n) => n.length > 2);
+  const sameName = (c: string) => { const x = c.toLowerCase().replace(/[.,]/g, ""); return names.some((n) => x.includes(n) || n.includes(x)); };
 
   const why = (e: RegisterEntry): Unchecked["why"] | null => {
-    if (names.some((n) => e.counterparty.toLowerCase().includes(n))) return "same client";
+    if (sameName(e.counterparty)) return "same client";
     if (e.type !== "other" && e.type !== "non_solicit") return null; // a duty owed to another client
     const specific = e.scope.sectors.length > 0 && e.scope.sectors.length < 8 && e.scope.regions.length > 0 && !e.scope.regions.some((r) => /worldwide|global|other/i.test(r));
     if (specific && e.scope.sectors.some((x) => sectors.has(x)) && regions.length && regionsOverlap(e.scope.regions, regions)) return "same market";
