@@ -213,3 +213,16 @@
 {"at":"2026-10-14T02:08:08.822Z","provider":"gemini","task":"ocr","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
 {"at":"2026-10-14T02:08:08.847Z","provider":"gemini","task":"ocr","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
 {"at":"2026-10-14T02:08:09.949Z","provider":"gemini","script":"eval","caseId":"EV-S6","task":"classify","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-14T02:15:58.060Z","provider":"gemini","task":"ocr","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-14T02:15:58.079Z","provider":"gemini","task":"ocr","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-14T02:15:59.046Z","provider":"gemini","script":"eval","caseId":"EV-S6","task":"classify","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-14T02:19:56.290Z","provider":"gemini","script":"eval","caseId":"EV-S6","task":"classify","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-14T02:20:02.482Z","provider":"gemini","script":"review","dealId":"corvina","task":"extract","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-14T02:20:02.494Z","provider":"gemini","script":"review","dealId":"corvina","task":"conflict","model":"gemini-3.6-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-14T02:20:02.498Z","provider":"gemini","script":"review","dealId":"corvina","task":"playbook","model":"gemini-3.6-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-14T02:20:02.529Z","provider":"gemini","script":"review","dealId":"corvina","task":"differs","model":"gemini-3.6-flash","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-14T02:20:17.838Z","provider":"gemini","script":"review","dealId":"corvina","task":"notes","model":"gemini-3.6-flash","inputTokens":974,"outputTokens":3006,"ms":15303,"cached":false,"ok":true}
+{"at":"2026-10-14T02:20:19.606Z","provider":"gemini","script":"review","dealId":"corvina","task":"brief","model":"gemini-3.6-flash","inputTokens":253,"outputTokens":44,"ms":1760,"cached":false,"ok":true}
+{"at":"2026-10-14T02:20:56.953Z","provider":"gemini","task":"ocr","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-14T02:20:56.970Z","provider":"gemini","task":"ocr","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}
+{"at":"2026-10-14T02:20:57.891Z","provider":"gemini","script":"eval","caseId":"EV-S6","task":"classify","model":"gemini-flash-lite-latest","inputTokens":0,"outputTokens":0,"ms":0,"cached":true,"ok":true}

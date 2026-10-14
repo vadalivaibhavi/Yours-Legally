@@ -18,6 +18,7 @@ import { checkFindings } from "./_grade";
 import { checkRegister } from "./checkRegister";
 import { filterRegister, unconfirmed } from "../lib/review/conflict";
 import { oneWayNda } from "../lib/review/playbook";
+import { containsDpa } from "../lib/review/bundle";
 import { injectionAttempts, sanitize } from "../lib/review/guardrails";
 import { briefsDir } from "../lib/config";
 import {
@@ -802,6 +803,7 @@ async function main() {
     { name: "A4 instructions to an AI reviewer are caught and block a clean verdict", ...injectionCheck(briefs) },
     { name: "A6 plain wording: \"redline\" reads right as a verb and as a noun", ...wordingCheck() },
     { name: "Every finding graded (eval/finding_labels.json): precision, noise, wrong", ...labelsCheck(briefs) },
+    { name: "A DPA annexed to another contract counts as a DPA (held-out finding)", ...dpaAnnexCheck() },
     { name: "A5 upload detection: notes vs contract, version vs additional, wrong deal, blank template", ...uploadDetectCheck() },
     { name: "A5 deal size: small-deal deviations count one step lower; promises to other clients never change", ...dealSizeCheck(briefs) },
     { name: "A5 owners are roles, never people's names", ...rolesCheck(briefs) },
@@ -1301,4 +1303,19 @@ function labelsCheck(briefs: Brief[]): { pass: boolean; detail: string } {
     pass: !ungraded.length && tally.wrong <= graded * 0.05,
     detail: `${graded} findings graded · precision ${pct(tally.correct)}% correct (+${pct(tally.partly)}% partly) · noise ${pct(tally.noise)}% · duplicates ${tally.duplicate} · wrong ${tally.wrong} · severity off ${sevOff}${ungraded.length ? ` · UNGRADED ${ungraded.length}: ${ungraded.slice(0, 8).join(", ")}${ungraded.length > 8 ? " …" : ""}` : " · none ungraded"}`,
   };
+}
+
+/** lib/review/bundle.ts containsDpa: a DPA heading inside another document counts; a passing mention doesn't. */
+function dpaAnnexCheck(): { pass: boolean; detail: string } {
+  const cases: [string, boolean][] = [
+    ["## ANNEX 2 — DATA PROCESSING AGREEMENT (Art. 28 GDPR)", true],
+    ["SCHEDULE 2 — DATA PROCESSING TERMS", true],
+    ["Annex 3 — Data Processing Agreement", true],
+    ["### Data Processing Addendum", true],
+    ['Under: Master Services Agreement dated 23 March 2026, including Annex 2 (Data Processing Agreement) (the "MSA")', false],
+    ["The Supplier shall comply with the data processing agreement.", false],
+    ["the Parties shall conclude the Data Processing Agreement pursuant to Art. 28 GDPR attached as Annex 3", false],
+  ];
+  const wrong = cases.filter(([t, want]) => containsDpa(t) !== want).map(([t]) => t.slice(0, 50));
+  return { pass: !wrong.length, detail: `${cases.length - wrong.length}/${cases.length} headings and sentences classified right${wrong.length ? ` · wrong: ${wrong.join(" | ")}` : ""}` };
 }

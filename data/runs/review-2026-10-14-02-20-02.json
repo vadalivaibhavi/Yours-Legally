@@ -1,0 +1,73 @@
+{
+  "deals": [
+    "corvina"
+  ],
+  "skipped": [],
+  "concurrency": 1,
+  "minIntervalMs": 4000,
+  "seconds": 17,
+  "quotaStop": null,
+  "calls": 2,
+  "cached": 4,
+  "inTok": 1227,
+  "outTok": 3050,
+  "byTaskAndModel": [
+    {
+      "task": "brief",
+      "model": "gemini-3.6-flash",
+      "calls": 1,
+      "cached": 0,
+      "failed": 0,
+      "inTok": 253,
+      "outTok": 44
+    },
+    {
+      "task": "conflict",
+      "model": "gemini-3.6-flash",
+      "calls": 0,
+      "cached": 1,
+      "failed": 0,
+      "inTok": 0,
+      "outTok": 0
+    },
+    {
+      "task": "differs",
+      "model": "gemini-3.6-flash",
+      "calls": 0,
+      "cached": 1,
+      "failed": 0,
+      "inTok": 0,
+      "outTok": 0
+    },
+    {
+      "task": "extract",
+      "model": "gemini-flash-lite-latest",
+      "calls": 0,
+      "cached": 1,
+      "failed": 0,
+      "inTok": 0,
+      "outTok": 0
+    },
+    {
+      "task": "notes",
+      "model": "gemini-3.6-flash",
+      "calls": 1,
+      "cached": 0,
+      "failed": 0,
+      "inTok": 974,
+      "outTok": 3006
+    },
+    {
+      "task": "playbook",
+      "model": "gemini-3.6-flash",
+      "calls": 0,
+      "cached": 1,
+      "failed": 0,
+      "inTok": 0,
+      "outTok": 0
+    }
+  ],
+  "rows": [
+    "corvina       SIGN AFTER CHANGES  0B 3H 0M  17s  "
+  ]
+}

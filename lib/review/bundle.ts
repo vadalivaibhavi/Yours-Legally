@@ -114,10 +114,12 @@ export function checkBundle(ctx: Ctx): { rows: BundleRow[]; findings: Finding[];
   const eu = ctx.rules.find((r) => r.id === "rd-eu-personal");
   if (eu && dataTypes.includes("personal_data") && regionsOverlap(regions, ["EU"])) {
     const missingDpaAnnex = [...ctx.gates.entries()].flatMap(([, g]) => g).find((g) => g.pass === false && g.rule.startsWith("annex:") && /data processing|dpa|scc|standard contractual/i.test(g.detail));
-    const dpaDoc = docsWith((d) => d.docType === "DPA");
+    // A DPA counts whether it is its own document or an annex / schedule of another one (e.g. the Corvina MSA's Annex 2).
+    const dpaDoc = docsWith((d) => d.docType === "DPA" || containsDpa(d.text));
+    const annexed = dpaDoc.find((d) => d.docType !== "DPA");
     const st: BundleRow["status"] = dpaDoc.some((d) => d.kind === "signed") ? "signed" : dpaDoc.length ? "in_review" : missingDpaAnnex ? "missing" : "missing";
     add(
-      { party: deal.counterparty, document: "DPA (GDPR Art. 28) incl. SCCs", status: st, detail: missingDpaAnnex ? `Referenced as ${missingDpaAnnex.label.replace(" attached", "")} but not attached` : st === "missing" ? "Not in the deal" : "On file", findingKey: missingDpaAnnex ? `gate:${missingDpaAnnex.rule}` : st === "missing" ? "bundle:dpa:client" : undefined },
+      { party: deal.counterparty, document: "DPA (GDPR Art. 28) incl. SCCs", status: st, detail: missingDpaAnnex ? `Referenced as ${missingDpaAnnex.label.replace(" attached", "")} but not attached` : st === "missing" ? "Not in the deal" : annexed ? `On file, annexed to ${annexed.title}` : "On file", findingKey: missingDpaAnnex ? `gate:${missingDpaAnnex.rule}` : st === "missing" ? "bundle:dpa:client" : undefined },
       st === "missing" && !missingDpaAnnex
         ? { key: "bundle:dpa:client", title: `Missing DPA with ${deal.counterparty}`, impact: eu.why, severity: "high", owner: OWNER.dealTeam, resolution: "document", citations: [], missingItem: { item: `DPA + SCCs with ${deal.counterparty}`, owner: OWNER.dealTeam } }
         : undefined,
@@ -143,4 +145,14 @@ export function checkBundle(ctx: Ctx): { rows: BundleRow[]; findings: Finding[];
     }
   }
   return { rows, findings, profile };
+}
+
+/**
+ * A DPA inside another document: a heading line (Markdown "#", or a line starting with Annex / Schedule /
+ * Exhibit / Appendix) that names data processing terms, e.g. "## ANNEX 2 — DATA PROCESSING AGREEMENT (Art. 28
+ * GDPR)" or "SCHEDULE 2 — DATA PROCESSING TERMS". A passing mention in a sentence ("…including Annex 2 (Data
+ * Processing Agreement)…") doesn't count.
+ */
+export function containsDpa(text: string): boolean {
+  return /^(?:#{1,4}\s*[^\n]{0,60}|(?:annex|annexure|schedule|exhibit|appendix)\s+[a-z0-9]{1,4}\b[^\n]{0,20})data processing (?:agreement|addendum|terms)\b[^\n]{0,60}$/im.test(text);
 }
