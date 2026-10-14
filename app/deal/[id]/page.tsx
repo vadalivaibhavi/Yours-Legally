@@ -134,7 +134,13 @@ export default async function DealPage(props: PageProps<"/deal/[id]">) {
                 <span className="text-xs text-muted">received {fmtDate(d.date)}</span>
               </summary>
               {/* Contract facts live with their document (FR-4): what was extracted, from which clause, and the rule checks. */}
-              {isK && factsFor(d.id) && <DocumentFacts review={factsFor(d.id)!} />}
+              {isK && factsFor(d.id) && (
+                <DocumentFacts
+                  review={factsFor(d.id)!}
+                  buyerSide={d.sideOfTable === "buyer"}
+                  otherSideUncapped={(shown ?? latest)?.findings.find((f) => f.key === "playbook:liability" && (!f.docId || f.docId === d.id))?.title}
+                />
+              )}
               <details className="mt-3">
                 <summary className="text-sm font-medium text-brand">Full text</summary>
                 <pre className="mt-2 max-h-[28rem] overflow-auto whitespace-pre-wrap rounded bg-paper p-3 font-serif text-sm">{d.text}</pre>
