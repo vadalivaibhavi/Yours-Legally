@@ -1,5 +1,8 @@
 # Phase 1 Spec: Data Layer
 
+> **Historical plan (13 Oct).** This was the build plan written before coding. The prototype as built is described in the repo README and `docs/Pending_Work.md`; product decisions made while building are in PRD v1.0 (marked *(build)*). Kept for the record; not updated.
+
+
 **Goal:** turn the dataset into the structured data every later phase reads: deals, documents, notes, company facts, the **obligations register** (F1), the **clause index** for similar past clauses (FR-22), the **playbook**, the **required-documents rules** and the **eval fixtures**. All of it is built by scripts on your laptop and committed to the repo as JSON. Vercel only reads these files and never runs the heavy jobs.
 
 **Size:** 2–3 sessions. **PRD links:** FR-1, FR-2 (read-only for now), FR-9, FR-14, FR-22 · §7.1 · EV-R1–R5.
@@ -44,7 +47,7 @@ scripts/ ingest.ts  buildRegister.ts  checkRegister.ts  buildClauseIndex.ts  bui
 
 ```ts
 Document     { id, file, kind: 'signed'|'incoming'|'note'|'reference', docType: 'MSA'|'SOW'|'NDA'|'BAA'|'ICA'|'Partnership'|'Subcontract'|'Waiver'|'Other',
-               counterparty, date, atliqEntity?: 'Pvt Ltd'|'Inc'|'FZ-LLC'|..., sideOfTable: 'supplier'|'buyer'|'partner'|'mutual',
+               counterparty, date, atliqEntity?: 'Pvt Ltd'|'Inc' /* only two entities exist */, sideOfTable: 'supplier'|'buyer'|'partner'|'mutual',
                paper: 'client'|'atliq', text, ocr: boolean, dealId? }
 Deal         { id, name, counterparty, owner, deadline?, valueUsd?, status: 'open'|'waiting_for_input'|'decided'|'signed',
                documentIds[], noteIds[], linkedDealIds[] /* e.g. Kriti → Rheinwerk, Ortiz → Harrington, Marcus → Lakeshore */ }
@@ -54,7 +57,8 @@ RegisterEntry{ id, type: 'non_compete'|'exclusivity'|'mfn_pricing'|'ip_transfer'
                sourceDocId, clauseRef, quote /* verbatim */, bindsEntities[], includesAffiliates: boolean,
                scope{ sectors[], regions[], services[], assets[], counterparties[] },
                start, end?, endRule? /* e.g. "term + 18 months" */, waivers[{ docId, clauseRef, covers }],
-               status /* computed by rule from APP_TODAY: live|expired|unknown */, verified: false, notes? }
+               status /* computed by rule from APP_TODAY: live|expired|unknown */, verified: false, notes?,
+               details?: Record<string, unknown> /* type-specific, e.g. MFN: rate card by role from Crestline Exhibit B; used by the seller rate check in Phase 4 */ }
 ClauseChunk  { id, docId, counterparty, date, atliqEntity, sideOfTable, clauseNo, heading, text,
                clauseType: 'ld'|'liability'|'indemnity'|'payment'|'ip'|'confidentiality'|'non_compete'|'non_solicit'|'governing_law'|'data_protection'|'termination'|'insurance'|'other',
                label: 'standard'|'exception'|'concession'|'accident'|'untagged', labelNote?, embedding: number[] }
@@ -81,7 +85,7 @@ EvalCase     { id, inputs: docId[], expectedVerdict?, mustFind: string[], mustNo
   - Gulf Crown counsel call → Gulf Crown
   - Harrington huddle → Harrington
   - Brightwater post-mortem → no open deal; reference only
-- Company facts come from `atliq_entities.md`, plus insurance held: **$1M cyber only known**, so mark everything else "unknown".
+- Company facts come from `atliq_entities.md`: **two entities only**. Pvt Ltd serves India, the Middle East, Europe and all non-US clients; Inc serves US clients only. Delivery for both is in Pune. Add insurance held: **$1M cyber only known**, so mark everything else "unknown".
 
 ### 1b. Build the register (AI, strong model, one call per signed document)
 - **Input:** one signed document's full text. **Output:** `RegisterEntry[]` validated with zod.

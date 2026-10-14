@@ -1,5 +1,5 @@
 {
-  "builtAt": "2026-10-14T02:27:12.320Z",
+  "builtAt": "2026-10-14T02:54:06.192Z",
   "from": "docs/Eval_Set.md + eval/case_keys.json",
   "cases": [
     {
@@ -1829,7 +1829,7 @@
         "checks": [
           "EV-M3"
         ],
-        "notRun": "masking eval not run in this mode (npm run check:mask / the masked eval run)"
+        "notRun": "Not run by decision (14 Oct): this level of masking was accepted for the demo; the full masked run is npm run eval:masked (about 70 model calls)"
       },
       "source": {
         "ID": "EV-M3",

@@ -1,10 +1,10 @@
 # Eval results
 
-Run 2026-10-14 01:42 UTC · APP_TODAY 2026-10-04 · cases from `docs/Eval_Set.md` via `eval/cases.json`.
+Run 2026-10-14 02:54 UTC · APP_TODAY 2026-10-04 · cases from `docs/Eval_Set.md` via `eval/cases.json`.
 
 Models: LLM gemini (fast: gemini-flash-lite-latest, gemini-3.5-flash-lite, gemini-3.1-flash-lite, gemini-3.1-flash-lite-preview; strong: gemini-3.6-flash, gemini-flash-latest, gemini-3.8-flash, gemini-3.7-flash, gemini-3-flash-preview, gemini-3.5-flash) · committed briefs made by gemini-flash-lite-latest, gemini-3-flash-preview, gemini-3.6-flash, gemini-3.8-flash, gemini-flash-latest, gemini-3.5-flash, gemini-3.7-flash.
 
-**46 passed · 3 failed · 0 not run (quota) · 1 skipped** (of 50 cases)
+**61 passed · 3 failed · 0 not run (quota) · 3 skipped** (of 67 cases) · last partial run: EV-M3
 
 ## Cross-cutting checks (PRD §11)
 
@@ -14,19 +14,26 @@ Models: LLM gemini (fast: gemini-flash-lite-latest, gemini-3.5-flash-lite, gemin
 | Guardrails: no breach/enforceable in system prose; never Reject | ✅ | 520 prose strings checked; 0 legal conclusions; 0 Reject recommendations |
 | Verdict identical with and without similar-clauses panel | ✅ | 13 briefs |
 | Register changes flag the right open deals and reach the checks (FR-2, FR-19) | ✅ | verify flags nothing; restriction edit flags all 13 open deals; ending it changes the seller check (conflict → clear); reject flags all and stops the conflict (clear); restore brings it back (conflict); client duty edit flags only that client's deals (harrington); insurance edit flags nothing (no check reads it) |
-| A1 no evidence, no finding: claims about the terms need a verified clause | ✅ | no counted finding lacks a clause · 0 shown as unsupported · injected "unlimited liability" on loopmart: verdict SIGN → SIGN, marked unsupported (low) |
-| A2 a clear register match is never dropped silently (strong-match rules) | ✅ | 5 strong-match rules right · a dismissed / unassessed strong match becomes "Possible collision with Al Noor Hospitality Group: GCC hospitality data analytics non-compete (confirm)" (high, confirm, cites the register clause) |
-| A3 one-way NDA caught by rules, whatever the title says | ✅ | one-way caught (definition + obligations): finserve-nda, meridian-nda · mutual left alone: 5/5 |
-| A4 instructions to an AI reviewer are caught and block a clean verdict | ✅ | attacks caught: 5/5 · real documents flagged: none · a SIGN brief (sunrise-sow2) with the finding: no longer SIGN |
-| A6 plain wording: "redline" reads right as a verb and as a noun | ✅ | 8/8 sentences read right |
+| EV-G1 (A1) no evidence, no finding: claims about the terms need a verified clause | ✅ | no counted finding lacks a clause · 0 shown as unsupported · injected "unlimited liability" on loopmart: verdict SIGN → SIGN, marked unsupported (low) |
+| EV-G2 (A2) a clear register match is never dropped silently (strong-match rules) | ✅ | 5 strong-match rules right · a dismissed / unassessed strong match becomes "Possible collision with Al Noor Hospitality Group: GCC hospitality data analytics non-compete (confirm)" (high, confirm, cites the register clause) |
+| EV-G3 (A3) one-way NDA caught by rules, whatever the title says | ✅ | one-way caught (definition + obligations): finserve-nda, meridian-nda · mutual left alone: 5/5 |
+| EV-G4 (A4) instructions to an AI reviewer are caught and block a clean verdict | ✅ | attacks caught: 5/5 · real documents flagged: none · a SIGN brief (sunrise-sow2) with the finding: no longer SIGN |
+| EV-G9 (A6) plain wording: "redline" reads right as a verb and as a noun | ✅ | 8/8 sentences read right |
 | Every finding graded (eval/finding_labels.json): precision, noise, wrong | ✅ | 83 findings graded · precision 84% correct (+5% partly) · noise 8% · duplicates 1 · wrong 1 · severity off 4 · none ungraded |
-| A5 upload detection: notes vs contract, version vs additional, wrong deal, blank template | ✅ | notes vs contract: 47/47 · document type from title: 0 wrong of 32 · real documents taken for templates: 0 · 17/17 version, wrong-deal and template cases right |
-| A5 deal size: small-deal deviations count one step lower; promises to other clients never change | ✅ | rule cases: 8/8 · small deals: blueorchid, kriti, sunrise-sow2 · 6 findings counted lower · protected findings moved: none |
-| A5 owners are roles, never people's names | ✅ | 113 owners and next actions checked · named a person: none · 0 stored owners with names mapped to roles at display |
+| A DPA annexed to another contract counts as a DPA (held-out finding) | ✅ | 7/7 headings and sentences classified right |
+| EV-F1 Word (.docx), incl. automatic numbering: ≥98% of words, every clause number | ✅ | pillarstone 100.0% · clauses 11/11, cobalt 100.0% · clauses 11/11, quanta 100.0% · clauses 8/8, greystone 100.0% · clauses 12/12, indus 100.0% · clauses 10/10 |
+| EV-F2 text-layer PDF: ≥98% of words, every clause number | ✅ | aldergrove 99.0% · clauses 10/10, ashwood 98.4% · clauses 7/7, cargoline 99.4% · clauses 10/10 |
+| EV-F3 scanned PDF read by OCR: ≥95% of words, every clause number | ✅ | corvina 99.6% · clauses 6/6, monsoon 99.5% · clauses 10/10 |
+| EV-F4 old Word (.doc) refused with instructions | ✅ | refused: "Old Word (.doc) files can't be read: save it as .docx or PDF and upload that." |
+| EV-M1 masking: 0 leaks in what goes to the AI | ✅ | dataset: 150 texts masked, 0 leaks, round trip 150/150, unit cases right · masked AI calls logged: 6, leaks 0 |
+| EV-M4 Lakeshore masked brief: real names back, every quote matches | ✅ | 5 masked calls (22 client names, 13 people, 30 amounts) · labels left: none · quotes matching the contract: 6/6 · verdict HOLD |
+| EV-G5 (A5) upload detection: notes vs contract, version vs additional, wrong deal, blank template | ✅ | notes vs contract: 47/47 · document type from title: 0 wrong of 32 · real documents taken for templates: 0 · 17/17 version, wrong-deal and template cases right |
+| EV-G6 (A5) deal size: small-deal deviations count one step lower; promises to other clients never change | ✅ | rule cases: 8/8 · small deals: blueorchid, kriti, sunrise-sow2 · 6 findings counted lower · protected findings moved: none |
+| EV-G7 (A5) owners are roles, never people's names | ✅ | 113 owners and next actions checked · named a person: none · 0 stored owners with names mapped to roles at display |
 | A5 seller mismatch is computed live from the latest deal check | ✅ | harrington (contract regions: USA) · declared none: mismatch · declared all: clear · stored mismatch with a matching check: dropped |
-| A5 store in contract register: deal leaves the queue, commitments reach the checks, the right deals are flagged | ✅ | harrington: signed, out of the queue · non-compete in the register · 12 open deals flagged for re-check · stored twice: no duplicate |
+| EV-G8 (A5) store in contract register: deal leaves the queue, commitments reach the checks, the right deals are flagged | ✅ | harrington: signed, out of the queue · non-compete in the register · 12 open deals flagged for re-check · stored twice: no duplicate |
 | A5 review runs read the dataset only, never the app's live state | ✅ | 13/13 briefs built from the dataset only · a live note or register edit changes the hash: yes · npm run review starts on an empty state: yes |
-| A4 end to end: LoopMart NDA with an injected instruction is reviewed (model) | ✅ | verdict SIGN AFTER CHANGES · injection finding raised · 1 findings |
+| EV-G4 (A4) end to end: LoopMart NDA with an injected instruction is reviewed (model) | ✅ | verdict SIGN AFTER CHANGES · injection finding raised · 1 findings |
 | NDA fast lane latency (<1 min) | info | finserve 44s · loopmart 29s |
 | Recall@3 on EV-P (≥80%) | ✅ | 10/10 = 100% |
 
@@ -58,7 +65,7 @@ Models: LLM gemini (fast: gemini-flash-lite-latest, gemini-3.5-flash-lite, gemin
 | EV-12 Harrington bundle (MSA, BAA, NDA, notes) | ❌ | missing playbook:ip |
 | EV-13 Daniel Ortiz ICA + NDA (AtliQ paper) | ✅ | SIGN AFTER CHANGES · found flowdown:data, flowdown:ip · clean on nda:, playbook:payment, playbook:termination, playbook:liability |
 | EV-15 BlueOrchid contract vs seller's deal check declaring "India  | ✅ | SIGN AFTER CHANGES · found mismatch:regions |
-| EV-14 TravelHub (negative test) | ✅ | HOLD · found nothing to find · clean on conflict:orbit-msa |
+| EV-14 TravelHub (negative test) | ✅ | HOLD · found nothing to find · clean on conflict:orbit-msa · listed as checked-expired: orbit-msa |
 
 ## B1. Compliance alerts & notes (FR-21)
 
@@ -119,4 +126,36 @@ Models: LLM gemini (fast: gemini-flash-lite-latest, gemini-3.5-flash-lite, gemin
 | EV-P5 Kriti subcontract payment (pay-when-paid, up to 120 days) | ✅ | top 3: Rohan Iyer §3 [standard] 0.92 · Trustline NBFC §4 [standard] 0.91 · PayTrack Technologies §4 [untagged] 0.92 |
 | EV-P6 Rheinwerk governing law (German law) | ✅ | top 3: Brightwater Insurance Inc §20 [accident] 0.87 · Northwind Logistics §17 [concession] 0.86 · Crestline Retail Inc §16 [untagged] 0.87 |
 | EV-P7 Sunrise SOW-2 "Penalty for Delay" (negative test) | ✅ | top 3: Acme Retail Group §7 [standard] 0.92 · Sunrise Foods §8 [standard] 0.90 · Brightwater Insurance Inc §9 [accident] 0.87 |
+
+## F. Guardrails and features added during the build (PRD §10, FR-3, FR-12, FR-14, FR-23, FR-24)
+
+| Case | Result | Detail |
+|---|---|---|
+| EV-G1  | ✅ | no counted finding lacks a clause · 0 shown as unsupported · injected "unlimited liability" on loopmart: verdict SIGN → SIGN, marked unsupported (low) |
+| EV-G2  | ✅ | 5 strong-match rules right · a dismissed / unassessed strong match becomes "Possible collision with Al Noor Hospitality Group: GCC hospitality data analytics non-compete (confirm)" (high, confirm, cites the register clause) |
+| EV-G3  | ✅ | one-way caught (definition + obligations): finserve-nda, meridian-nda · mutual left alone: 5/5 |
+| EV-G4  | ✅ | attacks caught: 5/5 · real documents flagged: none · a SIGN brief (sunrise-sow2) with the finding: no longer SIGN · verdict SIGN AFTER CHANGES · injection finding raised · 1 findings |
+| EV-G5  | ✅ | notes vs contract: 47/47 · document type from title: 0 wrong of 32 · real documents taken for templates: 0 · 17/17 version, wrong-deal and template cases right |
+| EV-G6  | ✅ | rule cases: 8/8 · small deals: blueorchid, kriti, sunrise-sow2 · 6 findings counted lower · protected findings moved: none |
+| EV-G7  | ✅ | 113 owners and next actions checked · named a person: none · 0 stored owners with names mapped to roles at display |
+| EV-G8  | ✅ | harrington: signed, out of the queue · non-compete in the register · 12 open deals flagged for re-check · stored twice: no duplicate |
+| EV-G9  | ✅ | 520 prose strings checked; 0 legal conclusions; 0 Reject recommendations · 8/8 sentences read right |
+
+## G. Reading real files (FR-3)
+
+| Case | Result | Detail |
+|---|---|---|
+| EV-F1 The 10 held-out drafts saved as Word (.docx), including auto | ✅ | pillarstone 100.0% · clauses 11/11, cobalt 100.0% · clauses 11/11, quanta 100.0% · clauses 8/8, greystone 100.0% · clauses 12/12, indus 100.0% · clauses 10/10 |
+| EV-F2 The same drafts as text-layer PDFs | ✅ | aldergrove 99.0% · clauses 10/10, ashwood 98.4% · clauses 7/7, cargoline 99.4% · clauses 10/10 |
+| EV-F3 The same drafts as image-only scans | ✅ | corvina 99.6% · clauses 6/6, monsoon 99.5% · clauses 10/10 |
+| EV-F4 An old Word (.doc) file | ✅ | refused: "Old Word (.doc) files can't be read: save it as .docx or PDF and upload that." |
+
+## G1. Masking client data (FR-26) (added 14 Oct, not built)
+
+| Case | Result | Detail |
+|---|---|---|
+| EV-M1 Full eval run with request logging on | ✅ | dataset: 150 texts masked, 0 leaks, round trip 150/150, unit cases right · masked AI calls logged: 6, leaks 0 |
+| EV-M2 Rheinwerk MSA with a person and a director not on any list | skip | Lite masking has no local name detection (Masking_Lite_Spec §6): names on no list are not caught; expected to fail in the prototype, declared in the README |
+| EV-M3 Full eval set masked vs unmasked | skip | Not run by decision (14 Oct): this level of masking was accepted for the demo; the full masked run is npm run eval:masked (about 70 model calls) |
+| EV-M4 Lakeshore brief after unmasking | ✅ | 5 masked calls (22 client names, 13 people, 30 amounts) · labels left: none · quotes matching the contract: 6/6 · verdict HOLD |
 

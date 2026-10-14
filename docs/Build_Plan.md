@@ -1,8 +1,11 @@
 # Yours Legally, — Prototype Build Plan (v2)
 
+> **Historical plan (13 Oct).** This was the build plan written before coding. The prototype as built is described in the repo README and `docs/Pending_Work.md`; product decisions made while building are in PRD v1.0 (marked *(build)*). Kept for the record; not updated.
+
+
 **Build mode:** KaVi builds in **Claude Code**; Claude (this chat) writes the phase specs and reviews each phase.
 **Deploy target:** Vercel, connected through GitHub in Phase 0.
-**LLM provider:** not chosen yet. The build is provider-neutral; the provider is picked by eval before Phase 2.
+**LLM + embeddings provider:** needed before Phase 1b (the register extraction is the first real AI call). The build stays provider-neutral; models are compared on the evals in Phase 2.
 **Deadline:** not confirmed. Phases are sized in working sessions; PRD §15 gets dates once the deadline is known.
 **Source of truth:** `PRD_Yours_Legally_v0.9.md` (FR IDs), `Eval_Set.md` (EV IDs), `Traceability_Matrix.md`.
 
@@ -12,7 +15,7 @@
 
 1. Install **Node.js (LTS)**, **Git** and **Claude Code** on your laptop, and create accounts on **GitHub** and **Vercel** (the free Hobby plan is enough).
 2. Create an empty folder, e.g. `C:\yours-legally`, separate from the capstone folder, and open Claude Code in it.
-3. Copy these into a `docs/` subfolder so Claude Code can read them: `PRD_Yours_Legally_v0.9.md`, `Eval_Set.md`, `Obligations_Register.md`, `Step0_Answer_Key.md`, `Build_Plan.md`. Copy the dataset into `data/raw/`, keeping the dataset's folder structure.
+3. Copy these into a `docs/` subfolder so Claude Code can read them: `PRD_Yours_Legally_v0.9.md`, `Eval_Set.md`, `Obligations_Register.md`, `Step0_Answer_Key.md`, `Build_Plan.md`, `Phase1_Spec.md` … `Phase5_Spec.md`. Copy the dataset into `data/raw/`, keeping the dataset's folder structure.
 4. Create `CLAUDE.md` in the root with the project rules in §4. Claude Code reads it at the start of every session.
 5. Ask Claude Code to create the GitHub repo and push. In Vercel, go to **Add New → Project**, import the repo, then add the environment variables (§2). After that, every push to `main` deploys automatically, and each branch gets its own preview URL.
 6. Run locally with `npm run dev` while building. Push when a phase's exit check passes.
@@ -127,4 +130,14 @@ All of these are declared in the README.
 
 ## 7. Next
 
-When Phase 0 is live, send me the URL and repo link. I'll give you the Phase 1 spec next: JSON shapes for deal, document, register entry, clause chunk and playbook rule (from FR-1–FR-4 and FR-22), plus the extraction and index scripts.
+Each phase has its own spec with steps, exit check and ready-to-paste prompts:
+
+| Phase | Spec | Key decisions inside |
+|---|---|---|
+| 1. Data layer | `Phase1_Spec.md` | LLM + embeddings provider before 1b; fixed `APP_TODAY` |
+| 2. Review engine | `Phase2_Spec.md` | Verdict is computed by code; similar clauses attached after severity; step-wise API calls for Vercel limits |
+| 3. Karandeep's UI | `Phase3_Spec.md` | Interaction state in browser storage behind `lib/store.ts` (+ Reset demo); /metrics shows the North Star |
+| 4. Seller side | `Phase4_Spec.md` | Code-first rate/region checks; redaction guardrail; demo waiver control |
+| 5. Deploy & document | `Phase5_Spec.md` | Demo passcode + provider spend limits; cost-report for Step 4; 5-minute demo path |
+
+Send the Phase 0 URL and repo link first, then each phase's exit-check outputs.
