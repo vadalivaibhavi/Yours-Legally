@@ -1,7 +1,7 @@
 {
   "dealId": "ortiz",
   "version": 1,
-  "createdAt": "2026-10-13T18:20:01.455Z",
+  "createdAt": "2026-10-14T01:40:54.190Z",
   "trigger": "initial review",
   "inputsHash": "99e3e068b82bb897cbe4cc3175f0ed56",
   "documentIds": [
@@ -340,7 +340,6 @@
     "NDA residuals: The agreement does not contain a residuals clause, which protects both parties from unauthorized retention of mental impressions."
   ],
   "notSeen": [
-    "Similar past clauses for Daniel Ortiz contractor agreement (AtliQ draft): comparison lines couldn't be written (timed out after 45s across retries | gemini-3.7-flash: AbortError: This operatio); the matching clauses are still shown",
     "Commitments were checked against all 17 signed contracts on file. Contracts AtliQ hasn't uploaded can't be checked."
   ],
   "documents": [
@@ -770,7 +769,7 @@
           "labelNote": "Fair freelancer terms: 30-day pay, mutual cap, mutual 15-day exit",
           "score": 0.935,
           "text": "3.1 AtliQ shall pay the Contractor the fees set out in the Engagement Schedule.\n\n3.2 The Contractor shall submit a monthly invoice, supported by a timesheet approved by the AtliQ project lead. AtliQ shall pay each undisputed invoice within thirty (30) days of receipt.\n\n3.3 AtliQ shall deduct tax at source under the Income Tax Act, 1961 as applicable and provide TDS certificates. The Contractor is responsible for his own GST registration (if required) and all other taxes.\n\n3.4 AtliQ shall reimburse reasonable pre-approved travel expenses incurred for client visits.",
-          "differs": "",
+          "differs": "Fairer to the vendor than Rohan Iyer: requires only a summary of hours instead of approved timesheets and reimburses all out-of-pocket expenses.",
           "alsoIn": []
         },
         {
@@ -783,7 +782,7 @@
           "labelNote": "45-day payment: the negotiated maximum (90 → 45)",
           "score": 0.886,
           "text": "4.1 The total fees for the Services are **USD 48,000** (United States Dollars Forty-Eight Thousand only), payable on completion of Milestones as set out in Annexure A.\n\n4.2 The Service Provider shall raise an invoice upon completion of each Milestone. The Company shall pay each undisputed invoice within forty-five (45) days of receipt of the invoice.\n\n4.3 All fees are exclusive of GST. The Company shall be entitled to deduct TDS as applicable.\n\n4.4 Any disputed amount shall be notified within ten (10) days of receipt of invoice, and the Parties shall resolve such dispute in good faith within thirty (30) days.",
-          "differs": "",
+          "differs": "Fairer to the vendor than Trustline NBFC: requires payment within 30 days of invoice receipt rather than 45 days.",
           "alsoIn": []
         },
         {
@@ -795,7 +794,7 @@
           "label": "untagged",
           "score": 0.898,
           "text": "2.1 The Client shall pay the fees set out in each SOW. Invoices shall be raised monthly and paid\nwithin thirty (30) days of receipt. Fees are exclusive of GST.\n2.2 Delayed payment shall carry interest @ l2% per annum.",
-          "differs": "",
+          "differs": "Harsher on the vendor than Orbit Travels Pvt Ltd: lacks interest of 12% per annum on delayed payments.",
           "alsoIn": []
         }
       ]
@@ -816,7 +815,7 @@
           "labelNote": "Rohan kept the Work Product IP (\"ok\" from phone) while Acme was promised ownership",
           "score": 0.922,
           "text": "5.1 In this Clause, \"**Work Product**\" means all dashboards, reports, data models, DAX measures, Power Query scripts, visual templates, documentation and other materials created by the Contractor in performing the Services.\n\n5.2 The Contractor retains ownership of all intellectual property rights in the Work Product and in any pre-existing materials, components and templates of the Contractor.\n\n5.3 The Contractor grants AtliQ a non-exclusive, perpetual, irrevocable, royalty-free, worldwide licence to use, copy, modify and deploy the Work Product for the purposes of AtliQ's business, including for delivery to AtliQ's clients.\n\n5.4 The Contractor shall not incorporate into the Work Product any third-party material that AtliQ is not entitled to use under Clause 5.3.",
-          "differs": "",
+          "differs": "Harsher on the vendor than Rohan Iyer: assigns all work product intellectual property to the company instead of letting vendor retain ownership.",
           "alsoIn": []
         },
         {
@@ -828,7 +827,7 @@
           "label": "untagged",
           "score": 0.886,
           "text": "9.1 Upon payment in full of the relevant Fees, all intellectual property rights in the Deliverables created specifically for the Client shall vest in the Client.\n\n9.2 The Supplier retains ownership of its pre-existing tools, libraries, methodologies and know-how (\"**Supplier Background IP**\"). To the extent any Supplier Background IP is incorporated into a Deliverable, the Supplier grants the Client a perpetual, non-exclusive, royalty-free licence to use it as part of that Deliverable.",
-          "differs": "",
+          "differs": "Same as Al Noor Hospitality Group: transfers intellectual property to the buyer upon payment while reserving the vendor's pre-existing tools.",
           "alsoIn": [
             "Northwind Logistics (2025-06)"
           ]
@@ -842,7 +841,7 @@
           "label": "untagged",
           "score": 0.885,
           "text": "5.1 All deliverables developed specifically for the Client shall be the property of the Client\nupon full payment. The Service Provider retains its pre-existing tools and know-how.",
-          "differs": "",
+          "differs": "Same as Orbit Travels Pvt Ltd: transfers deliverables to the buyer upon full payment while allowing vendor to retain pre-existing tools.",
           "alsoIn": [
             "Trustline NBFC (2026-08)",
             "Acme Retail Group (2025-03)"
@@ -865,7 +864,7 @@
           "label": "untagged",
           "score": 0.946,
           "text": "7.1 Each Party shall hold the other Party's Confidential Information in confidence, use it only to perform or receive the Services, and disclose it only to its personnel and advisors with a need to know who are bound by obligations at least as protective.\n\n7.2 The obligations in Section 7.1 do not apply to information that is or becomes publicly available without breach, was known to the recipient prior to disclosure, is independently developed, or is rightfully received from a third party.\n\n7.3 These obligations survive for three (3) years following termination, and indefinitely for trade secrets.",
-          "differs": "",
+          "differs": "Harsher on the vendor than Crestline Retail Inc: does not limit confidentiality obligations to three years after termination.",
           "alsoIn": [
             "Northwind Logistics (2025-06)",
             "CloudSpan Technologies (2025-09)",
@@ -881,7 +880,7 @@
           "label": "untagged",
           "score": 0.946,
           "text": "6.1 Each party shall keep confidential all non-public information of the other party, and in the case of AtliQ, of AtliQ's clients, received in connection with this Agreement, and shall use it only for the purposes of this Agreement.\n\n6.2 The Contractor shall comply with any confidentiality and data-security requirements of AtliQ's clients notified to him in writing, including restrictions on downloading client data to personal devices.\n\n6.3 This Clause 6 does not apply to information that is public, already lawfully known, independently developed, or required to be disclosed by law.\n\n6.4 The obligations in this Clause 6 survive for three (3) years after termination or expiry.",
-          "differs": "",
+          "differs": "Fairer to the vendor than Rohan Iyer: omits specific client data-security rules and restrictions on downloading data to personal devices.",
           "alsoIn": []
         },
         {
@@ -893,7 +892,7 @@
           "label": "untagged",
           "score": 0.924,
           "text": "4.1 Each party shall keep confidential all information received from the other party including\nfare data, supplier contracts, customer data and source code, and shall not disclose the same\nto any third party. This obligation shall survive for two (2) years after termination.",
-          "differs": "",
+          "differs": "Fairer to the vendor than Orbit Travels Pvt Ltd: includes standard exclusions for publicly available, prior known, and independently developed information.",
           "alsoIn": [
             "Sunrise Foods (2025-04)"
           ]
@@ -915,7 +914,7 @@
           "label": "untagged",
           "score": 0.951,
           "text": "10.1 Neither party shall solicit the employees of the other during the term and six months\nthereafter.",
-          "differs": "",
+          "differs": "Fairer to the vendor than Orbit Travels Pvt Ltd: limits non-solicitation to employees worked with and permits general hiring advertisements.",
           "alsoIn": [
             "Sunrise Foods (2025-04)",
             "Acme Retail Group (2025-03)",
@@ -931,7 +930,7 @@
           "label": "untagged",
           "score": 0.896,
           "text": "15.1 During the Term and for twelve (12) months thereafter, Crestline shall not directly solicit for employment any Supplier Personnel assigned to Crestline, save with Supplier's consent.",
-          "differs": "",
+          "differs": "Harsher on the vendor than Crestline Retail Inc: imposes a non-solicitation obligation on the vendor, whereas Crestline only restricted the buyer.",
           "alsoIn": []
         }
       ]
@@ -952,7 +951,7 @@
           "labelNote": "Fair freelancer terms: 30-day pay, mutual cap, mutual 15-day exit",
           "score": 0.922,
           "text": "8.1 Each party's aggregate liability under this Agreement shall not exceed the total fees paid or payable to the Contractor in the twelve (12) months preceding the claim, except for breach of Clause 6 or fraud.\n\n8.2 Neither party is liable for indirect or consequential loss.",
-          "differs": "",
+          "differs": "Harsher on the vendor than Rohan Iyer: includes an express IP non-infringement warranty and adds willful misconduct to liability cap exceptions.",
           "alsoIn": []
         },
         {
@@ -965,7 +964,7 @@
           "labelNote": "AtliQ-friendly master: capped liability, service credits capped at 5%",
           "score": 0.884,
           "text": "13.1 Neither Party shall be liable for indirect, consequential or special losses or loss of profits.\n\n13.2 Each Party's aggregate liability under an SOW shall not exceed the Fees paid or payable under that SOW.",
-          "differs": "",
+          "differs": "Harsher on the vendor than Sunrise Foods: carves out confidentiality, fraud, and willful misconduct from the liability cap.",
           "alsoIn": []
         },
         {
@@ -978,7 +977,7 @@
           "labelNote": "Counsel-reviewed BAA (Calloway Stern, $3.8k): capped liability, 5-day reporting, de-identified offshore route",
           "score": 0.878,
           "text": "9.1 Each Party's liability arising out of or relating to this BAA, including any Breach, is subject to the limitations and exclusions of liability in the Master Services Agreement, under which aggregate liability for claims relating to a Breach or a violation of this BAA shall not exceed two (2) times the Fees paid or payable under the Master Services Agreement in the twelve (12) months preceding the event giving rise to the claim.",
-          "differs": "",
+          "differs": "Fairer to the vendor than CareBridge Clinics Inc: caps aggregate liability at 1 times 12 months of fees rather than 2 times.",
           "alsoIn": []
         }
       ]
@@ -988,9 +987,9 @@
   "errors": [],
   "usage": {
     "calls": 1,
-    "cachedCalls": 6,
-    "inputTokens": 487,
-    "outputTokens": 2310,
-    "ms": 60620
+    "cachedCalls": 7,
+    "inputTokens": 3681,
+    "outputTokens": 8575,
+    "ms": 41559
   }
 }

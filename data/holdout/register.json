@@ -1,0 +1,4357 @@
+{
+  "version": "reg-2026-10-14-85",
+  "builtAt": "2026-10-14T01:51:30.354Z",
+  "today": "2026-10-04",
+  "models": [
+    "gemini-3.6-flash",
+    "gemini-flash-latest",
+    "gemini-3.8-flash",
+    "gemini-3.7-flash",
+    "gemini-3-flash-preview",
+    "gemini-3.5-flash"
+  ],
+  "entries": [
+    {
+      "id": "acme-msa#1",
+      "type": "non_solicit",
+      "title": "Staff non-solicitation",
+      "summary": "AtliQ Pvt Ltd and Acme Retail Group agree not to solicit each other's employees who were involved in the Services during the term and for six months thereafter.",
+      "sourceDocId": "acme-msa",
+      "counterparty": "Acme Retail Group",
+      "clauseRef": "14.1",
+      "quote": "During the term and for six (6) months thereafter, neither Party shall solicit any employee of the other Party who was involved in the Services",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "retail"
+        ],
+        "regions": [
+          "India"
+        ],
+        "services": [
+          "Power BI dashboards design and implementation Services"
+        ],
+        "assets": [],
+        "counterparties": [
+          "Acme Retail Group Private Limited"
+        ]
+      },
+      "relatedClauses": [
+        {
+          "clauseRef": "5.1",
+          "quote": "This Agreement shall commence on the Effective Date and remain in force for a period of two (2) years, unless terminated earlier"
+        }
+      ],
+      "start": "2025-03-10",
+      "end": "2027-09-09",
+      "endRule": "Term (to 9 Mar 2027) + 6 months",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": true,
+      "notes": "Mutual routine non-solicitation clause limited to staff involved in the Services and surviving for 6 months post-term."
+    },
+    {
+      "id": "acme-msa#2",
+      "type": "compliance",
+      "title": "DPDP Act data protection compliance",
+      "summary": "AtliQ Pvt Ltd must process personal data received from Acme Retail Group only for the purpose of the Services and in compliance with the Digital Personal Data Protection Act, 2023.",
+      "sourceDocId": "acme-msa",
+      "counterparty": "Acme Retail Group",
+      "clauseRef": "13.1",
+      "quote": "The Service Provider shall process personal data received from the Client only for the purpose of the Services and in compliance with the Digital Personal Data Protection Act, 2023 and the rules made thereunder, as and when in force, and shall implement reasonable security practices",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "retail"
+        ],
+        "regions": [
+          "India"
+        ],
+        "services": [
+          "Power BI dashboards design and implementation Services"
+        ],
+        "assets": [
+          "personal data"
+        ],
+        "counterparties": [
+          "Acme Retail Group Private Limited"
+        ]
+      },
+      "relatedClauses": [],
+      "start": "2025-03-10",
+      "end": "2027-03-09",
+      "endRule": "Term (to 9 Mar 2027)",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "Relates to compliance with India's Digital Personal Data Protection Act, 2023."
+    },
+    {
+      "id": "alnoor-msa#1",
+      "type": "non_compete",
+      "title": "GCC hospitality data analytics non-compete",
+      "summary": "Supplier and its Affiliates are prohibited from providing data analytics, AI, or revenue management services to any hospitality business in the GCC region during the term and for 18 months thereafter.",
+      "sourceDocId": "alnoor-msa",
+      "counterparty": "Al Noor Hospitality Group",
+      "clauseRef": "§12.1",
+      "quote": "In consideration of the Client disclosing to the Supplier its Confidential Information, including its revenue strategies, pricing models and Guest Data, the Supplier undertakes that neither it nor any of its Affiliates shall, during the Restricted Period, directly or indirectly, provide data analytics, artificial intelligence or revenue-management services to any Hospitality Business in the GCC",
+      "bindsEntities": [
+        "Pvt Ltd",
+        "Inc"
+      ],
+      "includesAffiliates": true,
+      "scope": {
+        "sectors": [
+          "hospitality",
+          "travel"
+        ],
+        "regions": [
+          "GCC"
+        ],
+        "services": [
+          "data analytics",
+          "artificial intelligence",
+          "revenue-management services"
+        ],
+        "assets": [],
+        "counterparties": []
+      },
+      "relatedClauses": [
+        {
+          "clauseRef": "§1.11",
+          "quote": "Hospitality Business**\" means any person, firm or entity that owns, operates, manages or franchises hotels, resorts or serviced apartments, or that provides distribution, revenue-management or guest-analytics services to any such person, firm or entity"
+        },
+        {
+          "clauseRef": "§1.14",
+          "quote": "Restricted Period**\" means the Term and the period of eighteen (18) months following the expiry or termination of this Agreement"
+        },
+        {
+          "clauseRef": "§1.9",
+          "quote": "GCC**\" means the member states of the Gulf Cooperation Council, being the United Arab Emirates, the Kingdom of Saudi Arabia, the State of Qatar, the State of Kuwait, the Kingdom of Bahrain and the Sultanate of Oman"
+        },
+        {
+          "clauseRef": "§12.2",
+          "quote": "For the purposes of Clause 12.1, services are provided \"in the GCC\" if the Hospitality Business receiving them is headquartered in, or the services relate to properties or operations located in, any state of the GCC, irrespective of where the services are performed"
+        },
+        {
+          "clauseRef": "§12.3",
+          "quote": "The Supplier shall procure that each of its Affiliates complies with this Clause 12 as if it were a party to this Agreement, and any breach by an Affiliate shall be deemed a breach by the Supplier"
+        }
+      ],
+      "start": "2025-03-15",
+      "end": "2029-09-14",
+      "endRule": "Term (to 14 Mar 2028) + 18 months",
+      "perpetual": false,
+      "waivers": [
+        {
+          "docId": "alnoor-waiver",
+          "clauseRef": "Clause 12.4",
+          "covers": "AtliQ providing demand-forecasting services to Seaside Hotels LLC, Muscat, Oman, solely as described in the statement of work between the Supplier and Seaside dated February 2026",
+          "quote": "Pursuant to Clause 12.4 of the Agreement, the Client hereby consents to the Supplier providing demand-forecasting services to **Seaside Hotels LLC, Muscat, Oman** (\"**Seaside**\"), solely as described in the statement of work between the Supplier and Seaside dated February 2026 (the \"**Seaside SOW**\"), a copy of which has been provided to the Client"
+        }
+      ],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "Calculated end date of 14 September 2029 is based on the 18-month post-termination restriction period following the agreement's scheduled expiration on 14 March 2028."
+    },
+    {
+      "id": "alnoor-msa#2",
+      "type": "non_solicit",
+      "title": "Mutual staff non-solicit",
+      "summary": "Neither party may solicit employees of the other party who were directly involved in the services during the term and for 12 months thereafter.",
+      "sourceDocId": "alnoor-msa",
+      "counterparty": "Al Noor Hospitality Group",
+      "clauseRef": "§12.5",
+      "quote": "During the Term and for twelve (12) months thereafter, neither Party shall solicit for employment any employee of the other Party who was directly involved in the Services, save through general advertisements not targeted at such employees",
+      "bindsEntities": [
+        "Pvt Ltd",
+        "Inc"
+      ],
+      "includesAffiliates": true,
+      "scope": {
+        "sectors": [
+          "technology",
+          "hospitality"
+        ],
+        "regions": [
+          "Worldwide"
+        ],
+        "services": [
+          "Services"
+        ],
+        "assets": [],
+        "counterparties": [
+          "Al Noor Hospitality Group LLC"
+        ]
+      },
+      "relatedClauses": [
+        {
+          "clauseRef": "§12.3",
+          "quote": "The Supplier shall procure that each of its Affiliates complies with this Clause 12 as if it were a party to this Agreement, and any breach by an Affiliate shall be deemed a breach by the Supplier"
+        }
+      ],
+      "start": "2025-03-15",
+      "end": "2029-03-14",
+      "endRule": "Term (to 14 Mar 2028) + 12 months",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": true,
+      "notes": "This is a routine mutual solicitation restriction that applies to personnel directly involved in the services."
+    },
+    {
+      "id": "alnoor-msa#3",
+      "type": "data_location",
+      "title": "UAE Guest Data offshore restriction",
+      "summary": "Supplier is prohibited from transferring Guest Data outside the UAE without consent, and any access from India must be remote-only from UAE-hosted environments.",
+      "sourceDocId": "alnoor-msa",
+      "counterparty": "Al Noor Hospitality Group",
+      "clauseRef": "§16.3",
+      "quote": "The Supplier shall not transfer Guest Data outside the UAE without the Client's prior written consent. Any Guest Data accessed from India shall be accessed remotely from UAE-hosted environments only",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "hospitality"
+        ],
+        "regions": [
+          "UAE",
+          "India"
+        ],
+        "services": [
+          "data engineering",
+          "analytics"
+        ],
+        "assets": [
+          "Guest Data"
+        ],
+        "counterparties": [
+          "Al Noor Hospitality Group LLC"
+        ]
+      },
+      "relatedClauses": [
+        {
+          "clauseRef": "§1.10",
+          "quote": "Guest Data**\" means any personal data relating to guests, prospective guests or loyalty members of the Client"
+        }
+      ],
+      "start": "2025-03-15",
+      "end": "2028-03-14",
+      "endRule": "Term of the agreement",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "Strict restriction on hosting or transferring Guest Data outside UAE. Indian operations are restricted to remote access of UAE-hosted environments."
+    },
+    {
+      "id": "alnoor-msa#4",
+      "type": "compliance",
+      "title": "Guest Data incident notification",
+      "summary": "Supplier must notify Al Noor within 48 hours of any unauthorized personal data access or incident involving Guest Data.",
+      "sourceDocId": "alnoor-msa",
+      "counterparty": "Al Noor Hospitality Group",
+      "clauseRef": "§16.2",
+      "quote": "The Supplier shall process Guest Data only on the documented instructions of the Client, implement appropriate technical and organisational measures, and notify the Client without undue delay (and in any event within forty-eight (48) hours) of any personal data breach",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "hospitality"
+        ],
+        "regions": [
+          "UAE"
+        ],
+        "services": [
+          "data engineering",
+          "analytics"
+        ],
+        "assets": [
+          "Guest Data"
+        ],
+        "counterparties": [
+          "Al Noor Hospitality Group LLC"
+        ]
+      },
+      "relatedClauses": [],
+      "start": "2025-03-15",
+      "end": "2028-03-14",
+      "endRule": "Term of the agreement",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "Requires prompt notification to the client within 48 hours of any personal data incident."
+    },
+    {
+      "id": "alnoor-msa#5",
+      "type": "insurance",
+      "title": "Professional Indemnity Insurance Requirement",
+      "summary": "Supplier is required to maintain professional indemnity insurance of not less than USD 500,000 per claim for the term and 1 year thereafter.",
+      "sourceDocId": "alnoor-msa",
+      "counterparty": "Al Noor Hospitality Group",
+      "clauseRef": "§17.1",
+      "quote": "The Supplier shall maintain professional indemnity insurance of not less than USD 500,000 per claim for the Term and one (1) year thereafter",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "technology"
+        ],
+        "regions": [
+          "Worldwide"
+        ],
+        "services": [
+          "software development",
+          "data engineering",
+          "analytics and artificial intelligence services"
+        ],
+        "assets": [],
+        "counterparties": []
+      },
+      "relatedClauses": [],
+      "start": "2025-03-15",
+      "end": "2029-03-14",
+      "endRule": "Term (to 14 Mar 2028) + 12 months",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "The professional indemnity insurance must be maintained at a minimum of USD 500,000 during the term and for 1 year after the contract ends."
+    },
+    {
+      "id": "alnoor-msa#6",
+      "type": "other",
+      "title": "Subcontracting restriction",
+      "summary": "Supplier is prohibited from subcontracting any portion of the services without prior written consent from Al Noor.",
+      "sourceDocId": "alnoor-msa",
+      "counterparty": "Al Noor Hospitality Group",
+      "clauseRef": "§13.1",
+      "quote": "The Supplier shall not subcontract any part of the Services without the Client's prior written consent. The Supplier remains responsible for the acts and omissions of its subcontractors",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "hospitality",
+          "technology"
+        ],
+        "regions": [
+          "Worldwide"
+        ],
+        "services": [
+          "Services"
+        ],
+        "assets": [],
+        "counterparties": []
+      },
+      "relatedClauses": [],
+      "start": "2025-03-15",
+      "end": "2028-03-14",
+      "endRule": "Term of the agreement",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "Requires explicit written consent from the client before subcontracting any part of the services."
+    },
+    {
+      "id": "alnoor-waiver#1",
+      "type": "other",
+      "title": "Personnel firewall for Seaside Hotels engagement",
+      "summary": "AtliQ must ensure that personnel who have had access to Al Noor's Client Data under the MSA do not have access to Seaside Hotels LLC data during the performance of the Seaside SOW.",
+      "sourceDocId": "alnoor-waiver",
+      "counterparty": "Al Noor Hospitality Group",
+      "clauseRef": "4",
+      "quote": "In performing the Seaside SOW, the Supplier shall not use or disclose any Confidential Information of the Client, and shall ensure that personnel who have had access to Client Data under the Agreement do not have access to Seaside data save with the Client's prior written approval",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "hospitality"
+        ],
+        "regions": [
+          "Oman",
+          "GCC"
+        ],
+        "services": [
+          "demand-forecasting services"
+        ],
+        "assets": [],
+        "counterparties": [
+          "Al Noor Hospitality Group LLC",
+          "Seaside Hotels LLC"
+        ]
+      },
+      "relatedClauses": [
+        {
+          "clauseRef": "3",
+          "quote": "This consent is strictly limited to the Seaside SOW. It does not extend to (a) any other services provided to Seaside, including any extension, renewal, change order or follow-on statement of work, unless separately consented to in writing by the Client; (b) any other Hospitality Business, whether in the Sultanate of Oman or elsewhere in the GCC; or (c) any Affiliate of the Supplier"
+        },
+        {
+          "clauseRef": "2",
+          "quote": "Pursuant to Clause 12.4 of the Agreement, the Client hereby consents to the Supplier providing demand-forecasting services to **Seaside Hotels LLC, Muscat, Oman** (\"**Seaside**\"), solely as described in the statement of work between the Supplier and Seaside dated February 2026 (the \"**Seaside SOW**\"), a copy of which has been provided to the Client"
+        }
+      ],
+      "start": "2026-02-10",
+      "end": null,
+      "endRule": "During the performance of the Seaside SOW",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "unknown",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "This letter waives a restriction in Clause 12 of the Master Services Agreement dated 15 March 2025 to permit AtliQ to provide demand-forecasting services to Seaside Hotels LLC, subject to a strict personnel firewall regarding Client Data."
+    },
+    {
+      "id": "brightwater-msa#1",
+      "type": "data_location",
+      "title": "US data residency and processing restriction",
+      "summary": "AtliQ Inc is restricted from processing Customer Data outside the United States without Brightwater's prior written consent.",
+      "sourceDocId": "brightwater-msa",
+      "counterparty": "Brightwater Insurance Inc",
+      "clauseRef": "13.3",
+      "quote": "The Supplier shall not process Customer Data outside the United States without the Customer's prior written consent",
+      "bindsEntities": [
+        "Inc"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "bfsi"
+        ],
+        "regions": [
+          "USA"
+        ],
+        "services": [
+          "claims analytics data mart development and reporting services"
+        ],
+        "assets": [],
+        "counterparties": [
+          "Brightwater Insurance Inc"
+        ]
+      },
+      "relatedClauses": [
+        {
+          "clauseRef": "3.1",
+          "quote": "Customer Data**\" means all data (including personal data) supplied by or on behalf of the Customer or any member of the Brightwater Group"
+        }
+      ],
+      "start": "2025-11-28",
+      "end": "2027-05-28",
+      "endRule": "Term (to 28 May 2027)",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false
+    },
+    {
+      "id": "brightwater-msa#2",
+      "type": "compliance",
+      "title": "24-hour security incident notification",
+      "summary": "AtliQ Inc must notify Brightwater of any security incident affecting Customer Data within 24 hours of becoming aware of the incident.",
+      "sourceDocId": "brightwater-msa",
+      "counterparty": "Brightwater Insurance Inc",
+      "clauseRef": "13.2",
+      "quote": "The Supplier shall notify the Customer of any security incident affecting Customer Data within twenty-four (24) hours of becoming aware of it",
+      "bindsEntities": [
+        "Inc"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "bfsi"
+        ],
+        "regions": [
+          "USA"
+        ],
+        "services": [
+          "claims analytics data mart development and reporting services"
+        ],
+        "assets": [],
+        "counterparties": [
+          "Brightwater Insurance Inc"
+        ]
+      },
+      "relatedClauses": [
+        {
+          "clauseRef": "3.1",
+          "quote": "Customer Data**\" means all data (including personal data) supplied by or on behalf of the Customer or any member of the Brightwater Group"
+        }
+      ],
+      "start": "2025-11-28",
+      "end": "2027-05-28",
+      "endRule": "Term (to 28 May 2027)",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false
+    },
+    {
+      "id": "brightwater-msa#3",
+      "type": "compliance",
+      "title": "Data privacy and security compliance",
+      "summary": "AtliQ Inc must comply with all applicable data protection laws, including the Connecticut Data Privacy Act and the Gramm-Leach-Bliley Act, as well as the Brightwater Group Information Security Schedule.",
+      "sourceDocId": "brightwater-msa",
+      "counterparty": "Brightwater Insurance Inc",
+      "clauseRef": "13.1",
+      "quote": "The Supplier shall comply with all applicable data protection laws, including the Connecticut Data Privacy Act and the Gramm-Leach-Bliley Act, and the Brightwater Group Information Security Schedule",
+      "bindsEntities": [
+        "Inc"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "bfsi"
+        ],
+        "regions": [
+          "USA"
+        ],
+        "services": [
+          "claims analytics data mart development and reporting services"
+        ],
+        "assets": [],
+        "counterparties": [
+          "Brightwater Insurance Inc"
+        ]
+      },
+      "relatedClauses": [],
+      "start": "2025-11-28",
+      "end": "2027-05-28",
+      "endRule": "Term (to 28 May 2027)",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "References the Brightwater Group Information Security Schedule, which is not attached."
+    },
+    {
+      "id": "brightwater-msa#4",
+      "type": "insurance",
+      "title": "Professional indemnity and cyber liability insurance",
+      "summary": "AtliQ Inc must maintain professional indemnity insurance of at least USD 2,000,000 and cyber liability insurance of at least USD 1,000,000.",
+      "sourceDocId": "brightwater-msa",
+      "counterparty": "Brightwater Insurance Inc",
+      "clauseRef": "17.1",
+      "quote": "The Supplier shall maintain professional indemnity insurance of not less than USD 2,000,000 and cyber liability insurance of not less than USD 1,000,000",
+      "bindsEntities": [
+        "Inc"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "bfsi"
+        ],
+        "regions": [
+          "USA"
+        ],
+        "services": [
+          "claims analytics data mart development and reporting services"
+        ],
+        "assets": [],
+        "counterparties": [
+          "Brightwater Insurance Inc"
+        ]
+      },
+      "relatedClauses": [],
+      "start": "2025-11-28",
+      "end": "2027-05-28",
+      "endRule": "Term (to 28 May 2027)",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false
+    },
+    {
+      "id": "brightwater-msa#5",
+      "type": "compliance",
+      "title": "Compliance and regulatory audits",
+      "summary": "AtliQ Inc must allow Brightwater, its internal audit function, and regulators to audit compliance with the agreement on reasonable notice.",
+      "sourceDocId": "brightwater-msa",
+      "counterparty": "Brightwater Insurance Inc",
+      "clauseRef": "18.1",
+      "quote": "The Supplier shall permit the Customer, the Brightwater Group internal audit function and any regulator to audit its compliance with this Agreement on reasonable notice",
+      "bindsEntities": [
+        "Inc"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "bfsi"
+        ],
+        "regions": [
+          "USA"
+        ],
+        "services": [
+          "claims analytics data mart development and reporting services"
+        ],
+        "assets": [],
+        "counterparties": [
+          "Brightwater Insurance Inc"
+        ]
+      },
+      "relatedClauses": [],
+      "start": "2025-11-28",
+      "end": "2027-05-28",
+      "endRule": "Term (to 28 May 2027)",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false
+    },
+    {
+      "id": "brightwater-msa#6",
+      "type": "compliance",
+      "title": "Personnel background checks",
+      "summary": "AtliQ Inc must ensure that all personnel engaged in the services have passed background checks in accordance with the Brightwater Group Vendor Screening Standard.",
+      "sourceDocId": "brightwater-msa",
+      "counterparty": "Brightwater Insurance Inc",
+      "clauseRef": "10.1",
+      "quote": "The Supplier shall ensure that all personnel engaged in the Services are suitably skilled, have passed background checks in accordance with the Brightwater Group Vendor Screening Standard, and comply with the Customer's security policies",
+      "bindsEntities": [
+        "Inc"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "bfsi"
+        ],
+        "regions": [
+          "USA"
+        ],
+        "services": [
+          "claims analytics data mart development and reporting services"
+        ],
+        "assets": [],
+        "counterparties": [
+          "Brightwater Insurance Inc"
+        ]
+      },
+      "relatedClauses": [],
+      "start": "2025-11-28",
+      "end": "2027-05-28",
+      "endRule": "Term (to 28 May 2027)",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": true,
+      "notes": "References the Brightwater Group Vendor Screening Standard and Customer's security policies, which are not attached."
+    },
+    {
+      "id": "brightwater-msa#7",
+      "type": "other",
+      "title": "Subcontracting and assignment restriction",
+      "summary": "AtliQ Inc may not assign the agreement or subcontract any portion of the services without Brightwater's prior written consent.",
+      "sourceDocId": "brightwater-msa",
+      "counterparty": "Brightwater Insurance Inc",
+      "clauseRef": "19.1",
+      "quote": "The Supplier shall not assign or subcontract without the Customer's prior written consent",
+      "bindsEntities": [
+        "Inc"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "bfsi"
+        ],
+        "regions": [
+          "USA"
+        ],
+        "services": [
+          "claims analytics data mart development and reporting services"
+        ],
+        "assets": [],
+        "counterparties": [
+          "Brightwater Insurance Inc"
+        ]
+      },
+      "relatedClauses": [],
+      "start": "2025-11-28",
+      "end": "2027-05-28",
+      "endRule": "Term (to 28 May 2027)",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": true
+    },
+    {
+      "id": "carebridge-baa#1",
+      "type": "data_location",
+      "title": "US-only PHI storage and access",
+      "summary": "AtliQ Inc must access, store, and process PHI solely within the Covered Entity Environment in the US, using only identified US-based personnel.",
+      "sourceDocId": "carebridge-baa",
+      "counterparty": "CareBridge Clinics Inc",
+      "clauseRef": "§3.1",
+      "quote": "Business Associate shall access, store and process PHI only within the Covered Entity Environment, and only through personnel of Business Associate who are located in the United States and who have been identified to Covered Entity by name in writing",
+      "bindsEntities": [
+        "Inc"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "healthcare"
+        ],
+        "regions": [
+          "USA"
+        ],
+        "services": [
+          "patient-scheduling analytics services"
+        ],
+        "assets": [],
+        "counterparties": [
+          "CareBridge Clinics, Inc."
+        ]
+      },
+      "relatedClauses": [
+        {
+          "clauseRef": "§3.2",
+          "quote": "No PHI shall be accessed, stored or processed outside the United States"
+        }
+      ],
+      "start": "2025-10-06",
+      "end": null,
+      "endRule": "Continues until the Master Services Agreement expires or is terminated.",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "unknown",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "Tied to the term of the Master Services Agreement, which is not provided."
+    },
+    {
+      "id": "carebridge-baa#2",
+      "type": "compliance",
+      "title": "5-day Breach Notification",
+      "summary": "AtliQ Inc must report any unauthorized use/disclosure of PHI or Breach of Unsecured PHI to CareBridge within 5 business days of discovery.",
+      "sourceDocId": "carebridge-baa",
+      "counterparty": "CareBridge Clinics Inc",
+      "clauseRef": "§5.1",
+      "quote": "Business Associate shall report to Covered Entity any use or disclosure of PHI not provided for by this BAA, including any Breach of Unsecured PHI, without unreasonable delay and in no case later than five (5) business days after discovery",
+      "bindsEntities": [
+        "Inc"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "healthcare"
+        ],
+        "regions": [
+          "USA"
+        ],
+        "services": [
+          "patient-scheduling analytics services"
+        ],
+        "assets": [],
+        "counterparties": [
+          "CareBridge Clinics, Inc."
+        ]
+      },
+      "relatedClauses": [],
+      "start": "2025-10-06",
+      "end": null,
+      "endRule": "Continues until the Master Services Agreement expires or is terminated.",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "unknown",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "Standard HIPAA BAA notification window, but capped at 5 business days."
+    },
+    {
+      "id": "carebridge-baa#3",
+      "type": "compliance",
+      "title": "Annual HIPAA Compliance Assessment",
+      "summary": "Upon 30 days' written notice, CareBridge may request documentation once every 12 months (or more frequently following a Breach) to verify compliance.",
+      "sourceDocId": "carebridge-baa",
+      "counterparty": "CareBridge Clinics Inc",
+      "clauseRef": "§8.4",
+      "quote": "Upon thirty (30) days' written notice, and not more than once in any twelve (12) month period unless following a Breach, Covered Entity may request reasonable documentation (including a completed security questionnaire and relevant policies) to verify Business Associate's compliance with this BAA",
+      "bindsEntities": [
+        "Inc"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "healthcare"
+        ],
+        "regions": [
+          "USA"
+        ],
+        "services": [
+          "patient-scheduling analytics services"
+        ],
+        "assets": [],
+        "counterparties": [
+          "CareBridge Clinics, Inc."
+        ]
+      },
+      "relatedClauses": [],
+      "start": "2025-10-06",
+      "end": null,
+      "endRule": "Continues until the Master Services Agreement expires or is terminated.",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "unknown",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "Allows CareBridge to audit security compliance annually via questionnaire and policies."
+    },
+    {
+      "id": "carebridge-baa#4",
+      "type": "other",
+      "title": "De-identified data restricted use",
+      "summary": "AtliQ Inc is restricted from using de-identified patient data for any client, product, or purpose other than performing the patient-scheduling analytics services.",
+      "sourceDocId": "carebridge-baa",
+      "counterparty": "CareBridge Clinics Inc",
+      "clauseRef": "§2.4",
+      "quote": "De-identified Data may be used only for the Services and not for any other client, product or purpose",
+      "bindsEntities": [
+        "Inc"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "healthcare"
+        ],
+        "regions": [
+          "USA"
+        ],
+        "services": [
+          "patient-scheduling analytics services"
+        ],
+        "assets": [
+          "De-identified Data"
+        ],
+        "counterparties": [
+          "CareBridge Clinics, Inc."
+        ]
+      },
+      "relatedClauses": [],
+      "start": "2025-10-06",
+      "end": null,
+      "endRule": "Continues until the Master Services Agreement expires or is terminated.",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "unknown",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "Limits AtliQ's ability to use de-identified data for product improvement or other client projects."
+    },
+    {
+      "id": "cloudspan-spa#1",
+      "type": "exclusivity",
+      "title": "Competing Platform exclusivity in India and GCC",
+      "summary": "AtliQ and its Affiliates may not act as an implementation, reseller, or referral partner for any cloud data-warehouse, lakehouse, or unified analytics platform offered as a service in India or the GCC countries during the term of the agreement.",
+      "sourceDocId": "cloudspan-spa",
+      "counterparty": "CloudSpan Technologies",
+      "clauseRef": "7.1",
+      "quote": "during the Term Partner and its Affiliates shall not act as an implementation, reseller or referral partner for any Competing Platform in India or the GCC",
+      "bindsEntities": [
+        "Pvt Ltd",
+        "Inc"
+      ],
+      "includesAffiliates": true,
+      "scope": {
+        "sectors": [
+          "technology",
+          "data_platform"
+        ],
+        "regions": [
+          "India",
+          "GCC"
+        ],
+        "services": [
+          "Implementation Services",
+          "reseller",
+          "referral partner"
+        ],
+        "assets": [],
+        "counterparties": [
+          "CloudSpan Technologies"
+        ]
+      },
+      "relatedClauses": [
+        {
+          "clauseRef": "1.1",
+          "quote": "Affiliate**\" means, in relation to a Party, any entity that directly or indirectly controls, is controlled by, or is under common control with that Party, where \"control\" means ownership of more than fifty per cent (50%) of the voting securities or the power to direct management"
+        },
+        {
+          "clauseRef": "1.10",
+          "quote": "Territory**\" means the Republic of India and the member states of the Gulf Cooperation Council, being the United Arab Emirates, the Kingdom of Saudi Arabia, the State of Qatar, the State of Kuwait, the Kingdom of Bahrain and the Sultanate of Oman"
+        },
+        {
+          "clauseRef": "7.2",
+          "quote": "Competing Platform**\" means any cloud data-warehouse, lakehouse or unified analytics platform offered as a service"
+        },
+        {
+          "clauseRef": "7.3",
+          "quote": "For clarity, Clause 7.1 does not restrict Partner or its Affiliates from (a) providing services outside India and the GCC; or (b) providing services to a customer that has independently selected a platform, provided Partner does not hold a partner appointment with, or receive any fee or benefit from, the provider of that platform"
+        },
+        {
+          "clauseRef": "7.4",
+          "quote": "In this Clause 7, \"GCC\" has the meaning given to the member states listed in the definition of Territory"
+        }
+      ],
+      "start": "2025-09-01",
+      "end": "2028-08-31",
+      "endRule": "Term (to 31 Aug 2028)",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "AtliQ and its Affiliates are prohibited from acting as a partner for competing cloud data platforms in India and the GCC. Standard carve-outs exist under Clause 7.3 for services where a customer independently selects a platform, provided AtliQ holds no partner appointment or fee from that platform provider."
+    },
+    {
+      "id": "cloudspan-spa#2",
+      "type": "non_solicit",
+      "title": "Staff non-solicitation",
+      "summary": "During the term of the agreement and for six months thereafter, neither party shall actively solicit for employment any employee of the other party with whom they had material contact under the agreement.",
+      "sourceDocId": "cloudspan-spa",
+      "counterparty": "CloudSpan Technologies",
+      "clauseRef": "16.2",
+      "quote": "During the Term and for six (6) months thereafter, neither Party shall actively solicit for employment any employee of the other Party with whom it had material contact under this Agreement. General advertisements are not solicitation",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "technology"
+        ],
+        "regions": [
+          "Worldwide"
+        ],
+        "services": [],
+        "assets": [],
+        "counterparties": [
+          "CloudSpan Technologies"
+        ]
+      },
+      "relatedClauses": [],
+      "start": "2025-09-01",
+      "end": "2029-02-28",
+      "endRule": "Term (to 31 Aug 2028) + 6 months",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": true,
+      "notes": "Routine mutual staff non-solicit with material-contact qualification and six-month post-term tail."
+    },
+    {
+      "id": "cloudspan-spa#3",
+      "type": "other",
+      "title": "Minimum Certified Engineers requirement",
+      "summary": "AtliQ must maintain at least four (4) Certified Engineers (employees holding a current CloudSpan Certified Implementation Engineer credential) throughout the term of the agreement.",
+      "sourceDocId": "cloudspan-spa",
+      "counterparty": "CloudSpan Technologies",
+      "clauseRef": "3.1",
+      "quote": "Partner shall maintain, throughout the Term, not fewer than four (4) Certified Engineers. Where the number falls below four (4) for reasons outside Partner's reasonable control, Partner shall have ninety (90) days to restore it",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "technology"
+        ],
+        "regions": [
+          "Worldwide"
+        ],
+        "services": [
+          "Implementation Services"
+        ],
+        "assets": [],
+        "counterparties": [
+          "CloudSpan Technologies"
+        ]
+      },
+      "relatedClauses": [
+        {
+          "clauseRef": "1.7",
+          "quote": "Certified Engineer**\" means an employee of Partner who holds a current CloudSpan Certified Implementation Engineer credential"
+        }
+      ],
+      "start": "2025-09-01",
+      "end": "2028-08-31",
+      "endRule": "Term (to 31 Aug 2028)",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "AtliQ has a 90-day grace period to restore the engineer count to four if the drop was outside its reasonable control."
+    },
+    {
+      "id": "crestline-msa#1",
+      "type": "mfn_pricing",
+      "title": "Crestline Rate Card MFN Pricing",
+      "summary": "AtliQ Inc must ensure its rates and commercial terms remain no less favorable than those offered by itself or its Affiliates to any other customer for substantially similar services.",
+      "sourceDocId": "crestline-msa",
+      "counterparty": "Crestline Retail Inc",
+      "clauseRef": "§6.4",
+      "quote": "Supplier represents and warrants that the rates, fees and other commercial terms offered to Crestline under this Agreement are and shall remain no less favorable than those offered by Supplier or its Affiliates to any other customer for substantially similar services during the Term",
+      "bindsEntities": [
+        "Inc",
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": true,
+      "scope": {
+        "sectors": [
+          "retail",
+          "travel",
+          "hospitality",
+          "healthcare",
+          "bfsi",
+          "logistics",
+          "manufacturing",
+          "food",
+          "technology",
+          "data_platform",
+          "other"
+        ],
+        "regions": [
+          "Worldwide"
+        ],
+        "services": [
+          "data engineering",
+          "business intelligence",
+          "analytics"
+        ],
+        "assets": [],
+        "counterparties": [
+          "Crestline Retail Inc"
+        ]
+      },
+      "relatedClauses": [
+        {
+          "clauseRef": "§1.1",
+          "quote": "Affiliate**\" means any entity that directly or indirectly controls, is controlled by, or is under common control with a Party, where \"control\" means ownership of more than fifty percent (50%) of the voting interests of the entity or the power to direct its management"
+        }
+      ],
+      "start": "2024-08-01",
+      "end": "2027-07-31",
+      "endRule": "Term (to 31 Jul 2027)",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {
+        "rateFloor": [
+          {
+            "role": "Senior Data Engineer",
+            "ratePerHourUsd": 85
+          },
+          {
+            "role": "Data Engineer",
+            "ratePerHourUsd": 62
+          },
+          {
+            "role": "BI Developer",
+            "ratePerHourUsd": 58
+          }
+        ]
+      },
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "Rates are fixed for the first 12 months. Thereafter, rates may be increased by up to 3% once per contract year upon 60 days' written notice."
+    },
+    {
+      "id": "crestline-msa#2",
+      "type": "compliance",
+      "title": "Crestline MFN Audit Rights",
+      "summary": "Crestline or an independent auditor may audit AtliQ Inc's records up to once per year upon reasonable notice to verify compliance with the MFN pricing terms.",
+      "sourceDocId": "crestline-msa",
+      "counterparty": "Crestline Retail Inc",
+      "clauseRef": "§6.5",
+      "quote": "Upon reasonable notice and no more than once per year, Crestline or an independent auditor bound by confidentiality may audit Supplier's records to verify compliance with this Section 6",
+      "bindsEntities": [
+        "Inc"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "retail"
+        ],
+        "regions": [
+          "USA"
+        ],
+        "services": [
+          "data engineering",
+          "business intelligence",
+          "analytics"
+        ],
+        "assets": [],
+        "counterparties": [
+          "Crestline Retail Inc"
+        ]
+      },
+      "relatedClauses": [
+        {
+          "clauseRef": "§6.4",
+          "quote": "Supplier represents and warrants that the rates, fees and other commercial terms offered to Crestline under this Agreement are and shall remain no less favorable than those offered by Supplier or its Affiliates to any other customer for substantially similar services during the Term"
+        }
+      ],
+      "start": "2024-08-01",
+      "end": "2027-07-31",
+      "endRule": "Term (to 31 Jul 2027)",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "Limits audits verifying MFN compliance to once per year upon reasonable notice."
+    },
+    {
+      "id": "crestline-msa#3",
+      "type": "data_location",
+      "title": "Crestline Offshore Data Access Restriction",
+      "summary": "AtliQ Inc is prohibited from accessing Crestline production data from outside the United States without prior written approval.",
+      "sourceDocId": "crestline-msa",
+      "counterparty": "Crestline Retail Inc",
+      "clauseRef": "§13.3",
+      "quote": "Supplier shall not access Crestline production data from outside the United States without Crestline's prior written approval",
+      "bindsEntities": [
+        "Inc"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "retail"
+        ],
+        "regions": [
+          "USA"
+        ],
+        "services": [
+          "data engineering",
+          "business intelligence",
+          "analytics"
+        ],
+        "assets": [
+          "Crestline production data"
+        ],
+        "counterparties": [
+          "Crestline Retail Inc"
+        ]
+      },
+      "relatedClauses": [],
+      "start": "2024-08-01",
+      "end": "2027-07-31",
+      "endRule": "Term (to 31 Jul 2027)",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "Prevents offshore resources from accessing production data without written consent."
+    },
+    {
+      "id": "crestline-msa#4",
+      "type": "compliance",
+      "title": "Crestline Security Incident Notification",
+      "summary": "AtliQ Inc must notify Crestline within 72 hours of becoming aware of any security incident affecting Crestline data.",
+      "sourceDocId": "crestline-msa",
+      "counterparty": "Crestline Retail Inc",
+      "clauseRef": "§13.2",
+      "quote": "Supplier shall notify Crestline within seventy-two (72) hours of becoming aware of any security incident affecting Crestline data",
+      "bindsEntities": [
+        "Inc"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "retail"
+        ],
+        "regions": [
+          "USA"
+        ],
+        "services": [
+          "data engineering",
+          "business intelligence",
+          "analytics"
+        ],
+        "assets": [
+          "Crestline data"
+        ],
+        "counterparties": [
+          "Crestline Retail Inc"
+        ]
+      },
+      "relatedClauses": [],
+      "start": "2024-08-01",
+      "end": "2027-07-31",
+      "endRule": "Term (to 31 Jul 2027)",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "Standard security incident notification window is 72 hours."
+    },
+    {
+      "id": "crestline-msa#5",
+      "type": "insurance",
+      "title": "Crestline Insurance Requirements",
+      "summary": "AtliQ Inc must maintain commercial general liability insurance of at least $1,000,000, professional liability/E&O of at least $2,000,000, and statutory workers' compensation insurance.",
+      "sourceDocId": "crestline-msa",
+      "counterparty": "Crestline Retail Inc",
+      "clauseRef": "§14.1",
+      "quote": "Supplier shall maintain commercial general liability insurance of at least $1,000,000 per occurrence, professional liability (errors and omissions) insurance of at least $2,000,000, and workers' compensation insurance as required by law",
+      "bindsEntities": [
+        "Inc"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "retail"
+        ],
+        "regions": [
+          "USA"
+        ],
+        "services": [
+          "data engineering",
+          "business intelligence",
+          "analytics"
+        ],
+        "assets": [],
+        "counterparties": [
+          "Crestline Retail Inc"
+        ]
+      },
+      "relatedClauses": [],
+      "start": "2024-08-01",
+      "end": "2027-07-31",
+      "endRule": "Term (to 31 Jul 2027)",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "Requires typical commercial general, professional liability, and workers' compensation insurance policies."
+    },
+    {
+      "id": "crestline-msa#6",
+      "type": "compliance",
+      "title": "Crestline Vendor Data Security & Privacy Compliance",
+      "summary": "AtliQ Inc must comply with Crestline's Vendor Data Security Requirements and all applicable US federal and state privacy laws, including the Ohio Data Protection Act.",
+      "sourceDocId": "crestline-msa",
+      "counterparty": "Crestline Retail Inc",
+      "clauseRef": "§13.1",
+      "quote": "Supplier shall comply with Crestline's Vendor Data Security Requirements, as updated from time to time, and all applicable U.S. federal and state privacy laws, including the Ohio Data Protection Act where applicable",
+      "bindsEntities": [
+        "Inc"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "retail"
+        ],
+        "regions": [
+          "USA"
+        ],
+        "services": [
+          "data engineering",
+          "business intelligence",
+          "analytics"
+        ],
+        "assets": [],
+        "counterparties": [
+          "Crestline Retail Inc"
+        ]
+      },
+      "relatedClauses": [],
+      "start": "2024-08-01",
+      "end": "2027-07-31",
+      "endRule": "Term (to 31 Jul 2027)",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "Binds AtliQ Inc to an external Vendor Data Security document which may be unilaterally updated by Crestline, and requires compliance with the Ohio Data Protection Act."
+    },
+    {
+      "id": "harrington-nda#1",
+      "type": "compliance",
+      "title": "PHI request prohibition",
+      "summary": "AtliQ is prohibited from requesting or receiving Protected Health Information under this Agreement, which requires a separate Business Associate Agreement prior to any such disclosure.",
+      "sourceDocId": "harrington-nda",
+      "counterparty": "Harrington Health Systems Inc",
+      "clauseRef": "§2.3",
+      "quote": "Protected Health Information, as defined at 45 C.F.R. § 160.103, is excluded from this Agreement and shall be disclosed only after execution of a Business Associate Agreement between the Parties. Harrington shall not disclose, and AtliQ shall not request, Protected Health Information under this Agreement",
+      "bindsEntities": [
+        "Inc"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "healthcare"
+        ],
+        "regions": [
+          "USA"
+        ],
+        "services": [
+          "enterprise clinical and operational analytics platform"
+        ],
+        "assets": [],
+        "counterparties": [
+          "Harrington Health Systems, Inc."
+        ]
+      },
+      "relatedClauses": [
+        {
+          "clauseRef": "§1.1",
+          "quote": "The Parties wish to evaluate a potential engagement under which AtliQ would design and implement an enterprise clinical and operational analytics platform for Harrington (the \"**Purpose"
+        }
+      ],
+      "start": "2026-08-20",
+      "end": "2028-08-20",
+      "endRule": "Two years from the Effective Date, ending on 2028-08-20.",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "Limits information transfer to non-PHI data until a separate BAA is fully executed."
+    },
+    {
+      "id": "ic-baa#1",
+      "type": "data_location",
+      "title": "CareBridge data environment and download restrictions",
+      "summary": "AtliQ Technologies Pvt Ltd is restricted to accessing only De-identified Data within the CareBridge Clinics secure environment, and is prohibited from downloading or transferring such data to its own systems or devices.",
+      "sourceDocId": "ic-baa",
+      "counterparty": "AtliQ Technologies Pvt Ltd (intercompany)",
+      "clauseRef": "§3.2",
+      "quote": "Subcontractor shall access De-identified Data only within the Covered Entity Environment (as defined in the Upstream BAA) or another secure environment approved in writing by Business Associate and the Covered Entity. Subcontractor shall not download, copy or transfer De-identified Data to its own systems or devices",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "healthcare"
+        ],
+        "regions": [
+          "USA"
+        ],
+        "services": [
+          "software development",
+          "data engineering"
+        ],
+        "assets": [],
+        "counterparties": [
+          "AtliQ Inc",
+          "CareBridge Clinics, Inc."
+        ]
+      },
+      "relatedClauses": [
+        {
+          "clauseRef": "§1.2",
+          "quote": "Engagement**\" means the CareBridge Engagement described in Schedule 1"
+        },
+        {
+          "clauseRef": "Schedule 1",
+          "quote": "The patient-scheduling analytics services under SOW-1 of the above Master Services Agreement, including model development and dashboard build using De-identified Data"
+        }
+      ],
+      "start": "2025-10-06",
+      "end": null,
+      "endRule": "Earlier of Upstream BAA expiration/termination or end of Engagement Services",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "unknown",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "The term of this agreement is tied to the expiration of the Upstream BAA or the end of the Engagement Services, neither of which is specifically dated in this agreement."
+    },
+    {
+      "id": "ic-baa#2",
+      "type": "compliance",
+      "title": "CareBridge incident and PHI reporting windows",
+      "summary": "AtliQ Technologies Pvt Ltd must report security incidents, uses/disclosures not provided for, or breaches within 2 business days to AtliQ Inc, and must notify AtliQ Inc within 1 business day if it discovers any data containing PHI.",
+      "sourceDocId": "ic-baa",
+      "counterparty": "AtliQ Technologies Pvt Ltd (intercompany)",
+      "clauseRef": "§5.1",
+      "quote": "Subcontractor shall report to Business Associate any use or disclosure not provided for by this Agreement, any Security Incident and any actual or suspected Breach within two (2) business days after discovery",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "healthcare"
+        ],
+        "regions": [
+          "USA"
+        ],
+        "services": [
+          "software development",
+          "data engineering"
+        ],
+        "assets": [],
+        "counterparties": [
+          "AtliQ Inc",
+          "CareBridge Clinics, Inc."
+        ]
+      },
+      "relatedClauses": [
+        {
+          "clauseRef": "§3.4",
+          "quote": "If Subcontractor becomes aware that any data made available to it contains PHI, Subcontractor shall immediately cease access and notify Business Associate within one (1) business day"
+        }
+      ],
+      "start": "2025-10-06",
+      "end": null,
+      "endRule": "Earlier of Upstream BAA expiration/termination or end of Engagement Services",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "unknown",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "The term of this agreement is tied to the expiration of the Upstream BAA or the end of the Engagement Services, neither of which is specifically dated in this agreement."
+    },
+    {
+      "id": "ic-baa#3",
+      "type": "other",
+      "title": "CareBridge subcontractor prohibition",
+      "summary": "AtliQ Technologies Pvt Ltd is prohibited from engaging any further subcontractor for the CareBridge Engagement Services.",
+      "sourceDocId": "ic-baa",
+      "counterparty": "AtliQ Technologies Pvt Ltd (intercompany)",
+      "clauseRef": "§4.2",
+      "quote": "Subcontractor shall not engage any further subcontractor for the Engagement Services",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "healthcare"
+        ],
+        "regions": [
+          "USA"
+        ],
+        "services": [
+          "software development",
+          "data engineering"
+        ],
+        "assets": [],
+        "counterparties": [
+          "AtliQ Inc",
+          "CareBridge Clinics, Inc."
+        ]
+      },
+      "relatedClauses": [
+        {
+          "clauseRef": "§1.3",
+          "quote": "Engagement Services**\" means the services performed by Subcontractor for Business Associate under the Intercompany Agreement in connection with the Engagement"
+        }
+      ],
+      "start": "2025-10-06",
+      "end": null,
+      "endRule": "Earlier of Upstream BAA expiration/termination or end of Engagement Services",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "unknown",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "The term of this agreement is tied to the expiration of the Upstream BAA or the end of the Engagement Services, neither of which is specifically dated in this agreement."
+    },
+    {
+      "id": "ic-baa#4",
+      "type": "compliance",
+      "title": "CareBridge HIPAA records audit rights",
+      "summary": "AtliQ Technologies Pvt Ltd must make its internal practices, books, and records relating to the CareBridge engagement services available to AtliQ Inc and the US Secretary of HHS for compliance determination.",
+      "sourceDocId": "ic-baa",
+      "counterparty": "AtliQ Technologies Pvt Ltd (intercompany)",
+      "clauseRef": "§6.1",
+      "quote": "Subcontractor shall make its internal practices, books and records relating to the Engagement Services available to Business Associate and to the Secretary for purposes of determining compliance with HIPAA",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "healthcare"
+        ],
+        "regions": [
+          "USA"
+        ],
+        "services": [
+          "software development",
+          "data engineering"
+        ],
+        "assets": [],
+        "counterparties": [
+          "AtliQ Inc",
+          "CareBridge Clinics, Inc."
+        ]
+      },
+      "relatedClauses": [],
+      "start": "2025-10-06",
+      "end": null,
+      "endRule": "Earlier of Upstream BAA expiration/termination or end of Engagement Services",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "unknown",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "The term of this agreement is tied to the expiration of the Upstream BAA or the end of the Engagement Services, neither of which is specifically dated in this agreement."
+    },
+    {
+      "id": "meridian-nda#1",
+      "type": "non_solicit",
+      "title": "Meridian staff non-solicit",
+      "summary": "AtliQ Technologies Pvt Ltd may not solicit or hire any employee or consultant of Meridian Healthcare with whom AtliQ had contact during the potential engagement evaluation.",
+      "sourceDocId": "meridian-nda",
+      "counterparty": "Meridian Healthcare",
+      "clauseRef": "§7.3",
+      "quote": "During the term of this Agreement and for a period of twenty-four (24) months thereafter, the Recipient shall not, directly or indirectly, solicit for employment or engagement, or employ or engage, any employee or consultant of Meridian with whom the Recipient had contact in connection with the Purpose, without Meridian's prior written consent",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "healthcare"
+        ],
+        "regions": [
+          "India"
+        ],
+        "services": [
+          "clinical operations analytics",
+          "hospital performance dashboards"
+        ],
+        "assets": [],
+        "counterparties": [
+          "Meridian Healthcare Private Limited"
+        ]
+      },
+      "relatedClauses": [
+        {
+          "clauseRef": "§1.1",
+          "quote": "Meridian intends to disclose certain information to the Recipient for the purpose of evaluating a potential engagement relating to clinical operations analytics and hospital performance dashboards (the \"**Purpose**\"), including a walkthrough of Meridian's data environment"
+        }
+      ],
+      "start": "2026-07-16",
+      "end": "2031-07-15",
+      "endRule": "Term (to 15 Jul 2029) + 24 months",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "One-way restriction on AtliQ that extends to both soliciting and direct hiring of Meridian's personnel."
+    },
+    {
+      "id": "meridian-nda#2",
+      "type": "compliance",
+      "title": "DPDP compliance and 24-hour breach notification",
+      "summary": "AtliQ must comply with the DPDP Act 2023 for any patient or health data and notify Meridian within 24 hours of discovering any unauthorized access or disclosure.",
+      "sourceDocId": "meridian-nda",
+      "counterparty": "Meridian Healthcare",
+      "clauseRef": "§3.1(d)–3.1(e)",
+      "quote": "comply with the Digital Personal Data Protection Act, 2023 in relation to any personal data, including health data, forming part of the Confidential Information; and\n   (e) notify Meridian within twenty-four (24) hours of becoming aware of any unauthorised access or disclosure",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "healthcare"
+        ],
+        "regions": [
+          "India"
+        ],
+        "services": [
+          "clinical operations analytics",
+          "hospital performance dashboards"
+        ],
+        "assets": [],
+        "counterparties": [
+          "Meridian Healthcare Private Limited"
+        ]
+      },
+      "relatedClauses": [
+        {
+          "clauseRef": "§5.1",
+          "quote": "This Agreement shall remain in force for three (3) years from its date. The Recipient's obligations shall survive for three (3) years after expiry or termination"
+        }
+      ],
+      "start": "2026-07-16",
+      "end": "2032-07-15",
+      "endRule": "Term (to 15 Jul 2029) + 36 months",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "Imposes a strict 24-hour notification window for unauthorized access or disclosures, alongside statutory compliance obligations under Indian data protection law."
+    },
+    {
+      "id": "northwind-msa#1",
+      "type": "ip_transfer",
+      "title": "PipeKit and pre-existing materials IP assignment",
+      "summary": "AtliQ assigns all Intellectual Property Rights in the Deliverables, including proprietary tools (like PipeKit) and pre-existing materials incorporated therein, absolutely to Northwind Logistics upon payment of Milestone fees.",
+      "sourceDocId": "northwind-msa",
+      "counterparty": "Northwind Logistics",
+      "clauseRef": "9.2",
+      "quote": "All Intellectual Property Rights in the Deliverables, including any software, tools, frameworks, libraries and pre-existing materials incorporated into the Deliverables, shall vest in the Client absolutely upon payment of the Charges for the relevant Milestone. The Supplier hereby assigns to the Client, with full title guarantee and by way of present assignment of future rights, all such Intellectual Property Rights with effect from such payment",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "logistics",
+          "technology"
+        ],
+        "regions": [
+          "Worldwide"
+        ],
+        "services": [
+          "Data engineering and analytics services"
+        ],
+        "assets": [
+          "PipeKit",
+          "pre-existing tools and libraries incorporated in Deliverables"
+        ],
+        "counterparties": [
+          "NORTHWIND LOGISTICS LIMITED"
+        ]
+      },
+      "relatedClauses": [
+        {
+          "clauseRef": "3.5",
+          "quote": "Deliverables**\" means all work product, software, code, pipelines, configurations, documentation and other materials created, supplied or delivered by the Supplier to the Client in the course of the Services"
+        },
+        {
+          "clauseRef": "S1.2",
+          "quote": "The Supplier will build the pipeline using its proprietary pipeline accelerator, **PipeKit**, which provides pre-built ingestion connectors, orchestration templates, data-quality checks and monitoring components. PipeKit will be configured and extended for the Client and incorporated into the delivered pipeline as its ingestion and orchestration layer"
+        }
+      ],
+      "start": "2025-06-20",
+      "end": null,
+      "endRule": "Perpetual (assignment vests absolutely upon payment)",
+      "perpetual": true,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "Because SOW-1 incorporates AtliQ's proprietary pipeline accelerator (PipeKit) directly into the delivered pipeline, and clause 9.2 assigns all IPR in pre-existing materials incorporated into the Deliverables, AtliQ is effectively assigning the IP rights of PipeKit to Northwind. There is no background IP license or carve-out."
+    },
+    {
+      "id": "northwind-msa#2",
+      "type": "non_solicit",
+      "title": "Mutual staff non-solicit",
+      "summary": "Both parties are prohibited from soliciting any employee of the other party engaged in the Services during the term of the agreement and for six months thereafter.",
+      "sourceDocId": "northwind-msa",
+      "counterparty": "Northwind Logistics",
+      "clauseRef": "8.2",
+      "quote": "Neither party shall, during the term and for six (6) months afterwards, solicit any employee of the other party engaged in the Services",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "logistics",
+          "technology"
+        ],
+        "regions": [
+          "Worldwide"
+        ],
+        "services": [
+          "Data engineering and analytics services"
+        ],
+        "assets": [],
+        "counterparties": [
+          "NORTHWIND LOGISTICS LIMITED"
+        ]
+      },
+      "relatedClauses": [],
+      "start": "2025-06-20",
+      "end": "2028-12-19",
+      "endRule": "Term + 6 months",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": true,
+      "notes": "Routine mutual non-solicit restricted to personnel engaged in the Services and limited to 6 months post-termination."
+    },
+    {
+      "id": "northwind-msa#3",
+      "type": "other",
+      "title": "Subcontracting and Assignment Restriction",
+      "summary": "AtliQ may not assign or subcontract any of its rights or obligations under the agreement without the Client's prior written consent.",
+      "sourceDocId": "northwind-msa",
+      "counterparty": "Northwind Logistics",
+      "clauseRef": "16.1",
+      "quote": "The Supplier shall not assign or subcontract any of its rights or obligations without the Client's prior written consent",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "logistics"
+        ],
+        "regions": [
+          "Worldwide"
+        ],
+        "services": [
+          "Data engineering and analytics services"
+        ],
+        "assets": [],
+        "counterparties": [
+          "NORTHWIND LOGISTICS LIMITED"
+        ]
+      },
+      "relatedClauses": [],
+      "start": "2025-06-20",
+      "end": "2028-06-19",
+      "endRule": "Term",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "Requires prior written consent from Northwind for any subcontracting of Services."
+    },
+    {
+      "id": "northwind-msa#4",
+      "type": "compliance",
+      "title": "Source code delivery",
+      "summary": "AtliQ must deliver the source code for all software Deliverables to Northwind's nominated repository upon completion of each Milestone.",
+      "sourceDocId": "northwind-msa",
+      "counterparty": "Northwind Logistics",
+      "clauseRef": "9.5",
+      "quote": "The Supplier shall deliver the source code for all software Deliverables to the Client's nominated repository on completion of each Milestone",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "logistics",
+          "technology"
+        ],
+        "regions": [
+          "Worldwide"
+        ],
+        "services": [
+          "Data engineering and analytics services"
+        ],
+        "assets": [
+          "PipeKit",
+          "software Deliverables"
+        ],
+        "counterparties": [
+          "NORTHWIND LOGISTICS LIMITED"
+        ]
+      },
+      "relatedClauses": [
+        {
+          "clauseRef": "S1.3",
+          "quote": "b) Production pipeline (incorporating PipeKit) for WMS, telematics and TMS sources"
+        }
+      ],
+      "start": "2025-06-20",
+      "end": "2028-06-19",
+      "endRule": "Term",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "Delivering source code incorporating PipeKit's core proprietary orchestration and templates represents a high intellectual property risk because there is no background license protecting AtliQ's underlying proprietary assets."
+    },
+    {
+      "id": "orbit-msa#1",
+      "type": "non_compete",
+      "title": "India online travel agency non-compete",
+      "summary": "AtliQ Technologies Pvt Ltd is restricted from developing, licensing, or providing travel-booking software to any online travel agency operating in India during the contract term and for 12 months thereafter.",
+      "sourceDocId": "orbit-msa",
+      "counterparty": "Orbit Travels Pvt Ltd",
+      "clauseRef": "6.1",
+      "quote": "In consideration of the access provided to the Client's business processes and supplier\narrangements, the Service Provider agrees that during the term of this Agreement and for a\nperiod of twelve (l2) months after its expiry or termination, it shall not develop, license or\nprovide travel-booking software to any online travel agency operating in India",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "travel"
+        ],
+        "regions": [
+          "India"
+        ],
+        "services": [
+          "travel-booking software"
+        ],
+        "assets": [],
+        "counterparties": []
+      },
+      "relatedClauses": [
+        {
+          "clauseRef": "6.2",
+          "quote": "Nothing in Clause 6.1 shall restrict the Service Provider from providing services to hotels,\nairlines or other businesses that are not online travel agencies, or from providing services\nunrelated to travel-booking software"
+        }
+      ],
+      "start": "2022-07-01",
+      "end": "2025-06-30",
+      "endRule": "Term (to 30 Jun 2024) + 12 months",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "expired",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "The OCR scan contains a minor typo 'twelve (l2) months' which is preserved in the quote."
+    },
+    {
+      "id": "orbit-msa#2",
+      "type": "non_solicit",
+      "title": "Mutual staff non-solicitation",
+      "summary": "AtliQ Technologies Pvt Ltd and Orbit Travels Pvt Ltd agreed to a mutual non-solicitation restriction covering each other's employees during the term and for 6 months after.",
+      "sourceDocId": "orbit-msa",
+      "counterparty": "Orbit Travels Pvt Ltd",
+      "clauseRef": "10.1",
+      "quote": "Neither party shall solicit the employees of the other during the term and six months\nthereafter",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [],
+        "regions": [],
+        "services": [],
+        "assets": [],
+        "counterparties": [
+          "ORBIT TRAVELS PRIVATE LIMITED"
+        ]
+      },
+      "relatedClauses": [],
+      "start": "2022-07-01",
+      "end": "2024-12-30",
+      "endRule": "Term (to 30 Jun 2024) + 6 months",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "expired",
+      "verified": false,
+      "rejected": false,
+      "routine": true,
+      "notes": "This restriction is mutual, covers employees generally, and has a 6-month post-termination survival tail."
+    },
+    {
+      "id": "paytrack-msa#1",
+      "type": "data_location",
+      "title": "RBI payment data localisation",
+      "summary": "AtliQ must ensure that payment system data included in Client Data is stored only in India to comply with RBI data localisation requirements.",
+      "sourceDocId": "paytrack-msa",
+      "counterparty": "PayTrack Technologies",
+      "clauseRef": "§7.2",
+      "quote": "AtliQ acknowledges that Client Data may include payment system data subject to RBI data localisation requirements, and shall ensure that such data is stored only in India",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "bfsi",
+          "technology"
+        ],
+        "regions": [
+          "India"
+        ],
+        "services": [
+          "Services"
+        ],
+        "assets": [],
+        "counterparties": [
+          "PayTrack Technologies Private Limited"
+        ]
+      },
+      "relatedClauses": [
+        {
+          "clauseRef": "§1.2",
+          "quote": "Client Data**\" means all data, including transaction data and merchant data, provided by or on behalf of PayTrack"
+        },
+        {
+          "clauseRef": "§7.3",
+          "quote": "These obligations survive for five (5) years following termination, and indefinitely in respect of Client Data"
+        }
+      ],
+      "start": "2025-01-22",
+      "end": null,
+      "endRule": "Perpetual survival for Client Data",
+      "perpetual": true,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "Clause 7.3 specifies that confidentiality and location obligations survive indefinitely in respect of Client Data."
+    },
+    {
+      "id": "paytrack-msa#2",
+      "type": "compliance",
+      "title": "Information security and RBI outsourcing compliance",
+      "summary": "AtliQ must comply with PayTrack's information security policies and written RBI guidelines on outsourcing of IT services.",
+      "sourceDocId": "paytrack-msa",
+      "counterparty": "PayTrack Technologies",
+      "clauseRef": "§2.3",
+      "quote": "AtliQ shall comply with PayTrack's information security policies and the RBI guidelines on outsourcing of IT services as communicated by PayTrack in writing",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "bfsi",
+          "technology"
+        ],
+        "regions": [
+          "India"
+        ],
+        "services": [
+          "Services"
+        ],
+        "assets": [],
+        "counterparties": [
+          "PayTrack Technologies Private Limited"
+        ]
+      },
+      "relatedClauses": [],
+      "start": "2025-01-22",
+      "end": "2027-01-21",
+      "endRule": "Term",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false
+    },
+    {
+      "id": "paytrack-msa#3",
+      "type": "compliance",
+      "title": "DPDP Act and RBI data compliance",
+      "summary": "AtliQ must process personal data in Client Data only on PayTrack's documented instructions and in compliance with the DPDP Act 2023, IT Act 2000, and applicable RBI directions.",
+      "sourceDocId": "paytrack-msa",
+      "counterparty": "PayTrack Technologies",
+      "clauseRef": "§12.1",
+      "quote": "AtliQ shall process personal data comprised in Client Data only on PayTrack's documented instructions and in compliance with the Digital Personal Data Protection Act, 2023, the Information Technology Act, 2000 and applicable RBI directions",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "bfsi",
+          "technology"
+        ],
+        "regions": [
+          "India"
+        ],
+        "services": [
+          "Services"
+        ],
+        "assets": [],
+        "counterparties": [
+          "PayTrack Technologies Private Limited"
+        ]
+      },
+      "relatedClauses": [
+        {
+          "clauseRef": "§1.2",
+          "quote": "Client Data**\" means all data, including transaction data and merchant data, provided by or on behalf of PayTrack"
+        }
+      ],
+      "start": "2025-01-22",
+      "end": "2027-01-21",
+      "endRule": "Term",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false
+    },
+    {
+      "id": "paytrack-msa#4",
+      "type": "compliance",
+      "title": "Data breach notification window",
+      "summary": "AtliQ must notify PayTrack of any data breach within 24 hours of discovery and cooperate with reporting to CERT-In or the RBI.",
+      "sourceDocId": "paytrack-msa",
+      "counterparty": "PayTrack Technologies",
+      "clauseRef": "§12.2",
+      "quote": "AtliQ shall notify PayTrack of any data breach within twenty-four (24) hours of becoming aware of it, and shall cooperate with PayTrack in any reporting to CERT-In or the RBI",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "bfsi",
+          "technology"
+        ],
+        "regions": [
+          "India"
+        ],
+        "services": [
+          "Services"
+        ],
+        "assets": [],
+        "counterparties": [
+          "PayTrack Technologies Private Limited"
+        ]
+      },
+      "relatedClauses": [],
+      "start": "2025-01-22",
+      "end": "2027-01-21",
+      "endRule": "Term",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false
+    },
+    {
+      "id": "paytrack-msa#5",
+      "type": "compliance",
+      "title": "Data compliance audit rights",
+      "summary": "AtliQ must permit PayTrack and its regulators to audit compliance with data protection obligations on reasonable notice.",
+      "sourceDocId": "paytrack-msa",
+      "counterparty": "PayTrack Technologies",
+      "clauseRef": "§12.3",
+      "quote": "AtliQ shall permit PayTrack and its regulators to audit its compliance with this Clause 12 on reasonable notice",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "bfsi",
+          "technology"
+        ],
+        "regions": [
+          "India"
+        ],
+        "services": [
+          "Services"
+        ],
+        "assets": [],
+        "counterparties": [
+          "PayTrack Technologies Private Limited"
+        ]
+      },
+      "relatedClauses": [],
+      "start": "2025-01-22",
+      "end": "2027-01-21",
+      "endRule": "Term",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false
+    },
+    {
+      "id": "paytrack-msa#6",
+      "type": "non_solicit",
+      "title": "Staff non-solicitation",
+      "summary": "Mutual restriction on soliciting employees engaged in the Services during the term of the agreement and for 12 months thereafter.",
+      "sourceDocId": "paytrack-msa",
+      "counterparty": "PayTrack Technologies",
+      "clauseRef": "§13.1",
+      "quote": "Neither Party shall solicit for employment the other Party's employees engaged in the Services during the term and for twelve (12) months thereafter",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "bfsi",
+          "technology"
+        ],
+        "regions": [
+          "India"
+        ],
+        "services": [
+          "Services"
+        ],
+        "assets": [],
+        "counterparties": [
+          "PayTrack Technologies Private Limited"
+        ]
+      },
+      "relatedClauses": [],
+      "start": "2025-01-22",
+      "end": "2028-01-21",
+      "endRule": "Term (to 21 Jan 2027) + 12 months",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": true,
+      "notes": "Mutual routine staff non-solicitation restricted to employees engaged in the services."
+    },
+    {
+      "id": "paytrack-msa#7",
+      "type": "other",
+      "title": "Business continuity plan maintenance",
+      "summary": "AtliQ must maintain a business continuity plan appropriate to the Services provided.",
+      "sourceDocId": "paytrack-msa",
+      "counterparty": "PayTrack Technologies",
+      "clauseRef": "§14.1",
+      "quote": "AtliQ shall maintain a business continuity plan appropriate to the Services",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "bfsi",
+          "technology"
+        ],
+        "regions": [
+          "India"
+        ],
+        "services": [
+          "Services"
+        ],
+        "assets": [],
+        "counterparties": [
+          "PayTrack Technologies Private Limited"
+        ]
+      },
+      "relatedClauses": [],
+      "start": "2025-01-22",
+      "end": "2027-01-21",
+      "endRule": "Term",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false
+    },
+    {
+      "id": "rohan-ica#1",
+      "type": "ip_retention",
+      "title": "Rohan Iyer Work Product IP retention",
+      "summary": "The contractor, Rohan Iyer, retains ownership of all intellectual property rights in the Work Product (dashboards, reports, data models, etc.) created during the performance of services, granting AtliQ only a non-exclusive license.",
+      "sourceDocId": "rohan-ica",
+      "counterparty": "Rohan Iyer",
+      "clauseRef": "5.2",
+      "quote": "The Contractor retains ownership of all intellectual property rights in the Work Product and in any pre-existing materials, components and templates of the Contractor",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "retail",
+          "technology"
+        ],
+        "regions": [
+          "India"
+        ],
+        "services": [
+          "Power BI Consultant services"
+        ],
+        "assets": [
+          "Work Product",
+          "dashboards",
+          "reports",
+          "data models",
+          "DAX measures",
+          "Power Query scripts",
+          "visual templates",
+          "documentation"
+        ],
+        "counterparties": [
+          "Rohan Iyer"
+        ]
+      },
+      "relatedClauses": [
+        {
+          "clauseRef": "5.1",
+          "quote": "In this Clause, \"**Work Product**\" means all dashboards, reports, data models, DAX measures, Power Query scripts, visual templates, documentation and other materials created by the Contractor in performing the Services"
+        },
+        {
+          "clauseRef": "5.3",
+          "quote": "The Contractor grants AtliQ a non-exclusive, perpetual, irrevocable, royalty-free, worldwide licence to use, copy, modify and deploy the Work Product for the purposes of AtliQ's business, including for delivery to AtliQ's clients"
+        }
+      ],
+      "start": "2025-04-28",
+      "end": null,
+      "endRule": "Perpetual",
+      "perpetual": true,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "The contractor retains full ownership of deliverables. AtliQ is granted only a non-exclusive, perpetual license to use, modify, and deploy them."
+    },
+    {
+      "id": "sunrise-msa#1",
+      "type": "non_solicit",
+      "title": "Mutual staff non-solicitation",
+      "summary": "Neither AtliQ nor Sunrise Foods may solicit employees of the other party involved in the services during the term of any active SOW and for 6 months thereafter.",
+      "sourceDocId": "sunrise-msa",
+      "counterparty": "Sunrise Foods",
+      "clauseRef": "§15.1",
+      "quote": "Neither Party shall solicit the employees of the other Party engaged in the Services during the term of the relevant SOW and six (6) months thereafter",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "food"
+        ],
+        "regions": [
+          "India"
+        ],
+        "services": [
+          "custom software development",
+          "data platform and analytics services"
+        ],
+        "assets": [],
+        "counterparties": [
+          "Sunrise Foods Private Limited"
+        ]
+      },
+      "relatedClauses": [],
+      "start": "2025-04-18",
+      "end": "2028-10-17",
+      "endRule": "SOW Term + 6 months",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": true,
+      "notes": "Routine mutual provision limited to personnel engaged in the services with a 6-month post-termination restriction."
+    },
+    {
+      "id": "sunrise-msa#2",
+      "type": "compliance",
+      "title": "Indian data protection compliance",
+      "summary": "AtliQ must comply with the Information Technology Act, 2000 and the Digital Personal Data Protection Act, 2023 when processing personal data of Sunrise's distributors or employees.",
+      "sourceDocId": "sunrise-msa",
+      "counterparty": "Sunrise Foods",
+      "clauseRef": "§14.1",
+      "quote": "AtliQ shall comply with the Information Technology Act, 2000, the rules thereunder, and the Digital Personal Data Protection Act, 2023 to the extent applicable, in relation to any personal data of distributors or employees processed in performing the Services",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "food"
+        ],
+        "regions": [
+          "India"
+        ],
+        "services": [
+          "custom software development",
+          "data platform and analytics services"
+        ],
+        "assets": [],
+        "counterparties": [
+          "Sunrise Foods Private Limited"
+        ]
+      },
+      "relatedClauses": [],
+      "start": "2025-04-18",
+      "end": "2028-04-17",
+      "endRule": "Term of the Agreement",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "Requires compliance with the newly enacted Digital Personal Data Protection Act, 2023 in India."
+    },
+    {
+      "id": "syn-ashwood-baa#1",
+      "type": "data_location",
+      "title": "US-only PHI offshore access restriction",
+      "summary": "AtliQ Inc, its Affiliates, and Subcontractors are prohibited from accessing, storing, processing, transmitting, or viewing PHI or Limited Data Sets from any location outside the United States.",
+      "sourceDocId": "syn-ashwood-baa",
+      "counterparty": "Ashwood Senior Living Inc",
+      "clauseRef": "§4.3",
+      "quote": "Business Associate shall not, and shall ensure that its Subcontractors and Affiliates do not, access, store, process, transmit or view PHI — **including any Limited Data Set** — from any location outside the United States, whether directly or through remote access, virtual desktop or screen-sharing",
+      "bindsEntities": [
+        "Inc",
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": true,
+      "scope": {
+        "sectors": [
+          "healthcare"
+        ],
+        "regions": [
+          "USA"
+        ],
+        "services": [
+          "data engineering",
+          "analytics services"
+        ],
+        "assets": [],
+        "counterparties": [
+          "Ashwood Senior Living, Inc."
+        ]
+      },
+      "relatedClauses": [
+        {
+          "clauseRef": "§4.2",
+          "quote": "Affiliates of Business Associate are Subcontractors for this purpose"
+        },
+        {
+          "clauseRef": "§4.4",
+          "quote": "Data that has been de-identified in accordance with the Safe Harbor method at 45 C.F.R. §164.514(b)(2) may be accessed outside the United States only with Covered Entity's prior written approval for each data set"
+        }
+      ],
+      "start": "2025-08-25",
+      "end": "2027-08-24",
+      "endRule": "Coterminous with Services Agreement (ends 24 August 2027) or for as long as PHI is retained",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "Extends to AtliQ Inc's Affiliates, including AtliQ Technologies Pvt Ltd (India)."
+    },
+    {
+      "id": "syn-ashwood-baa#2",
+      "type": "compliance",
+      "title": "5-day breach and incident notification window",
+      "summary": "AtliQ Inc must report any unpermitted PHI use or disclosure, Security Incident, or Breach of Unsecured PHI to Ashwood Senior Living within 5 business days of discovery.",
+      "sourceDocId": "syn-ashwood-baa",
+      "counterparty": "Ashwood Senior Living Inc",
+      "clauseRef": "§5.1",
+      "quote": "Business Associate shall report to Covered Entity any use or disclosure of PHI not permitted by this BAA, any Security Incident, and any Breach of Unsecured PHI without unreasonable delay and in any event within **five (5) business days** of discovery",
+      "bindsEntities": [
+        "Inc"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "healthcare"
+        ],
+        "regions": [
+          "USA"
+        ],
+        "services": [
+          "data engineering",
+          "analytics services"
+        ],
+        "assets": [],
+        "counterparties": [
+          "Ashwood Senior Living, Inc."
+        ]
+      },
+      "relatedClauses": [],
+      "start": "2025-08-25",
+      "end": "2027-08-24",
+      "endRule": "Coterminous with Services Agreement (ends 24 August 2027) or for as long as PHI is retained",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false
+    },
+    {
+      "id": "syn-ashwood-baa#3",
+      "type": "insurance",
+      "title": "Cyber liability insurance ($3M)",
+      "summary": "AtliQ Inc must maintain cyber liability insurance with limits of at least USD 3,000,000 per claim, naming Ashwood Senior Living as an additional insured.",
+      "sourceDocId": "syn-ashwood-baa",
+      "counterparty": "Ashwood Senior Living Inc",
+      "clauseRef": "§8.1",
+      "quote": "Business Associate shall maintain cyber liability insurance with limits of not less than **USD 3,000,000** per claim, naming Covered Entity as additional insured, and provide a certificate on request",
+      "bindsEntities": [
+        "Inc"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "healthcare"
+        ],
+        "regions": [
+          "USA"
+        ],
+        "services": [],
+        "assets": [],
+        "counterparties": [
+          "Ashwood Senior Living, Inc."
+        ]
+      },
+      "relatedClauses": [],
+      "start": "2025-08-25",
+      "end": "2027-08-24",
+      "endRule": "Coterminous with Services Agreement (ends 24 August 2027)",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false
+    },
+    {
+      "id": "syn-ashwood-baa#4",
+      "type": "compliance",
+      "title": "PHI de-identification and data use restriction",
+      "summary": "AtliQ Inc may not de-identify PHI except as necessary to perform services under the Services Agreement, and is prohibited from using de-identified data for its own purposes or for other clients.",
+      "sourceDocId": "syn-ashwood-baa",
+      "counterparty": "Ashwood Senior Living Inc",
+      "clauseRef": "§2.2",
+      "quote": "Business Associate shall not de-identify PHI for any purpose other than performing the services, and shall not use de-identified data for its own purposes or for other clients",
+      "bindsEntities": [
+        "Inc"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "healthcare"
+        ],
+        "regions": [
+          "USA"
+        ],
+        "services": [
+          "data engineering",
+          "analytics services"
+        ],
+        "assets": [],
+        "counterparties": [
+          "Ashwood Senior Living, Inc."
+        ]
+      },
+      "relatedClauses": [],
+      "start": "2025-08-25",
+      "end": "2027-08-24",
+      "endRule": "Coterminous with Services Agreement (ends 24 August 2027) or for as long as PHI is retained",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false
+    },
+    {
+      "id": "syn-ashwood-baa#5",
+      "type": "compliance",
+      "title": "Prior written approval for PHI subcontractors and affiliates",
+      "summary": "AtliQ Inc must obtain Ashwood Senior Living's prior written approval before engaging any subcontractor or Affiliate that creates, receives, maintains, or transmits PHI.",
+      "sourceDocId": "syn-ashwood-baa",
+      "counterparty": "Ashwood Senior Living Inc",
+      "clauseRef": "§4.1",
+      "quote": "Business Associate shall not engage any Subcontractor that creates, receives, maintains or transmits PHI without Covered Entity's prior written approval",
+      "bindsEntities": [
+        "Inc",
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": true,
+      "scope": {
+        "sectors": [
+          "healthcare"
+        ],
+        "regions": [
+          "USA"
+        ],
+        "services": [
+          "data engineering",
+          "analytics services"
+        ],
+        "assets": [],
+        "counterparties": [
+          "Ashwood Senior Living, Inc."
+        ]
+      },
+      "relatedClauses": [
+        {
+          "clauseRef": "§4.2",
+          "quote": "Affiliates of Business Associate are Subcontractors for this purpose"
+        }
+      ],
+      "start": "2025-08-25",
+      "end": "2027-08-24",
+      "endRule": "Coterminous with Services Agreement (ends 24 August 2027) or for as long as PHI is retained",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "Expressly categorizes AtliQ Inc's Affiliates (such as AtliQ Technologies Pvt Ltd) as Subcontractors requiring approval."
+    },
+    {
+      "id": "syn-corvina-msa#1",
+      "type": "data_location",
+      "title": "Data hosting and access location restriction",
+      "summary": "AtliQ must host personal data exclusively in Microsoft Azure West Europe (Netherlands) with remote access from India permitted under SCCs, and may not transfer personal data outside the EEA without Corvina's prior written consent.",
+      "sourceDocId": "syn-corvina-msa",
+      "counterparty": "Corvina Foods GmbH",
+      "clauseRef": "Annex 2, §A2.3",
+      "quote": "Personal data shall be hosted only in Microsoft Azure West Europe (Netherlands). Remote access from India by AtliQ personnel is permitted under the EU Standard Contractual Clauses (Module 2, controller-to-processor) incorporated in Annex 2-C. No other transfer outside the EEA is permitted without Corvina's prior written consent",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "food",
+          "retail"
+        ],
+        "regions": [
+          "EU",
+          "Germany",
+          "India"
+        ],
+        "services": [
+          "data engineering",
+          "analytics services"
+        ],
+        "assets": [
+          "personal data",
+          "retailer contact data",
+          "Corvina employee data",
+          "loyalty-card panel data"
+        ],
+        "counterparties": [
+          "Corvina Foods GmbH"
+        ]
+      },
+      "relatedClauses": [
+        {
+          "clauseRef": "Annex 2, §A2.1",
+          "quote": "Categories: retailer contact data, Corvina employee data (sales force), loyalty-card panel data supplied by retail partners (pseudonymised"
+        }
+      ],
+      "start": "2026-03-23",
+      "end": "2029-03-22",
+      "endRule": "Initial 3-year term ending 22 March 2029, auto-renewing annually",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false
+    },
+    {
+      "id": "syn-corvina-msa#2",
+      "type": "compliance",
+      "title": "36-hour data breach notification",
+      "summary": "AtliQ must notify Corvina of any personal data breach without undue delay and within 36 hours of becoming aware of it.",
+      "sourceDocId": "syn-corvina-msa",
+      "counterparty": "Corvina Foods GmbH",
+      "clauseRef": "Annex 2, §A2.6",
+      "quote": "AtliQ shall notify Corvina of a personal data breach without undue delay and in any case within **thirty-six (36) hours** of becoming aware of it",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "food",
+          "retail"
+        ],
+        "regions": [
+          "EU",
+          "Germany"
+        ],
+        "services": [
+          "data engineering",
+          "analytics services"
+        ],
+        "assets": [
+          "personal data"
+        ],
+        "counterparties": [
+          "Corvina Foods GmbH"
+        ]
+      },
+      "relatedClauses": [],
+      "start": "2026-03-23",
+      "end": "2029-03-22",
+      "endRule": "Initial 3-year term ending 22 March 2029, auto-renewing annually",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false
+    },
+    {
+      "id": "syn-corvina-msa#3",
+      "type": "compliance",
+      "title": "30-day sub-processor change notification",
+      "summary": "AtliQ must inform Corvina in writing at least 30 days in advance of adding or replacing any sub-processor, giving Corvina an opportunity to object.",
+      "sourceDocId": "syn-corvina-msa",
+      "counterparty": "Corvina Foods GmbH",
+      "clauseRef": "Annex 2, §A2.4",
+      "quote": "AtliQ shall inform Corvina in writing of any intended addition or replacement of a sub-processor **at least thirty (30) days in advance**, giving Corvina the opportunity to object",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "food",
+          "retail"
+        ],
+        "regions": [
+          "EU",
+          "Germany"
+        ],
+        "services": [
+          "data engineering",
+          "analytics services"
+        ],
+        "assets": [
+          "personal data"
+        ],
+        "counterparties": [
+          "Corvina Foods GmbH"
+        ]
+      },
+      "relatedClauses": [],
+      "start": "2026-03-23",
+      "end": "2029-03-22",
+      "endRule": "Initial 3-year term ending 22 March 2029, auto-renewing annually",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false
+    },
+    {
+      "id": "syn-corvina-msa#4",
+      "type": "compliance",
+      "title": "Annual data protection audit",
+      "summary": "AtliQ must permit Corvina to audit its compliance with data protection obligations once per year upon 30 days' advance notice.",
+      "sourceDocId": "syn-corvina-msa",
+      "counterparty": "Corvina Foods GmbH",
+      "clauseRef": "Annex 2, §A2.7",
+      "quote": "Corvina may audit AtliQ's compliance once per year on thirty (30) days' notice",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "food",
+          "retail"
+        ],
+        "regions": [
+          "EU",
+          "Germany"
+        ],
+        "services": [
+          "data engineering",
+          "analytics services"
+        ],
+        "assets": [
+          "personal data"
+        ],
+        "counterparties": [
+          "Corvina Foods GmbH"
+        ]
+      },
+      "relatedClauses": [],
+      "start": "2026-03-23",
+      "end": "2029-03-22",
+      "endRule": "Initial 3-year term ending 22 March 2029, auto-renewing annually",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false
+    },
+    {
+      "id": "syn-corvina-msa#5",
+      "type": "compliance",
+      "title": "Post-termination data deletion or return",
+      "summary": "AtliQ must delete or return all personal data within 30 days after termination of the agreement.",
+      "sourceDocId": "syn-corvina-msa",
+      "counterparty": "Corvina Foods GmbH",
+      "clauseRef": "Annex 2, §A2.8",
+      "quote": "On termination, AtliQ shall delete or return all personal data within thirty (30) days",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "food",
+          "retail"
+        ],
+        "regions": [
+          "EU",
+          "Germany"
+        ],
+        "services": [
+          "data engineering",
+          "analytics services"
+        ],
+        "assets": [
+          "personal data"
+        ],
+        "counterparties": [
+          "Corvina Foods GmbH"
+        ]
+      },
+      "relatedClauses": [],
+      "start": "2026-03-23",
+      "end": "2029-03-22",
+      "endRule": "30 days post-termination",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false
+    },
+    {
+      "id": "syn-falconridge-msa#1",
+      "type": "non_compete",
+      "title": "GCC logistics analytics non-compete for Protected Customers",
+      "summary": "AtliQ and its Affiliates may not directly or indirectly provide Logistics Analytics Services to any Protected Customer anywhere in the GCC during the term and for 24 months after its expiry or termination.",
+      "sourceDocId": "syn-falconridge-msa",
+      "counterparty": "Falconridge Logistics WLL",
+      "clauseRef": "§14.2",
+      "quote": "during the term of this Agreement and for twenty-four (24) months after its expiry or termination, the Supplier shall not, and shall procure that its Affiliates shall not, directly or indirectly, provide Logistics Analytics Services to any Protected Customer anywhere in the Territory, whether as contractor, subcontractor, partner or adviser",
+      "bindsEntities": [
+        "Pvt Ltd",
+        "Inc"
+      ],
+      "includesAffiliates": true,
+      "scope": {
+        "sectors": [
+          "logistics"
+        ],
+        "regions": [
+          "GCC"
+        ],
+        "services": [
+          "Logistics Analytics Services"
+        ],
+        "assets": [],
+        "counterparties": [
+          "Cargoline Shipping W.L.L.",
+          "Gulfway Freight LLC",
+          "Al Sahel Cold Chain Co.",
+          "Doha Bay Container Terminal Services W.L.L.",
+          "Muscat Gate Logistics SAOC"
+        ]
+      },
+      "relatedClauses": [
+        {
+          "clauseRef": "§1.1",
+          "quote": "Affiliate**\" means any entity that directly or indirectly controls, is controlled by, or is under common control with a party, including any parent, subsidiary or sister company wherever incorporated"
+        },
+        {
+          "clauseRef": "§1.2",
+          "quote": "Logistics Analytics Services**\" means fleet utilisation, route optimisation, warehouse performance, port-turnaround, freight demand forecasting and similar data analytics or data engineering services for freight, shipping, warehousing or logistics operations"
+        },
+        {
+          "clauseRef": "§1.3",
+          "quote": "Protected Customer**\" means each person listed in Schedule 4, and any of its Affiliates"
+        },
+        {
+          "clauseRef": "§1.4",
+          "quote": "Territory**\" means the member states of the Gulf Cooperation Council"
+        }
+      ],
+      "start": "2025-09-15",
+      "end": "2029-09-14",
+      "endRule": "Term (to 14 Sep 2027) + 24 months",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false
+    },
+    {
+      "id": "syn-halvorsen-nda#1",
+      "type": "non_compete",
+      "title": "US P&C insurer claims analytics non-compete",
+      "summary": "AtliQ Inc may not develop, market, offer, or provide claims-triage, claims-fraud detection, or claims-severity analytics products or services to any US-licensed property and casualty insurer other than Halvorsen for 18 months from the Effective Date.",
+      "sourceDocId": "syn-halvorsen-nda",
+      "counterparty": "Halvorsen Mutual Insurance Co",
+      "clauseRef": "§8.1",
+      "quote": "In recognition of the sensitivity of Halvorsen's claims and fraud data, for a period of **eighteen (18) months from the Effective Date**, AtliQ shall not develop, market, offer or provide any claims-triage, claims-fraud detection or claims-severity analytics product or service to any property and casualty insurer licensed in the United States, other than Halvorsen",
+      "bindsEntities": [
+        "Inc"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "bfsi"
+        ],
+        "regions": [
+          "USA"
+        ],
+        "services": [
+          "claims-triage analytics",
+          "claims-fraud detection analytics",
+          "claims-severity analytics"
+        ],
+        "assets": [],
+        "counterparties": [
+          "Halvorsen Mutual Insurance Company"
+        ]
+      },
+      "relatedClauses": [
+        {
+          "clauseRef": "§8.2",
+          "quote": "This Section 8 applies only to AtliQ"
+        }
+      ],
+      "start": "2025-02-10",
+      "end": "2026-08-10",
+      "endRule": "18 months from Effective Date (2026-08-10)",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "expired",
+      "verified": false,
+      "rejected": false,
+      "routine": false
+    },
+    {
+      "id": "syn-halvorsen-nda#2",
+      "type": "non_solicit",
+      "title": "Mutual employee non-solicitation",
+      "summary": "Neither AtliQ Inc nor Halvorsen may solicit for employment any employee of the other party with whom contact was made in connection with the Purpose, for 12 months from the Effective Date.",
+      "sourceDocId": "syn-halvorsen-nda",
+      "counterparty": "Halvorsen Mutual Insurance Co",
+      "clauseRef": "§9.1",
+      "quote": "For twelve (12) months from the Effective Date, neither party shall solicit for employment any employee of the other party with whom it had contact in connection with the Purpose",
+      "bindsEntities": [
+        "Inc"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [],
+        "regions": [],
+        "services": [],
+        "assets": [],
+        "counterparties": [
+          "Halvorsen Mutual Insurance Company"
+        ]
+      },
+      "relatedClauses": [],
+      "start": "2025-02-10",
+      "end": "2026-02-10",
+      "endRule": "12 months from Effective Date (2026-02-10)",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "expired",
+      "verified": false,
+      "rejected": false,
+      "routine": true
+    },
+    {
+      "id": "syn-kestrel-msa#1",
+      "type": "non_compete",
+      "title": "Pharma distribution analytics non-compete",
+      "summary": "AtliQ and its Affiliates are prohibited from directly or indirectly providing demand forecasting, replenishment, or secondary-sales analytics services to pharmaceutical wholesale distribution or logistics businesses in India during the term and for 12 months post-termination.",
+      "sourceDocId": "syn-kestrel-msa",
+      "counterparty": "Kestrel Pharma Distribution Pvt Ltd",
+      "clauseRef": "§12.1",
+      "quote": "In consideration of the Client sharing its depot-level sales, margin and supplier data, the Service Provider undertakes that, during the Term and for a period of twelve (12) months after the expiry or termination of this Agreement (the \"**Restricted Period**\"), neither the Service Provider nor any of its Affiliates shall, directly or indirectly, provide any Restricted Services to any Competing Business",
+      "bindsEntities": [
+        "Pvt Ltd",
+        "Inc"
+      ],
+      "includesAffiliates": true,
+      "scope": {
+        "sectors": [
+          "healthcare",
+          "logistics"
+        ],
+        "regions": [
+          "India"
+        ],
+        "services": [
+          "demand forecasting",
+          "inventory or replenishment optimisation",
+          "secondary-sales analytics",
+          "depot performance analytics",
+          "substantially similar data analytics services"
+        ],
+        "assets": [],
+        "counterparties": []
+      },
+      "relatedClauses": [
+        {
+          "clauseRef": "§1.2",
+          "quote": "Competing Business**\" means any person or entity, other than the Client and its Affiliates, engaged (wholly or in part) in the wholesale distribution, stockist operations, carrying-and-forwarding or third-party logistics of pharmaceutical products in India"
+        },
+        {
+          "clauseRef": "§1.3",
+          "quote": "Restricted Services**\" means demand forecasting, inventory or replenishment optimisation, secondary-sales analytics and depot performance analytics, and any substantially similar data analytics services"
+        }
+      ],
+      "start": "2024-11-04",
+      "end": "2028-11-03",
+      "endRule": "Term (to 3 Nov 2027) + 12 months",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false
+    },
+    {
+      "id": "syn-kestrel-msa#2",
+      "type": "non_solicit",
+      "title": "Employee non-solicitation",
+      "summary": "AtliQ and Kestrel are prohibited from soliciting each other's employees involved in the Services during the term and for 6 months after termination.",
+      "sourceDocId": "syn-kestrel-msa",
+      "counterparty": "Kestrel Pharma Distribution Pvt Ltd",
+      "clauseRef": "§14.1",
+      "quote": "During the Term and for six (6) months thereafter, neither Party shall solicit employees of the other involved in the Services",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [],
+        "regions": [],
+        "services": [],
+        "assets": [],
+        "counterparties": [
+          "Kestrel Pharma Distribution Private Limited"
+        ]
+      },
+      "relatedClauses": [],
+      "start": "2024-11-04",
+      "end": "2028-05-03",
+      "endRule": "Term (to 3 Nov 2027) + 6 months",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": true
+    },
+    {
+      "id": "syn-kestrel-msa#3",
+      "type": "compliance",
+      "title": "Personal data processing and DPDP Act compliance",
+      "summary": "AtliQ must process personal data solely for the purpose of providing the Services and in compliance with applicable law, including the Digital Personal Data Protection Act, 2023.",
+      "sourceDocId": "syn-kestrel-msa",
+      "counterparty": "Kestrel Pharma Distribution Pvt Ltd",
+      "clauseRef": "§13.1",
+      "quote": "The Service Provider shall process personal data only for the purpose of the Services and in compliance with applicable law, including the Digital Personal Data Protection Act, 2023 as and when in force",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [],
+        "regions": [
+          "India"
+        ],
+        "services": [],
+        "assets": [],
+        "counterparties": [
+          "Kestrel Pharma Distribution Private Limited"
+        ]
+      },
+      "relatedClauses": [],
+      "start": "2024-11-04",
+      "end": "2027-11-03",
+      "endRule": "Term (to 3 Nov 2027)",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": true
+    },
+    {
+      "id": "syn-lumen-msa#1",
+      "type": "non_compete",
+      "title": "Credit risk monitoring non-compete for RBI Regulated Lenders in India",
+      "summary": "AtliQ and its Affiliates may not design, develop, deploy, license, or provide any credit early-warning, delinquency-prediction, or credit-risk monitoring model or service to any RBI or NHB Regulated Lender in India during the 24-month Cooling-off Period following Final Acceptance.",
+      "sourceDocId": "syn-lumen-msa",
+      "counterparty": "Lumen Small Finance Bank Ltd",
+      "clauseRef": "§10.2",
+      "quote": "Without limiting Clause 10.1, for a period of **twenty-four (24) months from the date of Final Acceptance** (the \"**Cooling-off Period**\"), the Service Provider shall not, and shall ensure that its Affiliates shall not, design, develop, deploy, license or provide any credit early-warning, delinquency-prediction or similar credit-risk monitoring model or service to any Regulated Lender in India, whether or not derived from the Lumen EWS Model",
+      "bindsEntities": [
+        "Pvt Ltd",
+        "Inc"
+      ],
+      "includesAffiliates": true,
+      "scope": {
+        "sectors": [
+          "bfsi"
+        ],
+        "regions": [
+          "India"
+        ],
+        "services": [
+          "credit early-warning model",
+          "delinquency-prediction model",
+          "credit-risk monitoring model or service"
+        ],
+        "assets": [
+          "Lumen EWS Model"
+        ],
+        "counterparties": [
+          "Regulated Lender"
+        ]
+      },
+      "relatedClauses": [
+        {
+          "clauseRef": "§1.2",
+          "quote": "Final Acceptance**\" means the Bank's written acceptance of Milestone M4 under SOW-1"
+        },
+        {
+          "clauseRef": "§1.3",
+          "quote": "Regulated Lender**\" means any bank, small finance bank, cooperative bank, non-banking financial company, housing finance company or other lender regulated by the Reserve Bank of India or the National Housing Bank"
+        },
+        {
+          "clauseRef": "§10.3",
+          "quote": "The Bank may waive Clause 10.2 in writing for a specific engagement. Any request shall be made at least thirty (30) days before the Service Provider submits a proposal to the relevant Regulated Lender"
+        },
+        {
+          "clauseRef": "Annexure A",
+          "quote": "| M4 | Production deployment, dashboards (Final Acceptance) | 23,40,000 | 31 Jul 2026 |"
+        }
+      ],
+      "start": "2026-01-19",
+      "end": "2028-07-31",
+      "endRule": "24 months from Final Acceptance (M4 target date: 31 July 2026)",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "The Cooling-off Period of 24 months starts on the date of Final Acceptance (Milestone M4 target date is 31 July 2026, resulting in an estimated end date of 31 July 2028). Clause 10.3 sets out a written waiver process 30 days prior to proposal submission."
+    },
+    {
+      "id": "syn-lumen-msa#2",
+      "type": "other",
+      "title": "Restriction on use of Bank data and EWS Model for other clients",
+      "summary": "AtliQ must not use the Bank's data, the Lumen EWS Model, or any part of it for any other client.",
+      "sourceDocId": "syn-lumen-msa",
+      "counterparty": "Lumen Small Finance Bank Ltd",
+      "clauseRef": "§10.1",
+      "quote": "The Service Provider shall not use the Bank's data, the Lumen EWS Model or any part of it for any other client",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [],
+        "regions": [],
+        "services": [],
+        "assets": [
+          "Bank data",
+          "Lumen EWS Model"
+        ],
+        "counterparties": []
+      },
+      "relatedClauses": [],
+      "start": "2026-01-19",
+      "end": null,
+      "endRule": "Perpetual restriction",
+      "perpetual": true,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false
+    },
+    {
+      "id": "syn-meridale-msa#1",
+      "type": "data_location",
+      "title": "Meridale customer data access restriction",
+      "summary": "AtliQ personnel in the United States or India may perform services provided Meridale customer data is accessed exclusively through Meridale-managed virtual desktops.",
+      "sourceDocId": "syn-meridale-msa",
+      "counterparty": "Meridale Retail Brands Inc",
+      "clauseRef": "§1.2",
+      "quote": "Vendor may perform Services using personnel located in the United States or India, provided Meridale customer data is accessed only through Meridale-managed virtual desktops",
+      "bindsEntities": [
+        "Inc"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "retail"
+        ],
+        "regions": [
+          "USA",
+          "India"
+        ],
+        "services": [
+          "data engineering",
+          "analytics",
+          "business intelligence"
+        ],
+        "assets": [],
+        "counterparties": [
+          "Meridale Retail Brands, Inc."
+        ]
+      },
+      "relatedClauses": [
+        {
+          "clauseRef": "§1.1",
+          "quote": "Vendor shall provide data engineering, analytics and business intelligence services as described in one or more Statements of Work (\"**SOWs**\") executed under this Agreement"
+        }
+      ],
+      "start": "2025-02-03",
+      "end": "2028-02-02",
+      "endRule": "Term (to 2 Feb 2028)",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false
+    },
+    {
+      "id": "syn-meridale-msa#2",
+      "type": "mfn_pricing",
+      "title": "Most Favored Customer pricing commitment",
+      "summary": "AtliQ Inc and its Affiliates must ensure that rates, fees, discounts, and pricing offered to Meridale remain at least as favorable as those offered or charged to any other customer globally for substantially similar services in substantially similar volumes.",
+      "sourceDocId": "syn-meridale-msa",
+      "counterparty": "Meridale Retail Brands Inc",
+      "clauseRef": "§6.3",
+      "quote": "Vendor represents, warrants and covenants that the rates, fees, discounts and other pricing terms offered to Meridale under this Agreement are, and throughout the Term shall remain, at least as favorable as the rates, fees, discounts and pricing terms offered or charged by Vendor **or any of its Affiliates** to any other customer, anywhere in the world, for substantially similar services in substantially similar volumes",
+      "bindsEntities": [
+        "Inc",
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": true,
+      "scope": {
+        "sectors": [],
+        "regions": [
+          "Worldwide"
+        ],
+        "services": [
+          "data engineering",
+          "analytics",
+          "business intelligence"
+        ],
+        "assets": [],
+        "counterparties": [
+          "Meridale Retail Brands, Inc."
+        ]
+      },
+      "relatedClauses": [
+        {
+          "clauseRef": "§6.4",
+          "quote": "If Vendor or any Affiliate offers or charges any other customer more favorable pricing, Vendor shall (a) notify Meridale in writing within thirty (30) days, (b) extend such pricing to Meridale effective from the date it was first offered to such other customer, and (c) promptly refund or credit any amounts paid by Meridale in excess of such pricing"
+        },
+        {
+          "clauseRef": "§6.6",
+          "quote": "For the purposes of this Section 6, \"**Affiliate**\" means any entity controlling, controlled by or under common control with Vendor, including AtliQ Technologies Private Limited (India"
+        }
+      ],
+      "start": "2025-02-03",
+      "end": "2028-02-02",
+      "endRule": "Term (to 2 Feb 2028)",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {
+        "rateFloor": [
+          {
+            "role": "Senior Data Engineer",
+            "ratePerHourUsd": 80
+          },
+          {
+            "role": "Data Engineer",
+            "ratePerHourUsd": 60
+          },
+          {
+            "role": "BI Developer",
+            "ratePerHourUsd": 56
+          },
+          {
+            "role": "Solution Architect",
+            "ratePerHourUsd": 95
+          }
+        ]
+      },
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false
+    },
+    {
+      "id": "syn-meridale-msa#3",
+      "type": "compliance",
+      "title": "MFN compliance audit rights",
+      "summary": "AtliQ must permit Meridale or an independent auditor to audit its records once per contract year on 15 business days' notice to verify MFN pricing compliance.",
+      "sourceDocId": "syn-meridale-msa",
+      "counterparty": "Meridale Retail Brands Inc",
+      "clauseRef": "§6.5",
+      "quote": "Once per contract year, on fifteen (15) business days' notice, Meridale or an independent auditor bound by confidentiality may audit Vendor's records to the extent reasonably necessary to verify compliance with this Section 6. If an audit reveals non-compliance, Vendor shall bear the cost of the audit in addition to the remedies in Section 6.4",
+      "bindsEntities": [
+        "Inc",
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": true,
+      "scope": {
+        "sectors": [],
+        "regions": [
+          "Worldwide"
+        ],
+        "services": [],
+        "assets": [],
+        "counterparties": [
+          "Meridale Retail Brands, Inc."
+        ]
+      },
+      "relatedClauses": [
+        {
+          "clauseRef": "§6.6",
+          "quote": "For the purposes of this Section 6, \"**Affiliate**\" means any entity controlling, controlled by or under common control with Vendor, including AtliQ Technologies Private Limited (India"
+        }
+      ],
+      "start": "2025-02-03",
+      "end": "2028-02-02",
+      "endRule": "Term (to 2 Feb 2028)",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false
+    },
+    {
+      "id": "syn-meridale-msa#4",
+      "type": "insurance",
+      "title": "General and professional liability insurance",
+      "summary": "AtliQ Inc must maintain commercial general liability insurance of $1,000,000 and professional/cyber liability insurance of $1,000,000.",
+      "sourceDocId": "syn-meridale-msa",
+      "counterparty": "Meridale Retail Brands Inc",
+      "clauseRef": "§11.2",
+      "quote": "Vendor shall maintain commercial general liability of $1,000,000 and professional/cyber liability of $1,000,000",
+      "bindsEntities": [
+        "Inc"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [],
+        "regions": [],
+        "services": [],
+        "assets": [],
+        "counterparties": [
+          "Meridale Retail Brands, Inc."
+        ]
+      },
+      "relatedClauses": [],
+      "start": "2025-02-03",
+      "end": "2028-02-02",
+      "endRule": "Term (to 2 Feb 2028)",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false
+    },
+    {
+      "id": "syn-novaterra-msa#1",
+      "type": "data_location",
+      "title": "Azure UK South data residency restriction",
+      "summary": "AtliQ must access Customer personal data only through Novaterra's Azure UK South environment and is prohibited from copying such data outside of that environment.",
+      "sourceDocId": "syn-novaterra-msa",
+      "counterparty": "Novaterra Energy Ltd",
+      "clauseRef": "§2.2",
+      "quote": "Customer personal data shall be accessed only through the Customer's Azure UK South environment, and shall not be copied outside it",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "other"
+        ],
+        "regions": [
+          "UK"
+        ],
+        "services": [
+          "Smart-meter data platform services",
+          "Data ingestion and data-quality pipelines"
+        ],
+        "assets": [
+          "Customer personal data"
+        ],
+        "counterparties": [
+          "Novaterra Energy Limited"
+        ]
+      },
+      "relatedClauses": [],
+      "start": "2025-05-19",
+      "end": "2025-10-17",
+      "endRule": "Term (completion of SOW-1, targeted for 17 October 2025)",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "expired",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "Target date for completion of SOW-1 is 17 October 2025 as set out in Schedule 1."
+    },
+    {
+      "id": "syn-novaterra-msa#2",
+      "type": "ip_transfer",
+      "title": "Assignment of IngestIQ background framework",
+      "summary": "AtliQ assigned all intellectual property rights in its pre-existing IngestIQ framework and deliverables to Novaterra, and agreed not to use, copy, license, or create derivative works of IngestIQ for any third party.",
+      "sourceDocId": "syn-novaterra-msa",
+      "counterparty": "Novaterra Energy Ltd",
+      "clauseRef": "§6.1",
+      "quote": "The Supplier hereby assigns to the Customer, with full title guarantee and by way of present assignment of future rights, all Intellectual Property Rights in the Assigned Materials, with effect from the date of their creation or (for the Supplier Framework) from the date of payment of the Framework Transfer Fee",
+      "bindsEntities": [
+        "Pvt Ltd",
+        "Inc"
+      ],
+      "includesAffiliates": true,
+      "scope": {
+        "sectors": [
+          "technology",
+          "data_platform"
+        ],
+        "regions": [
+          "Worldwide"
+        ],
+        "services": [
+          "Data ingestion and data-quality pipelines"
+        ],
+        "assets": [
+          "IngestIQ",
+          "Supplier Framework",
+          "Deliverables",
+          "Assigned Materials"
+        ],
+        "counterparties": [
+          "Novaterra Energy Limited"
+        ]
+      },
+      "relatedClauses": [
+        {
+          "clauseRef": "§1.1",
+          "quote": "Supplier Framework**\" means the Supplier's pre-existing data ingestion and data-quality framework known as **IngestIQ**, as described in Schedule 3, in the version incorporated into the Deliverables"
+        },
+        {
+          "clauseRef": "§6.2",
+          "quote": "The Supplier shall not, and shall procure that its Affiliates and subcontractors shall not, use, copy, license, sell or create derivative works of the Assigned Materials for any third party, or provide any third party with services that make use of the Assigned Materials"
+        },
+        {
+          "clauseRef": "§6.5",
+          "quote": "The Supplier shall deliver to the Customer the complete source code, documentation and version history of the Supplier Framework and shall not retain any copy, save one archival copy for the purpose of performing and supporting the Services under this Agreement"
+        }
+      ],
+      "start": "2025-05-19",
+      "end": null,
+      "endRule": "Perpetual assignment",
+      "perpetual": true,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "AtliQ assigned its pre-existing tool IngestIQ v1.4 for a one-off Framework Transfer Fee of GBP 12,000."
+    },
+    {
+      "id": "syn-tessellate-vsa#1",
+      "type": "non_solicit",
+      "title": "Vendor personnel non-solicitation",
+      "summary": "AtliQ shall not hire or engage, directly or indirectly, any Vendor personnel who performed Services under the Agreement during the term and for 12 months thereafter.",
+      "sourceDocId": "syn-tessellate-vsa",
+      "counterparty": "Tessellate Analytics LLP",
+      "clauseRef": "§10.1",
+      "quote": "During the term and for twelve (12) months thereafter, AtliQ shall not hire or engage, directly or indirectly, any Vendor personnel who performed Services under this Agreement",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [],
+        "regions": [],
+        "services": [],
+        "assets": [],
+        "counterparties": [
+          "Tessellate Analytics LLP"
+        ]
+      },
+      "relatedClauses": [
+        {
+          "clauseRef": "§2.1",
+          "quote": "This Agreement commences on 10 November 2025 and continues for two (2) years, until 9 November 2027"
+        }
+      ],
+      "start": "2025-11-10",
+      "end": "2028-11-09",
+      "endRule": "Term (to 9 Nov 2027) + 12 months",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "One-way restriction on AtliQ prohibiting direct or indirect hiring of Vendor personnel who performed Services, with a 30% placement fee for breach."
+    },
+    {
+      "id": "syn-zephyr-spa#1",
+      "type": "exclusivity",
+      "title": "Competing platform exclusivity in Territory",
+      "summary": "AtliQ and its Affiliates must not enter into or perform reseller, referral, implementation, alliance, or partnership agreements with any provider of a Competing Platform in the Territory during the term and for 6 months thereafter.",
+      "sourceDocId": "syn-zephyr-spa",
+      "counterparty": "Zephyr Cloud Data Pte Ltd",
+      "clauseRef": "§7.1",
+      "quote": "During the Term and for six (6) months thereafter, Partner shall not, and shall procure that its Affiliates shall not, enter into or perform any reseller, referral, implementation, alliance or partnership agreement with the provider of any Competing Platform in respect of the Territory",
+      "bindsEntities": [
+        "Pvt Ltd",
+        "Inc"
+      ],
+      "includesAffiliates": true,
+      "scope": {
+        "sectors": [
+          "data_platform",
+          "technology"
+        ],
+        "regions": [
+          "India",
+          "Singapore",
+          "Other"
+        ],
+        "services": [
+          "reseller",
+          "referral",
+          "implementation",
+          "alliance",
+          "partnership"
+        ],
+        "assets": [],
+        "counterparties": [
+          "Zephyr Cloud Data Pte. Ltd.",
+          "Quanta Lake Data Inc",
+          "Polarbase Inc",
+          "StratoGrid GmbH",
+          "Nimbus Systems KK"
+        ]
+      },
+      "relatedClauses": [
+        {
+          "clauseRef": "§2.1",
+          "quote": "Affiliate**\" means any entity that controls, is controlled by, or is under common control with a party"
+        },
+        {
+          "clauseRef": "§2.2",
+          "quote": "Competing Platform**\" means any cloud data warehouse, lakehouse or data platform product that competes with Zephyr Lakehouse, including without limitation those listed in Schedule 1, as Zephyr may update on thirty (30) days' notice"
+        },
+        {
+          "clauseRef": "§2.3",
+          "quote": "Territory**\" means India, Singapore, Malaysia, Indonesia, Thailand and Vietnam"
+        },
+        {
+          "clauseRef": "§7.2",
+          "quote": "Clause 7.1 does not prevent Partner from performing services on a Competing Platform where the end customer has independently selected that platform before Partner's involvement and Partner receives no fee, margin or incentive from the provider of the Competing Platform"
+        }
+      ],
+      "start": "2025-06-30",
+      "end": "2028-12-29",
+      "endRule": "Term (to 29 Jun 2028) + 6 months",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "Carve-out in Clause 7.2 permits servicing competing platforms if independently chosen by the end customer prior to AtliQ's involvement and AtliQ receives no compensation from the platform provider."
+    },
+    {
+      "id": "syn-zephyr-spa#2",
+      "type": "other",
+      "title": "Right of first refusal for Indian BFSI opportunities",
+      "summary": "Before proposing any data platform, engineering, or analytics services for an Indian BFSI opportunity exceeding USD 50,000, AtliQ must notify Zephyr and offer it the right to be proposed as the primary platform, allowing 15 business days for response.",
+      "sourceDocId": "syn-zephyr-spa",
+      "counterparty": "Zephyr Cloud Data Pte Ltd",
+      "clauseRef": "§8.1",
+      "quote": "Before submitting any proposal for a BFSI Opportunity, Partner shall notify Zephyr in writing (with reasonable details of the opportunity) and offer Zephyr the right to be proposed as the data platform",
+      "bindsEntities": [
+        "Pvt Ltd",
+        "Inc"
+      ],
+      "includesAffiliates": true,
+      "scope": {
+        "sectors": [
+          "bfsi"
+        ],
+        "regions": [
+          "India"
+        ],
+        "services": [
+          "data platform services",
+          "data engineering services",
+          "analytics services"
+        ],
+        "assets": [],
+        "counterparties": [
+          "Zephyr Cloud Data Pte. Ltd."
+        ]
+      },
+      "relatedClauses": [
+        {
+          "clauseRef": "§2.4",
+          "quote": "BFSI Opportunity**\" means any opportunity known to Partner or its Affiliates to provide data platform, data engineering or analytics services to a bank, non-banking financial company, insurer or other financial-services institution in India with an expected contract value exceeding USD 50,000"
+        },
+        {
+          "clauseRef": "§8.2",
+          "quote": "Zephyr shall have fifteen (15) business days from notification to accept. If Zephyr accepts, Partner shall propose Zephyr Lakehouse as the primary platform in good faith. If Zephyr declines or does not respond, Partner may proceed on any platform, subject to Clause 7"
+        },
+        {
+          "clauseRef": "§8.3",
+          "quote": "Partner shall maintain a written log of BFSI Opportunities and notifications, available to Zephyr on request"
+        }
+      ],
+      "start": "2025-06-30",
+      "end": "2028-06-29",
+      "endRule": "Term (to 29 Jun 2028)",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false
+    },
+    {
+      "id": "syn-zephyr-spa#3",
+      "type": "compliance",
+      "title": "Minimum certified engineers requirement",
+      "summary": "AtliQ must maintain at least three Zephyr-certified engineers at all times during the term of the partnership.",
+      "sourceDocId": "syn-zephyr-spa",
+      "counterparty": "Zephyr Cloud Data Pte Ltd",
+      "clauseRef": "§3.1",
+      "quote": "Partner shall maintain at least three (3) Zephyr-certified engineers at all times",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "technology",
+          "data_platform"
+        ],
+        "regions": [
+          "India",
+          "Singapore",
+          "Other"
+        ],
+        "services": [
+          "data engineering",
+          "analytics consulting"
+        ],
+        "assets": [],
+        "counterparties": [
+          "Zephyr Cloud Data Pte. Ltd."
+        ]
+      },
+      "relatedClauses": [],
+      "start": "2025-06-30",
+      "end": "2028-06-29",
+      "endRule": "Term (to 29 Jun 2028)",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false
+    },
+    {
+      "id": "trustline-msa#1",
+      "type": "data_location",
+      "title": "India-only data storage restriction",
+      "summary": "AtliQ must store all Company Data (including borrower, loan account, and collections data) exclusively within India in compliance with applicable local laws and RBI directions.",
+      "sourceDocId": "trustline-msa",
+      "counterparty": "Trustline NBFC",
+      "clauseRef": "§13.1",
+      "quote": "The Service Provider shall comply with the Digital Personal Data Protection Act, 2023, the Information Technology Act, 2000 and applicable RBI directions in processing Company Data, and shall store Company Data only in India",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "bfsi"
+        ],
+        "regions": [
+          "India"
+        ],
+        "services": [
+          "Collections analytics data mart design and build",
+          "Early-warning risk scorecard development",
+          "Power BI dashboard development"
+        ],
+        "assets": [
+          "Company Data"
+        ],
+        "counterparties": [
+          "TRUSTLINE NBFC LIMITED"
+        ]
+      },
+      "relatedClauses": [
+        {
+          "clauseRef": "§1.1",
+          "quote": "Company Data**\" means all data, including borrower data, loan account data and collections data, provided by or on behalf of the Company"
+        }
+      ],
+      "start": "2026-08-15",
+      "end": "2027-08-14",
+      "endRule": "Term (to 14 Aug 2027)",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "Company Data is restricted to storage in India only, driven by DPDP Act 2023 and RBI outsourcing/IT guidelines."
+    },
+    {
+      "id": "trustline-msa#2",
+      "type": "compliance",
+      "title": "6-hour security incident reporting window",
+      "summary": "AtliQ must report any detected security incident involving Company Data or systems to Trustline NBFC within six (6) hours.",
+      "sourceDocId": "trustline-msa",
+      "counterparty": "Trustline NBFC",
+      "clauseRef": "§13.2",
+      "quote": "The Service Provider shall report any security incident to the Company within six (6) hours of detection",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "bfsi"
+        ],
+        "regions": [
+          "India"
+        ],
+        "services": [
+          "Collections analytics data mart design and build",
+          "Early-warning risk scorecard development",
+          "Power BI dashboard development"
+        ],
+        "assets": [],
+        "counterparties": [
+          "TRUSTLINE NBFC LIMITED"
+        ]
+      },
+      "relatedClauses": [],
+      "start": "2026-08-15",
+      "end": "2027-08-14",
+      "endRule": "Term (to 14 Aug 2027)",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "The 6-hour incident reporting timeline is exceptionally short and demanding."
+    },
+    {
+      "id": "trustline-msa#3",
+      "type": "compliance",
+      "title": "Regulatory and corporate audit rights",
+      "summary": "Trustline, their external auditors, and the Reserve Bank of India have the right to inspect and audit AtliQ's facilities and records related to the Services.",
+      "sourceDocId": "trustline-msa",
+      "counterparty": "Trustline NBFC",
+      "clauseRef": "§13.3",
+      "quote": "The Company, its auditors and the Reserve Bank of India shall have the right to inspect and audit the Service Provider's records and facilities relating to the Services",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "bfsi"
+        ],
+        "regions": [
+          "India"
+        ],
+        "services": [
+          "Collections analytics data mart design and build",
+          "Early-warning risk scorecard development",
+          "Power BI dashboard development"
+        ],
+        "assets": [
+          "records and facilities"
+        ],
+        "counterparties": [
+          "TRUSTLINE NBFC LIMITED",
+          "Reserve Bank of India"
+        ]
+      },
+      "relatedClauses": [],
+      "start": "2026-08-15",
+      "end": "2027-08-14",
+      "endRule": "Term (to 14 Aug 2027)",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "Audit rights directly extend to a government regulator (RBI) and the counterparty's external auditors."
+    },
+    {
+      "id": "trustline-msa#4",
+      "type": "compliance",
+      "title": "RBI KYC customer data usage restriction",
+      "summary": "AtliQ must restrict its use of customer KYC information solely to performing the contract's services and is forbidden from using it for any other purpose.",
+      "sourceDocId": "trustline-msa",
+      "counterparty": "Trustline NBFC",
+      "clauseRef": "§8.2",
+      "quote": "The Service Provider acknowledges that Company Data includes customer information protected under the RBI Master Direction – Know Your Customer and shall not use it for any purpose other than performing the Services",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "bfsi"
+        ],
+        "regions": [
+          "India"
+        ],
+        "services": [
+          "Collections analytics data mart design and build",
+          "Early-warning risk scorecard development",
+          "Power BI dashboard development"
+        ],
+        "assets": [
+          "Company Data"
+        ],
+        "counterparties": [
+          "TRUSTLINE NBFC LIMITED"
+        ]
+      },
+      "relatedClauses": [
+        {
+          "clauseRef": "§8.3",
+          "quote": "This Clause 8 shall survive for five (5) years after termination"
+        }
+      ],
+      "start": "2026-08-15",
+      "end": "2032-08-14",
+      "endRule": "Term (to 14 Aug 2027) + 5 years",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "Subject to a 5-year post-termination survival clause as outlined in Section 8.3."
+    },
+    {
+      "id": "trustline-msa#5",
+      "type": "other",
+      "title": "Subcontracting and assignment restriction",
+      "summary": "AtliQ cannot delegate, subcontract, or transfer its performance obligations under this agreement without prior written approval from Trustline NBFC.",
+      "sourceDocId": "trustline-msa",
+      "counterparty": "Trustline NBFC",
+      "clauseRef": "§16.1",
+      "quote": "Neither Party shall assign or subcontract this Agreement without prior written consent of the other",
+      "bindsEntities": [
+        "Pvt Ltd"
+      ],
+      "includesAffiliates": false,
+      "scope": {
+        "sectors": [
+          "bfsi"
+        ],
+        "regions": [
+          "India"
+        ],
+        "services": [
+          "Collections analytics data mart design and build",
+          "Early-warning risk scorecard development",
+          "Power BI dashboard development"
+        ],
+        "assets": [],
+        "counterparties": [
+          "TRUSTLINE NBFC LIMITED"
+        ]
+      },
+      "relatedClauses": [],
+      "start": "2026-08-15",
+      "end": "2027-08-14",
+      "endRule": "Term (to 14 Aug 2027)",
+      "perpetual": false,
+      "waivers": [],
+      "terms": {},
+      "status": "live",
+      "verified": false,
+      "rejected": false,
+      "routine": false,
+      "notes": "Prevents any off-shoring or third-party sourcing of operations without explicit counterparty sign-off."
+    }
+  ],
+  "documents": [
+    {
+      "docId": "acme-msa",
+      "counterparty": "Acme Retail Group",
+      "entryCount": 2,
+      "dropped": 0,
+      "illegible": [],
+      "referencedButMissing": [
+        {
+          "name": "SOW-1",
+          "note": "The detailed SOW-1 document containing specific deliverables, requirements, and review timelines, of which only the milestone table is annexed as Annexure A."
+        }
+      ]
+    },
+    {
+      "docId": "alnoor-msa",
+      "counterparty": "Al Noor Hospitality Group",
+      "entryCount": 6,
+      "dropped": 0,
+      "illegible": [],
+      "referencedButMissing": [
+        {
+          "name": "SOW-1 (Full Text)",
+          "note": "Schedule 1 contains only a summary table; the full statement of work including detailed acceptance criteria is referenced but not attached."
+        },
+        {
+          "name": "Annex A to SOW-1",
+          "note": "Contains the specific list of 14 properties across Dubai, Abu Dhabi and Ras Al Khaimah."
+        },
+        {
+          "name": "Client's site, health and safety and information security policies",
+          "note": "Supplier personnel must comply with these policies as referenced in Clause 7.2."
+        }
+      ]
+    },
+    {
+      "docId": "alnoor-nda",
+      "counterparty": "Al Noor Hospitality Group",
+      "entryCount": 0,
+      "dropped": 0,
+      "illegible": [],
+      "referencedButMissing": []
+    },
+    {
+      "docId": "alnoor-waiver",
+      "counterparty": "Al Noor Hospitality Group",
+      "entryCount": 1,
+      "dropped": 0,
+      "illegible": [],
+      "referencedButMissing": [
+        {
+          "name": "Master Services Agreement dated 15 March 2025 (Agreement No. ANHG/IT/2025/017)",
+          "note": "The underlying agreement whose Clause 12 restricts AtliQ's activities with other hospitality businesses in the GCC."
+        },
+        {
+          "name": "Seaside Hotels LLC Statement of Work dated February 2026",
+          "note": "The statement of work with Seaside Hotels LLC defining the scope of services permitted under this waiver."
+        }
+      ]
+    },
+    {
+      "docId": "brightwater-msa",
+      "counterparty": "Brightwater Insurance Inc",
+      "entryCount": 7,
+      "dropped": 0,
+      "illegible": [],
+      "referencedButMissing": [
+        {
+          "name": "Brightwater Group Vendor Screening Standard",
+          "note": "Referenced in Clause 10.1 regarding personnel background checks."
+        },
+        {
+          "name": "Brightwater Group Information Security Schedule",
+          "note": "Referenced in Clause 13.1 regarding data protection and security compliance."
+        },
+        {
+          "name": "Brightwater Group policies",
+          "note": "Referenced in Clause 5.1 regarding general compliance in providing services and deliverables."
+        }
+      ]
+    },
+    {
+      "docId": "carebridge-baa",
+      "counterparty": "CareBridge Clinics Inc",
+      "entryCount": 4,
+      "dropped": 0,
+      "illegible": [],
+      "referencedButMissing": [
+        {
+          "name": "Master Services Agreement",
+          "note": "Mentioned in Recital A and Section 10.1 as the agreement that determines the term and details of the patient-scheduling analytics services."
+        }
+      ]
+    },
+    {
+      "docId": "cloudspan-spa",
+      "counterparty": "CloudSpan Technologies",
+      "entryCount": 3,
+      "dropped": 0,
+      "illegible": [],
+      "referencedButMissing": [
+        {
+          "name": "CloudSpan Brand Guidelines",
+          "note": "Referenced in Clause 6.1 regarding the use of Marks."
+        },
+        {
+          "name": "CloudSpan Published Implementation Guidelines",
+          "note": "Referenced in Clause 3.2 for execution of Implementation Services."
+        },
+        {
+          "name": "Co-marketing Plan",
+          "note": "Referenced in Clause 5.3 as an annual plan to be agreed upon by both parties."
+        }
+      ]
+    },
+    {
+      "docId": "crestline-msa",
+      "counterparty": "Crestline Retail Inc",
+      "entryCount": 6,
+      "dropped": 0,
+      "illegible": [],
+      "referencedButMissing": [
+        {
+          "name": "Crestline's Vendor Data Security Requirements",
+          "note": "Mentioned in Section 13.1 as a set of security requirements the Supplier must comply with, but not attached to the agreement."
+        },
+        {
+          "name": "Crestline's travel policy",
+          "note": "Mentioned in Section 5.4 as the policy governing reimbursable travel expenses, but not attached to the agreement."
+        }
+      ]
+    },
+    {
+      "docId": "harrington-nda",
+      "counterparty": "Harrington Health Systems Inc",
+      "entryCount": 1,
+      "dropped": 0,
+      "illegible": [],
+      "referencedButMissing": []
+    },
+    {
+      "docId": "ic-baa",
+      "counterparty": "AtliQ Technologies Pvt Ltd (intercompany)",
+      "entryCount": 4,
+      "dropped": 0,
+      "illegible": [],
+      "referencedButMissing": [
+        {
+          "name": "Upstream BAA",
+          "note": "Business Associate Agreement No. CBC-BAA-2025-014 dated October 6, 2025 between CareBridge Clinics, Inc. and AtliQ Inc"
+        },
+        {
+          "name": "Intercompany Agreement",
+          "note": "Intercompany services agreement between AtliQ Inc and AtliQ Technologies Pvt Ltd"
+        },
+        {
+          "name": "Master Services Agreement",
+          "note": "Agreement dated October 6, 2025 between CareBridge Clinics, Inc. and AtliQ Inc"
+        },
+        {
+          "name": "SOW-1",
+          "note": "Statement of Work (Patient-Scheduling Analytics) under the Master Services Agreement"
+        }
+      ]
+    },
+    {
+      "docId": "meridian-nda",
+      "counterparty": "Meridian Healthcare",
+      "entryCount": 2,
+      "dropped": 0,
+      "illegible": [],
+      "referencedButMissing": []
+    },
+    {
+      "docId": "northwind-msa",
+      "counterparty": "Northwind Logistics",
+      "entryCount": 4,
+      "dropped": 0,
+      "illegible": [],
+      "referencedButMissing": [
+        {
+          "name": "Schedule 2 — Change Control Procedure",
+          "note": "Mentioned in clause 4.4 as the procedure for agreeing changes to SOWs but not included in the provided text."
+        },
+        {
+          "name": "Schedule 3 — Data Processing Terms",
+          "note": "Mentioned in clause 14.1 as governing personal data processing on behalf of the Client but not included in the provided text."
+        }
+      ]
+    },
+    {
+      "docId": "orbit-msa",
+      "counterparty": "Orbit Travels Pvt Ltd",
+      "entryCount": 2,
+      "dropped": 0,
+      "illegible": [
+        {
+          "clauseRef": "9.1",
+          "note": "Text between 'deliverables.' and 'own negligence' is obscured or illegible in the scanned PDF document."
+        }
+      ],
+      "referencedButMissing": [
+        {
+          "name": "Statement(s) of Work",
+          "note": "Mentioned in Clause 1.1 and 2.1 as containing specific scope of services and fee structures, but not attached."
+        }
+      ]
+    },
+    {
+      "docId": "paytrack-msa",
+      "counterparty": "PayTrack Technologies",
+      "entryCount": 7,
+      "dropped": 0,
+      "illegible": [],
+      "referencedButMissing": [
+        {
+          "name": "PayTrack's Information Security Policies",
+          "note": "Referenced in §2.3 as policies AtliQ must comply with."
+        },
+        {
+          "name": "RBI Guidelines on Outsourcing of IT Services",
+          "note": "Referenced in §2.3 as guidelines communicated by PayTrack in writing that AtliQ must comply with."
+        }
+      ]
+    },
+    {
+      "docId": "rohan-ica",
+      "counterparty": "Rohan Iyer",
+      "entryCount": 1,
+      "dropped": 0,
+      "illegible": [],
+      "referencedButMissing": [
+        {
+          "name": "SOW-1",
+          "note": "Statement of Work (SOW-1) dated 10 March 2025, which details the specific retail client project and deliverables."
+        }
+      ]
+    },
+    {
+      "docId": "sunrise-msa",
+      "counterparty": "Sunrise Foods",
+      "entryCount": 2,
+      "dropped": 0,
+      "illegible": [],
+      "referencedButMissing": [
+        {
+          "name": "SOW-1",
+          "note": "Executed concurrently on 18 April 2025; contains scope, milestones, build fees, and Monthly Support Fee specifics."
+        }
+      ]
+    },
+    {
+      "docId": "syn-ashwood-baa",
+      "counterparty": "Ashwood Senior Living Inc",
+      "entryCount": 5,
+      "dropped": 0,
+      "illegible": [],
+      "referencedButMissing": [
+        {
+          "name": "Professional Services Agreement dated August 25, 2025",
+          "note": "Main services agreement referenced in Recital B and Clause 7.1 with initial term ending August 24, 2027."
+        }
+      ]
+    },
+    {
+      "docId": "syn-corvina-msa",
+      "counterparty": "Corvina Foods GmbH",
+      "entryCount": 5,
+      "dropped": 0,
+      "illegible": [],
+      "referencedButMissing": [
+        {
+          "name": "Annex 2-C — Standard Contractual Clauses (Module 2)",
+          "note": "Referenced in Annex 2 as attached separately, but not included in document text."
+        },
+        {
+          "name": "Annex 2-D — Technical and Organisational Measures",
+          "note": "Referenced in Annex 2 as attached separately, but not included in document text."
+        }
+      ]
+    },
+    {
+      "docId": "syn-falconridge-msa",
+      "counterparty": "Falconridge Logistics WLL",
+      "entryCount": 1,
+      "dropped": 0,
+      "illegible": [],
+      "referencedButMissing": []
+    },
+    {
+      "docId": "syn-halvorsen-nda",
+      "counterparty": "Halvorsen Mutual Insurance Co",
+      "entryCount": 2,
+      "dropped": 0,
+      "illegible": [],
+      "referencedButMissing": []
+    },
+    {
+      "docId": "syn-kestrel-msa",
+      "counterparty": "Kestrel Pharma Distribution Pvt Ltd",
+      "entryCount": 3,
+      "dropped": 0,
+      "illegible": [],
+      "referencedButMissing": []
+    },
+    {
+      "docId": "syn-lumen-msa",
+      "counterparty": "Lumen Small Finance Bank Ltd",
+      "entryCount": 2,
+      "dropped": 2,
+      "illegible": [],
+      "referencedButMissing": [
+        {
+          "name": "RBI Master Direction on Outsourcing of Information Technology Services",
+          "note": "Referenced in §5.1 for regulatory outsourcing compliance requirements."
+        }
+      ]
+    },
+    {
+      "docId": "syn-meridale-msa",
+      "counterparty": "Meridale Retail Brands Inc",
+      "entryCount": 4,
+      "dropped": 0,
+      "illegible": [],
+      "referencedButMissing": []
+    },
+    {
+      "docId": "syn-novaterra-msa",
+      "counterparty": "Novaterra Energy Ltd",
+      "entryCount": 2,
+      "dropped": 0,
+      "illegible": [],
+      "referencedButMissing": [
+        {
+          "name": "Schedule 2 — Data Processing Terms (Standard Customer processor terms v4)",
+          "note": "Referenced in Clause 8.1 and Schedule 2 as attached separately but not included in the main text."
+        }
+      ]
+    },
+    {
+      "docId": "syn-tessellate-vsa",
+      "counterparty": "Tessellate Analytics LLP",
+      "entryCount": 1,
+      "dropped": 0,
+      "illegible": [],
+      "referencedButMissing": [
+        {
+          "name": "Work Orders",
+          "note": "Work orders under Section 1.1 specifying project, roles, number of personnel, expected hours, and duration."
+        },
+        {
+          "name": "AtliQ and client security policies",
+          "note": "Security policies referenced in Section 1.3 with which Vendor personnel must comply."
+        }
+      ]
+    },
+    {
+      "docId": "syn-zephyr-spa",
+      "counterparty": "Zephyr Cloud Data Pte Ltd",
+      "entryCount": 3,
+      "dropped": 0,
+      "illegible": [],
+      "referencedButMissing": []
+    },
+    {
+      "docId": "trustline-msa",
+      "counterparty": "Trustline NBFC",
+      "entryCount": 5,
+      "dropped": 0,
+      "illegible": [],
+      "referencedButMissing": [
+        {
+          "name": "Company's IT, information security and outsourcing policies",
+          "note": "Referred to in §2.3; these policies are binding on AtliQ but not attached to the master agreement."
+        }
+      ]
+    }
+  ],
+  "dropped": [
+    {
+      "docId": "syn-lumen-msa",
+      "clauseRef": "§6.1–6.2",
+      "quote": "All Bank data, including customer and loan data and any derived data sets, shall be stored and processed exclusively within India. No Bank data shall be accesse",
+      "reason": "quote not found verbatim in source"
+    },
+    {
+      "docId": "syn-lumen-msa",
+      "clauseRef": "§5.1–5.2",
+      "quote": "The Service Provider acknowledges that the Services constitute outsourcing of financial services under the RBI Master Direction on Outsourcing of Information Te",
+      "reason": "quote not found verbatim in source"
+    }
+  ]
+}

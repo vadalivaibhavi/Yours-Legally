@@ -1,0 +1,505 @@
+{
+  "at": "2026-10-14T02:08:14.130Z",
+  "provider": "gemini",
+  "verdictOk": 9,
+  "graded": 10,
+  "citeHit": 7,
+  "citeAll": 11,
+  "findHit": 10,
+  "findAll": 13,
+  "falseAlarms": 0,
+  "regOk": 8,
+  "cases": [
+    {
+      "id": "HO-01",
+      "dealId": "pillarstone",
+      "expected": "HOLD",
+      "verdict": "HOLD",
+      "pass": true,
+      "cites": [
+        {
+          "d": "syn-kestrel-msa",
+          "ok": true
+        }
+      ],
+      "finds": [
+        {
+          "k": "playbook:ld",
+          "ok": true
+        },
+        {
+          "k": "playbook:payment",
+          "ok": true
+        },
+        {
+          "k": "playbook:liability",
+          "ok": true
+        },
+        {
+          "k": "playbook:termination",
+          "ok": true
+        }
+      ],
+      "alarms": [],
+      "errors": [],
+      "findings": [
+        {
+          "key": "conflict:syn-kestrel-msa:non_compete",
+          "severity": "blocker",
+          "title": "Collides with Kestrel Pharma Distribution Pvt Ltd: Pharma distribution analytics non-compete"
+        },
+        {
+          "key": "playbook:confidentiality",
+          "severity": "high",
+          "title": "One-way confidentiality protecting only client information"
+        },
+        {
+          "key": "playbook:indemnity",
+          "severity": "high",
+          "title": "One-way uncapped vendor indemnity for all losses"
+        },
+        {
+          "key": "playbook:ip",
+          "severity": "high",
+          "title": "Deliverables vest on creation prior to full payment"
+        },
+        {
+          "key": "playbook:ld",
+          "severity": "high",
+          "title": "Uncapped delay penalties calculated on total contract value"
+        },
+        {
+          "key": "playbook:liability",
+          "severity": "high",
+          "title": "One-sided liability cap leaving AtliQ uncapped"
+        },
+        {
+          "key": "playbook:termination",
+          "severity": "high",
+          "title": "One-sided convenience termination paying accepted milestones only"
+        },
+        {
+          "key": "playbook:payment",
+          "severity": "medium",
+          "title": "Payment: 60 days"
+        }
+      ]
+    },
+    {
+      "id": "HO-02",
+      "dealId": "cobalt",
+      "expected": "HOLD",
+      "verdict": "HOLD",
+      "pass": false,
+      "cites": [
+        {
+          "d": "syn-meridale-msa",
+          "ok": true
+        },
+        {
+          "d": "crestline-msa",
+          "ok": true
+        }
+      ],
+      "finds": [
+        {
+          "k": "covenant:mfn_pricing",
+          "ok": false
+        }
+      ],
+      "alarms": [],
+      "errors": [],
+      "findings": [
+        {
+          "key": "conflict:crestline-msa:mfn_pricing",
+          "severity": "blocker",
+          "title": "Collides with Crestline Retail Inc: Crestline Rate Card MFN Pricing"
+        },
+        {
+          "key": "conflict:syn-meridale-msa:mfn_pricing",
+          "severity": "blocker",
+          "title": "Collides with Meridale Retail Brands Inc: Most Favored Customer pricing commitment"
+        },
+        {
+          "key": "playbook:liability",
+          "severity": "high",
+          "title": "Indemnity carved out of aggregate liability cap"
+        },
+        {
+          "key": "playbook:other",
+          "severity": "medium",
+          "title": "Most Favored Customer rate requirement"
+        },
+        {
+          "key": "playbook:insurance",
+          "severity": "low",
+          "title": "Professional liability insurance limit requires verification"
+        },
+        {
+          "key": "playbook:ld",
+          "severity": "low",
+          "title": "Liquidated damages clause lacks sole remedy language"
+        }
+      ]
+    },
+    {
+      "id": "HO-03",
+      "dealId": "aldergrove",
+      "expected": "HOLD",
+      "verdict": "HOLD",
+      "pass": true,
+      "cites": [
+        {
+          "d": "syn-novaterra-msa",
+          "ok": true
+        }
+      ],
+      "finds": [],
+      "alarms": [],
+      "errors": [],
+      "findings": [
+        {
+          "key": "conflict:syn-novaterra-msa:ip_transfer",
+          "severity": "high",
+          "title": "Collides with Novaterra Energy Ltd: Assignment of IngestIQ background framework"
+        },
+        {
+          "key": "gate:annex:schedule-1",
+          "severity": "high",
+          "title": "Missing: Schedule 1 (SOW-1: Meter & Network Telemetry Data Platform)"
+        },
+        {
+          "key": "playbook:ip",
+          "severity": "high",
+          "title": "IP vesting on creation before payment"
+        },
+        {
+          "key": "playbook:liability",
+          "severity": "high",
+          "title": "Uncapped liability for IP claims and 150% cap"
+        },
+        {
+          "key": "gate:governing_law",
+          "severity": "medium",
+          "title": "Governing law: English law"
+        },
+        {
+          "key": "playbook:termination",
+          "severity": "medium",
+          "title": "One-sided termination for convenience"
+        }
+      ]
+    },
+    {
+      "id": "HO-04",
+      "dealId": "quanta",
+      "expected": "HOLD",
+      "verdict": "SIGN AFTER CHANGES",
+      "pass": false,
+      "cites": [
+        {
+          "d": "syn-zephyr-spa",
+          "ok": true
+        }
+      ],
+      "finds": [
+        {
+          "k": "gate:entity",
+          "ok": false
+        }
+      ],
+      "alarms": [],
+      "errors": [],
+      "findings": [
+        {
+          "key": "conflict:cloudspan-spa:exclusivity",
+          "severity": "high",
+          "title": "Collides with CloudSpan Technologies: Competing Platform exclusivity in India and GCC"
+        },
+        {
+          "key": "conflict:syn-zephyr-spa:exclusivity",
+          "severity": "high",
+          "title": "Collides with Zephyr Cloud Data Pte Ltd: Competing platform exclusivity in Territory"
+        },
+        {
+          "key": "playbook:liability",
+          "severity": "high",
+          "title": "Uncapped liability for non-compliance with platform focus commitment"
+        },
+        {
+          "key": "playbook:restrictive",
+          "severity": "medium",
+          "title": "Exclusivity restriction regarding specified partner competitors in Territory"
+        }
+      ]
+    },
+    {
+      "id": "HO-05",
+      "dealId": "ashwood",
+      "expected": "HOLD",
+      "verdict": "HOLD",
+      "pass": false,
+      "cites": [
+        {
+          "d": "syn-ashwood-baa",
+          "ok": false
+        }
+      ],
+      "finds": [
+        {
+          "k": "gate:insurance|playbook:insurance",
+          "ok": false
+        }
+      ],
+      "alarms": [],
+      "errors": [],
+      "findings": [
+        {
+          "key": "bundle:msa:client",
+          "severity": "high",
+          "title": "Missing MSA with Ashwood Senior Living Inc"
+        },
+        {
+          "key": "bundle:nda:client",
+          "severity": "high",
+          "title": "Missing NDA with Ashwood Senior Living Inc"
+        },
+        {
+          "key": "bundle:sub-baa:pvt-ltd",
+          "severity": "high",
+          "title": "Missing subcontractor BAA: AtliQ Technologies Pvt Ltd (Pune delivery)"
+        },
+        {
+          "key": "bundle:consent:pvt-ltd",
+          "severity": "medium",
+          "title": "No client consent on file to subcontract to AtliQ Technologies Pvt Ltd (Pune delivery)"
+        },
+        {
+          "key": "playbook:data_protection",
+          "severity": "medium",
+          "title": "Sub-BAA or Data Use Agreement required for Pune entity before data access"
+        }
+      ]
+    },
+    {
+      "id": "HO-06",
+      "dealId": "cargoline",
+      "expected": "HOLD",
+      "verdict": "HOLD",
+      "pass": true,
+      "cites": [
+        {
+          "d": "syn-falconridge-msa",
+          "ok": true
+        }
+      ],
+      "finds": [
+        {
+          "k": "gate:entity|gate:invoicing_entity",
+          "ok": true
+        }
+      ],
+      "alarms": [],
+      "errors": [],
+      "findings": [
+        {
+          "key": "conflict:syn-falconridge-msa:non_compete",
+          "severity": "high",
+          "title": "Possible collision with Falconridge Logistics WLL: GCC logistics analytics non-compete for Protected Customers"
+        },
+        {
+          "key": "gate:annex:schedule-2",
+          "severity": "high",
+          "title": "Missing: Schedule 2 (MILESTONES)"
+        },
+        {
+          "key": "gate:entity",
+          "severity": "high",
+          "title": "Wrong AtliQ entity: Inc instead of Pvt Ltd"
+        },
+        {
+          "key": "playbook:termination",
+          "severity": "high",
+          "title": "Immediate termination and fee clawback for conflict of interest"
+        },
+        {
+          "key": "gate:governing_law",
+          "severity": "medium",
+          "title": "Governing law: laws of the Kingdom of Bahrain"
+        }
+      ]
+    },
+    {
+      "id": "HO-07",
+      "dealId": "monsoon",
+      "expected": "SIGN AFTER CHANGES",
+      "verdict": "SIGN AFTER CHANGES",
+      "pass": false,
+      "cites": [
+        {
+          "d": "syn-tessellate-vsa",
+          "ok": false
+        }
+      ],
+      "finds": [
+        {
+          "k": "playbook:ld",
+          "ok": true
+        },
+        {
+          "k": "playbook:payment",
+          "ok": true
+        },
+        {
+          "k": "playbook:liability",
+          "ok": true
+        },
+        {
+          "k": "playbook:restrictive",
+          "ok": true
+        },
+        {
+          "k": "playbook:termination",
+          "ok": true
+        }
+      ],
+      "alarms": [],
+      "errors": [],
+      "findings": [
+        {
+          "key": "playbook:indemnity",
+          "severity": "medium",
+          "title": "One-way uncapped vendor indemnity"
+        },
+        {
+          "key": "playbook:ld",
+          "severity": "medium",
+          "title": "Uncapped daily delay penalty"
+        },
+        {
+          "key": "playbook:liability",
+          "severity": "medium",
+          "title": "One-sided limitation of liability"
+        },
+        {
+          "key": "playbook:payment",
+          "severity": "medium",
+          "title": "Payment: pay-when-paid (then 60 days)"
+        },
+        {
+          "key": "playbook:restrictive",
+          "severity": "medium",
+          "title": "24-month post-term non-compete on vendor"
+        },
+        {
+          "key": "playbook:termination",
+          "severity": "medium",
+          "title": "One-sided termination for convenience"
+        },
+        {
+          "key": "playbook:confidentiality",
+          "severity": "low",
+          "title": "Unilateral indefinite confidentiality obligation"
+        },
+        {
+          "key": "playbook:ip",
+          "severity": "low",
+          "title": "Vesting of vendor pre-existing materials"
+        }
+      ]
+    },
+    {
+      "id": "HO-08",
+      "dealId": "indus",
+      "expected": "HOLD",
+      "verdict": "HOLD",
+      "pass": false,
+      "cites": [
+        {
+          "d": "syn-lumen-msa",
+          "ok": true
+        },
+        {
+          "d": "syn-zephyr-spa",
+          "ok": false
+        }
+      ],
+      "finds": [],
+      "alarms": [],
+      "errors": [],
+      "findings": [
+        {
+          "key": "conflict:syn-lumen-msa:non_compete",
+          "severity": "blocker",
+          "title": "Collides with Lumen Small Finance Bank Ltd: Credit risk monitoring non-compete for RBI Regulated Lenders in India"
+        },
+        {
+          "key": "playbook:liability",
+          "severity": "high",
+          "title": "Uncapped liability for data protection incidents"
+        }
+      ]
+    },
+    {
+      "id": "HO-09",
+      "dealId": "corvina",
+      "expected": "HOLD",
+      "verdict": "HOLD",
+      "pass": false,
+      "cites": [
+        {
+          "d": "syn-corvina-msa",
+          "ok": false
+        }
+      ],
+      "finds": [],
+      "alarms": [],
+      "errors": [],
+      "findings": [
+        {
+          "key": "conflict:crestline-msa:mfn_pricing",
+          "severity": "high",
+          "title": "Possible collision with Crestline Retail Inc: Crestline Rate Card MFN Pricing (confirm)"
+        },
+        {
+          "key": "conflict:syn-meridale-msa:mfn_pricing",
+          "severity": "high",
+          "title": "Possible collision with Meridale Retail Brands Inc: Most Favored Customer pricing commitment (confirm)"
+        },
+        {
+          "key": "bundle:dpa:client",
+          "severity": "high",
+          "title": "Missing DPA with Corvina Foods GmbH"
+        },
+        {
+          "key": "playbook:data_protection",
+          "severity": "high",
+          "title": "Sub-processor notice does not meet thirty-day advance requirement"
+        }
+      ]
+    },
+    {
+      "id": "HO-10",
+      "dealId": "greystone",
+      "expected": "SIGN",
+      "verdict": "SIGN",
+      "pass": true,
+      "cites": [],
+      "finds": [],
+      "alarms": [],
+      "errors": [],
+      "findings": [
+        {
+          "key": "playbook:insurance",
+          "severity": "low",
+          "title": "Professional liability insurance limit requires confirmation"
+        },
+        {
+          "key": "playbook:ld",
+          "severity": "low",
+          "title": "LD clause lacks express sole remedy statement"
+        }
+      ]
+    }
+  ]
+}

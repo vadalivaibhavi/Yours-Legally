@@ -1,0 +1,73 @@
+{
+  "deals": [
+    "aldergrove"
+  ],
+  "skipped": [],
+  "concurrency": 1,
+  "minIntervalMs": 4000,
+  "seconds": 47,
+  "quotaStop": null,
+  "calls": 1,
+  "cached": 4,
+  "inTok": 366,
+  "outTok": 48,
+  "byTaskAndModel": [
+    {
+      "task": "brief",
+      "model": "gemini-3.6-flash",
+      "calls": 1,
+      "cached": 0,
+      "failed": 0,
+      "inTok": 366,
+      "outTok": 48
+    },
+    {
+      "task": "conflict",
+      "model": "gemini-3.6-flash",
+      "calls": 0,
+      "cached": 1,
+      "failed": 0,
+      "inTok": 0,
+      "outTok": 0
+    },
+    {
+      "task": "differs",
+      "model": "gemini-3.6-flash,gemini-flash-latest,gemini-3.8-flash,gemini-3.7-flash,gemini-3-flash-preview,gemini-3.5-flash",
+      "calls": 0,
+      "cached": 0,
+      "failed": 1,
+      "inTok": 0,
+      "outTok": 0
+    },
+    {
+      "task": "extract",
+      "model": "gemini-flash-lite-latest",
+      "calls": 0,
+      "cached": 1,
+      "failed": 0,
+      "inTok": 0,
+      "outTok": 0
+    },
+    {
+      "task": "notes",
+      "model": "gemini-3.6-flash",
+      "calls": 0,
+      "cached": 1,
+      "failed": 0,
+      "inTok": 0,
+      "outTok": 0
+    },
+    {
+      "task": "playbook",
+      "model": "gemini-3.6-flash",
+      "calls": 0,
+      "cached": 1,
+      "failed": 0,
+      "inTok": 0,
+      "outTok": 0
+    }
+  ],
+  "rows": [
+    "aldergrove    HOLD                0B 4H 2M  47s  INCOMPLETE "
+  ]
+}

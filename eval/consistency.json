@@ -95,6 +95,22 @@
       ],
       "errors": [],
       "ms": 247054
+    },
+    {
+      "at": "2026-10-14T01:43:18.072Z",
+      "verdict": "SIGN AFTER CHANGES",
+      "counted": [
+        "conflict:cloudspan-spa:exclusivity",
+        "playbook:indemnity",
+        "playbook:payment",
+        "playbook:restrictive"
+      ],
+      "casePass": false,
+      "problems": [
+        "verdict SIGN AFTER CHANGES ≠ HOLD"
+      ],
+      "errors": [],
+      "ms": 58665
     }
   ],
   "kriti": [
@@ -154,6 +170,78 @@
         "Playbook check couldn't complete: review manually (timed out after 300s across retries | gemini-3.7-flash: HTTP 503: { \"error\": { \"code\": 503, \"message\": \"This model is currently experiencing high demand. Spikes)"
       ],
       "ms": 376893
+    },
+    {
+      "at": "2026-10-14T01:44:50.331Z",
+      "verdict": "SIGN AFTER CHANGES",
+      "counted": [
+        "dependency:rheinwerk",
+        "flowdown:consent",
+        "flowdown:data",
+        "flowdown:ip"
+      ],
+      "casePass": true,
+      "problems": [],
+      "errors": [],
+      "ms": 92258
+    },
+    {
+      "at": "2026-10-14T01:46:12.711Z",
+      "verdict": "SIGN AFTER CHANGES",
+      "counted": [
+        "dependency:rheinwerk",
+        "flowdown:data"
+      ],
+      "casePass": false,
+      "problems": [
+        "missing playbook:indemnity",
+        "missing playbook:liability",
+        "missing flowdown:ip"
+      ],
+      "errors": [],
+      "ms": 82379
+    },
+    {
+      "at": "2026-10-14T01:47:21.895Z",
+      "verdict": "SIGN AFTER CHANGES",
+      "counted": [
+        "dependency:rheinwerk",
+        "flowdown:data",
+        "flowdown:ip"
+      ],
+      "casePass": true,
+      "problems": [],
+      "errors": [],
+      "ms": 69184
+    }
+  ],
+  "loopmart": [
+    {
+      "at": "2026-10-14T01:47:44.227Z",
+      "verdict": "SIGN",
+      "counted": [],
+      "casePass": true,
+      "problems": [],
+      "errors": [],
+      "ms": 22330
+    },
+    {
+      "at": "2026-10-14T01:48:07.304Z",
+      "verdict": "SIGN",
+      "counted": [],
+      "casePass": true,
+      "problems": [],
+      "errors": [],
+      "ms": 23076
+    },
+    {
+      "at": "2026-10-14T01:48:29.211Z",
+      "verdict": "SIGN",
+      "counted": [],
+      "casePass": true,
+      "problems": [],
+      "errors": [],
+      "ms": 21906
     }
   ]
 }

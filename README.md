@@ -189,9 +189,9 @@ Rules that keep them apart:
 
 ## Eval results
 
-Full table: [`eval/results.md`](eval/results.md) (regenerate with `npm run eval`). Last full run (12 Oct, Gemini): **45 passed · 4 failed · 1 skipped of 50 cases**; EV-V1–V3 pass; skipped: EV-V4 (FR-18 not built).
+Full table: [`eval/results.md`](eval/results.md) (regenerate with `npm run eval`). Last full run (14 Oct, Gemini, on the leak-free briefs): **46 passed · 3 failed · 1 skipped of 50 cases**; EV-V1–V3 pass; skipped: EV-V4 (FR-18 not built). `npm run check` runs the model-free part on every change; `npm run eval:all` runs everything.
 
-> **Eval integrity fix (13 Oct).** Each dataset meeting note ends with an italic narrator line that the dataset calls ground truth ("no BAA had been signed; the extract remained with the two Pune engineers"). It was reaching the notes step as if it had been said in the meeting, i.e. part of the answer was in the input. It is now removed at ingest (`lib/editorial.ts`). The 8 briefs of deals with notes are being regenerated (`npm run eval:all`); until then the A5 isolation check correctly reports them as built from old inputs, and the numbers above are pre-fix.
+> **Eval integrity fix (13 Oct).** Each dataset meeting note ends with an italic narrator line that the dataset calls ground truth ("no BAA had been signed; the extract remained with the two Pune engineers"). It was reaching the notes step as if said in the meeting: part of the answer was in the input. It is now removed at ingest (`lib/editorial.ts`) and all 13 briefs were regenerated. No case was lost: Harrington's compliance alert is still found from the note itself.
 
 | PRD §11 dimension | Threshold | Result |
 |---|---|---|
@@ -204,21 +204,21 @@ Full table: [`eval/results.md`](eval/results.md) (regenerate with `npm run eval`
 | Similar past clauses (EV-P1–P7) | recall@3 ≥80%, labels right, verdict unchanged | recall@3 **100%** (10/10); verdict identical with and without the panel on all 13 briefs |
 | Citation validity | 100% | 136/136 quotes string-matched to source |
 | Guardrails | 0 legal conclusions, 0 Reject | 0 / 0 across 520 model-written strings |
-| **Every finding graded** (`eval/finding_labels.json`) | all findings labelled, ≤5% wrong | 82/82 graded: **84% correct**, 5% partly right, 9% noise, 1 duplicate, 1 wrong (a quote that doesn't support its claim); 4 with the wrong severity. Two output bugs found this way were fixed (garbled carve-out names; "pay-when-paid, up to N days") |
+| **Every finding graded** (`eval/finding_labels.json`) | all findings labelled, ≤5% wrong | 83/83 graded: **84% correct**, 5% partly right, 8% noise, 1 duplicate, 1 wrong (a quote that doesn't support its claim); 4 with the wrong severity. Two output bugs found this way were fixed (garbled carve-out names; "pay-when-paid, up to N days") |
 | Reading real files | text formats ≥98% of words + every clause number; scans ≥95% | 10/10: Word 100%, Word with auto-numbered headings 100%, PDF 98.4–99.4%, scanned PDF via OCR 99.5–99.6%; every clause number recovered |
-| Consistency (PRD §11, 3 runs) | same verdict on fresh answers | TravelHub 3/3 SEND BACK (EV-03 passes on every fresh run; the stored brief is an unlucky HOLD); Datavane 2/3 SIGN AFTER CHANGES (the CloudSpan collision is found every time, its severity varies); Kriti and LoopMart pending. Runs where the provider returned 503 are reported as reliability and retried, never counted as disagreement (`eval/consistency.md`) |
-| **Held-out set** (never used for tuning) | answer-key verdicts, conflicts, false alarms | Pending the model batch: cases pre-registered in `eval/holdout_cases.json` before any run (below) |
+| Consistency (PRD §11, 3 runs) | same verdict on fresh answers | **12/12 complete runs agree** on their deal's verdict: TravelHub 3/3 SEND BACK (EV-03 passes on every fresh run; the stored brief is an unlucky HOLD), Datavane 3/3 SIGN AFTER CHANGES (EV-05's miss is systematic, not variance: the CloudSpan collision is always found but never as a blocker), Kriti 3/3 SIGN AFTER CHANGES (EV-10 passes 2/3: individual findings vary), LoopMart 3/3 SIGN. Reliability: 3 of 15 runs lost a step to provider 503s; all 3 came out HOLD, never a clean verdict (`eval/consistency.md`) |
+| **Held-out set** (never used for tuning; below) | answer-key verdicts, conflicts, false alarms | **verdicts 9/10**, conflicts found 7/11, playbook/entity points 10/13, **0 false alarms on the clean draft**, register key 8/10; every finding graded: 74% correct (+4% partly), 16% noise, 3 wrong |
 | Added guardrails and newer features (A1–A6) | every check passes, no model calls | 11/11: no counted finding without a clause; 5 strong-match rules; one-way NDA caught; 5/5 injection attempts caught, 0 of the real documents flagged; 17/17 upload cases; deal-size, roles, live mismatch, store-in-register and review isolation all right; 8/8 wording sentences |
 
-**The 4 failures, honestly.** All four are judgment calls where the model's answer varies between runs; the deterministic checks don't vary.
+**The 3 failures, honestly.** All three are judgment calls; the deterministic checks don't vary.
 - **EV-03 TravelHub:** HOLD instead of SEND BACK. The model reads TravelHub (a hotel distribution platform building hotel-ranking AI for UAE/KSA hotels) as squarely inside Al Noor's "Hospitality Business" definition; the answer key calls it arguable, for counsel. The system errs cautious: it blocks rather than misses.
 - **EV-05 Datavane:** SIGN AFTER CHANGES instead of HOLD. The CloudSpan exclusivity collision *is* found, but this run judged it fixable by carving India + GCC out of the territory (high, not blocker); the previous run called it a blocker.
-- **EV-10 Kriti / EV-12 Harrington:** one IP finding each (Kriti's IP flow-down to Rheinwerk; Harrington's background-IP assignment) was found in earlier runs and missed in this one. Both verdicts are right.
+- **EV-12 Harrington:** the background-IP assignment is missed; the verdict (HOLD + compliance alert) is right. EV-10 (Kriti) passes since the 14 Oct regeneration and on 2 of 3 fresh runs.
 - In earlier runs, EV-11 (Marcus) and EV-13 (Ortiz) failed instead. Marcus flags a real tools-licence gap the answer key doesn't list. Ortiz was fixed by aligning the termination rule with the Rohan Iyer precedent.
 
 The briefs were produced over several runs because Gemini's **free tier** allows 20 requests per model per day per project. On the free tier, run `npm run review` once a day until it finishes without the quota message: each run picks up where the last one stopped. On a billed key (`LLM_MIN_INTERVAL_MS=0`, `REVIEW_CONCURRENCY=3`) one run regenerates everything.
 
-**Cost (from `npm run cost`, Gemini flash pricing placeholders $0.30 / $2.50 per 1M tokens):** register build ≈ $0.35 one-off for 17 contracts; a review ≈ 9.6k input / 8.6k output tokens ≈ $0.02–0.07 per deal, so roughly **$0.25–0.50/month at 9–20 contracts**, model cost only. NDA fast lane ran in 15 s when the model wasn't overloaded (one run took 365 s waiting out 503 "high demand" retries on the free tier).
+**Cost and latency (from `npm run cost`, Gemini flash pricing placeholders $0.30 / $2.50 per 1M tokens):** a fresh review ≈ **$0.03–0.05 per deal, 45–95 s** (measured on the 15 consistency runs and 10 held-out reviews), so roughly **$0.35–1.00/month at 9–20 contracts**, model cost only; register build ≈ $0.35 one-off for 17 contracts (≈ $0.03 per added contract); OCR of a 2-page scan ≈ 12 s on the fast model. The NDA fast lane runs in 20–45 s.
 
 ### Held-out evaluation
 
@@ -228,7 +228,14 @@ The 13 deals above were used while building and tuning, so their score says the 
 - notes lose their narrator lines; "today" is the set's own date (28 Sep 2026);
 - `eval/holdout_cases.json` was written from the answer key and **committed before the first held-out run**; any later edit must be logged in it. Grading is per item: verdicts, conflicts found (the right signed contract cited at blocker/high), playbook/entity points, false alarms on the clean draft (Greystone), and the register key (type, end date, expiry, affiliates).
 
-Results: [`eval/holdout-results.md`](eval/holdout-results.md) (after `npm run eval:all`).
+Results ([`eval/holdout-results.md`](eval/holdout-results.md), 14 Oct, Gemini): **verdicts 9/10 · conflicts found 7/11 · playbook / entity points 10/13 · false alarms on the clean draft 0 · register key 8/10**; every finding graded (`eval/holdout_finding_labels.json`): 50 findings, 74% correct (+4% partly), 16% noise, 3 wrong.
+
+What it showed that the tuned set couldn't:
+- **The conflict check only reads 5 commitment types** (non-compete, exclusivity, pricing promise, IP given away / not received). Commitments of other kinds are extracted into the register but never compared with a new deal: Zephyr's right of first refusal (Indus), Tessellate's take-or-pay minimum (Monsoon), Corvina's rate freeze and DPA hosting terms (Corvina SOW-2), Ashwood's offshore-PHI ban. That is 4 of the 4 missed conflicts, and the main product gap. Widening the filter is the next build item; once it is tuned on these deals, this set stops being held-out and a fresh one is needed.
+- **Severity runs low on clear collisions:** Zephyr (Quanta, named in its Schedule 1) and Falconridge (Cargoline, #1 on its protected list) were raised as high / "possible", not blockers, so Quanta came out SIGN AFTER CHANGES instead of HOLD.
+- **Guardrail A2 has a cost:** it raised two pricing-promise matches on Corvina whose rates are above both floors (the model had dismissed them correctly).
+- **Two bugs**, both fixed after this run (the scores above are from before): the PDF/Word reader didn't turn "SCHEDULE 2 — MILESTONES" into a heading, so two schedules that were present were reported missing; and a DPA annexed to a signed MSA isn't counted as a DPA (still open).
+- Cobalt's own pricing promise was found, but under a different key than the pre-registered case expected, so HO-02 counts it as a miss.
 
 ---
 

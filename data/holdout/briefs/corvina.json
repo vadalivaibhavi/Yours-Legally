@@ -1,0 +1,386 @@
+{
+  "dealId": "corvina",
+  "version": 1,
+  "createdAt": "2026-10-14T02:03:05.610Z",
+  "trigger": "initial review",
+  "inputsHash": "0f71f5e2c207eeca221701d82f1040a1",
+  "documentIds": [
+    "syn-corvina-sow2"
+  ],
+  "registerVersion": "reg-2026-10-14-85+r0",
+  "playbookVersion": "pb-v1.1-2026-10-05",
+  "models": [
+    "gemini-flash-lite-latest",
+    "gemini-3.6-flash"
+  ],
+  "promptVersion": "p1",
+  "route": "full_review",
+  "verdict": "HOLD",
+  "headline": "HOLD: 1 missing document, 3 contract blockers",
+  "nextAction": "AtliQ's deal team must obtain the executed DPA and SCCs from Corvina Foods GmbH.",
+  "findings": [
+    {
+      "key": "conflict:crestline-msa:mfn_pricing",
+      "category": "conflict",
+      "topic": "mfn_pricing",
+      "title": "Possible collision with Crestline Retail Inc: Crestline Rate Card MFN Pricing (confirm)",
+      "impact": "The register entry plainly overlaps this deal (rates offered while a most-favoured pricing promise is live (any customer, any region)), but the review judged it out of scope: No collision with Crestline's MFN promise because Corvina's rates in EUR exceed Crestline's committed rates when converted to USD.",
+      "severity": "high",
+      "confidence": "low",
+      "needsJudgment": true,
+      "owner": "Karandeep",
+      "resolution": "counsel",
+      "docId": "syn-corvina-sow2",
+      "citations": [
+        {
+          "docId": "crestline-msa",
+          "docTitle": "Crestline Retail Professional Services Agreement",
+          "clauseRef": "§6.4",
+          "quote": "Supplier represents and warrants that the rates, fees and other commercial terms offered to Crestline under this Agreement are and shall remain no less favorable than those offered by Supplier or its Affiliates to any other customer for substantially similar services during the Term",
+          "role": "register"
+        }
+      ],
+      "registerEntryId": "crestline-msa#1",
+      "registerVerified": false,
+      "expiry": "2027-07-31"
+    },
+    {
+      "key": "conflict:syn-meridale-msa:mfn_pricing",
+      "category": "conflict",
+      "topic": "mfn_pricing",
+      "title": "Possible collision with Meridale Retail Brands Inc: Most Favored Customer pricing commitment (confirm)",
+      "impact": "The register entry plainly overlaps this deal (rates offered while a most-favoured pricing promise is live (any customer, any region)), but the review judged it out of scope: No collision with Meridale's MFN promise because Corvina's rates in EUR exceed Meridale's committed rates when converted to USD.",
+      "severity": "high",
+      "confidence": "low",
+      "needsJudgment": true,
+      "owner": "Karandeep",
+      "resolution": "counsel",
+      "docId": "syn-corvina-sow2",
+      "citations": [
+        {
+          "docId": "syn-meridale-msa",
+          "docTitle": "Meridale Retail Brands MSA",
+          "clauseRef": "§6.3",
+          "quote": "Vendor represents, warrants and covenants that the rates, fees, discounts and other pricing terms offered to Meridale under this Agreement are, and throughout the Term shall remain, at least as favorable as the rates, fees, discounts and pricing terms offered or charged by Vendor **or any of its Affiliates** to any other customer, anywhere in the world, for substantially similar services in substantially similar volumes",
+          "role": "register"
+        }
+      ],
+      "registerEntryId": "syn-meridale-msa#2",
+      "registerVerified": false,
+      "expiry": "2028-02-02"
+    },
+    {
+      "category": "bundle",
+      "topic": "bundle",
+      "confidence": "high",
+      "needsJudgment": false,
+      "key": "bundle:dpa:client",
+      "title": "Missing DPA with Corvina Foods GmbH",
+      "impact": "GDPR: processor terms and a transfer mechanism are needed before personal data reaches India or a sub-processor.",
+      "severity": "high",
+      "owner": "AtliQ's deal team",
+      "resolution": "document",
+      "citations": [],
+      "missingItem": {
+        "item": "DPA + SCCs with Corvina Foods GmbH",
+        "owner": "AtliQ's deal team"
+      }
+    },
+    {
+      "key": "playbook:data_protection",
+      "category": "playbook",
+      "topic": "data_protection",
+      "title": "Sub-processor notice does not meet thirty-day advance requirement",
+      "impact": "Engaging new sub-processors without observing the full 30-day advance notice period conflict with the agreed DPA terms under the MSA.",
+      "severity": "high",
+      "confidence": "medium",
+      "needsJudgment": false,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "syn-corvina-sow2",
+      "citations": [
+        {
+          "docId": "syn-corvina-sow2",
+          "docTitle": "Corvina Foods SOW-2 + sub-processor notice (AtliQ draft)",
+          "clauseRef": "Document 1, Section 4.2",
+          "quote": "Audience activation will use SyncRiver (SyncRiver Inc, Austin, Texas, USA), a reverse-ETL SaaS tool that copies segment tables into SyncRiver's US-hosted processing environment before pushing them to retail-media platforms",
+          "role": "incoming"
+        },
+        {
+          "docId": "syn-corvina-sow2",
+          "docTitle": "Corvina Foods SOW-2 + sub-processor notice (AtliQ draft)",
+          "clauseRef": "Document 2, Notice of New Sub-Processors",
+          "quote": "Attaching SOW-2 for the retail media project. As discussed, we'll be starting on 12 October. For your records, we're adding two sub-processors under the DPA:\n\n1. Kriti Data Labs Pvt Ltd (Bengaluru) — model development\n\n2. SyncRiver Inc (USA) — audience activation tool",
+          "role": "incoming"
+        }
+      ],
+      "standard": "DPA (EU) or BAA (US health) signed before any personal/regulated data moves, with a sub-DPA / sub-BAA for every party that touches the data (incl. AtliQ's own Pune entity); engagement-specific scope; offshore access only as the agreement allows.",
+      "counterPosition": "Issue the formal sub-processor notice at least 30 days prior to the date any personal data is shared with or processed by Kriti Data Labs or SyncRiver.",
+      "precedents": [
+        {
+          "docId": "carebridge-baa",
+          "counterparty": "CareBridge Clinics",
+          "clauseRef": "whole BAA",
+          "label": "standard",
+          "note": "Counsel-reviewed: capped liability, 5-day reporting, de-identified offshore route"
+        }
+      ]
+    }
+  ],
+  "fine": [
+    "Correct AtliQ entity: Pvt Ltd for a Germany counterparty",
+    "Parties = invoicing entity: Pvt Ltd throughout",
+    "Payment ≤ 45 days: 30 days",
+    "Invoices payable within 30 days matches standard.",
+    "IP allocation governed by MSA Section 5.",
+    "Liability capped per MSA Section 6."
+  ],
+  "notSeen": [
+    "Commitments were checked against all 27 signed contracts on file. Contracts AtliQ hasn't uploaded can't be checked."
+  ],
+  "documents": [
+    {
+      "docId": "syn-corvina-sow2",
+      "title": "Corvina Foods SOW-2 + sub-processor notice (AtliQ draft)",
+      "docType": "SOW",
+      "paper": "atliq",
+      "route": "full_review",
+      "facts": [
+        {
+          "field": "docType",
+          "label": "Document type",
+          "value": "SOW"
+        },
+        {
+          "field": "parties",
+          "label": "Counterparty",
+          "value": "Corvina Foods GmbH (Germany)"
+        },
+        {
+          "field": "entity",
+          "label": "AtliQ entity (parties)",
+          "value": "Pvt Ltd",
+          "clauseRef": "1",
+          "quote": "AtliQ Technologies Pvt Ltd, 4th Floor, Baner Business Bay, Pune 411045, India (\"AtliQ"
+        },
+        {
+          "field": "invoicing",
+          "label": "AtliQ entity (invoicing)",
+          "value": "Pvt Ltd",
+          "clauseRef": "5.2",
+          "quote": "Estimated total: EUR 74,000 (approx. USD 87,000). Invoiced monthly; payable within thirty (30) days"
+        },
+        {
+          "field": "law",
+          "label": "Governing law",
+          "value": "Not stated"
+        },
+        {
+          "field": "forum",
+          "label": "Forum",
+          "value": "Not stated"
+        },
+        {
+          "field": "payment",
+          "label": "Payment",
+          "value": "30 days",
+          "clauseRef": "5.2",
+          "quote": "Invoiced monthly; payable within thirty (30) days"
+        },
+        {
+          "field": "ld",
+          "label": "Delay penalties",
+          "value": "None"
+        },
+        {
+          "field": "liability",
+          "label": "Liability",
+          "value": "null"
+        },
+        {
+          "field": "insurance",
+          "label": "Insurance required",
+          "value": "None"
+        },
+        {
+          "field": "annexes",
+          "label": "Annexes referenced",
+          "value": "None"
+        },
+        {
+          "field": "scope",
+          "label": "Sectors · regions",
+          "value": "retail, food, technology · Germany"
+        },
+        {
+          "field": "data",
+          "label": "Data handled",
+          "value": "personal_data"
+        },
+        {
+          "field": "rates",
+          "label": "Rates",
+          "value": "Senior Data Engineer $80/hr, Data Engineer $63/hr, Data Scientist $84/hr"
+        }
+      ],
+      "gate": [
+        {
+          "rule": "entity",
+          "label": "Correct AtliQ entity",
+          "pass": true,
+          "detail": "Pvt Ltd for a Germany counterparty",
+          "citation": {
+            "docId": "syn-corvina-sow2",
+            "docTitle": "Corvina Foods SOW-2 + sub-processor notice (AtliQ draft)",
+            "clauseRef": "1",
+            "quote": "AtliQ Technologies Pvt Ltd, 4th Floor, Baner Business Bay, Pune 411045, India (\"AtliQ",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "invoicing_entity",
+          "label": "Parties = invoicing entity",
+          "pass": true,
+          "detail": "Pvt Ltd throughout",
+          "citation": {
+            "docId": "syn-corvina-sow2",
+            "docTitle": "Corvina Foods SOW-2 + sub-processor notice (AtliQ draft)",
+            "clauseRef": "5.2",
+            "quote": "Estimated total: EUR 74,000 (approx. USD 87,000). Invoiced monthly; payable within thirty (30) days",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "governing_law",
+          "label": "Governing law matches entity",
+          "pass": null,
+          "detail": "Not stated"
+        },
+        {
+          "rule": "payment",
+          "label": "Payment ≤ 45 days",
+          "pass": true,
+          "detail": "30 days",
+          "citation": {
+            "docId": "syn-corvina-sow2",
+            "docTitle": "Corvina Foods SOW-2 + sub-processor notice (AtliQ draft)",
+            "clauseRef": "5.2",
+            "quote": "Invoiced monthly; payable within thirty (30) days",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "ld_cap",
+          "label": "Delay penalties capped",
+          "pass": null,
+          "detail": "No delay penalties"
+        },
+        {
+          "rule": "liability_cap",
+          "label": "Liability capped",
+          "pass": null,
+          "detail": "Not stated"
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "bundle": [
+    {
+      "party": "Corvina Foods GmbH",
+      "document": "DPA (GDPR Art. 28) incl. SCCs",
+      "status": "missing",
+      "detail": "Not in the deal",
+      "findingKey": "bundle:dpa:client"
+    }
+  ],
+  "notesFacts": [
+    {
+      "id": "corvina-fact-1",
+      "statement": "Corvina SOW-2 has a contract value of €74k and a target start date of 12 October.",
+      "category": "deadline",
+      "noteId": "note-2026-09-26-pipeline_review_new_queu",
+      "noteTitle": "Pipeline review — \"the second queue\" (Sat 26 Sep, call)",
+      "quote": "Corvina SOW-2 (Bhavin) — €74k — start **12 Oct",
+      "complianceEvent": false,
+      "whyItMatters": "The start date and contract value must be confirmed in the draft SOW prior to engagement."
+    },
+    {
+      "id": "corvina-fact-2",
+      "statement": "Bhavin plans to send a heads-up email regarding Kriti and sub-processor SyncRiver along with the SOW.",
+      "category": "staffing",
+      "noteId": "note-2026-09-26-pipeline_review_new_queu",
+      "noteTitle": "Pipeline review — \"the second queue\" (Sat 26 Sep, call)",
+      "quote": "just sending the SOW + a heads-up email about Kriti and SyncRiver",
+      "complianceEvent": false,
+      "whyItMatters": "An informal email notice may not meet legal requirements for sub-processor notification, particularly since the GDPR Art. 28 DPA is currently missing."
+    },
+    {
+      "id": "corvina-fact-3",
+      "statement": "Tracker confirms SOW-2 requires sub-processor notice for adding Kriti and SyncRiver.",
+      "category": "staffing",
+      "noteId": "tracker",
+      "noteTitle": "Tracker notes",
+      "quote": "SYN-120 (SOW-2 + sub-processor notice): EUR 74k. start 12 Oct. adds Kriti + SyncRiver",
+      "complianceEvent": false,
+      "whyItMatters": "Adding sub-processor SyncRiver requires proper contract coverage and formal client notice mechanisms under applicable privacy regulations."
+    }
+  ],
+  "complianceCandidate": null,
+  "similar": [
+    {
+      "clauseType": "payment",
+      "docId": "syn-corvina-sow2",
+      "clauseRef": "§5",
+      "quote": "5.1 Time-and-materials, estimated 1,050 hours. Rates for this SOW:\n\n| Role | Hourly rate (EUR) |\n| --- | --- |\n| Senior Data Engineer | 80 |\n| Data Engineer | 63 |\n| Data Scientist | 84 |\n\n5.2 Estimated total: EUR 74,000 (approx. USD 87,000). Invoiced monthly; payable within thirty (30) days.\n\n(Bhavin's comment in margin: \"rates +8% vs SOW-1 – inflation, should be fine\")",
+      "hits": [
+        {
+          "docId": "sunrise-msa",
+          "counterparty": "Sunrise Foods",
+          "date": "2025-04-18",
+          "clauseNo": "5",
+          "heading": "FEES AND PAYMENT",
+          "label": "untagged",
+          "score": 0.88,
+          "text": "5.1 The total Fees under SOW-1 are **USD 33,000** (United States Dollars Thirty-Three Thousand only), comprising build fees payable on Milestones and a Monthly Support Fee for the support period, as detailed in SOW-1.\n\n5.2 AtliQ shall invoice build fees upon completion of each Milestone and the Monthly Support Fee monthly in arrears. Sunrise shall pay each undisputed invoice within thirty (30) days of the invoice date.\n\n5.3 All amounts are exclusive of GST, which shall be charged additionally at the applicable rate. Sunrise may deduct TDS as required by law.\n\n5.4 Delayed payments shall attract interest at twelve percent (12%) per annum.",
+          "differs": "Better for AtliQ than Sunrise Foods: billed monthly on time-and-materials hourly rates rather than fixed fees tied to milestone delivery.",
+          "alsoIn": []
+        },
+        {
+          "docId": "trustline-msa",
+          "counterparty": "Trustline NBFC",
+          "date": "2026-08-15",
+          "clauseNo": "4",
+          "heading": "FEES AND PAYMENT",
+          "label": "standard",
+          "labelNote": "45-day payment: the negotiated maximum (90 → 45)",
+          "score": 0.847,
+          "text": "4.1 The total fees for the Services are **USD 48,000** (United States Dollars Forty-Eight Thousand only), payable on completion of Milestones as set out in Annexure A.\n\n4.2 The Service Provider shall raise an invoice upon completion of each Milestone. The Company shall pay each undisputed invoice within forty-five (45) days of receipt of the invoice.\n\n4.3 All fees are exclusive of GST. The Company shall be entitled to deduct TDS as applicable.\n\n4.4 Any disputed amount shall be notified within ten (10) days of receipt of invoice, and the Parties shall resolve such dispute in good faith within thirty (30) days.",
+          "differs": "Better for AtliQ than Trustline NBFC: payment is due within 30 days instead of 45 days, and billed monthly on time-and-materials.",
+          "alsoIn": []
+        },
+        {
+          "docId": "alnoor-msa",
+          "counterparty": "Al Noor Hospitality Group",
+          "date": "2025-03-15",
+          "clauseNo": "5",
+          "heading": "FEES AND PAYMENT",
+          "label": "untagged",
+          "score": 0.864,
+          "text": "5.1 The total Fees for SOW-1 are **USD 185,000** (one hundred and eighty-five thousand United States Dollars), payable against Milestones as set out in Schedule 1.\n\n5.2 The Supplier shall invoice upon achievement of each Milestone. Invoices are payable within thirty (30) days of receipt.\n\n5.3 All Fees are exclusive of VAT and any other applicable taxes. Where the Client is required by law to withhold tax, it shall provide the Supplier with the relevant withholding certificate.\n\n5.4 Late payments shall bear interest at one percent (1%) per month from the due date until the date of payment.\n\n5.5 The Client may dispute any invoice in good faith by written notice within ten (10) Business Days of receipt, and shall pay the undisputed portion by the due date.",
+          "differs": "Worse for AtliQ than Al Noor Hospitality Group: lacks late payment interest of 1% per month on overdue invoices.",
+          "alsoIn": []
+        }
+      ]
+    }
+  ],
+  "counselPack": null,
+  "errors": [],
+  "usage": {
+    "calls": 6,
+    "cachedCalls": 0,
+    "inputTokens": 9256,
+    "outputTokens": 20482,
+    "ms": 65135
+  }
+}

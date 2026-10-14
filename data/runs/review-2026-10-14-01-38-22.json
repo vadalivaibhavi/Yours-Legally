@@ -1,0 +1,153 @@
+{
+  "deals": [
+    "ortiz",
+    "lakeshore",
+    "travelhub",
+    "kriti",
+    "loopmart"
+  ],
+  "skipped": [
+    "harrington",
+    "marcus",
+    "blueorchid",
+    "gulfcrown",
+    "rheinwerk",
+    "sunrise-sow2",
+    "datavane",
+    "finserve"
+  ],
+  "concurrency": 1,
+  "minIntervalMs": 4000,
+  "seconds": 154,
+  "quotaStop": null,
+  "calls": 5,
+  "cached": 25,
+  "inTok": 17498,
+  "outTok": 31008,
+  "byTaskAndModel": [
+    {
+      "task": "brief",
+      "model": "gemini-3.5-flash",
+      "calls": 0,
+      "cached": 1,
+      "failed": 0,
+      "inTok": 0,
+      "outTok": 0
+    },
+    {
+      "task": "brief",
+      "model": "gemini-3.6-flash",
+      "calls": 1,
+      "cached": 3,
+      "failed": 0,
+      "inTok": 528,
+      "outTok": 52
+    },
+    {
+      "task": "conflict",
+      "model": "gemini-3-flash-preview",
+      "calls": 0,
+      "cached": 1,
+      "failed": 0,
+      "inTok": 0,
+      "outTok": 0
+    },
+    {
+      "task": "conflict",
+      "model": "gemini-3.6-flash",
+      "calls": 0,
+      "cached": 1,
+      "failed": 0,
+      "inTok": 0,
+      "outTok": 0
+    },
+    {
+      "task": "differs",
+      "model": "gemini-3-flash-preview",
+      "calls": 0,
+      "cached": 1,
+      "failed": 0,
+      "inTok": 0,
+      "outTok": 0
+    },
+    {
+      "task": "differs",
+      "model": "gemini-3.6-flash",
+      "calls": 4,
+      "cached": 1,
+      "failed": 0,
+      "inTok": 16970,
+      "outTok": 30956
+    },
+    {
+      "task": "extract",
+      "model": "gemini-flash-lite-latest",
+      "calls": 0,
+      "cached": 6,
+      "failed": 0,
+      "inTok": 0,
+      "outTok": 0
+    },
+    {
+      "task": "nda",
+      "model": "gemini-3.5-flash",
+      "calls": 0,
+      "cached": 1,
+      "failed": 0,
+      "inTok": 0,
+      "outTok": 0
+    },
+    {
+      "task": "nda",
+      "model": "gemini-3.6-flash",
+      "calls": 0,
+      "cached": 1,
+      "failed": 0,
+      "inTok": 0,
+      "outTok": 0
+    },
+    {
+      "task": "notes",
+      "model": "gemini-3-flash-preview",
+      "calls": 0,
+      "cached": 4,
+      "failed": 0,
+      "inTok": 0,
+      "outTok": 0
+    },
+    {
+      "task": "notes",
+      "model": "gemini-3.6-flash",
+      "calls": 0,
+      "cached": 1,
+      "failed": 0,
+      "inTok": 0,
+      "outTok": 0
+    },
+    {
+      "task": "playbook",
+      "model": "gemini-3-flash-preview",
+      "calls": 0,
+      "cached": 2,
+      "failed": 0,
+      "inTok": 0,
+      "outTok": 0
+    },
+    {
+      "task": "playbook",
+      "model": "gemini-3.5-flash",
+      "calls": 0,
+      "cached": 2,
+      "failed": 0,
+      "inTok": 0,
+      "outTok": 0
+    }
+  ],
+  "rows": [
+    "lakeshore     HOLD                1B 0H 1M  44s  ",
+    "travelhub     HOLD                1B 2H 3M  37s  ",
+    "loopmart      SIGN                0B 0H 0M  29s  ",
+    "ortiz         SIGN AFTER CHANGES  0B 2H 5M  42s  ",
+    "kriti         SIGN AFTER CHANGES  0B 8H 2M  2s  "
+  ]
+}

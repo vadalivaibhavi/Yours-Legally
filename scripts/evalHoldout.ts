@@ -23,6 +23,8 @@ import { useMemoryState } from "../lib/store";
 type HCase = { id: string; answerKey: string; dealId: string; expectedVerdict: string; why: string; mustCite: string[]; mustFind: string[]; mustNotCite?: string[]; mustNotFlag?: string[] };
 type RegKey = { id: string; docId: string; types: string[]; end?: string; perpetual?: boolean; expired?: boolean; affiliates?: boolean };
 const spec = readJson<{ cases: HCase[]; register: { entries: RegKey[] }; changes: unknown[] }>("../eval/holdout_cases.json");
+type Label = { label: "correct" | "partly" | "duplicate" | "noise" | "wrong"; severity: "ok" | "too_high" | "too_low"; note: string };
+const labels = readJson<{ labels: Record<string, Record<string, Label>> }>("../eval/holdout_finding_labels.json", { labels: {} }).labels;
 
 const counted = (f: Finding) => SEVERITY_RANK[f.severity] >= SEVERITY_RANK.high;
 const cites = (f: Finding, docId: string) => f.key.includes(docId) || f.citations.some((c) => c.docId === docId) || f.registerEntryId?.startsWith(docId);
@@ -33,6 +35,9 @@ function main() {
   const rows: string[] = [];
   const out: Record<string, unknown>[] = [];
   let verdictOk = 0, graded = 0, citeHit = 0, citeAll = 0, findHit = 0, findAll = 0, falseAlarms = 0;
+  const tally: Record<string, number> = { correct: 0, partly: 0, duplicate: 0, noise: 0, wrong: 0 };
+  let sevOff = 0;
+  const ungraded: string[] = [];
   for (const c of spec.cases) {
     const p = path.join("data", briefsDir(), `${c.dealId}.json`);
     if (!fs.existsSync(p)) {
@@ -51,6 +56,14 @@ function main() {
       ...(c.mustNotCite ?? []).flatMap((d) => e.findings.filter((f) => SEVERITY_RANK[f.severity] >= SEVERITY_RANK.medium && cites(f, d)).map((f) => `${f.key} (${f.severity})`)),
       ...(c.mustNotFlag ?? []).flatMap((k) => e.findings.filter((f) => matches(f, k)).map((f) => `${f.key} (${f.severity})`)),
     ];
+    for (const f of e.findings) {
+      const l = labels[c.dealId]?.[f.key];
+      if (!l) ungraded.push(`${c.dealId}:${f.key}`);
+      else {
+        tally[l.label]++;
+        if (l.severity !== "ok") sevOff++;
+      }
+    }
     citeHit += citeRes.filter((x) => x.ok).length;
     citeAll += citeRes.length;
     findHit += findRes.filter((x) => x.ok).length;
@@ -88,6 +101,8 @@ function main() {
     "# Held-out evaluation",
     "",
     `The dataset's SYN_ extension: 10 incoming drafts (read from Word / PDF / scanned files), 10 signed contracts added to the register, 6 notes without narrator lines. Never used to build, prompt or tune anything; cases written from the answer key before the first run (\`eval/holdout_cases.json\`, ${spec.changes.length ? `${spec.changes.length} logged change(s)` : "unchanged since"}). Model: ${provider()}. Run ${new Date().toISOString().slice(0, 16).replace("T", " ")} UTC.`,
+    "",
+    `Every finding graded (\`eval/holdout_finding_labels.json\`): ${(() => { const n = Object.values(tally).reduce((a, x) => a + x, 0); const p = (k: string) => (n ? Math.round((100 * tally[k]) / n) : 0); return `${n} findings · **${p("correct")}% correct** (+${p("partly")}% partly) · noise ${p("noise")}% · wrong ${tally.wrong} · severity off ${sevOff}${ungraded.length ? ` · UNGRADED: ${ungraded.join(", ")}` : ""}`; })()}`,
     "",
     `**Verdicts ${pct(verdictOk, graded)} · conflicts found (the right signed contract cited at blocker/high) ${pct(citeHit, citeAll)} · playbook / entity points ${pct(findHit, findAll)} · false alarms on the clean draft: ${falseAlarms} · register key ${pct(regOk, spec.register.entries.length)}** (${graded}/${spec.cases.length} deals reviewed)`,
     "",

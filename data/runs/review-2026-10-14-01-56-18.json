@@ -1,0 +1,103 @@
+{
+  "deals": [
+    "quanta",
+    "ashwood",
+    "cargoline",
+    "monsoon",
+    "indus",
+    "corvina",
+    "greystone"
+  ],
+  "skipped": [],
+  "concurrency": 1,
+  "minIntervalMs": 4000,
+  "seconds": 470,
+  "quotaStop": null,
+  "calls": 38,
+  "cached": 0,
+  "inTok": 63364,
+  "outTok": 139895,
+  "byTaskAndModel": [
+    {
+      "task": "brief",
+      "model": "gemini-3.6-flash",
+      "calls": 7,
+      "cached": 0,
+      "failed": 0,
+      "inTok": 2161,
+      "outTok": 320
+    },
+    {
+      "task": "conflict",
+      "model": "gemini-3.6-flash",
+      "calls": 4,
+      "cached": 0,
+      "failed": 0,
+      "inTok": 7064,
+      "outTok": 27119
+    },
+    {
+      "task": "differs",
+      "model": "gemini-3.6-flash",
+      "calls": 6,
+      "cached": 0,
+      "failed": 0,
+      "inTok": 17462,
+      "outTok": 33875
+    },
+    {
+      "task": "differs",
+      "model": "gemini-3.6-flash,gemini-flash-latest,gemini-3.8-flash,gemini-3.7-flash,gemini-3-flash-preview,gemini-3.5-flash",
+      "calls": 0,
+      "cached": 0,
+      "failed": 1,
+      "inTok": 0,
+      "outTok": 0
+    },
+    {
+      "task": "embed",
+      "model": "gemini-embedding-001",
+      "calls": 7,
+      "cached": 0,
+      "failed": 0,
+      "inTok": 1544,
+      "outTok": 0
+    },
+    {
+      "task": "extract",
+      "model": "gemini-flash-lite-latest",
+      "calls": 7,
+      "cached": 0,
+      "failed": 0,
+      "inTok": 6860,
+      "outTok": 6104
+    },
+    {
+      "task": "notes",
+      "model": "gemini-3.6-flash",
+      "calls": 7,
+      "cached": 0,
+      "failed": 0,
+      "inTok": 8091,
+      "outTok": 21895
+    },
+    {
+      "task": "playbook",
+      "model": "gemini-3.6-flash",
+      "calls": 7,
+      "cached": 0,
+      "failed": 0,
+      "inTok": 21726,
+      "outTok": 50582
+    }
+  ],
+  "rows": [
+    "quanta        SIGN AFTER CHANGES  0B 3H 1M  69s  INCOMPLETE ",
+    "ashwood       HOLD                0B 3H 2M  44s  ",
+    "cargoline     HOLD                0B 4H 1M  65s  ",
+    "monsoon       SIGN AFTER CHANGES  0B 6H 1M  95s  ",
+    "indus         HOLD                1B 1H 0M  68s  ",
+    "corvina       HOLD                0B 4H 0M  65s  ",
+    "greystone     SIGN                0B 0H 0M  63s  "
+  ]
+}

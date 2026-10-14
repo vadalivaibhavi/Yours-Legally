@@ -1,0 +1,691 @@
+{
+  "dealId": "indus",
+  "version": 1,
+  "createdAt": "2026-10-14T02:02:00.471Z",
+  "trigger": "initial review",
+  "inputsHash": "34d2573d9c790e29ad4cb18f936d95ee",
+  "documentIds": [
+    "syn-indus-sa"
+  ],
+  "registerVersion": "reg-2026-10-14-85+r0",
+  "playbookVersion": "pb-v1.1-2026-10-05",
+  "models": [
+    "gemini-flash-lite-latest",
+    "gemini-3.6-flash"
+  ],
+  "promptVersion": "p1",
+  "route": "full_review",
+  "verdict": "HOLD",
+  "headline": "HOLD: 1 blocker and 1 high-risk item pending resolution",
+  "nextAction": "Karandeep will seek a waiver for the non-compete collision and ask for changes to the liability clause.",
+  "findings": [
+    {
+      "key": "conflict:syn-lumen-msa:non_compete",
+      "category": "conflict",
+      "topic": "non_compete",
+      "title": "Collides with Lumen Small Finance Bank Ltd: Credit risk monitoring non-compete for RBI Regulated Lenders in India",
+      "impact": "Collides with the Lumen non-compete commitment, which runs for 24 months from 31 July 2026 through 31 July 2028.",
+      "severity": "blocker",
+      "confidence": "high",
+      "needsJudgment": false,
+      "owner": "Karandeep",
+      "resolution": "waiver",
+      "docId": "syn-indus-sa",
+      "citations": [
+        {
+          "docId": "syn-indus-sa",
+          "docTitle": "Indus Valley Co-operative Bank services agreement (draft)",
+          "clauseRef": "Clause 1.1",
+          "quote": "Pursuant to its RFP No. IVCB/IT/2026/14 dated 2 September 2026, the Bank has selected the Service Provider to implement a Credit Early Warning System (EWS) for its MSME, gold-loan and retail loan portfolios, in line with RBI expectations on early identification of stressed assets",
+          "role": "incoming"
+        },
+        {
+          "docId": "syn-indus-sa",
+          "docTitle": "Indus Valley Co-operative Bank services agreement (draft)",
+          "clauseRef": "Clause 2.1(b)",
+          "quote": "develop early-warning signals and a delinquency-prediction model (30/60/90 DPD",
+          "role": "incoming"
+        },
+        {
+          "docId": "syn-indus-sa",
+          "docTitle": "Indus Valley Co-operative Bank services agreement (draft)",
+          "clauseRef": "Clause 9.1",
+          "quote": "The Service Provider represents that it is not party to any agreement that restricts it from performing the Services, and that its performance will not breach any obligation owed to a third party",
+          "role": "incoming"
+        },
+        {
+          "docId": "syn-lumen-msa",
+          "docTitle": "Lumen Small Finance Bank MSA",
+          "clauseRef": "§10.2",
+          "quote": "Without limiting Clause 10.1, for a period of **twenty-four (24) months from the date of Final Acceptance** (the \"**Cooling-off Period**\"), the Service Provider shall not, and shall ensure that its Affiliates shall not, design, develop, deploy, license or provide any credit early-warning, delinquency-prediction or similar credit-risk monitoring model or service to any Regulated Lender in India, whether or not derived from the Lumen EWS Model",
+          "role": "register"
+        },
+        {
+          "docId": "syn-lumen-msa",
+          "docTitle": "Lumen Small Finance Bank MSA",
+          "clauseRef": "§1.2",
+          "quote": "Final Acceptance**\" means the Bank's written acceptance of Milestone M4 under SOW-1",
+          "role": "register"
+        },
+        {
+          "docId": "syn-lumen-msa",
+          "docTitle": "Lumen Small Finance Bank MSA",
+          "clauseRef": "§1.3",
+          "quote": "Regulated Lender**\" means any bank, small finance bank, cooperative bank, non-banking financial company, housing finance company or other lender regulated by the Reserve Bank of India or the National Housing Bank",
+          "role": "register"
+        },
+        {
+          "docId": "syn-lumen-msa",
+          "docTitle": "Lumen Small Finance Bank MSA",
+          "clauseRef": "§10.3",
+          "quote": "The Bank may waive Clause 10.2 in writing for a specific engagement. Any request shall be made at least thirty (30) days before the Service Provider submits a proposal to the relevant Regulated Lender",
+          "role": "register"
+        }
+      ],
+      "counterPosition": "Seek a written waiver from Lumen Small Finance Bank Ltd for this engagement, or consult legal counsel regarding the timeline constraints.",
+      "registerEntryId": "syn-lumen-msa#1",
+      "registerVerified": false,
+      "expiry": "2028-07-31",
+      "waiver": null
+    },
+    {
+      "key": "playbook:liability",
+      "category": "playbook",
+      "topic": "liability",
+      "title": "Uncapped liability for data protection incidents",
+      "impact": "AtliQ faces unlimited exposure to financial damages in the event of a data protection incident.",
+      "severity": "high",
+      "confidence": "medium",
+      "needsJudgment": false,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "syn-indus-sa",
+      "citations": [
+        {
+          "docId": "syn-indus-sa",
+          "docTitle": "Indus Valley Co-operative Bank services agreement (draft)",
+          "clauseRef": "8.1",
+          "quote": "Each party's aggregate liability capped at total fees, except for breach of confidentiality, data protection or fraud",
+          "role": "incoming"
+        }
+      ],
+      "standard": "Each party's aggregate liability capped at 1× fees (paid or payable in the prior 12 months), mutual; carve-outs only for fraud, wilful misconduct and confidentiality (plus any carve-outs that are mandatory under the governing law, e.g. German law for intent/gross negligence and injury).",
+      "counterPosition": "Subject data protection liability to a separate super-cap (such as 2x total fees) rather than leaving it uncapped.",
+      "precedents": [
+        {
+          "docId": "ref-negotiation-notes",
+          "counterparty": "Kessler Mobility",
+          "clauseRef": "negotiation notes",
+          "label": "standard",
+          "note": "Walked away from a €120k deal over unlimited liability (Jan 2026)"
+        },
+        {
+          "docId": "sunrise-msa",
+          "counterparty": "Sunrise Foods",
+          "clauseRef": "§13",
+          "label": "standard",
+          "note": "AtliQ-friendly master: capped liability"
+        },
+        {
+          "docId": "carebridge-baa",
+          "counterparty": "CareBridge Clinics",
+          "clauseRef": "§9",
+          "label": "standard",
+          "note": "Counsel-reviewed: BAA liability capped at 2× trailing-12-month fees"
+        },
+        {
+          "docId": "brightwater-msa",
+          "counterparty": "Brightwater Insurance",
+          "clauseRef": "§15",
+          "label": "accident",
+          "note": "LDs carved out of the 150% cap"
+        }
+      ]
+    }
+  ],
+  "fine": [
+    "Correct AtliQ entity: Pvt Ltd for a India counterparty",
+    "Parties = invoicing entity: Pvt Ltd throughout",
+    "Governing law matches entity: Laws of India (Pvt Ltd → Indian law)",
+    "Payment ≤ 45 days: 45 days",
+    "Delay penalties capped: Cap 5% of milestone",
+    "Liquidated damages clause matches standard rate of 0.5% per week capped at 5% of the affected milestone fee for supplier-caused delays.",
+    "IP ownership structure matches standard where bank-specific deliverables vest upon payment while AtliQ retains background tools and methodologies.",
+    "No indemnity obligations are imposed on AtliQ.",
+    "Payment term of 45 days is within acceptable negotiated limits.",
+    "Governing law and arbitration seat in Pune match standard for AtliQ Technologies Pvt Ltd."
+  ],
+  "notSeen": [
+    "Annexure B (RFP response) is referenced but not attached: not reviewed.",
+    "Commitments were checked against all 27 signed contracts on file. Contracts AtliQ hasn't uploaded can't be checked."
+  ],
+  "documents": [
+    {
+      "docId": "syn-indus-sa",
+      "title": "Indus Valley Co-operative Bank services agreement (draft)",
+      "docType": "MSA",
+      "paper": "client",
+      "route": "full_review",
+      "facts": [
+        {
+          "field": "docType",
+          "label": "Document type",
+          "value": "MSA"
+        },
+        {
+          "field": "parties",
+          "label": "Counterparty",
+          "value": "Indus Valley Co-operative Bank Limited (India)"
+        },
+        {
+          "field": "entity",
+          "label": "AtliQ entity (parties)",
+          "value": "Pvt Ltd",
+          "clauseRef": "Preamble",
+          "quote": "ATLIQ TECHNOLOGIES PRIVATE LIMITED, a company incorporated under the Companies Act, 2013 (CIN U72900MH2019PTC321456"
+        },
+        {
+          "field": "invoicing",
+          "label": "AtliQ entity (invoicing)",
+          "value": "Pvt Ltd",
+          "clauseRef": "3.1",
+          "quote": "Total fees: INR 98,50,000 (approx. USD 118,000) plus GST"
+        },
+        {
+          "field": "law",
+          "label": "Governing law",
+          "value": "Laws of India",
+          "clauseRef": "10.1",
+          "quote": "Laws of India"
+        },
+        {
+          "field": "forum",
+          "label": "Forum",
+          "value": "Pune",
+          "clauseRef": "10.1",
+          "quote": "Arbitration seated at Pune under the Arbitration and Conciliation Act, 1996"
+        },
+        {
+          "field": "payment",
+          "label": "Payment",
+          "value": "45 days",
+          "clauseRef": "3.2",
+          "quote": "Undisputed invoices payable within forty-five (45) days"
+        },
+        {
+          "field": "ld",
+          "label": "Delay penalties",
+          "value": "0.5% of milestone per week, cap 5% of milestone",
+          "clauseRef": "6.1",
+          "quote": "0.5% of the affected Milestone fee per week of delay attributable to the Service Provider, capped at 5% of that Milestone fee"
+        },
+        {
+          "field": "liability",
+          "label": "Liability",
+          "value": "Each party's aggregate liability capped at total fees · uncapped for breach of confidentiality, data protection, fraud",
+          "clauseRef": "8.1",
+          "quote": "Each party's aggregate liability capped at total fees, except for breach of confidentiality, data protection or fraud"
+        },
+        {
+          "field": "insurance",
+          "label": "Insurance required",
+          "value": "None"
+        },
+        {
+          "field": "annexes",
+          "label": "Annexes referenced",
+          "value": "Annexure B, Annexure A"
+        },
+        {
+          "field": "scope",
+          "label": "Sectors · regions",
+          "value": "bfsi · India"
+        },
+        {
+          "field": "data",
+          "label": "Data handled",
+          "value": "personal_data"
+        }
+      ],
+      "gate": [
+        {
+          "rule": "entity",
+          "label": "Correct AtliQ entity",
+          "pass": true,
+          "detail": "Pvt Ltd for a India counterparty",
+          "citation": {
+            "docId": "syn-indus-sa",
+            "docTitle": "Indus Valley Co-operative Bank services agreement (draft)",
+            "clauseRef": "Preamble",
+            "quote": "ATLIQ TECHNOLOGIES PRIVATE LIMITED, a company incorporated under the Companies Act, 2013 (CIN U72900MH2019PTC321456",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "invoicing_entity",
+          "label": "Parties = invoicing entity",
+          "pass": true,
+          "detail": "Pvt Ltd throughout",
+          "citation": {
+            "docId": "syn-indus-sa",
+            "docTitle": "Indus Valley Co-operative Bank services agreement (draft)",
+            "clauseRef": "3.1",
+            "quote": "Total fees: INR 98,50,000 (approx. USD 118,000) plus GST",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "governing_law",
+          "label": "Governing law matches entity",
+          "pass": true,
+          "detail": "Laws of India (Pvt Ltd → Indian law)",
+          "citation": {
+            "docId": "syn-indus-sa",
+            "docTitle": "Indus Valley Co-operative Bank services agreement (draft)",
+            "clauseRef": "10.1",
+            "quote": "Laws of India",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "payment",
+          "label": "Payment ≤ 45 days",
+          "pass": true,
+          "detail": "45 days",
+          "citation": {
+            "docId": "syn-indus-sa",
+            "docTitle": "Indus Valley Co-operative Bank services agreement (draft)",
+            "clauseRef": "3.2",
+            "quote": "Undisputed invoices payable within forty-five (45) days",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "ld_cap",
+          "label": "Delay penalties capped",
+          "pass": true,
+          "detail": "Cap 5% of milestone",
+          "citation": {
+            "docId": "syn-indus-sa",
+            "docTitle": "Indus Valley Co-operative Bank services agreement (draft)",
+            "clauseRef": "6.1",
+            "quote": "0.5% of the affected Milestone fee per week of delay attributable to the Service Provider, capped at 5% of that Milestone fee",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "liability_cap",
+          "label": "Liability capped",
+          "pass": false,
+          "detail": "Capped (Each party's aggregate liability capped at total fees) but uncapped for: data protection",
+          "citation": {
+            "docId": "syn-indus-sa",
+            "docTitle": "Indus Valley Co-operative Bank services agreement (draft)",
+            "clauseRef": "8.1",
+            "quote": "Each party's aggregate liability capped at total fees, except for breach of confidentiality, data protection or fraud",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "annex:annexure-b",
+          "label": "Annexure B attached",
+          "pass": false,
+          "detail": "RFP response: referenced but not attached (administrative: noted, not blocking)",
+          "citation": {
+            "docId": "syn-indus-sa",
+            "docTitle": "Indus Valley Co-operative Bank services agreement (draft)",
+            "clauseRef": "2.2",
+            "quote": "The Service Provider's RFP response (Annexure B) forms part of this Agreement",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "annex:annexure-a",
+          "label": "Annexure A attached",
+          "pass": true,
+          "detail": "Attached in this document",
+          "citation": {
+            "docId": "syn-indus-sa",
+            "docTitle": "Indus Valley Co-operative Bank services agreement (draft)",
+            "clauseRef": "3.1",
+            "quote": "payable per Annexure A",
+            "role": "incoming"
+          }
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "bundle": [],
+  "notesFacts": [
+    {
+      "id": "indus-fact-1",
+      "statement": "The target completion date for the Indus Valley Co-op Bank services agreement is 6 October.",
+      "category": "deadline",
+      "noteId": "note-2026-09-26-pipeline_review_new_queu",
+      "noteTitle": "Pipeline review — \"the second queue\" (Sat 26 Sep, call)",
+      "quote": "Indus Valley Co-op Bank (Dhaval) — ₹98.5L (~$118k) — by **6 Oct",
+      "complianceEvent": false,
+      "whyItMatters": "Establishes the required turnaround date for finalizing and executing the agreement."
+    },
+    {
+      "id": "indus-fact-2",
+      "statement": "The Indus Valley agreement is valued at INR 98.5L following an RFP win.",
+      "category": "commitment",
+      "noteId": "tracker",
+      "noteTitle": "Tracker notes",
+      "quote": "SYN-119 (Services Agreement): INR 98.5L. by 6 Oct. RFP won - 'same approach as Lumen",
+      "complianceEvent": false,
+      "whyItMatters": "Confirms the deal structure, value, and RFP background that must be aligned in the contract terms."
+    },
+    {
+      "id": "indus-fact-3",
+      "statement": "Dhaval confirmed that a new model will be built for Indus Valley rather than reusing Lumen's model.",
+      "category": "other",
+      "noteId": "note-2026-09-26-pipeline_review_new_queu",
+      "noteTitle": "Pipeline review — \"the second queue\" (Sat 26 Sep, call)",
+      "quote": "Their model is theirs, we're building a new one",
+      "complianceEvent": false,
+      "whyItMatters": "Ensures clarity on intellectual property ownership and deliverables, avoiding potential exclusivity issues with prior clients."
+    }
+  ],
+  "complianceCandidate": null,
+  "similar": [
+    {
+      "clauseType": "payment",
+      "docId": "syn-indus-sa",
+      "clauseRef": "§3",
+      "quote": "3.1 Total fees: INR 98,50,000 (approx. USD 118,000) plus GST, payable per Annexure A.\n\n3.2 Undisputed invoices payable within forty-five (45) days.",
+      "hits": [
+        {
+          "docId": "trustline-msa",
+          "counterparty": "Trustline NBFC",
+          "date": "2026-08-15",
+          "clauseNo": "4",
+          "heading": "FEES AND PAYMENT",
+          "label": "standard",
+          "labelNote": "45-day payment: the negotiated maximum (90 → 45)",
+          "score": 0.909,
+          "text": "4.1 The total fees for the Services are **USD 48,000** (United States Dollars Forty-Eight Thousand only), payable on completion of Milestones as set out in Annexure A.\n\n4.2 The Service Provider shall raise an invoice upon completion of each Milestone. The Company shall pay each undisputed invoice within forty-five (45) days of receipt of the invoice.\n\n4.3 All fees are exclusive of GST. The Company shall be entitled to deduct TDS as applicable.\n\n4.4 Any disputed amount shall be notified within ten (10) days of receipt of invoice, and the Parties shall resolve such dispute in good faith within thirty (30) days.",
+          "differs": "Same as Trustline NBFC: both set the payment timeframe for undisputed invoices at forty-five (45) days.",
+          "alsoIn": []
+        },
+        {
+          "docId": "sunrise-msa",
+          "counterparty": "Sunrise Foods",
+          "date": "2025-04-18",
+          "clauseNo": "5",
+          "heading": "FEES AND PAYMENT",
+          "label": "untagged",
+          "score": 0.907,
+          "text": "5.1 The total Fees under SOW-1 are **USD 33,000** (United States Dollars Thirty-Three Thousand only), comprising build fees payable on Milestones and a Monthly Support Fee for the support period, as detailed in SOW-1.\n\n5.2 AtliQ shall invoice build fees upon completion of each Milestone and the Monthly Support Fee monthly in arrears. Sunrise shall pay each undisputed invoice within thirty (30) days of the invoice date.\n\n5.3 All amounts are exclusive of GST, which shall be charged additionally at the applicable rate. Sunrise may deduct TDS as required by law.\n\n5.4 Delayed payments shall attract interest at twelve percent (12%) per annum.",
+          "differs": "Worse for AtliQ than Sunrise Foods: undisputed invoices are payable within forty-five (45) days instead of thirty (30) days.",
+          "alsoIn": []
+        },
+        {
+          "docId": "paytrack-msa",
+          "counterparty": "PayTrack Technologies",
+          "date": "2025-01-22",
+          "clauseNo": "4",
+          "heading": "FEES AND PAYMENT",
+          "label": "untagged",
+          "score": 0.904,
+          "text": "4.1 The total fees under SOW-1 are **USD 71,000** (United States Dollars Seventy-One Thousand only), payable in accordance with the milestone schedule in SOW-1.\n\n4.2 AtliQ shall invoice upon completion of each milestone. PayTrack shall pay each undisputed invoice within thirty (30) days of receipt.\n\n4.3 Fees are exclusive of GST. PayTrack may deduct TDS in accordance with Applicable Law.",
+          "differs": "Worse for AtliQ than PayTrack Technologies: payment terms are forty-five (45) days instead of thirty (30) days.",
+          "alsoIn": [
+            "Acme Retail Group (2025-03)"
+          ]
+        }
+      ]
+    },
+    {
+      "clauseType": "data_protection",
+      "docId": "syn-indus-sa",
+      "clauseRef": "§5",
+      "quote": "5.1 The Service Provider shall comply with the RBI Master Direction on Outsourcing of IT Services. The Bank, its auditors and RBI may audit the Service Provider.\n\n5.2 All Bank data shall be stored and processed only in India.",
+      "hits": [
+        {
+          "docId": "trustline-msa",
+          "counterparty": "Trustline NBFC",
+          "date": "2026-08-15",
+          "clauseNo": "13",
+          "heading": "DATA PROTECTION AND AUDIT",
+          "label": "untagged",
+          "score": 0.931,
+          "text": "13.1 The Service Provider shall comply with the Digital Personal Data Protection Act, 2023, the Information Technology Act, 2000 and applicable RBI directions in processing Company Data, and shall store Company Data only in India.\n\n13.2 The Service Provider shall report any security incident to the Company within six (6) hours of detection.\n\n13.3 The Company, its auditors and the Reserve Bank of India shall have the right to inspect and audit the Service Provider's records and facilities relating to the Services.",
+          "differs": "Better for AtliQ than Trustline NBFC: does not impose a six-hour deadline to report security incidents.",
+          "alsoIn": []
+        },
+        {
+          "docId": "paytrack-msa",
+          "counterparty": "PayTrack Technologies",
+          "date": "2025-01-22",
+          "clauseNo": "12",
+          "heading": "DATA PROTECTION",
+          "label": "untagged",
+          "score": 0.872,
+          "text": "12.1 AtliQ shall process personal data comprised in Client Data only on PayTrack's documented instructions and in compliance with the Digital Personal Data Protection Act, 2023, the Information Technology Act, 2000 and applicable RBI directions.\n\n12.2 AtliQ shall notify PayTrack of any data breach within twenty-four (24) hours of becoming aware of it, and shall cooperate with PayTrack in any reporting to CERT-In or the RBI.\n\n12.3 AtliQ shall permit PayTrack and its regulators to audit its compliance with this Clause 12 on reasonable notice.",
+          "differs": "Worse for AtliQ than PayTrack Technologies: requires compliance with RBI IT outsourcing directions and allows regulatory audits without reasonable notice restrictions.",
+          "alsoIn": []
+        },
+        {
+          "docId": "northwind-msa",
+          "counterparty": "Northwind Logistics",
+          "date": "2025-06-20",
+          "clauseNo": "14",
+          "heading": "DATA PROTECTION",
+          "label": "untagged",
+          "score": 0.869,
+          "text": "14.1 Each party shall comply with the UK GDPR and the Data Protection Act 2018. To the extent the Supplier processes personal data on behalf of the Client, it shall do so only on the Client's documented instructions and in accordance with the data processing terms in Schedule 3.\n\n14.2 Any transfer of personal data to India shall be made subject to the UK International Data Transfer Addendum to the EU Standard Contractual Clauses.",
+          "differs": "Worse for AtliQ than Northwind Logistics: requires full RBI IT outsourcing compliance, local data storage and processing, and banking regulatory audit rights.",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "ld",
+      "docId": "syn-indus-sa",
+      "clauseRef": "§6",
+      "quote": "6.1 0.5% of the affected Milestone fee per week of delay attributable to the Service Provider, capped at 5% of that Milestone fee.",
+      "hits": [
+        {
+          "docId": "acme-msa",
+          "counterparty": "Acme Retail Group",
+          "date": "2025-03-10",
+          "clauseNo": "7",
+          "heading": "DELAY AND LIQUIDATED DAMAGES",
+          "label": "standard",
+          "labelNote": "Origin of the LD playbook: 0.5% of milestone/week, 5% cap, client delays excluded (Mar 2025)",
+          "score": 0.937,
+          "text": "7.1 If the Service Provider fails to complete a Milestone by the agreed date for reasons solely attributable to the Service Provider, the Service Provider shall pay liquidated damages at the rate of 0.5% (half percent) of the Milestone Fee of the delayed Milestone for each complete week of delay.\n\n7.2 The aggregate liquidated damages in respect of any Milestone shall not exceed 5% (five percent) of the Milestone Fee of that Milestone.\n\n7.3 No liquidated damages shall be payable where the delay is caused by the Client, including delayed access to data or systems, delayed review of Deliverables, or changes in scope, or by a Force Majeure event.\n\n7.4 The Parties agree that the liquidated damages are a genuine pre-estimate of loss and shall be the Client's sole and exclusive remedy for delay.",
+          "differs": "Same as Acme Retail Group: both cap liquidated damages for delays at 5% of the affected milestone fee at 0.5% per week.",
+          "alsoIn": [
+            "Northwind Logistics (2025-06)",
+            "Trustline NBFC (2026-08)"
+          ]
+        },
+        {
+          "docId": "brightwater-msa",
+          "counterparty": "Brightwater Insurance Inc",
+          "date": "2025-11-28",
+          "clauseNo": "9",
+          "heading": "DELAY AND LIQUIDATED DAMAGES",
+          "label": "accident",
+          "labelNote": "Signed on a phone in 4 minutes: 1%/day uncapped LDs, no client-delay exclusion, group set-off, English law on a US entity. Cost $9k + $14.2k legal",
+          "score": 0.898,
+          "text": "9.1 If the Supplier fails to achieve any Key Date, the Supplier shall pay to the Customer liquidated damages in the amount of one per cent (1%) of the Contract Value for each day or part day by which the relevant Key Date is missed.\n\n9.2 Liquidated damages under clause 9.1 shall be payable in addition to any other right or remedy available to the Customer under this Agreement or at law, and the Customer may deduct such liquidated damages from any sums due to the Supplier.\n\n9.3 The Supplier acknowledges that the liquidated damages set out in this clause 9 are proportionate to the Customer's legitimate interest in the timely delivery of the Services.",
+          "differs": "Better for AtliQ than Brightwater Insurance Inc: liquidated damages are 0.5% per week capped at 5% of milestone fee, not 1% daily uncapped.",
+          "alsoIn": []
+        },
+        {
+          "docId": "alnoor-msa",
+          "counterparty": "Al Noor Hospitality Group",
+          "date": "2025-03-15",
+          "clauseNo": "10",
+          "heading": "DELIVERY, ACCEPTANCE AND LIQUIDATED DAMAGES",
+          "label": "exception",
+          "labelNote": "One-off: \"strategic exception for Al Noor only, not our new standard\" (cap 10% of total fees)",
+          "score": 0.881,
+          "text": "10.1 The Supplier shall use all reasonable endeavours to achieve each Milestone by the date set out in the relevant SOW.\n\n10.2 Each Deliverable shall be subject to acceptance testing by the Client within ten (10) Business Days of delivery against the acceptance criteria in the SOW. Deliverables not rejected in writing within that period shall be deemed accepted.\n\n10.3 If the Supplier fails to achieve a Milestone by its due date for reasons attributable to the Supplier, the Supplier shall pay to the Client, as liquidated damages, one percent (1%) of the Fees payable for the affected Milestone for each complete week of delay, provided that the aggregate liquidated damages payable under this Agreement shall not exceed ten percent (10%) of the total Fees payable under this Agreement.\n\n10.4 The Parties agree that the liquidated damages in Clause 10.3 are a genuine pre-estimate of loss. No liquidated damages shall be payable for delay caused by the Client, its contractors, or a Force Majeure Event.",
+          "differs": "Better for AtliQ than Al Noor Hospitality Group: liquidated damages are capped at 5% of the milestone fee at 0.5% per week instead of 1%.",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "ip",
+      "docId": "syn-indus-sa",
+      "clauseRef": "§7",
+      "quote": "7.1 Bank-specific deliverables vest in the Bank on payment; the Service Provider retains pre-existing tools and methodologies.",
+      "hits": [
+        {
+          "docId": "orbit-msa",
+          "counterparty": "Orbit Travels Pvt Ltd",
+          "date": "2022-07-01",
+          "clauseNo": "5",
+          "heading": "INTELLECTUAL PR0PERTY",
+          "label": "untagged",
+          "score": 0.916,
+          "text": "5.1 All deliverables developed specifically for the Client shall be the property of the Client\nupon full payment. The Service Provider retains its pre-existing tools and know-how.",
+          "differs": "Same as Orbit Travels Pvt Ltd: client-specific deliverables vest upon payment while AtliQ retains its pre-existing tools and methodologies.",
+          "alsoIn": [
+            "Acme Retail Group (2025-03)"
+          ]
+        },
+        {
+          "docId": "alnoor-msa",
+          "counterparty": "Al Noor Hospitality Group",
+          "date": "2025-03-15",
+          "clauseNo": "9",
+          "heading": "INTELLECTUAL PROPERTY",
+          "label": "untagged",
+          "score": 0.901,
+          "text": "9.1 Upon payment in full of the relevant Fees, all intellectual property rights in the Deliverables created specifically for the Client shall vest in the Client.\n\n9.2 The Supplier retains ownership of its pre-existing tools, libraries, methodologies and know-how (\"**Supplier Background IP**\"). To the extent any Supplier Background IP is incorporated into a Deliverable, the Supplier grants the Client a perpetual, non-exclusive, royalty-free licence to use it as part of that Deliverable.",
+          "differs": "Same as Al Noor Hospitality Group: deliverables created specifically for client vest upon payment while AtliQ retains pre-existing tools and methodologies.",
+          "alsoIn": [
+            "Trustline NBFC (2026-08)",
+            "Northwind Logistics (2025-06)"
+          ]
+        },
+        {
+          "docId": "crestline-msa",
+          "counterparty": "Crestline Retail Inc",
+          "date": "2024-08-01",
+          "clauseNo": "8",
+          "heading": "INTELLECTUAL PROPERTY",
+          "label": "untagged",
+          "score": 0.888,
+          "text": "8.1 Upon payment, Crestline shall own all right, title and interest in the Deliverables.\n\n8.2 Supplier retains all rights in its pre-existing materials, tools and know-how (\"**Supplier Materials**\"). To the extent Supplier Materials are incorporated in a Deliverable, Supplier grants Crestline a non-exclusive, perpetual, royalty-free license to use them as part of such Deliverable.",
+          "differs": "Same as Crestline Retail Inc: specific deliverables vest in client upon payment while AtliQ retains its pre-existing tools and methodologies.",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "liability",
+      "docId": "syn-indus-sa",
+      "clauseRef": "§8",
+      "quote": "8.1 Each party's aggregate liability capped at total fees, except for breach of confidentiality, data protection or fraud.",
+      "hits": [
+        {
+          "docId": "rohan-ica",
+          "counterparty": "Rohan Iyer",
+          "date": "2025-04-28",
+          "clauseNo": "8",
+          "heading": "LIABILITY",
+          "label": "standard",
+          "labelNote": "Fair freelancer terms: 30-day pay, mutual cap, mutual 15-day exit",
+          "score": 0.924,
+          "text": "8.1 Each party's aggregate liability under this Agreement shall not exceed the total fees paid or payable to the Contractor in the twelve (12) months preceding the claim, except for breach of Clause 6 or fraud.\n\n8.2 Neither party is liable for indirect or consequential loss.",
+          "differs": "Worse for AtliQ than Rohan Iyer: adds an uncapped liability exception for data protection incidents and caps liability at total fees instead of twelve months.",
+          "alsoIn": []
+        },
+        {
+          "docId": "carebridge-baa",
+          "counterparty": "CareBridge Clinics Inc",
+          "date": "2025-10-06",
+          "clauseNo": "9",
+          "heading": "LIABILITY",
+          "label": "standard",
+          "labelNote": "Counsel-reviewed BAA (Calloway Stern, $3.8k): capped liability, 5-day reporting, de-identified offshore route",
+          "score": 0.891,
+          "text": "9.1 Each Party's liability arising out of or relating to this BAA, including any Breach, is subject to the limitations and exclusions of liability in the Master Services Agreement, under which aggregate liability for claims relating to a Breach or a violation of this BAA shall not exceed two (2) times the Fees paid or payable under the Master Services Agreement in the twelve (12) months preceding the event giving rise to the claim.",
+          "differs": "Worse for AtliQ than CareBridge Clinics Inc: liability for confidentiality, data protection, and fraud is completely uncapped rather than capped at two times annual fees.",
+          "alsoIn": []
+        },
+        {
+          "docId": "sunrise-msa",
+          "counterparty": "Sunrise Foods",
+          "date": "2025-04-18",
+          "clauseNo": "13",
+          "heading": "LIMITATION OF LIABILITY",
+          "label": "standard",
+          "labelNote": "AtliQ-friendly master: capped liability, service credits capped at 5%",
+          "score": 0.884,
+          "text": "13.1 Neither Party shall be liable for indirect, consequential or special losses or loss of profits.\n\n13.2 Each Party's aggregate liability under an SOW shall not exceed the Fees paid or payable under that SOW.",
+          "differs": "Worse for AtliQ than Sunrise Foods: introduces uncapped liability carve-outs for confidentiality, data protection, and fraud.",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "governing_law",
+      "docId": "syn-indus-sa",
+      "clauseRef": "§10",
+      "quote": "10.1 Laws of India. Arbitration seated at Pune under the Arbitration and Conciliation Act, 1996.",
+      "hits": [
+        {
+          "docId": "orbit-msa",
+          "counterparty": "Orbit Travels Pvt Ltd",
+          "date": "2022-07-01",
+          "clauseNo": "11",
+          "heading": "GOVERNING LAW AND DISPUTES",
+          "label": "untagged",
+          "score": 0.942,
+          "text": "11.1 This Agreernent shall be governed by the laws of India. Disputes shall be referred to a sole\narbitrator under the Arbitration and Conciliation Act, 1996. Seat of arbitration: New Delhi.\nCourts at New Delhi shall have jurisdiction.",
+          "differs": "Better for AtliQ than Orbit Travels Pvt Ltd: seat of arbitration is Pune instead of New Delhi.",
+          "alsoIn": [
+            "Sunrise Foods (2025-04)",
+            "Trustline NBFC (2026-08)"
+          ]
+        },
+        {
+          "docId": "paytrack-msa",
+          "counterparty": "PayTrack Technologies",
+          "date": "2025-01-22",
+          "clauseNo": "15",
+          "heading": "GOVERNING LAW AND DISPUTE RESOLUTION",
+          "label": "untagged",
+          "score": 0.932,
+          "text": "15.1 This Agreement shall be governed by the laws of India.\n\n15.2 Disputes not resolved by negotiation between senior management within thirty (30) days shall be referred to arbitration by a sole arbitrator under the Arbitration and Conciliation Act, 1996. The seat and venue of arbitration shall be Pune, and the language shall be English.",
+          "differs": "Better for AtliQ than PayTrack Technologies: allows immediate arbitration without requiring a mandatory thirty-day pre-arbitration negotiation period.",
+          "alsoIn": [
+            "Acme Retail Group (2025-03)"
+          ]
+        },
+        {
+          "docId": "cloudspan-spa",
+          "counterparty": "CloudSpan Technologies",
+          "date": "2025-09-01",
+          "clauseNo": "15",
+          "heading": "GOVERNING LAW AND DISPUTE RESOLUTION",
+          "label": "concession",
+          "labelNote": "Singapore law / SIAC accepted",
+          "score": 0.858,
+          "text": "15.1 This Agreement is governed by the laws of the Republic of Singapore.\n\n15.2 The Parties shall first attempt to resolve any dispute through good-faith discussions between senior executives for thirty (30) days.\n\n15.3 Any dispute not so resolved shall be referred to and finally resolved by arbitration administered by the Singapore International Arbitration Centre (\"**SIAC**\") under the SIAC Rules in force at the time. The seat of arbitration shall be Singapore. The tribunal shall consist of one (1) arbitrator. The language of arbitration shall be English.",
+          "differs": "Better for AtliQ than CloudSpan Technologies: governed by Indian law with arbitration in Pune instead of Singapore law and SIAC arbitration.",
+          "alsoIn": []
+        }
+      ]
+    }
+  ],
+  "counselPack": null,
+  "errors": [],
+  "usage": {
+    "calls": 6,
+    "cachedCalls": 0,
+    "inputTokens": 11040,
+    "outputTokens": 21196,
+    "ms": 68409
+  }
+}

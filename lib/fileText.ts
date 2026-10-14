@@ -158,7 +158,7 @@ function pageBlocks(items: Item[]): string[] {
   clean.forEach((l, i) => {
     const gap = i ? clean[i - 1].y - l.y : 0;
     const prev = i ? clean[i - 1].text : "";
-    const isHeading = (t: string) => t.length <= 90 && !/[.;:,]$/.test(t) && (HEADING.test(t) || !!titleHeading(t));
+    const isHeading = (t: string) => t.length <= 90 && !/[.;:,]$/.test(t) && (HEADING.test(t) || ATTACHMENT.test(t) || !!titleHeading(t));
     // A new clause number starts a block only after a finished sentence or a heading ("1600 West End Avenue" after "Inc.," does not).
     const numbered = /^(\d{1,2}(\.\d{1,2})*\.?|\([a-z0-9]{1,4}\)|[-•])\s/.test(l.text) && (/[.;:]$/.test(prev) || isHeading(prev));
     const startsNew = i === 0 || gap > typical * 1.35 || isHeading(l.text) || isHeading(prev) || numbered;
@@ -206,6 +206,8 @@ async function ocrPdf(bytes: Uint8Array): Promise<Omit<ReadFile, "pages">> {
 
 /** A numbered clause heading on its own line: "7. LIMITATION OF LIABILITY", "ARTICLE 7 — FEES", "Section 7 Fees". */
 const HEADING = /^(?:(\d{1,2})\.?\s+([A-Z][A-Z0-9 ,;&'()/\-–—]{2,80})|(?:ARTICLE|Article)\s+(\d{1,2})\s*[.:—–-]?\s*(.{2,80})|(?:Section|SECTION|§)\s*(\d{1,2})\.?\s+([A-Z].{2,80}))$/;
+/** "SCHEDULE 2 — MILESTONES", "Annex 3", "EXHIBIT A: RATE CARD": an attachment heading (the annex check looks for it). */
+const ATTACHMENT = /^(?:SCHEDULE|Schedule|ANNEX|Annex|ANNEXURE|Annexure|EXHIBIT|Exhibit|APPENDIX|Appendix|ATTACHMENT|Attachment)\s+[A-Z0-9]{1,4}\b(?:\s*[—–:.-]\s*.{1,80})?$/;
 /** "7. Fees. The Client shall pay …": an inline heading in Title Case followed by the clause text. */
 const INLINE_HEADING = /^(\d{1,2})\.\s+([A-Z][A-Za-z'’&/,\- ]{1,60}?)\.\s+(\S.*)$/;
 
@@ -225,6 +227,11 @@ export function toContractMarkdown(blocks: string[]): string {
       else if (titled && lost) out.push(`## ${lost[1]}. ${inner}`);
       else if (!titled) out.push(`# ${inner}`);
       else out.push(`## ${inner}`);
+      titled = true;
+      continue;
+    }
+    if (b.length <= 100 && ATTACHMENT.test(b)) {
+      out.push(`## ${b}`);
       titled = true;
       continue;
     }

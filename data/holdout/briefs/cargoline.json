@@ -1,0 +1,737 @@
+{
+  "dealId": "cargoline",
+  "version": 1,
+  "createdAt": "2026-10-14T01:59:16.915Z",
+  "trigger": "initial review",
+  "inputsHash": "81e50cd920c1c60146ff7b6ae074527d",
+  "documentIds": [
+    "syn-cargoline-msa"
+  ],
+  "registerVersion": "reg-2026-10-14-85+r0",
+  "playbookVersion": "pb-v1.1-2026-10-05",
+  "models": [
+    "gemini-flash-lite-latest",
+    "gemini-3.6-flash"
+  ],
+  "promptVersion": "p1",
+  "route": "full_review",
+  "verdict": "HOLD",
+  "headline": "HOLD: 1 missing schedule and 1 non-compete conflict need resolution",
+  "nextAction": "Karandeep will send the missing Schedule 2 request and entity correction to AtliQ's deal team and the counterparty.",
+  "findings": [
+    {
+      "key": "conflict:syn-falconridge-msa:non_compete",
+      "category": "conflict",
+      "topic": "non_compete",
+      "title": "Possible collision with Falconridge Logistics WLL: GCC logistics analytics non-compete for Protected Customers",
+      "impact": "Potentially collides with the Falconridge non-compete commitment (live through September 2029) if Cargoline is a Protected Customer, making the representation in Clause 8.1 untrue.",
+      "severity": "high",
+      "confidence": "low",
+      "needsJudgment": true,
+      "readings": [
+        "Reading 1: Cargoline Shipping WLL or its Affiliates are listed in Schedule 4 of the Falconridge agreement, bringing the services under the Falconridge non-compete commitment.",
+        "Reading 2: Neither Cargoline Shipping WLL nor its Affiliates are listed in Schedule 4, so the Falconridge non-compete restriction does not apply to this agreement."
+      ],
+      "owner": "counsel (via Karandeep)",
+      "resolution": "counsel",
+      "docId": "syn-cargoline-msa",
+      "citations": [
+        {
+          "docId": "syn-cargoline-msa",
+          "docTitle": "Cargoline Shipping MSA (draft)",
+          "clauseRef": "1.1",
+          "quote": "1.1 The Contractor shall provide a Fleet & Port Performance Analytics platform, comprising:\n\n(a) ingestion of AIS vessel-tracking data, terminal operating system data from Khalifa Bin Salman Port, and the Client's booking and container-tracking systems;\n\n(b) port-turnaround, berth-utilisation and container dwell-time analytics;\n\n(c) freight demand forecasting by lane (GCC, Indian subcontinent and East Africa); and\n\n(d) executive and operations dashboards",
+          "role": "incoming"
+        },
+        {
+          "docId": "syn-cargoline-msa",
+          "docTitle": "Cargoline Shipping MSA (draft)",
+          "clauseRef": "8.1",
+          "quote": "8.1 The Contractor represents that, as at the date of this Agreement, neither it nor any of its Affiliates is subject to any contractual restriction that would prevent or restrict it from providing the Services to the Client",
+          "role": "incoming"
+        },
+        {
+          "docId": "syn-falconridge-msa",
+          "docTitle": "Falconridge Logistics MSA",
+          "clauseRef": "§14.2",
+          "quote": "during the term of this Agreement and for twenty-four (24) months after its expiry or termination, the Supplier shall not, and shall procure that its Affiliates shall not, directly or indirectly, provide Logistics Analytics Services to any Protected Customer anywhere in the Territory, whether as contractor, subcontractor, partner or adviser",
+          "role": "register"
+        },
+        {
+          "docId": "syn-falconridge-msa",
+          "docTitle": "Falconridge Logistics MSA",
+          "clauseRef": "§1.1",
+          "quote": "Affiliate**\" means any entity that directly or indirectly controls, is controlled by, or is under common control with a party, including any parent, subsidiary or sister company wherever incorporated",
+          "role": "register"
+        },
+        {
+          "docId": "syn-falconridge-msa",
+          "docTitle": "Falconridge Logistics MSA",
+          "clauseRef": "§1.2",
+          "quote": "Logistics Analytics Services**\" means fleet utilisation, route optimisation, warehouse performance, port-turnaround, freight demand forecasting and similar data analytics or data engineering services for freight, shipping, warehousing or logistics operations",
+          "role": "register"
+        },
+        {
+          "docId": "syn-falconridge-msa",
+          "docTitle": "Falconridge Logistics MSA",
+          "clauseRef": "§1.3",
+          "quote": "Protected Customer**\" means each person listed in Schedule 4, and any of its Affiliates",
+          "role": "register"
+        }
+      ],
+      "counterPosition": "Verify Schedule 4 of the Falconridge MSA with counsel to confirm whether Cargoline Shipping WLL is a Protected Customer, and modify Clause 8.1 to acknowledge existing affiliate commitments.",
+      "registerEntryId": "syn-falconridge-msa#1",
+      "registerVerified": false,
+      "expiry": "2029-09-14",
+      "waiver": null
+    },
+    {
+      "key": "gate:annex:schedule-2",
+      "category": "gate",
+      "topic": "annex",
+      "title": "Missing: Schedule 2 (MILESTONES)",
+      "impact": "Schedule 2 is referenced as part of the agreement but isn't in the pack, so it hasn't been checked. The fine-print review of everything else still ran.",
+      "severity": "high",
+      "confidence": "high",
+      "needsJudgment": false,
+      "owner": "AtliQ's deal team",
+      "resolution": "document",
+      "docId": "syn-cargoline-msa",
+      "citations": [
+        {
+          "docId": "syn-cargoline-msa",
+          "docTitle": "Cargoline Shipping MSA (draft)",
+          "clauseRef": "2.1",
+          "quote": "payable per Schedule 2",
+          "role": "incoming"
+        }
+      ],
+      "missingItem": {
+        "item": "Schedule 2: MILESTONES",
+        "owner": "AtliQ's deal team"
+      }
+    },
+    {
+      "key": "gate:entity",
+      "category": "gate",
+      "topic": "entity",
+      "title": "Wrong AtliQ entity: Inc instead of Pvt Ltd",
+      "impact": "Names AtliQ Inc, but the client is in Bahrain: AtliQ Inc serves US clients only, so this should be AtliQ Pvt Ltd. The entity decides who invoices, the tax regime and the bank account; a mismatch caused two payment delays in 2025.",
+      "severity": "high",
+      "confidence": "high",
+      "needsJudgment": false,
+      "owner": "the other side",
+      "resolution": "document",
+      "docId": "syn-cargoline-msa",
+      "citations": [
+        {
+          "docId": "syn-cargoline-msa",
+          "docTitle": "Cargoline Shipping MSA (draft)",
+          "clauseRef": "Preamble",
+          "quote": "ATLIQ INC, a corporation incorporated in the State of Delaware, USA",
+          "role": "incoming"
+        }
+      ],
+      "standard": "AtliQ Inc contracts with US clients only; AtliQ Technologies Pvt Ltd with everyone else.",
+      "counterPosition": "Name AtliQ Pvt Ltd in the parties clause, invoicing clause and signature block."
+    },
+    {
+      "key": "playbook:termination",
+      "category": "playbook",
+      "topic": "termination",
+      "title": "Immediate termination and fee clawback for conflict of interest",
+      "impact": "AtliQ risks being forced to refund all fees collected for completed work if any contractual restriction arises during the agreement term.",
+      "severity": "high",
+      "confidence": "medium",
+      "needsJudgment": false,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "syn-cargoline-msa",
+      "citations": [
+        {
+          "docId": "syn-cargoline-msa",
+          "docTitle": "Cargoline Shipping MSA (draft)",
+          "clauseRef": "8.2",
+          "quote": "If such a restriction exists or arises, the Client may terminate this Agreement immediately and recover all amounts paid",
+          "role": "incoming"
+        }
+      ],
+      "standard": "On any termination for convenience AtliQ is paid for all work done, including work in progress. Notice is mutual. Client contracts: reasonable notice (typically 30+ days). Freelancer / vendor agreements: a mutual short exit (about 15 days, as with Rohan Iyer) is AtliQ's standard and fair to both sides.",
+      "counterPosition": "Delete the right to recover all amounts paid and specify that upon any termination AtliQ shall be paid for all services performed up to the termination date.",
+      "precedents": [
+        {
+          "docId": "rohan-ica",
+          "counterparty": "Rohan Iyer",
+          "clauseRef": "§9",
+          "label": "standard",
+          "note": "Mutual 15-day exit"
+        }
+      ]
+    },
+    {
+      "key": "gate:governing_law",
+      "category": "gate",
+      "topic": "governing_law",
+      "title": "Governing law: laws of the Kingdom of Bahrain",
+      "impact": "AtliQ's position is Indian law for AtliQ Technologies Pvt Ltd. Client law has been accepted before to win a deal (DIFC, English, Singapore): a judgment call, not a blocker.",
+      "severity": "medium",
+      "confidence": "high",
+      "needsJudgment": true,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "syn-cargoline-msa",
+      "citations": [
+        {
+          "docId": "syn-cargoline-msa",
+          "docTitle": "Cargoline Shipping MSA (draft)",
+          "clauseRef": "10.1",
+          "quote": "This Agreement is governed by the laws of the Kingdom of Bahrain",
+          "role": "incoming"
+        }
+      ],
+      "standard": "Indian law for Pvt Ltd; US law for Inc.",
+      "counterPosition": "Laws of India; arbitration seated in India or a neutral seat."
+    }
+  ],
+  "fine": [
+    "Parties = invoicing entity: Inc throughout",
+    "Payment ≤ 45 days: 45 days",
+    "Delay penalties capped: Cap 5% of milestone",
+    "Liability capped: Each party's aggregate liability is limited to the Contract Price",
+    "Delay penalties are 0.5% per week capped at 5% of the affected milestone fee, matching AtliQ's standard.",
+    "Aggregate liability is capped at 1x fees with standard carve-outs for fraud and wilful misconduct.",
+    "Deliverables vest upon payment and AtliQ retains background IP, matching AtliQ's standard.",
+    "Confidentiality is mutual with a standard 5-year duration.",
+    "No indemnity obligations are imposed on AtliQ.",
+    "Data protection compliance requirements align with standard expectations."
+  ],
+  "notSeen": [
+    "Commitments were checked against all 27 signed contracts on file. Contracts AtliQ hasn't uploaded can't be checked."
+  ],
+  "documents": [
+    {
+      "docId": "syn-cargoline-msa",
+      "title": "Cargoline Shipping MSA (draft)",
+      "docType": "MSA",
+      "paper": "client",
+      "route": "full_review",
+      "facts": [
+        {
+          "field": "docType",
+          "label": "Document type",
+          "value": "MSA"
+        },
+        {
+          "field": "parties",
+          "label": "Counterparty",
+          "value": "CARGOLINE SHIPPING W.L.L. (Bahrain)"
+        },
+        {
+          "field": "entity",
+          "label": "AtliQ entity (parties)",
+          "value": "Inc",
+          "clauseRef": "Preamble",
+          "quote": "ATLIQ INC, a corporation incorporated in the State of Delaware, USA"
+        },
+        {
+          "field": "invoicing",
+          "label": "AtliQ entity (invoicing)",
+          "value": "Inc",
+          "clauseRef": "2.2",
+          "quote": "Payment shall be made in USD to the Contractor's bank account in the United States"
+        },
+        {
+          "field": "law",
+          "label": "Governing law",
+          "value": "laws of the Kingdom of Bahrain",
+          "clauseRef": "10.1",
+          "quote": "This Agreement is governed by the laws of the Kingdom of Bahrain"
+        },
+        {
+          "field": "forum",
+          "label": "Forum",
+          "value": "Bahrain Chamber for Dispute Resolution",
+          "clauseRef": "10.1",
+          "quote": "Disputes shall be referred to the Bahrain Chamber for Dispute Resolution"
+        },
+        {
+          "field": "payment",
+          "label": "Payment",
+          "value": "45 days",
+          "clauseRef": "2.2",
+          "quote": "Invoices shall be paid within forty-five (45) days"
+        },
+        {
+          "field": "ld",
+          "label": "Delay penalties",
+          "value": "0.5% of milestone per week, cap 5% of milestone",
+          "clauseRef": "4.1",
+          "quote": "For Contractor-caused delay, the Client may deduct 0.5% of the affected milestone fee per week, capped at 5% of that milestone fee"
+        },
+        {
+          "field": "liability",
+          "label": "Liability",
+          "value": "Each party's aggregate liability is limited to the Contract Price · uncapped for fraud, wilful misconduct",
+          "clauseRef": "7.1",
+          "quote": "Each party's aggregate liability is limited to the Contract Price, except for fraud or wilful misconduct"
+        },
+        {
+          "field": "insurance",
+          "label": "Insurance required",
+          "value": "None"
+        },
+        {
+          "field": "annexes",
+          "label": "Annexes referenced",
+          "value": "Schedule 2"
+        },
+        {
+          "field": "scope",
+          "label": "Sectors · regions",
+          "value": "logistics · Bahrain, GCC"
+        },
+        {
+          "field": "data",
+          "label": "Data handled",
+          "value": "personal_data"
+        }
+      ],
+      "gate": [
+        {
+          "rule": "entity",
+          "label": "Correct AtliQ entity",
+          "pass": false,
+          "detail": "Names AtliQ Inc, but the client is in Bahrain: AtliQ Inc serves US clients only, so this should be AtliQ Pvt Ltd.",
+          "citation": {
+            "docId": "syn-cargoline-msa",
+            "docTitle": "Cargoline Shipping MSA (draft)",
+            "clauseRef": "Preamble",
+            "quote": "ATLIQ INC, a corporation incorporated in the State of Delaware, USA",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "invoicing_entity",
+          "label": "Parties = invoicing entity",
+          "pass": true,
+          "detail": "Inc throughout",
+          "citation": {
+            "docId": "syn-cargoline-msa",
+            "docTitle": "Cargoline Shipping MSA (draft)",
+            "clauseRef": "2.2",
+            "quote": "Payment shall be made in USD to the Contractor's bank account in the United States",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "governing_law",
+          "label": "Governing law matches entity",
+          "pass": false,
+          "detail": "laws of the Kingdom of Bahrain (Pvt Ltd → Indian law)",
+          "citation": {
+            "docId": "syn-cargoline-msa",
+            "docTitle": "Cargoline Shipping MSA (draft)",
+            "clauseRef": "10.1",
+            "quote": "This Agreement is governed by the laws of the Kingdom of Bahrain",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "payment",
+          "label": "Payment ≤ 45 days",
+          "pass": true,
+          "detail": "45 days",
+          "citation": {
+            "docId": "syn-cargoline-msa",
+            "docTitle": "Cargoline Shipping MSA (draft)",
+            "clauseRef": "2.2",
+            "quote": "Invoices shall be paid within forty-five (45) days",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "ld_cap",
+          "label": "Delay penalties capped",
+          "pass": true,
+          "detail": "Cap 5% of milestone",
+          "citation": {
+            "docId": "syn-cargoline-msa",
+            "docTitle": "Cargoline Shipping MSA (draft)",
+            "clauseRef": "4.1",
+            "quote": "For Contractor-caused delay, the Client may deduct 0.5% of the affected milestone fee per week, capped at 5% of that milestone fee",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "liability_cap",
+          "label": "Liability capped",
+          "pass": true,
+          "detail": "Each party's aggregate liability is limited to the Contract Price",
+          "citation": {
+            "docId": "syn-cargoline-msa",
+            "docTitle": "Cargoline Shipping MSA (draft)",
+            "clauseRef": "7.1",
+            "quote": "Each party's aggregate liability is limited to the Contract Price, except for fraud or wilful misconduct",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "annex:schedule-2",
+          "label": "Schedule 2 attached",
+          "pass": false,
+          "detail": "MILESTONES: referenced but not attached",
+          "citation": {
+            "docId": "syn-cargoline-msa",
+            "docTitle": "Cargoline Shipping MSA (draft)",
+            "clauseRef": "2.1",
+            "quote": "payable per Schedule 2",
+            "role": "incoming"
+          }
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "bundle": [],
+  "notesFacts": [
+    {
+      "id": "cargoline-fact-1",
+      "statement": "The deal is marked as needed ASAP for approximately $92k in Bahrain.",
+      "category": "deadline",
+      "noteId": "note-2026-09-26-pipeline_review_new_queu",
+      "noteTitle": "Pipeline review — \"the second queue\" (Sat 26 Sep, call)",
+      "quote": "Cargoline (Bhavin) — ~$92k, Bahrain — \"ASAP",
+      "complianceEvent": false,
+      "whyItMatters": "Confirms the deal urgency, value, and geographic scope."
+    },
+    {
+      "id": "cargoline-fact-2",
+      "statement": "Bhavin asserts that Falconridge's restrictions apply to Qatar, so contracting with Cargoline in Bahrain is permissible.",
+      "category": "other",
+      "noteId": "note-2026-09-26-pipeline_review_new_queu",
+      "noteTitle": "Pipeline review — \"the second queue\" (Sat 26 Sep, call)",
+      "quote": "Falconridge restriction is Qatar — Cargoline is Bahrain, so we're fine",
+      "complianceEvent": false,
+      "whyItMatters": "Requires confirmation against the Falconridge contract terms to ensure there are no exclusivity or geographic restriction conflicts."
+    },
+    {
+      "id": "cargoline-fact-3",
+      "statement": "Tracker confirms the MSA status as ASAP and notes Falconridge restriction scope.",
+      "category": "deadline",
+      "noteId": "tracker",
+      "noteTitle": "Tracker notes",
+      "quote": "SYN-117 (MSA): ASAP. Bhavin: Falconridge is Qatar so fine",
+      "complianceEvent": false,
+      "whyItMatters": "Confirms tracker timeline and reliance on the Falconridge exclusivity analysis."
+    }
+  ],
+  "complianceCandidate": null,
+  "similar": [
+    {
+      "clauseType": "ld",
+      "docId": "syn-cargoline-msa",
+      "clauseRef": "§4",
+      "quote": "4.1 For Contractor-caused delay, the Client may deduct 0.5% of the affected milestone fee per week, capped at 5% of that milestone fee.",
+      "hits": [
+        {
+          "docId": "acme-msa",
+          "counterparty": "Acme Retail Group",
+          "date": "2025-03-10",
+          "clauseNo": "7",
+          "heading": "DELAY AND LIQUIDATED DAMAGES",
+          "label": "standard",
+          "labelNote": "Origin of the LD playbook: 0.5% of milestone/week, 5% cap, client delays excluded (Mar 2025)",
+          "score": 0.906,
+          "text": "7.1 If the Service Provider fails to complete a Milestone by the agreed date for reasons solely attributable to the Service Provider, the Service Provider shall pay liquidated damages at the rate of 0.5% (half percent) of the Milestone Fee of the delayed Milestone for each complete week of delay.\n\n7.2 The aggregate liquidated damages in respect of any Milestone shall not exceed 5% (five percent) of the Milestone Fee of that Milestone.\n\n7.3 No liquidated damages shall be payable where the delay is caused by the Client, including delayed access to data or systems, delayed review of Deliverables, or changes in scope, or by a Force Majeure event.\n\n7.4 The Parties agree that the liquidated damages are a genuine pre-estimate of loss and shall be the Client's sole and exclusive remedy for delay.",
+          "differs": "Worse for AtliQ than Acme Retail Group: same 0.5% weekly rate capped at 5%, but lacks Acme's explicit exclusions for client-caused delays.",
+          "alsoIn": [
+            "Trustline NBFC (2026-08)",
+            "Northwind Logistics (2025-06)"
+          ]
+        },
+        {
+          "docId": "brightwater-msa",
+          "counterparty": "Brightwater Insurance Inc",
+          "date": "2025-11-28",
+          "clauseNo": "9",
+          "heading": "DELAY AND LIQUIDATED DAMAGES",
+          "label": "accident",
+          "labelNote": "Signed on a phone in 4 minutes: 1%/day uncapped LDs, no client-delay exclusion, group set-off, English law on a US entity. Cost $9k + $14.2k legal",
+          "score": 0.867,
+          "text": "9.1 If the Supplier fails to achieve any Key Date, the Supplier shall pay to the Customer liquidated damages in the amount of one per cent (1%) of the Contract Value for each day or part day by which the relevant Key Date is missed.\n\n9.2 Liquidated damages under clause 9.1 shall be payable in addition to any other right or remedy available to the Customer under this Agreement or at law, and the Customer may deduct such liquidated damages from any sums due to the Supplier.\n\n9.3 The Supplier acknowledges that the liquidated damages set out in this clause 9 are proportionate to the Customer's legitimate interest in the timely delivery of the Services.",
+          "differs": "Better for AtliQ than Brightwater Insurance Inc: 0.5% per week capped at 5% of milestone fee, versus 1% of total contract value per day uncapped.",
+          "alsoIn": []
+        },
+        {
+          "docId": "alnoor-msa",
+          "counterparty": "Al Noor Hospitality Group",
+          "date": "2025-03-15",
+          "clauseNo": "10",
+          "heading": "DELIVERY, ACCEPTANCE AND LIQUIDATED DAMAGES",
+          "label": "exception",
+          "labelNote": "One-off: \"strategic exception for Al Noor only, not our new standard\" (cap 10% of total fees)",
+          "score": 0.856,
+          "text": "10.1 The Supplier shall use all reasonable endeavours to achieve each Milestone by the date set out in the relevant SOW.\n\n10.2 Each Deliverable shall be subject to acceptance testing by the Client within ten (10) Business Days of delivery against the acceptance criteria in the SOW. Deliverables not rejected in writing within that period shall be deemed accepted.\n\n10.3 If the Supplier fails to achieve a Milestone by its due date for reasons attributable to the Supplier, the Supplier shall pay to the Client, as liquidated damages, one percent (1%) of the Fees payable for the affected Milestone for each complete week of delay, provided that the aggregate liquidated damages payable under this Agreement shall not exceed ten percent (10%) of the total Fees payable under this Agreement.\n\n10.4 The Parties agree that the liquidated damages in Clause 10.3 are a genuine pre-estimate of loss. No liquidated damages shall be payable for delay caused by the Client, its contractors, or a Force Majeure Event.",
+          "differs": "Better for AtliQ than Al Noor Hospitality Group: penalty is 0.5% per week capped at 5% of milestone fee, instead of 1% uncapped.",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "ip",
+      "docId": "syn-cargoline-msa",
+      "clauseRef": "§6",
+      "quote": "6.1 Deliverables vest in the Client on payment. The Contractor retains pre-existing materials, licensed to the Client perpetually and non-exclusively.",
+      "hits": [
+        {
+          "docId": "orbit-msa",
+          "counterparty": "Orbit Travels Pvt Ltd",
+          "date": "2022-07-01",
+          "clauseNo": "5",
+          "heading": "INTELLECTUAL PR0PERTY",
+          "label": "untagged",
+          "score": 0.937,
+          "text": "5.1 All deliverables developed specifically for the Client shall be the property of the Client\nupon full payment. The Service Provider retains its pre-existing tools and know-how.",
+          "differs": "Same as Orbit Travels Pvt Ltd: deliverables transfer upon payment while pre-existing materials are retained by AtliQ.",
+          "alsoIn": [
+            "Al Noor Hospitality Group (2025-03)",
+            "Trustline NBFC (2026-08)",
+            "Acme Retail Group (2025-03)"
+          ]
+        },
+        {
+          "docId": "rohan-ica",
+          "counterparty": "Rohan Iyer",
+          "date": "2025-04-28",
+          "clauseNo": "5",
+          "heading": "INTELLECTUAL PROPERTY",
+          "label": "accident",
+          "labelNote": "Rohan kept the Work Product IP (\"ok\" from phone) while Acme was promised ownership",
+          "score": 0.895,
+          "text": "5.1 In this Clause, \"**Work Product**\" means all dashboards, reports, data models, DAX measures, Power Query scripts, visual templates, documentation and other materials created by the Contractor in performing the Services.\n\n5.2 The Contractor retains ownership of all intellectual property rights in the Work Product and in any pre-existing materials, components and templates of the Contractor.\n\n5.3 The Contractor grants AtliQ a non-exclusive, perpetual, irrevocable, royalty-free, worldwide licence to use, copy, modify and deploy the Work Product for the purposes of AtliQ's business, including for delivery to AtliQ's clients.\n\n5.4 The Contractor shall not incorporate into the Work Product any third-party material that AtliQ is not entitled to use under Clause 5.3.",
+          "differs": "Worse for AtliQ than Rohan Iyer: ownership of deliverables transfers to the client upon payment, rather than AtliQ retaining full ownership.",
+          "alsoIn": []
+        },
+        {
+          "docId": "crestline-msa",
+          "counterparty": "Crestline Retail Inc",
+          "date": "2024-08-01",
+          "clauseNo": "8",
+          "heading": "INTELLECTUAL PROPERTY",
+          "label": "untagged",
+          "score": 0.909,
+          "text": "8.1 Upon payment, Crestline shall own all right, title and interest in the Deliverables.\n\n8.2 Supplier retains all rights in its pre-existing materials, tools and know-how (\"**Supplier Materials**\"). To the extent Supplier Materials are incorporated in a Deliverable, Supplier grants Crestline a non-exclusive, perpetual, royalty-free license to use them as part of such Deliverable.",
+          "differs": "Same as Crestline Retail Inc: deliverables transfer to the client upon payment while AtliQ retains pre-existing materials under a non-exclusive perpetual license.",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "liability",
+      "docId": "syn-cargoline-msa",
+      "clauseRef": "§7",
+      "quote": "7.1 Each party's aggregate liability is limited to the Contract Price, except for fraud or wilful misconduct.",
+      "hits": [
+        {
+          "docId": "rohan-ica",
+          "counterparty": "Rohan Iyer",
+          "date": "2025-04-28",
+          "clauseNo": "8",
+          "heading": "LIABILITY",
+          "label": "standard",
+          "labelNote": "Fair freelancer terms: 30-day pay, mutual cap, mutual 15-day exit",
+          "score": 0.906,
+          "text": "8.1 Each party's aggregate liability under this Agreement shall not exceed the total fees paid or payable to the Contractor in the twelve (12) months preceding the claim, except for breach of Clause 6 or fraud.\n\n8.2 Neither party is liable for indirect or consequential loss.",
+          "differs": "Worse for AtliQ than Rohan Iyer: liability is capped at the total contract price without excluding indirect or consequential damages.",
+          "alsoIn": []
+        },
+        {
+          "docId": "paytrack-msa",
+          "counterparty": "PayTrack Technologies",
+          "date": "2025-01-22",
+          "clauseNo": "11",
+          "heading": "LIMITATION OF LIABILITY",
+          "label": "untagged",
+          "score": 0.905,
+          "text": "11.1 Neither Party shall be liable for any indirect, special, incidental or consequential damages, or loss of profits, revenue or goodwill.\n\n11.2 Each Party's total aggregate liability under or in connection with this Agreement shall not exceed the total fees paid or payable under the SOW giving rise to the claim.\n\n11.3 The limitations in this Clause 11 shall not apply to liability for fraud or wilful misconduct.",
+          "differs": "Worse for AtliQ than PayTrack Technologies: liability is limited to the contract price but lacks an exclusion for indirect and consequential damages.",
+          "alsoIn": [
+            "Northwind Logistics (2025-06)",
+            "Al Noor Hospitality Group (2025-03)",
+            "Trustline NBFC (2026-08)",
+            "CloudSpan Technologies (2025-09)",
+            "Acme Retail Group (2025-03)"
+          ]
+        },
+        {
+          "docId": "sunrise-msa",
+          "counterparty": "Sunrise Foods",
+          "date": "2025-04-18",
+          "clauseNo": "13",
+          "heading": "LIMITATION OF LIABILITY",
+          "label": "standard",
+          "labelNote": "AtliQ-friendly master: capped liability, service credits capped at 5%",
+          "score": 0.869,
+          "text": "13.1 Neither Party shall be liable for indirect, consequential or special losses or loss of profits.\n\n13.2 Each Party's aggregate liability under an SOW shall not exceed the Fees paid or payable under that SOW.",
+          "differs": "Worse for AtliQ than Sunrise Foods: liability cap covers total contract price but does not exclude indirect, consequential, or lost profit damages.",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "data_protection",
+      "docId": "syn-cargoline-msa",
+      "clauseRef": "§9",
+      "quote": "9.1 The Contractor shall comply with Bahrain Law No. 30 of 2018 (Personal Data Protection Law).",
+      "hits": [
+        {
+          "docId": "acme-msa",
+          "counterparty": "Acme Retail Group",
+          "date": "2025-03-10",
+          "clauseNo": "13",
+          "heading": "DATA PROTECTION",
+          "label": "untagged",
+          "score": 0.887,
+          "text": "13.1 The Service Provider shall process personal data received from the Client only for the purpose of the Services and in compliance with the Digital Personal Data Protection Act, 2023 and the rules made thereunder, as and when in force, and shall implement reasonable security practices.",
+          "differs": "Worse for AtliQ than Acme Retail Group: mandates compliance with Bahrain data protection law instead of India's Digital Personal Data Protection Act 2023.",
+          "alsoIn": []
+        },
+        {
+          "docId": "sunrise-msa",
+          "counterparty": "Sunrise Foods",
+          "date": "2025-04-18",
+          "clauseNo": "14",
+          "heading": "DATA PROTECTION",
+          "label": "untagged",
+          "score": 0.883,
+          "text": "14.1 AtliQ shall comply with the Information Technology Act, 2000, the rules thereunder, and the Digital Personal Data Protection Act, 2023 to the extent applicable, in relation to any personal data of distributors or employees processed in performing the Services.",
+          "differs": "Worse for AtliQ than Sunrise Foods: requires compliance with Bahrain data protection law rather than Indian data protection laws.",
+          "alsoIn": []
+        },
+        {
+          "docId": "northwind-msa",
+          "counterparty": "Northwind Logistics",
+          "date": "2025-06-20",
+          "clauseNo": "14",
+          "heading": "DATA PROTECTION",
+          "label": "untagged",
+          "score": 0.876,
+          "text": "14.1 Each party shall comply with the UK GDPR and the Data Protection Act 2018. To the extent the Supplier processes personal data on behalf of the Client, it shall do so only on the Client's documented instructions and in accordance with the data processing terms in Schedule 3.\n\n14.2 Any transfer of personal data to India shall be made subject to the UK International Data Transfer Addendum to the EU Standard Contractual Clauses.",
+          "differs": "Better for AtliQ than Northwind Logistics: requires compliance with Bahrain data law only, avoiding UK GDPR rules, documented instruction limits, and transfer addenda.",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "governing_law",
+      "docId": "syn-cargoline-msa",
+      "clauseRef": "§10",
+      "quote": "10.1 This Agreement is governed by the laws of the Kingdom of Bahrain. Disputes shall be referred to the Bahrain Chamber for Dispute Resolution.\n\nSCHEDULE 2 — MILESTONES\n\nMilestone Description Fee (USD equiv.) Target\n\nM1 Discovery and architecture 13,800 Start + 4 weeks\n\nM2 AIS, TOS and booking ingestion 32,200 Start + 11 weeks\n\nM3 Port and lane analytics; forecasting 27,600 Start + 17 weeks\n\nM4 Dashboards, go-live 18,400 Start + 20 weeks\n\nTotal 92,000\n\nSIGNATURES\n\nFor CARGOLINE SHIPPING W.L.L.\n\nName: Fatima Al-Jishi\n\nTitle: General Manager, Commercial\n\nSignature: ______________ Date: __________\n\nFor ATLIQ INC\n\nName: ______________ Title: ______________\n\nSignature: ______________ Date: _____",
+      "hits": [
+        {
+          "docId": "alnoor-msa",
+          "counterparty": "Al Noor Hospitality Group",
+          "date": "2025-03-15",
+          "clauseNo": "21",
+          "heading": "GOVERNING LAW AND DISPUTE RESOLUTION",
+          "label": "concession",
+          "labelNote": "DIFC law accepted as the client's group standard",
+          "score": 0.863,
+          "text": "21.1 This Agreement and any non-contractual obligations arising out of it shall be governed by the laws of the Dubai International Financial Centre.\n\n21.2 The Parties shall first attempt to resolve any dispute through good-faith negotiation between senior executives for thirty (30) days.\n\n21.3 Failing resolution, the courts of the Dubai International Financial Centre shall have exclusive jurisdiction.",
+          "differs": "Worse for AtliQ than Al Noor Hospitality Group: governs under Bahrain law and BCDR without a mandatory 30-day good-faith executive negotiation period.",
+          "alsoIn": []
+        },
+        {
+          "docId": "cloudspan-spa",
+          "counterparty": "CloudSpan Technologies",
+          "date": "2025-09-01",
+          "clauseNo": "15",
+          "heading": "GOVERNING LAW AND DISPUTE RESOLUTION",
+          "label": "concession",
+          "labelNote": "Singapore law / SIAC accepted",
+          "score": 0.848,
+          "text": "15.1 This Agreement is governed by the laws of the Republic of Singapore.\n\n15.2 The Parties shall first attempt to resolve any dispute through good-faith discussions between senior executives for thirty (30) days.\n\n15.3 Any dispute not so resolved shall be referred to and finally resolved by arbitration administered by the Singapore International Arbitration Centre (\"**SIAC**\") under the SIAC Rules in force at the time. The seat of arbitration shall be Singapore. The tribunal shall consist of one (1) arbitrator. The language of arbitration shall be English.",
+          "differs": "Worse for AtliQ than CloudSpan Technologies: subjects disputes to Bahrain law and BCDR directly, lacking a 30-day executive negotiation period prior to proceedings.",
+          "alsoIn": []
+        },
+        {
+          "docId": "northwind-msa",
+          "counterparty": "Northwind Logistics",
+          "date": "2025-06-20",
+          "clauseNo": "17",
+          "heading": "GOVERNING LAW AND DISPUTE RESOLUTION",
+          "label": "concession",
+          "labelNote": "English law + LCIA: \"not worth losing the deal over\"",
+          "score": 0.832,
+          "text": "17.1 This Agreement and any dispute or claim (including non-contractual disputes or claims) arising out of or in connection with it shall be governed by the law of England and Wales.\n\n17.2 Any dispute arising out of or in connection with this Agreement shall be referred to and finally resolved by arbitration under the LCIA Rules. The number of arbitrators shall be one. The seat of arbitration shall be London. The language of the arbitration shall be English.",
+          "differs": "Worse for AtliQ than Northwind Logistics: governed by Bahrain law and BCDR rather than English law and neutral LCIA international arbitration in London.",
+          "alsoIn": []
+        }
+      ]
+    }
+  ],
+  "counselPack": {
+    "question": "Possible collision with Falconridge Logistics WLL: GCC logistics analytics non-compete for Protected Customers: which reading applies? (a) Reading 1: Cargoline Shipping WLL or its Affiliates are listed in Schedule 4 of the Falconridge agreement, bringing the services under the Falconridge non-compete commitment. (b) Reading 2: Neither Cargoline Shipping WLL nor its Affiliates are listed in Schedule 4, so the Falconridge non-compete restriction does not apply to this agreement.",
+    "documents": [
+      "Cargoline Shipping MSA (draft)",
+      "Falconridge Logistics MSA"
+    ],
+    "clauses": [
+      {
+        "docId": "syn-cargoline-msa",
+        "docTitle": "Cargoline Shipping MSA (draft)",
+        "clauseRef": "1.1",
+        "quote": "1.1 The Contractor shall provide a Fleet & Port Performance Analytics platform, comprising:\n\n(a) ingestion of AIS vessel-tracking data, terminal operating system data from Khalifa Bin Salman Port, and the Client's booking and container-tracking systems;\n\n(b) port-turnaround, berth-utilisation and container dwell-time analytics;\n\n(c) freight demand forecasting by lane (GCC, Indian subcontinent and East Africa); and\n\n(d) executive and operations dashboards",
+        "role": "incoming"
+      },
+      {
+        "docId": "syn-cargoline-msa",
+        "docTitle": "Cargoline Shipping MSA (draft)",
+        "clauseRef": "8.1",
+        "quote": "8.1 The Contractor represents that, as at the date of this Agreement, neither it nor any of its Affiliates is subject to any contractual restriction that would prevent or restrict it from providing the Services to the Client",
+        "role": "incoming"
+      },
+      {
+        "docId": "syn-falconridge-msa",
+        "docTitle": "Falconridge Logistics MSA",
+        "clauseRef": "§14.2",
+        "quote": "during the term of this Agreement and for twenty-four (24) months after its expiry or termination, the Supplier shall not, and shall procure that its Affiliates shall not, directly or indirectly, provide Logistics Analytics Services to any Protected Customer anywhere in the Territory, whether as contractor, subcontractor, partner or adviser",
+        "role": "register"
+      },
+      {
+        "docId": "syn-falconridge-msa",
+        "docTitle": "Falconridge Logistics MSA",
+        "clauseRef": "§1.1",
+        "quote": "Affiliate**\" means any entity that directly or indirectly controls, is controlled by, or is under common control with a party, including any parent, subsidiary or sister company wherever incorporated",
+        "role": "register"
+      },
+      {
+        "docId": "syn-falconridge-msa",
+        "docTitle": "Falconridge Logistics MSA",
+        "clauseRef": "§1.2",
+        "quote": "Logistics Analytics Services**\" means fleet utilisation, route optimisation, warehouse performance, port-turnaround, freight demand forecasting and similar data analytics or data engineering services for freight, shipping, warehousing or logistics operations",
+        "role": "register"
+      },
+      {
+        "docId": "syn-falconridge-msa",
+        "docTitle": "Falconridge Logistics MSA",
+        "clauseRef": "§1.3",
+        "quote": "Protected Customer**\" means each person listed in Schedule 4, and any of its Affiliates",
+        "role": "register"
+      }
+    ],
+    "entityFacts": [
+      "AtliQ Technologies Pvt Ltd (India): serves India, Middle East, Europe, Rest of world (outside the US)",
+      "AtliQ Inc (USA): serves USA",
+      "Delivery teams for both entities sit in Pune. AtliQ Inc sub-contracts delivery to AtliQ Technologies Pvt Ltd under an intercompany agreement (not in the dataset)."
+    ]
+  },
+  "errors": [],
+  "usage": {
+    "calls": 6,
+    "cachedCalls": 0,
+    "inputTokens": 10285,
+    "outputTokens": 25048,
+    "ms": 65353
+  }
+}

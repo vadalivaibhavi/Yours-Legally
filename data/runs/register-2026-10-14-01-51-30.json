@@ -1,0 +1,238 @@
+{
+  "script": "buildRegister",
+  "at": "2026-10-14T01:51:30.354Z",
+  "models": [
+    "gemini-3.6-flash",
+    "gemini-flash-latest",
+    "gemini-3.8-flash",
+    "gemini-3.7-flash",
+    "gemini-3-flash-preview",
+    "gemini-3.5-flash"
+  ],
+  "documents": 27,
+  "entries": 85,
+  "dropped": 2,
+  "calls": 10,
+  "cachedCalls": 17,
+  "inputTokens": 22283,
+  "outputTokens": 76424,
+  "seconds": 180,
+  "perDoc": [
+    {
+      "docId": "acme-msa",
+      "ms": 8,
+      "model": "gemini-3.5-flash",
+      "cached": true,
+      "inputTokens": 3088,
+      "outputTokens": 5790
+    },
+    {
+      "docId": "alnoor-msa",
+      "ms": 11,
+      "model": "gemini-3.5-flash",
+      "cached": true,
+      "inputTokens": 4896,
+      "outputTokens": 19536
+    },
+    {
+      "docId": "alnoor-nda",
+      "ms": 7,
+      "model": "gemini-flash-latest",
+      "cached": true,
+      "inputTokens": 2085,
+      "outputTokens": 8850
+    },
+    {
+      "docId": "alnoor-waiver",
+      "ms": 8,
+      "model": "gemini-3.5-flash",
+      "cached": true,
+      "inputTokens": 1528,
+      "outputTokens": 9194
+    },
+    {
+      "docId": "brightwater-msa",
+      "ms": 8,
+      "model": "gemini-3.5-flash",
+      "cached": true,
+      "inputTokens": 3429,
+      "outputTokens": 15810
+    },
+    {
+      "docId": "carebridge-baa",
+      "ms": 7,
+      "model": "gemini-3.5-flash",
+      "cached": true,
+      "inputTokens": 3753,
+      "outputTokens": 7289
+    },
+    {
+      "docId": "cloudspan-spa",
+      "ms": 7,
+      "model": "gemini-3.5-flash",
+      "cached": true,
+      "inputTokens": 3979,
+      "outputTokens": 11975
+    },
+    {
+      "docId": "crestline-msa",
+      "ms": 11,
+      "model": "gemini-3.5-flash",
+      "cached": true,
+      "inputTokens": 3313,
+      "outputTokens": 13129
+    },
+    {
+      "docId": "harrington-nda",
+      "ms": 7,
+      "model": "gemini-3.5-flash",
+      "cached": true,
+      "inputTokens": 2032,
+      "outputTokens": 4959
+    },
+    {
+      "docId": "ic-baa",
+      "ms": 8,
+      "model": "gemini-3.5-flash",
+      "cached": true,
+      "inputTokens": 2289,
+      "outputTokens": 8771
+    },
+    {
+      "docId": "meridian-nda",
+      "ms": 7,
+      "model": "gemini-3.5-flash",
+      "cached": true,
+      "inputTokens": 1953,
+      "outputTokens": 6489
+    },
+    {
+      "docId": "northwind-msa",
+      "ms": 6,
+      "model": "gemini-3.5-flash",
+      "cached": true,
+      "inputTokens": 3804,
+      "outputTokens": 12657
+    },
+    {
+      "docId": "orbit-msa",
+      "ms": 24,
+      "model": "gemini-3.5-flash",
+      "cached": true,
+      "inputTokens": 2024,
+      "outputTokens": 4285
+    },
+    {
+      "docId": "paytrack-msa",
+      "ms": 7,
+      "model": "gemini-3.5-flash",
+      "cached": true,
+      "inputTokens": 2946,
+      "outputTokens": 9528
+    },
+    {
+      "docId": "rohan-ica",
+      "ms": 8,
+      "model": "gemini-3.5-flash",
+      "cached": true,
+      "inputTokens": 2432,
+      "outputTokens": 3792
+    },
+    {
+      "docId": "sunrise-msa",
+      "ms": 11,
+      "model": "gemini-3.5-flash",
+      "cached": true,
+      "inputTokens": 3027,
+      "outputTokens": 3391
+    },
+    {
+      "docId": "syn-ashwood-baa",
+      "ms": 37980,
+      "model": "gemini-3.6-flash",
+      "cached": false,
+      "inputTokens": 2082,
+      "outputTokens": 8838
+    },
+    {
+      "docId": "syn-corvina-msa",
+      "ms": 34687,
+      "model": "gemini-3.6-flash",
+      "cached": false,
+      "inputTokens": 2144,
+      "outputTokens": 7819
+    },
+    {
+      "docId": "syn-falconridge-msa",
+      "ms": 20579,
+      "model": "gemini-3.6-flash",
+      "cached": false,
+      "inputTokens": 2257,
+      "outputTokens": 4344
+    },
+    {
+      "docId": "syn-halvorsen-nda",
+      "ms": 20607,
+      "model": "gemini-3.6-flash",
+      "cached": false,
+      "inputTokens": 1603,
+      "outputTokens": 4578
+    },
+    {
+      "docId": "syn-kestrel-msa",
+      "ms": 30030,
+      "model": "gemini-3.6-flash",
+      "cached": false,
+      "inputTokens": 2840,
+      "outputTokens": 6555
+    },
+    {
+      "docId": "syn-lumen-msa",
+      "ms": 38471,
+      "model": "gemini-3.6-flash",
+      "cached": false,
+      "inputTokens": 2246,
+      "outputTokens": 8717
+    },
+    {
+      "docId": "syn-meridale-msa",
+      "ms": 48438,
+      "model": "gemini-3.6-flash",
+      "cached": false,
+      "inputTokens": 2384,
+      "outputTokens": 10446
+    },
+    {
+      "docId": "syn-novaterra-msa",
+      "ms": 32539,
+      "model": "gemini-3.6-flash",
+      "cached": false,
+      "inputTokens": 2550,
+      "outputTokens": 7367
+    },
+    {
+      "docId": "syn-tessellate-vsa",
+      "ms": 26429,
+      "model": "gemini-3.6-flash",
+      "cached": false,
+      "inputTokens": 2070,
+      "outputTokens": 5267
+    },
+    {
+      "docId": "syn-zephyr-spa",
+      "ms": 53768,
+      "model": "gemini-3.6-flash",
+      "cached": false,
+      "inputTokens": 2107,
+      "outputTokens": 12493
+    },
+    {
+      "docId": "trustline-msa",
+      "ms": 8,
+      "model": "gemini-3.5-flash",
+      "cached": true,
+      "inputTokens": 2875,
+      "outputTokens": 7542
+    }
+  ]
+}

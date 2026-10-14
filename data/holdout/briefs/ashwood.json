@@ -1,0 +1,424 @@
+{
+  "dealId": "ashwood",
+  "version": 1,
+  "createdAt": "2026-10-14T01:58:11.562Z",
+  "trigger": "initial review",
+  "inputsHash": "3c7bf83fcbb17f1cc336fc11bc2871bb",
+  "documentIds": [
+    "syn-ashwood-sow3"
+  ],
+  "registerVersion": "reg-2026-10-14-85+r0",
+  "playbookVersion": "pb-v1.1-2026-10-05",
+  "models": [
+    "gemini-flash-lite-latest",
+    "gemini-3.6-flash"
+  ],
+  "promptVersion": "p1",
+  "route": "full_review",
+  "verdict": "HOLD",
+  "headline": "HOLD: 4 missing documents require resolution before proceeding",
+  "nextAction": "AtliQ's deal team must obtain the missing MSA, NDA, and written client consent for subcontracting.",
+  "findings": [
+    {
+      "category": "bundle",
+      "topic": "bundle",
+      "confidence": "high",
+      "needsJudgment": false,
+      "key": "bundle:msa:client",
+      "title": "Missing MSA with Ashwood Senior Living Inc",
+      "impact": "US healthcare work needs NDA + MSA + BAA before any patient data moves (HIPAA: every business associate and subcontractor needs a written BAA before PHI access. AtliQ Inc delivers through Pvt Ltd (Pune), which is itself a subcontractor.)",
+      "severity": "high",
+      "owner": "AtliQ's deal team",
+      "resolution": "document",
+      "citations": [],
+      "missingItem": {
+        "item": "MSA with Ashwood Senior Living Inc",
+        "owner": "AtliQ's deal team"
+      }
+    },
+    {
+      "category": "bundle",
+      "topic": "bundle",
+      "confidence": "high",
+      "needsJudgment": false,
+      "key": "bundle:nda:client",
+      "title": "Missing NDA with Ashwood Senior Living Inc",
+      "impact": "US healthcare work needs NDA + MSA + BAA before any patient data moves (HIPAA: every business associate and subcontractor needs a written BAA before PHI access. AtliQ Inc delivers through Pvt Ltd (Pune), which is itself a subcontractor.)",
+      "severity": "high",
+      "owner": "AtliQ's deal team",
+      "resolution": "document",
+      "citations": [],
+      "missingItem": {
+        "item": "NDA with Ashwood Senior Living Inc",
+        "owner": "AtliQ's deal team"
+      }
+    },
+    {
+      "category": "bundle",
+      "topic": "bundle",
+      "confidence": "high",
+      "needsJudgment": false,
+      "key": "bundle:sub-baa:pvt-ltd",
+      "title": "Missing subcontractor BAA: AtliQ Technologies Pvt Ltd (Pune delivery)",
+      "impact": "The intercompany BAA (Intercompany subcontractor BAA (Inc ↔ Pvt Ltd)) is limited to AtliQ Inc, CareBridge Clinics, Inc.; it does not cover Ashwood Senior Living Inc. HIPAA requires a written flow-down BAA before this party touches PHI.",
+      "severity": "high",
+      "owner": "AtliQ's tech lead",
+      "resolution": "document",
+      "citations": [
+        {
+          "docId": "ic-baa",
+          "docTitle": "Intercompany subcontractor BAA (Inc ↔ Pvt Ltd)",
+          "clauseRef": "§3.2",
+          "quote": "Subcontractor shall access De-identified Data only within the Covered Entity Environment (as defined in the Upstream BAA) or another secure environment approved in writing by Business Associate and the Covered Entity. Subcontractor shall not download, copy or transfer De-identified Data to its own systems or devices",
+          "role": "register"
+        }
+      ],
+      "missingItem": {
+        "item": "Subcontractor BAA: AtliQ Technologies Pvt Ltd (Pune delivery)",
+        "owner": "AtliQ's tech lead"
+      }
+    },
+    {
+      "category": "bundle",
+      "topic": "bundle",
+      "confidence": "high",
+      "needsJudgment": false,
+      "key": "bundle:consent:pvt-ltd",
+      "title": "No client consent on file to subcontract to AtliQ Technologies Pvt Ltd (Pune delivery)",
+      "impact": "The client's prior written approval is required before AtliQ Technologies Pvt Ltd (Pune delivery) works on the engagement.",
+      "severity": "medium",
+      "owner": "AtliQ's deal team",
+      "resolution": "document",
+      "citations": [],
+      "missingItem": {
+        "item": "Ashwood Senior Living Inc's written consent for AtliQ Technologies Pvt Ltd (Pune delivery)",
+        "owner": "AtliQ's deal team"
+      }
+    },
+    {
+      "key": "playbook:data_protection",
+      "category": "playbook",
+      "topic": "data_protection",
+      "title": "Sub-BAA or Data Use Agreement required for Pune entity before data access",
+      "impact": "AtliQ's Pune entity could access regulated health data without an executed sub-BAA or Data Use Agreement in place, creating HIPAA compliance risk.",
+      "severity": "medium",
+      "confidence": "medium",
+      "needsJudgment": false,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "syn-ashwood-sow3",
+      "citations": [
+        {
+          "docId": "syn-ashwood-sow3",
+          "docTitle": "Ashwood Senior Living SOW-3 (draft, AtliQ template)",
+          "clauseRef": "6.3",
+          "quote": "Ashwood's Operations team confirms this approach is acceptable. A data use agreement for the Limited Data Set will be provided by Ashwood if required",
+          "role": "incoming"
+        }
+      ],
+      "standard": "DPA (EU) or BAA (US health) signed before any personal/regulated data moves, with a sub-DPA / sub-BAA for every party that touches the data (incl. AtliQ's own Pune entity); engagement-specific scope; offshore access only as the agreement allows.",
+      "counterPosition": "Execute the required sub-BAA or Data Use Agreement between AtliQ Inc, Ashwood, and AtliQ Technologies Pvt Ltd prior to granting offshore team members access to the data.",
+      "precedents": [
+        {
+          "docId": "carebridge-baa",
+          "counterparty": "CareBridge Clinics",
+          "clauseRef": "whole BAA",
+          "label": "standard",
+          "note": "Counsel-reviewed: capped liability, 5-day reporting, de-identified offshore route"
+        }
+      ]
+    }
+  ],
+  "fine": [
+    "Correct AtliQ entity: Inc for a USA counterparty",
+    "Parties = invoicing entity: Inc throughout",
+    "Payment ≤ 45 days: 30 days",
+    "No live AtliQ commitment covers this healthcare work in USA, India",
+    "30-day payment term meets AtliQ standard.",
+    "10 business days review period for deliverables is standard and acceptable."
+  ],
+  "notSeen": [
+    "Referenced but not on file: Business Associate Agreement dated August 25, 2025 (BAA governing the SOW)",
+    "Referenced but not on file: SOW-1 (Prior statement of work)",
+    "Referenced but not on file: SOW-2 (Prior statement of work)",
+    "Commitments were checked against all 27 signed contracts on file. Contracts AtliQ hasn't uploaded can't be checked."
+  ],
+  "documents": [
+    {
+      "docId": "syn-ashwood-sow3",
+      "title": "Ashwood Senior Living SOW-3 (draft, AtliQ template)",
+      "docType": "SOW",
+      "paper": "atliq",
+      "route": "full_review",
+      "facts": [
+        {
+          "field": "docType",
+          "label": "Document type",
+          "value": "SOW"
+        },
+        {
+          "field": "parties",
+          "label": "Counterparty",
+          "value": "Ashwood Senior Living, Inc. (USA)"
+        },
+        {
+          "field": "entity",
+          "label": "AtliQ entity (parties)",
+          "value": "Inc",
+          "clauseRef": "1",
+          "quote": "AtliQ Inc, 101 College Road East, Suite 210, Princeton, New Jersey 08540 (\"AtliQ"
+        },
+        {
+          "field": "invoicing",
+          "label": "AtliQ entity (invoicing)",
+          "value": "Inc"
+        },
+        {
+          "field": "law",
+          "label": "Governing law",
+          "value": "Not stated"
+        },
+        {
+          "field": "forum",
+          "label": "Forum",
+          "value": "Not stated"
+        },
+        {
+          "field": "payment",
+          "label": "Payment",
+          "value": "30 days",
+          "clauseRef": "4",
+          "quote": "Invoices payable within thirty (30) days"
+        },
+        {
+          "field": "ld",
+          "label": "Delay penalties",
+          "value": "None"
+        },
+        {
+          "field": "liability",
+          "label": "Liability",
+          "value": "null"
+        },
+        {
+          "field": "insurance",
+          "label": "Insurance required",
+          "value": "None"
+        },
+        {
+          "field": "annexes",
+          "label": "Annexes referenced",
+          "value": "None"
+        },
+        {
+          "field": "scope",
+          "label": "Sectors · regions",
+          "value": "healthcare · USA, India"
+        },
+        {
+          "field": "data",
+          "label": "Data handled",
+          "value": "personal_data, phi"
+        }
+      ],
+      "gate": [
+        {
+          "rule": "entity",
+          "label": "Correct AtliQ entity",
+          "pass": true,
+          "detail": "Inc for a USA counterparty",
+          "citation": {
+            "docId": "syn-ashwood-sow3",
+            "docTitle": "Ashwood Senior Living SOW-3 (draft, AtliQ template)",
+            "clauseRef": "1",
+            "quote": "AtliQ Inc, 101 College Road East, Suite 210, Princeton, New Jersey 08540 (\"AtliQ",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "invoicing_entity",
+          "label": "Parties = invoicing entity",
+          "pass": true,
+          "detail": "Inc throughout"
+        },
+        {
+          "rule": "governing_law",
+          "label": "Governing law matches entity",
+          "pass": null,
+          "detail": "Not stated"
+        },
+        {
+          "rule": "payment",
+          "label": "Payment ≤ 45 days",
+          "pass": true,
+          "detail": "30 days",
+          "citation": {
+            "docId": "syn-ashwood-sow3",
+            "docTitle": "Ashwood Senior Living SOW-3 (draft, AtliQ template)",
+            "clauseRef": "4",
+            "quote": "Invoices payable within thirty (30) days",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "ld_cap",
+          "label": "Delay penalties capped",
+          "pass": null,
+          "detail": "No delay penalties"
+        },
+        {
+          "rule": "liability_cap",
+          "label": "Liability capped",
+          "pass": null,
+          "detail": "Not stated"
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "bundle": [
+    {
+      "party": "Ashwood Senior Living Inc",
+      "document": "NDA",
+      "status": "missing",
+      "detail": "Not in the deal"
+    },
+    {
+      "party": "Ashwood Senior Living Inc",
+      "document": "MSA",
+      "status": "missing",
+      "detail": "Not in the deal"
+    },
+    {
+      "party": "Ashwood Senior Living Inc",
+      "document": "BAA",
+      "status": "signed",
+      "detail": "Signed"
+    },
+    {
+      "party": "AtliQ Technologies Pvt Ltd (Pune delivery)",
+      "document": "Subcontractor BAA",
+      "status": "missing",
+      "detail": "The intercompany BAA (Intercompany subcontractor BAA (Inc ↔ Pvt Ltd)) is limited to AtliQ Inc, CareBridge Clinics, Inc.; it does not cover Ashwood Senior Living Inc.",
+      "findingKey": "bundle:sub-baa:pvt-ltd"
+    },
+    {
+      "party": "AtliQ Technologies Pvt Ltd (Pune delivery)",
+      "document": "Ashwood Senior Living Inc's prior written consent to subcontract",
+      "status": "missing",
+      "detail": "No written consent on file",
+      "findingKey": "bundle:consent:pvt-ltd"
+    }
+  ],
+  "notesFacts": [
+    {
+      "id": "ashwood-fact-1",
+      "statement": "Daniel (a freelancer shared with Harrington) and 4 team members from Pune are proposed to staff SOW-3.",
+      "category": "staffing",
+      "noteId": "note-2026-09-21-ashwood_weekly_checkin",
+      "noteTitle": "Ashwood — weekly check-in (21 Sep 2026, Zoom)",
+      "quote": "our US team is 2 people + Daniel (freelancer, shared with Harrington). Could add 4 from Pune",
+      "complianceEvent": false,
+      "whyItMatters": "Staffing a shared freelancer and offshore team requires confirming subcontractor terms, client consent to subcontract, and Subcontractor BAA coverage."
+    },
+    {
+      "id": "ashwood-fact-2",
+      "statement": "Ashwood requested SOW-3 to be live before the January state survey season.",
+      "category": "commitment",
+      "noteId": "note-2026-09-21-ashwood_weekly_checkin",
+      "noteTitle": "Ashwood — weekly check-in (21 Sep 2026, Zoom)",
+      "quote": "James wants SOW-3 (fall-risk) live before the January state survey season",
+      "complianceEvent": false,
+      "whyItMatters": "Establishes a delivery commitment deadline tied to the client's regulatory survey timeline."
+    },
+    {
+      "id": "ashwood-fact-3",
+      "statement": "James proposed providing a limited data set without names or SSNs to the Pune delivery team.",
+      "category": "data_movement",
+      "noteId": "note-2026-09-21-ashwood_weekly_checkin",
+      "noteTitle": "Ashwood — weekly check-in (21 Sep 2026, Zoom)",
+      "quote": "Give them a limited data set — no names, no SSNs. That's not really PHI. I'll put it in the SOW",
+      "complianceEvent": false,
+      "whyItMatters": "Limited data sets derived from health records remain regulated under HIPAA, requiring client consent to subcontract and an active Subcontractor BAA covering Ashwood Senior Living Inc before data access occurs."
+    },
+    {
+      "id": "ashwood-fact-4",
+      "statement": "SOW-3 is valued at $67k with a target completion date of September 30 for an October 1 start.",
+      "category": "deadline",
+      "noteId": "note-2026-09-26-pipeline_review_new_queu",
+      "noteTitle": "Pipeline review — \"the second queue\" (Sat 26 Sep, call)",
+      "quote": "Ashwood SOW-3 (Dhaval) — $67k — by **30 Sep** (James wants to start 1 Oct",
+      "complianceEvent": false,
+      "whyItMatters": "Establishes the contract execution timeline needed to support the intended start date."
+    },
+    {
+      "id": "ashwood-fact-5",
+      "statement": "James added the Pune team staffing section to the SOW-3 agreement draft.",
+      "category": "staffing",
+      "noteId": "tracker",
+      "noteTitle": "Tracker notes",
+      "quote": "SYN-116 (SOW-3): by 30 Sep. James added staffing section (Pune team",
+      "complianceEvent": false,
+      "whyItMatters": "Formalizing the Pune delivery team in the SOW requires securing Ashwood's prior written consent to subcontract and an updated intercompany BAA covering this client."
+    }
+  ],
+  "complianceCandidate": null,
+  "similar": [
+    {
+      "clauseType": "payment",
+      "docId": "syn-ashwood-sow3",
+      "clauseRef": "§4",
+      "quote": "Milestone Deliverable Target Fee (USD)\n\nM1 Feature design and data preparation Start + 4 weeks 13,400\n\nM2 Fall-risk model and validation Start + 10 weeks 26,800\n\nM3 Staffing recommendations; dashboard integration Start + 14 weeks 16,750\n\nM4 Go-live and monitoring Start + 16 weeks 10,050\n\nTotal 67,000\n\nInvoices payable within thirty (30) days.",
+      "hits": [
+        {
+          "docId": "trustline-msa",
+          "counterparty": "Trustline NBFC",
+          "date": "2026-08-15",
+          "clauseNo": "4",
+          "heading": "FEES AND PAYMENT",
+          "label": "standard",
+          "labelNote": "45-day payment: the negotiated maximum (90 → 45)",
+          "score": 0.893,
+          "text": "4.1 The total fees for the Services are **USD 48,000** (United States Dollars Forty-Eight Thousand only), payable on completion of Milestones as set out in Annexure A.\n\n4.2 The Service Provider shall raise an invoice upon completion of each Milestone. The Company shall pay each undisputed invoice within forty-five (45) days of receipt of the invoice.\n\n4.3 All fees are exclusive of GST. The Company shall be entitled to deduct TDS as applicable.\n\n4.4 Any disputed amount shall be notified within ten (10) days of receipt of invoice, and the Parties shall resolve such dispute in good faith within thirty (30) days.",
+          "differs": "Better for AtliQ than Trustline NBFC: invoices are payable within 30 days instead of 45 days.",
+          "alsoIn": []
+        },
+        {
+          "docId": "paytrack-msa",
+          "counterparty": "PayTrack Technologies",
+          "date": "2025-01-22",
+          "clauseNo": "4",
+          "heading": "FEES AND PAYMENT",
+          "label": "untagged",
+          "score": 0.9,
+          "text": "4.1 The total fees under SOW-1 are **USD 71,000** (United States Dollars Seventy-One Thousand only), payable in accordance with the milestone schedule in SOW-1.\n\n4.2 AtliQ shall invoice upon completion of each milestone. PayTrack shall pay each undisputed invoice within thirty (30) days of receipt.\n\n4.3 Fees are exclusive of GST. PayTrack may deduct TDS in accordance with Applicable Law.",
+          "differs": "Same as PayTrack Technologies: invoices are payable within 30 days.",
+          "alsoIn": [
+            "Acme Retail Group (2025-03)"
+          ]
+        },
+        {
+          "docId": "sunrise-msa",
+          "counterparty": "Sunrise Foods",
+          "date": "2025-04-18",
+          "clauseNo": "5",
+          "heading": "FEES AND PAYMENT",
+          "label": "untagged",
+          "score": 0.891,
+          "text": "5.1 The total Fees under SOW-1 are **USD 33,000** (United States Dollars Thirty-Three Thousand only), comprising build fees payable on Milestones and a Monthly Support Fee for the support period, as detailed in SOW-1.\n\n5.2 AtliQ shall invoice build fees upon completion of each Milestone and the Monthly Support Fee monthly in arrears. Sunrise shall pay each undisputed invoice within thirty (30) days of the invoice date.\n\n5.3 All amounts are exclusive of GST, which shall be charged additionally at the applicable rate. Sunrise may deduct TDS as required by law.\n\n5.4 Delayed payments shall attract interest at twelve percent (12%) per annum.",
+          "differs": "Same as Sunrise Foods: invoices are payable within 30 days.",
+          "alsoIn": []
+        }
+      ]
+    }
+  ],
+  "counselPack": null,
+  "errors": [],
+  "usage": {
+    "calls": 5,
+    "cachedCalls": 0,
+    "inputTokens": 6524,
+    "outputTokens": 9192,
+    "ms": 44367
+  }
+}

@@ -312,7 +312,8 @@ export function slug(s: string): string {
 
 function annexPresent(name: string, doc: Document, others: { id: string; title: string; text: string }[]): { found: boolean; where: string } {
   const n = name.toLowerCase().replace(/\s+/g, " ").trim();
-  const headingRe = new RegExp(`^#{1,4}\\s*[^\\n]*\\b${escapeRe(n)}\\b`, "im");
+  // A Markdown heading naming it, or (text from PDF / Word / paste) a short line that starts with its name.
+  const headingRe = new RegExp(`^(#{1,4}\\s*[^\\n]*\\b${escapeRe(n)}\\b|\\s*${escapeRe(n)}\\b[^\\n]{0,80}$)`, "im");
   if (headingRe.test(doc.text)) return { found: true, where: "Attached in this document" };
   for (const o of others) {
     if (o.id === doc.id) continue;

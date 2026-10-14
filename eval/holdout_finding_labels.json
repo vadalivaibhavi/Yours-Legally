@@ -1,0 +1,276 @@
+{
+  "_what": "Every finding in the held-out briefs, graded like eval/finding_labels.json (correct / partly / duplicate / noise / wrong; severity ok / too_high / too_low). Written AFTER the first held-out run (14 Oct 2026), against the SYN answer key and the draft texts; the pre-registered cases in eval/holdout_cases.json were not changed.",
+  "_by": "Drafted by Claude (14 Oct 2026); to be confirmed by Karandeep.",
+  "labels": {
+    "aldergrove": {
+      "conflict:syn-novaterra-msa:ip_transfer": {
+        "label": "correct",
+        "severity": "too_low",
+        "note": "IngestIQ was assigned to Novaterra and §4.3 warrants ownership (uncapped): a blocker like Rheinwerk/PipeKit, raised as high"
+      },
+      "gate:annex:schedule-1": {
+        "label": "wrong",
+        "severity": "ok",
+        "note": "Schedule 1 (SOW-1) IS in the draft (SCHEDULE 1 — SOW-1: METER & NETWORK TELEMETRY DATA PLATFORM): same PDF-reader bug as Cargoline, fixed in lib/fileText.ts after this run"
+      },
+      "playbook:ip": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "IP vests on creation, before payment (not in the key, a real playbook point)"
+      },
+      "playbook:liability": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "uncapped liability for IP claims (the key's 'uncapped warranty')"
+      },
+      "gate:governing_law": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "English law: judgment item"
+      },
+      "playbook:termination": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "one-sided convenience termination"
+      }
+    },
+    "ashwood": {
+      "bundle:msa:client": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "the Ashwood services agreement (SYN-105) is logged but not on file"
+      },
+      "bundle:nda:client": {
+        "label": "noise",
+        "severity": "too_high",
+        "note": "a standing healthcare client under a signed services agreement + BAA doesn't need a new NDA for SOW-3"
+      },
+      "bundle:sub-baa:pvt-ltd": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "BAA §4.2: affiliates are subcontractors needing their own BAA; the CareBridge IC-BAA doesn't cover Ashwood"
+      },
+      "bundle:consent:pvt-ltd": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "client approval needed (§10.3: only the Privacy Officer can give it)"
+      },
+      "playbook:data_protection": {
+        "label": "correct",
+        "severity": "too_low",
+        "note": "the Limited Data Set going to Pune is the key issue, but BAA §4.3 expressly bans offshore access incl. LDS: a blocker, not a medium DUA question"
+      }
+    },
+    "cargoline": {
+      "conflict:syn-falconridge-msa:non_compete": {
+        "label": "partly",
+        "severity": "too_low",
+        "note": "right contract, but raised as 'possible, if Cargoline is a Protected Customer': it is #1 on Falconridge Sch 4"
+      },
+      "gate:annex:schedule-2": {
+        "label": "wrong",
+        "severity": "ok",
+        "note": "Schedule 2 (MILESTONES) IS in the draft: the PDF reader didn't turn 'SCHEDULE 2 — MILESTONES' into a heading (reader bug, fixed in lib/fileText.ts after this run)"
+      },
+      "gate:entity": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "Inc for a Bahrain client"
+      },
+      "playbook:termination": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "immediate termination + fee clawback if a restriction exists: ties to the false §8.1 rep"
+      },
+      "gate:governing_law": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "Bahrain law: judgment item"
+      }
+    },
+    "cobalt": {
+      "conflict:crestline-msa:mfn_pricing": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "$68 below the Crestline $85 floor"
+      },
+      "conflict:syn-meridale-msa:mfn_pricing": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "$68 below Meridale's $80 worldwide MFN"
+      },
+      "playbook:liability": {
+        "label": "noise",
+        "severity": "too_high",
+        "note": "indemnity carved out of the cap is market standard (as Lakeshore)"
+      },
+      "playbook:other": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "Cobalt's own MFN, the key's 'third constraint'. Found, but under playbook:other: the pre-registered case looked for covenant:mfn_pricing, so HO-02 is graded as a miss"
+      },
+      "playbook:insurance": {
+        "label": "noise",
+        "severity": "ok",
+        "note": "$1M professional liability: a check, correctly low"
+      },
+      "playbook:ld": {
+        "label": "noise",
+        "severity": "ok",
+        "note": "'not the sole remedy' nit"
+      }
+    },
+    "corvina": {
+      "conflict:crestline-msa:mfn_pricing": {
+        "label": "noise",
+        "severity": "too_high",
+        "note": "false alarm from guardrail A2: rates €80/63/84 (≈$87/68/91) are above the Crestline floor; the model had dismissed it correctly"
+      },
+      "conflict:syn-meridale-msa:mfn_pricing": {
+        "label": "noise",
+        "severity": "too_high",
+        "note": "false alarm from guardrail A2: rates are above Meridale's $80 floor"
+      },
+      "bundle:dpa:client": {
+        "label": "wrong",
+        "severity": "ok",
+        "note": "the DPA exists: Annex 2 of the signed Corvina MSA (on file as context). The bundle rule only counts a separate DPA document"
+      },
+      "playbook:data_protection": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "sub-processor notice under 30 days (DPA A2.4)"
+      }
+    },
+    "greystone": {
+      "playbook:insurance": {
+        "label": "noise",
+        "severity": "ok",
+        "note": "a check, correctly low"
+      },
+      "playbook:ld": {
+        "label": "noise",
+        "severity": "ok",
+        "note": "'not the sole remedy' nit"
+      }
+    },
+    "indus": {
+      "conflict:syn-lumen-msa:non_compete": {
+        "label": "partly",
+        "severity": "ok",
+        "note": "right conflict and blocker, but dated from the planned M4 date (31 Jul 2026) instead of the actual Final Acceptance (12 Aug 2026)"
+      },
+      "playbook:liability": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "uncapped liability for data-protection incidents"
+      }
+    },
+    "monsoon": {
+      "playbook:indemnity": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "one-way uncapped vendor indemnity (AtliQ's own paper)"
+      },
+      "playbook:ld": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "1%/day uncapped"
+      },
+      "playbook:liability": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "vendor uncapped vs AtliQ's 1-month cap"
+      },
+      "playbook:payment": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "pay-when-paid / 60 days"
+      },
+      "playbook:restrictive": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "24-month non-compete on a small vendor"
+      },
+      "playbook:termination": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "one-way 7-day termination"
+      },
+      "playbook:confidentiality": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "perpetual one-way confidentiality"
+      },
+      "playbook:ip": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "vendor's pre-existing materials vest in AtliQ, correctly low"
+      }
+    },
+    "pillarstone": {
+      "conflict:syn-kestrel-msa:non_compete": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "Kestrel §12 competing business"
+      },
+      "playbook:confidentiality": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "one-way confidentiality"
+      },
+      "playbook:indemnity": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "one-way uncapped indemnity"
+      },
+      "playbook:ip": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "vests on creation before payment"
+      },
+      "playbook:ld": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "1%/week of total fees"
+      },
+      "playbook:liability": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "vendor uncapped, client capped"
+      },
+      "playbook:termination": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "15-day termination, accepted milestones only"
+      },
+      "playbook:payment": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "60 days"
+      }
+    },
+    "quanta": {
+      "conflict:cloudspan-spa:exclusivity": {
+        "label": "correct",
+        "severity": "too_low",
+        "note": "not in the key, but Quanta Lake is a competing platform under the CloudSpan exclusivity (India + GCC), like Datavane"
+      },
+      "conflict:syn-zephyr-spa:exclusivity": {
+        "label": "correct",
+        "severity": "too_low",
+        "note": "Quanta Lake is named in Zephyr Sch 1: a deal-breaker (key: HOLD), raised as high"
+      },
+      "playbook:liability": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "uncapped liability for breaching the platform-focus clause"
+      },
+      "playbook:restrictive": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "Quanta's §3.3 bars working with Zephyr: mutually incompatible"
+      }
+    }
+  }
+}

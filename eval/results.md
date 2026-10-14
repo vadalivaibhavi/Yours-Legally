@@ -1,17 +1,17 @@
 # Eval results
 
-Run 2026-10-12 10:44 UTC · APP_TODAY 2026-10-04 · cases from `docs/Eval_Set.md` via `eval/cases.json`.
+Run 2026-10-14 01:42 UTC · APP_TODAY 2026-10-04 · cases from `docs/Eval_Set.md` via `eval/cases.json`.
 
-Models: LLM gemini (fast: gemini-flash-lite-latest, gemini-3.5-flash-lite, gemini-3.1-flash-lite, gemini-3.1-flash-lite-preview; strong: gemini-3.6-flash, gemini-flash-latest, gemini-3.8-flash, gemini-3.7-flash, gemini-3-flash-preview, gemini-3.5-flash) · committed briefs made by gemini-flash-lite-latest, gemini-3-flash-preview, gemini-3.6-flash, gemini-3.5-flash, gemini-flash-latest.
+Models: LLM gemini (fast: gemini-flash-lite-latest, gemini-3.5-flash-lite, gemini-3.1-flash-lite, gemini-3.1-flash-lite-preview; strong: gemini-3.6-flash, gemini-flash-latest, gemini-3.8-flash, gemini-3.7-flash, gemini-3-flash-preview, gemini-3.5-flash) · committed briefs made by gemini-flash-lite-latest, gemini-3-flash-preview, gemini-3.6-flash, gemini-3.8-flash, gemini-flash-latest, gemini-3.5-flash, gemini-3.7-flash.
 
-**45 passed · 4 failed · 0 not run (quota) · 1 skipped** (of 50 cases)
+**46 passed · 3 failed · 0 not run (quota) · 1 skipped** (of 50 cases)
 
 ## Cross-cutting checks (PRD §11)
 
 | Check | Result | Detail |
 |---|---|---|
-| Citation validity (all quotes string-matched to source) | ✅ | 131/131 |
-| Guardrails: no breach/enforceable in system prose; never Reject | ✅ | 517 prose strings checked; 0 legal conclusions; 0 Reject recommendations |
+| Citation validity (all quotes string-matched to source) | ✅ | 132/132 |
+| Guardrails: no breach/enforceable in system prose; never Reject | ✅ | 520 prose strings checked; 0 legal conclusions; 0 Reject recommendations |
 | Verdict identical with and without similar-clauses panel | ✅ | 13 briefs |
 | Register changes flag the right open deals and reach the checks (FR-2, FR-19) | ✅ | verify flags nothing; restriction edit flags all 13 open deals; ending it changes the seller check (conflict → clear); reject flags all and stops the conflict (clear); restore brings it back (conflict); client duty edit flags only that client's deals (harrington); insurance edit flags nothing (no check reads it) |
 | A1 no evidence, no finding: claims about the terms need a verified clause | ✅ | no counted finding lacks a clause · 0 shown as unsupported · injected "unlimited liability" on loopmart: verdict SIGN → SIGN, marked unsupported (low) |
@@ -19,14 +19,15 @@ Models: LLM gemini (fast: gemini-flash-lite-latest, gemini-3.5-flash-lite, gemin
 | A3 one-way NDA caught by rules, whatever the title says | ✅ | one-way caught (definition + obligations): finserve-nda, meridian-nda · mutual left alone: 5/5 |
 | A4 instructions to an AI reviewer are caught and block a clean verdict | ✅ | attacks caught: 5/5 · real documents flagged: none · a SIGN brief (sunrise-sow2) with the finding: no longer SIGN |
 | A6 plain wording: "redline" reads right as a verb and as a noun | ✅ | 8/8 sentences read right |
+| Every finding graded (eval/finding_labels.json): precision, noise, wrong | ✅ | 83 findings graded · precision 84% correct (+5% partly) · noise 8% · duplicates 1 · wrong 1 · severity off 4 · none ungraded |
 | A5 upload detection: notes vs contract, version vs additional, wrong deal, blank template | ✅ | notes vs contract: 47/47 · document type from title: 0 wrong of 32 · real documents taken for templates: 0 · 17/17 version, wrong-deal and template cases right |
-| A5 deal size: small-deal deviations count one step lower; promises to other clients never change | ✅ | rule cases: 8/8 · small deals: blueorchid, kriti, sunrise-sow2 · 7 findings counted lower · protected findings moved: none |
-| A5 owners are roles, never people's names | ✅ | 112 owners and next actions checked · named a person: none · 0 stored owners with names mapped to roles at display |
+| A5 deal size: small-deal deviations count one step lower; promises to other clients never change | ✅ | rule cases: 8/8 · small deals: blueorchid, kriti, sunrise-sow2 · 6 findings counted lower · protected findings moved: none |
+| A5 owners are roles, never people's names | ✅ | 113 owners and next actions checked · named a person: none · 0 stored owners with names mapped to roles at display |
 | A5 seller mismatch is computed live from the latest deal check | ✅ | harrington (contract regions: USA) · declared none: mismatch · declared all: clear · stored mismatch with a matching check: dropped |
 | A5 store in contract register: deal leaves the queue, commitments reach the checks, the right deals are flagged | ✅ | harrington: signed, out of the queue · non-compete in the register · 12 open deals flagged for re-check · stored twice: no duplicate |
 | A5 review runs read the dataset only, never the app's live state | ✅ | 13/13 briefs built from the dataset only · a live note or register edit changes the hash: yes · npm run review starts on an empty state: yes |
 | A4 end to end: LoopMart NDA with an injected instruction is reviewed (model) | ✅ | verdict SIGN AFTER CHANGES · injection finding raised · 1 findings |
-| NDA fast lane latency (<1 min) | info | finserve 45s (cached) · loopmart 45s (cached) |
+| NDA fast lane latency (<1 min) | info | finserve 44s · loopmart 29s |
 | Recall@3 on EV-P (≥80%) | ✅ | 10/10 = 100% |
 
 ## A. Register build (US-1 · FR-1, FR-2)
@@ -52,7 +53,7 @@ Models: LLM gemini (fast: gemini-flash-lite-latest, gemini-3.5-flash-lite, gemin
 | EV-07 FinServe "mutual" NDA | ✅ | HOLD · found nda:definition, nda:residuals, covenant:non_compete, nda:remedies · clean on gate:entity, gate:governing_law |
 | EV-08 LoopMart mutual NDA | ✅ | SIGN · found nothing to find · clean on severity:blocker, severity:high |
 | EV-09 Sunrise SOW-2 | ✅ | SIGN · found nothing to find · clean on playbook:ld, severity:blocker, severity:high |
-| EV-10 Kriti subcontract (AtliQ paper) | ❌ | missing flowdown:ip |
+| EV-10 Kriti subcontract (AtliQ paper) | ✅ | SIGN AFTER CHANGES · found playbook:ld, playbook:payment, playbook:indemnity, playbook:liability, flowdown:ip, flowdown:data, flowdown:consent |
 | EV-11 Marcus Reed ICA (AtliQ paper) | ✅ | SIGN AFTER CHANGES · found gate:entity, playbook:restrictive, playbook:termination, dependency:lakeshore · clean on playbook:ip, flowdown:ip |
 | EV-12 Harrington bundle (MSA, BAA, NDA, notes) | ❌ | missing playbook:ip |
 | EV-13 Daniel Ortiz ICA + NDA (AtliQ paper) | ✅ | SIGN AFTER CHANGES · found flowdown:data, flowdown:ip · clean on nda:, playbook:payment, playbook:termination, playbook:liability |
@@ -89,9 +90,9 @@ Models: LLM gemini (fast: gemini-flash-lite-latest, gemini-3.5-flash-lite, gemin
 
 | Case | Result | Detail |
 |---|---|---|
-| EV-V1 TravelHub: entity corrected to Pvt Ltd, invoicing aligned | ✅ | resolved gate:entity, gate:invoicing_entity, playbook:data_protection, playbook:termination, playbook:payment · still open 2 · new none · HOLD |
+| EV-V1 TravelHub: entity corrected to Pvt Ltd, invoicing aligned | ✅ | resolved gate:entity, gate:invoicing_entity, playbook:data_protection, playbook:termination, playbook:payment · still open 2 · new none · SIGN AFTER CHANGES |
 | EV-V2 Rheinwerk: Annex 3 DPA added | ✅ | resolved gate:annex:annex-3, playbook:confidentiality · still open 6 · new playbook:data_protection, playbook:liability, flowdown:consent · HOLD |
-| EV-V3 Harrington: sub-BAA for Daniel Ortiz added | ✅ | resolved bundle:sub-baa:ortiz · still open 14 · new notes:commitment, flowdown:consent · HOLD |
+| EV-V3 Harrington: sub-BAA for Daniel Ortiz added | ✅ | resolved bundle:sub-baa:ortiz · still open 14 · new flowdown:consent · HOLD |
 | EV-V4 Synthetic: v1 deep review ran; v2 raises a finding on unchan | skip | Late-finding detection (FR-18) is not built in the prototype (Build Plan §5, declared in README). |
 
 ## D. Seller checks (US-9, US-10 · FR-13, FR-19) (synthetic inputs)

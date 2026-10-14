@@ -1,0 +1,693 @@
+{
+  "dealId": "greystone",
+  "version": 1,
+  "createdAt": "2026-10-14T02:04:08.554Z",
+  "trigger": "initial review",
+  "inputsHash": "c9524701ff337dec6723804eb512249f",
+  "documentIds": [
+    "syn-greystone-msa"
+  ],
+  "registerVersion": "reg-2026-10-14-85+r0",
+  "playbookVersion": "pb-v1.1-2026-10-05",
+  "models": [
+    "gemini-flash-lite-latest",
+    "gemini-3.6-flash"
+  ],
+  "promptVersion": "p1",
+  "route": "full_review",
+  "verdict": "SIGN",
+  "headline": "SIGN: 2 low-severity issues require internal review",
+  "nextAction": "Karandeep will review the insurance limit and liquidated damages clause changes.",
+  "findings": [
+    {
+      "key": "playbook:insurance",
+      "category": "playbook",
+      "topic": "insurance",
+      "title": "Professional liability insurance limit requires confirmation",
+      "impact": "AtliQ may not meet contract requirements upon signing if its existing policy coverage falls short of $1,000,000.",
+      "severity": "low",
+      "confidence": "medium",
+      "needsJudgment": true,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "syn-greystone-msa",
+      "citations": [
+        {
+          "docId": "syn-greystone-msa",
+          "docTitle": "Greystone Claims Solutions MSA (draft)",
+          "clauseRef": "Section 12.2",
+          "quote": "Provider shall maintain professional liability and cyber liability insurance of $1,000,000 each",
+          "role": "incoming"
+        }
+      ],
+      "standard": "Check every required insurance type and limit against what AtliQ actually holds before signing (known: cyber $1M; everything else unrecorded).",
+      "counterPosition": "Verify internal policy limits for professional liability prior to signing, or adjust the contractual requirement to reflect existing coverage.",
+      "precedents": []
+    },
+    {
+      "key": "playbook:ld",
+      "category": "playbook",
+      "topic": "ld",
+      "title": "LD clause lacks express sole remedy statement",
+      "impact": "Greystone could attempt to seek additional damages for delay beyond the agreed liquidated damages cap.",
+      "severity": "low",
+      "confidence": "medium",
+      "needsJudgment": false,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "syn-greystone-msa",
+      "citations": [
+        {
+          "docId": "syn-greystone-msa",
+          "docTitle": "Greystone Claims Solutions MSA (draft)",
+          "clauseRef": "Section 10.1",
+          "quote": "Liquidated damages of 0.5% of the affected milestone fee per week of Provider-caused delay, capped at 5% of that milestone fee; not applicable to delays caused by Greystone or force majeure",
+          "role": "incoming"
+        }
+      ],
+      "standard": "0.5% of the affected milestone fee per week of delay attributable to AtliQ, capped at 5% of that milestone fee; no LDs for client-caused delay; LDs are the sole remedy for delay.",
+      "counterPosition": "Add language clarifying that liquidated damages are the sole and exclusive remedy for delay.",
+      "precedents": [
+        {
+          "docId": "acme-msa",
+          "counterparty": "Acme Retail Group",
+          "clauseRef": "§7",
+          "label": "standard",
+          "note": "Origin of the position (Mar 2025): countered 1%/week uncapped"
+        },
+        {
+          "docId": "northwind-msa",
+          "counterparty": "Northwind Logistics",
+          "clauseRef": "§11",
+          "label": "standard",
+          "note": "Countered 10% of contract value (Jun 2025)"
+        },
+        {
+          "docId": "trustline-msa",
+          "counterparty": "Trustline NBFC",
+          "clauseRef": "§7",
+          "label": "standard",
+          "note": "Countered 2%/week, 10% cap (Aug 2026)"
+        },
+        {
+          "docId": "alnoor-msa",
+          "counterparty": "Al Noor Hospitality",
+          "clauseRef": "§10.3",
+          "label": "exception",
+          "note": "10% of total fees cap: \"strategic exception for Al Noor only, not our new standard\". One-off: not a precedent"
+        },
+        {
+          "docId": "brightwater-msa",
+          "counterparty": "Brightwater Insurance",
+          "clauseRef": "§9",
+          "label": "accident",
+          "note": "1% of contract value per day, uncapped, no client-delay exclusion. Signed on a phone; cost $9k + $14.2k legal"
+        }
+      ]
+    }
+  ],
+  "fine": [
+    "Correct AtliQ entity: Inc for a USA counterparty",
+    "Parties = invoicing entity: Inc throughout",
+    "Governing law matches entity: Laws of the State of Delaware (Inc → US law)",
+    "Payment ≤ 45 days: 30 days",
+    "Liability capped: Each party's aggregate liability is capped at the fees paid or payable under the applicable SOW in the twelve (12) months preceding the claim, except for indemnification obligations and breach of Section 5.",
+    "Insurance: cyber $1M: Held: $1M",
+    "No live AtliQ commitment covers this bfsi/healthcare work in USA, India",
+    "Payment terms of 30 days align with AtliQ's standard.",
+    "Liability cap of 1x 12-month fees with standard carve-outs matches AtliQ standard.",
+    "Mutual indemnity for third-party claims resulting from confidentiality non-compliance, IP infringement, or gross negligence/willful misconduct matches standard.",
+    "Client owns specific deliverables upon payment while AtliQ retains background IP and grants a licence, matching standard.",
+    "Delaware governing law and forum align with standard for AtliQ Inc.",
+    "30 days' notice for convenience termination with payment for work performed and non-cancellable commitments matches standard.",
+    "Mutual confidentiality with 3-year general survival and indefinite protection for trade secrets and personal data matches standard."
+  ],
+  "notSeen": [
+    "Insurance: professional indemnity $1M required: AtliQ's professional indemnity cover isn't recorded anywhere. Confirm with finance.",
+    "Commitments were checked against all 27 signed contracts on file. Contracts AtliQ hasn't uploaded can't be checked."
+  ],
+  "documents": [
+    {
+      "docId": "syn-greystone-msa",
+      "title": "Greystone Claims Solutions MSA (draft)",
+      "docType": "MSA",
+      "paper": "client",
+      "route": "full_review",
+      "facts": [
+        {
+          "field": "docType",
+          "label": "Document type",
+          "value": "MSA"
+        },
+        {
+          "field": "parties",
+          "label": "Counterparty",
+          "value": "Greystone Claims Solutions, Inc. (USA)"
+        },
+        {
+          "field": "entity",
+          "label": "AtliQ entity (parties)",
+          "value": "Inc",
+          "quote": "AtliQ Inc, a Delaware corporation with offices at 101 College Road East, Suite 210, Princeton, New Jersey 08540 (\"Provider"
+        },
+        {
+          "field": "invoicing",
+          "label": "AtliQ entity (invoicing)",
+          "value": "Inc"
+        },
+        {
+          "field": "law",
+          "label": "Governing law",
+          "value": "Laws of the State of Delaware",
+          "clauseRef": "12.1",
+          "quote": "Laws of the State of Delaware"
+        },
+        {
+          "field": "forum",
+          "label": "Forum",
+          "value": "state and federal courts in Wilmington, Delaware",
+          "clauseRef": "12.1",
+          "quote": "state and federal courts in Wilmington, Delaware"
+        },
+        {
+          "field": "payment",
+          "label": "Payment",
+          "value": "30 days",
+          "clauseRef": "3.2",
+          "quote": "Payment within thirty (30) days of invoice"
+        },
+        {
+          "field": "ld",
+          "label": "Delay penalties",
+          "value": "0.5% of milestone per week, cap 5% of milestone, client delays excluded",
+          "clauseRef": "10.1",
+          "quote": "Liquidated damages of 0.5% of the affected milestone fee per week of Provider-caused delay, capped at 5% of that milestone fee; not applicable to delays caused by Greystone or force majeure"
+        },
+        {
+          "field": "liability",
+          "label": "Liability",
+          "value": "Each party's aggregate liability is capped at the fees paid or payable under the applicable SOW in the twelve (12) months preceding the claim, except for indemnification obligations and breach of Section 5. · uncapped for indemnification obligations, breach of Section 5",
+          "clauseRef": "9.2",
+          "quote": "Each party's aggregate liability is capped at the fees paid or payable under the applicable SOW in the twelve (12) months preceding the claim, except for indemnification obligations and breach of Section 5"
+        },
+        {
+          "field": "insurance",
+          "label": "Insurance required",
+          "value": "professional indemnity $1M, cyber $1M"
+        },
+        {
+          "field": "annexes",
+          "label": "Annexes referenced",
+          "value": "Exhibit A"
+        },
+        {
+          "field": "scope",
+          "label": "Sectors · regions",
+          "value": "bfsi, healthcare · USA, India"
+        },
+        {
+          "field": "data",
+          "label": "Data handled",
+          "value": "personal_data, payment_data"
+        }
+      ],
+      "gate": [
+        {
+          "rule": "entity",
+          "label": "Correct AtliQ entity",
+          "pass": true,
+          "detail": "Inc for a USA counterparty",
+          "citation": {
+            "docId": "syn-greystone-msa",
+            "docTitle": "Greystone Claims Solutions MSA (draft)",
+            "clauseRef": "",
+            "quote": "AtliQ Inc, a Delaware corporation with offices at 101 College Road East, Suite 210, Princeton, New Jersey 08540 (\"Provider",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "invoicing_entity",
+          "label": "Parties = invoicing entity",
+          "pass": true,
+          "detail": "Inc throughout"
+        },
+        {
+          "rule": "governing_law",
+          "label": "Governing law matches entity",
+          "pass": true,
+          "detail": "Laws of the State of Delaware (Inc → US law)",
+          "citation": {
+            "docId": "syn-greystone-msa",
+            "docTitle": "Greystone Claims Solutions MSA (draft)",
+            "clauseRef": "12.1",
+            "quote": "Laws of the State of Delaware",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "payment",
+          "label": "Payment ≤ 45 days",
+          "pass": true,
+          "detail": "30 days",
+          "citation": {
+            "docId": "syn-greystone-msa",
+            "docTitle": "Greystone Claims Solutions MSA (draft)",
+            "clauseRef": "3.2",
+            "quote": "Payment within thirty (30) days of invoice",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "ld_cap",
+          "label": "Delay penalties capped",
+          "pass": true,
+          "detail": "Cap 5% of milestone",
+          "citation": {
+            "docId": "syn-greystone-msa",
+            "docTitle": "Greystone Claims Solutions MSA (draft)",
+            "clauseRef": "10.1",
+            "quote": "Liquidated damages of 0.5% of the affected milestone fee per week of Provider-caused delay, capped at 5% of that milestone fee; not applicable to delays caused by Greystone or force majeure",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "liability_cap",
+          "label": "Liability capped",
+          "pass": true,
+          "detail": "Each party's aggregate liability is capped at the fees paid or payable under the applicable SOW in the twelve (12) months preceding the claim, except for indemnification obligations and breach of Section 5.",
+          "citation": {
+            "docId": "syn-greystone-msa",
+            "docTitle": "Greystone Claims Solutions MSA (draft)",
+            "clauseRef": "9.2",
+            "quote": "Each party's aggregate liability is capped at the fees paid or payable under the applicable SOW in the twelve (12) months preceding the claim, except for indemnification obligations and breach of Section 5",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "insurance:professional_indemnity",
+          "label": "Insurance: professional indemnity $1M",
+          "pass": null,
+          "detail": "AtliQ's cover for this type isn't recorded: verify",
+          "citation": {
+            "docId": "syn-greystone-msa",
+            "docTitle": "Greystone Claims Solutions MSA (draft)",
+            "clauseRef": "12.2",
+            "quote": "Provider shall maintain professional liability and cyber liability insurance of $1,000,000 each",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "insurance:cyber",
+          "label": "Insurance: cyber $1M",
+          "pass": true,
+          "detail": "Held: $1M",
+          "citation": {
+            "docId": "syn-greystone-msa",
+            "docTitle": "Greystone Claims Solutions MSA (draft)",
+            "clauseRef": "12.2",
+            "quote": "Provider shall maintain professional liability and cyber liability insurance of $1,000,000 each",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "annex:exhibit-a",
+          "label": "Exhibit A attached",
+          "pass": true,
+          "detail": "Attached in this document",
+          "citation": {
+            "docId": "syn-greystone-msa",
+            "docTitle": "Greystone Claims Solutions MSA (draft)",
+            "clauseRef": "3.1",
+            "quote": "payable by milestone (Exhibit A",
+            "role": "incoming"
+          }
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "bundle": [],
+  "notesFacts": [
+    {
+      "id": "greystone-fact-1",
+      "statement": "An early 2025 insurance NDA with Halvorsen may contain a lock-in clause restricting claims work.",
+      "category": "commitment",
+      "noteId": "note-2026-09-26-pipeline_review_new_queu",
+      "noteTitle": "Pipeline review — \"the second queue\" (Sat 26 Sep, call)",
+      "quote": "That was early 2025, I think it had some lock-in",
+      "complianceEvent": false,
+      "whyItMatters": "The contract reviewer must check the terms of the Halvorsen agreement to ensure entering into a claims triage MSA with Greystone Claims Solutions does not violate exclusivity or lock-in commitments."
+    }
+  ],
+  "complianceCandidate": null,
+  "similar": [
+    {
+      "clauseType": "payment",
+      "docId": "syn-greystone-msa",
+      "clauseRef": "§3",
+      "quote": "3.1 SOW-1 fees: USD 86,000, payable by milestone (Exhibit A).\n\n3.2 Payment within thirty (30) days of invoice.",
+      "hits": [
+        {
+          "docId": "paytrack-msa",
+          "counterparty": "PayTrack Technologies",
+          "date": "2025-01-22",
+          "clauseNo": "4",
+          "heading": "FEES AND PAYMENT",
+          "label": "untagged",
+          "score": 0.928,
+          "text": "4.1 The total fees under SOW-1 are **USD 71,000** (United States Dollars Seventy-One Thousand only), payable in accordance with the milestone schedule in SOW-1.\n\n4.2 AtliQ shall invoice upon completion of each milestone. PayTrack shall pay each undisputed invoice within thirty (30) days of receipt.\n\n4.3 Fees are exclusive of GST. PayTrack may deduct TDS in accordance with Applicable Law.",
+          "differs": "Same as PayTrack Technologies: both require payment within 30 days of invoice.",
+          "alsoIn": [
+            "Acme Retail Group (2025-03)"
+          ]
+        },
+        {
+          "docId": "sunrise-msa",
+          "counterparty": "Sunrise Foods",
+          "date": "2025-04-18",
+          "clauseNo": "5",
+          "heading": "FEES AND PAYMENT",
+          "label": "untagged",
+          "score": 0.924,
+          "text": "5.1 The total Fees under SOW-1 are **USD 33,000** (United States Dollars Thirty-Three Thousand only), comprising build fees payable on Milestones and a Monthly Support Fee for the support period, as detailed in SOW-1.\n\n5.2 AtliQ shall invoice build fees upon completion of each Milestone and the Monthly Support Fee monthly in arrears. Sunrise shall pay each undisputed invoice within thirty (30) days of the invoice date.\n\n5.3 All amounts are exclusive of GST, which shall be charged additionally at the applicable rate. Sunrise may deduct TDS as required by law.\n\n5.4 Delayed payments shall attract interest at twelve percent (12%) per annum.",
+          "differs": "Same as Sunrise Foods: both require payment within 30 days of invoice.",
+          "alsoIn": []
+        },
+        {
+          "docId": "trustline-msa",
+          "counterparty": "Trustline NBFC",
+          "date": "2026-08-15",
+          "clauseNo": "4",
+          "heading": "FEES AND PAYMENT",
+          "label": "standard",
+          "labelNote": "45-day payment: the negotiated maximum (90 → 45)",
+          "score": 0.903,
+          "text": "4.1 The total fees for the Services are **USD 48,000** (United States Dollars Forty-Eight Thousand only), payable on completion of Milestones as set out in Annexure A.\n\n4.2 The Service Provider shall raise an invoice upon completion of each Milestone. The Company shall pay each undisputed invoice within forty-five (45) days of receipt of the invoice.\n\n4.3 All fees are exclusive of GST. The Company shall be entitled to deduct TDS as applicable.\n\n4.4 Any disputed amount shall be notified within ten (10) days of receipt of invoice, and the Parties shall resolve such dispute in good faith within thirty (30) days.",
+          "differs": "Better for AtliQ than Trustline NBFC: payment is due within 30 days instead of 45 days.",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "confidentiality",
+      "docId": "syn-greystone-msa",
+      "clauseRef": "§5",
+      "quote": "5.1 Mutual. Each party protects the other's Confidential Information with reasonable care; obligations survive three (3) years, and indefinitely for trade secrets and claimant personal information.",
+      "hits": [
+        {
+          "docId": "crestline-msa",
+          "counterparty": "Crestline Retail Inc",
+          "date": "2024-08-01",
+          "clauseNo": "7",
+          "heading": "CONFIDENTIALITY",
+          "label": "untagged",
+          "score": 0.931,
+          "text": "7.1 Each Party shall hold the other Party's Confidential Information in confidence, use it only to perform or receive the Services, and disclose it only to its personnel and advisors with a need to know who are bound by obligations at least as protective.\n\n7.2 The obligations in Section 7.1 do not apply to information that is or becomes publicly available without breach, was known to the recipient prior to disclosure, is independently developed, or is rightfully received from a third party.\n\n7.3 These obligations survive for three (3) years following termination, and indefinitely for trade secrets.",
+          "differs": "Worse for AtliQ than Crestline Retail Inc: confidentiality survives indefinitely for claimant personal information, not just trade secrets.",
+          "alsoIn": [
+            "Acme Retail Group (2025-03)",
+            "CloudSpan Technologies (2025-09)",
+            "Northwind Logistics (2025-06)"
+          ]
+        },
+        {
+          "docId": "orbit-msa",
+          "counterparty": "Orbit Travels Pvt Ltd",
+          "date": "2022-07-01",
+          "clauseNo": "4",
+          "heading": "CONFIDENTIALITY",
+          "label": "untagged",
+          "score": 0.928,
+          "text": "4.1 Each party shall keep confidential all information received from the other party including\nfare data, supplier contracts, customer data and source code, and shall not disclose the same\nto any third party. This obligation shall survive for two (2) years after termination.",
+          "differs": "Worse for AtliQ than Orbit Travels Pvt Ltd: confidentiality survives for 3 years instead of 2, plus indefinitely for trade secrets and personal data.",
+          "alsoIn": [
+            "Sunrise Foods (2025-04)"
+          ]
+        },
+        {
+          "docId": "alnoor-nda",
+          "counterparty": "Al Noor Hospitality Group",
+          "date": "2025-01-22",
+          "clauseNo": "2",
+          "heading": "OBLIGATIONS OF THE RECEIVING PARTY",
+          "label": "standard",
+          "labelNote": "Genuinely mutual NDA: the template for what mutual looks like",
+          "score": 0.891,
+          "text": "2.1 Each Party, as Receiving Party, shall:\n   (a) use the Disclosing Party's Confidential Information solely for the Purpose;\n   (b) not disclose it to any third party other than its Representatives who are bound by confidentiality obligations no less protective than those in this Agreement;\n   (c) protect it using at least the same degree of care it uses for its own confidential information, and no less than reasonable care; and\n   (d) promptly notify the Disclosing Party on becoming aware of any unauthorised use or disclosure.\n\n2.2 Each Party is responsible for any breach of this Agreement by its Representatives.",
+          "differs": "Better for AtliQ than Al Noor Hospitality Group: confidentiality obligations expire after 3 years for general information rather than remaining perpetual.",
+          "alsoIn": [
+            "Harrington Health Systems Inc (2026-08)"
+          ]
+        }
+      ]
+    },
+    {
+      "clauseType": "ip",
+      "docId": "syn-greystone-msa",
+      "clauseRef": "§6",
+      "quote": "6.1 Greystone owns Deliverables created specifically for it on payment. Provider retains its pre-existing tools and know-how, and grants Greystone a perpetual, non-exclusive, royalty-free licence to use those incorporated in Deliverables for internal purposes.",
+      "hits": [
+        {
+          "docId": "crestline-msa",
+          "counterparty": "Crestline Retail Inc",
+          "date": "2024-08-01",
+          "clauseNo": "8",
+          "heading": "INTELLECTUAL PROPERTY",
+          "label": "untagged",
+          "score": 0.931,
+          "text": "8.1 Upon payment, Crestline shall own all right, title and interest in the Deliverables.\n\n8.2 Supplier retains all rights in its pre-existing materials, tools and know-how (\"**Supplier Materials**\"). To the extent Supplier Materials are incorporated in a Deliverable, Supplier grants Crestline a non-exclusive, perpetual, royalty-free license to use them as part of such Deliverable.",
+          "differs": "Better for AtliQ than Crestline Retail Inc: the client's licence to pre-existing tools is restricted to internal purposes.",
+          "alsoIn": []
+        },
+        {
+          "docId": "orbit-msa",
+          "counterparty": "Orbit Travels Pvt Ltd",
+          "date": "2022-07-01",
+          "clauseNo": "5",
+          "heading": "INTELLECTUAL PR0PERTY",
+          "label": "untagged",
+          "score": 0.929,
+          "text": "5.1 All deliverables developed specifically for the Client shall be the property of the Client\nupon full payment. The Service Provider retains its pre-existing tools and know-how.",
+          "differs": "Worse for AtliQ than Orbit Travels Pvt Ltd: explicitly grants the client a perpetual, royalty-free licence to incorporated pre-existing tools.",
+          "alsoIn": [
+            "Trustline NBFC (2026-08)",
+            "Al Noor Hospitality Group (2025-03)",
+            "Acme Retail Group (2025-03)"
+          ]
+        },
+        {
+          "docId": "paytrack-msa",
+          "counterparty": "PayTrack Technologies",
+          "date": "2025-01-22",
+          "clauseNo": "8",
+          "heading": "INTELLECTUAL PROPERTY",
+          "label": "untagged",
+          "score": 0.911,
+          "text": "8.1 Upon full payment, all intellectual property in the Deliverables developed specifically for PayTrack shall vest in PayTrack.\n\n8.2 AtliQ retains ownership of its pre-existing materials, tools and know-how and grants PayTrack a perpetual, non-exclusive, royalty-free licence to use such materials as incorporated in the Deliverables.",
+          "differs": "Better for AtliQ than PayTrack Technologies: the client's licence to pre-existing materials is limited to internal purposes.",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "indemnity",
+      "docId": "syn-greystone-msa",
+      "clauseRef": "§8",
+      "quote": "8.1 Each party shall indemnify the other against third-party claims to the extent caused by its breach of confidentiality, infringement of intellectual property, or gross negligence or willful misconduct.",
+      "hits": [
+        {
+          "docId": "acme-msa",
+          "counterparty": "Acme Retail Group",
+          "date": "2025-03-10",
+          "clauseNo": "11",
+          "heading": "INDEMNITY",
+          "label": "standard",
+          "labelNote": "Mutual indemnity",
+          "score": 0.968,
+          "text": "11.1 Each Party (\"**Indemnifying Party**\") shall indemnify the other against losses arising from third-party claims caused by the Indemnifying Party's breach of confidentiality, infringement of third-party intellectual property rights, or gross negligence or wilful misconduct.",
+          "differs": "Same as Acme Retail Group: both provide mutual indemnification for confidentiality, IP infringement, and gross negligence or wilful misconduct.",
+          "alsoIn": []
+        },
+        {
+          "docId": "sunrise-msa",
+          "counterparty": "Sunrise Foods",
+          "date": "2025-04-18",
+          "clauseNo": "12",
+          "heading": "INDEMNITY",
+          "label": "untagged",
+          "score": 0.972,
+          "text": "12.1 Each Party shall indemnify the other against third-party claims arising out of its breach of confidentiality, infringement of intellectual property rights, or gross negligence or wilful misconduct.",
+          "differs": "Same as Sunrise Foods: both provide mutual indemnification for confidentiality, IP infringement, and gross negligence or wilful misconduct.",
+          "alsoIn": [
+            "Trustline NBFC (2026-08)"
+          ]
+        },
+        {
+          "docId": "paytrack-msa",
+          "counterparty": "PayTrack Technologies",
+          "date": "2025-01-22",
+          "clauseNo": "10",
+          "heading": "INDEMNITY",
+          "label": "standard",
+          "labelNote": "Origin of the mutual-indemnity position: no indemnity for the indemnified party's own negligence",
+          "score": 0.932,
+          "text": "10.1 Each Party (the \"**Indemnifying Party**\") shall indemnify, defend and hold harmless the other Party and its directors, officers and employees (the \"**Indemnified Party**\") from and against all Losses arising out of any third-party claim to the extent caused by: (a) the Indemnifying Party's breach of Clause 7 (Confidentiality) or Clause 12 (Data Protection); (b) the gross negligence, wilful misconduct or fraud of the Indemnifying Party or its personnel; or (c) in the case of AtliQ, any claim that the Deliverables infringe a third party's intellectual property rights, and in the case of PayTrack, any claim that Client Data or materials supplied by PayTrack infringe a third party's rights.\n\n10.2 Neither Party shall be required to indemnify the other to the extent any Losses are caused by the negligence, breach or wilful misconduct of the Indemnified Party.\n\n10.3 The Indemnified Party shall give prompt written notice of any claim, permit the Indemnifying Party to control the defence and settlement, and provide reasonable cooperation at the Indemnifying Party's cost.",
+          "differs": "Better for AtliQ than PayTrack Technologies: intellectual property infringement indemnification is mutual rather than required only from AtliQ.",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "liability",
+      "docId": "syn-greystone-msa",
+      "clauseRef": "§9",
+      "quote": "9.1 Neither party is liable for indirect, consequential or punitive damages.\n\n9.2 Each party's aggregate liability is capped at the fees paid or payable under the applicable SOW in the twelve (12) months preceding the claim, except for indemnification obligations and breach of Section 5.",
+      "hits": [
+        {
+          "docId": "sunrise-msa",
+          "counterparty": "Sunrise Foods",
+          "date": "2025-04-18",
+          "clauseNo": "13",
+          "heading": "LIMITATION OF LIABILITY",
+          "label": "standard",
+          "labelNote": "AtliQ-friendly master: capped liability, service credits capped at 5%",
+          "score": 0.945,
+          "text": "13.1 Neither Party shall be liable for indirect, consequential or special losses or loss of profits.\n\n13.2 Each Party's aggregate liability under an SOW shall not exceed the Fees paid or payable under that SOW.",
+          "differs": "Worse for AtliQ than Sunrise Foods: liability for confidentiality and indemnification is uncapped rather than subject to the overall fee cap.",
+          "alsoIn": []
+        },
+        {
+          "docId": "rohan-ica",
+          "counterparty": "Rohan Iyer",
+          "date": "2025-04-28",
+          "clauseNo": "8",
+          "heading": "LIABILITY",
+          "label": "standard",
+          "labelNote": "Fair freelancer terms: 30-day pay, mutual cap, mutual 15-day exit",
+          "score": 0.94,
+          "text": "8.1 Each party's aggregate liability under this Agreement shall not exceed the total fees paid or payable to the Contractor in the twelve (12) months preceding the claim, except for breach of Clause 6 or fraud.\n\n8.2 Neither party is liable for indirect or consequential loss.",
+          "differs": "Worse for AtliQ than Rohan Iyer: indemnification obligations are excluded from the liability cap in addition to confidentiality.",
+          "alsoIn": []
+        },
+        {
+          "docId": "orbit-msa",
+          "counterparty": "Orbit Travels Pvt Ltd",
+          "date": "2022-07-01",
+          "clauseNo": "8",
+          "heading": "LIMITATION OF LIABILITY",
+          "label": "untagged",
+          "score": 0.953,
+          "text": "8.1 Neither party shall be liable for indirect or consequential loss. The aggregate liability of\nthe Service Provider shall not exceed the fees paid in the twelve (l2) months preceding the claim.",
+          "differs": "Worse for AtliQ than Orbit Travels Pvt Ltd: liability for indemnification and confidentiality is uncapped rather than subject to the cap.",
+          "alsoIn": [
+            "Trustline NBFC (2026-08)",
+            "Acme Retail Group (2025-03)"
+          ]
+        }
+      ]
+    },
+    {
+      "clauseType": "ld",
+      "docId": "syn-greystone-msa",
+      "clauseRef": "§10",
+      "quote": "10.1 Liquidated damages of 0.5% of the affected milestone fee per week of Provider-caused delay, capped at 5% of that milestone fee; not applicable to delays caused by Greystone or force majeure.",
+      "hits": [
+        {
+          "docId": "acme-msa",
+          "counterparty": "Acme Retail Group",
+          "date": "2025-03-10",
+          "clauseNo": "7",
+          "heading": "DELAY AND LIQUIDATED DAMAGES",
+          "label": "standard",
+          "labelNote": "Origin of the LD playbook: 0.5% of milestone/week, 5% cap, client delays excluded (Mar 2025)",
+          "score": 0.941,
+          "text": "7.1 If the Service Provider fails to complete a Milestone by the agreed date for reasons solely attributable to the Service Provider, the Service Provider shall pay liquidated damages at the rate of 0.5% (half percent) of the Milestone Fee of the delayed Milestone for each complete week of delay.\n\n7.2 The aggregate liquidated damages in respect of any Milestone shall not exceed 5% (five percent) of the Milestone Fee of that Milestone.\n\n7.3 No liquidated damages shall be payable where the delay is caused by the Client, including delayed access to data or systems, delayed review of Deliverables, or changes in scope, or by a Force Majeure event.\n\n7.4 The Parties agree that the liquidated damages are a genuine pre-estimate of loss and shall be the Client's sole and exclusive remedy for delay.",
+          "differs": "Same as Acme Retail Group: delay penalty of 0.5% per week is capped at 5% of the milestone fee, excluding client delays.",
+          "alsoIn": [
+            "Trustline NBFC (2026-08)",
+            "Northwind Logistics (2025-06)"
+          ]
+        },
+        {
+          "docId": "alnoor-msa",
+          "counterparty": "Al Noor Hospitality Group",
+          "date": "2025-03-15",
+          "clauseNo": "10",
+          "heading": "DELIVERY, ACCEPTANCE AND LIQUIDATED DAMAGES",
+          "label": "exception",
+          "labelNote": "One-off: \"strategic exception for Al Noor only, not our new standard\" (cap 10% of total fees)",
+          "score": 0.886,
+          "text": "10.1 The Supplier shall use all reasonable endeavours to achieve each Milestone by the date set out in the relevant SOW.\n\n10.2 Each Deliverable shall be subject to acceptance testing by the Client within ten (10) Business Days of delivery against the acceptance criteria in the SOW. Deliverables not rejected in writing within that period shall be deemed accepted.\n\n10.3 If the Supplier fails to achieve a Milestone by its due date for reasons attributable to the Supplier, the Supplier shall pay to the Client, as liquidated damages, one percent (1%) of the Fees payable for the affected Milestone for each complete week of delay, provided that the aggregate liquidated damages payable under this Agreement shall not exceed ten percent (10%) of the total Fees payable under this Agreement.\n\n10.4 The Parties agree that the liquidated damages in Clause 10.3 are a genuine pre-estimate of loss. No liquidated damages shall be payable for delay caused by the Client, its contractors, or a Force Majeure Event.",
+          "differs": "Better for AtliQ than Al Noor Hospitality Group: delay penalty is 0.5% per week capped at 5% instead of 1%.",
+          "alsoIn": []
+        },
+        {
+          "docId": "brightwater-msa",
+          "counterparty": "Brightwater Insurance Inc",
+          "date": "2025-11-28",
+          "clauseNo": "9",
+          "heading": "DELAY AND LIQUIDATED DAMAGES",
+          "label": "accident",
+          "labelNote": "Signed on a phone in 4 minutes: 1%/day uncapped LDs, no client-delay exclusion, group set-off, English law on a US entity. Cost $9k + $14.2k legal",
+          "score": 0.884,
+          "text": "9.1 If the Supplier fails to achieve any Key Date, the Supplier shall pay to the Customer liquidated damages in the amount of one per cent (1%) of the Contract Value for each day or part day by which the relevant Key Date is missed.\n\n9.2 Liquidated damages under clause 9.1 shall be payable in addition to any other right or remedy available to the Customer under this Agreement or at law, and the Customer may deduct such liquidated damages from any sums due to the Supplier.\n\n9.3 The Supplier acknowledges that the liquidated damages set out in this clause 9 are proportionate to the Customer's legitimate interest in the timely delivery of the Services.",
+          "differs": "Better for AtliQ than Brightwater Insurance Inc: penalty is 0.5% per week capped at 5% of milestone fee, excluding client delays.",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "data_protection",
+      "docId": "syn-greystone-msa",
+      "clauseRef": "§11",
+      "quote": "11.1 Provider shall comply with the Gramm-Leach-Bliley Act Safeguards Rule as applicable to service providers and with Greystone's security schedule; notify security incidents within seventy-two (72) hours.",
+      "hits": [
+        {
+          "docId": "brightwater-msa",
+          "counterparty": "Brightwater Insurance Inc",
+          "date": "2025-11-28",
+          "clauseNo": "13",
+          "heading": "DATA PROTECTION AND INFORMATION SECURITY",
+          "label": "untagged",
+          "score": 0.911,
+          "text": "13.1 The Supplier shall comply with all applicable data protection laws, including the Connecticut Data Privacy Act and the Gramm-Leach-Bliley Act, and the Brightwater Group Information Security Schedule.\n\n13.2 The Supplier shall notify the Customer of any security incident affecting Customer Data within twenty-four (24) hours of becoming aware of it.\n\n13.3 The Supplier shall not process Customer Data outside the United States without the Customer's prior written consent.",
+          "differs": "Better for AtliQ than Brightwater Insurance Inc: incident notification deadline is 72 hours instead of 24 hours.",
+          "alsoIn": []
+        },
+        {
+          "docId": "crestline-msa",
+          "counterparty": "Crestline Retail Inc",
+          "date": "2024-08-01",
+          "clauseNo": "13",
+          "heading": "DATA SECURITY",
+          "label": "untagged",
+          "score": 0.911,
+          "text": "13.1 Supplier shall comply with Crestline's Vendor Data Security Requirements, as updated from time to time, and all applicable U.S. federal and state privacy laws, including the Ohio Data Protection Act where applicable.\n\n13.2 Supplier shall notify Crestline within seventy-two (72) hours of becoming aware of any security incident affecting Crestline data.\n\n13.3 Supplier shall not access Crestline production data from outside the United States without Crestline's prior written approval.",
+          "differs": "Better for AtliQ than Crestline Retail Inc: does not require prior written approval for accessing data outside the United States.",
+          "alsoIn": []
+        },
+        {
+          "docId": "trustline-msa",
+          "counterparty": "Trustline NBFC",
+          "date": "2026-08-15",
+          "clauseNo": "13",
+          "heading": "DATA PROTECTION AND AUDIT",
+          "label": "untagged",
+          "score": 0.881,
+          "text": "13.1 The Service Provider shall comply with the Digital Personal Data Protection Act, 2023, the Information Technology Act, 2000 and applicable RBI directions in processing Company Data, and shall store Company Data only in India.\n\n13.2 The Service Provider shall report any security incident to the Company within six (6) hours of detection.\n\n13.3 The Company, its auditors and the Reserve Bank of India shall have the right to inspect and audit the Service Provider's records and facilities relating to the Services.",
+          "differs": "Better for AtliQ than Trustline NBFC: incident notification deadline is 72 hours instead of 6 hours, without data residency restrictions.",
+          "alsoIn": []
+        }
+      ]
+    }
+  ],
+  "counselPack": null,
+  "errors": [],
+  "usage": {
+    "calls": 5,
+    "cachedCalls": 0,
+    "inputTokens": 9597,
+    "outputTokens": 19736,
+    "ms": 62943
+  }
+}

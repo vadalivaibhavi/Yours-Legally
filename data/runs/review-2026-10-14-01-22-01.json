@@ -1,0 +1,142 @@
+{
+  "deals": [
+    "ortiz",
+    "lakeshore",
+    "travelhub",
+    "kriti",
+    "datavane",
+    "loopmart"
+  ],
+  "skipped": [
+    "harrington",
+    "marcus",
+    "blueorchid",
+    "gulfcrown",
+    "rheinwerk",
+    "sunrise-sow2",
+    "finserve"
+  ],
+  "concurrency": 1,
+  "minIntervalMs": 4000,
+  "seconds": 133,
+  "quotaStop": "daily quota reached for gemini-3.6-flash, gemini-flash-latest, gemini-3.8-flash, gemini-3.7-flash, gemini-3-flash-preview, gemini-3.5-flash: resume tomorrow (completed steps are cached)",
+  "calls": 1,
+  "cached": 15,
+  "inTok": 5297,
+  "outTok": 3610,
+  "byTaskAndModel": [
+    {
+      "task": "brief",
+      "model": "gemini-3-flash-preview",
+      "calls": 0,
+      "cached": 1,
+      "failed": 0,
+      "inTok": 0,
+      "outTok": 0
+    },
+    {
+      "task": "brief",
+      "model": "gemini-3.5-flash",
+      "calls": 0,
+      "cached": 1,
+      "failed": 0,
+      "inTok": 0,
+      "outTok": 0
+    },
+    {
+      "task": "brief",
+      "model": "gemini-3.6-flash",
+      "calls": 0,
+      "cached": 1,
+      "failed": 0,
+      "inTok": 0,
+      "outTok": 0
+    },
+    {
+      "task": "conflict",
+      "model": "gemini-3-flash-preview",
+      "calls": 0,
+      "cached": 1,
+      "failed": 0,
+      "inTok": 0,
+      "outTok": 0
+    },
+    {
+      "task": "conflict",
+      "model": "gemini-3.5-flash",
+      "calls": 0,
+      "cached": 1,
+      "failed": 0,
+      "inTok": 0,
+      "outTok": 0
+    },
+    {
+      "task": "conflict",
+      "model": "gemini-3.6-flash",
+      "calls": 0,
+      "cached": 1,
+      "failed": 0,
+      "inTok": 0,
+      "outTok": 0
+    },
+    {
+      "task": "differs",
+      "model": "gemini-3-flash-preview",
+      "calls": 1,
+      "cached": 0,
+      "failed": 0,
+      "inTok": 5297,
+      "outTok": 3610
+    },
+    {
+      "task": "differs",
+      "model": "gemini-3.6-flash,gemini-flash-latest,gemini-3.8-flash,gemini-3.7-flash,gemini-3-flash-preview,gemini-3.5-flash",
+      "calls": 0,
+      "cached": 0,
+      "failed": 2,
+      "inTok": 0,
+      "outTok": 0
+    },
+    {
+      "task": "extract",
+      "model": "gemini-flash-lite-latest",
+      "calls": 0,
+      "cached": 4,
+      "failed": 0,
+      "inTok": 0,
+      "outTok": 0
+    },
+    {
+      "task": "nda",
+      "model": "gemini-3.6-flash",
+      "calls": 0,
+      "cached": 1,
+      "failed": 0,
+      "inTok": 0,
+      "outTok": 0
+    },
+    {
+      "task": "notes",
+      "model": "gemini-3-flash-preview",
+      "calls": 0,
+      "cached": 3,
+      "failed": 0,
+      "inTok": 0,
+      "outTok": 0
+    },
+    {
+      "task": "playbook",
+      "model": "gemini-3.5-flash",
+      "calls": 0,
+      "cached": 3,
+      "failed": 0,
+      "inTok": 0,
+      "outTok": 0
+    }
+  ],
+  "rows": [
+    "lakeshore     HOLD                1B 0H 1M  45s  INCOMPLETE ",
+    "travelhub     HOLD                1B 2H 3M  45s  INCOMPLETE ",
+    "datavane      SIGN AFTER CHANGES  0B 3H 1M  21s  "
+  ]
+}

@@ -1,0 +1,805 @@
+{
+  "dealId": "cobalt",
+  "version": 1,
+  "createdAt": "2026-10-14T01:53:59.164Z",
+  "trigger": "initial review",
+  "inputsHash": "7a1b1cbf3c13a10e066d57e9377d2501",
+  "documentIds": [
+    "syn-cobalt-msa"
+  ],
+  "registerVersion": "reg-2026-10-14-85+r0",
+  "playbookVersion": "pb-v1.1-2026-10-05",
+  "models": [
+    "gemini-flash-lite-latest",
+    "gemini-3.6-flash"
+  ],
+  "promptVersion": "p1",
+  "route": "full_review",
+  "verdict": "HOLD",
+  "headline": "HOLD: 2 blockers, 1 high, 1 medium, 2 low issues",
+  "nextAction": "Karandeep must renegotiate the MFN pricing terms and liability cap exceptions with Cobalt Outfitters.",
+  "findings": [
+    {
+      "key": "conflict:crestline-msa:mfn_pricing",
+      "category": "conflict",
+      "topic": "mfn_pricing",
+      "title": "Collides with Crestline Retail Inc: Crestline Rate Card MFN Pricing",
+      "impact": "Collides with the Crestline MFN rate promise, live until July 2027.",
+      "severity": "blocker",
+      "confidence": "high",
+      "needsJudgment": false,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "syn-cobalt-msa",
+      "citations": [
+        {
+          "docId": "syn-cobalt-msa",
+          "docTitle": "Cobalt Outfitters MSA + rate card (draft)",
+          "clauseRef": "Exhibit A",
+          "quote": "Role | Hourly Rate (USD)\n\nSenior Data Engineer | $68\n\nData Engineer | $52\n\nBI Developer | $48\n\nSolution Architect | $85\n\nBlended onshore/offshore. Rates fixed for 36 months",
+          "role": "incoming"
+        },
+        {
+          "docId": "crestline-msa",
+          "docTitle": "Crestline Retail Professional Services Agreement",
+          "clauseRef": "§6.4",
+          "quote": "Supplier represents and warrants that the rates, fees and other commercial terms offered to Crestline under this Agreement are and shall remain no less favorable than those offered by Supplier or its Affiliates to any other customer for substantially similar services during the Term",
+          "role": "register"
+        },
+        {
+          "docId": "crestline-msa",
+          "docTitle": "Crestline Retail Professional Services Agreement",
+          "clauseRef": "§1.1",
+          "quote": "Affiliate**\" means any entity that directly or indirectly controls, is controlled by, or is under common control with a Party, where \"control\" means ownership of more than fifty percent (50%) of the voting interests of the entity or the power to direct its management",
+          "role": "register"
+        }
+      ],
+      "counterPosition": "Renegotiate Exhibit A rates to meet or exceed Crestline's rates ($85/hr Senior Data Engineer, $62/hr Data Engineer, $58/hr BI Developer) or seek a waiver from Crestline.",
+      "registerEntryId": "crestline-msa#1",
+      "registerVerified": false,
+      "expiry": "2027-07-31",
+      "waiver": null
+    },
+    {
+      "key": "conflict:syn-meridale-msa:mfn_pricing",
+      "category": "conflict",
+      "topic": "mfn_pricing",
+      "title": "Collides with Meridale Retail Brands Inc: Most Favored Customer pricing commitment",
+      "impact": "Collides with the Meridale MFN pricing commitment, live until February 2028.",
+      "severity": "blocker",
+      "confidence": "high",
+      "needsJudgment": false,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "syn-cobalt-msa",
+      "citations": [
+        {
+          "docId": "syn-cobalt-msa",
+          "docTitle": "Cobalt Outfitters MSA + rate card (draft)",
+          "clauseRef": "Exhibit A",
+          "quote": "Role | Hourly Rate (USD)\n\nSenior Data Engineer | $68\n\nData Engineer | $52\n\nBI Developer | $48\n\nSolution Architect | $85\n\nBlended onshore/offshore. Rates fixed for 36 months",
+          "role": "incoming"
+        },
+        {
+          "docId": "syn-meridale-msa",
+          "docTitle": "Meridale Retail Brands MSA",
+          "clauseRef": "§6.3",
+          "quote": "Vendor represents, warrants and covenants that the rates, fees, discounts and other pricing terms offered to Meridale under this Agreement are, and throughout the Term shall remain, at least as favorable as the rates, fees, discounts and pricing terms offered or charged by Vendor **or any of its Affiliates** to any other customer, anywhere in the world, for substantially similar services in substantially similar volumes",
+          "role": "register"
+        },
+        {
+          "docId": "syn-meridale-msa",
+          "docTitle": "Meridale Retail Brands MSA",
+          "clauseRef": "§6.4",
+          "quote": "If Vendor or any Affiliate offers or charges any other customer more favorable pricing, Vendor shall (a) notify Meridale in writing within thirty (30) days, (b) extend such pricing to Meridale effective from the date it was first offered to such other customer, and (c) promptly refund or credit any amounts paid by Meridale in excess of such pricing",
+          "role": "register"
+        },
+        {
+          "docId": "syn-meridale-msa",
+          "docTitle": "Meridale Retail Brands MSA",
+          "clauseRef": "§6.6",
+          "quote": "For the purposes of this Section 6, \"**Affiliate**\" means any entity controlling, controlled by or under common control with Vendor, including AtliQ Technologies Private Limited (India",
+          "role": "register"
+        }
+      ],
+      "counterPosition": "Renegotiate Exhibit A rates to meet or exceed Meridale's rates ($80/hr Senior Data Engineer, $60/hr Data Engineer, $56/hr BI Developer, $95/hr Solution Architect) or seek a waiver from Meridale.",
+      "registerEntryId": "syn-meridale-msa#2",
+      "registerVerified": false,
+      "expiry": "2028-02-02",
+      "waiver": null
+    },
+    {
+      "key": "playbook:liability",
+      "category": "playbook",
+      "topic": "liability",
+      "title": "Indemnity carved out of aggregate liability cap",
+      "impact": "AtliQ risks unlimited financial exposure for indemnification claims under the agreement.",
+      "severity": "high",
+      "confidence": "medium",
+      "needsJudgment": false,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "syn-cobalt-msa",
+      "citations": [
+        {
+          "docId": "syn-cobalt-msa",
+          "docTitle": "Cobalt Outfitters MSA + rate card (draft)",
+          "clauseRef": "7.1",
+          "quote": "Neither party liable for consequential damages. Each party's aggregate liability capped at fees paid or payable under the applicable SOW, except for confidentiality breaches and indemnity",
+          "role": "incoming"
+        }
+      ],
+      "standard": "Each party's aggregate liability capped at 1× fees (paid or payable in the prior 12 months), mutual; carve-outs only for fraud, wilful misconduct and confidentiality (plus any carve-outs that are mandatory under the governing law, e.g. German law for intent/gross negligence and injury).",
+      "counterPosition": "Limit liability cap carve-outs to confidentiality conflicts, fraud, willful misconduct, and IP infringement indemnification.",
+      "precedents": [
+        {
+          "docId": "ref-negotiation-notes",
+          "counterparty": "Kessler Mobility",
+          "clauseRef": "negotiation notes",
+          "label": "standard",
+          "note": "Walked away from a €120k deal over unlimited liability (Jan 2026)"
+        },
+        {
+          "docId": "sunrise-msa",
+          "counterparty": "Sunrise Foods",
+          "clauseRef": "§13",
+          "label": "standard",
+          "note": "AtliQ-friendly master: capped liability"
+        },
+        {
+          "docId": "carebridge-baa",
+          "counterparty": "CareBridge Clinics",
+          "clauseRef": "§9",
+          "label": "standard",
+          "note": "Counsel-reviewed: BAA liability capped at 2× trailing-12-month fees"
+        },
+        {
+          "docId": "brightwater-msa",
+          "counterparty": "Brightwater Insurance",
+          "clauseRef": "§15",
+          "label": "accident",
+          "note": "LDs carved out of the 150% cap"
+        }
+      ]
+    },
+    {
+      "key": "playbook:other",
+      "category": "playbook",
+      "topic": "other",
+      "title": "Most Favored Customer rate requirement",
+      "impact": "AtliQ could be forced to lower its contract pricing if it offers lower rates to any other US client during the 36-month term.",
+      "severity": "medium",
+      "confidence": "medium",
+      "needsJudgment": false,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "syn-cobalt-msa",
+      "citations": [
+        {
+          "docId": "syn-cobalt-msa",
+          "docTitle": "Cobalt Outfitters MSA + rate card (draft)",
+          "clauseRef": "9.1",
+          "quote": "Consultant warrants that the rates in Exhibit A are no less favorable than those Consultant charges any other customer in the United States for comparable services. If Consultant offers lower rates to another U.S. customer during the Term, Consultant shall extend them to Cobalt",
+          "role": "incoming"
+        }
+      ],
+      "standard": "Clause 9.1 requires AtliQ to guarantee that rates are its lowest in the US and automatically extend lower rates if offered to any other customer.",
+      "counterPosition": "Delete Section 9.1 (Most Favored Customer clause) in its entirety."
+    },
+    {
+      "key": "playbook:insurance",
+      "category": "playbook",
+      "topic": "insurance",
+      "title": "Professional liability insurance limit requires verification",
+      "impact": "AtliQ must verify that its existing insurance policy covers $1,000,000 in professional liability.",
+      "severity": "low",
+      "confidence": "medium",
+      "needsJudgment": true,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "syn-cobalt-msa",
+      "citations": [
+        {
+          "docId": "syn-cobalt-msa",
+          "docTitle": "Cobalt Outfitters MSA + rate card (draft)",
+          "clauseRef": "11.2",
+          "quote": "Consultant shall maintain professional liability insurance of $1,000,000",
+          "role": "incoming"
+        }
+      ],
+      "standard": "Check every required insurance type and limit against what AtliQ actually holds before signing (known: cyber $1M; everything else unrecorded).",
+      "counterPosition": "Confirm AtliQ's current professional liability policy meets the $1,000,000 limit or adjust the contractual requirement to match existing coverage.",
+      "precedents": []
+    },
+    {
+      "key": "playbook:ld",
+      "category": "playbook",
+      "topic": "ld",
+      "title": "Liquidated damages clause lacks sole remedy language",
+      "impact": "Cobalt could potentially seek additional damages for delay beyond the agreed liquidated damages.",
+      "severity": "low",
+      "confidence": "medium",
+      "needsJudgment": false,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "syn-cobalt-msa",
+      "citations": [
+        {
+          "docId": "syn-cobalt-msa",
+          "docTitle": "Cobalt Outfitters MSA + rate card (draft)",
+          "clauseRef": "10.1",
+          "quote": "Liquidated damages of 0.5% of the affected milestone fee per week of Consultant-caused delay, capped at 5% of that milestone fee",
+          "role": "incoming"
+        }
+      ],
+      "standard": "0.5% of the affected milestone fee per week of delay attributable to AtliQ, capped at 5% of that milestone fee; no LDs for client-caused delay; LDs are the sole remedy for delay.",
+      "counterPosition": "Add explicit language stating that liquidated damages are Cobalt's sole and exclusive remedy for delay.",
+      "precedents": [
+        {
+          "docId": "acme-msa",
+          "counterparty": "Acme Retail Group",
+          "clauseRef": "§7",
+          "label": "standard",
+          "note": "Origin of the position (Mar 2025): countered 1%/week uncapped"
+        },
+        {
+          "docId": "northwind-msa",
+          "counterparty": "Northwind Logistics",
+          "clauseRef": "§11",
+          "label": "standard",
+          "note": "Countered 10% of contract value (Jun 2025)"
+        },
+        {
+          "docId": "trustline-msa",
+          "counterparty": "Trustline NBFC",
+          "clauseRef": "§7",
+          "label": "standard",
+          "note": "Countered 2%/week, 10% cap (Aug 2026)"
+        },
+        {
+          "docId": "alnoor-msa",
+          "counterparty": "Al Noor Hospitality",
+          "clauseRef": "§10.3",
+          "label": "exception",
+          "note": "10% of total fees cap: \"strategic exception for Al Noor only, not our new standard\". One-off: not a precedent"
+        },
+        {
+          "docId": "brightwater-msa",
+          "counterparty": "Brightwater Insurance",
+          "clauseRef": "§9",
+          "label": "accident",
+          "note": "1% of contract value per day, uncapped, no client-delay exclusion. Signed on a phone; cost $9k + $14.2k legal"
+        }
+      ]
+    }
+  ],
+  "fine": [
+    "Correct AtliQ entity: Inc for a USA counterparty",
+    "Parties = invoicing entity: Inc throughout",
+    "Governing law matches entity: laws of the State of Colorado (Inc → US law)",
+    "Payment ≤ 45 days: 30 days",
+    "Net 30 days payment terms comply with AtliQ standard.",
+    "Termination for convenience provides 30 days' notice and payment for work performed.",
+    "Confidentiality provisions are mutual with a standard 3-year duration.",
+    "Deliverables transfer upon payment and AtliQ retains background IP with a non-exclusive licence.",
+    "60-day warranty for SOW conformity is standard.",
+    "Offshore processing in India is allowed provided customer personal data is not stored outside the US.",
+    "Mutual indemnity structure for IP, confidentiality, and gross negligence/willful misconduct is acceptable."
+  ],
+  "notSeen": [
+    "Insurance: professional indemnity $1M required: AtliQ's professional indemnity cover isn't recorded anywhere. Confirm with finance.",
+    "Commitments were checked against all 27 signed contracts on file. Contracts AtliQ hasn't uploaded can't be checked."
+  ],
+  "documents": [
+    {
+      "docId": "syn-cobalt-msa",
+      "title": "Cobalt Outfitters MSA + rate card (draft)",
+      "docType": "MSA",
+      "paper": "client",
+      "route": "full_review",
+      "facts": [
+        {
+          "field": "docType",
+          "label": "Document type",
+          "value": "MSA"
+        },
+        {
+          "field": "parties",
+          "label": "Counterparty",
+          "value": "Cobalt Outfitters, Inc. (USA)"
+        },
+        {
+          "field": "entity",
+          "label": "AtliQ entity (parties)",
+          "value": "Inc",
+          "clauseRef": "Preamble",
+          "quote": "AtliQ Inc, a Delaware corporation with offices at 101 College Road East, Suite 210, Princeton, New Jersey 08540 (\"Consultant"
+        },
+        {
+          "field": "invoicing",
+          "label": "AtliQ entity (invoicing)",
+          "value": "Inc",
+          "clauseRef": "Preamble",
+          "quote": "AtliQ Inc, a Delaware corporation with offices at 101 College Road East, Suite 210, Princeton, New Jersey 08540 (\"Consultant"
+        },
+        {
+          "field": "law",
+          "label": "Governing law",
+          "value": "laws of the State of Colorado",
+          "clauseRef": "11.1",
+          "quote": "Governed by the laws of the State of Colorado"
+        },
+        {
+          "field": "forum",
+          "label": "Forum",
+          "value": "Denver County",
+          "clauseRef": "11.1",
+          "quote": "Venue: Denver County"
+        },
+        {
+          "field": "payment",
+          "label": "Payment",
+          "value": "30 days",
+          "clauseRef": "2.3",
+          "quote": "Invoices are payable net thirty (30) days"
+        },
+        {
+          "field": "ld",
+          "label": "Delay penalties",
+          "value": "0.5% of milestone per week, cap 5% of milestone",
+          "clauseRef": "10.1",
+          "quote": "Liquidated damages of 0.5% of the affected milestone fee per week of Consultant-caused delay, capped at 5% of that milestone fee"
+        },
+        {
+          "field": "liability",
+          "label": "Liability",
+          "value": "fees paid or payable under the applicable SOW · uncapped for confidentiality breaches, indemnity",
+          "clauseRef": "7.1",
+          "quote": "Each party's aggregate liability capped at fees paid or payable under the applicable SOW, except for confidentiality breaches and indemnity"
+        },
+        {
+          "field": "insurance",
+          "label": "Insurance required",
+          "value": "professional indemnity $1M"
+        },
+        {
+          "field": "annexes",
+          "label": "Annexes referenced",
+          "value": "EXHIBIT A, EXHIBIT B"
+        },
+        {
+          "field": "scope",
+          "label": "Sectors · regions",
+          "value": "retail, technology · USA"
+        },
+        {
+          "field": "data",
+          "label": "Data handled",
+          "value": "personal_data"
+        },
+        {
+          "field": "rates",
+          "label": "Rates",
+          "value": "Senior Data Engineer $68/hr, Data Engineer $52/hr, BI Developer $48/hr, Solution Architect $85/hr"
+        }
+      ],
+      "gate": [
+        {
+          "rule": "entity",
+          "label": "Correct AtliQ entity",
+          "pass": true,
+          "detail": "Inc for a USA counterparty",
+          "citation": {
+            "docId": "syn-cobalt-msa",
+            "docTitle": "Cobalt Outfitters MSA + rate card (draft)",
+            "clauseRef": "Preamble",
+            "quote": "AtliQ Inc, a Delaware corporation with offices at 101 College Road East, Suite 210, Princeton, New Jersey 08540 (\"Consultant",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "invoicing_entity",
+          "label": "Parties = invoicing entity",
+          "pass": true,
+          "detail": "Inc throughout",
+          "citation": {
+            "docId": "syn-cobalt-msa",
+            "docTitle": "Cobalt Outfitters MSA + rate card (draft)",
+            "clauseRef": "Preamble",
+            "quote": "AtliQ Inc, a Delaware corporation with offices at 101 College Road East, Suite 210, Princeton, New Jersey 08540 (\"Consultant",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "governing_law",
+          "label": "Governing law matches entity",
+          "pass": true,
+          "detail": "laws of the State of Colorado (Inc → US law)",
+          "citation": {
+            "docId": "syn-cobalt-msa",
+            "docTitle": "Cobalt Outfitters MSA + rate card (draft)",
+            "clauseRef": "11.1",
+            "quote": "Governed by the laws of the State of Colorado",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "payment",
+          "label": "Payment ≤ 45 days",
+          "pass": true,
+          "detail": "30 days",
+          "citation": {
+            "docId": "syn-cobalt-msa",
+            "docTitle": "Cobalt Outfitters MSA + rate card (draft)",
+            "clauseRef": "2.3",
+            "quote": "Invoices are payable net thirty (30) days",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "ld_cap",
+          "label": "Delay penalties capped",
+          "pass": true,
+          "detail": "Cap 5% of milestone",
+          "citation": {
+            "docId": "syn-cobalt-msa",
+            "docTitle": "Cobalt Outfitters MSA + rate card (draft)",
+            "clauseRef": "10.1",
+            "quote": "Liquidated damages of 0.5% of the affected milestone fee per week of Consultant-caused delay, capped at 5% of that milestone fee",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "liability_cap",
+          "label": "Liability capped",
+          "pass": false,
+          "detail": "Capped (fees paid or payable under the applicable SOW) but uncapped for: indemnity",
+          "citation": {
+            "docId": "syn-cobalt-msa",
+            "docTitle": "Cobalt Outfitters MSA + rate card (draft)",
+            "clauseRef": "7.1",
+            "quote": "Each party's aggregate liability capped at fees paid or payable under the applicable SOW, except for confidentiality breaches and indemnity",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "insurance:professional_indemnity",
+          "label": "Insurance: professional indemnity $1M",
+          "pass": null,
+          "detail": "AtliQ's cover for this type isn't recorded: verify",
+          "citation": {
+            "docId": "syn-cobalt-msa",
+            "docTitle": "Cobalt Outfitters MSA + rate card (draft)",
+            "clauseRef": "11.2",
+            "quote": "Consultant shall maintain professional liability insurance of $1,000,000",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "annex:exhibit-a",
+          "label": "EXHIBIT A attached",
+          "pass": true,
+          "detail": "Attached in this document",
+          "citation": {
+            "docId": "syn-cobalt-msa",
+            "docTitle": "Cobalt Outfitters MSA + rate card (draft)",
+            "clauseRef": "Exhibit A",
+            "quote": "EXHIBIT A — RATE CARD",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "annex:exhibit-b",
+          "label": "EXHIBIT B attached",
+          "pass": true,
+          "detail": "Attached in this document",
+          "citation": {
+            "docId": "syn-cobalt-msa",
+            "docTitle": "Cobalt Outfitters MSA + rate card (draft)",
+            "clauseRef": "Exhibit B",
+            "quote": "EXHIBIT B — SOW-1 MILESTONES",
+            "role": "incoming"
+          }
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "bundle": [],
+  "notesFacts": [
+    {
+      "id": "cobalt-fact-1",
+      "statement": "Cobalt Outfitters deal has a target deadline of 2 October.",
+      "category": "deadline",
+      "noteId": "note-2026-09-26-pipeline_review_new_queu",
+      "noteTitle": "Pipeline review — \"the second queue\" (Sat 26 Sep, call)",
+      "quote": "- Cobalt Outfitters (Jay) — $58k, US — by **2 Oct",
+      "complianceEvent": false,
+      "whyItMatters": "The agreement target completion date must be tracked and met by October 2."
+    },
+    {
+      "id": "cobalt-fact-2",
+      "statement": "Cobalt Outfitters has a clause requiring the best US rate, and the agreed rate card is $68 per hour for a senior DE.",
+      "category": "commitment",
+      "noteId": "note-2026-09-26-pipeline_review_new_queu",
+      "noteTitle": "Pipeline review — \"the second queue\" (Sat 26 Sep, call)",
+      "quote": "Jay: Cobalt rate card is $68 senior DE. \"Dhaval ok'd on WhatsApp. They have a clause saying they get our best US rate, but we're giving them the best rate, so it's fine",
+      "complianceEvent": false,
+      "whyItMatters": "The contract reviewer must confirm that $68 per hour is indeed the best US rate offered across deals to satisfy the clause."
+    },
+    {
+      "id": "cobalt-fact-3",
+      "statement": "The deal tracker lists a 2 October deadline and $68 per hour senior DE rate approved by Dhaval via WhatsApp.",
+      "category": "deadline",
+      "noteId": "tracker",
+      "noteTitle": "Tracker notes",
+      "quote": "SYN-113 (MSA + rate card): by 2 Oct. $68/hr senior DE - Dhaval ok'd on WhatsApp",
+      "complianceEvent": false,
+      "whyItMatters": "Confirms rate card approval and deadline status tracked for SYN-113."
+    },
+    {
+      "id": "cobalt-fact-4",
+      "statement": "Cobalt is identified as part of the Q4 overflow pipeline work estimated at 900 hours.",
+      "category": "staffing",
+      "noteId": "note-2026-09-25-vendor_capacity_review",
+      "noteTitle": "Vendor & capacity review (25 Sep 2026, Pune office)",
+      "quote": "Pranav: Q4 overflow is ~900 hrs of pipeline work (Lakeshore, Cobalt if it lands, Cargoline if it lands",
+      "complianceEvent": false,
+      "whyItMatters": "Capacity planning requires tracking expected staffing and vendor overflow hours if the deal lands."
+    }
+  ],
+  "complianceCandidate": null,
+  "similar": [
+    {
+      "clauseType": "payment",
+      "docId": "syn-cobalt-msa",
+      "clauseRef": "§2",
+      "quote": "2.1 SOW-1 is fixed-fee: USD 58,000, payable by milestone (Exhibit B).\n\n2.2 Change orders and future SOWs shall be charged at the rates in Exhibit A, which shall remain fixed for thirty-six (36) months from the Effective Date.\n\n2.3 Invoices are payable net thirty (30) days.",
+      "hits": [
+        {
+          "docId": "sunrise-msa",
+          "counterparty": "Sunrise Foods",
+          "date": "2025-04-18",
+          "clauseNo": "5",
+          "heading": "FEES AND PAYMENT",
+          "label": "untagged",
+          "score": 0.907,
+          "text": "5.1 The total Fees under SOW-1 are **USD 33,000** (United States Dollars Thirty-Three Thousand only), comprising build fees payable on Milestones and a Monthly Support Fee for the support period, as detailed in SOW-1.\n\n5.2 AtliQ shall invoice build fees upon completion of each Milestone and the Monthly Support Fee monthly in arrears. Sunrise shall pay each undisputed invoice within thirty (30) days of the invoice date.\n\n5.3 All amounts are exclusive of GST, which shall be charged additionally at the applicable rate. Sunrise may deduct TDS as required by law.\n\n5.4 Delayed payments shall attract interest at twelve percent (12%) per annum.",
+          "differs": "Worse for AtliQ than Sunrise Foods: rates for change orders and future SOWs are locked for 36 months.",
+          "alsoIn": []
+        },
+        {
+          "docId": "orbit-msa",
+          "counterparty": "Orbit Travels Pvt Ltd",
+          "date": "2022-07-01",
+          "clauseNo": "2",
+          "heading": "FEES AND PAYMENT",
+          "label": "untagged",
+          "score": 0.906,
+          "text": "2.1 The Client shall pay the fees set out in each SOW. Invoices shall be raised monthly and paid\nwithin thirty (30) days of receipt. Fees are exclusive of GST.\n2.2 Delayed payment shall carry interest @ l2% per annum.",
+          "differs": "Worse for AtliQ than Orbit Travels Pvt Ltd: no interest is charged on late payments, unlike the 12% per annum rate previously.",
+          "alsoIn": []
+        },
+        {
+          "docId": "trustline-msa",
+          "counterparty": "Trustline NBFC",
+          "date": "2026-08-15",
+          "clauseNo": "4",
+          "heading": "FEES AND PAYMENT",
+          "label": "standard",
+          "labelNote": "45-day payment: the negotiated maximum (90 → 45)",
+          "score": 0.876,
+          "text": "4.1 The total fees for the Services are **USD 48,000** (United States Dollars Forty-Eight Thousand only), payable on completion of Milestones as set out in Annexure A.\n\n4.2 The Service Provider shall raise an invoice upon completion of each Milestone. The Company shall pay each undisputed invoice within forty-five (45) days of receipt of the invoice.\n\n4.3 All fees are exclusive of GST. The Company shall be entitled to deduct TDS as applicable.\n\n4.4 Any disputed amount shall be notified within ten (10) days of receipt of invoice, and the Parties shall resolve such dispute in good faith within thirty (30) days.",
+          "differs": "Better for AtliQ than Trustline NBFC: invoices are payable within 30 days instead of 45 days.",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "ip",
+      "docId": "syn-cobalt-msa",
+      "clauseRef": "§5",
+      "quote": "5.1 Cobalt owns SOW deliverables upon payment. Consultant retains pre-existing tools, licensed to Cobalt non-exclusively and perpetually for internal use.",
+      "hits": [
+        {
+          "docId": "rohan-ica",
+          "counterparty": "Rohan Iyer",
+          "date": "2025-04-28",
+          "clauseNo": "5",
+          "heading": "INTELLECTUAL PROPERTY",
+          "label": "accident",
+          "labelNote": "Rohan kept the Work Product IP (\"ok\" from phone) while Acme was promised ownership",
+          "score": 0.885,
+          "text": "5.1 In this Clause, \"**Work Product**\" means all dashboards, reports, data models, DAX measures, Power Query scripts, visual templates, documentation and other materials created by the Contractor in performing the Services.\n\n5.2 The Contractor retains ownership of all intellectual property rights in the Work Product and in any pre-existing materials, components and templates of the Contractor.\n\n5.3 The Contractor grants AtliQ a non-exclusive, perpetual, irrevocable, royalty-free, worldwide licence to use, copy, modify and deploy the Work Product for the purposes of AtliQ's business, including for delivery to AtliQ's clients.\n\n5.4 The Contractor shall not incorporate into the Work Product any third-party material that AtliQ is not entitled to use under Clause 5.3.",
+          "differs": "Worse for AtliQ than Rohan Iyer: client owns the deliverables upon payment, whereas the supplier retained ownership of all work product.",
+          "alsoIn": []
+        },
+        {
+          "docId": "orbit-msa",
+          "counterparty": "Orbit Travels Pvt Ltd",
+          "date": "2022-07-01",
+          "clauseNo": "5",
+          "heading": "INTELLECTUAL PR0PERTY",
+          "label": "untagged",
+          "score": 0.903,
+          "text": "5.1 All deliverables developed specifically for the Client shall be the property of the Client\nupon full payment. The Service Provider retains its pre-existing tools and know-how.",
+          "differs": "Same as Orbit Travels Pvt Ltd: client owns deliverables upon payment while AtliQ retains its pre-existing tools.",
+          "alsoIn": [
+            "Acme Retail Group (2025-03)"
+          ]
+        },
+        {
+          "docId": "crestline-msa",
+          "counterparty": "Crestline Retail Inc",
+          "date": "2024-08-01",
+          "clauseNo": "8",
+          "heading": "INTELLECTUAL PROPERTY",
+          "label": "untagged",
+          "score": 0.898,
+          "text": "8.1 Upon payment, Crestline shall own all right, title and interest in the Deliverables.\n\n8.2 Supplier retains all rights in its pre-existing materials, tools and know-how (\"**Supplier Materials**\"). To the extent Supplier Materials are incorporated in a Deliverable, Supplier grants Crestline a non-exclusive, perpetual, royalty-free license to use them as part of such Deliverable.",
+          "differs": "Same as Crestline Retail Inc: client owns deliverables upon payment while AtliQ retains its pre-existing tools.",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "liability",
+      "docId": "syn-cobalt-msa",
+      "clauseRef": "§7",
+      "quote": "7.1 Neither party liable for consequential damages. Each party's aggregate liability capped at fees paid or payable under the applicable SOW, except for confidentiality breaches and indemnity.",
+      "hits": [
+        {
+          "docId": "sunrise-msa",
+          "counterparty": "Sunrise Foods",
+          "date": "2025-04-18",
+          "clauseNo": "13",
+          "heading": "LIMITATION OF LIABILITY",
+          "label": "standard",
+          "labelNote": "AtliQ-friendly master: capped liability, service credits capped at 5%",
+          "score": 0.939,
+          "text": "13.1 Neither Party shall be liable for indirect, consequential or special losses or loss of profits.\n\n13.2 Each Party's aggregate liability under an SOW shall not exceed the Fees paid or payable under that SOW.",
+          "differs": "Worse for AtliQ than Sunrise Foods: liability cap excludes confidentiality conflicts and indemnities, exposing AtliQ to uncapped liability.",
+          "alsoIn": []
+        },
+        {
+          "docId": "paytrack-msa",
+          "counterparty": "PayTrack Technologies",
+          "date": "2025-01-22",
+          "clauseNo": "11",
+          "heading": "LIMITATION OF LIABILITY",
+          "label": "untagged",
+          "score": 0.937,
+          "text": "11.1 Neither Party shall be liable for any indirect, special, incidental or consequential damages, or loss of profits, revenue or goodwill.\n\n11.2 Each Party's total aggregate liability under or in connection with this Agreement shall not exceed the total fees paid or payable under the SOW giving rise to the claim.\n\n11.3 The limitations in this Clause 11 shall not apply to liability for fraud or wilful misconduct.",
+          "differs": "Worse for AtliQ than PayTrack Technologies: liability cap excludes confidentiality conflicts and indemnities rather than only fraud and wilful misconduct.",
+          "alsoIn": [
+            "Trustline NBFC (2026-08)",
+            "Acme Retail Group (2025-03)",
+            "Northwind Logistics (2025-06)",
+            "CloudSpan Technologies (2025-09)",
+            "Al Noor Hospitality Group (2025-03)"
+          ]
+        },
+        {
+          "docId": "rohan-ica",
+          "counterparty": "Rohan Iyer",
+          "date": "2025-04-28",
+          "clauseNo": "8",
+          "heading": "LIABILITY",
+          "label": "standard",
+          "labelNote": "Fair freelancer terms: 30-day pay, mutual cap, mutual 15-day exit",
+          "score": 0.916,
+          "text": "8.1 Each party's aggregate liability under this Agreement shall not exceed the total fees paid or payable to the Contractor in the twelve (12) months preceding the claim, except for breach of Clause 6 or fraud.\n\n8.2 Neither party is liable for indirect or consequential loss.",
+          "differs": "Worse for AtliQ than Rohan Iyer: liability cap excludes indemnities, exposing AtliQ to uncapped liability for third-party claims.",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "indemnity",
+      "docId": "syn-cobalt-msa",
+      "clauseRef": "§8",
+      "quote": "8.1 Mutual indemnity for third-party claims arising from IP infringement, breach of confidentiality, or gross negligence/willful misconduct.",
+      "hits": [
+        {
+          "docId": "acme-msa",
+          "counterparty": "Acme Retail Group",
+          "date": "2025-03-10",
+          "clauseNo": "11",
+          "heading": "INDEMNITY",
+          "label": "standard",
+          "labelNote": "Mutual indemnity",
+          "score": 0.951,
+          "text": "11.1 Each Party (\"**Indemnifying Party**\") shall indemnify the other against losses arising from third-party claims caused by the Indemnifying Party's breach of confidentiality, infringement of third-party intellectual property rights, or gross negligence or wilful misconduct.",
+          "differs": "Same as Acme Retail Group: mutual indemnity for third-party claims arising from IP infringement, confidentiality conflicts, and gross negligence or wilful misconduct.",
+          "alsoIn": []
+        },
+        {
+          "docId": "sunrise-msa",
+          "counterparty": "Sunrise Foods",
+          "date": "2025-04-18",
+          "clauseNo": "12",
+          "heading": "INDEMNITY",
+          "label": "untagged",
+          "score": 0.955,
+          "text": "12.1 Each Party shall indemnify the other against third-party claims arising out of its breach of confidentiality, infringement of intellectual property rights, or gross negligence or wilful misconduct.",
+          "differs": "Same as Sunrise Foods: mutual indemnity for third-party claims arising from IP infringement, confidentiality conflicts, and gross negligence or wilful misconduct.",
+          "alsoIn": [
+            "Trustline NBFC (2026-08)"
+          ]
+        },
+        {
+          "docId": "paytrack-msa",
+          "counterparty": "PayTrack Technologies",
+          "date": "2025-01-22",
+          "clauseNo": "10",
+          "heading": "INDEMNITY",
+          "label": "standard",
+          "labelNote": "Origin of the mutual-indemnity position: no indemnity for the indemnified party's own negligence",
+          "score": 0.908,
+          "text": "10.1 Each Party (the \"**Indemnifying Party**\") shall indemnify, defend and hold harmless the other Party and its directors, officers and employees (the \"**Indemnified Party**\") from and against all Losses arising out of any third-party claim to the extent caused by: (a) the Indemnifying Party's breach of Clause 7 (Confidentiality) or Clause 12 (Data Protection); (b) the gross negligence, wilful misconduct or fraud of the Indemnifying Party or its personnel; or (c) in the case of AtliQ, any claim that the Deliverables infringe a third party's intellectual property rights, and in the case of PayTrack, any claim that Client Data or materials supplied by PayTrack infringe a third party's rights.\n\n10.2 Neither Party shall be required to indemnify the other to the extent any Losses are caused by the negligence, breach or wilful misconduct of the Indemnified Party.\n\n10.3 The Indemnified Party shall give prompt written notice of any claim, permit the Indemnifying Party to control the defence and settlement, and provide reasonable cooperation at the Indemnifying Party's cost.",
+          "differs": "Better for AtliQ than PayTrack Technologies: client provides mutual indemnity for confidentiality and gross negligence, rather than indemnifying solely for IP infringement.",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "ld",
+      "docId": "syn-cobalt-msa",
+      "clauseRef": "§10",
+      "quote": "10.1 Liquidated damages of 0.5% of the affected milestone fee per week of Consultant-caused delay, capped at 5% of that milestone fee.",
+      "hits": [
+        {
+          "docId": "acme-msa",
+          "counterparty": "Acme Retail Group",
+          "date": "2025-03-10",
+          "clauseNo": "7",
+          "heading": "DELAY AND LIQUIDATED DAMAGES",
+          "label": "standard",
+          "labelNote": "Origin of the LD playbook: 0.5% of milestone/week, 5% cap, client delays excluded (Mar 2025)",
+          "score": 0.925,
+          "text": "7.1 If the Service Provider fails to complete a Milestone by the agreed date for reasons solely attributable to the Service Provider, the Service Provider shall pay liquidated damages at the rate of 0.5% (half percent) of the Milestone Fee of the delayed Milestone for each complete week of delay.\n\n7.2 The aggregate liquidated damages in respect of any Milestone shall not exceed 5% (five percent) of the Milestone Fee of that Milestone.\n\n7.3 No liquidated damages shall be payable where the delay is caused by the Client, including delayed access to data or systems, delayed review of Deliverables, or changes in scope, or by a Force Majeure event.\n\n7.4 The Parties agree that the liquidated damages are a genuine pre-estimate of loss and shall be the Client's sole and exclusive remedy for delay.",
+          "differs": "Same as Acme Retail Group: liquidated damages are 0.5% of the milestone fee per week, capped at 5% of that milestone fee.",
+          "alsoIn": [
+            "Northwind Logistics (2025-06)",
+            "Trustline NBFC (2026-08)"
+          ]
+        },
+        {
+          "docId": "brightwater-msa",
+          "counterparty": "Brightwater Insurance Inc",
+          "date": "2025-11-28",
+          "clauseNo": "9",
+          "heading": "DELAY AND LIQUIDATED DAMAGES",
+          "label": "accident",
+          "labelNote": "Signed on a phone in 4 minutes: 1%/day uncapped LDs, no client-delay exclusion, group set-off, English law on a US entity. Cost $9k + $14.2k legal",
+          "score": 0.886,
+          "text": "9.1 If the Supplier fails to achieve any Key Date, the Supplier shall pay to the Customer liquidated damages in the amount of one per cent (1%) of the Contract Value for each day or part day by which the relevant Key Date is missed.\n\n9.2 Liquidated damages under clause 9.1 shall be payable in addition to any other right or remedy available to the Customer under this Agreement or at law, and the Customer may deduct such liquidated damages from any sums due to the Supplier.\n\n9.3 The Supplier acknowledges that the liquidated damages set out in this clause 9 are proportionate to the Customer's legitimate interest in the timely delivery of the Services.",
+          "differs": "Better for AtliQ than Brightwater Insurance Inc: liquidated damages are 0.5% per week capped at 5% of milestone fee, instead of 1% per day uncapped.",
+          "alsoIn": []
+        },
+        {
+          "docId": "alnoor-msa",
+          "counterparty": "Al Noor Hospitality Group",
+          "date": "2025-03-15",
+          "clauseNo": "10",
+          "heading": "DELIVERY, ACCEPTANCE AND LIQUIDATED DAMAGES",
+          "label": "exception",
+          "labelNote": "One-off: \"strategic exception for Al Noor only, not our new standard\" (cap 10% of total fees)",
+          "score": 0.882,
+          "text": "10.1 The Supplier shall use all reasonable endeavours to achieve each Milestone by the date set out in the relevant SOW.\n\n10.2 Each Deliverable shall be subject to acceptance testing by the Client within ten (10) Business Days of delivery against the acceptance criteria in the SOW. Deliverables not rejected in writing within that period shall be deemed accepted.\n\n10.3 If the Supplier fails to achieve a Milestone by its due date for reasons attributable to the Supplier, the Supplier shall pay to the Client, as liquidated damages, one percent (1%) of the Fees payable for the affected Milestone for each complete week of delay, provided that the aggregate liquidated damages payable under this Agreement shall not exceed ten percent (10%) of the total Fees payable under this Agreement.\n\n10.4 The Parties agree that the liquidated damages in Clause 10.3 are a genuine pre-estimate of loss. No liquidated damages shall be payable for delay caused by the Client, its contractors, or a Force Majeure Event.",
+          "differs": "Better for AtliQ than Al Noor Hospitality Group: liquidated damages are 0.5% per week capped at 5%, compared to 1% per week without a cap.",
+          "alsoIn": []
+        }
+      ]
+    }
+  ],
+  "counselPack": null,
+  "errors": [],
+  "usage": {
+    "calls": 6,
+    "cachedCalls": 0,
+    "inputTokens": 10545,
+    "outputTokens": 27262,
+    "ms": 79727
+  }
+}

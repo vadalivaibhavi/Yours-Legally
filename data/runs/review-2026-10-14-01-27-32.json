@@ -1,0 +1,57 @@
+{
+  "deals": [
+    "ortiz",
+    "lakeshore",
+    "travelhub",
+    "kriti",
+    "loopmart"
+  ],
+  "skipped": [
+    "harrington",
+    "marcus",
+    "blueorchid",
+    "gulfcrown",
+    "rheinwerk",
+    "sunrise-sow2",
+    "datavane",
+    "finserve"
+  ],
+  "concurrency": 1,
+  "minIntervalMs": 4000,
+  "seconds": 37,
+  "quotaStop": "daily quota reached for gemini-3.6-flash, gemini-flash-latest, gemini-3.8-flash, gemini-3.7-flash, gemini-3-flash-preview, gemini-3.5-flash: resume tomorrow (completed steps are cached)",
+  "calls": 0,
+  "cached": 0,
+  "inTok": 0,
+  "outTok": 0,
+  "byTaskAndModel": [
+    {
+      "task": "conflict",
+      "model": "gemini-3.6-flash",
+      "calls": 0,
+      "cached": 1,
+      "failed": 0,
+      "inTok": 0,
+      "outTok": 0
+    },
+    {
+      "task": "extract",
+      "model": "gemini-flash-lite-latest",
+      "calls": 0,
+      "cached": 1,
+      "failed": 0,
+      "inTok": 0,
+      "outTok": 0
+    },
+    {
+      "task": "playbook",
+      "model": "gemini-3.5-flash",
+      "calls": 0,
+      "cached": 1,
+      "failed": 0,
+      "inTok": 0,
+      "outTok": 0
+    }
+  ],
+  "rows": []
+}

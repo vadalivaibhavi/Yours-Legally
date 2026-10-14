@@ -1,0 +1,1021 @@
+{
+  "dealId": "pillarstone",
+  "version": 1,
+  "createdAt": "2026-10-14T01:52:39.433Z",
+  "trigger": "initial review",
+  "inputsHash": "848f973dcad1bcd1143e9d41c63d736f",
+  "documentIds": [
+    "syn-pillarstone-msa"
+  ],
+  "registerVersion": "reg-2026-10-14-85+r0",
+  "playbookVersion": "pb-v1.1-2026-10-05",
+  "models": [
+    "gemini-flash-lite-latest",
+    "gemini-3.6-flash"
+  ],
+  "promptVersion": "p1",
+  "route": "full_review",
+  "verdict": "HOLD",
+  "headline": "HOLD: 1 non-compete blocker requires waiver before signing MSA",
+  "nextAction": "Karandeep must seek consent/waiver from Kestrel Pharma regarding the distribution analytics non-compete.",
+  "findings": [
+    {
+      "key": "conflict:syn-kestrel-msa:non_compete",
+      "category": "conflict",
+      "topic": "non_compete",
+      "title": "Collides with Kestrel Pharma Distribution Pvt Ltd: Pharma distribution analytics non-compete",
+      "impact": "Collides with the Kestrel commitment, which remains live until 3 November 2028.",
+      "severity": "blocker",
+      "confidence": "high",
+      "needsJudgment": false,
+      "owner": "Karandeep",
+      "resolution": "waiver",
+      "docId": "syn-pillarstone-msa",
+      "citations": [
+        {
+          "docId": "syn-pillarstone-msa",
+          "docTitle": "Pillarstone Pharma Logistics MSA (draft)",
+          "clauseRef": "1.1(a)",
+          "quote": "a) a SKU-level demand forecasting engine (approx. 1,900 SKUs, weekly granularity, 13-week horizon",
+          "role": "incoming"
+        },
+        {
+          "docId": "syn-pillarstone-msa",
+          "docTitle": "Pillarstone Pharma Logistics MSA (draft)",
+          "clauseRef": "1.1(b)",
+          "quote": "b) depot-level replenishment and expiry-risk recommendations",
+          "role": "incoming"
+        },
+        {
+          "docId": "syn-pillarstone-msa",
+          "docTitle": "Pillarstone Pharma Logistics MSA (draft)",
+          "clauseRef": "1.1(c)",
+          "quote": "c) secondary-sales and chemist-level analytics dashboards in Power BI; and",
+          "role": "incoming"
+        },
+        {
+          "docId": "syn-kestrel-msa",
+          "docTitle": "Kestrel Pharma Distribution MSA",
+          "clauseRef": "§12.1",
+          "quote": "In consideration of the Client sharing its depot-level sales, margin and supplier data, the Service Provider undertakes that, during the Term and for a period of twelve (12) months after the expiry or termination of this Agreement (the \"**Restricted Period**\"), neither the Service Provider nor any of its Affiliates shall, directly or indirectly, provide any Restricted Services to any Competing Business",
+          "role": "register"
+        },
+        {
+          "docId": "syn-kestrel-msa",
+          "docTitle": "Kestrel Pharma Distribution MSA",
+          "clauseRef": "§1.2",
+          "quote": "Competing Business**\" means any person or entity, other than the Client and its Affiliates, engaged (wholly or in part) in the wholesale distribution, stockist operations, carrying-and-forwarding or third-party logistics of pharmaceutical products in India",
+          "role": "register"
+        },
+        {
+          "docId": "syn-kestrel-msa",
+          "docTitle": "Kestrel Pharma Distribution MSA",
+          "clauseRef": "§1.3",
+          "quote": "Restricted Services**\" means demand forecasting, inventory or replenishment optimisation, secondary-sales analytics and depot performance analytics, and any substantially similar data analytics services",
+          "role": "register"
+        }
+      ],
+      "counterPosition": "Seek a waiver or consent from Kestrel Pharma Distribution Pvt Ltd prior to signing this agreement.",
+      "registerEntryId": "syn-kestrel-msa#1",
+      "registerVerified": false,
+      "expiry": "2028-11-03",
+      "waiver": null
+    },
+    {
+      "key": "playbook:confidentiality",
+      "category": "playbook",
+      "topic": "confidentiality",
+      "title": "One-way confidentiality protecting only client information",
+      "impact": "AtliQ's proprietary tools, technical know-how, and commercial information shared during the project remain completely unprotected.",
+      "severity": "high",
+      "confidence": "medium",
+      "needsJudgment": false,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "syn-pillarstone-msa",
+      "citations": [
+        {
+          "docId": "syn-pillarstone-msa",
+          "docTitle": "Pillarstone Pharma Logistics MSA (draft)",
+          "clauseRef": "6.1",
+          "quote": "The Vendor shall keep confidential all information of the Company and its principals (manufacturers), during the term and for five (5) years thereafter",
+          "role": "incoming"
+        }
+      ],
+      "standard": "Mutual in substance, not just in title: both parties' information protected, both bound by the same obligations, residuals mutual or none, mutual remedies, fixed term, and no non-competes or non-solicits hidden inside an NDA.",
+      "counterPosition": "Make definitions and obligations mutual, protecting both parties' confidential information under identical terms for a fixed 2–3 year period.",
+      "precedents": [
+        {
+          "docId": "ref-negotiation-notes",
+          "counterparty": "GlobalMart",
+          "clauseRef": "negotiation notes",
+          "label": "standard",
+          "note": "\"We only sign mutual: we'll be sharing our architecture too\" (Mar 2026). They agreed"
+        },
+        {
+          "docId": "alnoor-nda",
+          "counterparty": "Al Noor Hospitality",
+          "clauseRef": "whole NDA",
+          "label": "standard",
+          "note": "Genuinely mutual"
+        },
+        {
+          "docId": "harrington-nda",
+          "counterparty": "Harrington Health",
+          "clauseRef": "whole NDA",
+          "label": "standard",
+          "note": "Genuinely mutual"
+        },
+        {
+          "docId": "meridian-nda",
+          "counterparty": "Meridian Healthcare",
+          "clauseRef": "whole NDA",
+          "label": "accident",
+          "note": "One-way, uncapped indemnity, 24-month no-hire, signed within the hour"
+        }
+      ]
+    },
+    {
+      "key": "playbook:indemnity",
+      "category": "playbook",
+      "topic": "indemnity",
+      "title": "One-way uncapped vendor indemnity for all losses",
+      "impact": "AtliQ is exposed to unlimited financial liability for any losses connected to the services, regardless of client negligence or fault.",
+      "severity": "high",
+      "confidence": "medium",
+      "needsJudgment": false,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "syn-pillarstone-msa",
+      "citations": [
+        {
+          "docId": "syn-pillarstone-msa",
+          "docTitle": "Pillarstone Pharma Logistics MSA (draft)",
+          "clauseRef": "7.1",
+          "quote": "The Vendor shall indemnify the Company against all losses arising out of the Services or any act or omission of the Vendor or its personnel",
+          "role": "incoming"
+        }
+      ],
+      "standard": "Mutual: each party covers its own breach and negligence; never the other side's negligence. IP-infringement indemnity for deliverables is normal.",
+      "counterPosition": "Each party indemnifies the other for third-party claims caused by its own conflict or negligence; no indemnity for losses caused by the indemnified party's own negligence; indemnities subject to the liability cap (IP infringement excepted).",
+      "precedents": [
+        {
+          "docId": "paytrack-msa",
+          "counterparty": "PayTrack Technologies",
+          "clauseRef": "§10.2",
+          "label": "standard",
+          "note": "Origin: \"we can't insure against PayTrack's own negligence\" (Jan 2025)"
+        },
+        {
+          "docId": "acme-msa",
+          "counterparty": "Acme Retail Group",
+          "clauseRef": "§11",
+          "label": "standard",
+          "note": "Mutual indemnity"
+        }
+      ]
+    },
+    {
+      "key": "playbook:ip",
+      "category": "playbook",
+      "topic": "ip",
+      "title": "Deliverables vest on creation prior to full payment",
+      "impact": "The client acquires ownership of all deliverables immediately upon creation even if AtliQ is not paid for the services.",
+      "severity": "high",
+      "confidence": "medium",
+      "needsJudgment": false,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "syn-pillarstone-msa",
+      "citations": [
+        {
+          "docId": "syn-pillarstone-msa",
+          "docTitle": "Pillarstone Pharma Logistics MSA (draft)",
+          "clauseRef": "5.1",
+          "quote": "All Deliverables shall vest in the Company upon creation",
+          "role": "incoming"
+        }
+      ],
+      "standard": "The client owns what AtliQ builds specifically for it (on payment); AtliQ keeps its background IP, pre-existing tools and know-how and grants a licence to use them as part of the deliverables.",
+      "counterPosition": "Client owns deliverables created specifically for it upon payment; AtliQ retains background IP and grants a non-exclusive, perpetual, royalty-free licence to use it as part of the deliverables.",
+      "precedents": [
+        {
+          "docId": "acme-msa",
+          "counterparty": "Acme Retail Group",
+          "clauseRef": "§9",
+          "label": "standard",
+          "note": "Client owns deliverables, AtliQ keeps background IP"
+        },
+        {
+          "docId": "northwind-msa",
+          "counterparty": "Northwind Logistics",
+          "clauseRef": "§9.2",
+          "label": "accident",
+          "note": "Pre-existing tools incl. PipeKit assigned to Northwind (\"I skimmed the IP\")"
+        }
+      ]
+    },
+    {
+      "key": "playbook:ld",
+      "category": "playbook",
+      "topic": "ld",
+      "title": "Uncapped delay penalties calculated on total contract value",
+      "impact": "AtliQ risks excessive financial penalties calculated against the entire contract value even for minor milestone delays and even when delays are caused by the client.",
+      "severity": "high",
+      "confidence": "medium",
+      "needsJudgment": false,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "syn-pillarstone-msa",
+      "citations": [
+        {
+          "docId": "syn-pillarstone-msa",
+          "docTitle": "Pillarstone Pharma Logistics MSA (draft)",
+          "clauseRef": "4.2",
+          "quote": "For any delay in achieving a Milestone, the Vendor shall pay liquidated damages of one percent (1%) of the total fees for each week of delay, subject to a maximum of fifteen percent (15%) of the total fees",
+          "role": "incoming"
+        }
+      ],
+      "counterPosition": "0.5% of the affected milestone fee per week, capped at 5% of that milestone fee; no LDs where delay is caused by the client; LDs are the sole and exclusive remedy for delay.",
+      "standard": "0.5% of the affected milestone fee per week of delay attributable to AtliQ, capped at 5% of that milestone fee; no LDs for client-caused delay; LDs are the sole remedy for delay.",
+      "precedents": [
+        {
+          "docId": "acme-msa",
+          "counterparty": "Acme Retail Group",
+          "clauseRef": "§7",
+          "label": "standard",
+          "note": "Origin of the position (Mar 2025): countered 1%/week uncapped"
+        },
+        {
+          "docId": "northwind-msa",
+          "counterparty": "Northwind Logistics",
+          "clauseRef": "§11",
+          "label": "standard",
+          "note": "Countered 10% of contract value (Jun 2025)"
+        },
+        {
+          "docId": "trustline-msa",
+          "counterparty": "Trustline NBFC",
+          "clauseRef": "§7",
+          "label": "standard",
+          "note": "Countered 2%/week, 10% cap (Aug 2026)"
+        },
+        {
+          "docId": "alnoor-msa",
+          "counterparty": "Al Noor Hospitality",
+          "clauseRef": "§10.3",
+          "label": "exception",
+          "note": "10% of total fees cap: \"strategic exception for Al Noor only, not our new standard\". One-off: not a precedent"
+        },
+        {
+          "docId": "brightwater-msa",
+          "counterparty": "Brightwater Insurance",
+          "clauseRef": "§9",
+          "label": "accident",
+          "note": "1% of contract value per day, uncapped, no client-delay exclusion. Signed on a phone; cost $9k + $14.2k legal"
+        }
+      ]
+    },
+    {
+      "key": "playbook:liability",
+      "category": "playbook",
+      "topic": "liability",
+      "title": "One-sided liability cap leaving AtliQ uncapped",
+      "impact": "AtliQ faces unlimited exposure to claims while the client's total exposure to AtliQ is severely restricted.",
+      "severity": "high",
+      "confidence": "medium",
+      "needsJudgment": false,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "syn-pillarstone-msa",
+      "citations": [
+        {
+          "docId": "syn-pillarstone-msa",
+          "docTitle": "Pillarstone Pharma Logistics MSA (draft)",
+          "clauseRef": "8.1",
+          "quote": "The Company's liability shall not exceed the fees paid in the preceding three (3) months",
+          "role": "incoming"
+        }
+      ],
+      "standard": "Each party's aggregate liability capped at 1× fees (paid or payable in the prior 12 months), mutual; carve-outs only for fraud, wilful misconduct and confidentiality (plus any carve-outs that are mandatory under the governing law, e.g. German law for intent/gross negligence and injury).",
+      "counterPosition": "Mutual cap of 1× fees paid or payable in the 12 months before the claim; carve-outs limited to fraud, wilful misconduct and non-compliance with confidentiality.",
+      "precedents": [
+        {
+          "docId": "ref-negotiation-notes",
+          "counterparty": "Kessler Mobility",
+          "clauseRef": "negotiation notes",
+          "label": "standard",
+          "note": "Walked away from a €120k deal over unlimited liability (Jan 2026)"
+        },
+        {
+          "docId": "sunrise-msa",
+          "counterparty": "Sunrise Foods",
+          "clauseRef": "§13",
+          "label": "standard",
+          "note": "AtliQ-friendly master: capped liability"
+        },
+        {
+          "docId": "carebridge-baa",
+          "counterparty": "CareBridge Clinics",
+          "clauseRef": "§9",
+          "label": "standard",
+          "note": "Counsel-reviewed: BAA liability capped at 2× trailing-12-month fees"
+        },
+        {
+          "docId": "brightwater-msa",
+          "counterparty": "Brightwater Insurance",
+          "clauseRef": "§15",
+          "label": "accident",
+          "note": "LDs carved out of the 150% cap"
+        }
+      ]
+    },
+    {
+      "key": "playbook:termination",
+      "category": "playbook",
+      "topic": "termination",
+      "title": "One-sided convenience termination paying accepted milestones only",
+      "impact": "The client can terminate for convenience and refuse to compensate AtliQ for substantial work in progress performed prior to termination.",
+      "severity": "high",
+      "confidence": "medium",
+      "needsJudgment": false,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "syn-pillarstone-msa",
+      "citations": [
+        {
+          "docId": "syn-pillarstone-msa",
+          "docTitle": "Pillarstone Pharma Logistics MSA (draft)",
+          "clauseRef": "10.1",
+          "quote": "The Company may terminate for convenience on fifteen (15) days' notice. The Vendor shall be paid for accepted Milestones only",
+          "role": "incoming"
+        }
+      ],
+      "standard": "On any termination for convenience AtliQ is paid for all work done, including work in progress. Notice is mutual. Client contracts: reasonable notice (typically 30+ days). Freelancer / vendor agreements: a mutual short exit (about 15 days, as with Rohan Iyer) is AtliQ's standard and fair to both sides.",
+      "counterPosition": "Payment for all services performed up to termination, including work in progress and committed costs; mutual notice period.",
+      "precedents": [
+        {
+          "docId": "rohan-ica",
+          "counterparty": "Rohan Iyer",
+          "clauseRef": "§9",
+          "label": "standard",
+          "note": "Mutual 15-day exit"
+        }
+      ]
+    },
+    {
+      "key": "playbook:payment",
+      "category": "playbook",
+      "topic": "payment",
+      "title": "Payment: 60 days",
+      "impact": "60-day payment against AtliQ's 30-day standard (45 max).",
+      "severity": "medium",
+      "confidence": "high",
+      "needsJudgment": false,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "syn-pillarstone-msa",
+      "citations": [
+        {
+          "docId": "syn-pillarstone-msa",
+          "docTitle": "Pillarstone Pharma Logistics MSA (draft)",
+          "clauseRef": "2.2",
+          "quote": "The Company shall pay undisputed invoices within sixty (60) days of receipt",
+          "role": "incoming"
+        }
+      ],
+      "standard": "30 days from invoice; 45 days is the negotiated maximum.",
+      "counterPosition": "Payment within 30 days of receipt of invoice (45 days maximum); no pay-when-paid.",
+      "precedents": [
+        {
+          "docId": "trustline-msa",
+          "counterparty": "Trustline NBFC",
+          "clauseRef": "§4",
+          "label": "standard",
+          "note": "Negotiated 90 → 45 days (the maximum)"
+        },
+        {
+          "docId": "ref-negotiation-notes",
+          "counterparty": "PixelCraft Studio",
+          "clauseRef": "negotiation notes",
+          "label": "standard",
+          "note": "AtliQ's own paper: 60-day payment changed to 30 for a 6-person agency (Oct 2025)"
+        }
+      ]
+    }
+  ],
+  "fine": [
+    "Correct AtliQ entity: Pvt Ltd for a India counterparty",
+    "Parties = invoicing entity: Pvt Ltd throughout",
+    "Governing law matches entity: Laws of India (Pvt Ltd → Indian law)",
+    "12-month non-solicitation of client staff is within acceptable playbook parameters."
+  ],
+  "notSeen": [
+    "Commitments were checked against all 27 signed contracts on file. Contracts AtliQ hasn't uploaded can't be checked."
+  ],
+  "documents": [
+    {
+      "docId": "syn-pillarstone-msa",
+      "title": "Pillarstone Pharma Logistics MSA (draft)",
+      "docType": "MSA",
+      "paper": "client",
+      "route": "full_review",
+      "facts": [
+        {
+          "field": "docType",
+          "label": "Document type",
+          "value": "MSA"
+        },
+        {
+          "field": "parties",
+          "label": "Counterparty",
+          "value": "PILLARSTONE PHARMA LOGISTICS PRIVATE LIMITED (India)"
+        },
+        {
+          "field": "entity",
+          "label": "AtliQ entity (parties)",
+          "value": "Pvt Ltd",
+          "quote": "ATLIQ TECHNOLOGIES PRIVATE LIMITED, a company incorporated under the Companies Act, 2013"
+        },
+        {
+          "field": "invoicing",
+          "label": "AtliQ entity (invoicing)",
+          "value": "Pvt Ltd",
+          "clauseRef": "2.1",
+          "quote": "Total fees: INR 65,00,000 (approx. USD 78,000), plus GST"
+        },
+        {
+          "field": "law",
+          "label": "Governing law",
+          "value": "Laws of India",
+          "clauseRef": "11.1",
+          "quote": "Laws of India"
+        },
+        {
+          "field": "forum",
+          "label": "Forum",
+          "value": "Courts at Hyderabad",
+          "clauseRef": "11.1",
+          "quote": "Courts at Hyderabad shall have exclusive jurisdiction"
+        },
+        {
+          "field": "payment",
+          "label": "Payment",
+          "value": "60 days",
+          "clauseRef": "2.2",
+          "quote": "The Company shall pay undisputed invoices within sixty (60) days of receipt"
+        },
+        {
+          "field": "ld",
+          "label": "Delay penalties",
+          "value": "1% of total_fees per week, cap 15% of total_fees",
+          "clauseRef": "4.2",
+          "quote": "the Vendor shall pay liquidated damages of one percent (1%) of the total fees for each week of delay, subject to a maximum of fifteen percent (15%) of the total fees"
+        },
+        {
+          "field": "liability",
+          "label": "Liability",
+          "value": "null",
+          "clauseRef": "8.1",
+          "quote": "No cap is stated for the Vendor"
+        },
+        {
+          "field": "insurance",
+          "label": "Insurance required",
+          "value": "None"
+        },
+        {
+          "field": "annexes",
+          "label": "Annexes referenced",
+          "value": "Schedule A"
+        },
+        {
+          "field": "scope",
+          "label": "Sectors · regions",
+          "value": "healthcare, logistics · India"
+        },
+        {
+          "field": "data",
+          "label": "Data handled",
+          "value": "personal_data"
+        }
+      ],
+      "gate": [
+        {
+          "rule": "entity",
+          "label": "Correct AtliQ entity",
+          "pass": true,
+          "detail": "Pvt Ltd for a India counterparty",
+          "citation": {
+            "docId": "syn-pillarstone-msa",
+            "docTitle": "Pillarstone Pharma Logistics MSA (draft)",
+            "clauseRef": "",
+            "quote": "ATLIQ TECHNOLOGIES PRIVATE LIMITED, a company incorporated under the Companies Act, 2013",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "invoicing_entity",
+          "label": "Parties = invoicing entity",
+          "pass": true,
+          "detail": "Pvt Ltd throughout",
+          "citation": {
+            "docId": "syn-pillarstone-msa",
+            "docTitle": "Pillarstone Pharma Logistics MSA (draft)",
+            "clauseRef": "2.1",
+            "quote": "Total fees: INR 65,00,000 (approx. USD 78,000), plus GST",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "governing_law",
+          "label": "Governing law matches entity",
+          "pass": true,
+          "detail": "Laws of India (Pvt Ltd → Indian law)",
+          "citation": {
+            "docId": "syn-pillarstone-msa",
+            "docTitle": "Pillarstone Pharma Logistics MSA (draft)",
+            "clauseRef": "11.1",
+            "quote": "Laws of India",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "payment",
+          "label": "Payment ≤ 45 days",
+          "pass": false,
+          "detail": "60 days",
+          "citation": {
+            "docId": "syn-pillarstone-msa",
+            "docTitle": "Pillarstone Pharma Logistics MSA (draft)",
+            "clauseRef": "2.2",
+            "quote": "The Company shall pay undisputed invoices within sixty (60) days of receipt",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "ld_cap",
+          "label": "Delay penalties capped",
+          "pass": true,
+          "detail": "Cap 15% of total_fees",
+          "citation": {
+            "docId": "syn-pillarstone-msa",
+            "docTitle": "Pillarstone Pharma Logistics MSA (draft)",
+            "clauseRef": "4.2",
+            "quote": "the Vendor shall pay liquidated damages of one percent (1%) of the total fees for each week of delay, subject to a maximum of fifteen percent (15%) of the total fees",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "liability_cap",
+          "label": "Liability capped",
+          "pass": null,
+          "detail": "Not stated",
+          "citation": {
+            "docId": "syn-pillarstone-msa",
+            "docTitle": "Pillarstone Pharma Logistics MSA (draft)",
+            "clauseRef": "8.1",
+            "quote": "No cap is stated for the Vendor",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "annex:schedule-a",
+          "label": "Schedule A attached",
+          "pass": true,
+          "detail": "Attached in this document",
+          "citation": {
+            "docId": "syn-pillarstone-msa",
+            "docTitle": "Pillarstone Pharma Logistics MSA (draft)",
+            "clauseRef": "2.1",
+            "quote": "payable per Schedule A",
+            "role": "incoming"
+          }
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "bundle": [],
+  "notesFacts": [
+    {
+      "id": "pillarstone-fact-1",
+      "statement": "The MSA for Pillarstone Pharma has a target deadline of October 9th and a deal value of ₹65L.",
+      "category": "deadline",
+      "noteId": "note-2026-09-26-pipeline_review_new_queu",
+      "noteTitle": "Pipeline review — \"the second queue\" (Sat 26 Sep, call)",
+      "quote": "Pillarstone Pharma (Bhavin) — ₹65L (~$78k) — by **9 Oct",
+      "complianceEvent": false,
+      "whyItMatters": "Establishes the required execution timeline for the contract."
+    },
+    {
+      "id": "pillarstone-fact-2",
+      "statement": "Bhavin indicated that the pharma distribution scope is similar to work done for Kestrel, but the team could not recall if Kestrel's contract contains restrictions.",
+      "category": "other",
+      "noteId": "note-2026-09-26-pipeline_review_new_queu",
+      "noteTitle": "Pipeline review — \"the second queue\" (Sat 26 Sep, call)",
+      "quote": "Pillarstone: Bhavin says \"pharma distribution, we've done this before — Kestrel.\" Nobody remembered what Kestrel restricts",
+      "complianceEvent": false,
+      "whyItMatters": "The reviewer must check the Kestrel contract to ensure there are no non-compete, exclusivity, or IP restrictions that conflict with taking on Pillarstone Pharma Logistics."
+    },
+    {
+      "id": "pillarstone-fact-3",
+      "statement": "Tracker entry confirms the MSA target deadline of October 9 for INR 65L.",
+      "category": "deadline",
+      "noteId": "tracker",
+      "noteTitle": "Tracker notes",
+      "quote": "SYN-112 (MSA): by 9 Oct. INR 65L. Bhavin: 'we did this for Kestrel, easy",
+      "complianceEvent": false,
+      "whyItMatters": "Confirms task tracking and contract deadline."
+    }
+  ],
+  "complianceCandidate": null,
+  "similar": [
+    {
+      "clauseType": "payment",
+      "docId": "syn-pillarstone-msa",
+      "clauseRef": "§2",
+      "quote": "2.1 Total fees: INR 65,00,000 (approx. USD 78,000), plus GST, payable per Schedule A.\n\n2.2 The Company shall pay undisputed invoices within sixty (60) days of receipt.",
+      "hits": [
+        {
+          "docId": "trustline-msa",
+          "counterparty": "Trustline NBFC",
+          "date": "2026-08-15",
+          "clauseNo": "4",
+          "heading": "FEES AND PAYMENT",
+          "label": "standard",
+          "labelNote": "45-day payment: the negotiated maximum (90 → 45)",
+          "score": 0.897,
+          "text": "4.1 The total fees for the Services are **USD 48,000** (United States Dollars Forty-Eight Thousand only), payable on completion of Milestones as set out in Annexure A.\n\n4.2 The Service Provider shall raise an invoice upon completion of each Milestone. The Company shall pay each undisputed invoice within forty-five (45) days of receipt of the invoice.\n\n4.3 All fees are exclusive of GST. The Company shall be entitled to deduct TDS as applicable.\n\n4.4 Any disputed amount shall be notified within ten (10) days of receipt of invoice, and the Parties shall resolve such dispute in good faith within thirty (30) days.",
+          "differs": "Worse for AtliQ than Trustline NBFC: payment term is 60 days instead of 45 days.",
+          "alsoIn": []
+        },
+        {
+          "docId": "paytrack-msa",
+          "counterparty": "PayTrack Technologies",
+          "date": "2025-01-22",
+          "clauseNo": "4",
+          "heading": "FEES AND PAYMENT",
+          "label": "untagged",
+          "score": 0.905,
+          "text": "4.1 The total fees under SOW-1 are **USD 71,000** (United States Dollars Seventy-One Thousand only), payable in accordance with the milestone schedule in SOW-1.\n\n4.2 AtliQ shall invoice upon completion of each milestone. PayTrack shall pay each undisputed invoice within thirty (30) days of receipt.\n\n4.3 Fees are exclusive of GST. PayTrack may deduct TDS in accordance with Applicable Law.",
+          "differs": "Worse for AtliQ than PayTrack Technologies: payment term is 60 days instead of 30 days.",
+          "alsoIn": [
+            "Acme Retail Group (2025-03)"
+          ]
+        },
+        {
+          "docId": "orbit-msa",
+          "counterparty": "Orbit Travels Pvt Ltd",
+          "date": "2022-07-01",
+          "clauseNo": "2",
+          "heading": "FEES AND PAYMENT",
+          "label": "untagged",
+          "score": 0.896,
+          "text": "2.1 The Client shall pay the fees set out in each SOW. Invoices shall be raised monthly and paid\nwithin thirty (30) days of receipt. Fees are exclusive of GST.\n2.2 Delayed payment shall carry interest @ l2% per annum.",
+          "differs": "Worse for AtliQ than Orbit Travels Pvt Ltd: payment term is 60 days instead of 30 days, with no late interest clause.",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "ld",
+      "docId": "syn-pillarstone-msa",
+      "clauseRef": "§4",
+      "quote": "4.1 Time is of the essence.\n\n4.2 For any delay in achieving a Milestone, the Vendor shall pay liquidated damages of one percent (1%) of the total fees for each week of delay, subject to a maximum of fifteen percent (15%) of the total fees.",
+      "hits": [
+        {
+          "docId": "acme-msa",
+          "counterparty": "Acme Retail Group",
+          "date": "2025-03-10",
+          "clauseNo": "7",
+          "heading": "DELAY AND LIQUIDATED DAMAGES",
+          "label": "standard",
+          "labelNote": "Origin of the LD playbook: 0.5% of milestone/week, 5% cap, client delays excluded (Mar 2025)",
+          "score": 0.914,
+          "text": "7.1 If the Service Provider fails to complete a Milestone by the agreed date for reasons solely attributable to the Service Provider, the Service Provider shall pay liquidated damages at the rate of 0.5% (half percent) of the Milestone Fee of the delayed Milestone for each complete week of delay.\n\n7.2 The aggregate liquidated damages in respect of any Milestone shall not exceed 5% (five percent) of the Milestone Fee of that Milestone.\n\n7.3 No liquidated damages shall be payable where the delay is caused by the Client, including delayed access to data or systems, delayed review of Deliverables, or changes in scope, or by a Force Majeure event.\n\n7.4 The Parties agree that the liquidated damages are a genuine pre-estimate of loss and shall be the Client's sole and exclusive remedy for delay.",
+          "differs": "Worse for AtliQ than Acme Retail Group: 1% total fee per week capped at 15% instead of 0.5% milestone fee capped at 5%.",
+          "alsoIn": [
+            "Northwind Logistics (2025-06)",
+            "Trustline NBFC (2026-08)"
+          ]
+        },
+        {
+          "docId": "brightwater-msa",
+          "counterparty": "Brightwater Insurance Inc",
+          "date": "2025-11-28",
+          "clauseNo": "9",
+          "heading": "DELAY AND LIQUIDATED DAMAGES",
+          "label": "accident",
+          "labelNote": "Signed on a phone in 4 minutes: 1%/day uncapped LDs, no client-delay exclusion, group set-off, English law on a US entity. Cost $9k + $14.2k legal",
+          "score": 0.908,
+          "text": "9.1 If the Supplier fails to achieve any Key Date, the Supplier shall pay to the Customer liquidated damages in the amount of one per cent (1%) of the Contract Value for each day or part day by which the relevant Key Date is missed.\n\n9.2 Liquidated damages under clause 9.1 shall be payable in addition to any other right or remedy available to the Customer under this Agreement or at law, and the Customer may deduct such liquidated damages from any sums due to the Supplier.\n\n9.3 The Supplier acknowledges that the liquidated damages set out in this clause 9 are proportionate to the Customer's legitimate interest in the timely delivery of the Services.",
+          "differs": "Better for AtliQ than Brightwater Insurance Inc: liquidated damages are 1% per week capped at 15% instead of 1% per day uncapped.",
+          "alsoIn": []
+        },
+        {
+          "docId": "alnoor-msa",
+          "counterparty": "Al Noor Hospitality Group",
+          "date": "2025-03-15",
+          "clauseNo": "10",
+          "heading": "DELIVERY, ACCEPTANCE AND LIQUIDATED DAMAGES",
+          "label": "exception",
+          "labelNote": "One-off: \"strategic exception for Al Noor only, not our new standard\" (cap 10% of total fees)",
+          "score": 0.888,
+          "text": "10.1 The Supplier shall use all reasonable endeavours to achieve each Milestone by the date set out in the relevant SOW.\n\n10.2 Each Deliverable shall be subject to acceptance testing by the Client within ten (10) Business Days of delivery against the acceptance criteria in the SOW. Deliverables not rejected in writing within that period shall be deemed accepted.\n\n10.3 If the Supplier fails to achieve a Milestone by its due date for reasons attributable to the Supplier, the Supplier shall pay to the Client, as liquidated damages, one percent (1%) of the Fees payable for the affected Milestone for each complete week of delay, provided that the aggregate liquidated damages payable under this Agreement shall not exceed ten percent (10%) of the total Fees payable under this Agreement.\n\n10.4 The Parties agree that the liquidated damages in Clause 10.3 are a genuine pre-estimate of loss. No liquidated damages shall be payable for delay caused by the Client, its contractors, or a Force Majeure Event.",
+          "differs": "Worse for AtliQ than Al Noor Hospitality Group: liquidated damages apply to total contract fees rather than only the affected milestone fees.",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "ip",
+      "docId": "syn-pillarstone-msa",
+      "clauseRef": "§5",
+      "quote": "5.1 All Deliverables shall vest in the Company upon creation.\n\n5.2 The Vendor grants the Company and its group companies a perpetual, irrevocable, royalty-free, sub-licensable licence to use any pre-existing Vendor tools or components incorporated in the Deliverables.",
+      "hits": [
+        {
+          "docId": "orbit-msa",
+          "counterparty": "Orbit Travels Pvt Ltd",
+          "date": "2022-07-01",
+          "clauseNo": "5",
+          "heading": "INTELLECTUAL PR0PERTY",
+          "label": "untagged",
+          "score": 0.927,
+          "text": "5.1 All deliverables developed specifically for the Client shall be the property of the Client\nupon full payment. The Service Provider retains its pre-existing tools and know-how.",
+          "differs": "Worse for AtliQ than Orbit Travels Pvt Ltd: deliverables vest upon creation rather than upon full payment.",
+          "alsoIn": [
+            "Trustline NBFC (2026-08)",
+            "Al Noor Hospitality Group (2025-03)",
+            "Acme Retail Group (2025-03)"
+          ]
+        },
+        {
+          "docId": "rohan-ica",
+          "counterparty": "Rohan Iyer",
+          "date": "2025-04-28",
+          "clauseNo": "5",
+          "heading": "INTELLECTUAL PROPERTY",
+          "label": "accident",
+          "labelNote": "Rohan kept the Work Product IP (\"ok\" from phone) while Acme was promised ownership",
+          "score": 0.893,
+          "text": "5.1 In this Clause, \"**Work Product**\" means all dashboards, reports, data models, DAX measures, Power Query scripts, visual templates, documentation and other materials created by the Contractor in performing the Services.\n\n5.2 The Contractor retains ownership of all intellectual property rights in the Work Product and in any pre-existing materials, components and templates of the Contractor.\n\n5.3 The Contractor grants AtliQ a non-exclusive, perpetual, irrevocable, royalty-free, worldwide licence to use, copy, modify and deploy the Work Product for the purposes of AtliQ's business, including for delivery to AtliQ's clients.\n\n5.4 The Contractor shall not incorporate into the Work Product any third-party material that AtliQ is not entitled to use under Clause 5.3.",
+          "differs": "Worse for AtliQ than Rohan Iyer: AtliQ transfers deliverable IP on creation instead of retaining ownership of work product IP.",
+          "alsoIn": []
+        },
+        {
+          "docId": "brightwater-msa",
+          "counterparty": "Brightwater Insurance Inc",
+          "date": "2025-11-28",
+          "clauseNo": "11",
+          "heading": "INTELLECTUAL PROPERTY",
+          "label": "untagged",
+          "score": 0.909,
+          "text": "11.1 All intellectual property rights in the Deliverables shall vest in the Customer on creation. The Supplier hereby assigns all such rights to the Customer with full title guarantee.\n\n11.2 The Supplier retains ownership of its pre-existing materials and grants the Customer and the Brightwater Group a perpetual, irrevocable, royalty-free licence to use any such materials incorporated in the Deliverables.",
+          "differs": "Same as Brightwater Insurance Inc: deliverables vest on creation while pre-existing materials are licensed.",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "confidentiality",
+      "docId": "syn-pillarstone-msa",
+      "clauseRef": "§6",
+      "quote": "6.1 The Vendor shall keep confidential all information of the Company and its principals (manufacturers), during the term and for five (5) years thereafter.",
+      "hits": [
+        {
+          "docId": "orbit-msa",
+          "counterparty": "Orbit Travels Pvt Ltd",
+          "date": "2022-07-01",
+          "clauseNo": "4",
+          "heading": "CONFIDENTIALITY",
+          "label": "untagged",
+          "score": 0.895,
+          "text": "4.1 Each party shall keep confidential all information received from the other party including\nfare data, supplier contracts, customer data and source code, and shall not disclose the same\nto any third party. This obligation shall survive for two (2) years after termination.",
+          "differs": "Worse for AtliQ than Orbit Travels Pvt Ltd: unilateral confidentiality lasting 5 years post-termination instead of mutual confidentiality for 2 years.",
+          "alsoIn": [
+            "Sunrise Foods (2025-04)"
+          ]
+        },
+        {
+          "docId": "crestline-msa",
+          "counterparty": "Crestline Retail Inc",
+          "date": "2024-08-01",
+          "clauseNo": "7",
+          "heading": "CONFIDENTIALITY",
+          "label": "untagged",
+          "score": 0.894,
+          "text": "7.1 Each Party shall hold the other Party's Confidential Information in confidence, use it only to perform or receive the Services, and disclose it only to its personnel and advisors with a need to know who are bound by obligations at least as protective.\n\n7.2 The obligations in Section 7.1 do not apply to information that is or becomes publicly available without breach, was known to the recipient prior to disclosure, is independently developed, or is rightfully received from a third party.\n\n7.3 These obligations survive for three (3) years following termination, and indefinitely for trade secrets.",
+          "differs": "Worse for AtliQ than Crestline Retail Inc: unilateral confidentiality lasting 5 years post-termination instead of mutual confidentiality lasting 3 years.",
+          "alsoIn": [
+            "Northwind Logistics (2025-06)",
+            "Al Noor Hospitality Group (2025-03)",
+            "Acme Retail Group (2025-03)",
+            "CloudSpan Technologies (2025-09)"
+          ]
+        },
+        {
+          "docId": "rohan-ica",
+          "counterparty": "Rohan Iyer",
+          "date": "2025-04-28",
+          "clauseNo": "6",
+          "heading": "CONFIDENTIALITY",
+          "label": "untagged",
+          "score": 0.887,
+          "text": "6.1 Each party shall keep confidential all non-public information of the other party, and in the case of AtliQ, of AtliQ's clients, received in connection with this Agreement, and shall use it only for the purposes of this Agreement.\n\n6.2 The Contractor shall comply with any confidentiality and data-security requirements of AtliQ's clients notified to him in writing, including restrictions on downloading client data to personal devices.\n\n6.3 This Clause 6 does not apply to information that is public, already lawfully known, independently developed, or required to be disclosed by law.\n\n6.4 The obligations in this Clause 6 survive for three (3) years after termination or expiry.",
+          "differs": "Worse for AtliQ than Rohan Iyer: unilateral confidentiality obligation lasting 5 years post-termination instead of mutual confidentiality.",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "indemnity",
+      "docId": "syn-pillarstone-msa",
+      "clauseRef": "§7",
+      "quote": "7.1 The Vendor shall indemnify the Company against all losses arising out of the Services or any act or omission of the Vendor or its personnel.",
+      "hits": [
+        {
+          "docId": "acme-msa",
+          "counterparty": "Acme Retail Group",
+          "date": "2025-03-10",
+          "clauseNo": "11",
+          "heading": "INDEMNITY",
+          "label": "standard",
+          "labelNote": "Mutual indemnity",
+          "score": 0.878,
+          "text": "11.1 Each Party (\"**Indemnifying Party**\") shall indemnify the other against losses arising from third-party claims caused by the Indemnifying Party's breach of confidentiality, infringement of third-party intellectual property rights, or gross negligence or wilful misconduct.",
+          "differs": "Worse for AtliQ than Acme Retail Group: broad unilateral indemnity for all losses instead of mutual indemnity limited to specified third-party claims.",
+          "alsoIn": []
+        },
+        {
+          "docId": "orbit-msa",
+          "counterparty": "Orbit Travels Pvt Ltd",
+          "date": "2022-07-01",
+          "clauseNo": "9",
+          "heading": "INDEMNITY",
+          "label": "untagged",
+          "score": 0.884,
+          "text": "9.1 The Service Provider shall indemnify the Client against third party claims of IP infringement\narising from the deliverables. [illegible] ... own negligence or wilful misconduct.",
+          "differs": "Worse for AtliQ than Orbit Travels Pvt Ltd: broad unilateral indemnity covering all losses instead of indemnity limited to third-party IP claims and negligence.",
+          "alsoIn": []
+        },
+        {
+          "docId": "paytrack-msa",
+          "counterparty": "PayTrack Technologies",
+          "date": "2025-01-22",
+          "clauseNo": "10",
+          "heading": "INDEMNITY",
+          "label": "standard",
+          "labelNote": "Origin of the mutual-indemnity position: no indemnity for the indemnified party's own negligence",
+          "score": 0.863,
+          "text": "10.1 Each Party (the \"**Indemnifying Party**\") shall indemnify, defend and hold harmless the other Party and its directors, officers and employees (the \"**Indemnified Party**\") from and against all Losses arising out of any third-party claim to the extent caused by: (a) the Indemnifying Party's breach of Clause 7 (Confidentiality) or Clause 12 (Data Protection); (b) the gross negligence, wilful misconduct or fraud of the Indemnifying Party or its personnel; or (c) in the case of AtliQ, any claim that the Deliverables infringe a third party's intellectual property rights, and in the case of PayTrack, any claim that Client Data or materials supplied by PayTrack infringe a third party's rights.\n\n10.2 Neither Party shall be required to indemnify the other to the extent any Losses are caused by the negligence, breach or wilful misconduct of the Indemnified Party.\n\n10.3 The Indemnified Party shall give prompt written notice of any claim, permit the Indemnifying Party to control the defence and settlement, and provide reasonable cooperation at the Indemnifying Party's cost.",
+          "differs": "Worse for AtliQ than PayTrack Technologies: broad unilateral indemnity for all losses instead of mutual indemnity limited to specified third-party claims.",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "liability",
+      "docId": "syn-pillarstone-msa",
+      "clauseRef": "§8",
+      "quote": "8.1 The Company's liability shall not exceed the fees paid in the preceding three (3) months.\n\n(No cap is stated for the Vendor.)",
+      "hits": [
+        {
+          "docId": "rohan-ica",
+          "counterparty": "Rohan Iyer",
+          "date": "2025-04-28",
+          "clauseNo": "8",
+          "heading": "LIABILITY",
+          "label": "standard",
+          "labelNote": "Fair freelancer terms: 30-day pay, mutual cap, mutual 15-day exit",
+          "score": 0.901,
+          "text": "8.1 Each party's aggregate liability under this Agreement shall not exceed the total fees paid or payable to the Contractor in the twelve (12) months preceding the claim, except for breach of Clause 6 or fraud.\n\n8.2 Neither party is liable for indirect or consequential loss.",
+          "differs": "Worse for AtliQ than Rohan Iyer: AtliQ's liability is uncapped while client liability is capped at 3 months, instead of mutual 12-month caps.",
+          "alsoIn": []
+        },
+        {
+          "docId": "orbit-msa",
+          "counterparty": "Orbit Travels Pvt Ltd",
+          "date": "2022-07-01",
+          "clauseNo": "8",
+          "heading": "LIMITATION OF LIABILITY",
+          "label": "untagged",
+          "score": 0.921,
+          "text": "8.1 Neither party shall be liable for indirect or consequential loss. The aggregate liability of\nthe Service Provider shall not exceed the fees paid in the twelve (l2) months preceding the claim.",
+          "differs": "Worse for AtliQ than Orbit Travels Pvt Ltd: AtliQ's liability is uncapped instead of being capped at 12 months of fees.",
+          "alsoIn": [
+            "Trustline NBFC (2026-08)",
+            "Acme Retail Group (2025-03)"
+          ]
+        },
+        {
+          "docId": "sunrise-msa",
+          "counterparty": "Sunrise Foods",
+          "date": "2025-04-18",
+          "clauseNo": "13",
+          "heading": "LIMITATION OF LIABILITY",
+          "label": "standard",
+          "labelNote": "AtliQ-friendly master: capped liability, service credits capped at 5%",
+          "score": 0.877,
+          "text": "13.1 Neither Party shall be liable for indirect, consequential or special losses or loss of profits.\n\n13.2 Each Party's aggregate liability under an SOW shall not exceed the Fees paid or payable under that SOW.",
+          "differs": "Worse for AtliQ than Sunrise Foods: AtliQ's liability is uncapped while client is capped at 3 months, instead of mutual SOW fee caps.",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "non_solicit",
+      "docId": "syn-pillarstone-msa",
+      "clauseRef": "§9",
+      "quote": "9.1 The Vendor shall not solicit the Company's employees for twelve (12) months after termination.",
+      "hits": [
+        {
+          "docId": "orbit-msa",
+          "counterparty": "Orbit Travels Pvt Ltd",
+          "date": "2022-07-01",
+          "clauseNo": "10",
+          "heading": "N0N-SOLICITATION",
+          "label": "untagged",
+          "score": 0.937,
+          "text": "10.1 Neither party shall solicit the employees of the other during the term and six months\nthereafter.",
+          "differs": "Worse for AtliQ than Orbit Travels Pvt Ltd: unilateral 12-month non-solicit of client employees instead of a mutual 6-month non-solicit.",
+          "alsoIn": [
+            "PayTrack Technologies (2025-01)",
+            "Acme Retail Group (2025-03)",
+            "Sunrise Foods (2025-04)"
+          ]
+        },
+        {
+          "docId": "crestline-msa",
+          "counterparty": "Crestline Retail Inc",
+          "date": "2024-08-01",
+          "clauseNo": "15",
+          "heading": "NON-SOLICITATION",
+          "label": "untagged",
+          "score": 0.929,
+          "text": "15.1 During the Term and for twelve (12) months thereafter, Crestline shall not directly solicit for employment any Supplier Personnel assigned to Crestline, save with Supplier's consent.",
+          "differs": "Worse for AtliQ than Crestline Retail Inc: restricts AtliQ from soliciting client employees instead of restricting the client from soliciting AtliQ personnel.",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "governing_law",
+      "docId": "syn-pillarstone-msa",
+      "clauseRef": "§11",
+      "quote": "11.1 Laws of India. Courts at Hyderabad shall have exclusive jurisdiction.",
+      "hits": [
+        {
+          "docId": "orbit-msa",
+          "counterparty": "Orbit Travels Pvt Ltd",
+          "date": "2022-07-01",
+          "clauseNo": "11",
+          "heading": "GOVERNING LAW AND DISPUTES",
+          "label": "untagged",
+          "score": 0.916,
+          "text": "11.1 This Agreernent shall be governed by the laws of India. Disputes shall be referred to a sole\narbitrator under the Arbitration and Conciliation Act, 1996. Seat of arbitration: New Delhi.\nCourts at New Delhi shall have jurisdiction.",
+          "differs": "Worse for AtliQ than Orbit Travels Pvt Ltd: court litigation in Hyderabad instead of dispute resolution by arbitration in New Delhi.",
+          "alsoIn": [
+            "Trustline NBFC (2026-08)",
+            "Sunrise Foods (2025-04)"
+          ]
+        },
+        {
+          "docId": "paytrack-msa",
+          "counterparty": "PayTrack Technologies",
+          "date": "2025-01-22",
+          "clauseNo": "15",
+          "heading": "GOVERNING LAW AND DISPUTE RESOLUTION",
+          "label": "untagged",
+          "score": 0.879,
+          "text": "15.1 This Agreement shall be governed by the laws of India.\n\n15.2 Disputes not resolved by negotiation between senior management within thirty (30) days shall be referred to arbitration by a sole arbitrator under the Arbitration and Conciliation Act, 1996. The seat and venue of arbitration shall be Pune, and the language shall be English.",
+          "differs": "Worse for AtliQ than PayTrack Technologies: direct court jurisdiction in Hyderabad without prior mandatory negotiation or arbitration in Pune.",
+          "alsoIn": [
+            "Acme Retail Group (2025-03)"
+          ]
+        },
+        {
+          "docId": "crestline-msa",
+          "counterparty": "Crestline Retail Inc",
+          "date": "2024-08-01",
+          "clauseNo": "16",
+          "heading": "GOVERNING LAW; VENUE",
+          "label": "untagged",
+          "score": 0.868,
+          "text": "16.1 This Agreement shall be governed by the laws of the State of Ohio, without regard to its conflict-of-laws principles.\n\n16.2 The Parties consent to the exclusive jurisdiction of the state and federal courts located in Franklin County, Ohio.",
+          "differs": "Better for AtliQ than Crestline Retail Inc: governed by Indian law and Hyderabad courts instead of Ohio law and Ohio courts.",
+          "alsoIn": []
+        }
+      ]
+    }
+  ],
+  "counselPack": null,
+  "errors": [],
+  "usage": {
+    "calls": 6,
+    "cachedCalls": 0,
+    "inputTokens": 11497,
+    "outputTokens": 22796,
+    "ms": 68433
+  }
+}

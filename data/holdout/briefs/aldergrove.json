@@ -1,0 +1,833 @@
+{
+  "dealId": "aldergrove",
+  "version": 1,
+  "createdAt": "2026-10-14T01:56:05.190Z",
+  "trigger": "initial review",
+  "inputsHash": "db8073b5d0e34c4efb5ba836b476fdbb",
+  "documentIds": [
+    "syn-aldergrove-msa"
+  ],
+  "registerVersion": "reg-2026-10-14-85+r0",
+  "playbookVersion": "pb-v1.1-2026-10-05",
+  "models": [
+    "gemini-flash-lite-latest",
+    "gemini-3.6-flash"
+  ],
+  "promptVersion": "p1",
+  "route": "full_review",
+  "verdict": "HOLD",
+  "headline": "HOLD: 1 missing document, 1 IP conflict",
+  "nextAction": "AtliQ's deal team must provide Schedule 1 before Karandeep changes the agreement.",
+  "findings": [
+    {
+      "key": "conflict:syn-novaterra-msa:ip_transfer",
+      "category": "conflict",
+      "topic": "ip_transfer",
+      "title": "Collides with Novaterra Energy Ltd: Assignment of IngestIQ background framework",
+      "impact": "Collides with the perpetual assignment of IngestIQ to Novaterra Energy Ltd.",
+      "severity": "high",
+      "confidence": "high",
+      "needsJudgment": false,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "syn-aldergrove-msa",
+      "citations": [
+        {
+          "docId": "syn-aldergrove-msa",
+          "docTitle": "Aldergrove Water Services MSA + SOW-1 (draft)",
+          "clauseRef": "Schedule 1, Section 2",
+          "quote": "To accelerate delivery, the Supplier will deploy its proven IngestIQ ingestion and data-quality framework (a pre-existing Supplier Material), already used in production for a UK energy retailer's half-hourly smart-meter data",
+          "role": "incoming"
+        },
+        {
+          "docId": "syn-aldergrove-msa",
+          "docTitle": "Aldergrove Water Services MSA + SOW-1 (draft)",
+          "clauseRef": "Clause 4.2",
+          "quote": "The Supplier retains ownership of Supplier Materials and grants Aldergrove a perpetual, irrevocable, royalty-free, non-exclusive licence to use, modify and maintain any Supplier Materials incorporated in the Deliverables",
+          "role": "incoming"
+        },
+        {
+          "docId": "syn-aldergrove-msa",
+          "docTitle": "Aldergrove Water Services MSA + SOW-1 (draft)",
+          "clauseRef": "Clause 4.3",
+          "quote": "The Supplier warrants that it owns, or has all rights necessary to license, all Supplier Materials, and that their use by Aldergrove will not infringe any third party's rights",
+          "role": "incoming"
+        },
+        {
+          "docId": "syn-novaterra-msa",
+          "docTitle": "Novaterra Energy MSA + SOW-1",
+          "clauseRef": "§6.1",
+          "quote": "The Supplier hereby assigns to the Customer, with full title guarantee and by way of present assignment of future rights, all Intellectual Property Rights in the Assigned Materials, with effect from the date of their creation or (for the Supplier Framework) from the date of payment of the Framework Transfer Fee",
+          "role": "register"
+        },
+        {
+          "docId": "syn-novaterra-msa",
+          "docTitle": "Novaterra Energy MSA + SOW-1",
+          "clauseRef": "§1.1",
+          "quote": "Supplier Framework**\" means the Supplier's pre-existing data ingestion and data-quality framework known as **IngestIQ**, as described in Schedule 3, in the version incorporated into the Deliverables",
+          "role": "register"
+        },
+        {
+          "docId": "syn-novaterra-msa",
+          "docTitle": "Novaterra Energy MSA + SOW-1",
+          "clauseRef": "§6.2",
+          "quote": "The Supplier shall not, and shall procure that its Affiliates and subcontractors shall not, use, copy, license, sell or create derivative works of the Assigned Materials for any third party, or provide any third party with services that make use of the Assigned Materials",
+          "role": "register"
+        },
+        {
+          "docId": "syn-novaterra-msa",
+          "docTitle": "Novaterra Energy MSA + SOW-1",
+          "clauseRef": "§6.5",
+          "quote": "The Supplier shall deliver to the Customer the complete source code, documentation and version history of the Supplier Framework and shall not retain any copy, save one archival copy for the purpose of performing and supporting the Services under this Agreement",
+          "role": "register"
+        }
+      ],
+      "counterPosition": "Remove all references to IngestIQ from Schedule 1 and replace it with a bespoke data ingestion component or an alternative unencumbered framework, adjusting project pricing and milestones accordingly.",
+      "registerEntryId": "syn-novaterra-msa#2",
+      "registerVerified": false,
+      "expiry": null,
+      "waiver": null
+    },
+    {
+      "key": "gate:annex:schedule-1",
+      "category": "gate",
+      "topic": "annex",
+      "title": "Missing: Schedule 1 (SOW-1: Meter & Network Telemetry Data Platform)",
+      "impact": "Schedule 1 is referenced as part of the agreement but isn't in the pack, so it hasn't been checked. The fine-print review of everything else still ran.",
+      "severity": "high",
+      "confidence": "high",
+      "needsJudgment": false,
+      "owner": "AtliQ's deal team",
+      "resolution": "document",
+      "docId": "syn-aldergrove-msa",
+      "citations": [
+        {
+          "docId": "syn-aldergrove-msa",
+          "docTitle": "Aldergrove Water Services MSA + SOW-1 (draft)",
+          "clauseRef": "1.1",
+          "quote": "The Supplier shall perform the services in Schedule 1 (SOW-1",
+          "role": "incoming"
+        }
+      ],
+      "missingItem": {
+        "item": "Schedule 1: SOW-1: Meter & Network Telemetry Data Platform",
+        "owner": "AtliQ's deal team"
+      }
+    },
+    {
+      "key": "playbook:ip",
+      "category": "playbook",
+      "topic": "ip",
+      "title": "IP vesting on creation before payment",
+      "impact": "Aldergrove would acquire ownership of deliverables even if AtliQ is not paid for the services.",
+      "severity": "high",
+      "confidence": "medium",
+      "needsJudgment": false,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "syn-aldergrove-msa",
+      "citations": [
+        {
+          "docId": "syn-aldergrove-msa",
+          "docTitle": "Aldergrove Water Services MSA + SOW-1 (draft)",
+          "clauseRef": "Clause 4.1",
+          "quote": "All Intellectual Property Rights in the Deliverables vest in Aldergrove on creation",
+          "role": "incoming"
+        }
+      ],
+      "standard": "The client owns what AtliQ builds specifically for it (on payment); AtliQ keeps its background IP, pre-existing tools and know-how and grants a licence to use them as part of the deliverables.",
+      "counterPosition": "Intellectual Property Rights in deliverables created specifically for the client shall vest in Aldergrove only upon receipt of full payment.",
+      "precedents": [
+        {
+          "docId": "acme-msa",
+          "counterparty": "Acme Retail Group",
+          "clauseRef": "§9",
+          "label": "standard",
+          "note": "Client owns deliverables, AtliQ keeps background IP"
+        },
+        {
+          "docId": "northwind-msa",
+          "counterparty": "Northwind Logistics",
+          "clauseRef": "§9.2",
+          "label": "accident",
+          "note": "Pre-existing tools incl. PipeKit assigned to Northwind (\"I skimmed the IP\")"
+        }
+      ]
+    },
+    {
+      "key": "playbook:liability",
+      "category": "playbook",
+      "topic": "liability",
+      "title": "Uncapped liability for IP claims and 150% cap",
+      "impact": "AtliQ is exposed to unlimited financial liability for IP warranty and indemnity claims.",
+      "severity": "high",
+      "confidence": "medium",
+      "needsJudgment": false,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "syn-aldergrove-msa",
+      "citations": [
+        {
+          "docId": "syn-aldergrove-msa",
+          "docTitle": "Aldergrove Water Services MSA + SOW-1 (draft)",
+          "clauseRef": "6.1",
+          "quote": "Each party's total liability shall not exceed 150% of the Charges, save that the Supplier's liability under Clauses 4.3 and 5 shall be unlimited",
+          "role": "incoming"
+        }
+      ],
+      "standard": "Each party's aggregate liability capped at 1× fees (paid or payable in the prior 12 months), mutual; carve-outs only for fraud, wilful misconduct and confidentiality (plus any carve-outs that are mandatory under the governing law, e.g. German law for intent/gross negligence and injury).",
+      "counterPosition": "Cap total liability at 100% of fees paid or payable in the 12 months preceding the claim, with carve-outs limited to fraud, wilful misconduct, and confidentiality.",
+      "precedents": [
+        {
+          "docId": "ref-negotiation-notes",
+          "counterparty": "Kessler Mobility",
+          "clauseRef": "negotiation notes",
+          "label": "standard",
+          "note": "Walked away from a €120k deal over unlimited liability (Jan 2026)"
+        },
+        {
+          "docId": "sunrise-msa",
+          "counterparty": "Sunrise Foods",
+          "clauseRef": "§13",
+          "label": "standard",
+          "note": "AtliQ-friendly master: capped liability"
+        },
+        {
+          "docId": "carebridge-baa",
+          "counterparty": "CareBridge Clinics",
+          "clauseRef": "§9",
+          "label": "standard",
+          "note": "Counsel-reviewed: BAA liability capped at 2× trailing-12-month fees"
+        },
+        {
+          "docId": "brightwater-msa",
+          "counterparty": "Brightwater Insurance",
+          "clauseRef": "§15",
+          "label": "accident",
+          "note": "LDs carved out of the 150% cap"
+        }
+      ]
+    },
+    {
+      "key": "gate:governing_law",
+      "category": "gate",
+      "topic": "governing_law",
+      "title": "Governing law: English law",
+      "impact": "AtliQ's position is Indian law for AtliQ Technologies Pvt Ltd. Client law has been accepted before to win a deal (DIFC, English, Singapore): a judgment call, not a blocker.",
+      "severity": "medium",
+      "confidence": "high",
+      "needsJudgment": true,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "syn-aldergrove-msa",
+      "citations": [
+        {
+          "docId": "syn-aldergrove-msa",
+          "docTitle": "Aldergrove Water Services MSA + SOW-1 (draft)",
+          "clauseRef": "10.1",
+          "quote": "The law of England and Wales",
+          "role": "incoming"
+        }
+      ],
+      "standard": "Indian law for Pvt Ltd; US law for Inc.",
+      "counterPosition": "Laws of India; arbitration seated in India or a neutral seat."
+    },
+    {
+      "key": "playbook:termination",
+      "category": "playbook",
+      "topic": "termination",
+      "title": "One-sided termination for convenience",
+      "impact": "AtliQ cannot terminate the agreement for convenience if the project becomes unviable or circumstances change.",
+      "severity": "medium",
+      "confidence": "medium",
+      "needsJudgment": false,
+      "owner": "Karandeep",
+      "resolution": "redline",
+      "docId": "syn-aldergrove-msa",
+      "citations": [
+        {
+          "docId": "syn-aldergrove-msa",
+          "docTitle": "Aldergrove Water Services MSA + SOW-1 (draft)",
+          "clauseRef": "Clause 9.1",
+          "quote": "Aldergrove may terminate for convenience on thirty (30) days' notice, paying for work done",
+          "role": "incoming"
+        }
+      ],
+      "standard": "On any termination for convenience AtliQ is paid for all work done, including work in progress. Notice is mutual. Client contracts: reasonable notice (typically 30+ days). Freelancer / vendor agreements: a mutual short exit (about 15 days, as with Rohan Iyer) is AtliQ's standard and fair to both sides.",
+      "counterPosition": "Make termination for convenience mutual, allowing either party to terminate on 30 days' written notice with AtliQ paid for work done and work in progress.",
+      "precedents": [
+        {
+          "docId": "rohan-ica",
+          "counterparty": "Rohan Iyer",
+          "clauseRef": "§9",
+          "label": "standard",
+          "note": "Mutual 15-day exit"
+        }
+      ]
+    }
+  ],
+  "fine": [
+    "Correct AtliQ entity: Pvt Ltd for a UK counterparty",
+    "Parties = invoicing entity: Pvt Ltd throughout",
+    "Payment ≤ 45 days: 30 days",
+    "Delay penalties capped: Cap 5% of milestone",
+    "Delay penalties match AtliQ standard (0.5% per week capped at 5% of milestone for Supplier-caused delay).",
+    "IP infringement indemnity is standard and acceptable.",
+    "Supplier background materials (IngestIQ) remain owned by AtliQ with a non-exclusive licence granted.",
+    "UK GDPR processing role and UK tenant storage requirements are defined."
+  ],
+  "notSeen": [
+    "Similar past clauses for Aldergrove Water Services MSA + SOW-1 (draft): comparison lines couldn't be written (timed out after 45s across retries | gemini-3.6-flash: AbortError: This operatio); the matching clauses are still shown",
+    "Commitments were checked against all 27 signed contracts on file. Contracts AtliQ hasn't uploaded can't be checked."
+  ],
+  "documents": [
+    {
+      "docId": "syn-aldergrove-msa",
+      "title": "Aldergrove Water Services MSA + SOW-1 (draft)",
+      "docType": "MSA",
+      "paper": "client",
+      "route": "full_review",
+      "facts": [
+        {
+          "field": "docType",
+          "label": "Document type",
+          "value": "MSA"
+        },
+        {
+          "field": "parties",
+          "label": "Counterparty",
+          "value": "Aldergrove Water Services PLC (UK)"
+        },
+        {
+          "field": "entity",
+          "label": "AtliQ entity (parties)",
+          "value": "Pvt Ltd",
+          "clauseRef": "PARTIES",
+          "quote": "ATLIQ TECHNOLOGIES PRIVATE LIMITED, a company incorporated in India (CIN U72900MH2019PTC321456"
+        },
+        {
+          "field": "invoicing",
+          "label": "AtliQ entity (invoicing)",
+          "value": "Pvt Ltd",
+          "clauseRef": "PARTIES",
+          "quote": "ATLIQ TECHNOLOGIES PRIVATE LIMITED, a company incorporated in India (CIN U72900MH2019PTC321456"
+        },
+        {
+          "field": "law",
+          "label": "Governing law",
+          "value": "English law",
+          "clauseRef": "10.1",
+          "quote": "The law of England and Wales"
+        },
+        {
+          "field": "forum",
+          "label": "Forum",
+          "value": "courts of England and Wales",
+          "clauseRef": "10.1",
+          "quote": "The courts of England and Wales have exclusive jurisdiction"
+        },
+        {
+          "field": "payment",
+          "label": "Payment",
+          "value": "30 days",
+          "clauseRef": "2.2",
+          "quote": "Aldergrove shall pay valid invoices within thirty (30) days"
+        },
+        {
+          "field": "ld",
+          "label": "Delay penalties",
+          "value": "0.5% of milestone per week, cap 5% of milestone",
+          "clauseRef": "8.1",
+          "quote": "Service credits of 0.5% of the milestone charge per week of Supplier-caused delay, capped at 5% of that milestone charge"
+        },
+        {
+          "field": "liability",
+          "label": "Liability",
+          "value": "150% of the Charges · uncapped for Clauses 4.3 and 5",
+          "clauseRef": "6.1",
+          "quote": "Each party's total liability shall not exceed 150% of the Charges, save that the Supplier's liability under Clauses 4.3 and 5 shall be unlimited"
+        },
+        {
+          "field": "insurance",
+          "label": "Insurance required",
+          "value": "None"
+        },
+        {
+          "field": "annexes",
+          "label": "Annexes referenced",
+          "value": "Schedule 1"
+        },
+        {
+          "field": "scope",
+          "label": "Sectors · regions",
+          "value": "other · UK, India"
+        },
+        {
+          "field": "data",
+          "label": "Data handled",
+          "value": "personal_data"
+        },
+        {
+          "field": "assets",
+          "label": "Tools / IP reused",
+          "value": "IngestIQ"
+        }
+      ],
+      "gate": [
+        {
+          "rule": "entity",
+          "label": "Correct AtliQ entity",
+          "pass": true,
+          "detail": "Pvt Ltd for a UK counterparty",
+          "citation": {
+            "docId": "syn-aldergrove-msa",
+            "docTitle": "Aldergrove Water Services MSA + SOW-1 (draft)",
+            "clauseRef": "PARTIES",
+            "quote": "ATLIQ TECHNOLOGIES PRIVATE LIMITED, a company incorporated in India (CIN U72900MH2019PTC321456",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "invoicing_entity",
+          "label": "Parties = invoicing entity",
+          "pass": true,
+          "detail": "Pvt Ltd throughout",
+          "citation": {
+            "docId": "syn-aldergrove-msa",
+            "docTitle": "Aldergrove Water Services MSA + SOW-1 (draft)",
+            "clauseRef": "PARTIES",
+            "quote": "ATLIQ TECHNOLOGIES PRIVATE LIMITED, a company incorporated in India (CIN U72900MH2019PTC321456",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "governing_law",
+          "label": "Governing law matches entity",
+          "pass": false,
+          "detail": "English law (Pvt Ltd → Indian law)",
+          "citation": {
+            "docId": "syn-aldergrove-msa",
+            "docTitle": "Aldergrove Water Services MSA + SOW-1 (draft)",
+            "clauseRef": "10.1",
+            "quote": "The law of England and Wales",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "payment",
+          "label": "Payment ≤ 45 days",
+          "pass": true,
+          "detail": "30 days",
+          "citation": {
+            "docId": "syn-aldergrove-msa",
+            "docTitle": "Aldergrove Water Services MSA + SOW-1 (draft)",
+            "clauseRef": "2.2",
+            "quote": "Aldergrove shall pay valid invoices within thirty (30) days",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "ld_cap",
+          "label": "Delay penalties capped",
+          "pass": true,
+          "detail": "Cap 5% of milestone",
+          "citation": {
+            "docId": "syn-aldergrove-msa",
+            "docTitle": "Aldergrove Water Services MSA + SOW-1 (draft)",
+            "clauseRef": "8.1",
+            "quote": "Service credits of 0.5% of the milestone charge per week of Supplier-caused delay, capped at 5% of that milestone charge",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "liability_cap",
+          "label": "Liability capped",
+          "pass": false,
+          "detail": "Capped (150% of the Charges) but uncapped for: Clauses 4.3 and 5",
+          "citation": {
+            "docId": "syn-aldergrove-msa",
+            "docTitle": "Aldergrove Water Services MSA + SOW-1 (draft)",
+            "clauseRef": "6.1",
+            "quote": "Each party's total liability shall not exceed 150% of the Charges, save that the Supplier's liability under Clauses 4.3 and 5 shall be unlimited",
+            "role": "incoming"
+          }
+        },
+        {
+          "rule": "annex:schedule-1",
+          "label": "Schedule 1 attached",
+          "pass": false,
+          "detail": "SOW-1: Meter & Network Telemetry Data Platform: referenced but not attached",
+          "citation": {
+            "docId": "syn-aldergrove-msa",
+            "docTitle": "Aldergrove Water Services MSA + SOW-1 (draft)",
+            "clauseRef": "1.1",
+            "quote": "The Supplier shall perform the services in Schedule 1 (SOW-1",
+            "role": "incoming"
+          }
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "bundle": [],
+  "notesFacts": [
+    {
+      "id": "aldergrove-fact-1",
+      "statement": "The target completion date for the deal is 14 October with a deal value of £82k.",
+      "category": "deadline",
+      "noteId": "note-2026-09-26-pipeline_review_new_queu",
+      "noteTitle": "Pipeline review — \"the second queue\" (Sat 26 Sep, call)",
+      "quote": "Aldergrove Water (Bhavin) — £82k, UK — by **14 Oct",
+      "complianceEvent": false,
+      "whyItMatters": "Establishes the deal deadline and commercial value to be reflected in the agreement."
+    },
+    {
+      "id": "aldergrove-fact-2",
+      "statement": "The delivery cost model relies on using IngestIQ to reduce expenses by 30%.",
+      "category": "commitment",
+      "noteId": "note-2026-09-26-pipeline_review_new_queu",
+      "noteTitle": "Pipeline review — \"the second queue\" (Sat 26 Sep, call)",
+      "quote": "IngestIQ makes it 30% cheaper, \"that's why we won it",
+      "complianceEvent": false,
+      "whyItMatters": "The reviewer must ensure terms permit or account for IngestIQ usage and any underlying software IP or platform commitments."
+    }
+  ],
+  "complianceCandidate": null,
+  "similar": [
+    {
+      "clauseType": "payment",
+      "docId": "syn-aldergrove-msa",
+      "clauseRef": "§2",
+      "quote": "2.1 The Charges for SOW-1 are GBP 82,000 (approx. USD 104,000), payable by milestone.\n\n2.2 Aldergrove shall pay valid invoices within thirty (30) days.",
+      "hits": [
+        {
+          "docId": "northwind-msa",
+          "counterparty": "Northwind Logistics",
+          "date": "2025-06-20",
+          "clauseNo": "5",
+          "heading": "CHARGES AND PAYMENT",
+          "label": "untagged",
+          "score": 0.904,
+          "text": "5.1 The Client shall pay the Charges in accordance with the relevant SOW. The Charges under SOW-1 total **USD 54,000**.\n\n5.2 The Supplier shall invoice on completion of each Milestone. The Client shall pay undisputed invoices within thirty (30) days of receipt.\n\n5.3 Charges are exclusive of VAT, which (if applicable) shall be accounted for by the Client under the reverse-charge mechanism.\n\n5.4 Where sums are overdue, the Supplier may charge interest at 2% per annum above the Bank of England base rate.",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "brightwater-msa",
+          "counterparty": "Brightwater Insurance Inc",
+          "date": "2025-11-28",
+          "clauseNo": "7",
+          "heading": "CHARGES AND PAYMENT",
+          "label": "accident",
+          "labelNote": "Signed on a phone in 4 minutes: 1%/day uncapped LDs, no client-delay exclusion, group set-off, English law on a US entity. Cost $9k + $14.2k legal",
+          "score": 0.88,
+          "text": "7.1 In consideration of the provision of the Services, the Customer shall pay the Charges in accordance with Schedule 2.\n\n7.2 The Supplier shall invoice on the Customer's acceptance of each milestone, quoting the Customer's purchase order number. Invoices not quoting a valid purchase order number may be rejected.\n\n7.3 The Customer shall pay correctly rendered and undisputed invoices within forty-five (45) days of receipt.\n\n7.4 The Customer may set off against any sums owed to the Supplier any amount owed by the Supplier to the Customer or any member of the Brightwater Group.",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "sunrise-msa",
+          "counterparty": "Sunrise Foods",
+          "date": "2025-04-18",
+          "clauseNo": "5",
+          "heading": "FEES AND PAYMENT",
+          "label": "untagged",
+          "score": 0.895,
+          "text": "5.1 The total Fees under SOW-1 are **USD 33,000** (United States Dollars Thirty-Three Thousand only), comprising build fees payable on Milestones and a Monthly Support Fee for the support period, as detailed in SOW-1.\n\n5.2 AtliQ shall invoice build fees upon completion of each Milestone and the Monthly Support Fee monthly in arrears. Sunrise shall pay each undisputed invoice within thirty (30) days of the invoice date.\n\n5.3 All amounts are exclusive of GST, which shall be charged additionally at the applicable rate. Sunrise may deduct TDS as required by law.\n\n5.4 Delayed payments shall attract interest at twelve percent (12%) per annum.",
+          "differs": "",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "ip",
+      "docId": "syn-aldergrove-msa",
+      "clauseRef": "§4",
+      "quote": "4.1 All Intellectual Property Rights in the Deliverables vest in Aldergrove on creation.\n\n4.2 \"Supplier Materials \" means materials owned by the Supplier before the date of this Agreement or developed independently of it. The Supplier retains ownership of Supplier Materials and grants Aldergrove a perpetual, irrevocable, royalty-free, non-exclusive licence to use, modify and maintain any Supplier Materials incorporated in the Deliverables.\n\n4.3 The Supplier warrants that it owns, or has all rights necessary to license, all Supplier Materials, and that their use by Aldergrove will not infringe any third party's rights.",
+      "hits": [
+        {
+          "docId": "brightwater-msa",
+          "counterparty": "Brightwater Insurance Inc",
+          "date": "2025-11-28",
+          "clauseNo": "11",
+          "heading": "INTELLECTUAL PROPERTY",
+          "label": "untagged",
+          "score": 0.929,
+          "text": "11.1 All intellectual property rights in the Deliverables shall vest in the Customer on creation. The Supplier hereby assigns all such rights to the Customer with full title guarantee.\n\n11.2 The Supplier retains ownership of its pre-existing materials and grants the Customer and the Brightwater Group a perpetual, irrevocable, royalty-free licence to use any such materials incorporated in the Deliverables.",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "crestline-msa",
+          "counterparty": "Crestline Retail Inc",
+          "date": "2024-08-01",
+          "clauseNo": "8",
+          "heading": "INTELLECTUAL PROPERTY",
+          "label": "untagged",
+          "score": 0.92,
+          "text": "8.1 Upon payment, Crestline shall own all right, title and interest in the Deliverables.\n\n8.2 Supplier retains all rights in its pre-existing materials, tools and know-how (\"**Supplier Materials**\"). To the extent Supplier Materials are incorporated in a Deliverable, Supplier grants Crestline a non-exclusive, perpetual, royalty-free license to use them as part of such Deliverable.",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "rohan-ica",
+          "counterparty": "Rohan Iyer",
+          "date": "2025-04-28",
+          "clauseNo": "5",
+          "heading": "INTELLECTUAL PROPERTY",
+          "label": "accident",
+          "labelNote": "Rohan kept the Work Product IP (\"ok\" from phone) while Acme was promised ownership",
+          "score": 0.893,
+          "text": "5.1 In this Clause, \"**Work Product**\" means all dashboards, reports, data models, DAX measures, Power Query scripts, visual templates, documentation and other materials created by the Contractor in performing the Services.\n\n5.2 The Contractor retains ownership of all intellectual property rights in the Work Product and in any pre-existing materials, components and templates of the Contractor.\n\n5.3 The Contractor grants AtliQ a non-exclusive, perpetual, irrevocable, royalty-free, worldwide licence to use, copy, modify and deploy the Work Product for the purposes of AtliQ's business, including for delivery to AtliQ's clients.\n\n5.4 The Contractor shall not incorporate into the Work Product any third-party material that AtliQ is not entitled to use under Clause 5.3.",
+          "differs": "",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "indemnity",
+      "docId": "syn-aldergrove-msa",
+      "clauseRef": "§5",
+      "quote": "5.1 The Supplier shall indemnify Aldergrove against all losses arising from any claim that the Deliverables or the Supplier Materials infringe the Intellectual Property Rights of a third party.",
+      "hits": [
+        {
+          "docId": "alnoor-msa",
+          "counterparty": "Al Noor Hospitality Group",
+          "date": "2025-03-15",
+          "clauseNo": "15",
+          "heading": "INDEMNITY",
+          "label": "untagged",
+          "score": 0.936,
+          "text": "15.1 The Supplier shall indemnify the Client against losses arising from any third-party claim that the Deliverables (excluding Client materials) infringe that third party's intellectual property rights.\n\n15.2 The Client shall indemnify the Supplier against losses arising from any third-party claim that Client Data or Client materials infringe that third party's rights.\n\n15.3 The indemnified Party shall promptly notify the indemnifying Party, allow it conduct of the defence, and provide reasonable assistance.",
+          "differs": "",
+          "alsoIn": [
+            "Northwind Logistics (2025-06)",
+            "CloudSpan Technologies (2025-09)"
+          ]
+        },
+        {
+          "docId": "acme-msa",
+          "counterparty": "Acme Retail Group",
+          "date": "2025-03-10",
+          "clauseNo": "11",
+          "heading": "INDEMNITY",
+          "label": "standard",
+          "labelNote": "Mutual indemnity",
+          "score": 0.895,
+          "text": "11.1 Each Party (\"**Indemnifying Party**\") shall indemnify the other against losses arising from third-party claims caused by the Indemnifying Party's breach of confidentiality, infringement of third-party intellectual property rights, or gross negligence or wilful misconduct.",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "brightwater-msa",
+          "counterparty": "Brightwater Insurance Inc",
+          "date": "2025-11-28",
+          "clauseNo": "15",
+          "heading": "INDEMNITIES AND LIABILITY",
+          "label": "untagged",
+          "score": 0.908,
+          "text": "15.1 The Supplier shall indemnify the Customer and each member of the Brightwater Group against all losses arising from (a) any breach by the Supplier of clauses 12 or 13, (b) any claim that the Deliverables infringe third-party rights, and (c) the negligence or wilful default of the Supplier.\n\n15.2 Neither party shall be liable for any indirect or consequential loss.\n\n15.3 Subject to clauses 9, 15.1 and 15.4, the Supplier's total liability under this Agreement shall not exceed one hundred and fifty per cent (150%) of the Contract Value.\n\n15.4 Nothing in this Agreement shall limit liability for death or personal injury caused by negligence, fraud or any other liability which cannot be limited by law.",
+          "differs": "",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "liability",
+      "docId": "syn-aldergrove-msa",
+      "clauseRef": "§6",
+      "quote": "6.1 Each party's total liability shall not exceed 150% of the Charges, save that the Supplier's liability under Clauses 4.3 and 5 shall be unlimited.",
+      "hits": [
+        {
+          "docId": "rohan-ica",
+          "counterparty": "Rohan Iyer",
+          "date": "2025-04-28",
+          "clauseNo": "8",
+          "heading": "LIABILITY",
+          "label": "standard",
+          "labelNote": "Fair freelancer terms: 30-day pay, mutual cap, mutual 15-day exit",
+          "score": 0.884,
+          "text": "8.1 Each party's aggregate liability under this Agreement shall not exceed the total fees paid or payable to the Contractor in the twelve (12) months preceding the claim, except for breach of Clause 6 or fraud.\n\n8.2 Neither party is liable for indirect or consequential loss.",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "carebridge-baa",
+          "counterparty": "CareBridge Clinics Inc",
+          "date": "2025-10-06",
+          "clauseNo": "9",
+          "heading": "LIABILITY",
+          "label": "standard",
+          "labelNote": "Counsel-reviewed BAA (Calloway Stern, $3.8k): capped liability, 5-day reporting, de-identified offshore route",
+          "score": 0.878,
+          "text": "9.1 Each Party's liability arising out of or relating to this BAA, including any Breach, is subject to the limitations and exclusions of liability in the Master Services Agreement, under which aggregate liability for claims relating to a Breach or a violation of this BAA shall not exceed two (2) times the Fees paid or payable under the Master Services Agreement in the twelve (12) months preceding the event giving rise to the claim.",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "sunrise-msa",
+          "counterparty": "Sunrise Foods",
+          "date": "2025-04-18",
+          "clauseNo": "13",
+          "heading": "LIMITATION OF LIABILITY",
+          "label": "standard",
+          "labelNote": "AtliQ-friendly master: capped liability, service credits capped at 5%",
+          "score": 0.875,
+          "text": "13.1 Neither Party shall be liable for indirect, consequential or special losses or loss of profits.\n\n13.2 Each Party's aggregate liability under an SOW shall not exceed the Fees paid or payable under that SOW.",
+          "differs": "",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "data_protection",
+      "docId": "syn-aldergrove-msa",
+      "clauseRef": "§7",
+      "quote": "7.1 The Supplier acts as processor under the UK GDPR; Aldergrove's standard processor terms apply. Customer data must remain in Aldergrove's UK Azure tenant.",
+      "hits": [
+        {
+          "docId": "northwind-msa",
+          "counterparty": "Northwind Logistics",
+          "date": "2025-06-20",
+          "clauseNo": "14",
+          "heading": "DATA PROTECTION",
+          "label": "untagged",
+          "score": 0.892,
+          "text": "14.1 Each party shall comply with the UK GDPR and the Data Protection Act 2018. To the extent the Supplier processes personal data on behalf of the Client, it shall do so only on the Client's documented instructions and in accordance with the data processing terms in Schedule 3.\n\n14.2 Any transfer of personal data to India shall be made subject to the UK International Data Transfer Addendum to the EU Standard Contractual Clauses.",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "cloudspan-spa",
+          "counterparty": "CloudSpan Technologies",
+          "date": "2025-09-01",
+          "clauseNo": "10",
+          "heading": "DATA PROTECTION",
+          "label": "untagged",
+          "score": 0.871,
+          "text": "10.1 Each Party shall comply with data protection laws applicable to it. Where Partner processes Customer personal data in providing Implementation Services, it does so under its own agreement with that Customer.\n\n10.2 Referral Registrations shall contain only business contact information that Partner is entitled to share.",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "brightwater-msa",
+          "counterparty": "Brightwater Insurance Inc",
+          "date": "2025-11-28",
+          "clauseNo": "13",
+          "heading": "DATA PROTECTION AND INFORMATION SECURITY",
+          "label": "untagged",
+          "score": 0.869,
+          "text": "13.1 The Supplier shall comply with all applicable data protection laws, including the Connecticut Data Privacy Act and the Gramm-Leach-Bliley Act, and the Brightwater Group Information Security Schedule.\n\n13.2 The Supplier shall notify the Customer of any security incident affecting Customer Data within twenty-four (24) hours of becoming aware of it.\n\n13.3 The Supplier shall not process Customer Data outside the United States without the Customer's prior written consent.",
+          "differs": "",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "ld",
+      "docId": "syn-aldergrove-msa",
+      "clauseRef": "§8",
+      "quote": "8.1 Service credits of 0.5% of the milestone charge per week of Supplier-caused delay, capped at 5% of that milestone charge.",
+      "hits": [
+        {
+          "docId": "sunrise-msa",
+          "counterparty": "Sunrise Foods",
+          "date": "2025-04-18",
+          "clauseNo": "8",
+          "heading": "SERVICE LEVELS AND SERVICE CREDITS",
+          "label": "standard",
+          "labelNote": "AtliQ-friendly master: capped liability, service credits capped at 5%",
+          "score": 0.886,
+          "text": "8.1 During the support period under any SOW, AtliQ shall meet the Service Levels set out in Schedule A.\n\n8.2 If AtliQ fails to meet a Service Level in any calendar month for reasons attributable to AtliQ, Sunrise shall be entitled to Service Credits as set out in Schedule A.\n\n8.3 The total Service Credits in any calendar month shall not exceed five percent (5%) of the Monthly Support Fee for that month.\n\n8.4 Service Credits shall be applied against the next invoice and shall be Sunrise's sole monetary remedy for failure to meet the Service Levels. Service Credits are a price adjustment reflecting the reduced value of the Services and are not a penalty.\n\n8.5 No Service Credit shall accrue for failures caused by Sunrise, its third-party vendors, scheduled maintenance notified in advance, or Force Majeure.",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "acme-msa",
+          "counterparty": "Acme Retail Group",
+          "date": "2025-03-10",
+          "clauseNo": "7",
+          "heading": "DELAY AND LIQUIDATED DAMAGES",
+          "label": "standard",
+          "labelNote": "Origin of the LD playbook: 0.5% of milestone/week, 5% cap, client delays excluded (Mar 2025)",
+          "score": 0.885,
+          "text": "7.1 If the Service Provider fails to complete a Milestone by the agreed date for reasons solely attributable to the Service Provider, the Service Provider shall pay liquidated damages at the rate of 0.5% (half percent) of the Milestone Fee of the delayed Milestone for each complete week of delay.\n\n7.2 The aggregate liquidated damages in respect of any Milestone shall not exceed 5% (five percent) of the Milestone Fee of that Milestone.\n\n7.3 No liquidated damages shall be payable where the delay is caused by the Client, including delayed access to data or systems, delayed review of Deliverables, or changes in scope, or by a Force Majeure event.\n\n7.4 The Parties agree that the liquidated damages are a genuine pre-estimate of loss and shall be the Client's sole and exclusive remedy for delay.",
+          "differs": "",
+          "alsoIn": [
+            "Trustline NBFC (2026-08)",
+            "Northwind Logistics (2025-06)"
+          ]
+        },
+        {
+          "docId": "brightwater-msa",
+          "counterparty": "Brightwater Insurance Inc",
+          "date": "2025-11-28",
+          "clauseNo": "9",
+          "heading": "DELAY AND LIQUIDATED DAMAGES",
+          "label": "accident",
+          "labelNote": "Signed on a phone in 4 minutes: 1%/day uncapped LDs, no client-delay exclusion, group set-off, English law on a US entity. Cost $9k + $14.2k legal",
+          "score": 0.865,
+          "text": "9.1 If the Supplier fails to achieve any Key Date, the Supplier shall pay to the Customer liquidated damages in the amount of one per cent (1%) of the Contract Value for each day or part day by which the relevant Key Date is missed.\n\n9.2 Liquidated damages under clause 9.1 shall be payable in addition to any other right or remedy available to the Customer under this Agreement or at law, and the Customer may deduct such liquidated damages from any sums due to the Supplier.\n\n9.3 The Supplier acknowledges that the liquidated damages set out in this clause 9 are proportionate to the Customer's legitimate interest in the timely delivery of the Services.",
+          "differs": "",
+          "alsoIn": []
+        }
+      ]
+    },
+    {
+      "clauseType": "governing_law",
+      "docId": "syn-aldergrove-msa",
+      "clauseRef": "§10",
+      "quote": "10.1 The law of England and Wales. The courts of England and Wales have exclusive jurisdiction.\n\nSCHEDULE 1 — SOW-1: METER & NETWORK TELEMETRY DATA PLATFORM",
+      "hits": [
+        {
+          "docId": "brightwater-msa",
+          "counterparty": "Brightwater Insurance Inc",
+          "date": "2025-11-28",
+          "clauseNo": "20",
+          "heading": "GOVERNING LAW AND JURISDICTION",
+          "label": "accident",
+          "labelNote": "Signed on a phone in 4 minutes: 1%/day uncapped LDs, no client-delay exclusion, group set-off, English law on a US entity. Cost $9k + $14.2k legal",
+          "score": 0.906,
+          "text": "20.1 This Agreement and any dispute or claim (including non-contractual disputes or claims) arising out of or in connection with it or its subject matter shall be governed by and construed in accordance with the law of England and Wales.\n\n20.2 Each party irrevocably agrees that the courts of London, England shall have exclusive jurisdiction to settle any dispute or claim arising out of or in connection with this Agreement.\n\n---",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "northwind-msa",
+          "counterparty": "Northwind Logistics",
+          "date": "2025-06-20",
+          "clauseNo": "17",
+          "heading": "GOVERNING LAW AND DISPUTE RESOLUTION",
+          "label": "concession",
+          "labelNote": "English law + LCIA: \"not worth losing the deal over\"",
+          "score": 0.867,
+          "text": "17.1 This Agreement and any dispute or claim (including non-contractual disputes or claims) arising out of or in connection with it shall be governed by the law of England and Wales.\n\n17.2 Any dispute arising out of or in connection with this Agreement shall be referred to and finally resolved by arbitration under the LCIA Rules. The number of arbitrators shall be one. The seat of arbitration shall be London. The language of the arbitration shall be English.",
+          "differs": "",
+          "alsoIn": []
+        },
+        {
+          "docId": "alnoor-msa",
+          "counterparty": "Al Noor Hospitality Group",
+          "date": "2025-03-15",
+          "clauseNo": "21",
+          "heading": "GOVERNING LAW AND DISPUTE RESOLUTION",
+          "label": "concession",
+          "labelNote": "DIFC law accepted as the client's group standard",
+          "score": 0.828,
+          "text": "21.1 This Agreement and any non-contractual obligations arising out of it shall be governed by the laws of the Dubai International Financial Centre.\n\n21.2 The Parties shall first attempt to resolve any dispute through good-faith negotiation between senior executives for thirty (30) days.\n\n21.3 Failing resolution, the courts of the Dubai International Financial Centre shall have exclusive jurisdiction.",
+          "differs": "",
+          "alsoIn": []
+        }
+      ]
+    }
+  ],
+  "counselPack": null,
+  "errors": [],
+  "usage": {
+    "calls": 1,
+    "cachedCalls": 4,
+    "inputTokens": 366,
+    "outputTokens": 48,
+    "ms": 47114
+  }
+}

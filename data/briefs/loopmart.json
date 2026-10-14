@@ -1,7 +1,7 @@
 {
   "dealId": "loopmart",
   "version": 1,
-  "createdAt": "2026-10-13T18:19:00.847Z",
+  "createdAt": "2026-10-14T01:40:12.645Z",
   "trigger": "initial review",
   "inputsHash": "a66bc0be4f5194838195790376a35569",
   "documentIds": [
@@ -31,7 +31,6 @@
     "NDA term: The agreement has a fixed term of 2 years, with confidentiality obligations surviving for a reasonable, fixed period of 3 years post-termination."
   ],
   "notSeen": [
-    "Similar past clauses for LoopMart mutual NDA (draft): comparison lines couldn't be written (timed out after 45s across retries | gemini-3.7-flash: HTTP 503: { \"error\": { \"c); the matching clauses are still shown",
     "No meeting notes attached to this deal.",
     "Commitments were checked against all 17 signed contracts on file. Contracts AtliQ hasn't uploaded can't be checked."
   ],
@@ -208,7 +207,7 @@
           "labelNote": "Genuinely mutual NDA",
           "score": 0.928,
           "text": "1.1 The Parties wish to evaluate a potential engagement under which AtliQ would design and implement an enterprise clinical and operational analytics platform for Harrington (the \"**Purpose**\"), and each Party expects to disclose Confidential Information to the other in connection with the Purpose.",
-          "differs": "",
+          "differs": "Same as Harrington Health Systems Inc: both clauses establish mutual disclosure of confidential information for evaluating a potential engagement.",
           "alsoIn": []
         },
         {
@@ -221,7 +220,7 @@
           "labelNote": "One-way NDA signed within the hour; contradicts \"we only sign mutual\"",
           "score": 0.882,
           "text": "1.1 Meridian intends to disclose certain information to the Recipient for the purpose of evaluating a potential engagement relating to clinical operations analytics and hospital performance dashboards (the \"**Purpose**\"), including a walkthrough of Meridian's data environment.",
-          "differs": "",
+          "differs": "Better for AtliQ than Meridian Healthcare: disclosure is mutual rather than one-way, protecting AtliQ's confidential information as well as the client's.",
           "alsoIn": []
         },
         {
@@ -234,7 +233,7 @@
           "labelNote": "Genuinely mutual NDA: the template for what mutual looks like",
           "score": 0.85,
           "text": "1.1 \"**Confidential Information**\" means any information disclosed by one Party (the \"**Disclosing Party**\") to the other Party (the \"**Receiving Party**\") in connection with the Purpose, whether before or after the date of this Agreement, in any form, that is marked or identified as confidential or that a reasonable person would understand to be confidential, including guest and occupancy data, pricing, commercial proposals, solution architecture, source code, methodologies and business plans.",
-          "differs": "",
+          "differs": "Worse for AtliQ than Al Noor Hospitality Group: does not require information to be marked or reasonably recognizable as confidential to be protected.",
           "alsoIn": []
         }
       ]
@@ -254,7 +253,7 @@
           "label": "untagged",
           "score": 0.949,
           "text": "4.1 Where Confidential Information includes personal data of guests or employees, the Receiving Party shall process it only as necessary for the Purpose and in accordance with applicable data protection law, including the UAE Federal Decree-Law No. 45 of 2021 and the Indian Digital Personal Data Protection Act, 2023, as applicable.",
-          "differs": "",
+          "differs": "Better for AtliQ than Al Noor Hospitality Group: requires compliance only with the Indian DPDP Act 2023, omitting UAE data protection law.",
           "alsoIn": []
         },
         {
@@ -266,7 +265,7 @@
           "label": "untagged",
           "score": 0.915,
           "text": "13.1 The Service Provider shall process personal data received from the Client only for the purpose of the Services and in compliance with the Digital Personal Data Protection Act, 2023 and the rules made thereunder, as and when in force, and shall implement reasonable security practices.",
-          "differs": "",
+          "differs": "Better for AtliQ than Acme Retail Group: data processing compliance is mutual rather than imposed solely on AtliQ, and excludes additional security practice mandates.",
           "alsoIn": []
         },
         {
@@ -278,7 +277,7 @@
           "label": "untagged",
           "score": 0.899,
           "text": "14.1 AtliQ shall comply with the Information Technology Act, 2000, the rules thereunder, and the Digital Personal Data Protection Act, 2023 to the extent applicable, in relation to any personal data of distributors or employees processed in performing the Services.",
-          "differs": "",
+          "differs": "Better for AtliQ than Sunrise Foods: applies obligations mutually to both parties and excludes compliance with the Information Technology Act 2000.",
           "alsoIn": []
         }
       ]
@@ -298,7 +297,7 @@
           "label": "untagged",
           "score": 0.854,
           "text": "8.1 Each Party retains all rights in its own intellectual property. CloudSpan owns the CloudSpan Platform and all improvements to it.\n\n8.2 Partner retains all rights in its own methodologies, accelerators, tools, templates and know-how, whether developed before or during the Term, including those used in delivering Implementation Services.\n\n8.3 Any feedback provided by Partner concerning the CloudSpan Platform may be used by CloudSpan without restriction, provided Partner's Confidential Information is not disclosed.",
-          "differs": "",
+          "differs": "Better for AtliQ than CloudSpan Technologies: preserves AtliQ's freedom to work with third parties and grants no unrestricted feedback rights to the client.",
           "alsoIn": []
         },
         {
@@ -311,7 +310,7 @@
           "labelNote": "Rohan kept the Work Product IP (\"ok\" from phone) while Acme was promised ownership",
           "score": 0.829,
           "text": "5.1 In this Clause, \"**Work Product**\" means all dashboards, reports, data models, DAX measures, Power Query scripts, visual templates, documentation and other materials created by the Contractor in performing the Services.\n\n5.2 The Contractor retains ownership of all intellectual property rights in the Work Product and in any pre-existing materials, components and templates of the Contractor.\n\n5.3 The Contractor grants AtliQ a non-exclusive, perpetual, irrevocable, royalty-free, worldwide licence to use, copy, modify and deploy the Work Product for the purposes of AtliQ's business, including for delivery to AtliQ's clients.\n\n5.4 The Contractor shall not incorporate into the Work Product any third-party material that AtliQ is not entitled to use under Clause 5.3.",
-          "differs": "",
+          "differs": "Worse for AtliQ than Rohan Iyer: grants AtliQ only a limited right to use information for the Purpose rather than a perpetual license.",
           "alsoIn": []
         },
         {
@@ -323,7 +322,7 @@
           "label": "untagged",
           "score": 0.829,
           "text": "8.1 Upon payment, Crestline shall own all right, title and interest in the Deliverables.\n\n8.2 Supplier retains all rights in its pre-existing materials, tools and know-how (\"**Supplier Materials**\"). To the extent Supplier Materials are incorporated in a Deliverable, Supplier grants Crestline a non-exclusive, perpetual, royalty-free license to use them as part of such Deliverable.",
-          "differs": "",
+          "differs": "Better for AtliQ than Crestline Retail Inc: AtliQ retains ownership of its information without transferring deliverables or granting perpetual licenses to the client.",
           "alsoIn": []
         }
       ]
@@ -332,10 +331,10 @@
   "counselPack": null,
   "errors": [],
   "usage": {
-    "calls": 0,
+    "calls": 1,
     "cachedCalls": 4,
-    "inputTokens": 0,
-    "outputTokens": 0,
-    "ms": 45161
+    "inputTokens": 1844,
+    "outputTokens": 5623,
+    "ms": 28878
   }
 }
