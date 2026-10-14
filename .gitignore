@@ -10,7 +10,9 @@
 .vercel
 __MACOSX/
 data/*.log
-data/cache/
+# The model cache is committed (answers and embeddings for the synthetic dataset, no keys), so a fresh clone and CI
+# can run npm run check without an API key. The quota records stay local.
+data/cache/quota-exhausted-*
 data/dev.log
 data/state/
 next-env.d.ts

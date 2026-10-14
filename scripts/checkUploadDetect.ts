@@ -7,6 +7,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { belongsElsewhere, findPriorVersion, guessDocType, looksLikeNotes, looksLikeTemplate } from "../lib/uploadDetect";
 import type { Document } from "../lib/types";
+import { RAW_DIR } from "../lib/config";
 
 const all = JSON.parse(fs.readFileSync("data/documents.json", "utf8")) as Document[];
 const by = (id: string) => all.find((d) => d.id === id)!;
@@ -14,7 +15,7 @@ const file = (p: string) => fs.readFileSync(p, "utf8");
 let failed = 0;
 
 // Notes vs contract (reference documents such as the checklist count as notes; the entity fact sheet is a known miss).
-const notesDir = "../Dataset/meeting_notes";
+const notesDir = path.join(RAW_DIR, "meeting_notes"); // the dataset copy inside the repo
 const notesCases: [string, string, boolean][] = [
   ...(fs.existsSync(notesDir) ? fs.readdirSync(notesDir).map((f) => [f, file(path.join(notesDir, f)), true] as [string, string, boolean]) : []),
   ...all.filter((d) => d.id !== "ref-atliq-entities").map((d) => [d.id, d.text, d.kind === "reference"] as [string, string, boolean]),

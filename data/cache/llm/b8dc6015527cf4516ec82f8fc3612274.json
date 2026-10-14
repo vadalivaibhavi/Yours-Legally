@@ -1,0 +1,1 @@
+{"model":"qwen2.5:7b","usage":{"inputTokens":208,"outputTokens":30},"data":{"headline":"Comply by confirming the correct contracting entity in the document.","nextAction":"Send back to the other side for correction."}}

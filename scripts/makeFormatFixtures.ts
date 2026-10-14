@@ -21,7 +21,8 @@ export const FORMAT_PLAN: Record<string, "docx" | "docx-autonum" | "pdf" | "scan
   monsoon: "scan",
 };
 
-export const HOLDOUT_DIR = "../Dataset/incoming";
+/** The held-out drafts (the dataset's SYN_ files, copied into the repo so a fresh clone and CI can run every check). */
+export const HOLDOUT_DIR = "data/raw/holdout/incoming";
 export const FORMATS_DIR = "test-uploads/formats";
 
 export function holdoutSource(key: string): string {

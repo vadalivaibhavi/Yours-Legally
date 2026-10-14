@@ -1,0 +1,1 @@
+{"model":"gemini-flash-lite-latest","usage":{"inputTokens":160,"outputTokens":76},"data":{"facts":[{"statement":"Partnership Agreement deadline is 15 Oct","category":"deadline","source":"tracker","quote":"C-035 (Partnership Agreement): by 15 Oct.","complianceEvent":false,"whyItMatters":"Contract reviewer must ensure the agreement is executed by the specified deadline."}]}}

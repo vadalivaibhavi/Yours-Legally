@@ -1,0 +1,1 @@
+{"model":"gemini-flash-lite-latest","usage":{"inputTokens":196,"outputTokens":61},"data":{"facts":[{"statement":"Kriti wants to start on October 5th.","category":"deadline","source":"tracker","quote":"Kriti wants to start 5 Oct.","complianceEvent":false,"whyItMatters":"The agreement needs to be in place before the requested start date."}]}}

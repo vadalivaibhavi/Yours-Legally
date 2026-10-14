@@ -21,7 +21,7 @@ import { Deal, Document, Note, type AtliqEntity, type DocType, type Side } from 
 import { FORMAT_PLAN, FORMATS_DIR } from "./makeFormatFixtures";
 
 process.env.DATA_PROFILE = "holdout";
-const DATASET = "../Dataset";
+const DATASET = "data/raw/holdout"; // the dataset's SYN_ files, copied into the repo
 const OUT = "data/holdout";
 
 type Meta = { id: string; key: string; docType: DocType; title: string; counterparty: string; entity: AtliqEntity; side: Side; paper: "client" | "atliq"; tracker: string };

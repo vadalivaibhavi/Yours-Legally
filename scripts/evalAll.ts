@@ -20,6 +20,8 @@ const tsx = (script: string, ...args: string[]) => [path.join("node_modules", "t
 
 const CHECK: Step[] = [
   { name: "masking (FR-26): leaks and round trips", cmd: tsx("checkMask"), model: false, summary: /EV-M1 leaks: \d+.*/ },
+  // Next's page types (PageProps, RouteContext) are generated into .next/, which a fresh clone or CI doesn't have.
+  { name: "page types (next typegen)", cmd: [path.join("node_modules", "next", "dist", "bin", "next"), "typegen"], model: false },
   { name: "typecheck", cmd: [path.join("node_modules", "typescript", "bin", "tsc"), "--noEmit"], model: false },
   { name: "upload detection", cmd: tsx("checkUploadDetect"), model: false, summary: /all correct|\d+ wrong/ },
   { name: "file reading (PDF / Word / scans)", cmd: tsx("checkFileRead"), model: false, summary: /all files read back|\d+ file\(s\) below their bar/ },

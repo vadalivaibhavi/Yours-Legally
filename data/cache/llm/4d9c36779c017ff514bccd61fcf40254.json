@@ -1,0 +1,1 @@
+{"model":"gemini-3.6-flash","usage":{"inputTokens":142,"outputTokens":868},"data":{"facts":[{"statement":"Sania sent LoopMart's standard mutual NDA form.","category":"other","source":"tracker","quote":"Sania sent their standard one","complianceEvent":false,"whyItMatters":"The contract reviewer must review the counterparty's standard template rather than our standard NDA."}]}}

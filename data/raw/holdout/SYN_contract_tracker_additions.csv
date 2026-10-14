@@ -1,0 +1,22 @@
+contract_id,counterparty,doc_type,atliq_entity,client_country,requested_by,received_date,status,signed_date,expiry_date,value_usd,file_location,restrictive_clauses,notes
+SYN-101,Kestrel Pharma Distribution Pvt Ltd,MSA,Pvt Ltd,India,Bhavin,2024-10-14,Signed,2024-11-04,2027-11-03,62000,Bhavin email,,pharma demand forecasting. 9 states
+SYN-102,Meridale Retail Brands Inc,MSA,Inc,USA,Jay,2025-01-13,Signed,2025-02-03,2028-02-02,96000,Jay email,,markdown analytics. rate card in exh A
+SYN-103,Novaterra Energy Ltd,MSA + SOW-1,Pvt Ltd,UK,Bhavin,2025-04-22,Signed,2025-05-19,,88000,Shared Drive > Clients > Novaterra > Signed,none,"smart meter pipelines. GBP 69.5k incl 12k 'framework fee'"
+SYN-104,Zephyr Cloud Data Pte Ltd,Partnership Agreement,Pvt Ltd,Singapore,Bhavin,2025-06-02,Signed,2025-06-30,2028-06-29,,Shared Drive > Partnerships > Zephyr,referral only,15% referral. 3 certified engineers
+SYN-105,Ashwood Senior Living Inc,Services Agreement,Inc,USA,Dhaval,2025-08-04,Signed,2025-08-25,2027-08-24,71000,Dhaval email,,SOW-1 + SOW-2 under this
+SYN-106,Ashwood Senior Living Inc,BAA,Inc,USA,Dhaval,2025-08-04,Signed,2025-08-25,,,Dhaval email,,their template. no counsel review (K: 'same as CareBridge')
+SYN-107,Falconridge Logistics WLL,MSA,Pvt Ltd,Qatar,Bhavin,2025-08-20,Signed,2025-09-15,2027-09-14,112000,Bhavin email attachments,,LD 1%/wk cap 10% total - Bhavin approved as exception
+SYN-108,Halvorsen Mutual Insurance Co,Mutual NDA,Inc,USA,Dhaval,2025-02-07,Signed,2025-02-10,,,Karandeep email,,mutual - signed same day. deal didn't happen
+SYN-109,Tessellate Analytics LLP,Vendor Agreement,Pvt Ltd,India,Pranav,2025-10-27,Signed,2025-11-10,2027-11-09,,Pranav Google Drive > Vendors,,agency. INR 2400/hr. Ravi asked for 'capacity guarantee'
+SYN-110,Lumen Small Finance Bank Ltd,MSA,Pvt Ltd,India,Dhaval,2025-12-08,Signed,2026-01-19,2028-01-18,140000,Drive > Contracts > 2026,,EWS model. final acceptance 12 Aug 2026
+SYN-111,Corvina Foods GmbH,MSA + DPA,Pvt Ltd,Germany,Bhavin,2026-02-23,Signed,2026-03-23,2029-03-22,89000,Bhavin email,,EUR 82k. German law. DPA annex 2
+SYN-112,Pillarstone Pharma Logistics Pvt Ltd,MSA,Pvt Ltd,India,Bhavin,2026-09-21,In review,,,78000,Bhavin email,,"by 9 Oct. INR 65L. Bhavin: 'we did this for Kestrel, easy'"
+SYN-113,Cobalt Outfitters Inc,MSA + rate card,Inc,USA,Jay,2026-09-22,In review,,,58000,Jay email,,by 2 Oct. $68/hr senior DE - Dhaval ok'd on WhatsApp
+SYN-114,Aldergrove Water Services plc,MSA + SOW-1,Pvt Ltd,UK,Bhavin,2026-09-17,In review,,,104000,Bhavin email,,GBP 82k. by 14 Oct. Pranav: IngestIQ makes it 30% cheaper
+SYN-115,Quanta Lake Data Inc,Partnership Agreement,Inc,USA,Bhavin,2026-09-24,In review,,,,Bhavin email,,by 12 Oct. Q4 APAC/ME launch campaign + MDF
+SYN-116,Ashwood Senior Living Inc,SOW-3,Inc,USA,Dhaval,2026-09-23,In review,,,67000,Dhaval email,,by 30 Sep. James added staffing section (Pune team)
+SYN-117,Cargoline Shipping WLL,MSA,Inc,Bahrain,Bhavin,2026-09-25,,,,92000,Bhavin email,,ASAP. Bhavin: Falconridge is Qatar so fine
+SYN-118,Monsoon Data Studio,Vendor Agreement,Pvt Ltd,India,Pranav,2026-09-26,Draft,,,21500,Pranav email,,start 5 Oct. our template. 900 hrs overflow
+SYN-119,Indus Valley Co-operative Bank Ltd,Services Agreement,Pvt Ltd,India,Dhaval,2026-09-24,In review,,,118000,Dhaval email,,INR 98.5L. by 6 Oct. RFP won - 'same approach as Lumen'
+SYN-120,Corvina Foods GmbH,SOW-2 + sub-processor notice,Pvt Ltd,Germany,Bhavin,2026-09-25,Draft,,,87000,Bhavin email,,EUR 74k. start 12 Oct. adds Kriti + SyncRiver
+SYN-121,Greystone Claims Solutions Inc,MSA,Inc,USA,Dhaval,2026-09-18,In review,,,86000,Dhaval email,,claims triage. K: 'Halvorsen lock-in?'

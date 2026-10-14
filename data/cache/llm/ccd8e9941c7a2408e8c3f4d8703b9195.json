@@ -1,0 +1,1 @@
+{"model":"llama3.2","usage":{"inputTokens":166,"outputTokens":89},"data":{"facts":[{"statement":"Sania sent their standard one","category":"data_movement","source":"Sania","quote":"Sania sent their standard one","complianceEvent":true,"whyItMatters":"Regulated/personal data has been accessed before the agreement that must cover it is signed."}]}}
