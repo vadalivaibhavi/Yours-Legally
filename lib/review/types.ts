@@ -152,4 +152,6 @@ export type EffectiveBrief = Brief & {
   complianceAlert: (ComplianceAlert & { status: "open" | "resolved"; resolution?: string; evidenceFile?: { name: string; stored: string; bytes: number } }) | null;
   changes: { new: string[]; stillOpen: string[]; resolved: Finding[] } | null;
   waitingFor: { item: string; owner: string }[];
+  /** Register commitments of kinds the conflict check doesn't compare, listed for a manual check (lib/review/unchecked.ts). */
+  unchecked: { items: { entryId: string; sourceDocId: string; text: string; why: string }[]; more: number };
 };

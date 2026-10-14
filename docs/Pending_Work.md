@@ -56,7 +56,7 @@ On the free tier that is well within a day's quota for one round of tests. If a 
 
 ## 2c. The evaluation batch (needs Gemini quota): `npm run eval:all`
 
-**Done 14 Oct 2026** (all steps below ran; results in the README). Next, from the held-out findings: widen the conflict check beyond 5 commitment types (ROFR, take-or-pay minimums, rate freezes, DPA hosting / sub-processor terms, offshore-PHI bans); count a DPA annexed to a signed MSA; blocker severity for named / listed collisions. Building these turns the held-out set into a tuning set, so a fresh held-out set is needed afterwards.
+**Done 14 Oct 2026** (all steps below ran; results in the README). From the held-out findings: the conflict check stays at 5 commitment types (declared in Known limits); other kinds are listed in each brief for a manual check (lib/review/unchecked.ts, 4/4 missed conflicts pointed to). Still open: count a DPA annexed to a signed MSA; blocker severity for named / listed collisions.
 
 One command, resumable: on the free tier it stops at the daily quota (resets ~12:30 IST) and the same command carries on the next day. About 120 strong-model calls ≈ 3–4 free-tier days, or roughly $1–2 on a billed key in one run.
 

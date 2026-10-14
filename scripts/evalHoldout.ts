@@ -38,6 +38,8 @@ function main() {
   const tally: Record<string, number> = { correct: 0, partly: 0, duplicate: 0, noise: 0, wrong: 0 };
   let sevOff = 0;
   const ungraded: string[] = [];
+  let missedPointed = 0, missedAll = 0;
+  const pointed: string[] = [];
   for (const c of spec.cases) {
     const p = path.join("data", briefsDir(), `${c.dealId}.json`);
     if (!fs.existsSync(p)) {
@@ -62,6 +64,14 @@ function main() {
       else {
         tally[l.label]++;
         if (l.severity !== "ok") sevOff++;
+      }
+    }
+    // A conflict the check missed: does the brief's "check by hand" list (lib/review/unchecked.ts) point at that contract?
+    for (const x of citeRes.filter((r) => !r.ok)) {
+      missedAll++;
+      if (e.unchecked.items.some((u) => u.sourceDocId === x.d)) {
+        missedPointed++;
+        pointed.push(`${c.dealId} → ${x.d}`);
       }
     }
     citeHit += citeRes.filter((x) => x.ok).length;
@@ -105,6 +115,8 @@ function main() {
     `Every finding graded (\`eval/holdout_finding_labels.json\`): ${(() => { const n = Object.values(tally).reduce((a, x) => a + x, 0); const p = (k: string) => (n ? Math.round((100 * tally[k]) / n) : 0); return `${n} findings · **${p("correct")}% correct** (+${p("partly")}% partly) · noise ${p("noise")}% · wrong ${tally.wrong} · severity off ${sevOff}${ungraded.length ? ` · UNGRADED: ${ungraded.join(", ")}` : ""}`; })()}`,
     "",
     `**Verdicts ${pct(verdictOk, graded)} · conflicts found (the right signed contract cited at blocker/high) ${pct(citeHit, citeAll)} · playbook / entity points ${pct(findHit, findAll)} · false alarms on the clean draft: ${falseAlarms} · register key ${pct(regOk, spec.register.entries.length)}** (${graded}/${spec.cases.length} deals reviewed)`,
+    "",
+    `Missed conflicts that the brief's "check by hand" list points to (commitment kinds the conflict check doesn't compare): ${pct(missedPointed, missedAll)}${pointed.length ? ` (${pointed.join("; ")})` : ""}`,
     "",
     "| Case | Deal | Expected | Verdict | Conflict must cite | Must find | False alarms | Result |",
     "|---|---|---|---|---|---|---|---|",

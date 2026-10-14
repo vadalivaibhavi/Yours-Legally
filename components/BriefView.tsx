@@ -275,6 +275,18 @@ export async function BriefView({ dealId: id, version }: { dealId: string; versi
                 <li key={x}>◌ {x}</li>
               ))}
             </ul>
+            {b.unchecked.items.length > 0 && (
+              <div className="mt-3 border-t border-line pt-3">
+                <p className="font-medium">Commitments the conflict check doesn't compare (check by hand)</p>
+                <p className="text-xs text-muted">The check compares non-competes, exclusivity, pricing promises and IP. These other commitments may still apply to this deal; they don't change the verdict.</p>
+                <ul className="mt-1 space-y-1">
+                  {b.unchecked.items.map((u) => (
+                    <li key={u.entryId}>◌ {u.text.replace(/^Not compared with this deal \(check by hand\): /, "")}</li>
+                  ))}
+                  {b.unchecked.more > 0 && <li className="text-muted">… and {b.unchecked.more} more in the Commitments register</li>}
+                </ul>
+              </div>
+            )}
           </div>
         </Section>
       </div>

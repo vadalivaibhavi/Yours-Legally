@@ -1,10 +1,12 @@
 # Held-out evaluation
 
-The dataset's SYN_ extension: 10 incoming drafts (read from Word / PDF / scanned files), 10 signed contracts added to the register, 6 notes without narrator lines. Never used to build, prompt or tune anything; cases written from the answer key before the first run (`eval/holdout_cases.json`, unchanged since). Model: gemini. Run 2026-10-14 02:08 UTC.
+The dataset's SYN_ extension: 10 incoming drafts (read from Word / PDF / scanned files), 10 signed contracts added to the register, 6 notes without narrator lines. Never used to build, prompt or tune anything; cases written from the answer key before the first run (`eval/holdout_cases.json`, unchanged since). Model: gemini. Run 2026-10-14 02:16 UTC.
 
 Every finding graded (`eval/holdout_finding_labels.json`): 50 findings · **74% correct** (+4% partly) · noise 16% · wrong 3 · severity off 9
 
 **Verdicts 9/10 = 90% · conflicts found (the right signed contract cited at blocker/high) 7/11 = 64% · playbook / entity points 10/13 = 77% · false alarms on the clean draft: 0 · register key 8/10 = 80%** (10/10 deals reviewed)
+
+Missed conflicts that the brief's "check by hand" list points to (commitment kinds the conflict check doesn't compare): 4/4 = 100% (ashwood → syn-ashwood-baa; monsoon → syn-tessellate-vsa; indus → syn-zephyr-spa; corvina → syn-corvina-msa)
 
 | Case | Deal | Expected | Verdict | Conflict must cite | Must find | False alarms | Result |
 |---|---|---|---|---|---|---|---|

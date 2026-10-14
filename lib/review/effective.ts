@@ -12,6 +12,7 @@ import { adjustForDealSize } from "./materiality";
 import { ownerRole, rolesInText, OWNER } from "./owners";
 import { expandRegions } from "../geo";
 import { latestSellerCheck } from "../sellerChecks";
+import { uncheckedCommitments } from "./unchecked";
 import type { Brief, EffectiveBrief, Finding, Severity } from "./types";
 import { computeVerdict, sortFindings, templateHeadline } from "./verdict";
 
@@ -100,6 +101,7 @@ export function effectiveBrief(brief: Brief, prev: Brief | null): EffectiveBrief
         .replace(/^Similar past clauses for (.+?): comparison lines couldn't be written \(.*$/, "Comparisons with similar past clauses in $1 couldn't be written this time (model busy); the matching clauses are still shown."),
     ),
     similar: brief.similar.map((p) => ({ ...p, hits: p.hits.map((h) => ({ ...h, differs: sanitize(h.differs) })) })),
+    unchecked: uncheckedCommitments(brief), // never a finding, never in the verdict
     complianceAlert,
     changes,
     waitingFor,
