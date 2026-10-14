@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { syncState } from "@/lib/store";
 import { chooseDeal, confirmUpload, moveStaged, uploadDocument } from "./actions";
 import { TextArea } from "@/components/Fields";
 import { SaveButton } from "@/components/BriefControls";
@@ -14,6 +15,7 @@ import { readState } from "@/lib/store";
 export const maxDuration = 300;
 
 export default async function UploadPage(props: PageProps<"/upload">) {
+  await syncState(); // the shared store on Vercel (no-op locally)
   const user = await currentUser();
   const sp = await props.searchParams;
   const pendingId = typeof sp.pending === "string" ? sp.pending : null;

@@ -19,7 +19,7 @@ import { extractReferences } from "@/lib/references";
 import { extractDocument } from "@/lib/review/extract";
 import { nextVersion, reviewDeal } from "@/lib/review/pipeline";
 import { currentUser } from "@/lib/session";
-import { mutate, readState } from "@/lib/store";
+import { mutate, readState, withState } from "@/lib/store";
 import { LIMITS } from "@/lib/limits";
 import type { Deal, Document } from "@/lib/types";
 
@@ -71,6 +71,7 @@ function detect(text: string, deal: DealView): { what: string; why: string; else
 
 /** On the confirm screen: the file looks like another deal's, and the uploader moves it there (still unprocessed). */
 export async function moveStaged(form: FormData) {
+  return withState(async () => {
   const user = await currentUser();
   const staged = readState().stagedUploads.find((x) => x.id === String(form.get("staged")));
   const to = getDeal(String(form.get("to") ?? ""));
@@ -80,9 +81,11 @@ export async function moveStaged(form: FormData) {
     { user: user.name, dealId: to.id, action: "upload.move", detail: { name: staged.name, from: staged.dealId } },
   );
   redirect(`/upload?deal=${to.id}&staged=${staged.id}`);
+  });
 }
 
 export async function uploadDocument(form: FormData) {
+  return withState(async () => {
   const user = await currentUser();
   const { name, text, ocr, readNote } = await readUpload(form);
   const deal = getDeal(String(form.get("deal") ?? ""));
@@ -97,10 +100,12 @@ export async function uploadDocument(form: FormData) {
   // General upload: a blank template is turned away before any model call.
   if (looksLikeTemplate(text).template) redirect("/upload?template=1");
   await processContract({ name, text, ocr, chosen: String(form.get("deal") ?? ""), what: "contract", by: user.name });
+  });
 }
 
 /** Step 2 of 2: the uploader confirmed (or changed) what the file is. */
 export async function confirmUpload(form: FormData) {
+  return withState(async () => {
   const user = await currentUser();
   const staged = readState().stagedUploads.find((x) => x.id === String(form.get("staged")));
   if (!staged) throw new Error("That upload has expired: upload the file again.");
@@ -115,6 +120,7 @@ export async function confirmUpload(form: FormData) {
   if (what === "template") redirect(`/deal/${staged.dealId}?template=1`);
   if (what === "note") return addNote(staged.dealId, staged.name, staged.text, user.name);
   await processContract({ name: staged.name, text: staged.text, ocr: !!staged.ocr, chosen: staged.dealId, what, by: user.name });
+  });
 }
 
 /** A contract document: extract, link (or keep the chosen deal), replace the revised document if any, re-check. */
@@ -158,6 +164,7 @@ async function processContract(a: { name: string; text: string; ocr: boolean; ch
 }
 
 export async function chooseDeal(form: FormData) {
+  return withState(async () => {
   const user = await currentUser();
   const docId = String(form.get("docId"));
   const dealId = String(form.get("dealId"));
@@ -165,6 +172,7 @@ export async function chooseDeal(form: FormData) {
   if (!doc) throw new Error("Upload not found");
   const proposal = proposeLink({ counterparty: doc.counterparty, docType: doc.docType, text: doc.text, docId }, allDeals(), allDocuments(), dealId);
   await attach(doc, dealId, proposal, user.name);
+  });
 }
 
 async function attach(doc: Document, dealId: string, proposal: LinkProposal, by: string) {

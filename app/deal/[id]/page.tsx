@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { syncState } from "@/lib/store";
 import { notFound } from "next/navigation";
 import { Chip, DecisionBadge, DueBadge, Section, VerdictBadge } from "@/components/ui";
 import { canViewBrief, canViewDeal } from "@/lib/access";
@@ -21,6 +22,7 @@ import { recheckDeal } from "@/app/deal/actions";
 export const maxDuration = 300;
 
 export default async function DealPage(props: PageProps<"/deal/[id]">) {
+  await syncState(); // the shared store on Vercel (no-op locally)
   const { id } = await props.params;
   const user = await currentUser();
   const deal = getDeal(id);

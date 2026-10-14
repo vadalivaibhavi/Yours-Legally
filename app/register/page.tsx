@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { syncState } from "@/lib/store";
 import { notFound } from "next/navigation";
 import { Chip, Quote } from "@/components/ui";
 import { RegisterEntryCard } from "@/components/RegisterActions";
@@ -33,6 +34,7 @@ const RESTRICTIVE = ["non_compete", "exclusivity", "mfn_pricing", "ip_transfer",
 
 /** Register screen (FR-2): Karandeep only. Filter by live/expired, client, region, type. */
 export default async function RegisterPage(props: PageProps<"/register">) {
+  await syncState(); // the shared store on Vercel (no-op locally)
   const user = await currentUser();
   if (!canViewRegister(user)) notFound();
   const sp = await props.searchParams;

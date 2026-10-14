@@ -7,6 +7,7 @@
  */
 import fs from "node:fs";
 import path from "node:path";
+import zlib from "node:zlib";
 import { writableDir } from "./config";
 import type { Brief } from "./review/types";
 import type { Deal, Document, RegisterEntry, Note } from "./types";
@@ -106,12 +107,59 @@ function file() {
 
 /** In-memory overlay used by evals so they never touch the real state file. */
 let memoryState: State | null = null;
+
+/**
+ * Shared store (deployed app). On Vercel each server instance has its own /tmp, so a write on one instance
+ * (an upload, a decision) was invisible to the next request if another instance served it: the upload
+ * confirm screen came back empty. With a Redis store connected (Vercel Storage → Upstash for Redis, which sets
+ * KV_REST_API_URL / KV_REST_API_TOKEN), every request loads the shared state first (syncState) and every
+ * action saves it before its response is sent (withState). Locally and in evals nothing changes.
+ */
+const REDIS_URL = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
+const REDIS_TOKEN = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
+const REDIS_KEY = "yours-legally:state";
+let shared: State | null = null;
+let pendingSave: Promise<void> | null = null;
+
+export function sharedStore(): boolean {
+  return !!(REDIS_URL && REDIS_TOKEN) && !memoryState;
+}
+
+async function redis(command: (string | number)[]): Promise<unknown> {
+  const res = await fetch(REDIS_URL!, { method: "POST", headers: { Authorization: `Bearer ${REDIS_TOKEN}` }, body: JSON.stringify(command), cache: "no-store" });
+  if (!res.ok) throw new Error(`shared store: HTTP ${res.status}`);
+  return ((await res.json()) as { result: unknown }).result;
+}
+
+/** Load the shared state for this request (no-op locally). Pages and actions call it before reading. */
+export async function syncState(): Promise<void> {
+  if (!sharedStore()) return;
+  if (pendingSave) await pendingSave;
+  const raw = (await redis(["GET", REDIS_KEY])) as string | null;
+  shared = raw ? { ...structuredClone(EMPTY), ...JSON.parse(zlib.gunzipSync(Buffer.from(raw, "base64")).toString("utf8")) } : structuredClone(EMPTY);
+}
+
+/** Wait until the last write reached the shared store (no-op locally). */
+export async function flushState(): Promise<void> {
+  if (pendingSave) await pendingSave;
+}
+
+/** A server action with the shared state loaded first and saved before its response (including a redirect). */
+export async function withState<T>(fn: () => Promise<T>): Promise<T> {
+  await syncState();
+  try {
+    return await fn();
+  } finally {
+    await flushState();
+  }
+}
 export function useMemoryState(initial?: Partial<State>) {
   memoryState = { ...structuredClone(EMPTY), ...(initial ?? {}) };
 }
 
 export function readState(): State {
   if (memoryState) return memoryState;
+  if (sharedStore()) return structuredClone(shared ?? EMPTY);
   const p = file();
   if (!fs.existsSync(p)) return structuredClone(EMPTY);
   try {
@@ -127,6 +175,12 @@ export function mutate(fn: (s: State) => void, audit?: Omit<AuditEvent, "at">): 
   if (audit) s.audit.push({ at: new Date().toISOString(), ...audit });
   if (memoryState) {
     memoryState = s;
+    return s;
+  }
+  if (sharedStore()) {
+    shared = s;
+    const payload = zlib.gzipSync(JSON.stringify(s)).toString("base64");
+    pendingSave = redis(["SET", REDIS_KEY, payload]).then(() => undefined);
     return s;
   }
   const p = file();
@@ -157,6 +211,11 @@ function backupIfDue(p: string) {
 export function resetState() {
   if (memoryState) {
     memoryState = structuredClone(EMPTY);
+    return;
+  }
+  if (sharedStore()) {
+    shared = structuredClone(EMPTY);
+    pendingSave = redis(["DEL", REDIS_KEY]).then(() => undefined);
     return;
   }
   const p = file();

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { syncState } from "@/lib/store";
 import { Chip, DueBadge } from "@/components/ui";
 import { fmtDateTime } from "@/lib/format";
 import { reviewProgress } from "@/lib/review/progress";
@@ -49,6 +50,7 @@ function Plain({ children }: { children: string }) {
 
 /** Queue (F8, FR-14): due in / overdue from APP_TODAY, sorted by deadline. Deadline orders the list; it never changes risk. */
 export default async function QueuePage(props: PageProps<"/">) {
+  await syncState(); // the shared store on Vercel (no-op locally)
   const user = await currentUser();
   const sp = await props.searchParams;
   const visible = visibleDeals(user, allDeals());

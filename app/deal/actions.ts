@@ -18,7 +18,7 @@ import { nextVersion, reviewDeal } from "@/lib/review/pipeline";
 import { currentUser } from "@/lib/session";
 import { runSellerCheck } from "@/lib/seller";
 import { latestSellerCheck } from "@/lib/sellerChecks";
-import { mutate, readState, type SellerInput } from "@/lib/store";
+import { mutate, readState, type SellerInput, withState } from "@/lib/store";
 import { reviewProgress } from "@/lib/review/progress";
 import fs from "node:fs";
 import path from "node:path";
@@ -34,6 +34,7 @@ const str = (f: FormData, k: string) => String(f.get(k) ?? "").trim();
 const now = () => new Date().toISOString();
 
 export async function reactToFinding(form: FormData) {
+  return withState(async () => {
   const u = await requireKarandeep();
   const dealId = str(form, "dealId");
   const key = str(form, "key");
@@ -51,18 +52,22 @@ export async function reactToFinding(form: FormData) {
     { user: u.name, dealId, action: `finding.${reaction}`, detail: { key, reason, newSeverity: str(form, "newSeverity") } },
   );
   revalidatePath(`/deal/${dealId}`, "layout");
+  });
 }
 
 export async function undoReaction(form: FormData) {
+  return withState(async () => {
   const u = await requireKarandeep();
   const dealId = str(form, "dealId");
   const key = str(form, "key");
   reopenIfFinalised(dealIdOf(form));
   mutate((s) => void delete s.reactions[dealId]?.[key], { user: u.name, dealId, action: "finding.undo", detail: { key } });
   revalidatePath(`/deal/${dealId}`, "layout");
+  });
 }
 
 export async function acceptAllMedium(form: FormData) {
+  return withState(async () => {
   const u = await requireKarandeep();
   const dealId = str(form, "dealId");
   const keys = str(form, "keys").split(",").filter(Boolean);
@@ -75,9 +80,11 @@ export async function acceptAllMedium(form: FormData) {
     { user: u.name, dealId, action: "finding.accept_all_medium", detail: { keys } },
   );
   revalidatePath(`/deal/${dealId}`, "layout");
+  });
 }
 
 export async function noteOnBlocker(form: FormData) {
+  return withState(async () => {
   const u = await requireKarandeep();
   const dealId = str(form, "dealId");
   const key = str(form, "key");
@@ -91,9 +98,11 @@ export async function noteOnBlocker(form: FormData) {
     { user: u.name, dealId, action: "blocker.note", detail: { key, note } },
   );
   revalidatePath(`/deal/${dealId}`, "layout");
+  });
 }
 
 export async function addMissed(form: FormData) {
+  return withState(async () => {
   const u = await requireKarandeep();
   const dealId = str(form, "dealId");
   const entry = { clauseRef: field(form, "clauseRef", LIMITS.clauseRef, "Clause"), note: field(form, "note", LIMITS.note, "Note"), at: now(), version: Number(str(form, "version")) };
@@ -106,9 +115,11 @@ export async function addMissed(form: FormData) {
     { user: u.name, dealId, action: "brief.missed", detail: entry }, // FR-16: becomes an eval regression case
   );
   revalidatePath(`/deal/${dealId}`, "layout");
+  });
 }
 
 export async function confirmFact(form: FormData) {
+  return withState(async () => {
   const u = await requireKarandeep();
   const dealId = str(form, "dealId");
   const factId = str(form, "factId");
@@ -122,9 +133,11 @@ export async function confirmFact(form: FormData) {
     { user: u.name, dealId, action: `fact.${status}`, detail: { factId, edit: str(form, "edit") } },
   );
   revalidatePath(`/deal/${dealId}`, "layout");
+  });
 }
 
 export async function closeAlert(form: FormData) {
+  return withState(async () => {
   const u = await requireKarandeep();
   const dealId = str(form, "dealId");
   // One "Resolve" control: an attached file makes it "resolved with evidence", text alone an attested note (FR-21).
@@ -155,9 +168,11 @@ export async function closeAlert(form: FormData) {
     { user: u.name, dealId, action: `alert.${how}`, detail: { note, file: evidenceFile?.name } },
   );
   revalidatePath(`/deal/${dealId}`, "layout");
+  });
 }
 
 export async function recordDecision(form: FormData) {
+  return withState(async () => {
   const u = await requireKarandeep();
   const dealId = str(form, "dealId");
   const decision = str(form, "decision");
@@ -169,9 +184,11 @@ export async function recordDecision(form: FormData) {
     { user: u.name, dealId, action: "decision", detail: { decision, version: str(form, "version"), note: "recorded only: nothing sent, signed or shared" } },
   );
   revalidatePath("/", "layout");
+  });
 }
 
 export async function answerFollowUp(form: FormData) {
+  return withState(async () => {
   const u = await requireKarandeep();
   const dealId = str(form, "dealId");
   const entry = {
@@ -189,10 +206,12 @@ export async function answerFollowUp(form: FormData) {
     { user: u.name, dealId, action: "brief.followup", detail: entry },
   );
   revalidatePath(`/deal/${dealId}`, "layout");
+  });
 }
 
 /** FR-17 "Input added → re-check": new brief version grouped New / Still open / Resolved. */
 export async function recheckDeal(form: FormData) {
+  return withState(async () => {
   const u = await currentUser();
   const dealId = str(form, "dealId");
   const deal = getDeal(dealId);
@@ -214,10 +233,12 @@ export async function recheckDeal(form: FormData) {
   );
   revalidatePath("/", "layout");
   redirect(u.role === "karandeep" ? `/deal/${dealId}?v=${version}&open=1#brief` : `/deal/${dealId}`);
+  });
 }
 
 // ---------------------------------------------------------------- register (FR-2)
 export async function registerAction(form: FormData) {
+  return withState(async () => {
   const u = await requireKarandeep();
   const id = str(form, "id");
   const action = str(form, "action") as RegisterAction;
@@ -225,6 +246,7 @@ export async function registerAction(form: FormData) {
   if (!entry) throw new Error("Unknown register entry");
   applyRegisterChange(id, action, action === "edit" ? registerEdits(form, entry) : undefined, u.name);
   revalidatePath("/", "layout");
+  });
 }
 
 /** The whole entry as edited on the Register screen (the source clause and its quote stay verbatim). */
@@ -268,6 +290,7 @@ export type DealCheckState = { error?: string; ok?: boolean };
 const SECTOR_VALUES = new Set(["hospitality", "travel", "retail", "healthcare", "bfsi", "logistics", "manufacturing", "food", "technology", "data_platform", "other"]);
 
 export async function runDealCheck(_prev: DealCheckState, form: FormData): Promise<DealCheckState> {
+  return withState(async () => {
   const u = await currentUser();
   const dealId = str(form, "dealId");
   const deal = getDeal(dealId);
@@ -314,35 +337,43 @@ export async function runDealCheck(_prev: DealCheckState, form: FormData): Promi
   );
   revalidatePath(`/deal/${dealId}`);
   return { ok: true };
+  });
 }
 
 // ---------------------------------------------------------------- undo (every choice in the brief can be changed)
 export async function undoConfirmation(form: FormData) {
+  return withState(async () => {
   const u = await requireKarandeep();
   const dealId = str(form, "dealId");
   const factId = str(form, "factId");
   reopenIfFinalised(dealIdOf(form));
   mutate((s) => void delete s.confirmations[dealId]?.[factId], { user: u.name, dealId, action: "fact.undo", detail: { factId } });
   revalidatePath(`/deal/${dealId}`, "layout");
+  });
 }
 
 export async function undoFollowUp(form: FormData) {
+  return withState(async () => {
   const u = await requireKarandeep();
   const dealId = str(form, "dealId");
   const version = Number(str(form, "version"));
   mutate((s) => void (s.followUps[dealId] = (s.followUps[dealId] ?? []).filter((x) => x.version !== version)), { user: u.name, dealId, action: "brief.followup.undo", detail: { version } });
   revalidatePath(`/deal/${dealId}`, "layout");
+  });
 }
 
 export async function removeMissed(form: FormData) {
+  return withState(async () => {
   const u = await requireKarandeep();
   const dealId = str(form, "dealId");
   const at = str(form, "at");
   mutate((s) => void (s.missed[dealId] = (s.missed[dealId] ?? []).filter((m) => m.at !== at)), { user: u.name, dealId, action: "brief.missed.remove", detail: { at } });
   revalidatePath(`/deal/${dealId}`, "layout");
+  });
 }
 
 export async function clearDecision(form: FormData) {
+  return withState(async () => {
   const u = await requireKarandeep();
   const dealId = str(form, "dealId");
   mutate(
@@ -359,6 +390,7 @@ export async function clearDecision(form: FormData) {
     { user: u.name, dealId, action: "decision.clear" },
   );
   revalidatePath("/", "layout");
+  });
 }
 
 // ---------------------------------------------------------------- finalise (two-step: answer everything, then finalise)
@@ -371,6 +403,7 @@ function reopenIfFinalised(dealId: string) {
 }
 
 export async function finaliseReview(form: FormData) {
+  return withState(async () => {
   const u = await requireKarandeep();
   const dealId = str(form, "dealId");
   const p = reviewProgress(dealId);
@@ -383,13 +416,16 @@ export async function finaliseReview(form: FormData) {
     { user: u.name, dealId, action: "review.finalised", detail: { decision: p.decision, reacted: p.reacted, total: p.total } },
   );
   revalidatePath("/", "layout");
+  });
 }
 
 export async function reopenReview(form: FormData) {
+  return withState(async () => {
   const u = await requireKarandeep();
   const dealId = str(form, "dealId");
   mutate((s) => void Object.assign(s.dealOverrides[dealId] ?? (s.dealOverrides[dealId] = {}), { finalised: false, finalisedAt: undefined, status: undefined }), { user: u.name, dealId, action: "review.reopened" });
   revalidatePath("/", "layout");
+  });
 }
 
 // ---------------------------------------------------------------- store a signed deal in the contract register (FR-1)
@@ -399,6 +435,7 @@ export async function reopenReview(form: FormData) {
  * Nothing changes unless every document was read: a failed or quota-stopped call keeps the deal in the queue.
  */
 export async function storeInRegister(form: FormData) {
+  return withState(async () => {
   const u = await requireKarandeep();
   const deal = getDeal(str(form, "dealId"));
   if (!deal || !SIGN_DECISIONS.includes(deal.decision ?? "")) throw new Error("Only a deal Karandeep decided to sign can be stored");
@@ -421,4 +458,5 @@ export async function storeInRegister(form: FormData) {
   );
   revalidatePath("/", "layout");
   redirect(`/?stored=${deal.id}&n=${added}`);
+  });
 }
