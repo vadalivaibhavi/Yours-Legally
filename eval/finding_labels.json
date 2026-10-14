@@ -3,110 +3,446 @@
   "_by": "Drafted by Claude (13 Oct 2026) against docs/Eval_Set.md, the contracts and Karandeep's checklist; to be confirmed by Karandeep. Labels follow the deal and finding key, so they carry over to regenerated briefs; a finding with no label is reported as ungraded by npm run eval.",
   "labels": {
     "blueorchid": {
-      "conflict:alnoor-msa:non_compete": { "label": "correct", "severity": "ok", "note": "3 GCC properties hit Al Noor §12.2; carve-out is the fix (EV-04)" },
-      "mismatch:regions": { "label": "correct", "severity": "ok", "note": "seller declared India only (EV-15)" }
+      "conflict:alnoor-msa:non_compete": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "3 GCC properties hit Al Noor §12.2; carve-out is the fix (EV-04)"
+      },
+      "mismatch:regions": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "seller declared India only (EV-15)"
+      }
     },
     "datavane": {
-      "conflict:cloudspan-spa:exclusivity": { "label": "correct", "severity": "too_low", "note": "the CloudSpan collision is the deal-breaker the key expects (HOLD); high lets the verdict fall to SIGN AFTER CHANGES" },
-      "playbook:indemnity": { "label": "correct", "severity": "ok", "note": "uncapped one-way partner indemnity vs Datavane's $10k cap" },
-      "playbook:restrictive": { "label": "correct", "severity": "ok", "note": "client-capture §5.2-5.3" },
-      "gate:governing_law": { "label": "correct", "severity": "ok", "note": "Delaware law: a judgment item, correctly not a blocker" }
+      "conflict:cloudspan-spa:exclusivity": {
+        "label": "correct",
+        "severity": "too_low",
+        "note": "the CloudSpan collision is the deal-breaker the key expects (HOLD); high lets the verdict fall to SIGN AFTER CHANGES"
+      },
+      "playbook:indemnity": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "uncapped one-way partner indemnity vs Datavane's $10k cap"
+      },
+      "playbook:restrictive": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "client-capture §5.2-5.3"
+      },
+      "gate:governing_law": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "Delaware law: a judgment item, correctly not a blocker"
+      }
     },
     "finserve": {
-      "covenant:non_compete": { "label": "correct", "severity": "ok", "note": "hidden §8.1 non-compete vs PayTrack / Trustline / FinEdge" },
-      "nda:covenants": { "label": "duplicate", "severity": "ok", "note": "same §8.1 non-compete already raised as covenant:non_compete" },
-      "nda:definition": { "label": "correct", "severity": "ok", "note": "CI defined one way" },
-      "nda:obligations": { "label": "correct", "severity": "ok", "note": "only the Recipient (AtliQ) is bound" },
-      "nda:remedies": { "label": "correct", "severity": "ok", "note": "uncapped one-way indemnity" },
-      "nda:residuals": { "label": "correct", "severity": "ok", "note": "one-way residuals" },
-      "nda:term": { "label": "correct", "severity": "ok", "note": "perpetual one-way survival" }
+      "covenant:non_compete": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "hidden §8.1 non-compete vs PayTrack / Trustline / FinEdge"
+      },
+      "nda:covenants": {
+        "label": "duplicate",
+        "severity": "ok",
+        "note": "same §8.1 non-compete already raised as covenant:non_compete"
+      },
+      "nda:definition": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "CI defined one way"
+      },
+      "nda:obligations": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "only the Recipient (AtliQ) is bound"
+      },
+      "nda:remedies": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "uncapped one-way indemnity"
+      },
+      "nda:residuals": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "one-way residuals"
+      },
+      "nda:term": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "perpetual one-way survival"
+      }
     },
     "gulfcrown": {
-      "conflict:alnoor-msa:non_compete": { "label": "correct", "severity": "ok", "note": "Al Noor collision" },
-      "playbook:ld": { "label": "correct", "severity": "ok", "note": "1% of contract value/week, no client-delay exclusion" },
-      "playbook:liability": { "label": "partly", "severity": "too_high", "note": "the general 1x cap is acceptable per the key; the data-protection carve-out is a fair negotiation point at medium, not high. Title was garbled ('Data Protection) (DATA PROTECTION'): fixed in lib/review/gate.ts carveOutName" },
-      "playbook:termination": { "label": "correct", "severity": "ok", "note": "convenience termination pays accepted deliverables only" },
-      "gate:governing_law": { "label": "correct", "severity": "ok", "note": "KSA law: judgment item" },
-      "playbook:payment": { "label": "correct", "severity": "ok", "note": "60-day payment" },
-      "playbook:data_protection": { "label": "correct", "severity": "ok", "note": "§13.2 keeps Guest Data in KSA unless the client approves a transfer: the Pune delivery team needs that approval (new in the 13 Oct regeneration)" }
+      "conflict:alnoor-msa:non_compete": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "Al Noor collision"
+      },
+      "playbook:ld": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "1% of contract value/week, no client-delay exclusion"
+      },
+      "playbook:liability": {
+        "label": "partly",
+        "severity": "too_high",
+        "note": "the general 1x cap is acceptable per the key; the data-protection carve-out is a fair negotiation point at medium, not high. Title was garbled ('Data Protection) (DATA PROTECTION'): fixed in lib/review/gate.ts carveOutName"
+      },
+      "playbook:termination": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "convenience termination pays accepted deliverables only"
+      },
+      "gate:governing_law": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "KSA law: judgment item"
+      },
+      "playbook:payment": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "60-day payment"
+      },
+      "playbook:data_protection": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "§13.2 keeps Guest Data in KSA unless the client approves a transfer: the Pune delivery team needs that approval (new in the 13 Oct regeneration)"
+      }
     },
     "harrington": {
-      "bundle:sub-baa:ortiz": { "label": "correct", "severity": "ok", "note": "no sub-BAA for Ortiz" },
-      "bundle:sub-baa:pvt-ltd": { "label": "correct", "severity": "ok", "note": "IC-BAA is CareBridge-only" },
-      "notes:data_movement": { "label": "correct", "severity": "ok", "note": "PHI extract with the Pune engineers before any BAA (from the huddle note itself, not its narrator line)" },
-      "gate:annex:exhibit-b": { "label": "correct", "severity": "ok", "note": "Exhibit B referenced, not in the pack" },
-      "gate:insurance:cyber": { "label": "correct", "severity": "ok", "note": "$5M asked vs $1M held" },
-      "playbook:data_protection": { "label": "correct", "severity": "ok", "note": "BAA forbids offshore subcontractors" },
-      "playbook:indemnity": { "label": "correct", "severity": "ok", "note": "indemnity incl. client negligence" },
-      "playbook:ld": { "label": "correct", "severity": "ok", "note": "2%/day uncapped" },
-      "playbook:liability": { "label": "correct", "severity": "ok", "note": "unlimited liability" },
-      "playbook:payment": { "label": "correct", "severity": "ok", "note": "90-day payment + forfeiture for late invoices" },
-      "playbook:termination": { "label": "correct", "severity": "ok", "note": "no payment for work in progress" },
-      "bundle:consent:ortiz": { "label": "correct", "severity": "ok", "note": "client consent to subcontract" },
-      "bundle:consent:pvt-ltd": { "label": "correct", "severity": "ok", "note": "client consent to subcontract" },
-      "playbook:set_off": { "label": "correct", "severity": "ok", "note": "cross-agreement set-off: a fair medium point" },
-      "playbook:acceptance": { "label": "correct", "severity": "ok", "note": "no deemed acceptance, correctly low" }
+      "bundle:sub-baa:ortiz": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "no sub-BAA for Ortiz"
+      },
+      "bundle:sub-baa:pvt-ltd": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "IC-BAA is CareBridge-only"
+      },
+      "notes:data_movement": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "PHI extract with the Pune engineers before any BAA (from the huddle note itself, not its narrator line)"
+      },
+      "gate:annex:exhibit-b": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "Exhibit B referenced, not in the pack"
+      },
+      "gate:insurance:cyber": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "$5M asked vs $1M held"
+      },
+      "playbook:data_protection": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "BAA forbids offshore subcontractors"
+      },
+      "playbook:indemnity": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "indemnity incl. client negligence"
+      },
+      "playbook:ld": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "2%/day uncapped"
+      },
+      "playbook:liability": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "unlimited liability"
+      },
+      "playbook:payment": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "90-day payment + forfeiture for late invoices"
+      },
+      "playbook:termination": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "no payment for work in progress"
+      },
+      "bundle:consent:ortiz": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "client consent to subcontract"
+      },
+      "bundle:consent:pvt-ltd": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "client consent to subcontract"
+      },
+      "playbook:set_off": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "cross-agreement set-off: a fair medium point"
+      },
+      "playbook:acceptance": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "no deemed acceptance, correctly low"
+      }
     },
     "kriti": {
-      "flowdown:data": { "label": "correct", "severity": "ok", "note": "no DPA flow-down vs Rheinwerk §13.1" },
-      "playbook:indemnity": { "label": "correct", "severity": "ok", "note": "indemnity incl. AtliQ negligence" },
-      "playbook:ld": { "label": "correct", "severity": "ok", "note": "2%/day uncapped" },
-      "playbook:liability": { "label": "correct", "severity": "ok", "note": "unlimited vendor liability" },
-      "playbook:payment": { "label": "partly", "severity": "ok", "note": "pay-when-paid is right, but the title said 'up to 15 days' when the 15 days only start after the end client pays (up to ~120 days): fixed to 'then 15 days' in lib/review/gate.ts" },
-      "playbook:termination": { "label": "correct", "severity": "ok", "note": "no WIP payment on convenience termination" },
-      "dependency:rheinwerk": { "label": "correct", "severity": "ok", "note": "start date before the client contract" },
-      "flowdown:consent": { "label": "correct", "severity": "ok", "note": "no client consent to subcontract" },
-      "flowdown:ip": { "label": "correct", "severity": "ok", "note": "vendor retains IP vs exclusive rights promised to Rheinwerk (EV-10)" },
-      "playbook:acceptance": { "label": "correct", "severity": "ok", "note": "no deemed acceptance (mirror test)" },
-      "playbook:confidentiality": { "label": "correct", "severity": "ok", "note": "one-way confidentiality on AtliQ's own paper" }
+      "flowdown:data": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "no DPA flow-down vs Rheinwerk §13.1"
+      },
+      "playbook:indemnity": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "indemnity incl. AtliQ negligence"
+      },
+      "playbook:ld": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "2%/day uncapped"
+      },
+      "playbook:liability": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "unlimited vendor liability"
+      },
+      "playbook:payment": {
+        "label": "partly",
+        "severity": "ok",
+        "note": "pay-when-paid is right, but the title said 'up to 15 days' when the 15 days only start after the end client pays (up to ~120 days): fixed to 'then 15 days' in lib/review/gate.ts"
+      },
+      "playbook:termination": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "no WIP payment on convenience termination"
+      },
+      "dependency:rheinwerk": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "start date before the client contract"
+      },
+      "flowdown:consent": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "no client consent to subcontract"
+      },
+      "flowdown:ip": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "vendor retains IP vs exclusive rights promised to Rheinwerk (EV-10)"
+      },
+      "playbook:acceptance": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "no deemed acceptance (mirror test)"
+      },
+      "playbook:confidentiality": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "one-way confidentiality on AtliQ's own paper"
+      }
     },
     "lakeshore": {
-      "conflict:crestline-msa:mfn_pricing": { "label": "correct", "severity": "ok", "note": "Crestline MFN vs $72/$55/$50" },
-      "playbook:liability": { "label": "noise", "severity": "too_high", "note": "the key treats the liability cap as fine; indemnity carve-outs from the cap are market standard" },
-      "bundle:consent:marcus": { "label": "correct", "severity": "ok", "note": "consent check, correctly low" },
-      "playbook:ld": { "label": "noise", "severity": "ok", "note": "LDs match the standard (key); 'not the sole remedy' is a nit" }
+      "conflict:crestline-msa:mfn_pricing": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "Crestline MFN vs $72/$55/$50"
+      },
+      "playbook:liability": {
+        "label": "noise",
+        "severity": "too_high",
+        "note": "the key treats the liability cap as fine; indemnity carve-outs from the cap are market standard"
+      },
+      "bundle:consent:marcus": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "consent check, correctly low"
+      },
+      "playbook:ld": {
+        "label": "noise",
+        "severity": "ok",
+        "note": "LDs match the standard (key); 'not the sole remedy' is a nit"
+      }
     },
     "marcus": {
-      "gate:entity": { "label": "correct", "severity": "ok", "note": "Pvt Ltd for a US-client contractor" },
-      "playbook:restrictive": { "label": "partly", "severity": "ok", "note": "the worldwide non-compete / exclusivity is real, but the explanation calls it 'client-capture from a client' on AtliQ's own paper" },
-      "playbook:termination": { "label": "correct", "severity": "ok", "note": "asymmetric termination" },
-      "dependency:lakeshore": { "label": "correct", "severity": "ok", "note": "blocked Lakeshore deal" },
-      "gate:governing_law": { "label": "correct", "severity": "ok", "note": "follows the entity fix: judgment item" },
-      "flowdown:data": { "label": "correct", "severity": "ok", "note": "no incident notification vs Lakeshore's 72 h" },
-      "playbook:indemnity": { "label": "correct", "severity": "ok", "note": "one-way indemnity (mirror test)" },
-      "playbook:liability": { "label": "correct", "severity": "ok", "note": "one-sided cap (mirror test)" },
-      "playbook:other": { "label": "wrong", "severity": "ok", "note": "title says 'discretionary timesheet approval' but the quote is the USD→INR conversion clause: the evidence doesn't support the claim" },
-      "playbook:payment": { "label": "correct", "severity": "ok", "note": "60 days after timesheet approval" },
-      "flowdown:other": { "label": "correct", "severity": "ok", "note": "no insurance requirement, correctly low" }
+      "gate:entity": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "Pvt Ltd for a US-client contractor"
+      },
+      "playbook:restrictive": {
+        "label": "partly",
+        "severity": "ok",
+        "note": "the worldwide non-compete / exclusivity is real, but the explanation calls it 'client-capture from a client' on AtliQ's own paper"
+      },
+      "playbook:termination": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "asymmetric termination"
+      },
+      "dependency:lakeshore": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "blocked Lakeshore deal"
+      },
+      "gate:governing_law": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "follows the entity fix: judgment item"
+      },
+      "flowdown:data": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "no incident notification vs Lakeshore's 72 h"
+      },
+      "playbook:indemnity": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "one-way indemnity (mirror test)"
+      },
+      "playbook:liability": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "one-sided cap (mirror test)"
+      },
+      "playbook:other": {
+        "label": "wrong",
+        "severity": "ok",
+        "note": "title says 'discretionary timesheet approval' but the quote is the USD→INR conversion clause: the evidence doesn't support the claim"
+      },
+      "playbook:payment": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "60 days after timesheet approval"
+      },
+      "flowdown:other": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "no insurance requirement, correctly low"
+      }
     },
     "ortiz": {
-      "flowdown:data": { "label": "correct", "severity": "ok", "note": "no HIPAA / sub-BAA terms" },
-      "dependency:harrington": { "label": "correct", "severity": "ok", "note": "client deal on HOLD" },
-      "flowdown:consent": { "label": "correct", "severity": "ok", "note": "client consent to subcontract" },
-      "flowdown:ip": { "label": "correct", "severity": "ok", "note": "IP assigned only on payment" },
-      "flowdown:other": { "label": "correct", "severity": "ok", "note": "background-check / training prerequisites missing" },
-      "flowdown:sequencing": { "label": "correct", "severity": "ok", "note": "starts before the client signs" },
-      "playbook:indemnity": { "label": "noise", "severity": "ok", "note": "the key calls the agreement balanced; no general indemnity from a contractor is AtliQ's own choice" },
-      "nda:obligations": { "label": "noise", "severity": "ok", "note": "the key says NDA mutuality is fine; the affiliate-disclosure exception is trivial" }
+      "flowdown:data": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "no HIPAA / sub-BAA terms"
+      },
+      "dependency:harrington": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "client deal on HOLD"
+      },
+      "flowdown:consent": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "client consent to subcontract"
+      },
+      "flowdown:ip": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "IP assigned only on payment"
+      },
+      "flowdown:other": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "background-check / training prerequisites missing"
+      },
+      "flowdown:sequencing": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "starts before the client signs"
+      },
+      "playbook:indemnity": {
+        "label": "noise",
+        "severity": "ok",
+        "note": "the key calls the agreement balanced; no general indemnity from a contractor is AtliQ's own choice"
+      },
+      "nda:obligations": {
+        "label": "noise",
+        "severity": "ok",
+        "note": "the key says NDA mutuality is fine; the affiliate-disclosure exception is trivial"
+      }
     },
     "rheinwerk": {
-      "conflict:northwind-msa:ip_transfer": { "label": "correct", "severity": "ok", "note": "PipeKit warranty vs Northwind §9.2" },
-      "gate:annex:annex-1": { "label": "correct", "severity": "ok", "note": "Annex 1 referenced, not in the pack" },
-      "gate:annex:annex-3": { "label": "correct", "severity": "ok", "note": "DPA Annex 3 missing" },
-      "bundle:sub-processor:kriti": { "label": "correct", "severity": "ok", "note": "GDPR flow-down to Kriti" },
-      "gate:governing_law": { "label": "correct", "severity": "ok", "note": "German law: judgment item" },
-      "bundle:consent:kriti": { "label": "correct", "severity": "ok", "note": "consent check, correctly low" },
-      "playbook:confidentiality": { "label": "noise", "severity": "ok", "note": "5-year confidentiality is normal" },
-      "playbook:ld": { "label": "noise", "severity": "ok", "note": "LDs match the standard (key); 'not the sole remedy' is a nit" }
+      "conflict:northwind-msa:ip_transfer": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "PipeKit warranty vs Northwind §9.2"
+      },
+      "gate:annex:annex-1": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "Annex 1 referenced, not in the pack"
+      },
+      "gate:annex:annex-3": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "DPA Annex 3 missing"
+      },
+      "bundle:sub-processor:kriti": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "GDPR flow-down to Kriti"
+      },
+      "gate:governing_law": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "German law: judgment item"
+      },
+      "bundle:consent:kriti": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "consent check, correctly low"
+      },
+      "playbook:confidentiality": {
+        "label": "noise",
+        "severity": "ok",
+        "note": "5-year confidentiality is normal"
+      },
+      "playbook:ld": {
+        "label": "noise",
+        "severity": "ok",
+        "note": "LDs match the standard (key); 'not the sole remedy' is a nit"
+      }
     },
     "travelhub": {
-      "conflict:alnoor-msa:non_compete": { "label": "partly", "severity": "too_high", "note": "the key calls Al Noor arguable via 'distribution services': a judgment item, not a blocker" },
-      "gate:entity": { "label": "correct", "severity": "ok", "note": "Inc for a UAE client" },
-      "gate:invoicing_entity": { "label": "correct", "severity": "ok", "note": "parties ≠ invoicing entity" },
-      "gate:governing_law": { "label": "correct", "severity": "ok", "note": "Dubai law: judgment item" },
-      "playbook:data_protection": { "label": "correct", "severity": "ok", "note": "personal data without a DPA" },
-      "playbook:termination": { "label": "correct", "severity": "ok", "note": "one-sided convenience termination" },
-      "playbook:payment": { "label": "noise", "severity": "ok", "note": "30 days from invoice date vs receipt is a nit" }
+      "conflict:alnoor-msa:non_compete": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "a high \"needs your judgment\" item, as the key expects (arguable via distribution services); the 14 Oct regeneration replaced the earlier blocker"
+      },
+      "gate:entity": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "Inc for a UAE client"
+      },
+      "gate:invoicing_entity": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "parties ≠ invoicing entity"
+      },
+      "gate:governing_law": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "Dubai law: judgment item"
+      },
+      "playbook:data_protection": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "personal data without a DPA"
+      },
+      "playbook:termination": {
+        "label": "correct",
+        "severity": "ok",
+        "note": "one-sided convenience termination"
+      },
+      "playbook:payment": {
+        "label": "noise",
+        "severity": "ok",
+        "note": "30 days from invoice date vs receipt is a nit"
+      }
     }
   }
 }

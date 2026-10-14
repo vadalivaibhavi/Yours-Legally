@@ -1,0 +1,73 @@
+{
+  "deals": [
+    "travelhub"
+  ],
+  "skipped": [],
+  "concurrency": 1,
+  "minIntervalMs": 4000,
+  "seconds": 43,
+  "quotaStop": null,
+  "calls": 4,
+  "cached": 2,
+  "inTok": 11812,
+  "outTok": 15017,
+  "byTaskAndModel": [
+    {
+      "task": "brief",
+      "model": "gemini-3.6-flash",
+      "calls": 1,
+      "cached": 0,
+      "failed": 0,
+      "inTok": 335,
+      "outTok": 36
+    },
+    {
+      "task": "conflict",
+      "model": "gemini-3.6-flash",
+      "calls": 1,
+      "cached": 0,
+      "failed": 0,
+      "inTok": 4227,
+      "outTok": 6480
+    },
+    {
+      "task": "differs",
+      "model": "gemini-3.6-flash",
+      "calls": 0,
+      "cached": 1,
+      "failed": 0,
+      "inTok": 0,
+      "outTok": 0
+    },
+    {
+      "task": "extract",
+      "model": "gemini-flash-lite-latest",
+      "calls": 1,
+      "cached": 0,
+      "failed": 0,
+      "inTok": 2659,
+      "outTok": 1121
+    },
+    {
+      "task": "notes",
+      "model": "gemini-3-flash-preview",
+      "calls": 0,
+      "cached": 1,
+      "failed": 0,
+      "inTok": 0,
+      "outTok": 0
+    },
+    {
+      "task": "playbook",
+      "model": "gemini-3.6-flash",
+      "calls": 1,
+      "cached": 0,
+      "failed": 0,
+      "inTok": 4591,
+      "outTok": 7380
+    }
+  ],
+  "rows": [
+    "travelhub     SEND BACK           0B 3H 3M  43s  "
+  ]
+}

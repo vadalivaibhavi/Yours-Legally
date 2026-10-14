@@ -1,6 +1,6 @@
 # Held-out evaluation
 
-The dataset's SYN_ extension: 10 incoming drafts (read from Word / PDF / scanned files), 10 signed contracts added to the register, 6 notes without narrator lines. Never used to build, prompt or tune anything; cases written from the answer key before the first run (`eval/holdout_cases.json`, unchanged since). Model: gemini. Run 2026-10-14 02:37 UTC.
+The dataset's SYN_ extension: 10 incoming drafts (read from Word / PDF / scanned files), 10 signed contracts added to the register, 6 notes without narrator lines. Never used to build, prompt or tune anything; cases written from the answer key before the first run (`eval/holdout_cases.json`, unchanged since). Model: gemini. Run 2026-10-14 17:03 UTC.
 
 Every finding graded (`eval/holdout_finding_labels.json`): 50 findings · **74% correct** (+4% partly) · noise 16% · wrong 3 · severity off 9
 

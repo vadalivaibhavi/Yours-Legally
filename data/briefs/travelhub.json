@@ -1,7 +1,7 @@
 {
   "dealId": "travelhub",
   "version": 1,
-  "createdAt": "2026-10-14T01:39:43.763Z",
+  "createdAt": "2026-10-14T17:01:57.931Z",
   "trigger": "initial review",
   "inputsHash": "4057e1490ef6a782b92c72980b6223b8",
   "documentIds": [
@@ -11,48 +11,37 @@
   "playbookVersion": "pb-v1.1-2026-10-05",
   "models": [
     "gemini-flash-lite-latest",
-    "gemini-3-flash-preview",
-    "gemini-3.5-flash",
-    "gemini-3.6-flash"
+    "gemini-3.6-flash",
+    "gemini-3-flash-preview"
   ],
   "promptVersion": "p1",
   "route": "full_review",
-  "verdict": "HOLD",
-  "headline": "HOLD: Seek consent/waiver for non-compete and resolve entity discrepancies.",
-  "nextAction": "Karandeep must request a waiver from Al Noor Hospitality Group and obtain corrected entity documents from the counterparty.",
+  "verdict": "SEND BACK",
+  "headline": "SEND BACK: 3 high severity issues require entity alignment and waiver",
+  "nextAction": "Karandeep will return the draft to the counterparty to fix entity discrepancies.",
   "findings": [
     {
       "key": "conflict:alnoor-msa:non_compete",
       "category": "conflict",
       "topic": "non_compete",
-      "title": "Collides with Al Noor Hospitality Group: GCC hospitality data analytics non-compete",
-      "impact": "Collides with the Al Noor exclusivity commitment, which is active until September 2029 and covers all AtliQ Affiliates for GCC-based hospitality AI and analytics.",
-      "severity": "blocker",
-      "confidence": "high",
-      "needsJudgment": false,
-      "owner": "Karandeep",
+      "title": "Possible collision with Al Noor Hospitality Group: GCC hospitality data analytics non-compete",
+      "impact": "Arguably collides with the Al Noor non-compete commitment, which runs through September 2029.",
+      "severity": "high",
+      "confidence": "low",
+      "needsJudgment": true,
+      "readings": [
+        "TravelHub is caught as a Hospitality Business because it provides distribution services to hotel operators in the GCC under Section 1.11.",
+        "TravelHub is a consumer travel planning platform rather than a hotel owner or operator, placing it outside the core scope of a hospitality business."
+      ],
+      "owner": "counsel (via Karandeep)",
       "resolution": "waiver",
       "docId": "travelhub-sa",
       "citations": [
         {
           "docId": "travelhub-sa",
           "docTitle": "TravelHub software development & services agreement (draft)",
-          "clauseRef": "4.1(a)",
-          "quote": "Itinerary Personalization Engine** — a recommendation service that generates personalised day-by-day itineraries using user preferences, trip purpose, budget, travel dates, past bookings and in-app behaviour, and re-ranks suggested activities, restaurants and experiences in real time",
-          "role": "incoming"
-        },
-        {
-          "docId": "travelhub-sa",
-          "docTitle": "TravelHub software development & services agreement (draft)",
           "clauseRef": "4.1(b)",
-          "quote": "Partner Hotel Ranking Module** — a ranking and recommendation service that scores, ranks and surfaces Partner Hotels in the United Arab Emirates and the Kingdom of Saudi Arabia to TravelHub users at the point of search and itinerary building",
-          "role": "incoming"
-        },
-        {
-          "docId": "travelhub-sa",
-          "docTitle": "TravelHub software development & services agreement (draft)",
-          "clauseRef": "4.1(c)",
-          "quote": "Partner Performance Dashboard** — a dashboard for TravelHub's partnerships team showing impressions, click-through, bookings and commission by Partner Hotel, city and ranking position",
+          "quote": "Partner Hotel Ranking Module** — a ranking and recommendation service that scores, ranks and surfaces Partner Hotels in the United Arab Emirates and the Kingdom of Saudi Arabia to TravelHub users at the point of search and itinerary building, taking into account user fit, price competitiveness, partner commission tier, availability and conversion likelihood, and that drives the sort order of hotel results and \"recommended stay\" placements for booking through the TravelHub App",
           "role": "incoming"
         },
         {
@@ -84,7 +73,7 @@
           "role": "register"
         }
       ],
-      "counterPosition": "Delay the commencement of GCC-based AI and analytics services for hotel distribution until the expiry of the Al Noor restricted period in September 2029, or seek a specific waiver from Al Noor.",
+      "counterPosition": "Carve out Clause 4.1(b) (Partner Hotel Ranking Module) from the scope of work, or seek a written waiver from Al Noor Hospitality Group.",
       "registerEntryId": "alnoor-msa#1",
       "registerVerified": false,
       "expiry": "2029-09-14",
@@ -92,7 +81,7 @@
         "docId": "alnoor-waiver",
         "covers": "AtliQ providing demand-forecasting services to Seaside Hotels LLC, Muscat, Oman, solely as described in the statement of work between the Supplier and Seaside dated February 2026",
         "applies": false,
-        "why": "The Al Noor waiver letter dated 10 February 2026 is strictly limited to services for Seaside Hotels LLC in Oman and explicitly excludes any other Hospitality Business in the GCC."
+        "why": "The Al Noor waiver is strictly limited to demand-forecasting services for Seaside Hotels LLC in Muscat, Oman, and explicitly excludes all other entities and GCC operations."
       }
     },
     {
@@ -177,8 +166,8 @@
       "key": "playbook:data_protection",
       "category": "playbook",
       "topic": "data_protection",
-      "title": "Data protection terms without executed DPA",
-      "impact": "AtliQ risks processing user personal data without a fully compliant, dedicated data processing agreement in place.",
+      "title": "Data transfer restriction and missing DPA",
+      "impact": "AtliQ's offshore development team cannot access Customer Data without prior written approval and a formal DPA.",
       "severity": "medium",
       "confidence": "medium",
       "needsJudgment": false,
@@ -189,13 +178,13 @@
         {
           "docId": "travelhub-sa",
           "docTitle": "TravelHub software development & services agreement (draft)",
-          "clauseRef": "14.1",
-          "quote": "AtliQ shall process personal data only on TravelHub's documented instructions and in compliance with Federal Decree-Law No. 45 of 2021 on the Protection of Personal Data and, where applicable, the Saudi Personal Data Protection Law",
+          "clauseRef": "14.2",
+          "quote": "AtliQ shall not transfer Customer Data outside the TravelHub cloud environment without prior written approval",
           "role": "incoming"
         }
       ],
       "standard": "DPA (EU) or BAA (US health) signed before any personal/regulated data moves, with a sub-DPA / sub-BAA for every party that touches the data (incl. AtliQ's own Pune entity); engagement-specific scope; offshore access only as the agreement allows.",
-      "counterPosition": "Require the execution of AtliQ's standard Data Protection Agreement (DPA) before any personal data is transferred or processed under this agreement.",
+      "counterPosition": "Execute a formal Data Processing Addendum (DPA) including sub-processor authorization for AtliQ's Indian entity and explicitly agreeing to de-identified offshore access terms prior to data processing.",
       "precedents": [
         {
           "docId": "carebridge-baa",
@@ -210,8 +199,8 @@
       "key": "playbook:termination",
       "category": "playbook",
       "topic": "termination",
-      "title": "One-sided convenience termination notice",
-      "impact": "AtliQ cannot terminate this agreement for convenience if the commercial relationship becomes unviable.",
+      "title": "One-sided termination for convenience",
+      "impact": "TravelHub holds a unilateral right to terminate for convenience while AtliQ does not have a corresponding right.",
       "severity": "medium",
       "confidence": "medium",
       "needsJudgment": false,
@@ -228,7 +217,7 @@
         }
       ],
       "standard": "On any termination for convenience AtliQ is paid for all work done, including work in progress. Notice is mutual. Client contracts: reasonable notice (typically 30+ days). Freelancer / vendor agreements: a mutual short exit (about 15 days, as with Rohan Iyer) is AtliQ's standard and fair to both sides.",
-      "counterPosition": "Make the convenience termination right mutual with thirty (30) days' written notice for either party, ensuring AtliQ is paid for all work performed up to the termination date, including work in progress and committed costs.",
+      "counterPosition": "Make termination for convenience mutual, allowing either party to terminate on 30 days' written notice with payment for all work performed and committed costs incurred up to termination.",
       "precedents": [
         {
           "docId": "rohan-ica",
@@ -238,59 +227,22 @@
           "note": "Mutual 15-day exit"
         }
       ]
-    },
-    {
-      "key": "playbook:payment",
-      "category": "playbook",
-      "topic": "payment",
-      "title": "Payment terms trigger from invoice date rather than receipt",
-      "impact": "Any delay in the transmission or receipt of the invoice will shorten AtliQ's actual payment cycle.",
-      "severity": "low",
-      "confidence": "medium",
-      "needsJudgment": false,
-      "owner": "Karandeep",
-      "resolution": "redline",
-      "docId": "travelhub-sa",
-      "citations": [
-        {
-          "docId": "travelhub-sa",
-          "docTitle": "TravelHub software development & services agreement (draft)",
-          "clauseRef": "7.2",
-          "quote": "TravelHub shall pay each undisputed invoice within thirty (30) days of the invoice date by wire transfer to the bank account specified on the invoice",
-          "role": "incoming"
-        }
-      ],
-      "standard": "Invoices payable within 30 days of receipt; 45 days is the negotiated maximum.",
-      "counterPosition": "Amend the payment trigger to state that payments are due within thirty (30) days of receipt of the invoice.",
-      "precedents": [
-        {
-          "docId": "trustline-msa",
-          "counterparty": "Trustline NBFC",
-          "clauseRef": "§4",
-          "label": "standard",
-          "note": "Negotiated 90 → 45 days (the maximum)"
-        },
-        {
-          "docId": "ref-negotiation-notes",
-          "counterparty": "PixelCraft Studio",
-          "clauseRef": "negotiation notes",
-          "label": "standard",
-          "note": "AtliQ's own paper: 60-day payment changed to 30 for a 6-person agency (Oct 2025)"
-        }
-      ]
     }
   ],
   "fine": [
-    "Liability capped: Each Party's total liability arising out of this Agreement shall not exceed the total fees paid under this Agreement in the twelve (12) months preceding the claim",
-    "No liquidated damages or delay penalties are specified in this agreement, which is highly favorable.",
-    "The liability limit is mutual, capped at 1x fees paid in the preceding 12 months, and contains standard mutual carve-outs.",
-    "Indemnification obligations are limited and AtliQ's IP indemnity remains subject to the general liability cap, which is favorable.",
-    "IP ownership of custom deliverables transfers to the client only upon full payment, and AtliQ retains ownership of its background technology.",
-    "Confidentiality obligations are mutual, balanced, and have a standard three-year survival period.",
-    "The non-solicitation clause is mutual and limited to twelve months post-termination, which is acceptable.",
-    "No insurance requirements or minimum coverage limits are imposed on AtliQ in this draft.",
-    "The review period is ten business days with an automatic deemed acceptance mechanism, which matches standard requirements.",
-    "Standard warranty of professional services and a reasonable sixty-day conformity period are provided."
+    "Payment ≤ 45 days: 30 days",
+    "Liability capped: total fees paid under this Agreement in the twelve (12) months preceding the claim",
+    "No delay penalties present in the agreement.",
+    "30-day payment term meets AtliQ's standard.",
+    "Liability cap is mutual at 1x fees paid in prior 12 months with standard carve-outs.",
+    "Indemnity is narrow and balanced, covering IP infringement and customer data compliance.",
+    "IP assignment occurs upon full payment with background technology retained by AtliQ.",
+    "Confidentiality terms are mutual with standard exceptions and a 3-year duration.",
+    "Non-solicitation obligation is mutual and limited to 12 months for direct project staff.",
+    "No specific insurance obligations imposed.",
+    "Acceptance process includes a 10-day review period and deemed acceptance.",
+    "60-day warranty for material conformity is standard.",
+    "No set-off terms included."
   ],
   "notSeen": [
     "Commitments were checked against all 17 signed contracts on file. Contracts AtliQ hasn't uploaded can't be checked."
@@ -356,7 +308,7 @@
         {
           "field": "liability",
           "label": "Liability",
-          "value": "Each Party's total liability arising out of this Agreement shall not exceed the total fees paid under this Agreement in the twelve (12) months preceding the claim · uncapped for breach of confidentiality, wilful misconduct",
+          "value": "total fees paid under this Agreement in the twelve (12) months preceding the claim · uncapped for breach of confidentiality, wilful misconduct",
           "clauseRef": "12.2",
           "quote": "Each Party's total liability arising out of this Agreement shall not exceed the total fees paid under this Agreement in the twelve (12) months preceding the claim, except for breach of confidentiality or wilful misconduct"
         },
@@ -373,7 +325,7 @@
         {
           "field": "scope",
           "label": "Sectors · regions",
-          "value": "hospitality, travel · UAE, Saudi Arabia"
+          "value": "travel, hospitality · UAE, Saudi Arabia"
         },
         {
           "field": "data",
@@ -444,7 +396,7 @@
           "rule": "liability_cap",
           "label": "Liability capped",
           "pass": true,
-          "detail": "Each Party's total liability arising out of this Agreement shall not exceed the total fees paid under this Agreement in the twelve (12) months preceding the claim",
+          "detail": "total fees paid under this Agreement in the twelve (12) months preceding the claim",
           "citation": {
             "docId": "travelhub-sa",
             "docTitle": "TravelHub software development & services agreement (draft)",
@@ -845,13 +797,61 @@
       ]
     }
   ],
-  "counselPack": null,
+  "counselPack": {
+    "question": "Possible collision with Al Noor Hospitality Group: GCC hospitality data analytics non-compete: which reading applies? (a) TravelHub is caught as a Hospitality Business because it provides distribution services to hotel operators in the GCC under Section 1.11. (b) TravelHub is a consumer travel planning platform rather than a hotel owner or operator, placing it outside the core scope of a hospitality business.",
+    "documents": [
+      "TravelHub software development & services agreement (draft)",
+      "Al Noor Hospitality MSA"
+    ],
+    "clauses": [
+      {
+        "docId": "travelhub-sa",
+        "docTitle": "TravelHub software development & services agreement (draft)",
+        "clauseRef": "4.1(b)",
+        "quote": "Partner Hotel Ranking Module** — a ranking and recommendation service that scores, ranks and surfaces Partner Hotels in the United Arab Emirates and the Kingdom of Saudi Arabia to TravelHub users at the point of search and itinerary building, taking into account user fit, price competitiveness, partner commission tier, availability and conversion likelihood, and that drives the sort order of hotel results and \"recommended stay\" placements for booking through the TravelHub App",
+        "role": "incoming"
+      },
+      {
+        "docId": "alnoor-msa",
+        "docTitle": "Al Noor Hospitality MSA",
+        "clauseRef": "§12.1",
+        "quote": "In consideration of the Client disclosing to the Supplier its Confidential Information, including its revenue strategies, pricing models and Guest Data, the Supplier undertakes that neither it nor any of its Affiliates shall, during the Restricted Period, directly or indirectly, provide data analytics, artificial intelligence or revenue-management services to any Hospitality Business in the GCC",
+        "role": "register"
+      },
+      {
+        "docId": "alnoor-msa",
+        "docTitle": "Al Noor Hospitality MSA",
+        "clauseRef": "§1.11",
+        "quote": "Hospitality Business**\" means any person, firm or entity that owns, operates, manages or franchises hotels, resorts or serviced apartments, or that provides distribution, revenue-management or guest-analytics services to any such person, firm or entity",
+        "role": "register"
+      },
+      {
+        "docId": "alnoor-msa",
+        "docTitle": "Al Noor Hospitality MSA",
+        "clauseRef": "§1.14",
+        "quote": "Restricted Period**\" means the Term and the period of eighteen (18) months following the expiry or termination of this Agreement",
+        "role": "register"
+      },
+      {
+        "docId": "alnoor-msa",
+        "docTitle": "Al Noor Hospitality MSA",
+        "clauseRef": "§1.9",
+        "quote": "GCC**\" means the member states of the Gulf Cooperation Council, being the United Arab Emirates, the Kingdom of Saudi Arabia, the State of Qatar, the State of Kuwait, the Kingdom of Bahrain and the Sultanate of Oman",
+        "role": "register"
+      }
+    ],
+    "entityFacts": [
+      "AtliQ Technologies Pvt Ltd (India): serves India, Middle East, Europe, Rest of world (outside the US)",
+      "AtliQ Inc (USA): serves USA",
+      "Delivery teams for both entities sit in Pune. AtliQ Inc sub-contracts delivery to AtliQ Technologies Pvt Ltd under an intercompany agreement (not in the dataset)."
+    ]
+  },
   "errors": [],
   "usage": {
-    "calls": 1,
-    "cachedCalls": 5,
-    "inputTokens": 5019,
-    "outputTokens": 7477,
-    "ms": 36584
+    "calls": 4,
+    "cachedCalls": 2,
+    "inputTokens": 11812,
+    "outputTokens": 15017,
+    "ms": 43419
   }
 }

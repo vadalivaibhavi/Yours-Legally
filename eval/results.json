@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-14T02:54:13.358Z",
+  "at": "2026-10-14T17:02:47.927Z",
   "provider": "gemini",
   "models": "LLM gemini (fast: gemini-flash-lite-latest, gemini-3.5-flash-lite, gemini-3.1-flash-lite, gemini-3.1-flash-lite-preview; strong: gemini-3.6-flash, gemini-flash-latest, gemini-3.8-flash, gemini-3.7-flash, gemini-3-flash-preview, gemini-3.5-flash) · committed briefs made by gemini-flash-lite-latest, gemini-3-flash-preview, gemini-3.6-flash, gemini-3.8-flash, gemini-flash-latest, gemini-3.5-flash, gemini-3.7-flash",
   "results": [
@@ -63,9 +63,9 @@
       "id": "EV-03",
       "section": "B. Incoming contracts (US-2 to US-7, US-11)",
       "title": "TravelHub agreement",
-      "pass": false,
-      "status": "fail",
-      "detail": "verdict HOLD ≠ SEND BACK"
+      "pass": true,
+      "status": "pass",
+      "detail": "SEND BACK · found gate:entity, gate:invoicing_entity, conflict:alnoor-msa:non_compete · clean on conflict:orbit-msa"
     },
     {
       "id": "EV-04",
@@ -161,7 +161,7 @@
       "title": "TravelHub (negative test)",
       "pass": true,
       "status": "pass",
-      "detail": "HOLD · found nothing to find · clean on conflict:orbit-msa · listed as checked-expired: orbit-msa"
+      "detail": "SEND BACK · found nothing to find · clean on conflict:orbit-msa · listed as checked-expired: orbit-msa"
     },
     {
       "id": "EV-C1",
@@ -544,12 +544,12 @@
     {
       "name": "Citation validity (all quotes string-matched to source)",
       "pass": true,
-      "detail": "132/132"
+      "detail": "129/129"
     },
     {
       "name": "Guardrails: no breach/enforceable in system prose; never Reject",
       "pass": true,
-      "detail": "520 prose strings checked; 0 legal conclusions; 0 Reject recommendations"
+      "detail": "517 prose strings checked; 0 legal conclusions; 0 Reject recommendations"
     },
     {
       "name": "Verdict identical with and without similar-clauses panel",
@@ -589,7 +589,7 @@
     {
       "name": "Every finding graded (eval/finding_labels.json): precision, noise, wrong",
       "pass": true,
-      "detail": "83 findings graded · precision 84% correct (+5% partly) · noise 8% · duplicates 1 · wrong 1 · severity off 4 · none ungraded"
+      "detail": "82 findings graded · precision 87% correct (+4% partly) · noise 7% · duplicates 1 · wrong 1 · severity off 3 · none ungraded"
     },
     {
       "name": "A DPA annexed to another contract counts as a DPA (held-out finding)",
@@ -629,7 +629,7 @@
     {
       "name": "EV-G5 (A5) upload detection: notes vs contract, version vs additional, wrong deal, blank template",
       "pass": true,
-      "detail": "notes vs contract: 47/47 · document type from title: 0 wrong of 32 · real documents taken for templates: 0 · 17/17 version, wrong-deal and template cases right"
+      "detail": "notes vs contract: 41/41 · document type from title: 0 wrong of 32 · real documents taken for templates: 0 · 17/17 version, wrong-deal and template cases right"
     },
     {
       "name": "EV-G6 (A5) deal size: small-deal deviations count one step lower; promises to other clients never change",
@@ -639,7 +639,7 @@
     {
       "name": "EV-G7 (A5) owners are roles, never people's names",
       "pass": true,
-      "detail": "113 owners and next actions checked · named a person: none · 0 stored owners with names mapped to roles at display"
+      "detail": "112 owners and next actions checked · named a person: none · 0 stored owners with names mapped to roles at display"
     },
     {
       "name": "A5 seller mismatch is computed live from the latest deal check",
