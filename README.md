@@ -2,6 +2,8 @@
 
 A contract-review assistant for AtliQ, a 2-entity analytics company with no legal team. It gives AtliQ the memory it lacks. It builds a **commitments register of everything AtliQ has already promised**, checks every incoming and outgoing contract against that register and AtliQ's own negotiation playbook, and hands the CEO (Karandeep) a **verdict-first, cited, decision-ready brief**. Sellers get a dated heads-up before they promise a client anything.
 
+**Live:** https://yours-legally.vercel.app · **Code:** https://github.com/vadalivaibhavi/Yours-Legally (deployed on Vercel from `main`; every push redeploys)
+
 Capstone prototype. Spec: [`docs/PRD_Yours_Legally_v1.1.md`](docs/PRD_Yours_Legally_v1.1.md) (FR IDs; masking: [`docs/Masking_Lite_Spec.md`](docs/Masking_Lite_Spec.md); traceability: [`docs/Traceability_Matrix.md`](docs/Traceability_Matrix.md)) · tests: [`docs/Eval_Set.md`](docs/Eval_Set.md) (EV IDs) · plan: [`docs/Build_Plan.md`](docs/Build_Plan.md) and [`docs/Phase1_Spec.md`](docs/Phase1_Spec.md).
 
 > Decision support, not legal advice. The product records decisions; it never sends, signs or contacts anyone.
