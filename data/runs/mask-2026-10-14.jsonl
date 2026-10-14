@@ -1,0 +1,6 @@
+{"at":"2026-10-14T02:39:49.556Z","script":"review","dealId":"lakeshore","amounts":true,"task":"extract","counts":{"atliq":2,"client":2,"person":2,"email":0,"phone":0,"bank":0,"id":2,"amount":6},"unmaskedFile":false,"leaks":[]}
+{"at":"2026-10-14T02:39:53.987Z","script":"review","dealId":"lakeshore","amounts":true,"task":"conflict","counts":{"atliq":2,"client":3,"person":2,"email":0,"phone":0,"bank":0,"id":0,"amount":9},"unmaskedFile":false,"leaks":[]}
+{"at":"2026-10-14T02:39:53.993Z","script":"review","dealId":"lakeshore","amounts":true,"task":"playbook","counts":{"atliq":2,"client":4,"person":2,"email":0,"phone":0,"bank":0,"id":0,"amount":7},"unmaskedFile":false,"leaks":[]}
+{"at":"2026-10-14T02:39:54.055Z","script":"review","dealId":"lakeshore","amounts":true,"task":"differs","counts":{"atliq":0,"client":13,"person":0,"email":0,"phone":0,"bank":0,"id":0,"amount":3},"unmaskedFile":false,"leaks":[]}
+{"at":"2026-10-14T02:40:39.083Z","script":"review","dealId":"lakeshore","amounts":true,"task":"notes","counts":{"atliq":0,"client":10,"person":6,"email":0,"phone":0,"bank":0,"id":0,"amount":8},"unmaskedFile":false,"leaks":[]}
+{"at":"2026-10-14T02:40:55.423Z","script":"review","dealId":"lakeshore","amounts":true,"task":"brief","counts":{"atliq":0,"client":3,"person":1,"email":0,"phone":0,"bank":0,"id":0,"amount":0},"unmaskedFile":false,"leaks":[]}

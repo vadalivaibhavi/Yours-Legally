@@ -1,0 +1,73 @@
+{
+  "deals": [
+    "lakeshore"
+  ],
+  "skipped": [],
+  "concurrency": 1,
+  "minIntervalMs": 4000,
+  "seconds": 68,
+  "quotaStop": null,
+  "calls": 5,
+  "cached": 0,
+  "inTok": 12092,
+  "outTok": 18361,
+  "byTaskAndModel": [
+    {
+      "task": "brief",
+      "model": "gemini-3.6-flash",
+      "calls": 1,
+      "cached": 0,
+      "failed": 0,
+      "inTok": 289,
+      "outTok": 42
+    },
+    {
+      "task": "conflict",
+      "model": "gemini-3.6-flash",
+      "calls": 1,
+      "cached": 0,
+      "failed": 0,
+      "inTok": 3320,
+      "outTok": 6037
+    },
+    {
+      "task": "differs",
+      "model": "gemini-3.6-flash,gemini-flash-latest,gemini-3.8-flash,gemini-3.7-flash,gemini-3-flash-preview,gemini-3.5-flash",
+      "calls": 0,
+      "cached": 0,
+      "failed": 1,
+      "inTok": 0,
+      "outTok": 0
+    },
+    {
+      "task": "extract",
+      "model": "gemini-flash-lite-latest",
+      "calls": 1,
+      "cached": 0,
+      "failed": 0,
+      "inTok": 2806,
+      "outTok": 1387
+    },
+    {
+      "task": "notes",
+      "model": "gemini-3.6-flash",
+      "calls": 1,
+      "cached": 0,
+      "failed": 0,
+      "inTok": 924,
+      "outTok": 3313
+    },
+    {
+      "task": "playbook",
+      "model": "gemini-3.6-flash",
+      "calls": 1,
+      "cached": 0,
+      "failed": 0,
+      "inTok": 4753,
+      "outTok": 7582
+    }
+  ],
+  "rows": [
+    "lakeshore     HOLD                1B 0H 1M  68s  INCOMPLETE "
+  ]
+}
